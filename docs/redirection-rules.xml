@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="744259b3">
+        <description>Created after removal of "How to" from Instance Name</description>
+        <accepts>How-to.html</accepts>
+    </rule>
+    <rule id="79ee94d7">
+        <description>Created after removal of "Reference" from Instance Name</description>
+        <accepts>Reference.html</accepts>
+    </rule>
+    <rule id="3b906ab8">
+        <description>Created after removal of "Overview" from Instance Name</description>
+        <accepts>Overview.html</accepts>
+    </rule>
+    <rule id="7540583">
+        <description>Created after removal of "Starter" from Grupo 4 - TPI</description>
+        <accepts>starter.html</accepts>
+    </rule>
+</rules>

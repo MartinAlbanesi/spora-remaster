@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="g4-t"
+                 name="Grupo 4 - TPI"
+                 start-page="Inicio.md">
+
+    <toc-element topic="Inicio.md"/>
+    <toc-element topic="Nosotros.md"/>
+    <toc-element topic="Descripción.md"/>
+    <toc-element topic="Brief-del-Servicio.md"/>
+    <toc-element topic="Aventura.md"/>
+    <toc-element topic="Conceptos.md"/>
+    <toc-element topic="Niveles.md"/>
+    <toc-element topic="Desafíos.md"/>
+    <toc-element topic="Misiones-Y-Objetivos.md"/>
+    <toc-element topic="Perfil.md"/>
+    <toc-element topic="Personalización.md"/>
+    <toc-element topic="Features-Adicionales.md"/>
+</instance-profile>
