@@ -10,4 +10,7 @@ plugins {
 
     // Kotlin Serialization
     alias(libs.plugins.kotlinSerialization) apply false
+
+    // Detekt
+    alias(libs.plugins.detekt)
 }

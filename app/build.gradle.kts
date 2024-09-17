@@ -9,6 +9,9 @@ plugins {
 
     // Kotlin Serialization
     alias(libs.plugins.kotlinSerialization)
+
+    // Detekt
+    alias(libs.plugins.detekt)
 }
 
 android {
