@@ -6,6 +6,9 @@ plugins {
     //Dagger Hilt
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+
+    // Kotlin Serialization
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
@@ -73,4 +76,10 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    //Kotlin Serialization
+    implementation(libs.kotlinx.serialization.json)
 }

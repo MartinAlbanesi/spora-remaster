@@ -7,4 +7,7 @@ plugins {
     //Dagger Hilt
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false
+
+    // Kotlin Serialization
+    alias(libs.plugins.kotlinSerialization) apply false
 }
