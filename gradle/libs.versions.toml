@@ -60,6 +60,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
