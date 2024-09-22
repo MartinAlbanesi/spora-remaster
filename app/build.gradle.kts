@@ -12,6 +12,9 @@ plugins {
 
     // Detekt
     alias(libs.plugins.detekt)
+
+    // Google Services
+    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -85,4 +88,8 @@ dependencies {
 
     //Kotlin Serialization
     implementation(libs.kotlinx.serialization.json)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

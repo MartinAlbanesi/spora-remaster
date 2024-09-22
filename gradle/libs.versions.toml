@@ -50,6 +50,9 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 # Kotlin Serialization
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.3.0" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -65,3 +68,6 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 
 # Detekt
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+
+# Google Services
+googleServices = { id = "com.google.gms.google-services", version = "4.4.2" }
