@@ -13,4 +13,7 @@ plugins {
 
     // Detekt
     alias(libs.plugins.detekt)
+
+    // Google Services
+    alias(libs.plugins.googleServices) apply false
 }
