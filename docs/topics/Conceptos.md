@@ -14,9 +14,6 @@ Es un ser mágico y antiguo que protege el bosque y cuida el medio ambiente. El 
 ### Villanos
 Son seres malvados que intentan destruir el bosque y contaminar el medio ambiente. Los villanos son enemigos de Spora, y tratan de detenerlo en su misión de salvar el bosque.
 
-### Aliados
-Son seres bondadosos que ayudan a Spora en su viaje para salvar el bosque y cuidar el medio ambiente. Los aliados son amigos de Spora, y lo apoyan en su misión de proteger la naturaleza.
-
 ## Objetos
 
 ### Oxígeno (O2)
