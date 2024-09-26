@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582788422443",
+    "project_id": "spora-3f595",
+    "storage_bucket": "spora-3f595.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582788422443:android:1f355550e4f8108c07c36e",
+        "android_client_info": {
+          "package_name": "com.gg.spora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8r5h2sGz4aZTGWsr6WlwFRk7ehZk1IpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
