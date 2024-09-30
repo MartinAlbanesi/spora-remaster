@@ -1,4 +1,4 @@
-package com.gg.spora
+package com.gg.spora.core
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
