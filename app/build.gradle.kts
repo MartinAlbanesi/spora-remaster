@@ -94,4 +94,12 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
+
+    //CameraX
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.video)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.extensions)
+    implementation(libs.camera.view)
 }
