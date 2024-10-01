@@ -5,31 +5,44 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.gg.spora.R
+import com.gg.spora.ui.theme.SporaTheme
+
+/**
+ * Top bar with progress bar
+ * @param firstLabel: Label for the first icon
+ * @param firstIcon: Image for the first icon
+ * @param secondLabel: Label for the second icon
+ * @param secondIcon: Image for the second icon
+ * @param showBackArrow: Boolean to show or not the back arrow
+ * @param onBackClick: Lambda to be executed when the back arrow is clicked
+ */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DualIconTopAppBar(
-    statusLabel: String,
-    statusIcon: ImageVector,
-    actionLabel: String,
-    actionIcon: ImageVector,
+fun TopAppBarWithDualIcon(
+    modifier: Modifier = Modifier,
+    firstLabel: String,
+    firstIcon: Int,
+    secondLabel: String,
+    secondIcon: Int,
     showBackArrow: Boolean = false,
     onBackClick: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = Color.Transparent,
             titleContentColor = MaterialTheme.colorScheme.primary,
         ),
         title = {
@@ -37,8 +50,8 @@ fun DualIconTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                IconWithText(statusIcon, statusLabel)
-                IconWithText(actionIcon, actionLabel)
+                ImageWithText(firstIcon, firstLabel)
+                ImageWithText(secondIcon, secondLabel)
             }
         },
         navigationIcon = {
@@ -51,17 +64,24 @@ fun DualIconTopAppBar(
                 }
             }
         },
+        modifier = modifier,
     )
 }
 
 @Preview
 @Composable
 fun TopAppBarPreview() {
-    DualIconTopAppBar(
-        statusLabel = "Status",
-        statusIcon = Icons.Default.Menu,
-        actionLabel = "Action",
-        actionIcon = Icons.Default.Menu,
-        showBackArrow = true,
-    )
+    SporaTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            TopAppBarWithDualIcon(
+                firstLabel = "12",
+                firstIcon = R.drawable.trees_icon,
+                secondLabel = "465",
+                secondIcon = R.drawable.o2_icon,
+                showBackArrow = false,
+            )
+        }
+    }
 }
