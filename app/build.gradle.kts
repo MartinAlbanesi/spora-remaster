@@ -33,7 +33,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -43,6 +42,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -57,6 +57,9 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    androidResources {
+        noCompress += "tflite"
     }
 }
 
@@ -102,4 +105,11 @@ dependencies {
     implementation(libs.camerax.camera2)
     implementation(libs.camerax.extensions)
     implementation(libs.camera.view)
+
+    //TensorFlow
+    implementation(libs.tensorflow.gpu)
+    implementation(libs.tensorflow.select)
+    implementation(libs.tensorflow.support)
+    implementation(libs.tensorflow.android)
+    implementation(libs.tensorflow.metadata)
 }
