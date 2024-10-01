@@ -1,7 +1,9 @@
 package com.gg.spora.core.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -13,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,32 +43,39 @@ fun TopAppBarWithDualIcon(
     showBackArrow: Boolean = false,
     onBackClick: () -> Unit = {}
 ) {
-    CenterAlignedTopAppBar(
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.Transparent,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),
-        title = {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                ImageWithText(firstIcon, firstLabel)
-                ImageWithText(secondIcon, secondLabel)
-            }
-        },
-        navigationIcon = {
-            if (showBackArrow) {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Go back"
-                    )
+    Box(modifier = Modifier.fillMaxSize()) {
+        GradientTopAppBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.TopCenter)
+        )
+        CenterAlignedTopAppBar(
+            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                containerColor = Color.Transparent,
+                titleContentColor = MaterialTheme.colorScheme.primary,
+            ),
+            title = {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    ImageWithText(firstIcon, firstLabel)
+                    ImageWithText(secondIcon, secondLabel)
                 }
-            }
-        },
-        modifier = modifier,
-    )
+            },
+            navigationIcon = {
+                if (showBackArrow) {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Go back"
+                        )
+                    }
+                }
+            },
+            modifier = modifier,
+        )
+    }
 }
 
 @Preview
