@@ -3,7 +3,6 @@ package com.gg.spora.core.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -43,7 +42,7 @@ fun TopAppBarWithDualIcon(
     showBackArrow: Boolean = false,
     onBackClick: () -> Unit = {}
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box {
         GradientTopAppBar(
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,8 +58,8 @@ fun TopAppBarWithDualIcon(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    ImageWithText(firstIcon, firstLabel)
-                    ImageWithText(secondIcon, secondLabel)
+                    ImageWithTextHorizontal(firstIcon, firstLabel)
+                    ImageWithTextHorizontal(secondIcon, secondLabel)
                 }
             },
             navigationIcon = {
