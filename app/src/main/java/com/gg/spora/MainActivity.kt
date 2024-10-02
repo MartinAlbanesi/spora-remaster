@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.gg.spora.areaBosque.ui.AreaBosqueScreen
 import com.gg.spora.ui.theme.SporaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
 
+
+                    AreaBosqueScreen(modifier = Modifier)
                 }
             }
         }
