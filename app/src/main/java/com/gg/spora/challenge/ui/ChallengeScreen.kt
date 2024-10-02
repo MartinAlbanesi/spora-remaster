@@ -19,7 +19,7 @@ import com.gg.spora.ui.theme.SporaTheme
  * @param modifier: Modifier
  */
 @Composable
-fun ChallengeScreen(
+fun ChallengeScannerScreen(
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -27,7 +27,7 @@ fun ChallengeScreen(
         contentAlignment = Alignment.TopCenter
     ) {
         Image(
-            painter = painterResource(R.drawable.ic_launcher_background),
+            painter = painterResource(R.color.white),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
@@ -35,19 +35,20 @@ fun ChallengeScreen(
         Column(
             modifier = modifier
         ) {
+
         }
     }
 }
 
 @Preview
 @Composable
-private fun ChallengeScreenPreview() {
+private fun ChallengeScannerScreenPreview() {
     SporaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ChallengeScreen(
+            ChallengeScannerScreen(
                 modifier = Modifier.fillMaxSize()
             )
         }
