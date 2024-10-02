@@ -66,43 +66,7 @@ fun MinigameQuizImageScreen(
         }
     }
 
-
-
-
 }
-    /*Column(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.fondo_minijuegos),
-            contentDescription = "background",
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.35f),
-            contentScale = ContentScale.Crop
-        )
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.65f),
-            shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("Card Content")
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MinigameQuizImageScreen()
-}*/
 
 @Preview
 @Composable
