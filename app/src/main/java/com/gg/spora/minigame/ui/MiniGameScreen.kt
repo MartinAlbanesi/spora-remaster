@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.components.SporaWithCard
+import com.gg.spora.core.components.ChampyWithCard
 import com.gg.spora.core.components.TopBarWithProgressBar
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -38,7 +38,7 @@ fun MiniGameScreen(
         contentAlignment = Alignment.TopCenter
     ) {
         Image(
-            painter = painterResource(R.drawable.fondobosque),
+            painter = painterResource(R.drawable.fondo_minijuegos),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
@@ -62,9 +62,9 @@ fun MiniGameScreen(
                     .align(Alignment.CenterHorizontally)
                     .clip(MaterialTheme.shapes.large)
             )
-            SporaWithCard(
+            ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),
-                sporaImage = R.drawable.sporasonriente,
+                champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
             ) { }
         }
     }
