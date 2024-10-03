@@ -33,7 +33,7 @@ fun ImageWithTextVertical(
             modifier = Modifier
                 .size(64.dp)
         )
-        OutlinedText(text)
+        OutlinedText(text = text)
     }
 }
 

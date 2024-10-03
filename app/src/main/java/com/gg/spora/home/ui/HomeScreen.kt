@@ -4,8 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -18,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
+import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.ui.components.ImageWithTextVertical
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -45,6 +47,7 @@ fun HomeScreen(
                 secondLabel = "465",
                 secondIcon = R.drawable.o2_icon,
                 showBackArrow = false,
+                modifier = ModifierStyle.brush
             )
         },
         modifier = modifier
@@ -91,21 +94,20 @@ fun HomeScreen(
                     )
                 }
             }
+        }
 
-            Box(
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.forest_sign),
+                contentDescription = "Home Background",
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.fondo_home),
-                    contentDescription = "Home Background",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .matchParentSize()
-                )
-            }
+                    .size(140.dp)
+                    .offset(y = -40.dp, x = -80.dp)
+            )
         }
     }
 }
