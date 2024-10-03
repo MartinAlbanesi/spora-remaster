@@ -17,12 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.gg.spora.R
 
 
 /**
- * Top bar with 02Icon and backarrow
+ * Top bar with o2Icon and backarrow
  * @param firstLabel: Label for the first icon
+ * @param title: Title of the top bar
  * @param firstIcon: Image for the first icon
  * @param showBackArrow: Boolean to show or not the back arrow
  * @param onBackClick: Lambda to be executed when the back arrow is clicked
@@ -52,7 +55,8 @@ fun TopAppBarWithO2Icon(
             title = {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = title,
@@ -83,4 +87,15 @@ fun TopAppBarWithO2Icon(
 
         )
     }
+}
+
+@Composable
+@Preview()
+fun PreviewTopAppBarWithO2Icon() {
+    TopAppBarWithO2Icon(
+        title = "Title",
+        firstLabel = "10",
+        firstIcon = R.drawable.o2,
+        showBackArrow = true,
+    )
 }
