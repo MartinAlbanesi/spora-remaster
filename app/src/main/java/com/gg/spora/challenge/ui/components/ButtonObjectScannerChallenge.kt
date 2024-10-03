@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
-import com.gg.spora.ui.theme.SurfaceButton
+import com.gg.spora.ui.theme.primaryContainerLight
 
 /**
  * Composable element in the Challenge items
@@ -35,9 +35,9 @@ fun ButtonObjectScannerChallenge(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .clip(RoundedCornerShape(10.dp))
-            .background(SurfaceButton)
-            .width(100.dp)
-            .padding(horizontal = 5.dp)
+            .background(primaryContainerLight)
+            .width(150.dp)
+            .padding(horizontal = 8.dp)
     ) {
             Image(
                 painter = painterResource(R.drawable.clock_icon),
@@ -46,13 +46,19 @@ fun ButtonObjectScannerChallenge(
             )
 
         Column(
-            modifier = Modifier.padding(5.dp, 0.dp)
+            modifier = Modifier.padding(8.dp, 0.dp)
         ){
             Text(
                 text = text,
-                fontSize = 11.sp
+                fontSize = 9.sp,
+                modifier = Modifier.width(90.dp)
             )
         }
+        Image(
+            painter = painterResource(R.drawable.camera_icon),
+            contentDescription = null,
+            modifier = Modifier.size(15.dp)
+        )
 
     }
 }
@@ -66,7 +72,7 @@ fun IconWithTextPreview() {
         ) {
             ButtonObjectScannerChallenge(
                 modifier = Modifier,
-                text = "hola"
+                text = "Botella de plastico"
             )
         }
     }

@@ -4,14 +4,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.gg.spora.R
+import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
+import com.gg.spora.core.components.MiniGameScreen
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -19,37 +26,34 @@ import com.gg.spora.ui.theme.SporaTheme
  * @param modifier: Modifier
  */
 @Composable
-fun ChallengeScannerScreen(
-    modifier: Modifier = Modifier
+fun ChallengeScreen(
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        Image(
-            painter = painterResource(R.color.white),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-        )
-        Column(
-            modifier = modifier
-        ) {
-
-        }
-    }
 }
 
 @Preview
+//@PreviewLightDark
+//@PreviewFontScale
+//@PreviewScreenSizes
 @Composable
-private fun ChallengeScannerScreenPreview() {
+private fun ChallengeScreenPreview() {
     SporaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ChallengeScannerScreen(
-                modifier = Modifier.fillMaxSize()
+            MiniGameScreen(
+                modifier = Modifier.fillMaxSize(),
+                imageBackground = R.drawable.fondo_minijuegos,
+                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                onBackClick = { },
+                content = {
+                        ButtonObjectScannerChallenge(
+                            modifier = Modifier.size(500.dp),
+                            text = "Objeto 1"
+                        )
+                }
             )
         }
     }
