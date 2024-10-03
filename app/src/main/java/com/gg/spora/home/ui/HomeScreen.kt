@@ -77,7 +77,7 @@ fun HomeScreen(
         ) {
             LazyColumn(
                 modifier = Modifier
-                    .padding(top = paddingValue.calculateTopPadding())
+                    .padding(top = paddingValue.calculateTopPadding(), start = 8.dp, end = 8.dp)
             ) {
                 item {
                     ImageWithTextVertical(
