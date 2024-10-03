@@ -1,14 +1,9 @@
 package com.gg.spora.forestStage.domain
 
-import androidx.compose.ui.graphics.painter.Painter
-
 class ChallengeLevel(
-    image: Painter,
+    image: Int,
     typeStage: TypeStage,
     isUnlocked: Boolean,
     isCompleted: Boolean,
-    onClicked: () -> Unit
-) : Level(image, typeStage, isUnlocked, isCompleted, onClicked) {
-
-
-}
+    id: Int
+) : Level(image, typeStage, isUnlocked, isCompleted, id)

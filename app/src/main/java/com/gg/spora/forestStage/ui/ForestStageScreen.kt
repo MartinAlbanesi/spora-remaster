@@ -22,8 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.components.LevelChallenge
-import com.gg.spora.core.components.LevelStage
+import com.gg.spora.core.ui.components.LevelChallenge
+import com.gg.spora.core.ui.components.LevelStage
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.forestStage.domain.TypeStage
 

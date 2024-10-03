@@ -1,11 +1,9 @@
 package com.gg.spora.forestStage.domain
 
-import androidx.compose.ui.graphics.painter.Painter
-
 open class Level(
-    val image: Painter,
+    val image: Int,
     val typeStage: TypeStage,
     var isUnlocked: Boolean,
     var isCompleted: Boolean,
-    var onClicked: () -> Unit
+    val id: Int
 )
