@@ -25,6 +25,7 @@ import com.gg.spora.ui.theme.SporaTheme
  * Screen for mini games with Spora and progress bar
  * @param modifier: Modifier
  * @param imageBackground: Background image
+ * @param champyImage: Champy image
  * @param onBackClick: Click listener for back button
  * @param content: Content of the screen in the champy card
  */
