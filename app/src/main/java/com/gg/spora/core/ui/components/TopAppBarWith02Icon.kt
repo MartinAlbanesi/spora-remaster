@@ -62,7 +62,7 @@ fun TopAppBarWithO2Icon(
                 ) {
                     Text(
                         text = title,
-                        fontSize = 32.sp,
+                        fontSize = 26.sp,
                         color = MaterialTheme.colorScheme.background,
                         fontStyle = MaterialTheme.typography.titleLarge.fontStyle,
                     )

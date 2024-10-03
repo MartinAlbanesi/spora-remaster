@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.gg.spora.areaBosque.ui.AreaBosqueScreen
+import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.ui.theme.SporaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 ) {
 
 
-                    AreaBosqueScreen(modifier = Modifier, o2 = 50)
+                    ForestStageScreen(modifier = Modifier, o2 = 50)
                 }
             }
         }

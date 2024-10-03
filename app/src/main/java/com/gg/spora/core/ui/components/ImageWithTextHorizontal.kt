@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -41,6 +42,7 @@ fun ImageWithTextHorizontal(
             text,
             style = MaterialTheme.typography.titleMedium,
             color = Color.White,
+            fontSize = 24.sp
         )
     }
 }
