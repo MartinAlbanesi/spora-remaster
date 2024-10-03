@@ -12,7 +12,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun OutlinedText(text: String) {
-    Box{
+    Box(
+        contentAlignment = androidx.compose.ui.Alignment.Center,
+    ) {
         Text(
             text = text,
             style = superLargeStyleOutline
@@ -42,7 +44,7 @@ val superLargeStyleOutline: TextStyle
     @Composable
     get() {
         return superLargeStyle.copy(
-            color = MaterialTheme.colorScheme.surface,
+            color = MaterialTheme.colorScheme.onBackground,
             drawStyle = Stroke(
                 miter = 7f,
                 width = 7f,

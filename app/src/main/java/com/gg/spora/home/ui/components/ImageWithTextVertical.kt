@@ -1,6 +1,7 @@
 package com.gg.spora.home.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
@@ -17,15 +18,18 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun ImageWithTextVertical(
     image: Int,
-    text: String
+    text: String,
+    modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier,
     ) {
         Image(
             painter = painterResource(image),
             contentDescription = null,
-            alignment = Alignment.Center,
+            alignment = Alignment.TopCenter,
             modifier = Modifier
                 .size(64.dp)
         )
@@ -42,7 +46,8 @@ fun IconWithTextPreview() {
         ) {
             ImageWithTextVertical(
                 image = R.drawable.trees_icon,
-                text = "12"
+                text = "12",
+                modifier = Modifier.size(64.dp)
             )
         }
     }

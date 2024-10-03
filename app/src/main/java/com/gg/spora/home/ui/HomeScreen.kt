@@ -4,12 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -24,22 +25,17 @@ import com.gg.spora.ui.theme.SporaTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
-    /*
-    val leftIcons = listOf(
-        ImageWithTextVertical(
-            image = R.drawable.profile_icon,
-            text = "Perfil"
-        ),
-        ImageWithTextVertical(
-            image = R.drawable.ranking_icon,
-            text = "Ranking"
-        ),
-        ImageWithTextVertical(
-            image = R.drawable.missions_icon,
-            text = "Misiones"
-        ),
+
+    val leftIcons = mapOf(
+        R.drawable.profile_icon to "Perfil",
+        R.drawable.ranking_icon to "Ranking",
+        R.drawable.missions_icon to "Misiones",
     )
-     */
+
+    val rightIcons = mapOf(
+        R.drawable.eco_diary_icon to "Diario",
+        R.drawable.grove_icon to "Arboleda",
+    )
 
     Scaffold(
         topBar = {
@@ -66,49 +62,49 @@ fun HomeScreen(
             )
         }
 
-        Column(
-            Modifier
+        Box(
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(
-                    start = 8.dp,
-                    end = 8.dp,
-                    bottom = 8.dp,
-                )
+                .padding(paddingValue)
         ) {
-            LazyColumn(
+            Column(
                 modifier = Modifier
-                    .padding(top = paddingValue.calculateTopPadding(), start = 8.dp, end = 8.dp)
+                    .align(Alignment.TopStart)
             ) {
-                item {
+                leftIcons.forEach { (image, text) ->
                     ImageWithTextVertical(
-                        image = R.drawable.profile_icon,
-                        text = "Perfil"
+                        image = image,
+                        text = text,
+                        modifier = Modifier,
                     )
                 }
-                item {
+            }
+            Column(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+            ) {
+                rightIcons.forEach { (image, text) ->
                     ImageWithTextVertical(
-                        image = R.drawable.ranking_icon,
-                        text = "Ranking"
+                        image = image,
+                        text = text,
+                        modifier = Modifier,
                     )
                 }
-                item {
-                    ImageWithTextVertical(
-                        image = R.drawable.missions_icon,
-                        text = "Misiones"
-                    )
-                }
-                item {
-                    ImageWithTextVertical(
-                        image = R.drawable.grove_icon,
-                        text = "Arboleda"
-                    )
-                }
-                item {
-                    ImageWithTextVertical(
-                        image = R.drawable.eco_diary_icon,
-                        text = "Diario"
-                    )
-                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.fondo_home),
+                    contentDescription = "Home Background",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .matchParentSize()
+                )
             }
         }
     }
