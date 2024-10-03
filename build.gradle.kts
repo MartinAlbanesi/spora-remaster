@@ -16,4 +16,8 @@ plugins {
 
     // Google Services
     alias(libs.plugins.googleServices) apply false
+
+    // Firebase Crashlytics
+    id("com.google.firebase.crashlytics") version "3.0.2" apply false
+
 }

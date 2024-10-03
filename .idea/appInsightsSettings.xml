@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.gg.spora" />
+                  <option name="mobileSdkAppId" value="1:582788422443:android:1f355550e4f8108c07c36e" />
+                  <option name="projectId" value="spora-3f595" />
+                  <option name="projectNumber" value="582788422443" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
