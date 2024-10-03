@@ -33,7 +33,7 @@ fun SporaWithCard(
             contentDescription = null,
             modifier = Modifier
                 .size(200.dp)
-                .offset(y = (60).dp)
+                .offset(y = (35).dp)
         )
         Card(
             shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
