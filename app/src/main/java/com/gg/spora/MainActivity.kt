@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 ) {
 
 
-                    AreaBosqueScreen(modifier = Modifier)
+                    AreaBosqueScreen(modifier = Modifier, o2 = 50)
                 }
             }
         }

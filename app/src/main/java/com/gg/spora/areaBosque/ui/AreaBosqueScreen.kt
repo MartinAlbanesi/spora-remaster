@@ -26,14 +26,15 @@ import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 
 @Composable
 fun AreaBosqueScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    o2 : Int
 ) {
 
     Scaffold(
         topBar = {
             TopAppBarWithO2Icon(
                 title = "Área Bosque",
-                firstLabel = "10",
+                firstLabel = o2.toString(),
                 firstIcon = R.drawable.o2,
                 showBackArrow = true,
                 onBackClick = {},
@@ -97,6 +98,7 @@ fun PreviewAreaBosqueScreen() {
     AreaBosqueScreen(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.background),
+        o2 = 50
     )
 }
