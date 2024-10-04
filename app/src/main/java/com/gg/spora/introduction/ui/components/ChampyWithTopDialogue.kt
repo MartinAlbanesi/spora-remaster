@@ -35,7 +35,6 @@ fun ChampyWithTopDialogue(
     x: Dp = 0.dp,
     y: Dp = 0.dp,
     size: Int = 250,
-    padding: Dp = 0.dp,
     modifier: Modifier = Modifier
 ) {
 
@@ -53,7 +52,7 @@ fun ChampyWithTopDialogue(
             Image(
                 painter = painterResource(id = champy),
                 contentDescription = "Champy",
-                modifier = Modifier.size(size.dp)
+                modifier = Modifier.size(size.dp).offset(y = y)
             )
 
         }

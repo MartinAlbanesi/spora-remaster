@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun SporaLabelPrimary(modifier: Modifier = Modifier, text: String) {
+fun SporaTextField(modifier: Modifier = Modifier, text: String) {
 
     var nameValue = remember { mutableStateOf(text) }
     val placeholder = "Escribi tu nombre"
@@ -32,7 +32,7 @@ fun SporaLabelPrimary(modifier: Modifier = Modifier, text: String) {
         },
         placeholder = { Text(
             text = placeholder,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             style = MaterialTheme.typography.labelLarge,
         ) },
         singleLine = true,
@@ -42,8 +42,8 @@ fun SporaLabelPrimary(modifier: Modifier = Modifier, text: String) {
         colors = TextFieldDefaults.colors(
             unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
             focusedTextColor = MaterialTheme.colorScheme.onSurface,
-            focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             cursorColor = MaterialTheme.colorScheme.primary,
@@ -57,7 +57,7 @@ fun SporaLabelPrimary(modifier: Modifier = Modifier, text: String) {
 fun SporaLabelPrimaryPreview() {
     SporaTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            SporaLabelPrimary(text = "", modifier = Modifier.align(Alignment.Center))
+            SporaTextField(text = "", modifier = Modifier.align(Alignment.Center))
         }
     }
 }
