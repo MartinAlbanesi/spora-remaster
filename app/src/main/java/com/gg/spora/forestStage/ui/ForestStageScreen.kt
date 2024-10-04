@@ -2,6 +2,7 @@ package com.gg.spora.forestStage.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,7 +31,8 @@ import com.gg.spora.forestStage.domain.TypeStage
 @Composable
 fun ForestStageScreen(
     modifier: Modifier = Modifier,
-    o2 : Int
+    o2 : Int,
+    onNavigateToQuizGame: () -> Unit = {}
 ) {
 
     Scaffold(
@@ -59,7 +61,8 @@ fun ForestStageScreen(
             ListOfLevels(
                 modifier = Modifier,
                 paddingValues = paddingValue,
-                stage = TypeStage.FOREST
+                stage = TypeStage.FOREST,
+                onNavigateToQuizGame = onNavigateToQuizGame
             )
 
         }
@@ -70,7 +73,8 @@ fun ForestStageScreen(
 fun ListOfLevels(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
-    stage: TypeStage
+    stage: TypeStage,
+    onNavigateToQuizGame: () -> Unit = {}
 ) {
 
     Column(
@@ -82,42 +86,45 @@ fun ListOfLevels(
     ) {
 
         LevelStage(
-            1,
+            number = 1,
             0,
             false,
-            stage
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-
-        LevelStage(
-            2,
-            0,
-            true,
             stage,
-            modifier.offset(x = (-10).dp)
+            modifier = Modifier.clickable {
+                onNavigateToQuizGame()
+            }
         )
+//        Spacer(modifier = Modifier.height(20.dp))
 
-        Spacer(modifier = Modifier.height(20.dp))
+//        LevelStage(
+//            2,
+//            0,
+//            true,
+//            stage,
+//            modifier.offset(x = (-10).dp)
+//        )
 
-        LevelStage(
-            2,
-            0,
-            true,
-            stage,
-            modifier.offset(x = 25.dp)
-        )
+//        Spacer(modifier = Modifier.height(20.dp))
 
-        Spacer(modifier = Modifier.height(20.dp))
+//        LevelStage(
+//            2,
+//            0,
+//            true,
+//            stage,
+//            modifier.offset(x = 25.dp)
+//        )
 
-        LevelStage(
-            2,
-            0,
-            true,
-            stage,
-            modifier.offset(x = 70.dp)
-        )
+//        Spacer(modifier = Modifier.height(20.dp))
 
-        Spacer(modifier = Modifier.height(20.dp))
+//        LevelStage(
+//            2,
+//            0,
+//            true,
+//            stage,
+//            modifier.offset(x = 70.dp)
+//        )
+
+//        Spacer(modifier = Modifier.height(20.dp))
 
         LevelChallenge(modifier.offset(x = 100.dp))
         }

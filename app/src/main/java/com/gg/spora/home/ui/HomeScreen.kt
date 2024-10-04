@@ -29,6 +29,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    onNavigateToForestStage: () -> Unit,
 ) {
 
     // Icons in the left
@@ -129,7 +130,7 @@ fun HomeScreen(
                     .align(Alignment.BottomCenter)
                     .size(140.dp)
                     .offset(y = -40.dp, x = -80.dp)
-                    .clickable(onClick = { /*TODO*/ })
+                    .clickable(onClick = onNavigateToForestStage)
             )
         }
     }
@@ -145,7 +146,7 @@ private fun MiniGameScreenPreview() {
         ) {
             HomeScreen(
                 modifier = Modifier.fillMaxSize()
-            )
+            ){}
         }
     }
 }
