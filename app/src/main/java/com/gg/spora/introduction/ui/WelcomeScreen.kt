@@ -35,7 +35,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun WelcomeScreen(modifier: Modifier = Modifier) {
+fun WelcomeScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToHome: () -> Unit = {}
+) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = {
         5
@@ -75,7 +78,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
                     }
 
                     4 -> IntroductionScreen5(modifier, "Titi") {
-                        /*Nav to Home screen*/
+                        onNavigateToHome()
                     }
 
                     else -> {
@@ -281,7 +284,7 @@ fun IntroductionScreen5(modifier: Modifier, guestName: String, onClick: () -> Un
             )
 
             SporaPrimaryButton(modifier = modifier, text = "Comenzar") {
-                //Nav to Home screen
+                onClick()
             }
         }
     }

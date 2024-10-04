@@ -19,7 +19,7 @@ import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.introduction.ui.IntroductionHorizontalPager
+import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -40,10 +40,14 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Home
+                        startDestination = NavigationRoutes.Welcome
                     ){
                         composable<NavigationRoutes.Welcome>{
-
+                            WelcomeScreen(
+                                onNavigateToHome = {
+                                    navController.navigate(NavigationRoutes.Home)
+                                }
+                            )
                         }
 
                         composable<NavigationRoutes.Home> {

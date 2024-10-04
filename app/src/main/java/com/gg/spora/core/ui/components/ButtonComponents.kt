@@ -24,7 +24,7 @@ import com.gg.spora.ui.theme.SporaTheme
 fun SporaPrimaryButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
 
     Button(
-        onClick = onClick,
+        onClick = { onClick() },
         modifier = modifier.size(width = 350.dp, height = 50.dp),
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         elevation = ButtonDefaults.buttonElevation(5.dp),
