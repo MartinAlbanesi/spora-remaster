@@ -13,11 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -30,14 +28,14 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
 import com.gg.spora.introduction.ui.components.ChampyWithTopDialogue
-import com.gg.spora.introduction.ui.components.SporaLabelPrimary
+import com.gg.spora.introduction.ui.components.SporaTextField
 import com.gg.spora.ui.theme.SporaTheme
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroductionHorizontalPager(modifier: Modifier = Modifier) {
+fun WelcomeScreen(modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = {
         5
@@ -45,7 +43,11 @@ fun IntroductionHorizontalPager(modifier: Modifier = Modifier) {
 
     Box(modifier = modifier.fillMaxSize()) {
         Column(modifier = modifier.fillMaxWidth()) {
-            HorizontalPager(state = pagerState, modifier = modifier.weight(0.7f)) { page ->
+            HorizontalPager(
+                state = pagerState,
+                modifier = modifier.weight(0.7f),
+                userScrollEnabled = false
+            ) { page ->
 
                 when (page) {
                     0 -> IntroductionScreen1(modifier) {
@@ -70,6 +72,10 @@ fun IntroductionHorizontalPager(modifier: Modifier = Modifier) {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(page + 1)
                         }
+                    }
+
+                    4 -> IntroductionScreen5(modifier, "Titi") {
+                        /*Nav to Home screen*/
                     }
 
                     else -> {
@@ -149,7 +155,8 @@ fun IntroductionScreen2(modifier: Modifier, onClick: () -> Unit) {
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_sonriente_brazo_izquierdo_levantado,
                 dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi hogar.",
-                x = -(30).dp
+                x = -(30).dp,
+                y = -(22).dp
             )
 
             SporaPrimaryButton(
@@ -215,7 +222,7 @@ fun IntroductionScreen4(modifier: Modifier, onClick: () -> Unit) {
 
         Image(
             painter = painterResource(id = R.drawable.fondo_introduccion),
-            contentDescription = "Area 1 background",
+            contentDescription = "Welcome background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
         )
@@ -239,10 +246,42 @@ fun IntroductionScreen4(modifier: Modifier, onClick: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                SporaLabelPrimary(modifier = modifier, "")
+                SporaTextField(modifier = modifier, "")
 
                 SporaPrimaryButton(modifier, "Siguente", onClick = onClick)
 
+            }
+        }
+    }
+}
+
+@Composable
+fun IntroductionScreen5(modifier: Modifier, guestName: String, onClick: () -> Unit) {
+
+    Box(modifier = modifier.fillMaxSize()) {
+
+        Image(
+            painter = painterResource(id = R.drawable.fondo_introduccion),
+            contentDescription = "Welcome background",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.matchParentSize()
+        )
+
+        Column(
+            modifier = modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            ChampyWithTopDialogue(
+                champy = R.drawable.champy_celebrando_brazoslevantados,
+                dialogue = "¡Genial, $guestName!\n vamos a mi hogar",
+                x = -(30).dp,
+                y = -(22).dp
+            )
+
+            SporaPrimaryButton(modifier = modifier, text = "Comenzar") {
+                //Nav to Home screen
             }
         }
     }
@@ -252,6 +291,6 @@ fun IntroductionScreen4(modifier: Modifier, onClick: () -> Unit) {
 @Composable
 fun IntroductionScreenPreview() {
     SporaTheme {
-        IntroductionScreen4(modifier = Modifier, onClick = {})
+        IntroductionScreen5(modifier = Modifier, guestName = "Titi", onClick = {})
     }
 }
