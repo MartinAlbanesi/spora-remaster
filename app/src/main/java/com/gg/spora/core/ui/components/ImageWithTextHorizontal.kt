@@ -26,10 +26,14 @@ import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun ImageWithTextHorizontal(
+    modifier: Modifier = Modifier,
     image: Int,
     text: String
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+    ) {
         Image(
             painter = painterResource(image),
             contentDescription = null,

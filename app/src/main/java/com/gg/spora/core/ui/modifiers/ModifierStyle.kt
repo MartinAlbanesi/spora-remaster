@@ -6,6 +6,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 object ModifierStyle {
+
+    // Brush shadow for the TopBar
     val brush = Modifier
         .background(
             brush = Brush.verticalGradient(

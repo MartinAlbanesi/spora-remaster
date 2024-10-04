@@ -52,8 +52,8 @@ fun TopAppBarWithDualIcon(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    ImageWithTextHorizontal(firstIcon, firstLabel)
-                    ImageWithTextHorizontal(secondIcon, secondLabel)
+                    ImageWithTextHorizontal(image = firstIcon, text = firstLabel)
+                    ImageWithTextHorizontal(image = secondIcon, text = secondLabel)
                 }
             },
             navigationIcon = {

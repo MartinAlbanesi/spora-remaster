@@ -28,12 +28,14 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
 
+    // Icons in the left
     val leftIcons = mapOf(
         R.drawable.profile_icon to "Perfil",
         R.drawable.ranking_icon to "Ranking",
         R.drawable.missions_icon to "Misiones",
     )
 
+    // Icons in the right
     val rightIcons = mapOf(
         R.drawable.eco_diary_icon to "Diario",
         R.drawable.grove_icon to "Arboleda",
@@ -52,6 +54,8 @@ fun HomeScreen(
         },
         modifier = modifier
     ) { paddingValue ->
+
+        // Screen Background
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -65,10 +69,11 @@ fun HomeScreen(
             )
         }
 
+        // Screen Content
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValue)
+                .padding(top = paddingValue.calculateTopPadding(), start = 8.dp, end = 8.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -96,13 +101,14 @@ fun HomeScreen(
             }
         }
 
+        // Forest Sign Button
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
             Image(
                 painter = painterResource(id = R.drawable.forest_sign),
-                contentDescription = "Home Background",
+                contentDescription = "Forest Sign",
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .size(140.dp)

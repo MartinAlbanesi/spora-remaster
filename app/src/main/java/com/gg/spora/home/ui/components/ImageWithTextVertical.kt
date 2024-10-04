@@ -15,11 +15,17 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 
+
+/**
+ * Composable function to display an icon with text under it.
+ * @param image The [Int] representing the icon.
+ * @param text The text to be displayed under the icon.
+ */
 @Composable
 fun ImageWithTextVertical(
+    modifier: Modifier = Modifier,
     image: Int,
     text: String,
-    modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

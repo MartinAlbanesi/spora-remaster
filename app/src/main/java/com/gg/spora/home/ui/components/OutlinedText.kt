@@ -11,6 +11,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
+/**
+ * Composable function to display a text with stroke.
+ * @param text The text to be displayed with stroke.
+ */
 @Composable
 fun OutlinedText(
     modifier: Modifier = Modifier,
@@ -18,6 +22,7 @@ fun OutlinedText(
 ) {
     Box(
         contentAlignment = androidx.compose.ui.Alignment.Center,
+        modifier = modifier
     ) {
         Text(
             text = text,
@@ -32,11 +37,13 @@ fun OutlinedText(
 
 }
 
+// Styles
+// Text without outline
 val superLargeStyle: TextStyle
     @Composable
     get() {
         return TextStyle(
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.surfaceVariant,
             fontFamily = MaterialTheme.typography.displayMedium.fontFamily,
             fontWeight = MaterialTheme.typography.displayMedium.fontWeight,
             fontSize = 20.sp,
@@ -44,6 +51,8 @@ val superLargeStyle: TextStyle
             textAlign = TextAlign.Center,
         )
     }
+
+// Outlined text
 val superLargeStyleOutline: TextStyle
     @Composable
     get() {
