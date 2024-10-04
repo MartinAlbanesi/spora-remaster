@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.gg.spora.forestStage.ui.ForestStageScreen
+import com.gg.spora.introduction.ui.IntroductionHorizontalPager
 import com.gg.spora.ui.theme.SporaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,9 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-
-
-                    ForestStageScreen(modifier = Modifier, o2 = 50)
+                    IntroductionHorizontalPager()
                 }
             }
         }
