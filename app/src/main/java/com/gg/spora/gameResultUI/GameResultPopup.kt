@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,7 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -50,6 +54,7 @@ fun GameResultPopup(
                 .fillMaxSize()
                 .background(Color.Black.copy(alpha = 0.5f))
         ) {
+
             Box(
                 modifier = Modifier
                     .fillMaxHeight(0.3f)
@@ -67,7 +72,12 @@ fun GameResultPopup(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(8.dp)),
-                    contentScale = ContentScale.FillBounds
+                    contentScale = ContentScale.FillBounds,
+                    colorFilter = ColorFilter.colorMatrix(
+                        ColorMatrix().apply {
+                            setToScale(0.7f, 0.7f, 0.7f, 1f) // Ajusta los valores para controlar el oscurecimiento
+                        }
+                    )
                 )
                 Column(
                     modifier = Modifier
@@ -76,6 +86,8 @@ fun GameResultPopup(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
+                    Spacer(modifier = Modifier.height(24.dp))
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
@@ -83,13 +95,38 @@ fun GameResultPopup(
                         Image(
                             painter = painterResource(id = R.drawable.champy_sonriente_idle),
                             contentDescription = "Resultado",
-                            modifier = Modifier.size(86.dp)
+                            modifier = Modifier.size(100.dp)
                         )
                         Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            text = if (hasWon) "¡Ganaste!" else "Perdiste",
-                            style = MaterialTheme.typography.bodyLarge
-                        )
+                        Column {
+                            Text(
+                                text = if (hasWon) "Recompensa" else "Perdiste",
+                                style = MaterialTheme.typography.bodyLarge.copy(
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary
+                                )
+                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.o2), // Reemplaza con tu imagen
+                                    contentDescription = "Imagen de recompensa",
+                                    modifier = Modifier
+                                        .size(50.dp)
+                                        .align(Alignment.CenterVertically)
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                val rewardText = "+20"
+                                Text(
+                                    text = rewardText, // Parámetro recibido
+                                    style = MaterialTheme.typography.bodyMedium.copy(
+                                        fontSize = 40.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onPrimary
+                                    )
+                                )
+                            }
+                        }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
@@ -134,105 +171,44 @@ fun GameResultPopup(
                         }
                     }
                 }
+
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp)
+                .offset(y = (250).dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+                    .align(Alignment.BottomCenter),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.estrella_gris),
+                    contentDescription = "Imagen 1",
+                    modifier = Modifier
+                        .size(60.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.estrella_gris),
+                    contentDescription = "Imagen 2",
+                    modifier = Modifier.size(70.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.estrella_gris),
+                    contentDescription = "Imagen 3",
+                    modifier = Modifier.size(60.dp)
+                )
             }
         }
     }
 }
-
-
-/*
-@Composable
-fun GameResultPopup(
-    isVisible: Boolean,
-    onRetryClick: () -> Unit,
-    onContinueClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val hasWon = true //la uso para saber si ganó o perdió
-    if (isVisible) {
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.5f))
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight(0.3f)
-                    .padding(horizontal = 16.dp)
-                    .align(Alignment.Center)
-                    .shadow(
-                        elevation = 8.dp,
-                        shape = RoundedCornerShape(60.dp)
-                    )
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(
-                        painter = painterResource(id = R.drawable.fondo_minijuegos), // Reemplaza con tu imagen
-                        contentScale = ContentScale.Crop // Ajusta la escala de la imagen
-                    )
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceAround
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.champy_sonriente_idle),
-                            contentDescription = "Resultado",
-                            modifier = Modifier.size(86.dp)
-                        )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            text = if (hasWon) "¡Ganaste!" else "Perdiste",
-                            style = MaterialTheme.typography.bodyLarge
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Button(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(150.dp),
-                            onClick = { /* Acción del botón 1 */ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(id = R.color.surface),
-                                contentColor = colorResource(id = R.color.primary)
-                            )
-                        )
-                        { Text(
-                            text = "Reiniciar",
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold)) }
-                        Button(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(150.dp),
-                            onClick = { /* Acción del botón 1 */ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(id = R.color.primary),
-                                contentColor = colorResource(id = R.color.surface)
-                            )
-                        )
-                        { Text(
-                            text ="Siguiente",
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold)) }
-                    }
-                }
-            }
-        }
-    }
-}*/
 
 
 @Preview(showBackground = true)
