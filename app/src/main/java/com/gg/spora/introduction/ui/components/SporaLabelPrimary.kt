@@ -10,8 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,17 +24,17 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun SporaLabelPrimary(modifier: Modifier = Modifier, text: String) {
 
-    var nameValue = remember { mutableStateOf(text) }
+    var nameValue by remember { mutableStateOf(text) }
     val placeholder = "Escribi tu nombre"
     val shape = RoundedCornerShape(20.dp)
     TextField(
-        value = nameValue.value,
+        value = nameValue,
         onValueChange = {
-            nameValue.value = it
+            nameValue = it
         },
         placeholder = { Text(
             text = placeholder,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             style = MaterialTheme.typography.labelLarge,
         ) },
         singleLine = true,

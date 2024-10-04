@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -237,7 +239,7 @@ fun IntroductionScreen4(modifier: Modifier, onClick: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                SporaLabelPrimary(modifier = modifier, " ")
+                SporaLabelPrimary(modifier = modifier, "")
 
                 SporaPrimaryButton(modifier, "Siguente", onClick = onClick)
 
