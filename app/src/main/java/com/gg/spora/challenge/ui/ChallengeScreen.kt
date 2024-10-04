@@ -126,27 +126,29 @@ fun ChallengeListObject(
     var selectedObject by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    if (resultText.isNotEmpty()) {
-        Text(
-            text = resultText,
-            modifier = Modifier.height(80.dp),
-            style = MaterialTheme.typography.bodyLarge
-        )
-    }
-
-    CameraPreview(
-        onImageCaptured = { bitmap: Bitmap ->
-            classifyImage(context, bitmap, selectedObject) { result ->
-                resultText = result
-            }
-            showCamera = true
-        },
-        onError = { error ->
-            // Manejar error
-            showCamera = false
-        }
-    )
     /*
+        if (resultText.isNotEmpty()) {
+            Text(
+                text = resultText,
+                modifier = Modifier.height(80.dp),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+        CameraPreview(
+            onImageCaptured = { bitmap: Bitmap ->
+                classifyImage(context, bitmap, selectedObject) { result ->
+                    resultText = result
+                }
+                showCamera = true
+            },
+            onError = { error ->
+                // Manejar error
+                showCamera = false
+            }
+        )
+
+     */
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -191,7 +193,7 @@ fun ChallengeListObject(
         }
     }
 
-     */
+
 }
 
 @Composable
@@ -304,7 +306,7 @@ fun ImageProxy.toBitmap(): Bitmap {
     return BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
 }
 
-fun classifyImage(context: Context, bitmap: Bitmap, selectedObject: String, onResult: (String) -> Unit) {
+fun classifyImage(context: Context, bitmap: Bitmap, selectedObject: String/*, onResult: (String) -> Unit*/) {
     // Cargar el modelo de TensorFlow Lite
     val model = ModelUnquant.newInstance(context)
 
@@ -324,7 +326,7 @@ fun classifyImage(context: Context, bitmap: Bitmap, selectedObject: String, onRe
 
     model.close()
 
-    onResult(resultText)
+    //onResult(resultText)
 }
 
 fun preprocessImage(bitmap: Bitmap): TensorImage {
