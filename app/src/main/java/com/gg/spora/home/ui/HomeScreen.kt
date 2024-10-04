@@ -137,7 +137,7 @@ fun HomeScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun MiniGameScreenPreview() {
+private fun HomePreview() {
     SporaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
