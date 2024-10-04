@@ -1,6 +1,7 @@
 package com.gg.spora.home.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
+import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
+import com.gg.spora.home.ui.components.SignButton
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
@@ -29,16 +32,36 @@ fun HomeScreen(
 ) {
 
     // Icons in the left
-    val leftIcons = mapOf(
-        R.drawable.profile_icon to "Perfil",
-        R.drawable.ranking_icon to "Ranking",
-        R.drawable.missions_icon to "Misiones",
+    val leftIcons = listOf<HomeIcon>(
+        HomeIcon(
+            image = R.drawable.profile_icon,
+            text = "Perfil",
+            onClick = {}
+        ),
+        HomeIcon(
+            image = R.drawable.ranking_icon,
+            text = "Ranking",
+            onClick = {}
+        ),
+        HomeIcon(
+            image = R.drawable.missions_icon,
+            text = "Misiones",
+            onClick = {}
+        )
     )
 
     // Icons in the right
-    val rightIcons = mapOf(
-        R.drawable.eco_diary_icon to "Diario",
-        R.drawable.grove_icon to "Arboleda",
+    val rightIcons = listOf<HomeIcon>(
+        HomeIcon(
+            image = R.drawable.eco_diary_icon,
+            text = "Diario",
+            onClick = {}
+        ),
+        HomeIcon(
+            image = R.drawable.grove_icon,
+            text = "Arboleda",
+            onClick = {}
+        )
     )
 
     Scaffold(
@@ -79,11 +102,11 @@ fun HomeScreen(
                 modifier = Modifier
                     .align(Alignment.TopStart)
             ) {
-                leftIcons.forEach { (image, text) ->
+                leftIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier,
+                        modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
@@ -91,28 +114,22 @@ fun HomeScreen(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
             ) {
-                rightIcons.forEach { (image, text) ->
+                rightIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier,
+                        modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
-        }
-
-        // Forest Sign Button
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.forest_sign),
-                contentDescription = "Forest Sign",
+            // Forest Sign Button
+            SignButton(
+                image = R.drawable.forest_sign,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .size(140.dp)
                     .offset(y = -40.dp, x = -80.dp)
+                    .clickable(onClick = { /*TODO*/ })
             )
         }
     }
