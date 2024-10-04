@@ -1,6 +1,5 @@
 package com.gg.spora.quiz.ui
 
-import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
@@ -19,7 +18,7 @@ class QuizViewModel @Inject constructor(
 ) : ViewModel(){
 
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
-    val questions = _questions.asStateFlow()
+//    val questions = _questions.asStateFlow()
 
     private val _currentQuestionIndex = MutableStateFlow(0)
 //    val currentQuestionIndex = _currentQuestionIndex.asStateFlow()
