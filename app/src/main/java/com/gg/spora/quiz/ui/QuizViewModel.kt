@@ -46,8 +46,6 @@ class QuizViewModel @Inject constructor(
                 if (it.id == answerId) {
                     it.copy(
                         isCorrect = isCorrect,
-                        textColor = Color.White,
-                        backgroundColor = if (isCorrect) Color(0xff538c21) else Color(0xffb3261e)
                     )
                 } else {
                     it
