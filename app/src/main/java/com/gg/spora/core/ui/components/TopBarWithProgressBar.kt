@@ -1,4 +1,4 @@
-package com.gg.spora.core.components
+package com.gg.spora.core.ui.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons

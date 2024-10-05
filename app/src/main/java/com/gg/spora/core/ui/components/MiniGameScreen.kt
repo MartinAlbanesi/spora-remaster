@@ -1,4 +1,4 @@
-package com.gg.spora.core.components
+package com.gg.spora.core.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -11,8 +11,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,7 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.minigameQuiz.ui.MinigameQuizScreen
+import com.gg.spora.core.fake.FakeQuizModels
+import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -49,7 +48,7 @@ fun MiniGameScreen(
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .offset(y = (-360).dp)
+                    .offset(y = (-360).dp)
         )
         Column(
             modifier = modifier
@@ -96,38 +95,17 @@ private fun MiniGameScreenPreview() {
                 champyImage = R.drawable.champy_celebrando_brazoslevantados,
                 onBackClick = { },
                 content = {
-                    MinigameQuizScreen(
+                    QuizScreen(
                         modifier = Modifier.fillMaxSize().padding(16.dp),
                         questionTitle = "¿Qué tipo de residuo debe depositarse en el contenedor verde?",
-                        answerOptions = mapOf(
-                            "Vidrio" to true,
-                            "Residuos Orgánicos" to null,
-                            "Papel y Cartón" to null,
-                            "Envases de Plástico" to null,
-                        )
+                        answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
+                        answerQuestionId = "1",
+                        onAnswerSelected = { },
+                        onNextQuestion = { }
                     )
 
                 }
             )
-//            MiniGameScreen(
-//                modifier = Modifier.fillMaxSize(),
-//                imageBackground = R.drawable.fondo_minijuegos,
-//                champyImage = R.drawable.champy_triste_brazosalcuerpo,
-//                onBackClick = { },
-//                content = {
-//                    MinigameQuizScreen(
-//                        modifier = Modifier.fillMaxSize().padding(16.dp),
-//                        questionTitle = "¿Qué tipo de residuo debe depositarse en el contenedor verde?",
-//                        answerOptions = mapOf(
-//                            "Vidrio" to null,
-//                            "Residuos Orgánicos" to false,
-//                            "Papel y Cartón" to null,
-//                            "Envases de Plástico" to null,
-//                        )
-//                    )
-//
-//                }
-//            )
         }
     }
 }
