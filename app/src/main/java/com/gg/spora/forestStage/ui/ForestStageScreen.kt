@@ -31,8 +31,9 @@ import com.gg.spora.forestStage.domain.TypeStage
 @Composable
 fun ForestStageScreen(
     modifier: Modifier = Modifier,
-    o2 : Int,
-    onNavigateToQuizGame: () -> Unit = {}
+    o2: Int,
+    onNavigateToQuizGame: () -> Unit = {},
+    onNavigateToChallenge: () -> Unit = {}
 ) {
 
     Scaffold(
@@ -62,7 +63,8 @@ fun ForestStageScreen(
                 modifier = Modifier,
                 paddingValues = paddingValue,
                 stage = TypeStage.FOREST,
-                onNavigateToQuizGame = onNavigateToQuizGame
+                onNavigateToQuizGame = onNavigateToQuizGame,
+                onNavigateToChallenge = onNavigateToChallenge
             )
 
         }
@@ -74,7 +76,8 @@ fun ListOfLevels(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     stage: TypeStage,
-    onNavigateToQuizGame: () -> Unit = {}
+    onNavigateToQuizGame: () -> Unit = {},
+    onNavigateToChallenge: () -> Unit = {}
 ) {
 
     Column(
@@ -126,10 +129,14 @@ fun ListOfLevels(
 
 //        Spacer(modifier = Modifier.height(20.dp))
 
-        LevelChallenge(modifier.offset(x = 100.dp))
-        }
-
+        LevelChallenge(
+            modifier
+                .offset(x = 100.dp),
+            onClick = onNavigateToChallenge,
+        )
     }
+
+}
 
 @Composable
 @Preview(showBackground = true)

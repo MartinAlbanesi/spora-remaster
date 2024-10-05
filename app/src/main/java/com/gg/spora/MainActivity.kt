@@ -15,6 +15,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.gg.spora.challenge.ui.ChallengeListObject
+import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
@@ -41,8 +43,8 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController,
                         startDestination = NavigationRoutes.Welcome
-                    ){
-                        composable<NavigationRoutes.Welcome>{
+                    ) {
+                        composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
                                 onNavigateToHome = {
                                     navController.navigate(NavigationRoutes.Home)
@@ -67,6 +69,9 @@ class MainActivity : ComponentActivity() {
                                 o2 = 100,
                                 onNavigateToQuizGame = {
                                     navController.navigate(NavigationRoutes.QuizGame)
+                                },
+                                onNavigateToChallenge = {
+                                    navController.navigate(NavigationRoutes.Challenge)
                                 }
                             )
                         }
@@ -83,7 +88,9 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { },
                                 content = {
                                     QuizScreen(
-                                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .padding(16.dp),
                                         questionTitle = currentQuestion!!.question,
                                         answerOptions = currentQuestion!!.answers,
                                         answerQuestionId = currentQuestion!!.answer.id,
@@ -92,6 +99,24 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             )
+                        }
+                        composable<NavigationRoutes.Challenge> {
+                            ChallengeScreen(
+                                modifier = Modifier,
+                                imageBackground = R.drawable.fondo_minijuegos,
+                                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                                onBackClick = { }
+                                ) {
+                                ChallengeListObject(
+                                    modifier = Modifier.fillMaxSize().padding(16.dp),
+                                    recyclerOptions = mapOf(
+                                        "Vidrio" to true,
+                                        "Residuos Orgánicos" to null,
+                                        "Papel y Cartón" to null,
+                                        "Envases de Plástico" to null,
+                                    )
+                                )
+                            }
                         }
                     }
                 }
