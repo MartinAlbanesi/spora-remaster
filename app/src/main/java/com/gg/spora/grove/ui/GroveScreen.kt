@@ -49,7 +49,7 @@ fun GroveScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.fondo_generico_sin_pasto),
-                contentDescription = "Home Background",
+                contentDescription = "Grove Background",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .matchParentSize()
