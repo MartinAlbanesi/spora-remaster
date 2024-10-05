@@ -23,6 +23,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,11 +35,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
@@ -187,25 +194,156 @@ fun GameResultPopup(
                     .align(Alignment.BottomCenter),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.estrella_gris),
-                    contentDescription = "Imagen 1",
-                    modifier = Modifier
-                        .size(60.dp)
-                )
+                Box {
+                    var starImageSize by remember { mutableStateOf(IntSize.Zero) }
+                    Image(
+                        painter = painterResource(id = R.drawable.estrella_gris),
+                        contentDescription = "Estrella gris 1",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .onGloballyPositioned { coordinates ->
+                                starImageSize = coordinates.size
+                            }
+                    )
+
+                    // Row con la imagen de O2 y el texto
+                    Row(
+                        modifier = Modifier
+                            .layout { measurable, constraints ->
+                                val placeable = measurable.measure(constraints)
+                                // Calcula la posición del Row dentro de la estrella
+                                val x = (starImageSize.width - placeable.width) / 2
+                                val y = (starImageSize.height - placeable.height) / 2
+                                layout(placeable.width, placeable.height) {
+                                    placeable.placeRelative(x, y)
+                                }
+                            },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.o2),
+                            contentDescription = "Imagen de recompensa",
+                            modifier = Modifier.size(16.dp) // Ajusta el tamaño según sea necesario
+                        )
+
+                        val rewardText = "10"
+                        Text(
+                            text = rewardText,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.width(8.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.estrella_gris),
-                    contentDescription = "Imagen 2",
-                    modifier = Modifier.size(70.dp)
-                )
+                Box {
+                    var starImageSize by remember { mutableStateOf(IntSize.Zero) }
+                    Image(
+                        painter = painterResource(id = R.drawable.estrella_gris),
+                        contentDescription = "Estrella gris 2",
+                        modifier = Modifier
+                            .size(70.dp)
+                            .onGloballyPositioned { coordinates ->
+                                starImageSize = coordinates.size
+                            }
+                    )
+                    // Row con la imagen de O2 y el texto
+                    Row(
+                        modifier = Modifier
+                            .layout { measurable, constraints ->
+                                val placeable = measurable.measure(constraints)
+                                // Calcula la posición del Row dentro de la estrella
+                                val x = (starImageSize.width - placeable.width) / 2
+                                val y = (starImageSize.height - placeable.height) / 2
+                                layout(placeable.width, placeable.height) {
+                                    placeable.placeRelative(x, y)
+                                }
+                            },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.o2),
+                            contentDescription = "Imagen de recompensa",
+                            modifier = Modifier.size(16.dp) // Ajusta el tamaño según sea necesario
+                        )
+
+                        val rewardText = "20"
+                        Text(
+                            text = rewardText,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.width(8.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.estrella_gris),
-                    contentDescription = "Imagen 3",
-                    modifier = Modifier.size(60.dp)
-                )
+                Box {
+                    var starImageSize by remember { mutableStateOf(IntSize.Zero) }
+                    Image(
+                        painter = painterResource(id = R.drawable.estrella_gris),
+                        contentDescription = "Estrella gris 3",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .onGloballyPositioned { coordinates ->
+                                starImageSize = coordinates.size
+                            }
+                    )
+
+                    // Row con la imagen de O2 y el texto
+                    Row(
+                        modifier = Modifier
+                            .layout { measurable, constraints ->
+                                val placeable = measurable.measure(constraints)
+                                // Calcula la posición del Row dentro de la estrella
+                                val x = (starImageSize.width - placeable.width) / 2
+                                val y = (starImageSize.height - placeable.height) / 2
+                                layout(placeable.width, placeable.height) {
+                                    placeable.placeRelative(x, y)
+                                }
+                            },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.o2),
+                            contentDescription = "Imagen de recompensa",
+                            modifier = Modifier.size(16.dp)
+                        )
+
+                        val rewardText = "30"
+                        Text(
+                            text = rewardText,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
+                        )
+                    }
+                }
             }
+            /*Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.o2), // Reemplaza con tu imagen
+                    contentDescription = "Imagen de recompensa",
+                    modifier = Modifier
+                        .size(15.dp)
+                        .align(Alignment.CenterVertically)
+                )
+
+                val rewardText = "+20"
+                Text(
+                    text = rewardText, // Parámetro recibido
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                )
+            }*/
         }
     }
 }
