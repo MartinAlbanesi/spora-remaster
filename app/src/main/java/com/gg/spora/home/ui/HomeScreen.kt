@@ -30,6 +30,7 @@ import com.gg.spora.ui.theme.SporaTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToGrove: () -> Unit,
 ) {
 
     // Icons in the left
@@ -61,7 +62,7 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.grove_icon,
             text = "Arboleda",
-            onClick = {}
+            onClick = onNavigateToGrove
         )
     )
 
@@ -119,7 +120,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = onClick ),
                     )
                 }
             }
@@ -145,8 +146,10 @@ private fun HomePreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             HomeScreen(
-                modifier = Modifier.fillMaxSize()
-            ){}
+                modifier = Modifier.fillMaxSize(),
+                onNavigateToForestStage = {},
+                onNavigateToGrove = {}
+            )
         }
     }
 }

@@ -20,6 +20,7 @@ import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
+import com.gg.spora.grove.ui.GroveScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
@@ -57,12 +58,15 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 onNavigateToForestStage = {
                                     navController.navigate(NavigationRoutes.ForestStage)
+                                },
+                                onNavigateToGrove = {
+                                    navController.navigate(NavigationRoutes.Grove)
                                 }
                             )
                         }
 
                         composable<NavigationRoutes.Grove> {
-
+                            GroveScreen()
                         }
 
                         composable<NavigationRoutes.ForestStage> {
