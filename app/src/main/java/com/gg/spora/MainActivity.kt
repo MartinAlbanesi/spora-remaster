@@ -22,6 +22,7 @@ import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
+import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -72,6 +73,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onNavigateToChallenge = {
                                     navController.navigate(NavigationRoutes.Challenge)
+                                },
+                                onNavigateToQuizImage = {
+                                    navController.navigate(NavigationRoutes.QuizImage)
                                 }
                             )
                         }
@@ -116,6 +120,11 @@ class MainActivity : ComponentActivity() {
                                         "Envases de Plástico" to null,
                                     )
                                 )
+                            }
+                        }
+                        composable<NavigationRoutes.QuizImage> {
+                            MinigameQuizImageScreen(){
+
                             }
                         }
                     }
