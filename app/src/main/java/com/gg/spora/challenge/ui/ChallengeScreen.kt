@@ -61,8 +61,9 @@ import com.gg.spora.R
 import com.gg.spora.camera.CameraScreen
 import com.gg.spora.camera.classifyImage
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
-import com.gg.spora.core.components.ChampyWithCard
-import com.gg.spora.core.components.TopBarWithProgressBar
+import com.gg.spora.core.graph.NavigationRoutes
+import com.gg.spora.core.ui.components.ChampyWithCard
+import com.gg.spora.core.ui.components.TopBarWithProgressBar
 import com.gg.spora.ui.theme.SporaTheme
 import java.nio.ByteOrder
 
@@ -78,20 +79,28 @@ val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
  */
 @Composable
 fun ChallengeScreen(
-    modifier: Modifier = Modifier,
-    imageBackground: Int,
-    champyImage: Int,
-    onBackClick: () -> Unit,
-    content: @Composable () -> Unit,
+    modifier : Modifier = Modifier,
+    champyImage : Int,
+    onBackClick : () -> Unit,
+    recyclerOptions : Map<String, Boolean?>,
+    scannedObject : String = "",
+    onNavigateToCamera : () -> Unit
 ) {
 
-    //var resultText by remember { mutableStateOf("") }
+
+    var resultScan by remember { mutableStateOf(false) }
+    var isSelectedAnswer by remember { mutableStateOf(false) }
+    var showCamera by remember { mutableStateOf(false) }
+    var selectedObject by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val navController = rememberNavController()
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ) {
         Image(
-            painter = painterResource(imageBackground),
+            painter = painterResource(R.drawable.fondo_minijuegos),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
@@ -109,7 +118,31 @@ fun ChallengeScreen(
                 modifier = Modifier.fillMaxSize(),
                 champyImage = champyImage,
             ) {
-                content()
+                Column(
+                    modifier = modifier.padding(15.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                var isValidate: Boolean
+
+                    recyclerOptions.forEach {
+                    isValidate = scannedObject == it.key
+
+                    ButtonObjectScannerChallenge(
+                        textObject = it.key,
+                        modifier = Modifier
+                            .shadow(
+                                elevation = 4.dp,
+                                shape = MaterialTheme.shapes.large,
+                                ambientColor = DefaultShadowColor
+                            )
+                            .fillMaxWidth()
+                            .clip(MaterialTheme.shapes.large)
+                            .height(60.dp)
+                            .clickable (onClick = onNavigateToCamera),
+                        isValidate = isValidate
+                    )
+                }
+                }
             }
         }
     }
@@ -121,55 +154,6 @@ fun ChallengeListObject(
     recyclerOptions: Map<String, Boolean?>,
 ) {
 
-    var resultScan by remember { mutableStateOf(false) }
-    var isSelectedAnswer by remember { mutableStateOf(false) }
-    var showCamera by remember { mutableStateOf(false) }
-    var selectedObject by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val navController = rememberNavController()
-
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        recyclerOptions.forEach {
-            ButtonObjectScannerChallenge(
-                textObject = it.key,
-                modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        shape = MaterialTheme.shapes.large,
-                        ambientColor = DefaultShadowColor
-                    )
-                    .fillMaxWidth()
-                    .clip(MaterialTheme.shapes.large)
-                    .height(60.dp)
-                    .clickable {
-                        isSelectedAnswer = true
-                        selectedObject = it.key
-                        showCamera = true
-                        /*
-                        NavHost(navController = navController, startDestination = "camera") {
-                            composable("camera") {
-                                CameraScreen(onImageCaptured = { bitmap: Bitmap ->
-                                classifyImage(context, bitmap, selectedObject) { result ->
-                                    resultScan = result
-                                }
-                                showCamera = false
-                            },
-                                onError = { error ->
-                                    // Manejar error
-                                    showCamera = false
-                                }) }
-                        }
-
-                         */
-
-                    },
-                isValidate = false
-            )
-        }
-    }
 
 }
 
@@ -185,20 +169,16 @@ SporaTheme {
         color = MaterialTheme.colorScheme.background
     ) {
         ChallengeScreen(
-            modifier = Modifier.fillMaxSize(),
-            imageBackground = R.drawable.fondo_minijuegos,
+            modifier = Modifier,
             champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
+            recyclerOptions = mapOf(
+                "Botella de plastico" to true,
+                "Residuos Orgánicos" to null,
+                "Papel y Cartón" to null,
+                "Envases de Plástico" to null,
+            ),
             onBackClick = { },
-            content = {
-                ChallengeListObject(
-                    modifier = Modifier.fillMaxSize().padding(16.dp),
-                    recyclerOptions = mapOf(
-                        "Vidrio" to true,
-                        "Residuos Orgánicos" to null,
-                        "Papel y Cartón" to null,
-                        "Envases de Plástico" to null,
-                    )
-                )
+            onNavigateToCamera = {
 
             }
         )
