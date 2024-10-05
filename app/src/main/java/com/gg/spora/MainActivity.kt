@@ -97,7 +97,6 @@ class MainActivity : ComponentActivity() {
                                             .padding(16.dp),
                                         questionTitle = currentQuestion!!.question,
                                         answerOptions = currentQuestion!!.answers,
-                                        answerQuestionId = currentQuestion!!.answer.id,
                                         onAnswerSelected = quizViewModel::isAnswerCorrect,
                                         onNextQuestion = quizViewModel::nextQuestion
                                     )

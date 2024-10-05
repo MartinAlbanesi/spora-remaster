@@ -1,6 +1,5 @@
 package com.gg.spora.quiz.ui
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.DefaultShadowColor
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,25 +39,11 @@ import com.gg.spora.ui.theme.SporaTheme
 fun QuizScreen(
     modifier: Modifier = Modifier,
     questionTitle: String,
-    answerQuestionId: String,
     answerOptions: List<Answer>,
     onAnswerSelected: (String) -> Unit,
     onNextQuestion: () -> Unit,
 ) {
     var isSelectedAnswer by remember { mutableStateOf(false) }
-
-//    var textColor = mutableListOf(
-//        Color(0xff442801),
-//        Color(0xff442801),
-//        Color(0xff442801),
-//        Color(0xff442801),
-//    )
-//    var backgroundColor = mutableListOf(
-//        Color(0xFFffeacc),
-//        Color(0xFFffeacc),
-//        Color(0xFFffeacc),
-//        Color(0xFFffeacc),
-//    )
 
     Column(
         modifier = modifier,
@@ -156,7 +139,6 @@ private fun MinigameQuizScreenPreview() {
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 questionTitle = "¿Cuál es la capital de España?",
                 answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
-                answerQuestionId = "2",
                 onAnswerSelected =  {},
                 onNextQuestion = {}
             )
