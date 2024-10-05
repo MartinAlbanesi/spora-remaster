@@ -1,8 +1,8 @@
 package com.gg.spora.core.fake
 
-import com.gg.spora.quiz.domain.Answer
-import com.gg.spora.quiz.domain.Question
-import com.gg.spora.quiz.domain.QuestionType
+import com.gg.spora.quiz.domain.model.Answer
+import com.gg.spora.quiz.domain.model.Question
+import com.gg.spora.quiz.domain.model.QuestionType
 
 object FakeQuizModels {
 

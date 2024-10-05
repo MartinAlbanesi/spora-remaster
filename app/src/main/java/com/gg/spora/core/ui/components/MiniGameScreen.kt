@@ -99,7 +99,6 @@ private fun MiniGameScreenPreview() {
                         modifier = Modifier.fillMaxSize().padding(16.dp),
                         questionTitle = "¿Qué tipo de residuo debe depositarse en el contenedor verde?",
                         answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
-                        answerQuestionId = "1",
                         onAnswerSelected = { },
                         onNextQuestion = { }
                     )

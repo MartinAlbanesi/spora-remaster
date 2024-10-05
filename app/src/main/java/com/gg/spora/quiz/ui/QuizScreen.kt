@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.core.fake.FakeQuizModels
-import com.gg.spora.quiz.domain.Answer
+import com.gg.spora.quiz.domain.model.Answer
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable

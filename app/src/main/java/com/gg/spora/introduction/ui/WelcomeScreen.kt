@@ -202,9 +202,9 @@ fun IntroductionScreen3(modifier: Modifier, onClick: () -> Unit) {
             Column(
                 modifier = modifier.height(120.dp), verticalArrangement = Arrangement.SpaceBetween
             ) {
-                SporaPrimaryButton(modifier = modifier, text = "Crear cuenta") {
-                    /*Nav to Sign Up screen*/
-                }
+//                SporaPrimaryButton(modifier = modifier, text = "Crear cuenta") {
+//                    /*Nav to Sign Up screen*/
+//                }
 
                 SporaPrimaryInverseButton(
                     modifier = modifier, text = "Jugar como invitado", onClick = onClick

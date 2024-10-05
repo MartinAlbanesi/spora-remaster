@@ -1,4 +1,4 @@
-package com.gg.spora.quiz.domain
+package com.gg.spora.quiz.domain.model
 
 import androidx.compose.ui.graphics.Color
 

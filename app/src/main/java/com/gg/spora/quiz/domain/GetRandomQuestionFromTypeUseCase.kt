@@ -1,6 +1,7 @@
 package com.gg.spora.quiz.domain
 
-import android.util.Log
+import com.gg.spora.quiz.domain.model.Question
+import com.gg.spora.quiz.domain.model.QuestionType
 import javax.inject.Inject
 
 class GetRandomQuestionFromTypeUseCase @Inject constructor(
