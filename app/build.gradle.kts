@@ -35,7 +35,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -45,6 +44,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -54,11 +54,18 @@ android {
     }
     buildFeatures {
         compose = true
+        mlModelBinding = true
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    androidResources {
+        noCompress += "tflite"
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
@@ -73,6 +80,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -97,4 +105,19 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
+
+    //CameraX
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.video)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.extensions)
+    implementation(libs.camera.view)
+
+    //TensorFlow
+    implementation(libs.tensorflow.gpu)
+    implementation(libs.tensorflow.select)
+    implementation(libs.tensorflow.support)
+    implementation(libs.tensorflow.android)
+    implementation(libs.tensorflow.metadata)
 }

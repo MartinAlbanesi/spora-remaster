@@ -30,6 +30,7 @@ fun TopBarWithProgressBar(
     modifier: Modifier = Modifier,
     title: String,
     onBackClick: () -> Unit,
+    buttonLike: Boolean = true
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -43,10 +44,12 @@ fun TopBarWithProgressBar(
             }
         },
         actions = {
-            IconButton(
-                onClick = { }
-            ) {
-                Icon(Icons.Default.Favorite, contentDescription = "Back")
+            if(buttonLike){
+                IconButton(
+                    onClick = { }
+                ) {
+                    Icon(Icons.Default.Favorite, contentDescription = "Back")
+                }
             }
         },
         colors =  TopAppBarDefaults.centerAlignedTopAppBarColors(
