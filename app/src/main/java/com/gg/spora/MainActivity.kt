@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome
+                        startDestination = NavigationRoutes.QuizGame
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
@@ -85,10 +85,13 @@ class MainActivity : ComponentActivity() {
 
                             val currentQuestion by quizViewModel.currentQuestion.collectAsState()
 
+                            val isCorrect by quizViewModel.isCorrect.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
-                                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+//                                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                                isCorrect = isCorrect,
                                 onBackClick = { },
                                 content = {
                                     QuizScreen(

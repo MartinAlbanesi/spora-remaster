@@ -35,10 +35,17 @@ import com.gg.spora.ui.theme.SporaTheme
 fun MiniGameScreen(
     modifier: Modifier = Modifier,
     imageBackground: Int,
-    champyImage: Int,
+    isCorrect: Boolean? = null,
     onBackClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
+    val champyImage = when(isCorrect){
+        true -> R.drawable.champy_celebrando_brazoslevantados
+        false -> R.drawable.champy_triste_brazosalcuerpo
+        else -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
+    }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -92,7 +99,7 @@ private fun MiniGameScreenPreview() {
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
                 imageBackground = R.drawable.fondo_minijuegos,
-                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+//                champyImage = R.drawable.champy_celebrando_brazoslevantados,
                 onBackClick = { },
                 content = {
                     QuizScreen(

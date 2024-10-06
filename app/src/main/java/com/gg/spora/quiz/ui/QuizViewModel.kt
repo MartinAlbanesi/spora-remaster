@@ -26,6 +26,9 @@ class QuizViewModel @Inject constructor(
     private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
 
+    private val _isCorrect = MutableStateFlow<Boolean?>(null)
+    val isCorrect = _isCorrect.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -40,12 +43,12 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        val isCorrect  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 if (it.id == answerId) {
                     it.copy(
-                        isCorrect = isCorrect,
+                        isCorrect = _isCorrect.value,
                     )
                 } else {
                     it
@@ -57,6 +60,7 @@ class QuizViewModel @Inject constructor(
     fun nextQuestion() {
         _currentQuestionIndex.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
+        _isCorrect.value = null
     }
 
 }

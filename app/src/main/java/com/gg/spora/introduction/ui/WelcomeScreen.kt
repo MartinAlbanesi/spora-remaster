@@ -32,8 +32,6 @@ import com.gg.spora.introduction.ui.components.SporaTextField
 import com.gg.spora.ui.theme.SporaTheme
 import kotlinx.coroutines.launch
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
