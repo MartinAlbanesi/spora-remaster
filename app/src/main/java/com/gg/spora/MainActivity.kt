@@ -23,6 +23,7 @@ import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImage.ui.MinigameQuizImageScreen
+import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -122,9 +123,21 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         composable<NavigationRoutes.QuizImage> {
-                            MinigameQuizImageScreen(){
+                            val quizImageViewModel = hiltViewModel<QuizImageViewModel>()
 
-                            }
+                            val currentImageQuestion by quizImageViewModel.currentQuestion.collectAsState()
+
+                            MinigameQuizImageScreen(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp),
+                                onBackClick = { },
+                                questionTitle = currentImageQuestion!!.question,
+                                answerOptions = currentImageQuestion!!.answers,
+                                onAnswerSelected = quizImageViewModel::isAnswerCorrect,
+                                onNextQuestion = quizImageViewModel::nextQuestion,
+                                questionImageResId = quizImageViewModel.questionImageResId
+                            )
                         }
                     }
                 }

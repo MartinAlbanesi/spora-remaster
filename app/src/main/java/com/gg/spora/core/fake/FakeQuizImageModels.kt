@@ -15,7 +15,7 @@ object FakeQuizImageModels {
             imageResId = R.drawable.simbolo_reciclaje
         ),
         AnswerImage(
-            answer = "Caalentamiento Global",
+            answer = "Calentamiento Global",
             id = "2",
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.calentamiento_global
@@ -59,49 +59,56 @@ object FakeQuizImageModels {
             question = "Que representa la imagen?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "1" }.take(3),
             answer = fakeImageAnswers[0],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.simbolo_reciclaje
         ),
         QuestionImage(
             id = "2",
             question = "Que representa la imagen?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "2" }.take(3),
             answer = fakeImageAnswers[1],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.calentamiento_global
         ),
         QuestionImage(
             id = "3",
             question = "Que paso en el bosque?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "3" }.take(3),
             answer = fakeImageAnswers[2],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.deforestacion
         ),
         QuestionImage(
             id = "4",
             question = "Que produce el humo?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "4" }.take(3),
             answer = fakeImageAnswers[3],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.smog
         ),
         QuestionImage(
             id = "5",
             question = "Que esta pasando en la imagen?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "5" }.take(3),
             answer = fakeImageAnswers[4],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.contaminacion
         ),
         QuestionImage(
             id = "6",
             question = "Que tipo de energia es?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "6" }.take(3),
             answer = fakeImageAnswers[5],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.recurso_viento
         ),
         QuestionImage(
             id = "7",
             question = "Que tipo de desecho es?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "7" }.take(3),
             answer = fakeImageAnswers[6],
-            type = ImageQuestionType.RECYCLINGIMAGE
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.desechos_electronicos
         ),
 
     )

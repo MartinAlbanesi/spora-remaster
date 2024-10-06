@@ -5,7 +5,9 @@ data class QuestionImage(
     val question: String,
     val answers: List<AnswerImage>,
     val answer: AnswerImage,
-    val type: ImageQuestionType
+    val type: ImageQuestionType,
+    val imageResId: Int
+
 )
 
 enum class ImageQuestionType {
