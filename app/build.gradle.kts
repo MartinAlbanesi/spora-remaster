@@ -3,8 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
 
+    id("com.google.devtools.ksp")
+
     //Dagger Hilt
-    alias(libs.plugins.ksp)
+    // alias(libs.plugins.ksp) // Add this line without apply false
     alias(libs.plugins.hilt)
 
     // Kotlin Serialization
