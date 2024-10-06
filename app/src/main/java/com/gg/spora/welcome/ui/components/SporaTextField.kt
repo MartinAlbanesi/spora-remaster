@@ -20,14 +20,14 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun SporaTextField(
     modifier: Modifier = Modifier,
-    text: String,
+    guestName: String,
     onValueChange: (String) -> Unit = {},
 ) {
     val placeholder = "Escribi tu nombre"
     val shape = RoundedCornerShape(20.dp)
 
     TextField(
-        value = text,
+        value = guestName,
         onValueChange = {
             onValueChange (it)
         },
@@ -61,7 +61,7 @@ fun SporaLabelPrimaryPreview() {
     SporaTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             SporaTextField(
-                text = "",
+                guestName = "",
                 modifier = Modifier.align(Alignment.Center),
             )
         }

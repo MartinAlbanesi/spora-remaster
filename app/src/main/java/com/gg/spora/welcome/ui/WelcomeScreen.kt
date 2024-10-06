@@ -1,5 +1,6 @@
 package com.gg.spora.welcome.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -37,10 +37,12 @@ import com.gg.spora.welcome.ui.components.SporaTextField
 import kotlinx.coroutines.launch
 
 
+@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
+    setGuestName: (String) -> Unit = {},
     onNavigateToHome: () -> Unit = {}
 ) {
     var name by remember { mutableStateOf("") }
@@ -48,12 +50,9 @@ fun WelcomeScreen(
     val pagerState = rememberPagerState(initialPage = 0, pageCount = {
         5
     })
-
-    Box(modifier = modifier.fillMaxSize()) {
-        Column(modifier = modifier.fillMaxWidth()) {
             HorizontalPager(
                 state = pagerState,
-                modifier = modifier.weight(0.7f),
+                modifier = modifier,
                 userScrollEnabled = false
             ) { page ->
 
@@ -78,14 +77,15 @@ fun WelcomeScreen(
 
                     3 -> GuestEnterNameScreen(
                         modifier,
-                        text = name,
+                        guestName = name,
                         onValueChange = { name = it }) {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(page + 1)
                         }
                     }
 
-                    4 -> ChampyTalkGuestScreen(modifier, text = name) {
+                    4 -> ChampyTalkGuestScreen(modifier, guestName = name) {
+                        setGuestName(name)
                         onNavigateToHome()
                     }
 
@@ -99,8 +99,6 @@ fun WelcomeScreen(
                 }
             }
         }
-    }
-}
 
 
 @Composable
@@ -118,8 +116,9 @@ fun LogoScreen(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.fillMaxSize()
         )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -144,7 +143,10 @@ fun LogoScreen(
 
 
 @Composable
-fun ChampyTalkScreen(modifier: Modifier, onClick: () -> Unit) {
+fun ChampyTalkScreen(
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
 
     Box(
         modifier = modifier
@@ -155,7 +157,7 @@ fun ChampyTalkScreen(modifier: Modifier, onClick: () -> Unit) {
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.fillMaxSize()
         )
 
         Column(
@@ -179,7 +181,10 @@ fun ChampyTalkScreen(modifier: Modifier, onClick: () -> Unit) {
 
 
 @Composable
-fun TypeUserSelectionScreen(modifier: Modifier, onClick: () -> Unit) {
+fun TypeUserSelectionScreen(
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -190,7 +195,7 @@ fun TypeUserSelectionScreen(modifier: Modifier, onClick: () -> Unit) {
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.fillMaxSize()
         )
 
         Column(
@@ -224,7 +229,7 @@ fun TypeUserSelectionScreen(modifier: Modifier, onClick: () -> Unit) {
 @Composable
 fun GuestEnterNameScreen(
     modifier: Modifier,
-    text: String,
+    guestName: String,
     onValueChange: (String) -> Unit,
     onClick: () -> Unit
 ) {
@@ -237,10 +242,11 @@ fun GuestEnterNameScreen(
 
         Image(
             painter = painterResource(id = R.drawable.fondo_introduccion),
-            contentDescription = "Welcome background",
+            contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.fillMaxSize()
         )
+
         Column(
             modifier = Modifier
                 .fillMaxHeight(),
@@ -261,7 +267,7 @@ fun GuestEnterNameScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                SporaTextField(modifier = modifier, text, onValueChange)
+                SporaTextField(modifier = modifier, guestName, onValueChange)
 
                 SporaPrimaryButton(modifier, "Siguente", onClick = onClick)
 
@@ -271,15 +277,19 @@ fun GuestEnterNameScreen(
 }
 
 @Composable
-fun ChampyTalkGuestScreen(modifier: Modifier,text:String,onClick: () -> Unit) {
+fun ChampyTalkGuestScreen(
+    modifier: Modifier,
+    guestName: String,
+    onClick: () -> Unit
+) {
 
     Box(modifier = modifier.fillMaxSize()) {
 
         Image(
             painter = painterResource(id = R.drawable.fondo_introduccion),
-            contentDescription = "Welcome background",
+            contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.fillMaxSize()
         )
 
         Column(
@@ -290,7 +300,7 @@ fun ChampyTalkGuestScreen(modifier: Modifier,text:String,onClick: () -> Unit) {
 
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_celebrando_brazoslevantados,
-                dialogue = "¡Genial, ${text}!\n vamos a mi hogar",
+                dialogue = "¡Genial, ${guestName}!\n vamos a mi hogar",
                 x = -(30).dp,
                 y = -(22).dp
             )
@@ -306,6 +316,6 @@ fun ChampyTalkGuestScreen(modifier: Modifier,text:String,onClick: () -> Unit) {
 @Composable
 fun IntroductionScreenPreview() {
     SporaTheme {
-        ChampyTalkGuestScreen(modifier = Modifier, text = "Hola", onClick = {})
+        ChampyTalkGuestScreen(modifier = Modifier, guestName = "Hola", onClick = {})
     }
 }

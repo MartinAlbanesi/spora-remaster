@@ -52,6 +52,7 @@ class MainActivity : ComponentActivity() {
                                 onNavigateToHome = {
                                     navController.navigate(NavigationRoutes.Home)
                                 },
+                                setGuestName = {welcomeViewModel.setGuestName(it)},
                                 //welcomeViewModel = welcomeViewModel
                             )
                         }

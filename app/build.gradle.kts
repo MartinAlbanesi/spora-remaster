@@ -120,4 +120,7 @@ dependencies {
     implementation(libs.tensorflow.support)
     implementation(libs.tensorflow.android)
     implementation(libs.tensorflow.metadata)
+
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
