@@ -50,6 +50,14 @@ fun WelcomeScreen(
     val pagerState = rememberPagerState(initialPage = 0, pageCount = {
         5
     })
+
+    Box(modifier = modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.fondo_introduccion),
+            contentDescription = "Area 1 background",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.matchParentSize()
+        )
             HorizontalPager(
                 state = pagerState,
                 modifier = modifier,
@@ -98,7 +106,8 @@ fun WelcomeScreen(
                     }
                 }
             }
-        }
+    }
+}
 
 
 @Composable
@@ -109,14 +118,13 @@ fun LogoScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
     ) {
 
         Image(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.matchParentSize()
         )
 
         Column(
@@ -157,7 +165,7 @@ fun ChampyTalkScreen(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.matchParentSize()
         )
 
         Column(
@@ -195,7 +203,7 @@ fun TypeUserSelectionScreen(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.matchParentSize()
         )
 
         Column(
@@ -244,7 +252,7 @@ fun GuestEnterNameScreen(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.matchParentSize()
         )
 
         Column(
@@ -289,7 +297,7 @@ fun ChampyTalkGuestScreen(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.matchParentSize()
         )
 
         Column(
