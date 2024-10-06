@@ -83,7 +83,7 @@ fun ChallengeScreen(
     champyImage : Int,
     onBackClick : () -> Unit,
     recyclerOptions : Map<String, Boolean?>,
-    scannedObject : String = "",
+    onNavigateToChallenge : () -> Unit,
     onNavigateToCamera : () -> Unit
 ) {
 
@@ -122,10 +122,8 @@ fun ChallengeScreen(
                     modifier = modifier.padding(15.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                var isValidate: Boolean
 
                     recyclerOptions.forEach {
-                    isValidate = scannedObject == it.key
 
                     ButtonObjectScannerChallenge(
                         textObject = it.key,
@@ -139,7 +137,7 @@ fun ChallengeScreen(
                             .clip(MaterialTheme.shapes.large)
                             .height(60.dp)
                             .clickable (onClick = onNavigateToCamera),
-                        isValidate = isValidate
+                        isValidate = it.value
                     )
                 }
                 }
@@ -178,6 +176,9 @@ SporaTheme {
                 "Envases de Plástico" to null,
             ),
             onBackClick = { },
+            onNavigateToChallenge = {
+
+            },
             onNavigateToCamera = {
 
             }

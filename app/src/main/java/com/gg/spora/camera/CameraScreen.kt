@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gg.spora.challenge.ui.classes
@@ -36,7 +35,7 @@ import java.nio.ByteOrder
 @Composable
 fun CameraScreen(
     onImageCaptured: (Bitmap) -> Unit,
-    onError: (Exception) -> Unit,
+    onError: (Exception) -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -44,17 +43,19 @@ fun CameraScreen(
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
 
+    // Obtengo el permiso de camara
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
     if (cameraPermissionState.hasPermission) {
 
+        // Vista de la camara
         AndroidView(
             factory = { previewView },
             modifier = Modifier
                 .fillMaxSize()
-                .zIndex(1f) // Asegura que la vista de la cámara tenga prioridad
         )
 
+        // Codigo suspendido y config asincronico
         LaunchedEffect(Unit) {
             cameraProviderFuture.addListener({
                 val cameraProvider = cameraProviderFuture.get()
@@ -63,6 +64,7 @@ fun CameraScreen(
                 }
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
+                //
                 try {
                     cameraProvider.unbindAll()
                     cameraProvider.bindToLifecycle(
