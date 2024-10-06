@@ -22,7 +22,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gg.spora.camera.CameraScreen
 import com.gg.spora.camera.classifyImage
-import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
@@ -46,7 +45,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     val navController = rememberNavController()
-                    var scannedObject by remember { mutableStateOf("") }
+                    var scannedObjects by remember { mutableStateOf(mapOf(
+                        "Botella de plastico" to false,
+                        "Residuos Orgánicos" to false,
+                        "Papel y Cartón" to false,
+                        "Envases de Plástico" to false,
+                    )) }
 
                     NavHost(
                         navController = navController,
@@ -110,11 +114,14 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<NavigationRoutes.Camera>{
                             val context = LocalContext.current
+                            var scannedObject = "Botella de Plastico"
                             CameraScreen(
                                 onImageCaptured = { bitmap: Bitmap ->
-                                    classifyImage(context, bitmap, "Botella de plastico") { result ->
+                                    classifyImage(context, bitmap, scannedObject) { result ->
                                        if(result){
-                                           scannedObject = "Botella de plastico"
+                                           scannedObjects = scannedObjects.toMutableMap().apply {
+                                               this["Botella de plastico"] = true
+                                           }
                                            navController.navigate(NavigationRoutes.Challenge)
                                        }
                                     }
@@ -128,14 +135,11 @@ class MainActivity : ComponentActivity() {
                             ChallengeScreen(
                                 modifier = Modifier,
                                 champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
-                                recyclerOptions = mapOf(
-                                    "Botella de plastico" to true,
-                                    "Residuos Orgánicos" to null,
-                                    "Papel y Cartón" to null,
-                                    "Envases de Plástico" to null,
-                                ),
-                                scannedObject = scannedObject,
+                                recyclerOptions = scannedObjects,
                                 onBackClick = { },
+                                onNavigateToChallenge = {
+                                    navController.navigate(NavigationRoutes.Challenge)
+                                },
                                 onNavigateToCamera = {
                                     navController.navigate(NavigationRoutes.Camera)
                                 }
