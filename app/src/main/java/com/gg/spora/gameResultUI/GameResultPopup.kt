@@ -1,6 +1,7 @@
 package com.gg.spora.gameResultUI
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,7 +59,9 @@ fun StarWithOxygen(
 private fun StarWithOxygenGroup() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().height(100.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
     ) {
         StarWithOxygen(
             oxygenAmount = 10,
@@ -78,12 +82,52 @@ private fun StarWithOxygenGroup() {
 }
 
 @Composable
+fun ChampyWithRewards(
+    modifier: Modifier = Modifier,
+    champyImage: Int,
+    oxygenAmount: Int,
+) {
+    Row(modifier = modifier) {
+        Image(
+            painter = painterResource(id = champyImage),
+            contentDescription = "Champy",
+            modifier = Modifier.size(100.dp)
+        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.o2),
+                contentDescription = "Oxígeno",
+                modifier = Modifier.size(48.dp)
+            )
+            Text(
+                text = "+ $oxygenAmount",
+                fontSize = 24.sp,
+                color = Color.White
+            )
+        }
+    }
+}
+
+//@Preview
+//@Composable
+//private fun ChampyWithRewardsPreview() {
+//    ChampyWithRewards(
+//        champyImage = R.drawable.champy_sonriente_idle,
+//        oxygenAmount = 20,
+//        modifier = Modifier
+//    )
+//}
+
+@Composable
 fun GameResultPopUp(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
     backgroundImage: Int,
-    primaryButtonText: String,
-    secondaryButtonText: String,
+    starsWon: Int,
     onClickPrimaryButton: () -> Unit,
     onClickSecondaryButton: () -> Unit,
     onDismissRequest: () -> Unit
@@ -98,11 +142,19 @@ fun GameResultPopUp(
                     .fillMaxWidth()
                     .padding(16.dp)
             ){
+//                Image(
+//                    painter = painterResource(id = backgroundImage),
+//                    contentDescription = "Fondo",
+//                    modifier = Modifier.fillMaxWidth(),
+//                    contentScale = androidx.compose.ui.layout.ContentScale.Crop
+//                )
                 Column {
                     StarWithOxygenGroup()
-                    Row {
-
-                    }
+                    ChampyWithRewards(
+                        champyImage = R.drawable.champy_sonriente_idle,
+                        oxygenAmount = 20,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
                     Row {
 
                     }
@@ -405,14 +457,13 @@ fun GameResultPopUp(
 }
 
 
-@Preview(showBackground = true)
+@Preview(showSystemUi = true)
 @Composable
 fun GameResultPopupPreview() {
     GameResultPopUp(
         isVisible = true,
         backgroundImage = R.drawable.fondo_minijuegos,
-        primaryButtonText = "Reiniciar",
-        secondaryButtonText = "Siguiente",
+        starsWon = 3,
         onClickPrimaryButton = {},
         onClickSecondaryButton = {},
         onDismissRequest = {}
