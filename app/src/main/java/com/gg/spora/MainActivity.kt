@@ -100,6 +100,7 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .fillMaxSize()
                                             .padding(16.dp),
+                                        isCorrect = isCorrect,
                                         questionTitle = currentQuestion!!.question,
                                         answerOptions = currentQuestion!!.answers,
                                         onAnswerSelected = quizViewModel::isAnswerCorrect,
