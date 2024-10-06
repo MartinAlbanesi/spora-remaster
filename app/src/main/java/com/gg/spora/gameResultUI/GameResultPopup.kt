@@ -61,6 +61,7 @@ private fun StarWithOxygenGroup(
 }
 
 enum class StarState(val starCount: Int = 0) {
+    STAR_ZERO(0),
     STAR_ONE(1),
     STAR_TWO(2),
     STAR_THREE(3)
@@ -83,17 +84,18 @@ fun GameResultPopUp(
         mutableIntStateOf(0)
     }
 
-    for (i in 1..MAX_STAR){
-        if(i <= starsState.starCount){
-            localRewards[rewards[i-1]] = R.drawable.estrella
-        }else{
-            localRewards[rewards[i-1]] = R.drawable.estrella_gris
+    for (i in 1..MAX_STAR) {
+        if (i <= starsState.starCount) {
+            localRewards[rewards[i - 1]] = R.drawable.estrella
+            totalOxygen += rewards[i - 1]
+        } else {
+            localRewards[rewards[i - 1]] = R.drawable.estrella_gris
         }
     }
 
     if (isVisible) {
 
-        Dialog (onDismissRequest = onDismissRequest) {
+        Dialog(onDismissRequest = onDismissRequest) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
@@ -113,7 +115,7 @@ fun GameResultPopUp(
                     )
                     ChampyWithRewards(
                         champyImage = R.drawable.champy_sonriente_idle,
-                        oxygenAmount = 20,
+                        oxygenAmount = totalOxygen,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                     Row(
@@ -153,7 +155,7 @@ fun GameResultPopupPreview() {
             GameResultPopUp(
                 isVisible = true,
                 backgroundImage = R.drawable.fondo_minijuegos,
-                starsState = StarState.STAR_THREE,
+                starsState = StarState.STAR_TWO,
                 rewards = listOf(10, 20, 30),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},

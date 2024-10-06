@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.QuizGame
+                        startDestination = NavigationRoutes.Welcome
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
