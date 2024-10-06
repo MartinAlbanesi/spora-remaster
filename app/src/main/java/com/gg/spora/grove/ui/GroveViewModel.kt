@@ -38,8 +38,9 @@ class GroveViewModel @Inject constructor(
     private val _forestTrees = MutableStateFlow<List<List<ForestTree?>>>(emptyList())
     val forestTrees: StateFlow<List<List<ForestTree?>>> = _forestTrees.asStateFlow()
 
+
     private val _forestTree = MutableStateFlow<ForestTree?>(null)
-    val forestTree = _forestTree.asStateFlow()
+    // val forestTree = _forestTree.asStateFlow()
 
     // Inicialización de los casos de uso
     init {
