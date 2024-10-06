@@ -1,6 +1,8 @@
 package com.gg.spora.core.ui.components
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
@@ -16,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -26,11 +29,11 @@ import com.gg.spora.ui.theme.SporaTheme
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarWithProgressBar(
+fun TopBarWithTitleExitAndIcon(
     modifier: Modifier = Modifier,
     title: String,
+    showIcon: Boolean = true,
     onBackClick: () -> Unit,
-    buttonLike: Boolean = true
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -44,15 +47,15 @@ fun TopBarWithProgressBar(
             }
         },
         actions = {
-            if(buttonLike){
-                IconButton(
-                    onClick = { }
-                ) {
-                    Icon(Icons.Default.Favorite, contentDescription = "Back")
-                }
+            if (showIcon) {
+                Icon(
+                    Icons.Default.Favorite,
+                    contentDescription = "Back",
+                    modifier = Modifier.size(44.dp)
+                )
             }
         },
-        colors =  TopAppBarDefaults.centerAlignedTopAppBarColors(
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color.Transparent
         ),
         modifier = modifier
@@ -69,7 +72,7 @@ private fun TopBarWithProgressBarPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            TopBarWithProgressBar(
+            TopBarWithTitleExitAndIcon(
                 title = "Title",
                 onBackClick = { }
             )

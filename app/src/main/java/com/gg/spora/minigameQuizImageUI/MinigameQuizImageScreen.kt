@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaWithCard
-import com.gg.spora.core.ui.components.TopBarWithProgressBar
+import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 
 /*
 @Composable
@@ -123,7 +123,7 @@ fun MinigameQuizImageScreen(
         Column(
             modifier = modifier
         ) {
-            TopBarWithProgressBar(
+            TopBarWithTitleExitAndIcon(
                 title = "Mini Game",
                 onBackClick = onBackClick,
             )

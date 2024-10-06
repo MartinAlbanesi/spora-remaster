@@ -1,7 +1,8 @@
 package com.gg.spora.quiz.ui
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import com.gg.spora.core.utils.SporaEnums
+import com.gg.spora.core.utils.SporaEnums.MAX_QUESTIONS
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.model.Question
 import com.gg.spora.quiz.domain.model.QuestionType
@@ -9,8 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
-
-const val MAX_QUESTIONS = 10
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
