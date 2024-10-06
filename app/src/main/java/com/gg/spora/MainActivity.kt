@@ -21,11 +21,12 @@ import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.introduction.ui.WelcomeScreen
+import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
+import com.gg.spora.welcome.ui.WelcomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,10 +47,12 @@ class MainActivity : ComponentActivity() {
                         startDestination = NavigationRoutes.Welcome
                     ) {
                         composable<NavigationRoutes.Welcome> {
+                            val welcomeViewModel = hiltViewModel<WelcomeViewModel>()
                             WelcomeScreen(
                                 onNavigateToHome = {
                                     navController.navigate(NavigationRoutes.Home)
-                                }
+                                },
+                                //welcomeViewModel = welcomeViewModel
                             )
                         }
 

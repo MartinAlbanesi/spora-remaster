@@ -1,4 +1,4 @@
-package com.gg.spora.introduction.ui.components
+package com.gg.spora.welcome.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
