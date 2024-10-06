@@ -35,6 +35,20 @@ fun SporaPrimaryButton(modifier: Modifier = Modifier, text: String, onClick: () 
 }
 
 @Composable
+fun SporaDisableButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+
+    Button(
+        onClick = { onClick() },
+        modifier = modifier.size(width = 350.dp, height = 50.dp),
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimaryContainer),
+        elevation = ButtonDefaults.buttonElevation(5.dp),
+        shape = ButtonDefaults.elevatedShape
+    ) {
+        Text(text = text, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
 fun SporaPrimaryInverseButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
 
     Button(
@@ -85,6 +99,15 @@ fun SporaPrimaryButtonPreview() {
 
             SporaPrimaryButton(
                 modifier = Modifier.align(Alignment.Center),
+                text = "Continuar",
+                onClick = {})
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            SporaDisableButton(
+                modifier = Modifier
+                .align(Alignment.Center)
+                .offset(y = -120.dp),
                 text = "Continuar",
                 onClick = {})
 

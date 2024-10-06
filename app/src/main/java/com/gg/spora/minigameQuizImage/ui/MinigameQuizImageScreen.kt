@@ -1,4 +1,4 @@
-package com.gg.spora.minigameQuizImageUI
+package com.gg.spora.minigameQuizImage.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.colorResource
@@ -34,17 +35,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
+import com.gg.spora.core.ui.components.ButtonQuizImage
+import com.gg.spora.core.ui.components.SporaDisableButton
 import com.gg.spora.core.ui.components.SporaWithCard
 import com.gg.spora.core.ui.components.TopBarWithProgressBar
 
-/*
 @Composable
 fun MinigameQuizImageScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
 ) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier =
+        Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ) {
         Image(
@@ -52,10 +55,11 @@ fun MinigameQuizImageScreen(
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .offset(y = (-260).dp)
+                .offset(y = (-360).dp)
         )
         Column(
             modifier = modifier
+                .padding(vertical = 16.dp) // Padding vertical general
         ) {
             TopBarWithProgressBar(
                 title = "Mini Game",
@@ -72,14 +76,14 @@ fun MinigameQuizImageScreen(
                     .align(Alignment.CenterHorizontally)
                     .clip(MaterialTheme.shapes.large)
             )
+
             SporaWithCard(
                 modifier = Modifier.fillMaxSize(),
-                sporaImage = R.drawable.champy_sonriente_idle,
+                sporaImage = R.drawable.champy_sonriente_idle
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .wrapContentHeight()
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -87,23 +91,67 @@ fun MinigameQuizImageScreen(
                         modifier = Modifier
                             .fillMaxWidth(0.75f)
                             .aspectRatio(1.2f)
-                            .padding(16.dp)
-                            .background(Color(0xFFF3D3A6)),
-                        contentAlignment = Alignment.TopEnd
+                            .weight(0.35f)
+                            .shadow(
+                                elevation = 4.dp,
+                                shape = MaterialTheme.shapes.large,
+                            )
+                            .background(
+                                color = colorResource(id = R.color.surface),
+                                shape = RoundedCornerShape(16.dp)
+                            ),
+                        contentAlignment = Alignment.TopCenter
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.champy_sonriente_idle), // Reemplaza con tu imagen
+                            painter = painterResource(id = R.drawable.simbolo_reciclaje),
                             contentDescription = "Imagen",
                             modifier = Modifier
-                                .fillMaxSize()
+                                .padding(16.dp)
                         )
                     }
+
+                    Text(
+                        text = "Que tipo de hongo es Champy?",
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        ),
+                        modifier = Modifier.padding(top = 8.dp) // Padding superior
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 24.dp), // Padding vertical
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
+                        ButtonQuizImage(text = "Asesino", onClick = { /* Acción del botón 1 */ })
+                        ButtonQuizImage(text = "Come Plastico", onClick = { /* Acción del botón 2 */ })
+                    }
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp), // Padding inferior
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
+                        ButtonQuizImage(text = "Comestible", onClick = { /* Acción del botón 3 */ })
+                        ButtonQuizImage(text = "Alucinogeno", onClick = { /* Acción del botón 4 */ })
+                    }
+                    SporaDisableButton(
+                        modifier = Modifier.padding(top = 16.dp),
+                        text = "Continue",
+                        onClick = { /* Acción del botón */ }
+                    )
                 }
             }
         }
     }
 }
-*/
+
+
+/*
 @Composable
 fun MinigameQuizImageScreen(
     modifier: Modifier = Modifier,
@@ -185,30 +233,8 @@ fun MinigameQuizImageScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
-                        Button(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(165.dp),
-                            onClick = { /* Acción del botón 1 */ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(id = R.color.surface),
-                                contentColor = colorResource(id = R.color.black)
-                            )
-                        ) {
-                            Text("Asesino")
-                        }
-                        Button(
-                            modifier = Modifier
-                                .width(165.dp)
-                                .height(50.dp),
-                            onClick = { /* Acción del botón 2 */ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(id = R.color.surface),
-                                contentColor = colorResource(id = R.color.black)
-                            )
-                        ) {
-                            Text("Come Plastico")
-                        }
+                        ButtonQuizImage(text = "Asesino", onClick = { /* Acción del botón 1 */ })
+                        ButtonQuizImage(text = "Come Plastico", onClick = { /* Acción del botón 2 */ })
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -217,51 +243,8 @@ fun MinigameQuizImageScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
-                        Button(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(165.dp),
-                            onClick = { /* Acción del botón 3 */ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(id = R.color.surface),
-                                contentColor = colorResource(id = R.color.black)
-                            )
-                        ) {
-                            Text("Comestible")
-                        }
-                        Button(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(165.dp),
-                            onClick = { /* Acción del botón 4 */ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(id = R.color.surface),
-                                contentColor = colorResource(id = R.color.black)
-                            )
-                        ) {
-                            Text("Alucinogeno")
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    Button(
-                        modifier = Modifier
-                            .height(50.dp)
-                            .fillMaxWidth(0.9f),
-                        onClick = { /* Acción del botón final */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = colorResource(id = R.color.grey_700),
-                            contentColor = colorResource(id = R.color.white)
-                        )
-                    ) {
-                        Text(
-                            text = "Continuar",
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 18.sp, // Tamaño de fuente más grande
-                                fontWeight = FontWeight.Bold // Negrita
-                            )
-                        )
+                        ButtonQuizImage(text = "Comestible", onClick = { /* Acción del botón 3 */ })
+                        ButtonQuizImage(text = "Alucinogeno", onClick = { /* Acción del botón 4 */ })
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                 }
@@ -270,21 +253,12 @@ fun MinigameQuizImageScreen(
     }
 }
 
-@Composable
-fun MyButton(text: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Red,
-            contentColor = Color.White
-        )
-    ) {
-        Text(text)
-    }
-}
-
+*/
     @Preview
     @Composable
     fun MinigameQuizImageScreenPreview() {
         MinigameQuizImageScreen(onBackClick = {})
     }
+
+
+

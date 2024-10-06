@@ -116,7 +116,7 @@ fun GameResultPopup(
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.o2), // Reemplaza con tu imagen
+                                    painter = painterResource(id = R.drawable.o2),
                                     contentDescription = "Imagen de recompensa",
                                     modifier = Modifier
                                         .size(50.dp)
@@ -206,12 +206,11 @@ fun GameResultPopup(
                             }
                     )
 
-                    // Row con la imagen de O2 y el texto
                     Row(
                         modifier = Modifier
                             .layout { measurable, constraints ->
                                 val placeable = measurable.measure(constraints)
-                                // Calcula la posición del Row dentro de la estrella
+
                                 val x = (starImageSize.width - placeable.width) / 2
                                 val y = (starImageSize.height - placeable.height) / 2
                                 layout(placeable.width, placeable.height) {
@@ -223,7 +222,7 @@ fun GameResultPopup(
                         Image(
                             painter = painterResource(id = R.drawable.o2),
                             contentDescription = "Imagen de recompensa",
-                            modifier = Modifier.size(16.dp) // Ajusta el tamaño según sea necesario
+                            modifier = Modifier.size(16.dp)
                         )
 
                         val rewardText = "10"
@@ -254,7 +253,7 @@ fun GameResultPopup(
                         modifier = Modifier
                             .layout { measurable, constraints ->
                                 val placeable = measurable.measure(constraints)
-                                // Calcula la posición del Row dentro de la estrella
+
                                 val x = (starImageSize.width - placeable.width) / 2
                                 val y = (starImageSize.height - placeable.height) / 2
                                 layout(placeable.width, placeable.height) {
