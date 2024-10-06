@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
-import com.gg.spora.core.utils.SporaEnums
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.scalarNumber
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
@@ -68,7 +68,7 @@ fun MiniGameScreen(
     )
 
     var lives by rememberSaveable {
-        mutableIntStateOf(SporaEnums.MAX_LIVES)
+        mutableIntStateOf(SporaConstant.MAX_LIVES)
     }
 
     LaunchedEffect(isCorrect) {

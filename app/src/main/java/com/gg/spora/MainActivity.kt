@@ -19,7 +19,7 @@ import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
-import com.gg.spora.core.utils.SporaEnums
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
@@ -92,7 +92,7 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 isCorrect = isCorrect,
-                                questionSize = SporaEnums.MAX_QUESTIONS,
+                                questionSize = SporaConstant.MAX_QUESTIONS,
                                 onBackClick = { },
                                 onNextQuestion = quizViewModel::nextQuestion,
                                 content = {

@@ -1,8 +1,7 @@
 package com.gg.spora.quiz.ui
 
 import androidx.lifecycle.ViewModel
-import com.gg.spora.core.utils.SporaEnums
-import com.gg.spora.core.utils.SporaEnums.MAX_QUESTIONS
+import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.model.Question
 import com.gg.spora.quiz.domain.model.QuestionType
