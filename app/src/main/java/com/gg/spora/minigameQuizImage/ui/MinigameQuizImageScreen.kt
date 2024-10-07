@@ -42,6 +42,7 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.ButtonQuizImage
 import com.gg.spora.core.ui.components.OptionItemButton
 import com.gg.spora.core.ui.components.SporaDisableButton
+import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaWithCard
 import com.gg.spora.core.ui.components.TopBarWithProgressBar
 import com.gg.spora.minigameQuizImage.domain.model.model.AnswerImage
@@ -59,8 +60,10 @@ fun MinigameQuizImageScreen(
     onNextQuestion: () -> Unit,
     quizImageViewModel: QuizImageViewModel = hiltViewModel()
 ) {
-    var isSelectedAnswer by remember { mutableStateOf(false) }
+
     val currentImageResIdState by quizImageViewModel.currentImageResId.collectAsState()
+    var isAnswerSelected by remember { mutableStateOf(false) }
+
     Box(
         modifier =
         Modifier.fillMaxSize(),
@@ -74,9 +77,8 @@ fun MinigameQuizImageScreen(
                 .offset(y = (-360).dp)
         )
         Column(
-            modifier = modifier
-                .padding(vertical = 16.dp)
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             TopBarWithProgressBar(
                 title = "Mini Game",
@@ -151,18 +153,32 @@ fun MinigameQuizImageScreen(
                                 .clip(MaterialTheme.shapes.large)
                                 .height(50.dp)
                                 .clickable {
-                                    isSelectedAnswer = true
+                                    isAnswerSelected = true
                                     onAnswerSelected(answer.id)
                                 }
                         )
                     }
-                    SporaDisableButton(
-                        modifier = Modifier
-                            .padding(top = 8.dp)
-                            .fillMaxWidth(),
-                        text = "Continue",
-                        onClick = { onNextQuestion() }
-                    )
+                    if(isAnswerSelected){
+                        SporaPrimaryButton(
+                            modifier = Modifier
+                                .padding(top = 8.dp)
+                                .fillMaxWidth(),
+                            text = "Continue",
+                            onClick = {
+                                onNextQuestion()
+                                isAnswerSelected = false
+                            }
+                        )
+                    }else{
+                        SporaDisableButton(
+                            modifier = Modifier
+                                .padding(top = 8.dp)
+                                .fillMaxWidth(),
+                            text = "Continue",
+                            onClick = {  }
+                        )
+                    }
+
                 }
 
             }
