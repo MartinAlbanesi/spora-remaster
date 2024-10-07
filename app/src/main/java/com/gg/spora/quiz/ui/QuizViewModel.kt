@@ -1,6 +1,7 @@
 package com.gg.spora.quiz.ui
 
 import androidx.lifecycle.ViewModel
+import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.core.utils.enums.QuestionType
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
@@ -30,7 +31,7 @@ class QuizViewModel @Inject constructor(
     private val _isFinished = MutableStateFlow(false)
     val isFinished = _isFinished.asStateFlow()
 
-    private val _lives = MutableStateFlow(MAX_QUESTIONS)
+    private val _lives = MutableStateFlow(MAX_LIVES)
     val lives = _lives.asStateFlow()
 
     private val _counterQuestion = MutableStateFlow(0)
@@ -85,7 +86,7 @@ class QuizViewModel @Inject constructor(
     fun resetGame() {
         _counterQuestion.value = 0
         _currentQuestionIndex.value = 0
-        _lives.value = MAX_QUESTIONS
+        _lives.value = MAX_LIVES
         _isFinished.value = false
         _isCorrect.value = null
         getRandomQuestions()

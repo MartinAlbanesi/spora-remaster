@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.QuizGame
+                        startDestination = NavigationRoutes.ForestStage
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
@@ -105,6 +105,7 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { },
                                 onNextQuestion = quizViewModel::nextQuestion,
                                 onResetGame = quizViewModel::resetGame,
+                                onBackForestStage = { navController.popBackStack() },
                                 content = {
                                     QuizScreen(
                                         modifier = Modifier
