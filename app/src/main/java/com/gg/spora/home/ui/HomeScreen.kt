@@ -72,9 +72,9 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
-                firstLabel = "12",
+                firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
-                secondLabel = "465",
+                secondLabel = "0",
                 secondIcon = R.drawable.o2_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
