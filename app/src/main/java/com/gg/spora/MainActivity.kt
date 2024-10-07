@@ -24,6 +24,7 @@ import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImage.ui.MinigameQuizImageScreen
+import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
@@ -126,9 +127,11 @@ class MainActivity : ComponentActivity() {
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 champyImage = R.drawable.champy_celebrando_brazoslevantados,
                                 onBackClick = { }
-                                ) {
+                            ) {
                                 ChallengeListObject(
-                                    modifier = Modifier.fillMaxSize().padding(16.dp),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(16.dp),
                                     recyclerOptions = mapOf(
                                         "Vidrio" to true,
                                         "Residuos Orgánicos" to null,
@@ -145,22 +148,54 @@ class MainActivity : ComponentActivity() {
 
                             val isCorrect by quizImageViewModel.isCorrect.collectAsState()
 
-                            MinigameQuizImageScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(16.dp),
-                                onBackClick = { },
-                                questionTitle = currentImageQuestion!!.question,
-                                answerOptions = currentImageQuestion!!.answers,
-                                onAnswerSelected = quizImageViewModel::isAnswerCorrect,
-                                onNextQuestion = quizImageViewModel::nextQuestion,
-                                questionImageResId = quizImageViewModel.questionImageResId
-                            )
+                            val currentImageResIdState by quizImageViewModel.currentImageResId.collectAsState()
 
+                            val isFinished by quizImageViewModel.isFinished.collectAsState()
+
+                            val lives by quizImageViewModel.lives.collectAsState()
+
+                            val counterQuestion by quizImageViewModel.counterQuestion.collectAsState()
+
+//                            MinigameQuizImageScreen(
+//                                modifier = Modifier
+//                                    .fillMaxSize()
+//                                    .padding(16.dp),
+//                                onBackClick = { },
+//                                questionTitle = currentImageQuestion!!.question,
+//                                answerOptions = currentImageQuestion!!.answers,
+//                                onAnswerSelected = quizImageViewModel::isAnswerCorrect,
+//                                onNextQuestion = quizImageViewModel::nextQuestion,
+//                                questionImageResId = quizImageViewModel.questionImageResId
+//                            )
+                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
+                                imageBackground = R.drawable.fondo_minijuegos,
+                                isCorrect = isCorrect,
+                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                isFinished = isFinished,
+                                lives = lives,
+                                counterQuestion = counterQuestion,
+                                onBackClick = { },
+                                onNextQuestion = quizImageViewModel::nextQuestion,
+                                onResetGame = quizImageViewModel::resetGame,
+                                onBackForestStage = { navController.popBackStack() },
+                                content = {
+                                    QuizImageScreen(
+                                        modifier = Modifier,
+                                        questionTitle = currentImageQuestion!!.question,
+                                        answerOptions = currentImageQuestion!!.answers,
+                                        currentImageResIdState = currentImageResIdState,
+                                        onAnswerSelected = quizImageViewModel::isAnswerCorrect,
+                                        onNextQuestion = quizImageViewModel::nextQuestion,
+                                    )
+                                }
+
+                            )
                         }
+
                     }
                 }
             }
         }
     }
+
 }
