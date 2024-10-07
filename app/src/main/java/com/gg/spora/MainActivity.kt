@@ -126,7 +126,6 @@ class MainActivity : ComponentActivity() {
                             ChallengeScreen(
                                 modifier = Modifier,
                                 champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
-                                recyclerOptions = scannedObjects,
                                 onBackClick = { },
                                 onNavigateToCameraScreen = {
                                     navController.navigate(NavigationRoutes.Camera)
