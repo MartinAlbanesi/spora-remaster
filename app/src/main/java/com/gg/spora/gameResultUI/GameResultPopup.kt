@@ -1,12 +1,13 @@
 package com.gg.spora.gameResultUI
 
-import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -18,54 +19,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_STAR
+import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.gameResultUI.components.ChampyWithRewards
-import com.gg.spora.gameResultUI.components.StarWithOxygen
+import com.gg.spora.gameResultUI.components.StarWithOxygenGroup
 import com.gg.spora.ui.theme.SporaTheme
 
-
-@Composable
-private fun StarWithOxygenGroup(
-    modifier: Modifier = Modifier,
-    rewards: Map<Int, Int>, // oxygenAmount to starImage
-) {
-
-    val rotateItem = mapOf(
-        -25f to 0.dp,
-        0f to (-16).dp,
-        25f to 0.dp
-    )
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        modifier = modifier
-    ) {
-        rewards.entries.toList().forEachIndexed { index, entry ->
-            StarWithOxygen(
-                oxygenAmount = entry.key,
-                starImage = entry.value,
-                modifier = Modifier
-                    .offset(y = rotateItem.values.elementAt(index))
-                    .rotate(rotateItem.keys.elementAt(index))
-            )
-        }
-    }
-}
-
-enum class StarState(val starCount: Int = 0) {
-    STAR_ZERO(0),
-    STAR_ONE(1),
-    STAR_TWO(2),
-    STAR_THREE(3)
-}
 
 @Composable
 fun GameResultPopUp(
@@ -100,18 +69,31 @@ fun GameResultPopUp(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp)
+                    .padding(top = 24.dp)
             ) {
+
+                Image(
+                    painter = painterResource(id = backgroundImage),
+                    contentDescription = "Fondo minijuegos",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp)
+                        .clip(MaterialTheme.shapes.extraLarge)
+                )
+
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     StarWithOxygenGroup(
                         rewards = localRewards,
+                        rotateItems = SporaConstant.ROTATE_ITEMS_REWARDS,
                         modifier = Modifier
                             .fillMaxWidth()
                             .align(Alignment.CenterHorizontally)
+                            .offset(y = -16.dp)
                     )
                     ChampyWithRewards(
                         champyImage = R.drawable.champy_sonriente_idle,
@@ -154,7 +136,7 @@ fun GameResultPopupPreview() {
         ) {
             GameResultPopUp(
                 isVisible = true,
-                backgroundImage = R.drawable.fondo_minijuegos,
+                backgroundImage = R.drawable.fondo_minijuegos_crop,
                 starsState = StarState.STAR_TWO,
                 rewards = listOf(10, 20, 30),
                 onClickPrimaryButton = {},

@@ -2,9 +2,9 @@ package com.gg.spora.quiz.ui
 
 import androidx.lifecycle.ViewModel
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
+import com.gg.spora.core.utils.enums.QuestionType
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.model.Question
-import com.gg.spora.quiz.domain.model.QuestionType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

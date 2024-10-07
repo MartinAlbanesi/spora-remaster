@@ -33,7 +33,7 @@ fun StarWithOxygen(
     ) {
         Image(
             painter = painterResource(id = starImage),
-            contentDescription = "Estrella gris",
+            contentDescription = "Estrella",
             modifier = Modifier.size(96.dp)
         )
         Row(

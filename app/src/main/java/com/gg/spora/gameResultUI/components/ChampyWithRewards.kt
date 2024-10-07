@@ -36,11 +36,9 @@ fun ChampyWithRewards(
         )
         Row(
             verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.Center,
-//            modifier = Modifier.align(Alignment.CenterVertically)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.o2),
+                painter = painterResource(id = R.drawable.o2_icon),
                 contentDescription = "Oxígeno",
                 modifier = Modifier.size(48.dp)
             )

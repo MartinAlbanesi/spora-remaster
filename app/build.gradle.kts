@@ -120,4 +120,7 @@ dependencies {
     implementation(libs.tensorflow.support)
     implementation(libs.tensorflow.android)
     implementation(libs.tensorflow.metadata)
+
+    // Coil
+    implementation(libs.coil.compose)
 }

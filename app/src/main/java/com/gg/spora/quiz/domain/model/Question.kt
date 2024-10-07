@@ -1,5 +1,7 @@
 package com.gg.spora.quiz.domain.model
 
+import com.gg.spora.core.utils.enums.QuestionType
+
 
 data class Question(
     val id: String,
@@ -8,7 +10,3 @@ data class Question(
     val answer: Answer,
     val type: QuestionType
 )
-
-enum class QuestionType {
-    RECYCLING,
-}

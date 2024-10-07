@@ -38,6 +38,9 @@ tensorflowgpu = "2.14.0"
 tensorflowmetadata = "0.1.0"
 tensorflow = "+"
 
+# Coil
+coil = "2.7.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -87,6 +90,9 @@ tensorflow-select = { group = "org.tensorflow", name = "tensorflow-lite-select-t
 tensorflow-android = { group = "org.tensorflow", name = "tensorflow-lite",  version.ref = "tensorflow"}
 tensorflow-support = { group = "org.tensorflow", name = "tensorflow-lite-support",  version.ref = "tensorflow"}
 tensorflow-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata",  version.ref = "tensorflowmetadata"}
+
+# Coil
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
