@@ -13,10 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,7 +25,6 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.SporaConstant.MAX_STAR
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.functions.getStarsRewards
 import com.gg.spora.gameResultUI.components.ChampyWithRewards
@@ -50,6 +45,13 @@ fun GameResultPopUp(
 ) {
 
     val (localRewards,totalOxygen) = getStarsRewards(starsState, rewards)
+
+    val champyImage = when(starsState){
+        StarState.STAR_ZERO -> R.drawable.champy_derrotado_brazosalcuerpo
+        StarState.STAR_ONE -> R.drawable.champy_serio_idle
+        StarState.STAR_TWO -> R.drawable.champy_sonriente_idle
+        StarState.STAR_THREE -> R.drawable.champy_celebrando_brazoslevantados
+    }
 
     if (isVisible) {
 
@@ -85,7 +87,7 @@ fun GameResultPopUp(
                             .offset(y = -16.dp)
                     )
                     ChampyWithRewards(
-                        champyImage = R.drawable.champy_sonriente_idle,
+                        champyImage = champyImage,
                         oxygenAmount = totalOxygen,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
@@ -101,12 +103,14 @@ fun GameResultPopUp(
                             modifier = Modifier
                                 .padding(8.dp)
                         )
-                        SporaPrimaryButton(
-                            text = "Siguiente",
-                            onClick = onClickPrimaryButton,
-                            modifier = Modifier
-                                .padding(8.dp)
-                        )
+                        if(starsState.starCount != 0){
+                            SporaPrimaryButton(
+                                text = "Siguiente",
+                                onClick = onClickPrimaryButton,
+                                modifier = Modifier
+                                    .padding(8.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -126,7 +130,7 @@ fun GameResultPopupPreview() {
             GameResultPopUp(
                 isVisible = true,
                 backgroundImage = R.drawable.fondo_minijuegos_crop,
-                starsState = StarState.STAR_ONE,
+                starsState = StarState.STAR_ZERO,
                 rewards = listOf(10, 20, 60),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},
