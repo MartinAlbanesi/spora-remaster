@@ -34,6 +34,7 @@ fun HomeScreen(
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
+        /*
         HomeIcon(
             image = R.drawable.profile_icon,
             text = "Perfil",
@@ -49,10 +50,12 @@ fun HomeScreen(
             text = "Misiones",
             onClick = {}
         )
+         */
     )
 
     // Icons in the right
     val rightIcons = listOf<HomeIcon>(
+        /*
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
@@ -63,6 +66,7 @@ fun HomeScreen(
             text = "Arboleda",
             onClick = {}
         )
+         */
     )
 
     Scaffold(
@@ -123,6 +127,18 @@ fun HomeScreen(
                     )
                 }
             }
+
+            Box(modifier = Modifier.align(Alignment.Center).fillMaxSize()) {
+                Image(
+                    painter = painterResource(id = R.drawable.champy_sonriente_brazosalcuerpo),
+                    contentDescription = "Forest Background",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .size(140.dp)
+                        .align(Alignment.Center),
+                )
+            }
+
             // Forest Sign Button
             SignButton(
                 image = R.drawable.forest_sign,
@@ -146,7 +162,7 @@ private fun MiniGameScreenPreview() {
         ) {
             HomeScreen(
                 modifier = Modifier.fillMaxSize()
-            ){}
+            ) {}
         }
     }
 }
