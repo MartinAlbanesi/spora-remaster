@@ -31,6 +31,7 @@ import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_STAR
 import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.core.utils.functions.getStarsRewards
 import com.gg.spora.gameResultUI.components.ChampyWithRewards
 import com.gg.spora.gameResultUI.components.StarWithOxygenGroup
 import com.gg.spora.ui.theme.SporaTheme
@@ -47,20 +48,8 @@ fun GameResultPopUp(
     onClickSecondaryButton: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
-    val localRewards: MutableMap<Int, Int> = mutableMapOf()
 
-    var totalOxygen by remember {
-        mutableIntStateOf(0)
-    }
-
-    for (i in 1..MAX_STAR) {
-        if (i <= starsState.starCount) {
-            localRewards[rewards[i - 1]] = R.drawable.estrella
-            totalOxygen += rewards[i - 1]
-        } else {
-            localRewards[rewards[i - 1]] = R.drawable.estrella_gris
-        }
-    }
+    val (localRewards,totalOxygen) = getStarsRewards(starsState, rewards)
 
     if (isVisible) {
 
@@ -137,8 +126,8 @@ fun GameResultPopupPreview() {
             GameResultPopUp(
                 isVisible = true,
                 backgroundImage = R.drawable.fondo_minijuegos_crop,
-                starsState = StarState.STAR_TWO,
-                rewards = listOf(10, 20, 30),
+                starsState = StarState.STAR_ONE,
+                rewards = listOf(10, 20, 60),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},
                 onDismissRequest = {}

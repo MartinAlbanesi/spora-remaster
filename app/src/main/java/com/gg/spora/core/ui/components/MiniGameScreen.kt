@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.scalarNumber
+import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 

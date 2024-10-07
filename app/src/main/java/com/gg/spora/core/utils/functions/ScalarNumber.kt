@@ -1,4 +1,4 @@
-package com.gg.spora.core.utils
+package com.gg.spora.core.utils.functions
 
 fun scalarNumber(valor: Int, minOriginal: Int = 0, maxOriginal: Int): Float {
     return (valor - minOriginal).toFloat() / (maxOriginal - minOriginal).toFloat()
