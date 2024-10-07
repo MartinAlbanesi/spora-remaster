@@ -90,14 +90,21 @@ class MainActivity : ComponentActivity() {
 
                             val isFinished by quizViewModel.isFinished.collectAsState()
 
+                            val lives by quizViewModel.lives.collectAsState()
+
+                            val counterQuestion by quizViewModel.counterQuestion.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 isCorrect = isCorrect,
                                 questionSize = SporaConstant.MAX_QUESTIONS,
                                 isFinished = isFinished,
+                                lives = lives,
+                                counterQuestion = counterQuestion,
                                 onBackClick = { },
                                 onNextQuestion = quizViewModel::nextQuestion,
+                                onResetGame = quizViewModel::resetGame,
                                 content = {
                                     QuizScreen(
                                         modifier = Modifier

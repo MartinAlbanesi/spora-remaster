@@ -30,6 +30,12 @@ class QuizViewModel @Inject constructor(
     private val _isFinished = MutableStateFlow(false)
     val isFinished = _isFinished.asStateFlow()
 
+    private val _lives = MutableStateFlow(MAX_QUESTIONS)
+    val lives = _lives.asStateFlow()
+
+    private val _counterQuestion = MutableStateFlow(0)
+    val counterQuestion = _counterQuestion.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -47,25 +53,43 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
+                // si la respuesta es la correcta
                 if (it.id == answerId) {
                     it.copy(
                         isCorrect = _isCorrect.value,
                     )
-                } else {
+                }
+                // si la respuesta es incorrecta
+                else {
                     it
                 }
             }
         )
+
+        if(_isCorrect.value == false) {
+            _lives.value--
+        }
     }
 
     fun nextQuestion() {
-        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1){
+        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1 || _lives.value <= 0) {
             _isFinished.value = true
             return
         }
         _currentQuestionIndex.value++
+        _counterQuestion.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
         _isCorrect.value = null
+    }
+
+    fun resetGame() {
+        _counterQuestion.value = 0
+        _currentQuestionIndex.value = 0
+        _lives.value = MAX_QUESTIONS
+        _isFinished.value = false
+        _isCorrect.value = null
+        getRandomQuestions()
+        getCurrentQuestion()
     }
 
 }
