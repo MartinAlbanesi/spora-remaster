@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,6 +18,8 @@ import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
+import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
+import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
@@ -37,14 +38,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             SporaTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     val navController = rememberNavController()
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome
+                        startDestination = NavigationRoutes.Welcome,
+                        enterTransition = ::screenFadeWithSlideInToLeft,
+                        exitTransition = ::screenFadeWithSlideOutToRight,
+                        popEnterTransition = ::screenFadeWithSlideInToLeft,
+                        popExitTransition = ::screenFadeWithSlideOutToRight
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
@@ -116,7 +120,9 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { }
                                 ) {
                                 ChallengeListObject(
-                                    modifier = Modifier.fillMaxSize().padding(16.dp),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(16.dp),
                                     recyclerOptions = mapOf(
                                         "Vidrio" to true,
                                         "Residuos Orgánicos" to null,
