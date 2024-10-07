@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +31,7 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
 import com.gg.spora.ui.theme.SporaTheme
+import com.gg.spora.welcome.ui.animations.LogoInitialAnimation
 import com.gg.spora.welcome.ui.components.ChampyWithTopDialogue
 import com.gg.spora.welcome.ui.components.SporaTextField
 import kotlinx.coroutines.launch
@@ -134,14 +134,8 @@ fun LogoScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo_reborde_slogan),
-                contentDescription = "Logo",
-                Modifier
-                    .size(350.dp)
-                    .offset(y = (-50).dp),
-                contentScale = ContentScale.Fit
-            )
+
+            LogoInitialAnimation(modifier = modifier, image = R.drawable.logo_reborde_slogan)
 
             SporaPrimaryButton(modifier.offset(y = 60.dp), "Continuar", onClick = onClick)
 
