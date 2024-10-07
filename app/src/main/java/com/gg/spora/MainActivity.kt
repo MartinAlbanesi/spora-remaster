@@ -1,6 +1,5 @@
 package com.gg.spora
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,18 +13,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.gg.spora.camera.CameraScreen
-import com.gg.spora.camera.classifyImage
 import com.gg.spora.challenge.ui.ChallengeScreen
-import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
@@ -48,12 +42,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     val navController = rememberNavController()
-                    var scannedObjects by remember { mutableStateOf(mapOf(
-                        "Botella de plastico" to false,
-                        "Residuos Orgánicos" to false,
-                        "Papel y Cartón" to false,
-                        "Envases de Plástico" to false,
-                    )) }
 
                     NavHost(
                         navController = navController,
@@ -125,7 +113,6 @@ class MainActivity : ComponentActivity() {
                         composable<NavigationRoutes.Challenge> {
                             ChallengeScreen(
                                 modifier = Modifier,
-                                champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
                                 onBackClick = { },
                                 onNavigateToCameraScreen = {
                                     navController.navigate(NavigationRoutes.Camera)

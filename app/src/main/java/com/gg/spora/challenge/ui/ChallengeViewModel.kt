@@ -21,8 +21,8 @@ class ChallengeViewModel : ViewModel() {
 
     fun getObjectsChallenge(){
         _objectsChallenge.value = mapOf(
-            "Botella de plastico" to true,
-            "Residuos Orgánicos" to false,
+            "Botella de plastico" to false,
+            "Caja de carton" to false,
             "Papel y Cartón" to false,
             "Envases de Plástico" to false,
         )

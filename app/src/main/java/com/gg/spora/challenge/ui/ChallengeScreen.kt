@@ -36,7 +36,6 @@ val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
 /**
  * Screen for mini games with Spora and progress bar
  * @param modifier: Modifier
- * @param champyImage: Champy image
  * @param onBackClick: Click listener for back button
  * @param onNavigateToCameraScreen: Action for navigate to Camera Screen
  * @param challengeViewModel: View model for the Challenge
@@ -44,7 +43,6 @@ val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
 @Composable
 fun ChallengeScreen(
     modifier : Modifier = Modifier,
-    champyImage : Int,
     onBackClick : () -> Unit,
     onNavigateToCameraScreen : () -> Unit,
     challengeViewModel: ChallengeViewModel = viewModel()
@@ -60,6 +58,14 @@ fun ChallengeScreen(
             objectsChallenge = objects
         }
     }
+
+    val champyImage : Int = if(objectsChallenge.values.all{ it }){
+        R.drawable.champy_celebrando_brazoslevantados
+    }
+    else{
+        R.drawable.champy_sonriente_brazosalcuerpo
+    }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -90,6 +96,7 @@ fun ChallengeScreen(
 
                     objectsChallenge.forEach {
                     val nameObject = it.key
+
                     ButtonObjectScannerChallenge(
                         textObject = nameObject,
                         modifier = Modifier
@@ -127,7 +134,6 @@ SporaTheme {
     ) {
         ChallengeScreen(
             modifier = Modifier,
-            champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
             onBackClick = { },
             onNavigateToCameraScreen = {
 
