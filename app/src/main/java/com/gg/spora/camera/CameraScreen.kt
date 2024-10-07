@@ -47,9 +47,18 @@ fun CameraScreen(
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
     var selectedObject = ""
+    var objectsChallenge = mapOf<String, Boolean>()
+
+
     LaunchedEffect(challengeViewModel.selectedObject) {
         challengeViewModel.selectedObject.observe(lifecycleOwner) { newObject ->
             selectedObject = newObject
+        }
+    }
+
+    LaunchedEffect(challengeViewModel.objectsChallenge) {
+        challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
+            objectsChallenge = objects
         }
     }
 
@@ -98,9 +107,11 @@ fun CameraScreen(
                                     val bitmap = imageProxy.toBitmap()
                                     classifyImage(context, bitmap, selectedObject) { result ->
                                         if (result) {
-                                            /*scannedObjects = scannedObjects.toMutableMap().apply {
-                                                this[selectedObject] = true
-                                            }*/
+                                            challengeViewModel.setObjectsChallenge(
+                                                objectsChallenge.toMutableMap().apply {
+                                                    this[selectedObject] = true
+                                                }
+                                            )
                                             onNavigateToChallengeScreen
                                         }
                                     }
