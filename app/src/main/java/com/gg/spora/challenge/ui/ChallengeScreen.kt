@@ -54,6 +54,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -83,8 +85,7 @@ fun ChallengeScreen(
     champyImage : Int,
     onBackClick : () -> Unit,
     recyclerOptions : Map<String, Boolean?>,
-    onNavigateToChallenge : () -> Unit,
-    onNavigateToCamera : () -> Unit
+    challengeViewModel: ChallengeViewModel = viewModel()
 ) {
 
 
@@ -124,9 +125,9 @@ fun ChallengeScreen(
                 ) {
 
                     recyclerOptions.forEach {
-
+                    val nameObject = it.key
                     ButtonObjectScannerChallenge(
-                        textObject = it.key,
+                        textObject = nameObject,
                         modifier = Modifier
                             .shadow(
                                 elevation = 4.dp,
@@ -136,7 +137,10 @@ fun ChallengeScreen(
                             .fillMaxWidth()
                             .clip(MaterialTheme.shapes.large)
                             .height(60.dp)
-                            .clickable (onClick = onNavigateToCamera),
+                            .clickable {
+                                challengeViewModel.selectObject(nameObject)
+                                navController.navigate(NavigationRoutes.Camera)
+                            },
                         isValidate = it.value
                     )
                 }
@@ -176,12 +180,7 @@ SporaTheme {
                 "Envases de Plástico" to null,
             ),
             onBackClick = { },
-            onNavigateToChallenge = {
-
-            },
-            onNavigateToCamera = {
-
-            }
+            challengeViewModel = ChallengeViewModel()
         )
     }
 }
