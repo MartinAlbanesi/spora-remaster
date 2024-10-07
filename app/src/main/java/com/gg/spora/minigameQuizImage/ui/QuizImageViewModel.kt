@@ -30,6 +30,9 @@ class QuizImageViewModel @Inject constructor(
     private val _currentImageResId = MutableStateFlow<Int>(R.drawable.recurso_viento)
     val currentImageResId: StateFlow<Int> = _currentImageResId.asStateFlow()
 
+    private val _isCorrect = MutableStateFlow<Boolean?>(null)
+    val isCorrect = _isCorrect.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -46,12 +49,12 @@ class QuizImageViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        val isCorrect  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 if (it.id == answerId) {
                     it.copy(
-                        isCorrect = isCorrect,
+                        isCorrect = _isCorrect.value,
                     )
                     } else {
                         it
@@ -63,6 +66,7 @@ class QuizImageViewModel @Inject constructor(
         _currentQuestionIndex.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
         _currentImageResId.value = _currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
+        _isCorrect.value = null
     }
 
 }

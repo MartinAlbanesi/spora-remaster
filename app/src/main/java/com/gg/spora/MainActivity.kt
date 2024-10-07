@@ -19,6 +19,7 @@ import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
@@ -127,6 +128,8 @@ class MainActivity : ComponentActivity() {
 
                             val currentImageQuestion by quizImageViewModel.currentQuestion.collectAsState()
 
+                            val isCorrect by quizImageViewModel.isCorrect.collectAsState()
+
                             MinigameQuizImageScreen(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -138,6 +141,7 @@ class MainActivity : ComponentActivity() {
                                 onNextQuestion = quizImageViewModel::nextQuestion,
                                 questionImageResId = quizImageViewModel.questionImageResId
                             )
+
                         }
                     }
                 }
