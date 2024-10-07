@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -25,7 +26,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.challenge.ui.classes
+import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.ml.ModelObject
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -34,14 +38,20 @@ import java.nio.ByteOrder
 
 @Composable
 fun CameraScreen(
-    onImageCaptured: (Bitmap) -> Unit,
-    onError: (Exception) -> Unit
+    onNavigateToChallengeScreen : () -> Unit,
+    challengeViewModel: ChallengeViewModel = viewModel()
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
+    var selectedObject = ""
+    LaunchedEffect(challengeViewModel.selectedObject) {
+        challengeViewModel.selectedObject.observe(lifecycleOwner) { newObject ->
+            selectedObject = newObject
+        }
+    }
 
     // Obtengo el permiso de camara
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
@@ -74,7 +84,6 @@ fun CameraScreen(
                         imageCapture
                     )
                 } catch (exc: Exception) {
-                    onError(exc)
                 }
 
                 val handler = Handler(Looper.getMainLooper())
@@ -84,8 +93,17 @@ fun CameraScreen(
                             ContextCompat.getMainExecutor(context),
                             object : ImageCapture.OnImageCapturedCallback() {
                                 override fun onCaptureSuccess(imageProxy: ImageProxy) {
+
+
                                     val bitmap = imageProxy.toBitmap()
-                                    onImageCaptured(bitmap)
+                                    classifyImage(context, bitmap, selectedObject) { result ->
+                                        if (result) {
+                                            /*scannedObjects = scannedObjects.toMutableMap().apply {
+                                                this[selectedObject] = true
+                                            }*/
+                                            onNavigateToChallengeScreen
+                                        }
+                                    }
                                     imageProxy.close()
                                 }
 
@@ -101,10 +119,7 @@ fun CameraScreen(
             }, ContextCompat.getMainExecutor(context))
         }
     } else {
-        // Solicitar permiso de cámara
-        LaunchedEffect(Unit) {
-            cameraPermissionState.launchPermissionRequest()
-        }
+        launchPermissionRequest(cameraPermissionState)
     }
 }
 
@@ -130,6 +145,13 @@ fun rememberPermissionState(permission: String): PermissionState {
 
     return PermissionState(permissionState.value) {
         permissionRequestLauncher.launch(permission)
+    }
+}
+
+@Composable
+fun launchPermissionRequest(cameraPermissionState : PermissionState){
+    LaunchedEffect(Unit) {
+        cameraPermissionState.launchPermissionRequest()
     }
 }
 

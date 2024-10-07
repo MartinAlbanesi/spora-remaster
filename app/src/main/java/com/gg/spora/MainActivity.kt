@@ -17,12 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.gg.spora.camera.CameraScreen
 import com.gg.spora.camera.classifyImage
 import com.gg.spora.challenge.ui.ChallengeScreen
+import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.forestStage.ui.ForestStageScreen
@@ -112,24 +115,12 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        composable<NavigationRoutes.Camera>{
-                            val context = LocalContext.current
-                            var scannedObject = "Botella de Plastico"
+                        composable<NavigationRoutes.Camera> {
                             CameraScreen(
-                                onImageCaptured = { bitmap: Bitmap ->
-                                    classifyImage(context, bitmap, scannedObject) { result ->
-                                       if(result){
-                                           scannedObjects = scannedObjects.toMutableMap().apply {
-                                               this["Botella de plastico"] = true
-                                           }
-                                           navController.navigate(NavigationRoutes.Challenge)
-                                       }
-                                    }
-                                },
-                                onError = { error ->
-                                    // Manejar error
-                                })
-
+                                onNavigateToChallengeScreen = {
+                                    navController.navigate(NavigationRoutes.Challenge)
+                                }
+                            )
                         }
                         composable<NavigationRoutes.Challenge> {
                             ChallengeScreen(
@@ -137,10 +128,7 @@ class MainActivity : ComponentActivity() {
                                 champyImage = R.drawable.champy_sonriente_brazosalcuerpo,
                                 recyclerOptions = scannedObjects,
                                 onBackClick = { },
-                                onNavigateToChallenge = {
-                                    navController.navigate(NavigationRoutes.Challenge)
-                                },
-                                onNavigateToCamera = {
+                                onNavigateToCameraScreen = {
                                     navController.navigate(NavigationRoutes.Camera)
                                 }
                             )

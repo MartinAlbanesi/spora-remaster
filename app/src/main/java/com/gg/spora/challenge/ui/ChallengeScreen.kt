@@ -85,16 +85,9 @@ fun ChallengeScreen(
     champyImage : Int,
     onBackClick : () -> Unit,
     recyclerOptions : Map<String, Boolean?>,
+    onNavigateToCameraScreen : () -> Unit,
     challengeViewModel: ChallengeViewModel = viewModel()
 ) {
-
-
-    var resultScan by remember { mutableStateOf(false) }
-    var isSelectedAnswer by remember { mutableStateOf(false) }
-    var showCamera by remember { mutableStateOf(false) }
-    var selectedObject by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val navController = rememberNavController()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -139,7 +132,7 @@ fun ChallengeScreen(
                             .height(60.dp)
                             .clickable {
                                 challengeViewModel.selectObject(nameObject)
-                                navController.navigate(NavigationRoutes.Camera)
+                                onNavigateToCameraScreen
                             },
                         isValidate = it.value
                     )
@@ -148,15 +141,6 @@ fun ChallengeScreen(
             }
         }
     }
-}
-
-@Composable
-fun ChallengeListObject(
-    modifier: Modifier = Modifier,
-    recyclerOptions: Map<String, Boolean?>,
-) {
-
-
 }
 
 @Preview
@@ -180,7 +164,9 @@ SporaTheme {
                 "Envases de Plástico" to null,
             ),
             onBackClick = { },
-            challengeViewModel = ChallengeViewModel()
+            onNavigateToCameraScreen = {
+
+            }
         )
     }
 }
