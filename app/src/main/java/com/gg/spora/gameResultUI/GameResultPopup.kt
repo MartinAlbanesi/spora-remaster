@@ -50,7 +50,6 @@ fun GameResultPopUp(
     rewards: List<Int>,
     onClickPrimaryButton: () -> Unit,
     onClickSecondaryButton: () -> Unit,
-    onDismissRequest: () -> Unit,
 ) {
 
     val (localRewards, totalOxygen) = getStarsRewards(starsState, rewards)
@@ -65,9 +64,11 @@ fun GameResultPopUp(
     if (isVisible) {
 
         Dialog(
-            onDismissRequest = onDismissRequest,
+            onDismissRequest = onClickPrimaryButton,
             properties = DialogProperties(
-                usePlatformDefaultWidth = false
+                usePlatformDefaultWidth = false,
+                dismissOnClickOutside = false,
+                dismissOnBackPress = false
             )
         ) {
             Box(
@@ -85,19 +86,6 @@ fun GameResultPopUp(
                         .fillMaxWidth()
                         .height(300.dp)
                         .clip(MaterialTheme.shapes.extraLarge)
-                )
-
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Cerrar",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .offset(x = (16).dp, y = -16.dp)
-                        .size(44.dp)
-                        .clickable { onDismissRequest() }
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.primary)
                 )
 
                 Column(
@@ -130,14 +118,14 @@ fun GameResultPopUp(
                             modifier = Modifier
                                 .padding(8.dp)
                         )
-                        if (starsState.starCount != 0) {
+
                             SporaPrimaryButton(
-                                text = "Siguiente",
+                                text = if (starsState.starCount != 0) "Siguiente" else "Volver",
                                 onClick = onClickPrimaryButton,
                                 modifier = Modifier
                                     .padding(8.dp)
                             )
-                        }
+
                     }
                 }
             }
@@ -161,7 +149,6 @@ fun GameResultPopupPreview() {
                 rewards = listOf(10, 20, 60),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},
-                onDismissRequest = {}
             )
         }
 

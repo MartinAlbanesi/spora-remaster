@@ -72,13 +72,14 @@ fun MiniGameScreen(
             backgroundImage = R.drawable.fondo_minijuegos_crop,
             starsState = getStarState(lives = lives),
             rewards = listOf(10, 20, 30),
-            onClickPrimaryButton = {},
-            onClickSecondaryButton = {
-                if (lives <= 0){
-                    onResetGame()
-                }
+            onClickPrimaryButton = {
+                onBackForestStage()
             },
-            onDismissRequest = onBackForestStage
+            onClickSecondaryButton = {
+//                if (lives <= 0){
+                    onResetGame()
+//                }
+            },
         )
     }
 
