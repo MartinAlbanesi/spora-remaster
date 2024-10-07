@@ -1,5 +1,6 @@
 package com.gg.spora.core.ui.components
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -32,7 +34,10 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.core.utils.functions.getStarState
 import com.gg.spora.core.utils.functions.scalarNumber
+import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -49,11 +54,11 @@ fun MiniGameScreen(
     imageBackground: Int,
     isCorrect: Boolean? = null,
     questionSize: Int,
+    isFinished: Boolean = false,
     onBackClick: () -> Unit,
     onNextQuestion: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-
     val champyImage = when(isCorrect){
         true -> R.drawable.champy_celebrando_brazoslevantados
         false -> R.drawable.champy_triste_brazosalcuerpo
@@ -75,6 +80,19 @@ fun MiniGameScreen(
         if (isCorrect == false) {
             lives--
         }
+        Log.i("titi", "counter: $counterQuestion | questionSize: $questionSize")
+    }
+
+    if(lives == 0 || isFinished){
+        GameResultPopUp(
+            isVisible = true,
+            backgroundImage = R.drawable.fondo_minijuegos_crop,
+            starsState = getStarState(lives = lives),
+            rewards = listOf(10, 20, 60),
+            onClickPrimaryButton = {},
+            onClickSecondaryButton = {},
+            onDismissRequest = {}
+        )
     }
 
     Box(

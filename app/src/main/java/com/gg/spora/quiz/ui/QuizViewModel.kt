@@ -27,6 +27,9 @@ class QuizViewModel @Inject constructor(
     private val _isCorrect = MutableStateFlow<Boolean?>(null)
     val isCorrect = _isCorrect.asStateFlow()
 
+    private val _isFinished = MutableStateFlow(false)
+    val isFinished = _isFinished.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -56,6 +59,10 @@ class QuizViewModel @Inject constructor(
     }
 
     fun nextQuestion() {
+        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1){
+            _isFinished.value = true
+            return
+        }
         _currentQuestionIndex.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
         _isCorrect.value = null

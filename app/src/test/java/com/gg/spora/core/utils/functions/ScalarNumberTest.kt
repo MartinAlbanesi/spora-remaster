@@ -1,4 +1,4 @@
-package com.gg.spora.core.utils
+package com.gg.spora.core.utils.functions
 
 import org.junit.Assert.assertEquals
 
@@ -15,7 +15,7 @@ class ScalarNumberTest {
         val maxOriginal = 10
 
         // When
-        val result = com.gg.spora.core.utils.functions.scalarNumber(valor, minOriginal, maxOriginal)
+        val result = scalarNumber(valor, minOriginal, maxOriginal)
 
         // Then
         assertEquals(0.5f, result)

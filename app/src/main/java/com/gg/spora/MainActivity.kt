@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome
+                        startDestination = NavigationRoutes.QuizGame
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
@@ -88,11 +88,14 @@ class MainActivity : ComponentActivity() {
 
                             val isCorrect by quizViewModel.isCorrect.collectAsState()
 
+                            val isFinished by quizViewModel.isFinished.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 isCorrect = isCorrect,
                                 questionSize = SporaConstant.MAX_QUESTIONS,
+                                isFinished = isFinished,
                                 onBackClick = { },
                                 onNextQuestion = quizViewModel::nextQuestion,
                                 content = {
