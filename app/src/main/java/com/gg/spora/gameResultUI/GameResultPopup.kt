@@ -1,6 +1,8 @@
 package com.gg.spora.gameResultUI
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,17 +12,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
@@ -44,9 +53,9 @@ fun GameResultPopUp(
     onDismissRequest: () -> Unit,
 ) {
 
-    val (localRewards,totalOxygen) = getStarsRewards(starsState, rewards)
+    val (localRewards, totalOxygen) = getStarsRewards(starsState, rewards)
 
-    val champyImage = when(starsState){
+    val champyImage = when (starsState) {
         StarState.STAR_ZERO -> R.drawable.champy_derrotado_brazosalcuerpo
         StarState.STAR_ONE -> R.drawable.champy_serio_idle
         StarState.STAR_TWO -> R.drawable.champy_sonriente_idle
@@ -55,12 +64,17 @@ fun GameResultPopUp(
 
     if (isVisible) {
 
-        Dialog(onDismissRequest = onDismissRequest) {
+        Dialog(
+            onDismissRequest = onDismissRequest,
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false
+            )
+        ) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp)
+                    .padding(24.dp)
             ) {
 
                 Image(
@@ -71,6 +85,19 @@ fun GameResultPopUp(
                         .fillMaxWidth()
                         .height(300.dp)
                         .clip(MaterialTheme.shapes.extraLarge)
+                )
+
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Cerrar",
+                    tint = Color.White,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .offset(x = (16).dp, y = -16.dp)
+                        .size(44.dp)
+                        .clickable { onDismissRequest() }
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary)
                 )
 
                 Column(
@@ -103,7 +130,7 @@ fun GameResultPopUp(
                             modifier = Modifier
                                 .padding(8.dp)
                         )
-                        if(starsState.starCount != 0){
+                        if (starsState.starCount != 0) {
                             SporaPrimaryButton(
                                 text = "Siguiente",
                                 onClick = onClickPrimaryButton,
