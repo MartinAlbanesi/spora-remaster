@@ -16,20 +16,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
+import com.gg.spora.core.fake.FakeLevelModels
 import com.gg.spora.core.ui.components.ChampyDialog
 import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun MissionPreview(
+fun LevelPreview(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
     backgroundImage: Int,
-    missionName: String,
-    missionArea: String,
-    requiredOxygen: Int,
-    starsState: StarState,
-    rewards: List<Int>,
+//    levelName: String,
+//    levelArea: String,
+//    requiredOxygen: Int,
+//    rewards: List<Int>,
+//    starsState: StarState,
+    level: Level,
     onClickPrimaryButton: () -> Unit,
     onClickSecondaryButton: () -> Unit,
 ) {
@@ -42,10 +45,10 @@ fun MissionPreview(
         modifier = modifier,
         backgroundImage = backgroundImage,
         champyImage = champyImage,
-        title = "$missionName - $missionArea",
+        title = "${level.levelName} - ${level.stageType.label}",
         isVisible = isVisible,
-        starsState = starsState,
-        rewards = rewards,
+        starsState = level.starState,
+        rewards = level.rewardsOxygen,
         textPrimaryButton = "Jugar",
         textSecondaryButton = "Cancelar",
         onClickPrimaryButton = onClickPrimaryButton,
@@ -55,7 +58,7 @@ fun MissionPreview(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Requisito: $requiredOxygen",
+                text = "Requisito: ${level.requiredOxygen}",
                 fontSize = 24.sp,
                 color = Color.White
             )
@@ -76,14 +79,15 @@ fun GameResultPopupPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            MissionPreview(
+            LevelPreview(
                 isVisible = true,
                 backgroundImage = R.drawable.fondo_minijuegos_crop,
-                missionName = "Nivel 1",
-                missionArea = "Bosque",
-                requiredOxygen = 100,
-                starsState = StarState.STAR_ZERO,
-                rewards = listOf(10, 20, 30),
+//                levelName = "Nivel 1",
+//                levelArea = "Bosque",
+//                requiredOxygen = 100,
+//                starsState = StarState.STAR_ZERO,
+//                rewards = listOf(10, 20, 30),
+                level = FakeLevelModels.fakeLevels.first(),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},
             )

@@ -47,6 +47,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun MiniGameScreen(
     modifier: Modifier = Modifier,
+    title: String = "Mini Juego",
     imageBackground: Int,
     isCorrect: Boolean? = null,
     questionSize: Int,
@@ -115,7 +116,7 @@ fun MiniGameScreen(
             modifier = modifier
         ) {
             TopBarWithTitleExitAndIcon(
-                title = "Mini Game",
+                title = title,
                 onBackClick = {
                     showDialogConfirm = true
                 },

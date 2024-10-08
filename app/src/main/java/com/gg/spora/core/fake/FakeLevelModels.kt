@@ -37,10 +37,10 @@ object FakeLevelModels {
         ),
         Level(
             id = 4,
-            levelName = "Nivel 4",
+            levelName = "Desafio",
             stageType = StageType.FOREST,
             requiredOxygen = 0,
-            rewardsOxygen = listOf(0, 0, 0),
+            rewardsOxygen = listOf(10, 10, 10),
             questionType = QuestionType.CHALLENGE
         )
     )

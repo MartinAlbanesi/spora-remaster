@@ -10,6 +10,6 @@ data class Level(
     val stageType: StageType,
     val requiredOxygen: Int,
     val rewardsOxygen: List<Int>,
+    val starState: StarState = StarState.STAR_ZERO,
     val questionType: QuestionType,
-    val starState: StarState = StarState.STAR_ZERO
 )

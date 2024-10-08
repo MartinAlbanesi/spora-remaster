@@ -13,6 +13,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -33,13 +37,13 @@ fun StageScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     levels: List<Level>,
-    onNavigateToQuizGame: () -> Unit,
-    onNavigateToChallenge: () -> Unit,
-    onNavigateToQuizImage: () -> Unit,
-    onNavigateToRelationsGame: () -> Unit,
+    onNavigateToQuizGame: (String) -> Unit,
+    onNavigateToChallenge: (String) -> Unit,
+    onNavigateToQuizImage: (String) -> Unit,
+    onNavigateToRelationsGame: (String) -> Unit,
+    onClickLevelItem: (Level, Boolean, QuestionType) -> Unit,
     popBackStack: () -> Unit,
 ) {
-
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -77,13 +81,11 @@ fun StageScreen(
                     key = { _, level -> level.id }
                 ) { index, level ->
                     val navigateGame = when (level.questionType) {
-                        QuestionType.QUIZ -> onNavigateToQuizGame
-                        QuestionType.RELATIONS -> onNavigateToRelationsGame
-                        QuestionType.QUIZ_IMAGE -> onNavigateToQuizImage
-                        QuestionType.CHALLENGE -> onNavigateToChallenge
+                        QuestionType.QUIZ -> QuestionType.QUIZ
+                        QuestionType.RELATIONS -> QuestionType.RELATIONS
+                        QuestionType.QUIZ_IMAGE -> QuestionType.QUIZ_IMAGE
+                        QuestionType.CHALLENGE -> QuestionType.CHALLENGE
                     }
-
-
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
@@ -93,9 +95,23 @@ fun StageScreen(
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-                                navigateGame()
+//                                navigateGame("${level.levelName} - ${level.stageType.label}")
+//                                showLevelPreview = true
+                                onClickLevelItem(level, true, navigateGame)
                             }
                     )
+
+//                    LevelPreview(
+//                        isVisible = showLevelPreview,
+//                        backgroundImage = R.drawable.fondo_minijuegos_crop,
+//                        level = level,
+//                        onClickPrimaryButton = {
+//                            navigateGame()
+//                        },
+//                        onClickSecondaryButton = {
+//                            showLevelPreview = false
+//                        },
+//                    )
                 }
             }
 
@@ -118,7 +134,8 @@ private fun StageScreenPreview() {
                 onNavigateToChallenge = {},
                 onNavigateToQuizImage = {},
                 popBackStack = {},
-                onNavigateToRelationsGame = {}
+                onNavigateToRelationsGame = {},
+                onClickLevelItem = {_, _ , _-> }
 
             )
         }
