@@ -1,9 +1,9 @@
 package com.gg.spora.quiz.data.local
 
 import com.gg.spora.core.fake.FakeQuizModels
+import com.gg.spora.core.utils.enums.QuestionType
 import com.gg.spora.quiz.domain.IQuizLocalRepository
 import com.gg.spora.quiz.domain.model.Question
-import com.gg.spora.quiz.domain.model.QuestionType
 import javax.inject.Inject
 
 class FakeQuizLocalRepository @Inject constructor(

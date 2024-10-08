@@ -52,7 +52,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gg.spora.R
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.core.ui.components.ChampyWithCard
-import com.gg.spora.core.ui.components.TopBarWithProgressBar
+import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ml.ModelUnquant
 import com.gg.spora.ui.theme.SporaTheme
 import org.tensorflow.lite.DataType
@@ -92,10 +92,10 @@ fun ChallengeScreen(
         Column(
             modifier = modifier
         ) {
-            TopBarWithProgressBar(
+            TopBarWithTitleExitAndIcon(
                 title = stringResource(R.string.title_challenge),
                 onBackClick = onBackClick,
-                buttonLike = false
+                showIcon = false
             )
             ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),

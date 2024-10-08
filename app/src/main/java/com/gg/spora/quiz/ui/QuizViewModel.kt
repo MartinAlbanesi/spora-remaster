@@ -1,16 +1,14 @@
 package com.gg.spora.quiz.ui
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
+import com.gg.spora.core.utils.enums.QuestionType
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.model.Question
-import com.gg.spora.quiz.domain.model.QuestionType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
-
-const val MAX_QUESTIONS = 10
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
@@ -26,6 +24,9 @@ class QuizViewModel @Inject constructor(
     private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
 
+    private val _isCorrect = MutableStateFlow<Boolean?>(null)
+    val isCorrect = _isCorrect.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -40,14 +41,12 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        val isCorrect  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 if (it.id == answerId) {
                     it.copy(
-                        isCorrect = isCorrect,
-                        textColor = Color.White,
-                        backgroundColor = if (isCorrect) Color(0xff538c21) else Color(0xffb3261e)
+                        isCorrect = _isCorrect.value,
                     )
                 } else {
                     it
@@ -59,6 +58,7 @@ class QuizViewModel @Inject constructor(
     fun nextQuestion() {
         _currentQuestionIndex.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
+        _isCorrect.value = null
     }
 
 }

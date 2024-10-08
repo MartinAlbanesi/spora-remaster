@@ -3,13 +3,14 @@ package com.gg.spora
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -19,6 +20,9 @@ import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
+import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
+import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.welcome.ui.WelcomeScreen
@@ -37,14 +41,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             SporaTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     val navController = rememberNavController()
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome
+                        startDestination = NavigationRoutes.Welcome,
+                        enterTransition = ::screenFadeWithSlideInToLeft,
+                        exitTransition = ::screenFadeWithSlideOutToRight,
+                        popEnterTransition = ::screenFadeWithSlideInToLeft,
+                        popExitTransition = ::screenFadeWithSlideOutToRight,
+                        modifier = Modifier.background(color = Color.Black)
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             val welcomeViewModel = hiltViewModel<WelcomeViewModel>()
@@ -89,20 +97,24 @@ class MainActivity : ComponentActivity() {
 
                             val currentQuestion by quizViewModel.currentQuestion.collectAsState()
 
+                            val isCorrect by quizViewModel.isCorrect.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
-                                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                                isCorrect = isCorrect,
+                                questionSize = SporaConstant.MAX_QUESTIONS,
                                 onBackClick = { },
+                                onNextQuestion = quizViewModel::nextQuestion,
                                 content = {
                                     QuizScreen(
                                         modifier = Modifier
                                             .fillMaxSize()
                                             .padding(16.dp),
+                                        isCorrect = isCorrect,
                                         questionTitle = currentQuestion!!.question,
                                         answerOptions = currentQuestion!!.answers,
                                         onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                        onNextQuestion = quizViewModel::nextQuestion
                                     )
                                 }
                             )
@@ -115,7 +127,9 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { }
                                 ) {
                                 ChallengeListObject(
-                                    modifier = Modifier.fillMaxSize().padding(16.dp),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(16.dp),
                                     recyclerOptions = mapOf(
                                         "Vidrio" to true,
                                         "Residuos Orgánicos" to null,

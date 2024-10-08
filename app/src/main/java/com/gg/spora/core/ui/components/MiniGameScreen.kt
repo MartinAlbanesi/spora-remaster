@@ -1,16 +1,26 @@
 package com.gg.spora.core.ui.components
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +31,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
+import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -35,10 +47,36 @@ import com.gg.spora.ui.theme.SporaTheme
 fun MiniGameScreen(
     modifier: Modifier = Modifier,
     imageBackground: Int,
-    champyImage: Int,
+    isCorrect: Boolean? = null,
+    questionSize: Int,
     onBackClick: () -> Unit,
+    onNextQuestion: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
+    val champyImage = when(isCorrect){
+        true -> R.drawable.champy_celebrando_brazoslevantados
+        false -> R.drawable.champy_triste_brazosalcuerpo
+        else -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
+    }
+
+    var counterQuestion by rememberSaveable { mutableIntStateOf(0) }
+
+    val progressIndicator by animateFloatAsState(
+        targetValue = scalarNumber(valor = counterQuestion, maxOriginal = questionSize),
+        label = "progressIndicator",
+    )
+
+    var lives by rememberSaveable {
+        mutableIntStateOf(SporaConstant.MAX_LIVES)
+    }
+
+    LaunchedEffect(isCorrect) {
+        if (isCorrect == false) {
+            lives--
+        }
+    }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -53,12 +91,13 @@ fun MiniGameScreen(
         Column(
             modifier = modifier
         ) {
-            TopBarWithProgressBar(
+            TopBarWithTitleExitAndIcon(
                 title = "Mini Game",
                 onBackClick = onBackClick,
+                lives = lives,
             )
             LinearProgressIndicator(
-                progress = { 0.4f },
+                progress = { progressIndicator },
                 gapSize = 0.dp,
                 strokeCap = StrokeCap.Butt,
                 color = Color(0xFFf58c0a),
@@ -74,6 +113,27 @@ fun MiniGameScreen(
             ) {
                 content()
             }
+        }
+        Button(
+            enabled = isCorrect != null,
+            onClick = {
+                counterQuestion++
+                onNextQuestion()
+            },
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color.White,
+                containerColor = Color(0xFFf58c0a),
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(16.dp)
+                .height(60.dp)
+        ) {
+            Text(
+                text = "Continuar",
+                color = Color.White,
+            )
         }
     }
 }
@@ -92,15 +152,15 @@ private fun MiniGameScreenPreview() {
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
                 imageBackground = R.drawable.fondo_minijuegos,
-                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                questionSize = 5,
                 onBackClick = { },
+                onNextQuestion = {},
                 content = {
                     QuizScreen(
                         modifier = Modifier.fillMaxSize().padding(16.dp),
                         questionTitle = "¿Qué tipo de residuo debe depositarse en el contenedor verde?",
                         answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
                         onAnswerSelected = { },
-                        onNextQuestion = { }
                     )
 
                 }
