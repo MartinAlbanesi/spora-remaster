@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class ChallengeViewModel : ViewModel() {
 
-    private val _objectsChallenge = MutableLiveData<Map<String, Boolean>>()
-    val objectsChallenge: LiveData<Map<String, Boolean>> get() = _objectsChallenge
+    private val _objectsChallenge = MutableLiveData<MutableMap<String, Boolean>>()
+    val objectsChallenge: LiveData<MutableMap<String, Boolean>> get() = _objectsChallenge
     private val _selectedObject = MutableLiveData<String>()
     val selectedObject: LiveData<String> get() = _selectedObject
 
@@ -15,12 +15,12 @@ class ChallengeViewModel : ViewModel() {
         _selectedObject.value = objectName
     }
 
-    fun setObjectsChallenge(objectsChallenge: Map<String, Boolean>) {
+    fun setObjectsChallenge(objectsChallenge: MutableMap<String, Boolean>) {
         _objectsChallenge.value = objectsChallenge
     }
 
     fun getObjectsChallenge(){
-        _objectsChallenge.value = mapOf(
+        _objectsChallenge.value = mutableMapOf(
             "Botella de plastico" to false,
             "Caja de carton" to false,
             "Papel y Cartón" to false,

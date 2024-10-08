@@ -1,5 +1,6 @@
 package com.gg.spora.challenge.ui
 
+import androidx.camera.core.ImageCapture
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.DefaultShadowColor
@@ -51,8 +56,9 @@ fun ChallengeScreen(
     challengeViewModel: ChallengeViewModel = viewModel()
 ) {
 
+
     val lifecycleOwner = LocalLifecycleOwner.current
-    var objectsChallenge = mapOf<String, Boolean>()
+    var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
 
     challengeViewModel.getObjectsChallenge()
 
@@ -102,27 +108,29 @@ fun ChallengeScreen(
                         fontSize = 20.sp,
                         modifier = Modifier.padding(10.dp)
                     )
-                    objectsChallenge.forEach {
-                    val nameObject = it.key
+                    if(objectsChallenge.isNotEmpty()){
+                        objectsChallenge.forEach {
+                            val nameObject = it.key
 
-                    ButtonObjectScannerChallenge(
-                        textObject = nameObject,
-                        modifier = Modifier
-                            .shadow(
-                                elevation = 4.dp,
-                                shape = MaterialTheme.shapes.large,
-                                ambientColor = DefaultShadowColor
+                            ButtonObjectScannerChallenge(
+                                textObject = nameObject,
+                                modifier = Modifier
+                                    .shadow(
+                                        elevation = 4.dp,
+                                        shape = MaterialTheme.shapes.large,
+                                        ambientColor = DefaultShadowColor
+                                    )
+                                    .fillMaxWidth()
+                                    .clip(MaterialTheme.shapes.large)
+                                    .height(60.dp)
+                                    .clickable {
+                                        challengeViewModel.selectObject(nameObject)
+                                        onNavigateToCameraScreen()
+                                    },
+                                isValidate = it.value
                             )
-                            .fillMaxWidth()
-                            .clip(MaterialTheme.shapes.large)
-                            .height(60.dp)
-                            .clickable {
-                                challengeViewModel.selectObject(nameObject)
-                                onNavigateToCameraScreen
-                            },
-                        isValidate = it.value
-                    )
-                }
+                        }
+                    }
                 }
             }
         }

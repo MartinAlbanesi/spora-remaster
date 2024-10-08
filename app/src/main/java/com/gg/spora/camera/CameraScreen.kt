@@ -118,7 +118,6 @@ fun CameraScreen(
                                     }
                                     imageProxy.close()
                                 }
-
                                 override fun onError(exception: ImageCaptureException) {
                                     onError(exception)
                                 }
