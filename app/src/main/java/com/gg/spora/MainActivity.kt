@@ -131,15 +131,6 @@ class MainActivity : ComponentActivity() {
                             StageScreen(
                                 oxygen = oxygen.oxygen,
                                 levels = levels,
-                                onNavigateToQuizGame = { title ->
-                                    navController.navigate(NavigationRoutes.QuizGame(title))
-                                },
-                                onNavigateToQuizImage = { title ->
-                                    navController.navigate(NavigationRoutes.QuizImage(title))
-                                },
-                                onNavigateToRelationsGame = { title ->
-                                    navController.navigate(NavigationRoutes.RelationsGame(title))
-                                },
                                 onNavigateToChallenge = { title ->
                                     navController.navigate(NavigationRoutes.Challenge(title))
                                 },
