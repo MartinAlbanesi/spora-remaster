@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
@@ -132,7 +133,14 @@ fun LogoScreen(
 
             LogoInitialAnimation(modifier = modifier, image = R.drawable.logo_reborde_slogan)
 
-            SporaPrimaryButton(modifier.offset(y = 60.dp), "Continuar", onClick = onClick)
+            SporaPrimaryButton(
+                modifier
+                    .size(width = 350.dp, height = 50.dp)
+                    .offset(y = 60.dp),
+                "Continuar",
+                textSize = 30,
+                onClick = onClick
+            )
 
         }
     }
@@ -170,7 +178,10 @@ fun ChampyTalkScreen(
             )
 
             SporaPrimaryButton(
-                modifier = modifier, text = "Continuar", onClick = onClick
+                modifier = modifier.size(width = 350.dp, height = 50.dp),
+                text = "Continuar",
+                textSize = 30,
+                onClick = onClick
             )
         }
     }
@@ -216,7 +227,10 @@ fun TypeUserSelectionScreen(
 //                }
 
                 SporaPrimaryInverseButton(
-                    modifier = modifier, text = "Jugar como invitado", onClick = onClick
+                    modifier = modifier.size(width = 350.dp, height = 50.dp),
+                    text = "Jugar como invitado",
+                    textSize = 30,
+                    onClick = onClick
                 )
             }
         }
@@ -266,7 +280,12 @@ fun GuestEnterNameScreen(
 
                 SporaTextField(modifier = modifier, guestName, onValueChange)
 
-                SporaPrimaryButton(modifier, "Siguente", onClick = onClick)
+                SporaPrimaryButton(
+                    modifier.size(width = 350.dp, height = 50.dp),
+                    "Siguente",
+                    textSize = 30,
+                    onClick = onClick
+                )
 
             }
         }
@@ -302,7 +321,11 @@ fun ChampyTalkGuestScreen(
                 y = -(22).dp
             )
 
-            SporaPrimaryButton(modifier = modifier, text = "Comenzar") {
+            SporaPrimaryButton(
+                modifier = modifier.size(width = 350.dp, height = 50.dp),
+                text = "Comenzar",
+                textSize = 30
+            ) {
                 onClick()
             }
         }
