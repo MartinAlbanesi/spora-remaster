@@ -8,7 +8,7 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-class ClassifyTf(val context : Context) {
+class ClassifyTf(context : Context) {
 
     // Carga el modelo de TensorFlow Lite
     private val modelObj = ModelObject.newInstance(context)

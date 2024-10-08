@@ -25,7 +25,9 @@ object NavigationRoutes {
     @Serializable
     object QuizImage
 
-
     @Serializable
-    object Camera
+    object Camera {
+        const val route = "camera/{nameObject}"
+        fun createRoute(nameObject: String) = "camera/$nameObject"
+    }
 }

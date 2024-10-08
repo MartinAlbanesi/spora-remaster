@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
@@ -21,6 +22,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
@@ -39,24 +41,25 @@ import java.nio.ByteOrder
 
 @Composable
 fun CameraScreen(
+    nameObject : String,
     onNavigateToChallengeScreen : () -> Unit,
-    challengeViewModel: ChallengeViewModel = viewModel()
+    challengeViewModel: ChallengeViewModel = viewModel(),
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-    var selectedObject = ""
-    var objectsChallenge = mapOf<String, Boolean>()
-
-
+    //var selectedObject by remember { mutableStateOf("") }
+    var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
+/*
     LaunchedEffect(challengeViewModel.selectedObject) {
         challengeViewModel.selectedObject.observe(lifecycleOwner) { newObject ->
             selectedObject = newObject
+            //Log.d("CameraScreen", "Selected object updated: $selectedObject")
         }
     }
-
+*/
     LaunchedEffect(challengeViewModel.objectsChallenge) {
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
             objectsChallenge = objects
@@ -104,16 +107,18 @@ fun CameraScreen(
                             object : ImageCapture.OnImageCapturedCallback() {
                                 override fun onCaptureSuccess(imageProxy: ImageProxy) {
 
-
                                     val bitmap = imageProxy.toBitmap()
-                                    ClassifyTf(context).classifyImage(bitmap, selectedObject) { result ->
+                                    classifyImage(context, bitmap, nameObject) { result ->
                                         if (result) {
+
                                             challengeViewModel.setObjectsChallenge(
                                                 objectsChallenge.toMutableMap().apply {
-                                                    this[selectedObject] = true
+                                                    this[nameObject] = true
                                                 }
                                             )
-                                            onNavigateToChallengeScreen
+
+                                            //imageProxy.close()
+                                            onNavigateToChallengeScreen()
                                         }
                                     }
                                     imageProxy.close()
@@ -123,14 +128,14 @@ fun CameraScreen(
                                 }
                             }
                         )
-                        handler.postDelayed(this, 1000)
+                        handler.postDelayed(this, 2000)
                     }
                 }
                 handler.post(runnable)
             }, ContextCompat.getMainExecutor(context))
         }
     } else {
-        launchPermissionRequest(cameraPermissionState)
+        LaunchPermissionRequest(cameraPermissionState)
     }
 }
 
@@ -160,12 +165,53 @@ fun rememberPermissionState(permission: String): PermissionState {
 }
 
 @Composable
-fun launchPermissionRequest(cameraPermissionState : PermissionState){
+fun LaunchPermissionRequest(cameraPermissionState : PermissionState){
     LaunchedEffect(Unit) {
         cameraPermissionState.launchPermissionRequest()
     }
 }
 
+fun classifyImage(context : Context, bitmap: Bitmap, selectedObject: String, onResult: (Boolean) -> Unit) {
+    var resultScan = false
+
+    // Carga el modelo de TensorFlow Lite
+    val modelObj = ModelObject.newInstance(context)
+
+    val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+
+    inputFeature0.loadBuffer(preprocessImage(bitmap))
+
+
+    val outputs = modelObj.process(inputFeature0)
+    val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+    val outputArray = outputFeature0.floatArray
+    val maxConfidenceIndex = outputArray.indices.maxByOrNull { outputArray[it] } ?: 0
+
+    if(selectedObject == classes[maxConfidenceIndex])
+        resultScan = true
+
+    onResult(resultScan)
+}
+
+
+private fun preprocessImage(bitmap: Bitmap): ByteBuffer {
+    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+    val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
+    byteBuffer.order(ByteOrder.nativeOrder())
+
+    val intValue = IntArray(224 * 224)
+
+    resizedBitmap.getPixels(intValue, 0, resizedBitmap.width, 0, 0, resizedBitmap.width, resizedBitmap.height)
+
+    for (pixelValue in intValue) {
+        byteBuffer.putFloat((pixelValue shr 16 and 0xFF) * (1f / 255))
+        byteBuffer.putFloat((pixelValue shr 8 and 0xFF) * (1f / 255))
+        byteBuffer.putFloat((pixelValue and 0xFF) * (1f / 255))
+    }
+
+    return byteBuffer
+}
 data class PermissionState(
     val hasPermission: Boolean,
     val launchPermissionRequest: () -> Unit

@@ -1,6 +1,5 @@
 package com.gg.spora.challenge.ui
 
-import androidx.camera.core.ImageCapture
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,9 +49,9 @@ val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
  */
 @Composable
 fun ChallengeScreen(
-    modifier : Modifier = Modifier,
-    onBackClick : () -> Unit,
-    onNavigateToCameraScreen : () -> Unit,
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
+    onNavigateToCameraScreen: (Any?) -> Unit,
     challengeViewModel: ChallengeViewModel = viewModel()
 ) {
 
@@ -125,7 +124,7 @@ fun ChallengeScreen(
                                     .height(60.dp)
                                     .clickable {
                                         challengeViewModel.selectObject(nameObject)
-                                        onNavigateToCameraScreen()
+                                        onNavigateToCameraScreen(nameObject)
                                     },
                                 isValidate = it.value
                             )

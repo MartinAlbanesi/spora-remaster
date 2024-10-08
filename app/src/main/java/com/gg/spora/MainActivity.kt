@@ -9,15 +9,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.gg.spora.camera.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
@@ -122,19 +121,27 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        composable<NavigationRoutes.Camera> {
+                        composable(
+                            route = NavigationRoutes.Camera.route,
+                            arguments = listOf(navArgument("nameObject") { type = NavType.StringType })
+                        ) {
+                            val nameObject = it.arguments?.getString("nameObject") ?: ""
                             CameraScreen(
+                                nameObject = nameObject,
                                 onNavigateToChallengeScreen = {
                                     navController.navigate(NavigationRoutes.Challenge)
                                 }
                             )
                         }
+
                         composable<NavigationRoutes.Challenge> {
                             ChallengeScreen(
                                 modifier = Modifier,
                                 onBackClick = { },
-                                onNavigateToCameraScreen = {
-                                    navController.navigate(NavigationRoutes.Camera)
+                                onNavigateToCameraScreen = { nameObject ->
+                                    navController.navigate(NavigationRoutes.Camera.createRoute(
+                                        nameObject.toString()
+                                    ))
                                 }
                             )
                         }
