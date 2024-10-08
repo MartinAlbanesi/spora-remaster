@@ -1,16 +1,15 @@
 package com.gg.spora.quiz.ui
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
+import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
+import com.gg.spora.core.utils.enums.QuestionType
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
-import com.gg.spora.quiz.domain.Question
-import com.gg.spora.quiz.domain.QuestionType
+import com.gg.spora.quiz.domain.model.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
-
-const val MAX_QUESTIONS = 3
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
@@ -26,6 +25,18 @@ class QuizViewModel @Inject constructor(
     private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
 
+    private val _isCorrect = MutableStateFlow<Boolean?>(null)
+    val isCorrect = _isCorrect.asStateFlow()
+
+    private val _isFinished = MutableStateFlow(false)
+    val isFinished = _isFinished.asStateFlow()
+
+    private val _lives = MutableStateFlow(MAX_LIVES)
+    val lives = _lives.asStateFlow()
+
+    private val _counterQuestion = MutableStateFlow(0)
+    val counterQuestion = _counterQuestion.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -40,25 +51,46 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        val isCorrect  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
+                // si la respuesta es la correcta
                 if (it.id == answerId) {
                     it.copy(
-                        isCorrect = isCorrect,
-                        textColor = Color.White,
-                        backgroundColor = if (isCorrect) Color(0xff538c21) else Color(0xffb3261e)
+                        isCorrect = _isCorrect.value,
                     )
-                } else {
+                }
+                // si la respuesta es incorrecta
+                else {
                     it
                 }
             }
         )
+
+        if(_isCorrect.value == false) {
+            _lives.value--
+        }
     }
 
     fun nextQuestion() {
+        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1 || _lives.value <= 0) {
+            _isFinished.value = true
+            return
+        }
         _currentQuestionIndex.value++
+        _counterQuestion.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
+        _isCorrect.value = null
+    }
+
+    fun resetGame() {
+        _counterQuestion.value = 0
+        _currentQuestionIndex.value = 0
+        _lives.value = MAX_LIVES
+        _isFinished.value = false
+        _isCorrect.value = null
+        getRandomQuestions()
+        getCurrentQuestion()
     }
 
 }

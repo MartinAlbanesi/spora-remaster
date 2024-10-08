@@ -89,6 +89,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
@@ -120,4 +121,7 @@ dependencies {
     implementation(libs.tensorflow.support)
     implementation(libs.tensorflow.android)
     implementation(libs.tensorflow.metadata)
+
+    // Coil
+    implementation(libs.coil.compose)
 }

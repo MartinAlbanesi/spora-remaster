@@ -23,5 +23,9 @@ object NavigationRoutes {
     object Challenge
 
     @Serializable
+    object QuizImage
+
+
+    @Serializable
     object Camera
 }

@@ -32,8 +32,6 @@ import com.gg.spora.introduction.ui.components.SporaTextField
 import com.gg.spora.ui.theme.SporaTheme
 import kotlinx.coroutines.launch
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
@@ -202,9 +200,9 @@ fun IntroductionScreen3(modifier: Modifier, onClick: () -> Unit) {
             Column(
                 modifier = modifier.height(120.dp), verticalArrangement = Arrangement.SpaceBetween
             ) {
-                SporaPrimaryButton(modifier = modifier, text = "Crear cuenta") {
-                    /*Nav to Sign Up screen*/
-                }
+//                SporaPrimaryButton(modifier = modifier, text = "Crear cuenta") {
+//                    /*Nav to Sign Up screen*/
+//                }
 
                 SporaPrimaryInverseButton(
                     modifier = modifier, text = "Jugar como invitado", onClick = onClick

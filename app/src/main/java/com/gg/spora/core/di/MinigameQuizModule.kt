@@ -1,6 +1,7 @@
 package com.gg.spora.core.di
 
-import com.gg.spora.quiz.domain.FakeQuizLocalRepository
+
+import com.gg.spora.quiz.data.local.FakeQuizLocalRepository
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.IQuizLocalRepository
 import dagger.Module

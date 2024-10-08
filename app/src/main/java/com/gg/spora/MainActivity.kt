@@ -22,9 +22,13 @@ import com.gg.spora.camera.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
+import com.gg.spora.minigameQuizImage.ui.MinigameQuizImageScreen
+import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
+import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -45,7 +49,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome
+                        startDestination = NavigationRoutes.ForestStage
                     ) {
                         composable<NavigationRoutes.Welcome> {
                             WelcomeScreen(
@@ -75,6 +79,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onNavigateToChallenge = {
                                     navController.navigate(NavigationRoutes.Challenge)
+                                },
+                                onNavigateToQuizImage = {
+                                    navController.navigate(NavigationRoutes.QuizImage)
                                 }
                             )
                         }
@@ -84,21 +91,35 @@ class MainActivity : ComponentActivity() {
 
                             val currentQuestion by quizViewModel.currentQuestion.collectAsState()
 
+                            val isCorrect by quizViewModel.isCorrect.collectAsState()
+
+                            val isFinished by quizViewModel.isFinished.collectAsState()
+
+                            val lives by quizViewModel.lives.collectAsState()
+
+                            val counterQuestion by quizViewModel.counterQuestion.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
-                                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                                isCorrect = isCorrect,
+                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                isFinished = isFinished,
+                                lives = lives,
+                                counterQuestion = counterQuestion,
                                 onBackClick = { },
+                                onNextQuestion = quizViewModel::nextQuestion,
+                                onResetGame = quizViewModel::resetGame,
+                                onBackForestStage = { navController.popBackStack() },
                                 content = {
                                     QuizScreen(
                                         modifier = Modifier
                                             .fillMaxSize()
                                             .padding(16.dp),
+                                        isCorrect = isCorrect,
                                         questionTitle = currentQuestion!!.question,
                                         answerOptions = currentQuestion!!.answers,
-                                        answerQuestionId = currentQuestion!!.answer.id,
                                         onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                        onNextQuestion = quizViewModel::nextQuestion
                                     )
                                 }
                             )
@@ -119,9 +140,61 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        composable<NavigationRoutes.QuizImage> {
+                            val quizImageViewModel = hiltViewModel<QuizImageViewModel>()
+
+                            val currentImageQuestion by quizImageViewModel.currentQuestion.collectAsState()
+
+                            val isCorrect by quizImageViewModel.isCorrect.collectAsState()
+
+                            val currentImageResIdState by quizImageViewModel.currentImageResId.collectAsState()
+
+                            val isFinished by quizImageViewModel.isFinished.collectAsState()
+
+                            val lives by quizImageViewModel.lives.collectAsState()
+
+                            val counterQuestion by quizImageViewModel.counterQuestion.collectAsState()
+
+//                            MinigameQuizImageScreen(
+//                                modifier = Modifier
+//                                    .fillMaxSize()
+//                                    .padding(16.dp),
+//                                onBackClick = { },
+//                                questionTitle = currentImageQuestion!!.question,
+//                                answerOptions = currentImageQuestion!!.answers,
+//                                onAnswerSelected = quizImageViewModel::isAnswerCorrect,
+//                                onNextQuestion = quizImageViewModel::nextQuestion,
+//                                questionImageResId = quizImageViewModel.questionImageResId
+//                            )
+                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
+                                imageBackground = R.drawable.fondo_minijuegos,
+                                isCorrect = isCorrect,
+                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                isFinished = isFinished,
+                                lives = lives,
+                                counterQuestion = counterQuestion,
+                                onBackClick = { },
+                                onNextQuestion = quizImageViewModel::nextQuestion,
+                                onResetGame = quizImageViewModel::resetGame,
+                                onBackForestStage = { navController.popBackStack() },
+                                content = {
+                                    QuizImageScreen(
+                                        modifier = Modifier,
+                                        questionTitle = currentImageQuestion!!.question,
+                                        answerOptions = currentImageQuestion!!.answers,
+                                        currentImageResIdState = currentImageResIdState,
+                                        onAnswerSelected = quizImageViewModel::isAnswerCorrect,
+                                        onNextQuestion = quizImageViewModel::nextQuestion,
+                                    )
+                                }
+
+                            )
+                        }
+
                     }
                 }
             }
         }
     }
+
 }

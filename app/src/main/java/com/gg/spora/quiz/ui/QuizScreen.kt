@@ -1,67 +1,34 @@
 package com.gg.spora.quiz.ui
 
-import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.DefaultShadowColor
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.core.fake.FakeQuizModels
-import com.gg.spora.quiz.domain.Answer
+import com.gg.spora.core.ui.components.OptionItemButton
+import com.gg.spora.quiz.domain.model.Answer
 import com.gg.spora.ui.theme.SporaTheme
+
 
 @Composable
 fun QuizScreen(
     modifier: Modifier = Modifier,
     questionTitle: String,
-    answerQuestionId: String,
+    isCorrect: Boolean? = null,
     answerOptions: List<Answer>,
     onAnswerSelected: (String) -> Unit,
-    onNextQuestion: () -> Unit,
 ) {
-    var isSelectedAnswer by remember { mutableStateOf(false) }
-
-//    var textColor = mutableListOf(
-//        Color(0xff442801),
-//        Color(0xff442801),
-//        Color(0xff442801),
-//        Color(0xff442801),
-//    )
-//    var backgroundColor = mutableListOf(
-//        Color(0xFFffeacc),
-//        Color(0xFFffeacc),
-//        Color(0xFFffeacc),
-//        Color(0xFFffeacc),
-//    )
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -72,72 +39,18 @@ fun QuizScreen(
             textAlign = TextAlign.Center,
         )
         answerOptions.forEach { answer ->
-            AnswerItem(
-                answer = answer.answer,
-//                isCorrect = answer.isCorrect,
-                textColor = answer.textColor,
-                backgroundColor = answer.backgroundColor,
+            OptionItemButton(
+                textItem = answer.answer,
+                isCorrect = answer.isCorrect,
+                enabled = isCorrect == null,
                 modifier = Modifier
-                    .shadow(
-                        elevation = 4.dp,
-                        shape = MaterialTheme.shapes.large,
-                    )
                     .fillMaxWidth()
                     .clip(MaterialTheme.shapes.large)
                     .height(60.dp)
-                    .clickable {
-                        isSelectedAnswer = true
-                        onAnswerSelected(answer.id)
-                    }
-            )
+            ){
+                onAnswerSelected(answer.id)
+            }
         }
-        Button(
-            enabled = isSelectedAnswer,
-            onClick = {
-                onNextQuestion()
-                isSelectedAnswer = false
-            },
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White,
-                containerColor = Color(0xFFf58c0a),
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-        ) {
-            Text(
-                text = "Continuar",
-                color = Color.White,
-            )
-        }
-    }
-}
-
-@Composable
-fun AnswerItem(
-    modifier: Modifier = Modifier,
-    answer: String,
-    textColor: Color,
-    backgroundColor: Color,
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .background(backgroundColor)
-            .padding(horizontal = 16.dp)
-    ) {
-        Text(
-            text = answer,
-            color = textColor,
-        )
-        Icon(
-            imageVector = Icons.Default.CheckCircle,
-            tint = textColor,
-            modifier = Modifier.size(40.dp),
-            contentDescription = Icons.Default.CheckCircle.name,
-        )
-
     }
 }
 
@@ -156,9 +69,7 @@ private fun MinigameQuizScreenPreview() {
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 questionTitle = "¿Cuál es la capital de España?",
                 answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
-                answerQuestionId = "2",
                 onAnswerSelected =  {},
-                onNextQuestion = {}
             )
         }
     }

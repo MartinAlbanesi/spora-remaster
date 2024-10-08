@@ -21,33 +21,38 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun SporaPrimaryButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun SporaPrimaryButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit
+) {
 
     Button(
         onClick = { onClick() },
-        modifier = modifier.size(width = 350.dp, height = 50.dp),
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-        elevation = ButtonDefaults.buttonElevation(5.dp),
         shape = ButtonDefaults.elevatedShape
     ) {
-        Text(text = text, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+        Text(text = text, fontWeight = FontWeight.Bold)
     }
 }
 
 @Composable
-fun SporaPrimaryInverseButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun SporaPrimaryInverseButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit
+) {
 
     Button(
         onClick = onClick,
-        modifier = modifier.size(width = 350.dp, height = 50.dp),
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.background),
-        elevation = ButtonDefaults.buttonElevation(5.dp),
         shape = ButtonDefaults.elevatedShape,
         border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
     ) {
         Text(
             text = text,
-            fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
