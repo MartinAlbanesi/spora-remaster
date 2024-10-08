@@ -1,11 +1,12 @@
 package com.gg.spora.core.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -16,8 +17,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,11 +54,12 @@ fun TopAppBarWithDualIcon(
             ),
             title = {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround
+                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp).align(Alignment.TopCenter),
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    ImageWithTextHorizontal(image = firstIcon, text = firstLabel)
-                    ImageWithTextHorizontal(image = secondIcon, text = secondLabel)
+                    ImageWithTextHorizontal(imageResource = firstIcon, text = firstLabel)
+                    Spacer(Modifier.size(50.dp))
+                    ImageWithTextHorizontal(imageResource = secondIcon, text = secondLabel)
                 }
             },
             navigationIcon = {
@@ -71,12 +73,6 @@ fun TopAppBarWithDualIcon(
                 }
             },
             modifier = modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color.Black, Color.Transparent)
-                    )
-                )
-                .height(100.dp),
         )
     }
 }
@@ -89,9 +85,9 @@ fun TopAppBarPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             TopAppBarWithDualIcon(
-                firstLabel = "12",
+                firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
-                secondLabel = "465",
+                secondLabel = "0",
                 secondIcon = R.drawable.o2_icon,
                 showBackArrow = false,
             )
