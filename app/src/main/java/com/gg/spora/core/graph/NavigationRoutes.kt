@@ -2,16 +2,21 @@ package com.gg.spora.core.graph
 
 import kotlinx.serialization.Serializable
 
-object NavigationRoutes {
+sealed class NavigationRoutes {
 
     @Serializable
     object Home
 
     @Serializable
-    object ForestStage
+    data class ForestStage(
+        val oxygen: Int,
+//        val background: Int,
+    )
 
     @Serializable
-    object QuizGame
+    data class QuizGame(
+        val title: String
+    ): NavigationRoutes()
 
     @Serializable
     object Welcome
@@ -20,10 +25,19 @@ object NavigationRoutes {
     object Grove
 
     @Serializable
-    object Challenge
+    data class Challenge(
+        val title: String
+    ): NavigationRoutes()
 
     @Serializable
-    object QuizImage
+    data class QuizImage(
+        val title: String
+    ): NavigationRoutes()
+
+    @Serializable
+    data class RelationsGame(
+        val title: String
+    ): NavigationRoutes()
 
 
 }

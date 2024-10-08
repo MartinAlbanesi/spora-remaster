@@ -1,0 +1,143 @@
+package com.gg.spora.forestStage.ui
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.gg.spora.R
+import com.gg.spora.core.fake.FakeLevelModels
+import com.gg.spora.core.ui.components.LevelStageItem
+import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
+import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.core.utils.enums.QuestionType
+import com.gg.spora.forestStage.domain.model.Level
+import com.gg.spora.ui.theme.SporaTheme
+
+@Composable
+fun StageScreen(
+    modifier: Modifier = Modifier,
+    oxygen: Int,
+    levels: List<Level>,
+    onNavigateToQuizGame: (String) -> Unit,
+    onNavigateToChallenge: (String) -> Unit,
+    onNavigateToQuizImage: (String) -> Unit,
+    onNavigateToRelationsGame: (String) -> Unit,
+    onClickLevelItem: (Level, Boolean, QuestionType) -> Unit,
+    popBackStack: () -> Unit,
+) {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBarWithO2Icon(
+                title = "Área del Bosque",
+                firstLabel = oxygen.toString(),
+                firstIcon = R.drawable.o2,
+                showBackArrow = true,
+                onBackClick = {
+                    popBackStack()
+                },
+            )
+        }
+    ) { paddingValue ->
+
+        Box(modifier = Modifier.fillMaxSize()) {
+
+
+            Image(
+                painter = painterResource(id = R.drawable.fondo_area1),
+                contentDescription = "Area 1 background",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.matchParentSize()
+            )
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValue),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(40.dp),
+            ) {
+                itemsIndexed(
+                    levels,
+                    key = { _, level -> level.id }
+                ) { index, level ->
+                    val navigateGame = when (level.questionType) {
+                        QuestionType.QUIZ -> QuestionType.QUIZ
+                        QuestionType.RELATIONS -> QuestionType.RELATIONS
+                        QuestionType.QUIZ_IMAGE -> QuestionType.QUIZ_IMAGE
+                        QuestionType.CHALLENGE -> QuestionType.CHALLENGE
+                    }
+                    LevelStageItem(
+                        itemNumber = level.id,
+                        starsState = level.starState,
+                        isChallenge = level.questionType == QuestionType.CHALLENGE,
+                        stage = level.stageType,
+//                        rewards = level.rewardsOxygen,
+                        modifier = Modifier
+                            .offset(x = SporaConstant.PATH_LADDER[index].dp)
+                            .clickable {
+//                                navigateGame("${level.levelName} - ${level.stageType.label}")
+//                                showLevelPreview = true
+                                onClickLevelItem(level, true, navigateGame)
+                            }
+                    )
+
+//                    LevelPreview(
+//                        isVisible = showLevelPreview,
+//                        backgroundImage = R.drawable.fondo_minijuegos_crop,
+//                        level = level,
+//                        onClickPrimaryButton = {
+//                            navigateGame()
+//                        },
+//                        onClickSecondaryButton = {
+//                            showLevelPreview = false
+//                        },
+//                    )
+                }
+            }
+
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun StageScreenPreview() {
+    SporaTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            StageScreen(
+                oxygen = 0,
+                levels = FakeLevelModels.fakeLevels,
+                onNavigateToQuizGame = {},
+                onNavigateToChallenge = {},
+                onNavigateToQuizImage = {},
+                popBackStack = {},
+                onNavigateToRelationsGame = {},
+                onClickLevelItem = {_, _ , _-> }
+
+            )
+        }
+    }
+}

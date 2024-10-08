@@ -21,33 +21,41 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun SporaPrimaryButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun SporaPrimaryButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    textSize: Int = 26,
+    onClick: () -> Unit
+) {
 
     Button(
         onClick = { onClick() },
-        modifier = modifier.size(width = 350.dp, height = 50.dp),
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-        elevation = ButtonDefaults.buttonElevation(5.dp),
         shape = ButtonDefaults.elevatedShape
     ) {
-        Text(text = text, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+        Text(text = text, fontSize = textSize.sp, fontWeight = FontWeight.Bold)
     }
 }
 
 @Composable
-fun SporaPrimaryInverseButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun SporaPrimaryInverseButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    textSize: Int = 26,
+    onClick: () -> Unit
+) {
 
     Button(
         onClick = onClick,
-        modifier = modifier.size(width = 350.dp, height = 50.dp),
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.background),
-        elevation = ButtonDefaults.buttonElevation(5.dp),
         shape = ButtonDefaults.elevatedShape,
         border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
     ) {
         Text(
             text = text,
-            fontSize = 26.sp,
+            fontSize = textSize.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
@@ -55,7 +63,12 @@ fun SporaPrimaryInverseButton(modifier: Modifier = Modifier, text: String, onCli
 }
 
 @Composable
-fun SporaSecondaryButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun SporaSecondaryButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    textSize: Int = 26,
+    onClick: () -> Unit
+) {
 
     Button(
         onClick = onClick,
@@ -66,7 +79,7 @@ fun SporaSecondaryButton(modifier: Modifier = Modifier, text: String, onClick: (
     ) {
         Text(
             text = text,
-            fontSize = 26.sp,
+            fontSize = textSize.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSecondary
         )
@@ -86,7 +99,9 @@ fun SporaPrimaryButtonPreview() {
             SporaPrimaryButton(
                 modifier = Modifier.align(Alignment.Center),
                 text = "Continuar",
-                onClick = {})
+                onClick = {},
+                textSize = 26
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -122,6 +137,7 @@ fun SporaPrimaryButtonPreview() {
 fun SporaInverseSecondaryButton(
     modifier: Modifier,
     text: String = "Continuar",
+    textSize: Int = 26,
     onClick: () -> Unit
 ) {
 
@@ -136,7 +152,7 @@ fun SporaInverseSecondaryButton(
 
         Text(
             text = text,
-            fontSize = 26.sp,
+            fontSize = textSize.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.secondary
         )

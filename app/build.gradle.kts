@@ -91,6 +91,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
@@ -122,4 +123,12 @@ dependencies {
     implementation(libs.tensorflow.support)
     implementation(libs.tensorflow.android)
     implementation(libs.tensorflow.metadata)
+
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 }
