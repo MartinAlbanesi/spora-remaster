@@ -52,12 +52,7 @@ fun WelcomeScreen(
     })
 
     Box(modifier = modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
-            contentDescription = "Area 1 background",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
-        )
+
             HorizontalPager(
                 state = pagerState,
                 modifier = modifier,
