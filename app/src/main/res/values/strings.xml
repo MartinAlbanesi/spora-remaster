@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Spora</string>
     <string name="title_challenge">Desafío</string>
+    <string name="label_challenge">Escanea los objetos de la lista con tu cámara para finalizar el desafío.</string>
 </resources>
