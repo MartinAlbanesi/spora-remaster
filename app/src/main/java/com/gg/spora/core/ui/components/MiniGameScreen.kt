@@ -1,5 +1,6 @@
 package com.gg.spora.core.ui.components
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -87,9 +88,12 @@ fun MiniGameScreen(
         )
     }
 
+    BackHandler {
+        showDialogConfirm = true
+    }
+
     ChampyDialogConfirm(
-//        modifier = Modifier.fillMaxSize(),
-        backgroundImage = imageBackground,
+        backgroundImage = R.drawable.fondo_minijuegos_crop,
         isVisible = showDialogConfirm,
         onConfirmRequest = {
             showDialogConfirm = false
