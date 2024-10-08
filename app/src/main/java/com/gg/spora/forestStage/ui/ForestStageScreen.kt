@@ -34,7 +34,8 @@ fun ForestStageScreen(
     oxygen: Int,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {}
+    onNavigateToQuizImage: () -> Unit = {},
+    popBackStack: () -> Unit = {}
 ) {
 
     Scaffold(
@@ -45,7 +46,9 @@ fun ForestStageScreen(
                 firstLabel = oxygen.toString(),
                 firstIcon = R.drawable.o2,
                 showBackArrow = true,
-                onBackClick = {},
+                onBackClick = {
+                    popBackStack()
+                },
             )
         }
     ) { paddingValue ->

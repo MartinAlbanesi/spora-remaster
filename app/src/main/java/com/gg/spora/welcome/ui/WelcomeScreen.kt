@@ -283,7 +283,7 @@ fun GuestEnterNameScreen(
                 SporaPrimaryButton(
                     modifier.size(width = 350.dp, height = 50.dp),
                     "Siguente",
-                    textSize = 30,
+                    textSize = 32,
                     onClick = onClick
                 )
 
@@ -324,7 +324,7 @@ fun ChampyTalkGuestScreen(
             SporaPrimaryButton(
                 modifier = modifier.size(width = 350.dp, height = 50.dp),
                 text = "Comenzar",
-                textSize = 30
+                textSize = 32
             ) {
                 onClick()
             }

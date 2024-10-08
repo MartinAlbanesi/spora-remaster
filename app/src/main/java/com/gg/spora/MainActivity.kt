@@ -25,11 +25,11 @@ import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
+import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +37,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
         setContent {
             SporaTheme {
                 Surface(
@@ -61,7 +60,6 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(NavigationRoutes.Home)
                                 },
                                 setGuestName = {welcomeViewModel.setGuestName(it)},
-                                //welcomeViewModel = welcomeViewModel
                             )
                         }
 
@@ -88,6 +86,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onNavigateToQuizImage = {
                                     navController.navigate(NavigationRoutes.QuizImage)
+                                },
+                                popBackStack = {
+                                    navController.popBackStack()
                                 }
                             )
                         }
