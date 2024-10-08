@@ -4,6 +4,8 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -15,12 +17,12 @@ fun screenFadeWithSlideInToLeft(scope: AnimatedContentTransitionScope<NavBackSta
     return scope.run {
         fadeIn(
             animationSpec = tween(
-                300, easing = LinearEasing
+                250, easing = FastOutLinearInEasing
             )
         ) +
                 slideIntoContainer(
-                    animationSpec = tween(300, easing = EaseIn),
-                    towards = AnimatedContentTransitionScope.SlideDirection.Start
+                    animationSpec = tween(250, easing = FastOutLinearInEasing),
+                    towards = AnimatedContentTransitionScope.SlideDirection.Up
                 )
     }
 }
@@ -29,12 +31,12 @@ fun screenFadeWithSlideOutToRight(scope: AnimatedContentTransitionScope<NavBackS
     return scope.run {
         fadeOut(
             animationSpec = tween(
-                300, easing = LinearEasing
+                250, easing = FastOutLinearInEasing
             )
         ) +
                 slideOutOfContainer(
-                    animationSpec = tween(300, easing = EaseIn),
-                    towards = AnimatedContentTransitionScope.SlideDirection.End
+                    animationSpec = tween(250, easing = FastOutLinearInEasing),
+                    towards = AnimatedContentTransitionScope.SlideDirection.Down,
                 )
     }
 }
