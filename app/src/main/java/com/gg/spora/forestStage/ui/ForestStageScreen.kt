@@ -35,9 +35,8 @@ fun ForestStageScreen(
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
     onNavigateToQuizImage: () -> Unit = {},
-    popBackStack: () -> Unit = {}
-    onNavigateToQuizImage: () -> Unit = {},
-    onNavigateToRelationsGame: () -> Unit = {}
+    onNavigateToRelationsGame: () -> Unit = {},
+    popBackStack: () -> Unit = {},
 ) {
 
     Scaffold(
@@ -95,7 +94,7 @@ fun ListOfLevels(
             .fillMaxWidth()
             .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(40.dp),
     ) {
 
         LevelStage(
@@ -107,51 +106,29 @@ fun ListOfLevels(
                 onNavigateToQuizGame()
             }
         )
-        Spacer(modifier = Modifier.height(40.dp))
 
         LevelStage(
             2,
             0,
             false,
             stage,
-            modifier.offset(x = (-10).dp).clickable {
-                onNavigateToQuizImage()
-            }
+            modifier
+                .offset(x = (-10).dp)
+                .clickable {
+                    onNavigateToQuizImage()
+                }
         )
-
-        Spacer(modifier = Modifier.height(20.dp))
-        LevelStage(
-            3,
-            0,
-            true,
-            stage,
-            modifier.offset(x = (-10).dp).clickable {
-                onNavigateToRelationsGame()
-            }
-        )
-
-//        Spacer(modifier = Modifier.height(20.dp))
-
-//        LevelStage(
-//            2,
-//            0,
-//            true,
-//            stage,
-//            modifier.offset(x = 25.dp)
-//        )
-        Spacer(modifier = Modifier.height(40.dp))
-
         LevelStage(
             3,
             0,
             false,
             stage,
-            modifier.offset(x = (40).dp).clickable {
-                /*Nav to minigame 3*/
-            }
+            modifier
+                .offset(x = (30).dp)
+                .clickable {
+                    onNavigateToRelationsGame()
+                }
         )
-
-        Spacer(modifier = Modifier.height(40.dp))
 
         LevelChallenge(
             modifier

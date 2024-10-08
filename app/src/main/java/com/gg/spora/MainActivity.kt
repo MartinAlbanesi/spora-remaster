@@ -25,8 +25,6 @@ import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
-import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
@@ -50,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.ForestStage,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -61,9 +59,13 @@ class MainActivity : ComponentActivity() {
                             val welcomeViewModel = hiltViewModel<WelcomeViewModel>()
                             WelcomeScreen(
                                 onNavigateToHome = {
-                                    navController.navigate(NavigationRoutes.Home)
+                                    navController.navigate(NavigationRoutes.Home) {
+                                        popUpTo(NavigationRoutes.Welcome) {
+                                            inclusive = true
+                                        }
+                                    }
                                 },
-                                setGuestName = {welcomeViewModel.setGuestName(it)},
+                                setGuestName = { welcomeViewModel.setGuestName(it) },
                             )
                         }
 
@@ -211,7 +213,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable<NavigationRoutes.RelationsGame> {
-                            MinigameRelationsScreen(){
+                            MinigameRelationsScreen() {
 
                             }
                         }
