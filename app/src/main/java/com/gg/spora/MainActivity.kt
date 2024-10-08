@@ -20,7 +20,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.gg.spora.camera.CameraScreen
 import androidx.navigation.toRoute
-import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
@@ -30,7 +29,6 @@ import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
@@ -173,6 +171,9 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(NavigationRoutes.Camera.createRoute(
                                         nameObject.toString()
                                     ))
+                                },
+                                onNavigateToForestStage = {
+                                    navController.navigate(NavigationRoutes.ForestStage(0))
                                 },
                                 challengeViewModel = challengeViewModel
                             )

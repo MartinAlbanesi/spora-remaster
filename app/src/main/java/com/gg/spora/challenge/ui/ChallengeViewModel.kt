@@ -33,8 +33,6 @@ class ChallengeViewModel @Inject constructor() : ViewModel () {
         _objectsChallenge.value = mutableMapOf(
             "Botella de plastico" to false,
             "Caja de carton" to false,
-            "Papel y Cartón" to false,
-            "Envases de Plástico" to false,
         )
     }
 
