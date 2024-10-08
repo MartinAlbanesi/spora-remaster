@@ -69,7 +69,6 @@ class MainActivity : ComponentActivity() {
                                 setGuestName = { welcomeViewModel.setGuestName(it) },
                             )
                         }
-
                         composable<NavigationRoutes.Home> {
                             HomeScreen(
                                 onNavigateToForestStage = {
@@ -77,14 +76,12 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-
                         composable<NavigationRoutes.Grove> {
 
                         }
-
                         composable<NavigationRoutes.ForestStage> { backStackEntry ->
 
-                            val oxygen =  backStackEntry.toRoute<NavigationRoutes.ForestStage>()
+                            val oxygen = backStackEntry.toRoute<NavigationRoutes.ForestStage>()
 
 
                             ForestStageScreen(
@@ -180,17 +177,6 @@ class MainActivity : ComponentActivity() {
 
                             val counterQuestion by quizImageViewModel.counterQuestion.collectAsState()
 
-//                            MinigameQuizImageScreen(
-//                                modifier = Modifier
-//                                    .fillMaxSize()
-//                                    .padding(16.dp),
-//                                onBackClick = { },
-//                                questionTitle = currentImageQuestion!!.question,
-//                                answerOptions = currentImageQuestion!!.answers,
-//                                onAnswerSelected = quizImageViewModel::isAnswerCorrect,
-//                                onNextQuestion = quizImageViewModel::nextQuestion,
-//                                questionImageResId = quizImageViewModel.questionImageResId
-//                            )
                             MiniGameScreen(modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 isCorrect = isCorrect,
@@ -211,16 +197,27 @@ class MainActivity : ComponentActivity() {
                                         onNextQuestion = quizImageViewModel::nextQuestion,
                                     )
                                 }
-
                             )
                         }
-
                         composable<NavigationRoutes.RelationsGame> {
-                            MinigameRelationsScreen() {
+                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
+                                imageBackground = R.drawable.fondo_minijuegos,
+                                isCorrect = null, // <- Cambiar por tu variable de estado
+                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                isFinished = false, // <- Cambiar por tu variable de estado
+                                lives = 5, // <- Cambiar por tu variable de estado
+                                counterQuestion = 0, // <- Cambiar por tu variable de estado
+                                onNextQuestion = { /* Ingresar logica de siguiente */ },
+                                onResetGame = { /* Ingresar logica de reset */ },
+                                onBackForestStage = { navController.popBackStack() },
+                                content = {
+                                    MinigameRelationsScreen() {
 
-                            }
+                                    }
+                                }
+                            )
+
                         }
-
                     }
                 }
             }
