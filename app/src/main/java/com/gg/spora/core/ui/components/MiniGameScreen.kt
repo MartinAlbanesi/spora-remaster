@@ -136,6 +136,7 @@ fun MiniGameScreen(
             ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),
                 champyImage = champyImage,
+                isCorrect = isCorrect,
             ) {
                 content()
             }

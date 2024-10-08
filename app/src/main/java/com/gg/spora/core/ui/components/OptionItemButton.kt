@@ -1,5 +1,6 @@
 package com.gg.spora.core.ui.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,17 +29,23 @@ fun OptionItemButton(
     onAnswerSelected: () -> Unit,
 ) {
 
-    val textColor = when(isCorrect){
-        true -> Color.White
-        false -> Color.White
-        null -> Color(0xff442801)
-    }
+    val textColor by animateColorAsState(
+        when (isCorrect) {
+            true -> Color.White
+            false -> Color.White
+            null -> Color(0xff442801)
+        }, label = "textColor"
+    )
 
-    val backgroundColor = when(isCorrect){
-        true -> Color(0xff538c21)
-        false -> Color(0xffb3261e)
-        null -> Color(0xFFffeacc)
-    }
+    val backgroundColor by animateColorAsState(
+        when (isCorrect) {
+            true -> Color(0xff538c21)
+            false -> Color(0xffb3261e)
+            null -> Color(0xFFffeacc)
+        },
+        label = "backgroundColor"
+    )
+
     Button(
         onClick = onAnswerSelected,
         enabled = enabled,
@@ -68,25 +76,6 @@ fun OptionItemButton(
 
         }
     }
-//    Row(
-//        horizontalArrangement = Arrangement.SpaceBetween,
-//        verticalAlignment = Alignment.CenterVertically,
-//        modifier = modifier
-//            .background(backgroundColor)
-//            .padding(horizontal = 16.dp)
-//    ) {
-//        Text(
-//            text = textItem,
-//            color = textColor,
-//        )
-//        Icon(
-//            imageVector = Icons.Default.CheckCircle,
-//            tint = textColor,
-//            modifier = Modifier.size(40.dp),
-//            contentDescription = Icons.Default.CheckCircle.name,
-//        )
-//
-//    }
 }
 
 @Preview
@@ -102,18 +91,18 @@ private fun OptionItemButtonPreview() {
             textItem = "Option 1",
             isCorrect = true,
             enabled = true
-        ){}
+        ) {}
         OptionItemButton(
             modifier = Modifier.fillMaxWidth(),
             textItem = "Option 2",
             isCorrect = false,
             enabled = true
-        ){}
+        ) {}
         OptionItemButton(
             modifier = Modifier.fillMaxWidth(),
             textItem = "Option 3",
             isCorrect = null,
             enabled = true
-        ){}
+        ) {}
     }
 }
