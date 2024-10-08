@@ -106,8 +106,9 @@ fun QuizImageScreen(
     isCorrect: Boolean? = null,
     answerOptions: List<AnswerImage>,
     currentImageResIdState: Int,
-    onAnswerSelected : (String) -> Unit,
+    onAnswerSelected: (String) -> Unit,
     onNextQuestion: () -> Unit,
+    areOptionsEnabled: Boolean
 ) {
 
     var isAnswerSelected by remember { mutableStateOf(false) }
@@ -156,22 +157,25 @@ fun QuizImageScreen(
             OptionItemButton(
                 textItem = answer.answer,
                 isCorrect = answer.isCorrect,
-                enabled =  true,
+                //enabled =  true,
+                enabled = areOptionsEnabled, //BORRAR SI NO FUNCIONA
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
                     .clip(MaterialTheme.shapes.large)
                     .height(50.dp)
-                    .clickable(enabled = !isAnswerSelected) {
-                       isAnswerSelected = true
+                    .clickable {
+
+                        isAnswerSelected = true
 
                     }
-            ){
+            )
+            {
                 onAnswerSelected(answer.id)
             }
         }
         Spacer(modifier = Modifier.weight(0.05f))
-        if(isAnswerSelected){
+        if (isAnswerSelected) {
             SporaPrimaryButton(
                 modifier = Modifier
                     .padding(top = 8.dp)
@@ -183,8 +187,7 @@ fun QuizImageScreen(
 
                 }
             )
-        }
-        else{
+        } else {
         }
 
     }
