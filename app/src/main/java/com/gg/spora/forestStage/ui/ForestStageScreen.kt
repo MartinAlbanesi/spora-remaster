@@ -26,7 +26,7 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.LevelChallenge
 import com.gg.spora.core.ui.components.LevelStage
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
-import com.gg.spora.forestStage.domain.TypeStage
+import com.gg.spora.forestStage.domain.model.TypeLevel
 
 @Composable
 fun ForestStageScreen(
@@ -67,7 +67,7 @@ fun ForestStageScreen(
             ListOfLevels(
                 modifier = Modifier,
                 paddingValues = paddingValue,
-                stage = TypeStage.FOREST,
+                stage = TypeLevel.FOREST,
                 onNavigateToQuizGame = onNavigateToQuizGame,
                 onNavigateToChallenge = onNavigateToChallenge,
                 onNavigateToQuizImage = onNavigateToQuizImage,
@@ -82,7 +82,7 @@ fun ForestStageScreen(
 fun ListOfLevels(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
-    stage: TypeStage,
+    stage: TypeLevel,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
     onNavigateToQuizImage: () -> Unit = {},
