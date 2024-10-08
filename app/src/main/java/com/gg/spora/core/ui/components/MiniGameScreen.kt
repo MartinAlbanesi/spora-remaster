@@ -17,6 +17,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,13 +53,12 @@ fun MiniGameScreen(
     lives: Int,
     counterQuestion: Int,
     isFinished: Boolean = false,
-    onBackClick: () -> Unit,
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    val champyImage = when(isCorrect){
+    val champyImage = when (isCorrect) {
         true -> R.drawable.champy_celebrando_brazoslevantados
         false -> R.drawable.champy_triste_brazosalcuerpo
         else -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
@@ -66,7 +69,9 @@ fun MiniGameScreen(
         label = "progressIndicator",
     )
 
-    if(isFinished){
+    var showDialogConfirm by rememberSaveable { mutableStateOf(false) }
+
+    if (isFinished) {
         GameResultPopUp(
             isVisible = true,
             backgroundImage = R.drawable.fondo_minijuegos_crop,
@@ -76,12 +81,24 @@ fun MiniGameScreen(
                 onBackForestStage()
             },
             onClickSecondaryButton = {
-//                if (lives <= 0){
-                    onResetGame()
-//                }
+                onResetGame()
             },
         )
     }
+
+    ChampyDialogConfirm(
+//        modifier = Modifier.fillMaxSize(),
+        backgroundImage = imageBackground,
+        isVisible = showDialogConfirm,
+        onConfirmRequest = {
+            showDialogConfirm = false
+            onBackForestStage()
+        },
+        onDismissRequest = {
+            showDialogConfirm = false
+        }
+    )
+
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -92,14 +109,16 @@ fun MiniGameScreen(
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                    .offset(y = (-360).dp)
+                .offset(y = (-360).dp)
         )
         Column(
             modifier = modifier
         ) {
             TopBarWithTitleExitAndIcon(
                 title = "Mini Game",
-                onBackClick = onBackClick,
+                onBackClick = {
+                    showDialogConfirm = true
+                },
                 lives = lives,
             )
             LinearProgressIndicator(
@@ -123,7 +142,6 @@ fun MiniGameScreen(
         Button(
             enabled = isCorrect != null,
             onClick = {
-//                counterQuestion++
                 onNextQuestion()
             },
             colors = ButtonDefaults.buttonColors(
@@ -161,13 +179,14 @@ private fun MiniGameScreenPreview() {
                 questionSize = 5,
                 lives = 5,
                 counterQuestion = 0,
-                onBackClick = { },
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = {},
                 content = {
                     QuizScreen(
-                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                         questionTitle = "¿Qué tipo de residuo debe depositarse en el contenedor verde?",
                         answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
                         onAnswerSelected = { },

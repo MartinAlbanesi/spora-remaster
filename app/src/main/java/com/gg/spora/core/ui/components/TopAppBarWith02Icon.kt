@@ -74,7 +74,7 @@ fun TopAppBarWithO2Icon(
                     )
 
                     ImageWithTextHorizontal(
-                        image = firstIcon,
+                        imageResource = firstIcon,
                         text = firstLabel
                     )
 
