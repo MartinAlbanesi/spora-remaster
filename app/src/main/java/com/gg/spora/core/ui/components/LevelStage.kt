@@ -2,14 +2,15 @@ package com.gg.spora.core.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.ui.theme.SporaTheme
 
 /**
  * Icon for levels with image and number
@@ -29,109 +32,86 @@ import com.gg.spora.core.utils.enums.StageType
  * @param onClick: Lambda to be executed when the level is clicked
  */
 
-
 @Composable
-fun LevelStage(
-    number: Int,
-    stars: Int,
-    blocked: Boolean = false,
-    stage: StageType,
+fun LevelStageItem(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    itemNumber: Int,
+    starsState: StarState,
+    stage: StageType,
+    isChallenge: Boolean,
+//    rewards: List<Int>
 ) {
 
+    val stageImage = when (stage) {
+        StageType.FOREST -> R.drawable.stage_forest_minigames
+        StageType.DESERT -> 1
+        StageType.RIVER -> 2
+        else -> R.drawable.stage_forest_minigames
+    }
 
-    Box(modifier = modifier) {
+    val challengeImage = when (stage) {
+        StageType.FOREST -> R.drawable.chanllenger_icon
+        StageType.DESERT -> 1
+        StageType.RIVER -> 2
+        else -> R.drawable.nivel_desafio
+    }
 
-        if (blocked) {
+    val levelImageSelected = if (isChallenge) challengeImage else stageImage
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+    ) {
+        Image(
+            painter = painterResource(levelImageSelected),
+            contentDescription = "Level Item",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .size(100.dp)
+        )
+        if (!isChallenge) {
+            Text(
+                text = itemNumber.toString(),
+                color = Color.Black,
+                fontWeight = FontWeight.Black,
+                fontSize = 44.sp,
+            )
+        } else {
             Image(
-                painter = painterResource(id = R.drawable.nivel_bloqueado),
-                contentDescription = "Level blocked",
+                painter = painterResource(R.drawable.crown_icon),
+                contentDescription = "Challenge Icon",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-//                    .padding(end = 70.dp)
-                    .size(100.dp)
+                    .size(64.dp)
             )
-        } else
-            when (stage) {
-
-                StageType.FOREST ->
-                    when (stars) {
-                        0 -> Image(
-                            painter = painterResource(id = R.drawable.nivel_bosque_0e),
-                            contentDescription = "Forest level without stars",
-                            contentScale = ContentScale.FillBounds,
-                            modifier = Modifier
-//                                .padding(end = 70.dp)
-                                .size(100.dp)
-                        )
-
-                        1 -> Image(
-                            painter = painterResource(id = R.drawable.nivel_bosque_1e),
-                            contentDescription = "Forest level with 1 star",
-                            contentScale = ContentScale.FillBounds,
-                            modifier = Modifier
-//                                .padding(end = 70.dp)
-                                .size(100.dp)
-                        )
-
-                        2 -> Image(
-                            painter = painterResource(id = R.drawable.nivel_bosque_2e),
-                            contentDescription = "Forest level with 2 stars",
-                            contentScale = ContentScale.FillBounds,
-                            modifier = Modifier
-//                                .padding(end = 70.dp)
-                                .size(100.dp)
-                        )
-
-                        3 -> Image(
-                            painter = painterResource(id = R.drawable.nivel_bosque_3e),
-                            contentDescription = "Forest level with 3 stars",
-                            contentScale = ContentScale.FillBounds,
-                            modifier = Modifier
-//                                .padding(end = 70.dp)
-                                .size(100.dp)
-                        )
-
-                        else -> Image(
-                            painter = painterResource(id = R.drawable.nivel_bosque_0e),
-                            contentDescription = "Forest level without stars",
-                            contentScale = ContentScale.FillBounds,
-                            modifier = Modifier
-//                                .padding(end = 70.dp)
-                                .size(100.dp)
-                        )
-                    }
-
-                StageType.DESERT -> TODO()
-                StageType.RIVER -> TODO()
-                else -> TODO()
-            }
-
-        if (!blocked) {
-            Text(
-                text = number.toString(),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Black,
-                fontSize = 35.sp,
+        }
+        if (!isChallenge) {
+            StarsGroup(
+                starState = starsState,
                 modifier = Modifier
-                    .align(Alignment.Center)
-                    .offset(y = (-10).dp)
+                    .align(Alignment.BottomCenter)
             )
         }
     }
+
 }
 
+@Preview(showSystemUi = true)
 @Composable
-@Preview(showBackground = true)
-fun PreviewIconLevelStage() {
-    LevelStage(
-        number = 1,
-        stars = 0,
-        blocked = false,
-        stage = StageType.FOREST,
-    ) {
-        /*Nav to level*/
+private fun LevelStageItemPreview() {
+    SporaTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            LevelStageItem(
+                modifier = Modifier,
+                itemNumber = 1,
+                starsState = StarState.STAR_ZERO,
+                stage = StageType.FOREST,
+                isChallenge = false,
+//                rewards = listOf(10, 20, 30)
+            )
+        }
     }
-
 }

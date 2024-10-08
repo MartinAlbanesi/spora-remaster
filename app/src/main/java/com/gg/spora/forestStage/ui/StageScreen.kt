@@ -4,16 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,24 +20,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.LevelChallenge
-import com.gg.spora.core.ui.components.LevelStage
+import com.gg.spora.core.fake.FakeLevelModels
+import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.QuestionType
-import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.domain.model.Level
+import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun StageScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     levels: List<Level>,
-    onNavigateToQuizGame: () -> Unit = {},
-    onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {},
-    onNavigateToRelationsGame: () -> Unit = {},
-    popBackStack: () -> Unit = {},
+    onNavigateToQuizGame: () -> Unit,
+    onNavigateToChallenge: () -> Unit,
+    onNavigateToQuizImage: () -> Unit,
+    onNavigateToRelationsGame: () -> Unit,
+    popBackStack: () -> Unit,
 ) {
 
     Scaffold(
@@ -69,7 +67,7 @@ fun StageScreen(
 
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .padding(paddingValue),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(40.dp),
@@ -77,31 +75,26 @@ fun StageScreen(
                 itemsIndexed(
                     levels,
                     key = { _, level -> level.id }
-                ){ index, level ->
-                    val navigateGame = when(level.questionType) {
+                ) { index, level ->
+                    val navigateGame = when (level.questionType) {
                         QuestionType.QUIZ -> onNavigateToQuizGame
                         QuestionType.RELATIONS -> onNavigateToRelationsGame
                         QuestionType.QUIZ_IMAGE -> onNavigateToQuizImage
-                        QuestionType.CHALLENGE -> TODO()
+                        QuestionType.CHALLENGE -> onNavigateToChallenge
                     }
 
-                    LevelStage(
-                        number = index,
-                        stars = level.starState.starCount,
-                        blocked = false,
-                        level.stageType,
+
+                    LevelStageItem(
+                        itemNumber = level.id,
+                        starsState = level.starState,
+                        isChallenge = level.questionType == QuestionType.CHALLENGE,
+                        stage = level.stageType,
+//                        rewards = level.rewardsOxygen,
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-                            navigateGame()
-                        }
-                    )
-                }
-                item{
-                    LevelChallenge(
-                        modifier
-                            .offset(x = 50.dp),
-                        onClick = onNavigateToChallenge,
+                                navigateGame()
+                            }
                     )
                 }
             }
@@ -110,74 +103,24 @@ fun StageScreen(
     }
 }
 
+@Preview
 @Composable
-fun ListOfLevels(
-    modifier: Modifier = Modifier,
-    paddingValues: PaddingValues,
-    stage: StageType,
-    onNavigateToQuizGame: () -> Unit = {},
-    onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {},
-    onNavigateToRelationsGame: () -> Unit = {}
-) {
+private fun StageScreenPreview() {
+    SporaTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            StageScreen(
+                oxygen = 0,
+                levels = FakeLevelModels.fakeLevels,
+                onNavigateToQuizGame = {},
+                onNavigateToChallenge = {},
+                onNavigateToQuizImage = {},
+                popBackStack = {},
+                onNavigateToRelationsGame = {}
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(paddingValues),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(40.dp),
-    ) {
-
-        LevelStage(
-            number = 1,
-            0,
-            false,
-            stage,
-            modifier = Modifier.clickable {
-                onNavigateToQuizGame()
-            }
-        )
-
-        LevelStage(
-            2,
-            0,
-            false,
-            stage,
-            modifier
-                .offset(x = (-10).dp)
-                .clickable {
-                    onNavigateToQuizImage()
-                }
-        )
-        LevelStage(
-            3,
-            0,
-            false,
-            stage,
-            modifier
-                .offset(x = (30).dp)
-                .clickable {
-                    onNavigateToRelationsGame()
-                }
-        )
-
-        LevelChallenge(
-            modifier
-                .offset(x = 90.dp),
-            onClick = onNavigateToChallenge,
-        )
+            )
+        }
     }
-
-}
-
-@Composable
-@Preview(showBackground = true)
-fun PreviewAreaBosqueScreen() {
-//    StageScreen(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .background(MaterialTheme.colorScheme.background),
-//        oxygen = 0
-//    )
 }

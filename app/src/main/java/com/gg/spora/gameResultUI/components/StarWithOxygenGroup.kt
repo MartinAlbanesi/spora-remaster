@@ -2,18 +2,16 @@ package com.gg.spora.gameResultUI.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
@@ -22,15 +20,8 @@ import com.gg.spora.ui.theme.SporaTheme
 fun StarWithOxygenGroup(
     modifier: Modifier = Modifier,
     rewards: Map<Int, Int>, // oxygenAmount to starImage
-    rotateItems: Map<Float, Int>
+    rotateItems: Map<Float, Int>,
 ) {
-
-//    val rotateItem = mapOf(
-//        -25f to 0.dp,
-//        0f to (-16).dp,
-//        25f to 0.dp
-//    )
-
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
@@ -43,6 +34,7 @@ fun StarWithOxygenGroup(
                 modifier = Modifier
                     .rotate(rotateItems.keys.elementAt(index))
                     .offset(y = rotateItems.values.elementAt(index).dp)
+
             )
         }
     }

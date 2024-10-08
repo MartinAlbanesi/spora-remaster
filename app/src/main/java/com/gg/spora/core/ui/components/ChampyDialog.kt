@@ -71,10 +71,6 @@ fun ChampyDialog(
                         .fillMaxWidth()
                         .height(300.dp)
                         .clip(MaterialTheme.shapes.extraLarge)
-//                        .graphicsLayer {
-//                            compositingStrategy = CompositingStrategy.ModulateAlpha
-//                            alpha = 0.5f
-//                        }
                 )
 
                 Column(
@@ -95,20 +91,6 @@ fun ChampyDialog(
                         title = title,
                         body = {
                             content()
-//                            Row(
-//                                verticalAlignment = Alignment.CenterVertically,
-//                            ) {
-//                                Image(
-//                                    painter = painterResource(id = R.drawable.o2_icon),
-//                                    contentDescription = "Oxígeno",
-//                                    modifier = Modifier.size(48.dp)
-//                                )
-//                                Text(
-//                                    text = "+ $totalOxygen",
-//                                    fontSize = 24.sp,
-//                                    color = Color.White
-//                                )
-//                            }
                         },
                         modifier = Modifier
                             .fillMaxWidth()

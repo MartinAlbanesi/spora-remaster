@@ -15,6 +15,12 @@ object SporaConstant {
         25f to 0
     )
 
+    val ROTATE_ITEMS_LEVEL_PREVIEW = mapOf(
+        -25f to 0,
+        0f to (10),
+        25f to 0
+    )
+
     val PATH_LADDER = listOf(
         -40, (-40), -10, 50
     )
