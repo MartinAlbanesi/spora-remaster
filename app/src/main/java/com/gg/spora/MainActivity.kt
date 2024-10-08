@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
 
                         composable<NavigationRoutes.ForestStage> {
                             ForestStageScreen(
-                                o2 = 100,
+                                oxygen = 100,
                                 onNavigateToQuizGame = {
                                     navController.navigate(NavigationRoutes.QuizGame)
                                 },
