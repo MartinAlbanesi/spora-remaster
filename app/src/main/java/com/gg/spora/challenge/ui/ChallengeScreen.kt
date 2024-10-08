@@ -28,7 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.R
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.core.ui.components.ChampyWithCard
-import com.gg.spora.core.ui.components.TopBarWithProgressBar
+import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 
 val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
@@ -80,10 +80,10 @@ fun ChallengeScreen(
         Column(
             modifier = modifier
         ) {
-            TopBarWithProgressBar(
+            TopBarWithTitleExitAndIcon(
                 title = stringResource(R.string.title_challenge),
                 onBackClick = onBackClick,
-                buttonLike = false
+                showIcon = false
             )
             ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),

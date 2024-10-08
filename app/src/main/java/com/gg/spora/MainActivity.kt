@@ -26,7 +26,6 @@ import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
-import com.gg.spora.minigameQuizImage.ui.MinigameQuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.quiz.ui.QuizScreen
@@ -38,7 +37,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
         setContent {
             SporaTheme {
                 Surface(
