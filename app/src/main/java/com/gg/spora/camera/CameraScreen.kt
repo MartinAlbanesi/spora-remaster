@@ -27,8 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.challenge.ui.classes
 import com.gg.spora.ml.ModelObject
@@ -41,7 +41,7 @@ import java.nio.ByteOrder
 fun CameraScreen(
     nameObject: String,
     onNavigateToChallengeScreen: () -> Unit,
-    challengeViewModel: ChallengeViewModel,
+    challengeViewModel: ChallengeViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current

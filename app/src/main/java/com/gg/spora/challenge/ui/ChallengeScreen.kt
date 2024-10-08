@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.R
@@ -53,16 +55,14 @@ fun ChallengeScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onNavigateToCameraScreen: (Any?) -> Unit,
-    challengeViewModel: ChallengeViewModel
+    challengeViewModel: ChallengeViewModel = hiltViewModel()
 ) {
 
 
     val lifecycleOwner = LocalLifecycleOwner.current
+    var buttonContinueEnabled by remember { mutableStateOf(false) }
+    var champyImage by remember { mutableIntStateOf(R.drawable.champy_sonriente_brazosalcuerpo) }
     var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
-
-    /*if(challengeViewModel.objectsChallenge.value?.isEmpty() == true){
-        challengeViewModel.getObjectsChallenge()
-    }*/
 
     LaunchedEffect(challengeViewModel.objectsChallenge) {
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
@@ -70,11 +70,9 @@ fun ChallengeScreen(
         }
     }
 
-    val champyImage : Int = if(objectsChallenge.values.all{ it }){
-        R.drawable.champy_celebrando_brazoslevantados
-    }
-    else{
-        R.drawable.champy_sonriente_brazosalcuerpo
+    if(objectsChallenge.values.all{ it }){
+        champyImage = R.drawable.champy_celebrando_brazoslevantados
+        buttonContinueEnabled = true
     }
 
     Box(
@@ -133,6 +131,8 @@ fun ChallengeScreen(
                             )
                         }
                     }
+
+
                 }
             }
         }

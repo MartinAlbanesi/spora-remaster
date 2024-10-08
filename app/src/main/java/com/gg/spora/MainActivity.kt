@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     val navController = rememberNavController()
-
+                    val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
                         startDestination = NavigationRoutes.ForestStage
@@ -132,7 +132,7 @@ class MainActivity : ComponentActivity() {
                                 onNavigateToChallengeScreen = {
                                     navController.navigate(NavigationRoutes.Challenge)
                                 },
-                                challengeViewModel = ChallengeViewModel()
+                                challengeViewModel = challengeViewModel
                             )
                         }
 
@@ -145,7 +145,7 @@ class MainActivity : ComponentActivity() {
                                         nameObject.toString()
                                     ))
                                 },
-                                challengeViewModel = ChallengeViewModel()
+                                challengeViewModel = challengeViewModel
                             )
                         }
                         composable<NavigationRoutes.QuizImage> {
