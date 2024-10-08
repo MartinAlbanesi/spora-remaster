@@ -71,10 +71,10 @@ fun ChampyDialog(
                         .fillMaxWidth()
                         .height(300.dp)
                         .clip(MaterialTheme.shapes.extraLarge)
-                        .graphicsLayer {
-                            compositingStrategy = CompositingStrategy.ModulateAlpha
-                            alpha = 0.5f
-                        }
+//                        .graphicsLayer {
+//                            compositingStrategy = CompositingStrategy.ModulateAlpha
+//                            alpha = 0.5f
+//                        }
                 )
 
                 Column(
