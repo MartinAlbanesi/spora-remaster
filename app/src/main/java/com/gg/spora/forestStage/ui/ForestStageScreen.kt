@@ -31,9 +31,11 @@ import com.gg.spora.forestStage.domain.TypeStage
 @Composable
 fun ForestStageScreen(
     modifier: Modifier = Modifier,
-    o2: Int,
+    oxygen: Int,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
+    onNavigateToQuizImage: () -> Unit = {},
+    popBackStack: () -> Unit = {}
     onNavigateToQuizImage: () -> Unit = {},
     onNavigateToRelationsGame: () -> Unit = {}
 ) {
@@ -43,10 +45,12 @@ fun ForestStageScreen(
         topBar = {
             TopAppBarWithO2Icon(
                 title = "Área del Bosque",
-                firstLabel = o2.toString(),
+                firstLabel = oxygen.toString(),
                 firstIcon = R.drawable.o2,
                 showBackArrow = true,
-                onBackClick = {},
+                onBackClick = {
+                    popBackStack()
+                },
             )
         }
     ) { paddingValue ->
@@ -103,12 +107,12 @@ fun ListOfLevels(
                 onNavigateToQuizGame()
             }
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         LevelStage(
             2,
             0,
-            true,
+            false,
             stage,
             modifier.offset(x = (-10).dp).clickable {
                 onNavigateToQuizImage()
@@ -135,22 +139,23 @@ fun ListOfLevels(
 //            stage,
 //            modifier.offset(x = 25.dp)
 //        )
+        Spacer(modifier = Modifier.height(40.dp))
 
-//        Spacer(modifier = Modifier.height(20.dp))
+        LevelStage(
+            3,
+            0,
+            false,
+            stage,
+            modifier.offset(x = (40).dp).clickable {
+                /*Nav to minigame 3*/
+            }
+        )
 
-//        LevelStage(
-//            2,
-//            0,
-//            true,
-//            stage,
-//            modifier.offset(x = 70.dp)
-//        )
-
-//        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         LevelChallenge(
             modifier
-                .offset(x = 100.dp),
+                .offset(x = 90.dp),
             onClick = onNavigateToChallenge,
         )
     }
@@ -164,6 +169,6 @@ fun PreviewAreaBosqueScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        o2 = 50
+        oxygen = 0
     )
 }
