@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.forestStage.domain.TypeStage
+import com.gg.spora.forestStage.domain.model.TypeLevel
 
 /**
  * Icon for levels with image and number
@@ -35,7 +35,7 @@ fun LevelStage(
     number: Int,
     stars: Int,
     blocked: Boolean = false,
-    stage: TypeStage,
+    stage: TypeLevel,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
@@ -55,7 +55,7 @@ fun LevelStage(
         } else
             when (stage) {
 
-                TypeStage.FOREST ->
+                TypeLevel.FOREST ->
                     when (stars) {
                         0 -> Image(
                             painter = painterResource(id = R.drawable.nivel_bosque_0e),
@@ -103,8 +103,8 @@ fun LevelStage(
                         )
                     }
 
-                TypeStage.DESERT -> TODO()
-                TypeStage.RIVER -> TODO()
+                TypeLevel.DESERT -> TODO()
+                TypeLevel.RIVER -> TODO()
                 else -> TODO()
             }
 
@@ -129,7 +129,7 @@ fun PreviewIconLevelStage() {
         number = 1,
         stars = 0,
         blocked = false,
-        stage = TypeStage.FOREST,
+        stage = TypeLevel.FOREST,
     ) {
         /*Nav to level*/
     }
