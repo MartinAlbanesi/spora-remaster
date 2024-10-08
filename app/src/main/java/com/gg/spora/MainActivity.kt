@@ -23,6 +23,7 @@ import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
+import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -76,7 +77,11 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onNavigateToQuizImage = {
                                     navController.navigate(NavigationRoutes.QuizImage)
+                                },
+                                onNavigateToRelationsGame = {
+                                    navController.navigate(NavigationRoutes.RelationsGame)
                                 }
+
                             )
                         }
                         composable<NavigationRoutes.QuizGame> {
@@ -126,6 +131,12 @@ class MainActivity : ComponentActivity() {
 
                             }
                         }
+                        composable<NavigationRoutes.RelationsGame> {
+                            MinigameRelationsScreen(){
+
+                            }
+                        }
+
                     }
                 }
             }

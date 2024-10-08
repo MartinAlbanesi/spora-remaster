@@ -25,5 +25,8 @@ object NavigationRoutes {
     @Serializable
     object QuizImage
 
+    @Serializable
+    object RelationsGame
+
 
 }
