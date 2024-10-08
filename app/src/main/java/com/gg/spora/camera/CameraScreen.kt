@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.challenge.ui.ChallengeViewModel
+import com.gg.spora.challenge.ui.ClassifyTf
 import com.gg.spora.challenge.ui.classes
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.ml.ModelObject
@@ -105,7 +106,7 @@ fun CameraScreen(
 
 
                                     val bitmap = imageProxy.toBitmap()
-                                    classifyImage(context, bitmap, selectedObject) { result ->
+                                    ClassifyTf(context).classifyImage(bitmap, selectedObject) { result ->
                                         if (result) {
                                             challengeViewModel.setObjectsChallenge(
                                                 objectsChallenge.toMutableMap().apply {
@@ -171,44 +172,3 @@ data class PermissionState(
     val launchPermissionRequest: () -> Unit
 )
 
-fun classifyImage(context: Context, bitmap: Bitmap, selectedObject: String, onResult: (Boolean) -> Unit) {
-    var resultScan = false
-
-    // Carga el modelo de TensorFlow Lite
-    val modelObj = ModelObject.newInstance(context)
-
-    val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-
-    inputFeature0.loadBuffer(preprocessImage(bitmap))
-
-
-    val outputs = modelObj.process(inputFeature0)
-    val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-    val outputArray = outputFeature0.floatArray
-    val maxConfidenceIndex = outputArray.indices.maxByOrNull { outputArray[it] } ?: 0
-
-    if(selectedObject == classes[maxConfidenceIndex])
-        resultScan = true
-
-    onResult(resultScan)
-}
-
-
-fun preprocessImage(bitmap: Bitmap): ByteBuffer {
-    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-    val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
-    byteBuffer.order(ByteOrder.nativeOrder())
-
-    val intValue = IntArray(224 * 224)
-
-    resizedBitmap.getPixels(intValue, 0, resizedBitmap.width, 0, 0, resizedBitmap.width, resizedBitmap.height)
-
-    for (pixelValue in intValue) {
-        byteBuffer.putFloat((pixelValue shr 16 and 0xFF) * (1f / 255))
-        byteBuffer.putFloat((pixelValue shr 8 and 0xFF) * (1f / 255))
-        byteBuffer.putFloat((pixelValue and 0xFF) * (1f / 255))
-    }
-
-    return byteBuffer
-}
