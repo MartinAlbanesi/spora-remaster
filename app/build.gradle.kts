@@ -122,6 +122,6 @@ dependencies {
     implementation(libs.tensorflow.android)
     implementation(libs.tensorflow.metadata)
 
-    // Coil
-    implementation(libs.coil.compose)
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

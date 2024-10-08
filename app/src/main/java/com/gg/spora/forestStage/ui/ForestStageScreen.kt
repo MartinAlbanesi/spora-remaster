@@ -31,10 +31,12 @@ import com.gg.spora.forestStage.domain.TypeStage
 @Composable
 fun ForestStageScreen(
     modifier: Modifier = Modifier,
-    o2: Int,
+    oxygen: Int,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {}
+    onNavigateToQuizImage: () -> Unit = {},
+    onNavigateToRelationsGame: () -> Unit = {},
+    popBackStack: () -> Unit = {},
 ) {
 
     Scaffold(
@@ -42,10 +44,12 @@ fun ForestStageScreen(
         topBar = {
             TopAppBarWithO2Icon(
                 title = "Área del Bosque",
-                firstLabel = o2.toString(),
+                firstLabel = oxygen.toString(),
                 firstIcon = R.drawable.o2,
                 showBackArrow = true,
-                onBackClick = {},
+                onBackClick = {
+                    popBackStack()
+                },
             )
         }
     ) { paddingValue ->
@@ -66,7 +70,8 @@ fun ForestStageScreen(
                 stage = TypeStage.FOREST,
                 onNavigateToQuizGame = onNavigateToQuizGame,
                 onNavigateToChallenge = onNavigateToChallenge,
-                onNavigateToQuizImage = onNavigateToQuizImage
+                onNavigateToQuizImage = onNavigateToQuizImage,
+                onNavigateToRelationsGame = onNavigateToRelationsGame
             )
 
         }
@@ -80,7 +85,8 @@ fun ListOfLevels(
     stage: TypeStage,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {}
+    onNavigateToQuizImage: () -> Unit = {},
+    onNavigateToRelationsGame: () -> Unit = {}
 ) {
 
     Column(
@@ -88,7 +94,7 @@ fun ListOfLevels(
             .fillMaxWidth()
             .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(40.dp),
     ) {
 
         LevelStage(
@@ -100,43 +106,33 @@ fun ListOfLevels(
                 onNavigateToQuizGame()
             }
         )
-        Spacer(modifier = Modifier.height(20.dp))
 
         LevelStage(
             2,
             0,
-            true,
+            false,
             stage,
-            modifier.offset(x = (-10).dp).clickable {
-                onNavigateToQuizImage()
-            }
+            modifier
+                .offset(x = (-10).dp)
+                .clickable {
+                    onNavigateToQuizImage()
+                }
         )
-
-//        Spacer(modifier = Modifier.height(20.dp))
-
-//        LevelStage(
-//            2,
-//            0,
-//            true,
-//            stage,
-//            modifier.offset(x = 25.dp)
-//        )
-
-//        Spacer(modifier = Modifier.height(20.dp))
-
-//        LevelStage(
-//            2,
-//            0,
-//            true,
-//            stage,
-//            modifier.offset(x = 70.dp)
-//        )
-
-//        Spacer(modifier = Modifier.height(20.dp))
+        LevelStage(
+            3,
+            0,
+            false,
+            stage,
+            modifier
+                .offset(x = (30).dp)
+                .clickable {
+                    onNavigateToRelationsGame()
+                }
+        )
 
         LevelChallenge(
             modifier
-                .offset(x = 100.dp),
+                .offset(x = 90.dp),
             onClick = onNavigateToChallenge,
         )
     }
@@ -150,6 +146,6 @@ fun PreviewAreaBosqueScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        o2 = 50
+        oxygen = 0
     )
 }

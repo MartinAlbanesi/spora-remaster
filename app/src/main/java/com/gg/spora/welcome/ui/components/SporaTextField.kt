@@ -1,4 +1,4 @@
-package com.gg.spora.introduction.ui.components
+package com.gg.spora.welcome.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,10 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,15 +18,18 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun SporaTextField(modifier: Modifier = Modifier, text: String) {
-
-    var nameValue by remember { mutableStateOf(text) }
+fun SporaTextField(
+    modifier: Modifier = Modifier,
+    guestName: String,
+    onValueChange: (String) -> Unit = {},
+) {
     val placeholder = "Escribi tu nombre"
     val shape = RoundedCornerShape(20.dp)
+
     TextField(
-        value = nameValue,
+        value = guestName,
         onValueChange = {
-            nameValue = it
+            onValueChange (it)
         },
         placeholder = { Text(
             text = placeholder,
@@ -38,7 +37,9 @@ fun SporaTextField(modifier: Modifier = Modifier, text: String) {
             style = MaterialTheme.typography.labelLarge,
         ) },
         singleLine = true,
-        modifier = modifier.width(350.dp).height(50.dp),
+        modifier = modifier
+            .width(350.dp)
+            .height(50.dp),
         shape = shape,
         textStyle = MaterialTheme.typography.labelLarge,
         colors = TextFieldDefaults.colors(
@@ -59,7 +60,10 @@ fun SporaTextField(modifier: Modifier = Modifier, text: String) {
 fun SporaLabelPrimaryPreview() {
     SporaTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            SporaTextField(text = "", modifier = Modifier.align(Alignment.Center))
+            SporaTextField(
+                guestName = "",
+                modifier = Modifier.align(Alignment.Center),
+            )
         }
     }
 }
