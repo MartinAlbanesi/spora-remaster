@@ -103,12 +103,12 @@ fun MinigameQuizImageScreen(
 fun QuizImageScreen(
     modifier: Modifier = Modifier,
     questionTitle: String,
+    isCorrect: Boolean? = null,
     answerOptions: List<AnswerImage>,
     currentImageResIdState: Int,
     onAnswerSelected : (String) -> Unit,
     onNextQuestion: () -> Unit,
 ) {
-
 
     var isAnswerSelected by remember { mutableStateOf(false) }
 
@@ -137,7 +137,7 @@ fun QuizImageScreen(
             Image(
                 painter = painterResource(id = currentImageResIdState),
                 contentDescription = "Imagen",
-                contentScale = ContentScale.Inside,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .padding(8.dp)
             )
@@ -156,14 +156,15 @@ fun QuizImageScreen(
             OptionItemButton(
                 textItem = answer.answer,
                 isCorrect = answer.isCorrect,
-                enabled = true,
+                enabled =  true,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
                     .clip(MaterialTheme.shapes.large)
                     .height(50.dp)
-                    .clickable {
-                        isAnswerSelected = true
+                    .clickable(enabled = !isAnswerSelected) {
+                       isAnswerSelected = true
+
                     }
             ){
                 onAnswerSelected(answer.id)
@@ -179,6 +180,7 @@ fun QuizImageScreen(
                 onClick = {
                     onNextQuestion()
                     isAnswerSelected = false
+
                 }
             )
         }

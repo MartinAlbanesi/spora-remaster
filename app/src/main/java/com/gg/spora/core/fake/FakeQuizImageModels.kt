@@ -9,7 +9,7 @@ object FakeQuizImageModels {
 
     val fakeImageAnswers = listOf(
         AnswerImage(
-            answer = "Simbolo Reciclaje",
+            answer = "Símbolo de Reciclaje",
             id = "1",
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.simbolo_reciclaje
@@ -21,7 +21,7 @@ object FakeQuizImageModels {
             imageResId = R.drawable.calentamiento_global
         ),
         AnswerImage(
-            answer = "Deforestacion",
+            answer = "Deforestación",
             id = "3",
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.deforestacion
@@ -33,22 +33,41 @@ object FakeQuizImageModels {
             imageResId = R.drawable.smog
         ),
         AnswerImage(
-            answer = "Contaminacion",
+            answer = "Contaminación",
             id = "5",
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.contaminacion
         ),
         AnswerImage(
-            answer = "Energia Eolica",
+            answer = "Energia Eólica",
             id = "6",
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.recurso_viento
         ),
         AnswerImage(
-            answer = "Desechos Electronicos",
+            answer = "Desechos Electrónicos",
             id = "7",
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.desechos_electronicos
+
+        ),
+        AnswerImage(
+            answer = "Agujero de Ozono",
+            id = "8",
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.agujero_ozono
+        ),
+        AnswerImage(
+            answer = "Residuo Tóxico",
+            id = "9",
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.residuo_toxico
+        ),
+        AnswerImage(
+            answer = "Panel Solar",
+            id = "10",
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.panel_solar
 
         ),
     )
@@ -56,7 +75,7 @@ object FakeQuizImageModels {
     val fakeImageQuestions = listOf(
         QuestionImage(
             id = "1",
-            question = "Que representa la imagen?",
+            question = "¿Qué representa la imagen?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "1" }.take(3),
             answer = fakeImageAnswers[0],
             type = ImageQuestionType.RECYCLINGIMAGE,
@@ -64,7 +83,7 @@ object FakeQuizImageModels {
         ),
         QuestionImage(
             id = "2",
-            question = "Que representa la imagen?",
+            question = "¿Qué representa la imagen?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "2" }.take(3),
             answer = fakeImageAnswers[1],
             type = ImageQuestionType.RECYCLINGIMAGE,
@@ -72,7 +91,7 @@ object FakeQuizImageModels {
         ),
         QuestionImage(
             id = "3",
-            question = "Que paso en el bosque?",
+            question = "¿Qué pasó en el bosque?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "3" }.take(3),
             answer = fakeImageAnswers[2],
             type = ImageQuestionType.RECYCLINGIMAGE,
@@ -80,7 +99,7 @@ object FakeQuizImageModels {
         ),
         QuestionImage(
             id = "4",
-            question = "Que produce el humo?",
+            question = "¿Qué produce el humo?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "4" }.take(3),
             answer = fakeImageAnswers[3],
             type = ImageQuestionType.RECYCLINGIMAGE,
@@ -88,7 +107,7 @@ object FakeQuizImageModels {
         ),
         QuestionImage(
             id = "5",
-            question = "Que esta pasando en la imagen?",
+            question = "¿Qué está pasando en la imagen?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "5" }.take(3),
             answer = fakeImageAnswers[4],
             type = ImageQuestionType.RECYCLINGIMAGE,
@@ -96,7 +115,7 @@ object FakeQuizImageModels {
         ),
         QuestionImage(
             id = "6",
-            question = "Que tipo de energia es?",
+            question = "¿Qué tipo de energía es?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "6" }.take(3),
             answer = fakeImageAnswers[5],
             type = ImageQuestionType.RECYCLINGIMAGE,
@@ -104,12 +123,36 @@ object FakeQuizImageModels {
         ),
         QuestionImage(
             id = "7",
-            question = "Que tipo de desecho es?",
+            question = "¿Qué tipo de desecho es?",
             answers = fakeImageAnswers.filter { fake -> fake.id != "7" }.take(3),
             answer = fakeImageAnswers[6],
             type = ImageQuestionType.RECYCLINGIMAGE,
             imageResId = R.drawable.desechos_electronicos
         ),
+        QuestionImage(
+            id = "8",
+            question = "¿Qué representa la imagen?",
+            answers = fakeImageAnswers.filter { fake -> fake.id != "8" }.take(3),
+            answer = fakeImageAnswers[7],
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.agujero_ozono
+        ),
+        QuestionImage(
+            id = "9",
+            question = "¿Qué tipo de residuo es?",
+            answers = fakeImageAnswers.filter { fake -> fake.id != "9" }.take(3),
+            answer = fakeImageAnswers[8],
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.residuo_toxico
+        ),
+        QuestionImage(
+            id = "10",
+            question = "¿Qué es el objeto de la imagen?",
+            answers = fakeImageAnswers.filter { fake -> fake.id != "10" }.take(3),
+            answer = fakeImageAnswers[9],
+            type = ImageQuestionType.RECYCLINGIMAGE,
+            imageResId = R.drawable.panel_solar
+        ),
 
-    )
+        )
 }
