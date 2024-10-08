@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.gg.spora.camera.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
+import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
@@ -130,7 +131,8 @@ class MainActivity : ComponentActivity() {
                                 nameObject = nameObject,
                                 onNavigateToChallengeScreen = {
                                     navController.navigate(NavigationRoutes.Challenge)
-                                }
+                                },
+                                challengeViewModel = ChallengeViewModel()
                             )
                         }
 
@@ -142,7 +144,8 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(NavigationRoutes.Camera.createRoute(
                                         nameObject.toString()
                                     ))
-                                }
+                                },
+                                challengeViewModel = ChallengeViewModel()
                             )
                         }
                         composable<NavigationRoutes.QuizImage> {

@@ -37,6 +37,7 @@ import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.core.ui.components.ChampyWithCard
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
+import javax.inject.Inject
 
 val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
 
@@ -52,18 +53,20 @@ fun ChallengeScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onNavigateToCameraScreen: (Any?) -> Unit,
-    challengeViewModel: ChallengeViewModel = viewModel()
+    challengeViewModel: ChallengeViewModel
 ) {
 
 
     val lifecycleOwner = LocalLifecycleOwner.current
     var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
 
-    challengeViewModel.getObjectsChallenge()
+    /*if(challengeViewModel.objectsChallenge.value?.isEmpty() == true){
+        challengeViewModel.getObjectsChallenge()
+    }*/
 
     LaunchedEffect(challengeViewModel.objectsChallenge) {
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
-            objectsChallenge = objects
+                objectsChallenge = objects
         }
     }
 
@@ -135,7 +138,7 @@ fun ChallengeScreen(
         }
     }
 }
-
+/*
 @Preview
 //@PreviewLightDark
 //@PreviewFontScale
@@ -157,3 +160,5 @@ SporaTheme {
     }
 }
 }
+
+ */

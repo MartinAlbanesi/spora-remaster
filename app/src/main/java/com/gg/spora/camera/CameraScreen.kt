@@ -30,9 +30,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.challenge.ui.ChallengeViewModel
-import com.gg.spora.challenge.ui.ClassifyTf
 import com.gg.spora.challenge.ui.classes
-import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.ml.ModelObject
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -41,44 +39,32 @@ import java.nio.ByteOrder
 
 @Composable
 fun CameraScreen(
-    nameObject : String,
-    onNavigateToChallengeScreen : () -> Unit,
-    challengeViewModel: ChallengeViewModel = viewModel(),
+    nameObject: String,
+    onNavigateToChallengeScreen: () -> Unit,
+    challengeViewModel: ChallengeViewModel,
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-    //var selectedObject by remember { mutableStateOf("") }
     var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
-/*
-    LaunchedEffect(challengeViewModel.selectedObject) {
-        challengeViewModel.selectedObject.observe(lifecycleOwner) { newObject ->
-            selectedObject = newObject
-            //Log.d("CameraScreen", "Selected object updated: $selectedObject")
-        }
-    }
-*/
+    var isCapturing by remember { mutableStateOf(true) }
+
     LaunchedEffect(challengeViewModel.objectsChallenge) {
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
             objectsChallenge = objects
         }
     }
 
-    // Obtengo el permiso de camara
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
     if (cameraPermissionState.hasPermission) {
-
-        // Vista de la camara
         AndroidView(
             factory = { previewView },
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         )
 
-        // Codigo suspendido y config asincronico
         LaunchedEffect(Unit) {
             cameraProviderFuture.addListener({
                 val cameraProvider = cameraProviderFuture.get()
@@ -87,7 +73,6 @@ fun CameraScreen(
                 }
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-                //
                 try {
                     cameraProvider.unbindAll()
                     cameraProvider.bindToLifecycle(
@@ -97,45 +82,48 @@ fun CameraScreen(
                         imageCapture
                     )
                 } catch (exc: Exception) {
+                    Log.e("CameraScreen", "Camera binding failed", exc)
                 }
 
                 val handler = Handler(Looper.getMainLooper())
                 val runnable = object : Runnable {
                     override fun run() {
-                        imageCapture.takePicture(
-                            ContextCompat.getMainExecutor(context),
-                            object : ImageCapture.OnImageCapturedCallback() {
-                                override fun onCaptureSuccess(imageProxy: ImageProxy) {
-
-                                    val bitmap = imageProxy.toBitmap()
-                                    classifyImage(context, bitmap, nameObject) { result ->
-                                        if (result) {
-
-                                            challengeViewModel.setObjectsChallenge(
-                                                objectsChallenge.toMutableMap().apply {
-                                                    this[nameObject] = true
-                                                }
-                                            )
-
-                                            //imageProxy.close()
-                                            onNavigateToChallengeScreen()
+                        if (isCapturing) {
+                            imageCapture.takePicture(
+                                ContextCompat.getMainExecutor(context),
+                                object : ImageCapture.OnImageCapturedCallback() {
+                                    override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                                        val bitmap = imageProxy.toBitmap()
+                                        classifyImage(context, bitmap, nameObject) { result ->
+                                            if (result) {
+                                                challengeViewModel.setObjectsChallenge(
+                                                    objectsChallenge.toMutableMap().apply {
+                                                        this[nameObject] = true
+                                                    }
+                                                )
+                                                isCapturing = false
+                                                onNavigateToChallengeScreen()
+                                            }
                                         }
+                                        imageProxy.close()
                                     }
-                                    imageProxy.close()
+
+                                    override fun onError(exception: ImageCaptureException) {
+                                        Log.e("CameraScreen", "Image capture failed", exception)
+                                    }
                                 }
-                                override fun onError(exception: ImageCaptureException) {
-                                    onError(exception)
-                                }
-                            }
-                        )
-                        handler.postDelayed(this, 2000)
+                            )
+                            handler.postDelayed(this, 2000)
+                        }
                     }
                 }
                 handler.post(runnable)
             }, ContextCompat.getMainExecutor(context))
         }
     } else {
-        LaunchPermissionRequest(cameraPermissionState)
+        LaunchedEffect(Unit) {
+            cameraPermissionState.launchPermissionRequest()
+        }
     }
 }
 
