@@ -24,7 +24,8 @@ import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
 import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.forestStage.ui.ForestStageScreen
+import com.gg.spora.forestStage.ui.StageScreen
+import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.ForestStage(0),
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -83,9 +84,14 @@ class MainActivity : ComponentActivity() {
 
                             val oxygen = backStackEntry.toRoute<NavigationRoutes.ForestStage>()
 
+                            val stageViewModel = hiltViewModel<StageViewModel>()
 
-                            ForestStageScreen(
+                            val levels by stageViewModel.levels.collectAsState()
+
+
+                            StageScreen(
                                 oxygen = oxygen.oxygen,
+                                levels = levels,
                                 onNavigateToQuizGame = {
                                     navController.navigate(NavigationRoutes.QuizGame)
                                 },

@@ -47,7 +47,7 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getRandomQuestions() {
-        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, QuestionType.RECYCLING)
+        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, QuestionType.QUIZ)
     }
 
     fun isAnswerCorrect(answerId: String) {

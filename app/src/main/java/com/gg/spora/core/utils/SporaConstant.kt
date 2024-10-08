@@ -14,4 +14,8 @@ object SporaConstant {
         0f to (-16),
         25f to 0
     )
+
+    val PATH_LADDER = listOf(
+        -40, (-40), -10, 50
+    )
 }

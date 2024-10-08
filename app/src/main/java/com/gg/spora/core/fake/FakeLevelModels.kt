@@ -1,7 +1,8 @@
 package com.gg.spora.core.fake
 
+import com.gg.spora.core.utils.enums.QuestionType
 import com.gg.spora.forestStage.domain.model.Level
-import com.gg.spora.forestStage.domain.model.TypeLevel
+import com.gg.spora.core.utils.enums.StageType
 
 object FakeLevelModels {
 
@@ -10,40 +11,27 @@ object FakeLevelModels {
         Level(
             id = 1,
             levelName = "Nivel 1",
-            stage = TypeLevel.FOREST,
-            requiredOxygen = 10,
+            stageType = StageType.FOREST,
+            requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
+            questionType = QuestionType.QUIZ
         ),
         Level(
             id = 2,
             levelName = "Nivel 2",
-            stage = TypeLevel.FOREST,
-            requiredOxygen = 20,
-            rewardsOxygen = listOf(10, 20, 30),
+            stageType = StageType.FOREST,
+            requiredOxygen = 30,
+            rewardsOxygen = listOf(15, 25, 35),
+            questionType = QuestionType.QUIZ_IMAGE
         ),
 
         Level(
             id = 3,
             levelName = "Nivel 3",
-            stage = TypeLevel.FOREST,
-            requiredOxygen = 40,
-            rewardsOxygen = listOf(10, 20, 30),
-        ),
-
-        Level(
-            id = 4,
-            levelName = "Nivel 4",
-            stage = TypeLevel.FOREST,
-            requiredOxygen = 60,
-            rewardsOxygen = listOf(10, 20, 30),
-        ),
-
-        Level(
-            id = 5,
-            levelName = "Nivel 5",
-            stage = TypeLevel.CHALLENGE,
+            stageType = StageType.FOREST,
             requiredOxygen = 80,
-            rewardsOxygen = listOf(10, 20, 30),
+            rewardsOxygen = listOf(15, 25, 40),
+            questionType = QuestionType.RELATIONS
         ),
     )
 }

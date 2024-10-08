@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.ChampyDialog
 import com.gg.spora.core.utils.enums.StarState
-import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable

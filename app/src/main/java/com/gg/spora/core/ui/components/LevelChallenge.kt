@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 
 @Composable
-fun LevelChallenge(modifier: Modifier, blocked: Boolean = false, onClick: () -> Unit = {}){
+fun LevelChallenge(modifier: Modifier, blocked: Boolean = true, onClick: () -> Unit = {}){
 
     Box(modifier = modifier.clickable { onClick() }) {
         if(blocked){
@@ -23,19 +23,20 @@ fun LevelChallenge(modifier: Modifier, blocked: Boolean = false, onClick: () -> 
                 contentDescription = "Level blocked",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .padding(end = 70.dp)
+//                    .padding(end = 70.dp)
+                    .size(100.dp)
+            )
+        }else{
+            Image(
+                painter = painterResource(id = R.drawable.nivel_desafio),
+                contentDescription = "Challenge level",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+//                    .padding(end = 70.dp)
                     .size(100.dp)
             )
         }
 
-        Image(
-            painter = painterResource(id = R.drawable.nivel_desafio),
-            contentDescription = "Challenge level",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .padding(end = 70.dp)
-                .size(100.dp)
-        )
     }
 }
 

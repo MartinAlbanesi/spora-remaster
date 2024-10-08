@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.forestStage.domain.model.TypeLevel
+import com.gg.spora.core.utils.enums.StageType
 
 /**
  * Icon for levels with image and number
@@ -35,7 +35,7 @@ fun LevelStage(
     number: Int,
     stars: Int,
     blocked: Boolean = false,
-    stage: TypeLevel,
+    stage: StageType,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
@@ -49,20 +49,20 @@ fun LevelStage(
                 contentDescription = "Level blocked",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .padding(end = 70.dp)
+//                    .padding(end = 70.dp)
                     .size(100.dp)
             )
         } else
             when (stage) {
 
-                TypeLevel.FOREST ->
+                StageType.FOREST ->
                     when (stars) {
                         0 -> Image(
                             painter = painterResource(id = R.drawable.nivel_bosque_0e),
                             contentDescription = "Forest level without stars",
                             contentScale = ContentScale.FillBounds,
                             modifier = Modifier
-                                .padding(end = 70.dp)
+//                                .padding(end = 70.dp)
                                 .size(100.dp)
                         )
 
@@ -71,7 +71,7 @@ fun LevelStage(
                             contentDescription = "Forest level with 1 star",
                             contentScale = ContentScale.FillBounds,
                             modifier = Modifier
-                                .padding(end = 70.dp)
+//                                .padding(end = 70.dp)
                                 .size(100.dp)
                         )
 
@@ -80,7 +80,7 @@ fun LevelStage(
                             contentDescription = "Forest level with 2 stars",
                             contentScale = ContentScale.FillBounds,
                             modifier = Modifier
-                                .padding(end = 70.dp)
+//                                .padding(end = 70.dp)
                                 .size(100.dp)
                         )
 
@@ -89,7 +89,7 @@ fun LevelStage(
                             contentDescription = "Forest level with 3 stars",
                             contentScale = ContentScale.FillBounds,
                             modifier = Modifier
-                                .padding(end = 70.dp)
+//                                .padding(end = 70.dp)
                                 .size(100.dp)
                         )
 
@@ -98,13 +98,13 @@ fun LevelStage(
                             contentDescription = "Forest level without stars",
                             contentScale = ContentScale.FillBounds,
                             modifier = Modifier
-                                .padding(end = 70.dp)
+//                                .padding(end = 70.dp)
                                 .size(100.dp)
                         )
                     }
 
-                TypeLevel.DESERT -> TODO()
-                TypeLevel.RIVER -> TODO()
+                StageType.DESERT -> TODO()
+                StageType.RIVER -> TODO()
                 else -> TODO()
             }
 
@@ -116,7 +116,7 @@ fun LevelStage(
                 fontSize = 35.sp,
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .offset(y = (-10).dp, x = (-36).dp)
+                    .offset(y = (-10).dp)
             )
         }
     }
@@ -129,7 +129,7 @@ fun PreviewIconLevelStage() {
         number = 1,
         stars = 0,
         blocked = false,
-        stage = TypeLevel.FOREST,
+        stage = StageType.FOREST,
     ) {
         /*Nav to level*/
     }
