@@ -34,7 +34,8 @@ fun ForestStageScreen(
     o2: Int,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {}
+    onNavigateToQuizImage: () -> Unit = {},
+    onNavigateToRelationsGame: () -> Unit = {}
 ) {
 
     Scaffold(
@@ -66,7 +67,8 @@ fun ForestStageScreen(
                 stage = TypeStage.FOREST,
                 onNavigateToQuizGame = onNavigateToQuizGame,
                 onNavigateToChallenge = onNavigateToChallenge,
-                onNavigateToQuizImage = onNavigateToQuizImage
+                onNavigateToQuizImage = onNavigateToQuizImage,
+                onNavigateToRelationsGame = onNavigateToRelationsGame
             )
 
         }
@@ -80,7 +82,8 @@ fun ListOfLevels(
     stage: TypeStage,
     onNavigateToQuizGame: () -> Unit = {},
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToQuizImage: () -> Unit = {}
+    onNavigateToQuizImage: () -> Unit = {},
+    onNavigateToRelationsGame: () -> Unit = {}
 ) {
 
     Column(
@@ -109,6 +112,17 @@ fun ListOfLevels(
             stage,
             modifier.offset(x = (-10).dp).clickable {
                 onNavigateToQuizImage()
+            }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+        LevelStage(
+            3,
+            0,
+            true,
+            stage,
+            modifier.offset(x = (-10).dp).clickable {
+                onNavigateToRelationsGame()
             }
         )
 

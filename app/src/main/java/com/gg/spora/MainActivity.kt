@@ -26,6 +26,8 @@ import com.gg.spora.introduction.ui.WelcomeScreen
 import com.gg.spora.minigameQuizImage.ui.MinigameQuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
+import com.gg.spora.minigameQuizImageUI.MinigameQuizImageScreen
+import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -79,7 +81,11 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onNavigateToQuizImage = {
                                     navController.navigate(NavigationRoutes.QuizImage)
+                                },
+                                onNavigateToRelationsGame = {
+                                    navController.navigate(NavigationRoutes.RelationsGame)
                                 }
+
                             )
                         }
                         composable<NavigationRoutes.QuizGame> {
@@ -190,6 +196,12 @@ class MainActivity : ComponentActivity() {
                                 }
 
                             )
+                        }
+
+                        composable<NavigationRoutes.RelationsGame> {
+                            MinigameRelationsScreen(){
+
+                            }
                         }
 
                     }
