@@ -36,9 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaWithCard
-import com.gg.spora.core.ui.components.TopBarWithProgressBar
 import com.gg.spora.minigameRelations.domain.GameLogic
 import androidx.compose.runtime.*
+import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
+import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 
 
 @Composable
@@ -72,7 +73,7 @@ fun MinigameRelationsScreen(
         Column(
             modifier = modifier
         ) {
-            TopBarWithProgressBar(
+            TopBarWithTitleExitAndIcon(
                 title = "Mini Game",
                 onBackClick = onBackClick,
             )
