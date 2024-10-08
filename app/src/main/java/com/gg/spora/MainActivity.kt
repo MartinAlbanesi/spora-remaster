@@ -16,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.core.graph.NavigationRoutes
@@ -72,7 +73,7 @@ class MainActivity : ComponentActivity() {
                         composable<NavigationRoutes.Home> {
                             HomeScreen(
                                 onNavigateToForestStage = {
-                                    navController.navigate(NavigationRoutes.ForestStage)
+                                    navController.navigate(NavigationRoutes.ForestStage(0))
                                 }
                             )
                         }
@@ -81,9 +82,13 @@ class MainActivity : ComponentActivity() {
 
                         }
 
-                        composable<NavigationRoutes.ForestStage> {
+                        composable<NavigationRoutes.ForestStage> { backStackEntry ->
+
+                            val oxygen =  backStackEntry.toRoute<NavigationRoutes.ForestStage>()
+
+
                             ForestStageScreen(
-                                oxygen = 100,
+                                oxygen = oxygen.oxygen,
                                 onNavigateToQuizGame = {
                                     navController.navigate(NavigationRoutes.QuizGame)
                                 },
