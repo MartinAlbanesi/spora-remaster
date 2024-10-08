@@ -137,8 +137,7 @@ fun HomeScreen(
                 ChampyBlinkAnimation(
                     modifier = Modifier
                         .size(140.dp)
-                        .align(Alignment.Center),
-                    delay = 5000
+                        .align(Alignment.Center)
                 )
             }
 
@@ -148,7 +147,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .size(140.dp)
-                    .offset(y = -40.dp, x = -80.dp)
+                    .offset(y = (-40).dp, x = (-80).dp)
                     .clickable(onClick = onNavigateToForestStage)
             )
         }

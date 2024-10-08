@@ -11,13 +11,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import kotlinx.coroutines.delay
+import kotlin.random.Random
 
 @Composable
-fun ChampyBlinkAnimation(modifier: Modifier, delay: Long) {
+fun ChampyBlinkAnimation(modifier: Modifier, ) {
 
     val initialFrame: Int = ChampyStates.SMILING.image
     val finalFrame: Int = ChampyStates.BLINK.image
-
     var isTimePassed by remember { mutableStateOf(false) }
     var coroutineScope = rememberCoroutineScope()
 
@@ -25,7 +25,7 @@ fun ChampyBlinkAnimation(modifier: Modifier, delay: Long) {
 
         while (true) {
 
-            delay(delay)
+            delay(Random.nextLong(3000, 5000))
             isTimePassed = true
 
 
