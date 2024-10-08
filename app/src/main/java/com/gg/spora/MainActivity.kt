@@ -1,5 +1,6 @@
 package com.gg.spora
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,7 +31,6 @@ import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
-import com.gg.spora.forestStage.ui.ForestStageScreen
 import com.gg.spora.grove.ui.GroveScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
@@ -45,6 +45,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.ForestStage(0),
+                        startDestination = NavigationRoutes.Welcome,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -113,16 +114,19 @@ class MainActivity : ComponentActivity() {
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
-                                    when(localQuestionType){
+                                    when (localQuestionType) {
                                         0 -> {
                                             navController.navigate(NavigationRoutes.QuizGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
+
                                         1 -> {
                                             navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
+
                                         2 -> {
                                             navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
+
                                         3 -> {
                                             navController.navigate(NavigationRoutes.Challenge("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }

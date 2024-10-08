@@ -62,12 +62,12 @@ fun HomeScreen(
             text = "Diario",
             onClick = {}
         ),
+         */
         HomeIcon(
             image = R.drawable.grove_icon,
             text = "Arboleda",
             onClick = onNavigateToGrove
         )
-         */
     )
 
     Scaffold(
