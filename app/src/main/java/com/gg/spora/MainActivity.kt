@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.Home,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,

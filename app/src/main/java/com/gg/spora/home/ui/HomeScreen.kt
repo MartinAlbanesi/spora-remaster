@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
+import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
@@ -128,14 +129,16 @@ fun HomeScreen(
                 }
             }
 
-            Box(modifier = Modifier.align(Alignment.Center).fillMaxSize()) {
-                Image(
-                    painter = painterResource(id = R.drawable.champy_sonriente_brazosalcuerpo),
-                    contentDescription = "Forest Background",
-                    contentScale = ContentScale.Fit,
+            Box(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .fillMaxSize()
+            ) {
+                ChampyBlinkAnimation(
                     modifier = Modifier
                         .size(140.dp)
                         .align(Alignment.Center),
+                    delay = 5000
                 )
             }
 
