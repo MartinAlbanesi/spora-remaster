@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,9 +54,6 @@ fun MinigameQuizImageScreen(
     onAnswerSelected: (String) -> Unit,
     onNextQuestion: () -> Unit,
 ) {
-
-//    val currentImageResIdState by quizImageViewModel.currentImageResId.collectAsState()
-//    var isAnswerSelected by remember { mutableStateOf(false) }
 
     Box(
         modifier =
@@ -95,89 +94,6 @@ fun MinigameQuizImageScreen(
             ) {
 
 
-//                Column(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(8.dp),
-//                    horizontalAlignment = Alignment.CenterHorizontally
-//                ) {
-//                    Box(
-//                        modifier = Modifier
-//                            .fillMaxWidth(0.50f)
-//                            .aspectRatio(1.2f)
-//                            .weight(0.15f)
-//                            .shadow(
-//                                elevation = 4.dp,
-//                                shape = MaterialTheme.shapes.large,
-//                            )
-//                            .background(
-//                                color = colorResource(id = R.color.surface),
-//                                shape = RoundedCornerShape(16.dp)
-//                            ),
-//                        contentAlignment = Alignment.TopCenter
-//                    ) {
-//                        Image(
-//                            painter = painterResource(id = currentImageResIdState),
-//                            contentDescription = "Imagen",
-//                            modifier = Modifier
-//                                .padding(8.dp)
-//                        )
-//                    }
-//                    Text(
-//                        text = questionTitle,
-//                        style = MaterialTheme.typography.bodyLarge.copy(
-//                            fontSize = 20.sp,
-//                            fontWeight = FontWeight.Bold,
-//                            textAlign = TextAlign.Center
-//                        ),
-//                        modifier = Modifier.padding(top = 8.dp)
-//                    )
-//
-//                    answerOptions.forEach { answer ->
-//                        OptionItemButton(
-//                            textItem = answer.answer,
-//                            isCorrect = answer.isCorrect,
-//                            enabled = true,
-//                            modifier = Modifier
-////                                .shadow(
-////                                    elevation = 4.dp,
-////                                    shape = MaterialTheme.shapes.large,
-////                                )
-//                                .fillMaxWidth()
-//                                .padding(vertical = 8.dp)
-//                                .clip(MaterialTheme.shapes.large)
-//                                .height(50.dp)
-//                                .clickable {
-//                                    isAnswerSelected = true
-//                                }
-//                        ){
-//                            onAnswerSelected(answer.id)
-//                        }
-//                    }
-//                    if(isAnswerSelected){
-//                        SporaPrimaryButton(
-//                            modifier = Modifier
-//                                .padding(top = 8.dp)
-//                                .fillMaxWidth(),
-//                            text = "Continue",
-//                            onClick = {
-//                                onNextQuestion()
-//                                isAnswerSelected = false
-//                            }
-//                        )
-//                    }
-//                    else{
-////                        SporaDisableButton(
-////                            modifier = Modifier
-////                                .padding(top = 8.dp)
-////                                .fillMaxWidth(),
-////                            text = "Continue",
-////                            onClick = {  }
-////                        )
-//                    }
-//
-//                }
-
             }
         }
     }
@@ -199,14 +115,15 @@ fun QuizImageScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(horizontal = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.50f)
                 .aspectRatio(1.2f)
-                .weight(0.15f)
+                .weight(0.1f)
                 .shadow(
                     elevation = 4.dp,
                     shape = MaterialTheme.shapes.large,
@@ -220,6 +137,7 @@ fun QuizImageScreen(
             Image(
                 painter = painterResource(id = currentImageResIdState),
                 contentDescription = "Imagen",
+                contentScale = ContentScale.Inside,
                 modifier = Modifier
                     .padding(8.dp)
             )
@@ -240,10 +158,6 @@ fun QuizImageScreen(
                 isCorrect = answer.isCorrect,
                 enabled = true,
                 modifier = Modifier
-//                                .shadow(
-//                                    elevation = 4.dp,
-//                                    shape = MaterialTheme.shapes.large,
-//                                )
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
                     .clip(MaterialTheme.shapes.large)
@@ -255,6 +169,7 @@ fun QuizImageScreen(
                 onAnswerSelected(answer.id)
             }
         }
+        Spacer(modifier = Modifier.weight(0.05f))
         if(isAnswerSelected){
             SporaPrimaryButton(
                 modifier = Modifier
@@ -268,13 +183,6 @@ fun QuizImageScreen(
             )
         }
         else{
-//                        SporaDisableButton(
-//                            modifier = Modifier
-//                                .padding(top = 8.dp)
-//                                .fillMaxWidth(),
-//                            text = "Continue",
-//                            onClick = {  }
-//                        )
         }
 
     }
