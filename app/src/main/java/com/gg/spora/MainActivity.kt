@@ -111,16 +111,19 @@ class MainActivity : ComponentActivity() {
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
-                                    when(localQuestionType){
+                                    when (localQuestionType) {
                                         0 -> {
                                             navController.navigate(NavigationRoutes.QuizGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
+
                                         1 -> {
                                             navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
+
                                         2 -> {
                                             navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
+
                                         3 -> {
                                             navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
                                         }
@@ -190,7 +193,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(
                             route = NavigationRoutes.Camera.route,
-                            arguments = listOf(navArgument("nameObject") { type = NavType.StringType })
+                            arguments = listOf(navArgument("nameObject") {
+                                type = NavType.StringType
+                            })
                         ) {
                             val nameObject = it.arguments?.getString("nameObject") ?: ""
                             CameraScreen(
@@ -204,20 +209,37 @@ class MainActivity : ComponentActivity() {
 
                         composable<NavigationRoutes.Challenge> {
 
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
-
-                            ChallengeScreen(
-                                modifier = Modifier,
-                                onBackClick = { },
-                                onNavigateToCameraScreen = { nameObject ->
-                                    navController.navigate(NavigationRoutes.Camera.createRoute(
-                                        nameObject.toString()
-                                    ))
-                                },
-                                onNavigateToForestStage = {
-                                    navController.navigate(NavigationRoutes.ForestStage(0))
-                                },
-                                challengeViewModel = challengeViewModel
+//                            val title = it.toRoute<NavigationRoutes.QuizGame>()
+                            MiniGameScreen(
+                                modifier = Modifier.fillMaxSize(),
+                                imageBackground = R.drawable.fondo_minijuegos,
+                                title = "Desafío",
+                                isCorrect = null,
+                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                isFinished = false,
+                                lives = 0,
+                                counterQuestion = 0,
+                                showIcon = false,
+                                onNextQuestion = {},
+                                onResetGame = {},
+                                onBackForestStage = { navController.popBackStack() },
+                                content = {
+                                    ChallengeScreen(
+                                        modifier = Modifier,
+                                        onBackClick = { },
+                                        onNavigateToCameraScreen = { nameObject ->
+                                            navController.navigate(
+                                                NavigationRoutes.Camera.createRoute(
+                                                    nameObject.toString()
+                                                )
+                                            )
+                                        },
+                                        onNavigateToForestStage = {
+                                            navController.navigate(NavigationRoutes.ForestStage(0))
+                                        },
+                                        challengeViewModel = challengeViewModel
+                                    )
+                                }
                             )
                         }
                         composable<NavigationRoutes.QuizImage> {

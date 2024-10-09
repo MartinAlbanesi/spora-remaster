@@ -55,6 +55,7 @@ fun MiniGameScreen(
     lives: Int,
     counterQuestion: Int,
     isFinished: Boolean = false,
+    showIcon: Boolean = true,
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
@@ -125,6 +126,7 @@ fun MiniGameScreen(
                     showDialogConfirm = true
                 },
                 lives = lives,
+                showIcon = showIcon
             )
             LinearProgressIndicator(
                 progress = { progressIndicator },

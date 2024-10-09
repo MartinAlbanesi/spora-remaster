@@ -83,29 +83,29 @@ fun ChallengeScreen(
         buttonContinueEnabled = true
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        Image(
-            painter = painterResource(R.drawable.fondo_minijuegos),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                .offset(y = (-360).dp)
-        )
-        Column(
-            modifier = modifier
-        ) {
-            TopBarWithTitleExitAndIcon(
-                title = stringResource(R.string.title_challenge),
-                onBackClick = onBackClick,
-                showIcon = false
-            )
-            ChampyWithCard(
-                modifier = Modifier.fillMaxSize(),
-                champyImage = champyImage,
-            ) {
+//    Box(
+//        modifier = Modifier.fillMaxSize(),
+//        contentAlignment = Alignment.TopCenter
+//    ) {
+//        Image(
+//            painter = painterResource(R.drawable.fondo_minijuegos),
+//            contentDescription = null,
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .offset(y = (-360).dp)
+//        )
+//        Column(
+//            modifier = modifier
+//        ) {
+//            TopBarWithTitleExitAndIcon(
+//                title = stringResource(R.string.title_challenge),
+//                onBackClick = onBackClick,
+//                showIcon = false
+//            )
+//            ChampyWithCard(
+//                modifier = Modifier.fillMaxSize(),
+//                champyImage = champyImage,
+//            ) {
                 Column(
                     modifier = modifier.padding(15.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -175,7 +175,7 @@ fun ChallengeScreen(
                     Spacer(modifier = Modifier.height(24.dp))
 
                 }
-            }
-        }
-    }
+//            }
+//        }
+//    }
 }
