@@ -226,6 +226,8 @@ class MainActivity : ComponentActivity() {
 
                             val counterQuestion by quizImageViewModel.counterQuestion.collectAsState()
 
+                            val areOptionsEnabled by quizImageViewModel.areOptionsEnabled.collectAsState() //BORRAR SI NO FUNCIONA
+
                             MiniGameScreen(modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 title = title.title,
@@ -245,6 +247,7 @@ class MainActivity : ComponentActivity() {
                                         currentImageResIdState = currentImageResIdState,
                                         onAnswerSelected = quizImageViewModel::isAnswerCorrect,
                                         onNextQuestion = quizImageViewModel::nextQuestion,
+                                        areOptionsEnabled = areOptionsEnabled, //BORRAR SI NO FUNCIONA
                                     )
                                 }
                             )

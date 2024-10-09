@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn (SingletonComponent ::class)
+@InstallIn(SingletonComponent ::class)
 class QuizImageModule {
 
     @Provides
@@ -23,4 +23,5 @@ class QuizImageModule {
     @Provides
     fun provideGetRandomQuestionImage() =
         GetRamdonQuestionImage(provideQuizImageLocalRepository())
+
 }
