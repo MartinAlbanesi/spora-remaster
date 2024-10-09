@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -80,16 +81,14 @@ class MainActivity : ComponentActivity() {
                         composable<NavigationRoutes.Home> {
                             HomeScreen(
                                 onNavigateToForestStage = {
-                                    navController.navigate(NavigationRoutes.ForestStage(0))
+                                    navController.navigate(NavigationRoutes.ForestStage)
                                 }
                             )
                         }
                         composable<NavigationRoutes.Grove> {
 
                         }
-                        composable<NavigationRoutes.ForestStage> { backStackEntry ->
-
-                            val oxygen = backStackEntry.toRoute<NavigationRoutes.ForestStage>()
+                        composable<NavigationRoutes.ForestStage> {
 
                             val stageViewModel = hiltViewModel<StageViewModel>()
 
@@ -102,7 +101,7 @@ class MainActivity : ComponentActivity() {
                             }
 
                             var localQuestionType by rememberSaveable {
-                                mutableStateOf(0)
+                                mutableIntStateOf(0)
                             }
 
                             LevelPreview(
@@ -201,7 +200,8 @@ class MainActivity : ComponentActivity() {
                             CameraScreen(
                                 nameObject = nameObject,
                                 onNavigateToChallengeScreen = {
-                                    navController.navigate(NavigationRoutes.Challenge)
+//                                    navController.navigate(NavigationRoutes.Challenge)
+                                    navController.popBackStack()
                                 },
                                 challengeViewModel = challengeViewModel
                             )
@@ -237,7 +237,7 @@ class MainActivity : ComponentActivity() {
                                             )
                                         },
                                         onNavigateToForestStage = {
-                                            navController.navigate(NavigationRoutes.ForestStage(0))
+                                            navController.navigate(NavigationRoutes.ForestStage)
                                         },
                                         challengeViewModel = challengeViewModel
                                     )

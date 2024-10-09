@@ -8,10 +8,7 @@ object NavigationRoutes {
     object Home
 
     @Serializable
-    data class ForestStage(
-        val oxygen: Int,
-//        val background: Int,
-    )
+    object ForestStage
 
     @Serializable
     data class QuizGame(
