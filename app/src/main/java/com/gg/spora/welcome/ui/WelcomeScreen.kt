@@ -240,8 +240,8 @@ fun TypeUserSelectionScreen(
 //                }
 
                 SporaPrimaryInverseButton(
-                    text = "Ingresar como invitado",
-                    textSize = 30,
+                    text = "Jugar como invitado",
+                    textSize = 20,
                     onClick = onClick,
                     modifier = modifier
                         .size(width = 350.dp, height = 50.dp)

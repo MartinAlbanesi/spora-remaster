@@ -32,7 +32,7 @@ class ChallengeViewModel @Inject constructor() : ViewModel () {
     private fun setObjectsChallengeData(){
         _objectsChallenge.value = mutableMapOf(
             "Botella de plastico" to false,
-            "Caja de carton" to false,
+//            "Caja de carton" to false,
         )
     }
 

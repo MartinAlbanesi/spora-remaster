@@ -28,17 +28,17 @@ object FakeLevelModels {
             starState = StarState.STAR_ONE
         ),
 
+//        Level(
+//            id = 3,
+//            levelName = "Nivel 3",
+//            stageType = StageType.FOREST,
+//            requiredOxygen = 80,
+//            rewardsOxygen = listOf(15, 25, 40),
+//            questionType = QuestionType.RELATIONS,
+//            starState = StarState.STAR_TWO
+//        ),
         Level(
             id = 3,
-            levelName = "Nivel 3",
-            stageType = StageType.FOREST,
-            requiredOxygen = 80,
-            rewardsOxygen = listOf(15, 25, 40),
-            questionType = QuestionType.RELATIONS,
-            starState = StarState.STAR_TWO
-        ),
-        Level(
-            id = 4,
             levelName = "Desafio",
             stageType = StageType.FOREST,
             requiredOxygen = 0,

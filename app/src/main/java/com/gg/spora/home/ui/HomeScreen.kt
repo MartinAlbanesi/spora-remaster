@@ -75,7 +75,7 @@ fun HomeScreen(
             TopAppBarWithDualIcon(
                 firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
-                secondLabel = "0",
+                secondLabel = "75",
                 secondIcon = R.drawable.o2_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush

@@ -117,14 +117,14 @@ class MainActivity : ComponentActivity() {
                                         }
 
                                         1 -> {
-                                            navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-                                        }
-
-                                        2 -> {
                                             navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
 
-                                        3 -> {
+//                                        2 -> {
+//                                            navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
+//                                        }
+
+                                        2 -> {
                                             navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
                                         }
                                     }
@@ -135,7 +135,7 @@ class MainActivity : ComponentActivity() {
                             )
 
                             StageScreen(
-                                oxygen = oxygen.oxygen,
+                                oxygen = 75,
                                 levels = levels,
                                 onNavigateToChallenge = { title ->
                                     navController.navigate(NavigationRoutes.Challenge)
@@ -220,6 +220,8 @@ class MainActivity : ComponentActivity() {
                                 lives = 0,
                                 counterQuestion = 0,
                                 showIcon = false,
+                                showButtonContinue = false,
+                                showProgressBar = false,
                                 onNextQuestion = {},
                                 onResetGame = {},
                                 onBackForestStage = { navController.popBackStack() },
