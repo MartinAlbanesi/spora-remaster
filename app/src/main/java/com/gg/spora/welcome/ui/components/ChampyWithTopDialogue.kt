@@ -30,18 +30,21 @@ import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun ChampyWithTopDialogue(
+    modifier: Modifier = Modifier,
     champy: Int,
     dialogue: String,
     x: Dp = 0.dp,
     y: Dp = 0.dp,
     size: Int = 250,
-    modifier: Modifier = Modifier
 ) {
 
-    Box(contentAlignment = Alignment.Center) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+    ) {
 
         Column(
-            modifier = modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.End,
         ) {
 
