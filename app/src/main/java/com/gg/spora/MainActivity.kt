@@ -16,12 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.gg.spora.camera.CameraScreen
 import androidx.navigation.toRoute
-import com.gg.spora.challenge.ui.ChallengeListObject
 import com.gg.spora.challenge.ui.ChallengeScreen
+import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
@@ -51,7 +54,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     val navController = rememberNavController()
-
+                    val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
                         startDestination = NavigationRoutes.Welcome,
@@ -185,28 +188,37 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        composable(
+                            route = NavigationRoutes.Camera.route,
+                            arguments = listOf(navArgument("nameObject") { type = NavType.StringType })
+                        ) {
+                            val nameObject = it.arguments?.getString("nameObject") ?: ""
+                            CameraScreen(
+                                nameObject = nameObject,
+                                onNavigateToChallengeScreen = {
+                                    navController.navigate(NavigationRoutes.Challenge)
+                                },
+                                challengeViewModel = challengeViewModel
+                            )
+                        }
+
                         composable<NavigationRoutes.Challenge> {
 
                             val title = it.toRoute<NavigationRoutes.QuizGame>()
 
                             ChallengeScreen(
                                 modifier = Modifier,
-                                imageBackground = R.drawable.fondo_minijuegos,
-                                champyImage = R.drawable.champy_celebrando_brazoslevantados,
-                                onBackClick = { }
-                            ) {
-                                ChallengeListObject(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
-                                    recyclerOptions = mapOf(
-                                        "Vidrio" to true,
-                                        "Residuos Orgánicos" to null,
-                                        "Papel y Cartón" to null,
-                                        "Envases de Plástico" to null,
-                                    )
-                                )
-                            }
+                                onBackClick = { },
+                                onNavigateToCameraScreen = { nameObject ->
+                                    navController.navigate(NavigationRoutes.Camera.createRoute(
+                                        nameObject.toString()
+                                    ))
+                                },
+                                onNavigateToForestStage = {
+                                    navController.navigate(NavigationRoutes.ForestStage(0))
+                                },
+                                challengeViewModel = challengeViewModel
+                            )
                         }
                         composable<NavigationRoutes.QuizImage> {
 

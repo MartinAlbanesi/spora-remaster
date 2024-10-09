@@ -35,9 +35,14 @@ sealed class NavigationRoutes {
     ): NavigationRoutes()
 
     @Serializable
+    object Camera {
+        const val route = "camera/{nameObject}"
+        fun createRoute(nameObject: String) = "camera/$nameObject"
+    }
+
+    @Serializable
     data class RelationsGame(
         val title: String
     ): NavigationRoutes()
-
 
 }
