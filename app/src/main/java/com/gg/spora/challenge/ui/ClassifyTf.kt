@@ -2,7 +2,7 @@ package com.gg.spora.challenge.ui
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.gg.spora.ml.ModelObject
+import com.gg.spora.ml.ModelObjects
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
@@ -11,7 +11,7 @@ import java.nio.ByteOrder
 class ClassifyTf(context : Context) {
 
     // Carga el modelo de TensorFlow Lite
-    private val modelObj = ModelObject.newInstance(context)
+    private val modelObj = ModelObjects.newInstance(context)
 
     fun classifyImage(bitmap: Bitmap, selectedObject: String, onResult: (Boolean) -> Unit) {
         var resultScan = false

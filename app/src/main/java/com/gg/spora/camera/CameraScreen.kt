@@ -41,7 +41,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.challenge.ui.classes
-import com.gg.spora.ml.ModelObject
+import com.gg.spora.ml.ModelObjects
 import kotlinx.coroutines.delay
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -202,7 +202,7 @@ fun classifyImage(context : Context, bitmap: Bitmap, selectedObject: String, onR
     var resultScan = false
 
     // Carga el modelo de TensorFlow Lite
-    val modelObj = ModelObject.newInstance(context)
+    val modelObj = ModelObjects.newInstance(context)
 
     val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
 
