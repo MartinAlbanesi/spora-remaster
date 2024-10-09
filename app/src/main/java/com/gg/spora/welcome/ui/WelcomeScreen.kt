@@ -226,7 +226,7 @@ fun TypeUserSelectionScreen(
 
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_curioso_brazos_al_cuerpo,
-                dialogue = "Pero primero, ¿me contas sobre vos?",
+                dialogue = "Pero primero, ¿me contás sobre vos?",
                 x = -(30).dp,
                 modifier = Modifier.align(Alignment.Center)
             )
@@ -240,7 +240,7 @@ fun TypeUserSelectionScreen(
 //                }
 
                 SporaPrimaryInverseButton(
-                    text = "Jugar como invitado",
+                    text = "Ingresar como invitado",
                     textSize = 30,
                     onClick = onClick,
                     modifier = modifier

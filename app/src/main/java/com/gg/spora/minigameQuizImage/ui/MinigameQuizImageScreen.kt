@@ -145,12 +145,12 @@ fun QuizImageScreen(
         }
         Text(
             text = questionTitle,
-            style = MaterialTheme.typography.bodyLarge.copy(
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            ),
-            modifier = Modifier.padding(top = 8.dp)
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
         )
 
         answerOptions.forEach { answer ->

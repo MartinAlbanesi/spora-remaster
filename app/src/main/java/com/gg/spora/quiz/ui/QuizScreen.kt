@@ -40,7 +40,7 @@ fun QuizScreen(
             text = questionTitle,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
+            fontSize = 20.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .align(alignment = Alignment.TopCenter)

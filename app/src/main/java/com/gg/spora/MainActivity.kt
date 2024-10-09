@@ -122,7 +122,7 @@ class MainActivity : ComponentActivity() {
                                             navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
                                         }
                                         3 -> {
-                                            navController.navigate(NavigationRoutes.Challenge("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
+                                            navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
                                         }
                                     }
                                 },
@@ -135,7 +135,7 @@ class MainActivity : ComponentActivity() {
                                 oxygen = oxygen.oxygen,
                                 levels = levels,
                                 onNavigateToChallenge = { title ->
-                                    navController.navigate(NavigationRoutes.Challenge(title))
+                                    navController.navigate(NavigationRoutes.Challenge)
                                 },
                                 popBackStack = {
                                     navController.popBackStack()
