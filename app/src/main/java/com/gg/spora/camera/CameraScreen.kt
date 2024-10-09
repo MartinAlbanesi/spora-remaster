@@ -15,7 +15,10 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -23,15 +26,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.gg.spora.R
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.challenge.ui.classes
 import com.gg.spora.ml.ModelObject
+import kotlinx.coroutines.delay
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
@@ -43,6 +54,10 @@ fun CameraScreen(
     onNavigateToChallengeScreen: () -> Unit,
     challengeViewModel: ChallengeViewModel = hiltViewModel(),
 ) {
+
+    var isScanComplete by remember { mutableStateOf(false) }
+    val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.success))
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
@@ -54,6 +69,29 @@ fun CameraScreen(
     LaunchedEffect(challengeViewModel.objectsChallenge) {
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
             objectsChallenge = objects
+        }
+    }
+
+    if (isScanComplete) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Dialog(onDismissRequest = {}) {
+                LottieAnimation(
+                    composition = lottie.value,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Center),
+                )
+
+                LaunchedEffect(lottie.isComplete) {
+                    delay(1600)
+                    onNavigateToChallengeScreen()
+                }
+            }
         }
     }
 
@@ -102,7 +140,8 @@ fun CameraScreen(
                                                     }
                                                 )
                                                 isCapturing = false
-                                                onNavigateToChallengeScreen()
+//                                                onNavigateToChallengeScreen()
+                                                isScanComplete = true
                                             }
                                         }
                                         imageProxy.close()
