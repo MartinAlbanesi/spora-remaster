@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.gg.spora.R
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
+import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.minigameQuizImage.domain.model.GetRamdonQuestionImage
 import com.gg.spora.minigameQuizImage.domain.model.model.ImageQuestionType
 import com.gg.spora.minigameQuizImage.domain.model.model.QuestionImage
@@ -12,8 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
-
-const val MAX_QUESTIONS = 5
 
 @HiltViewModel
 class QuizImageViewModel @Inject constructor(
