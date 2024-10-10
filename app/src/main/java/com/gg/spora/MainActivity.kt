@@ -29,8 +29,8 @@ import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.MiniGameScreen
-import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
-import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
+import com.gg.spora.core.ui.animations.screenFadeWithSlideInToLeft
+import com.gg.spora.core.ui.animations.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen

@@ -1,4 +1,4 @@
-package com.gg.spora.core.ui.animations
+package com.gg.spora.core.utils.enums
 
 import com.gg.spora.R
 
