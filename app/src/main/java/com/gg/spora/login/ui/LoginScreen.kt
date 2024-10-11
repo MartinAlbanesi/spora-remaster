@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -55,7 +56,8 @@ fun LoginScreen(
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .graphicsLayer { alpha = 0.5f }
+                .graphicsLayer { alpha = 0.5f },
+            contentScale = androidx.compose.ui.layout.ContentScale.FillBounds
         )
 
         // Contenido principal centrado verticalmente
@@ -100,7 +102,7 @@ fun LoginScreen(
 
             // Botón de confirmar
             SporaPrimaryButton(
-                text = "Iniciar Sesión",
+                text = "Confirmar",
                 textSize = 20,
                 onClick = onLoginClick,
                 modifier = Modifier.fillMaxWidth()
@@ -157,9 +159,10 @@ fun LoginScreen(
                 .padding(16.dp) // Espaciado desde el borde de la pantalla
         ) {
             Icon(
-                imageVector = Icons.Filled.ArrowBack,
+                imageVector = Icons.Filled.KeyboardArrowLeft,
                 contentDescription = "Volver",
-                tint = Color.White
+                tint = Color.White,
+                modifier = Modifier.size(32.dp)
             )
         }
 
