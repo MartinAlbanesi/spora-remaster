@@ -160,7 +160,7 @@ fun ChallengeScreen(
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = continueButtonColor,
-                            contentColor = colorResource(id = R.color.white)
+                            contentColor = Color.White
                         )
                     ) {
                         Text(

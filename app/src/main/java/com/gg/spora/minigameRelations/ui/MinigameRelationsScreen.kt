@@ -140,7 +140,7 @@ fun MinigameRelationsScreen(
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = continueButtonColor,
-                contentColor = colorResource(id = R.color.white)
+                contentColor = Color.White
             )
         ) {
             Text(
@@ -176,7 +176,7 @@ fun AnswerButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
-            contentColor = colorResource(id = R.color.black)
+            contentColor = Color.Black
         ),
         modifier = Modifier
             .height(50.dp)
