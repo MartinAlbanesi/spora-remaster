@@ -2,13 +2,19 @@ package com.gg.spora.challenge.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -24,7 +30,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,49 +65,59 @@ fun ChampyDialogConfirm(
                 ),
                 shape = RoundedCornerShape(16.dp),
                 modifier = modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
+                    .padding(15.dp)
             ) {
-
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.fillMaxWidth().padding(15.dp)
-                ) {
-
+                    modifier = modifier
+                        .padding(15.dp)
+                ){
                     Text(
                         text = nameObject,
+                        fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )
                     Row(
-                        modifier = Modifier.clip(shape = RoundedCornerShape(20.dp))
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = modifier.clip(shape = RoundedCornerShape(20.dp))
                             .background(color = MaterialTheme.colorScheme.background)
+                            .padding(10.dp)
                     )
                     {
-                        Column {
+                        Column(
+                            modifier = modifier.width(220.dp)
+                        )
+                        {
                             Text(
                                 text = contentObjectDescription,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                color = Color.Black,
+                                fontSize = 24.sp
+                            ) }
+                        Column(
+                            modifier = modifier.width(120.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.botella_de_plastico),
+                                contentDescription = "Botella de Plastico",
+                                modifier = modifier.size(100.dp)
                             )
                         }
-                        Column {
-                        }
                     }
+                }
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-
-                        SporaPrimaryButton(
-                            text = "Salir", //if (starsState.starCount != 0) "Siguiente" else "Volver",
-                            onClick = onContinueButton,
-                            modifier = Modifier
-                                .padding(8.dp)
-                        )
-
-                    }
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SporaPrimaryButton(
+                        text = "Continuar",
+                        onClick = onContinueButton,
+                        modifier = modifier
+                            .padding(8.dp)
+                    )
 
                 }
             }
