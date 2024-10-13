@@ -59,7 +59,6 @@ fun ChampyDialogConfirm(
                 Image(
                     painter = painterResource(id = backgroundImage),
                     contentDescription = "Fondo minijuegos",
-                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(300.dp)
