@@ -48,6 +48,13 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
+
+/**
+ * Screen init the camera
+ * @param nameObject: The name of the object that was selected in the challenge list.
+ * @param onNavigateToChallengeScreen: Navigate when user returns from camera
+ * @param challengeViewModel: View Model of the challenge
+ */
 @Composable
 fun CameraScreen(
     nameObject: String,
@@ -160,12 +167,15 @@ fun CameraScreen(
             }, ContextCompat.getMainExecutor(context))
         }
     } else {
-        LaunchedEffect(Unit) {
-            cameraPermissionState.launchPermissionRequest()
-        }
+        LaunchPermissionRequest(cameraPermissionState)
     }
 }
 
+
+/**
+ * Get the permission state
+ * @param permission: The permission that the user wants request.
+ */
 @Composable
 fun rememberPermissionState(permission: String): PermissionState {
     val context = LocalContext.current
@@ -182,7 +192,7 @@ fun rememberPermissionState(permission: String): PermissionState {
         permissionState.value = permissionResult == PackageManager.PERMISSION_GRANTED
 
         onDispose {
-            // Cleanup if needed
+            // Completar o eliminar el onDispose
         }
     }
 
@@ -191,6 +201,10 @@ fun rememberPermissionState(permission: String): PermissionState {
     }
 }
 
+/**
+ * Ask user for permission
+ * @param cameraPermissionState: Instance of permission
+ */
 @Composable
 fun LaunchPermissionRequest(cameraPermissionState : PermissionState){
     LaunchedEffect(Unit) {
@@ -198,6 +212,13 @@ fun LaunchPermissionRequest(cameraPermissionState : PermissionState){
     }
 }
 
+
+/**
+ * Classifies with Tensor flow the image when the camera takes screen
+ * @param context: Context
+ * @param bitmap: Bitmap of the image
+ * @param selectedObject: String of the object that the user wants scan
+ */
 fun classifyImage(context : Context, bitmap: Bitmap, selectedObject: String, onResult: (Boolean) -> Unit) {
     var resultScan = false
 
@@ -221,7 +242,10 @@ fun classifyImage(context : Context, bitmap: Bitmap, selectedObject: String, onR
     onResult(resultScan)
 }
 
-
+/**
+ * Converter bitmap of image to the format necessary
+ * @param bitmap: Bitmap of the image
+ */
 private fun preprocessImage(bitmap: Bitmap): ByteBuffer {
     val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
     val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
@@ -239,6 +263,10 @@ private fun preprocessImage(bitmap: Bitmap): ByteBuffer {
 
     return byteBuffer
 }
+
+/**
+ * Class of permission
+ */
 data class PermissionState(
     val hasPermission: Boolean,
     val launchPermissionRequest: () -> Unit
