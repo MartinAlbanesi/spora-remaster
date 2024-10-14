@@ -20,6 +20,9 @@ object NavigationRoutes {
     object Welcome
 
     @Serializable
+    object SignUp
+
+    @Serializable
     object Grove
 
     @Serializable

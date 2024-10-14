@@ -81,8 +81,22 @@ class MainActivity : ComponentActivity() {
                                     }
                                 },
                                 setGuestName = { welcomeViewModel.setGuestName(it) },
+                                modifier = Modifier,
+                                onNavigateToSignUp = {
+                                    navController.navigate(NavigationRoutes.SignUp)
+                                }
                             )
                         }
+
+                        composable<NavigationRoutes.SignUp> {
+
+                            val loginViewModel = hiltViewModel<LoginViewModel>()
+
+                            LoginScreen(
+                                viewModel = loginViewModel
+                            )
+                        }
+
                         composable<NavigationRoutes.Home> {
                             HomeScreen(
                                 onNavigateToForestStage = {
