@@ -6,6 +6,26 @@ import com.gg.spora.tutorials.Tutorial
 object TutorialModels {
 
     val name = "Titi"
+
+    val initialTutorial = listOf<Tutorial>(
+        Tutorial(
+            "Este es mi hogar, el Árbol Madre. Acá vive mi familia “Pestalotiopsis microspora”",
+            ChampyStates.SMILING
+        ),
+        Tutorial(
+            "Nos encargamos de limpiar los residuos del bosque y cuidar a los árboles que nos rodean.",
+            ChampyStates.NORMAL
+        ),
+        Tutorial(
+            "Pero últimamente, estamos agotados debido a la contaminación que causan los humanos que viven fuera del bosque.",
+            ChampyStates.ANGRY
+        ),
+        Tutorial(
+            "¡Es por eso que necesitamos de tu ayuda! Para que el bosque sobreviva, debemos aprender a cuidar el medioambiente.",
+            ChampyStates.GREETING
+        )
+
+    )
     val homeTutorials = listOf<Tutorial>(
         Tutorial(
             "Acá vas a poder ver la cantidad de árboles que están bajo nuestro cuidado.",
@@ -157,5 +177,24 @@ object TutorialModels {
             "Oh... Es bueno ver a las nuevas generaciones interesadas en aprender.",
             ChampyStates.SMILING
         )
+    )
+
+    val bottleChallengeTutorial = listOf<Tutorial>(
+        Tutorial(
+            "¡Wow! Encontraste una botella, voy a contarte un poco sobre ella.",
+            ChampyStates.SMILING
+        ),
+        Tutorial(
+            "Las botellas de plástico se pueden encontrar en muchos lugares y son fáciles de reciclar",
+            ChampyStates.SMILING
+        ),
+        Tutorial(
+            "Al ser de una importancia ecológica alta, es necesario aprender a reciclarlas.",
+            ChampyStates.CURIOUS
+        ),
+        Tutorial(
+            "Así que, aprendamos juntos sobre cómo reciclar este tipo de objetos.",
+            ChampyStates.GREETING
+        ),
     )
 }
