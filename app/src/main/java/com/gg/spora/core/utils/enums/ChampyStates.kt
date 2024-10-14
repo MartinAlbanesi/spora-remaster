@@ -9,6 +9,7 @@ enum class ChampyStates {
     GREETING,
     DEFEATED,
     BLINK,
+    NORMAL,
     CURIOUS;
 
     val image: Int
@@ -19,5 +20,6 @@ enum class ChampyStates {
             CURIOUS -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
             DEFEATED -> R.drawable.champy_derrotado_brazosalcuerpo
             BLINK -> R.drawable.champy_sonriente_brazos_al_cuerpo_pestaneo
+            NORMAL -> R.drawable.champy_serio_idle
         }
 }
