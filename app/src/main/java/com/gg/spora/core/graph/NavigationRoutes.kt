@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 object NavigationRoutes {
 
+
     @Serializable
     object Home
 

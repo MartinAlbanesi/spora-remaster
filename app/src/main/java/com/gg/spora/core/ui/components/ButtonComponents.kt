@@ -32,10 +32,7 @@ fun SporaPrimaryButton(
     Button(
         onClick = { onClick() },
         modifier = modifier,
-        //colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFF69C2C) // modificar para usar material
-        ),
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         shape = ButtonDefaults.elevatedShape
     ) {
         Text(text = text, fontSize = textSize.sp, fontWeight = FontWeight.Bold)

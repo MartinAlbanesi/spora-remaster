@@ -36,6 +36,8 @@ import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
+import com.gg.spora.login.ui.LoginScreen
+import com.gg.spora.login.ui.LoginViewModel
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
@@ -56,7 +58,7 @@ class MainActivity : ComponentActivity() {
             SporaTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
-                ) {
+                ){
                     val navController = rememberNavController()
                     val challengeViewModel = ChallengeViewModel()
                     NavHost(
