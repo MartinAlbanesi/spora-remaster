@@ -1,10 +1,10 @@
 package com.gg.spora.quiz.domain.model
 
-import com.gg.spora.core.utils.enums.QuestionType
+import com.gg.spora.core.utils.enums.TypeQuestion
 
 data class Answer(
     val id: String,
     val answer: String,
     val isCorrect: Boolean? = null,
-    val type: QuestionType,
+    val type: TypeQuestion,
 )

@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                     val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.ForestStage,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,

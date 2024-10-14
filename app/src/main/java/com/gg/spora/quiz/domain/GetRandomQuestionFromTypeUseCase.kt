@@ -1,19 +1,21 @@
 package com.gg.spora.quiz.domain
 
-import com.gg.spora.core.utils.enums.QuestionType
+import com.gg.spora.core.utils.enums.GameType
+import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.quiz.domain.model.Question
 import javax.inject.Inject
 
 class GetRandomQuestionFromTypeUseCase @Inject constructor(
     private val quizLocalRepository: IQuizLocalRepository
 ) {
-    operator fun invoke(count : Int, type: QuestionType): List<Question> {
+    operator fun invoke(count : Int, type: GameType, typeQuestion: TypeQuestion): List<Question> {
 
         val randomQuestions = quizLocalRepository
-            .getRandomQuestions(count,type)
+            .getRandomQuestions(count,type,typeQuestion)
             .map { question ->
+                val answer = quizLocalRepository.getAnswerById(question.answerId)
                 val newQuestion = question.copy(
-                    answers = (question.answers + question.answer).shuffled()
+                    answers = (question.answers + answer).shuffled()
                 )
                 newQuestion
             }

@@ -13,10 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -28,7 +24,7 @@ import com.gg.spora.core.fake.FakeLevelModels
 import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.enums.QuestionType
+import com.gg.spora.core.utils.enums.GameType
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -38,7 +34,7 @@ fun StageScreen(
     oxygen: Int,
     levels: List<Level>,
     onNavigateToChallenge: (String) -> Unit,
-    onClickLevelItem: (Level, Boolean, QuestionType) -> Unit,
+    onClickLevelItem: (Level, Boolean, GameType) -> Unit,
     popBackStack: () -> Unit,
 ) {
     Scaffold(
@@ -77,21 +73,21 @@ fun StageScreen(
                     levels,
                     key = { _, level -> level.id }
                 ) { index, level ->
-                    val navigateGame = when (level.questionType) {
-                        QuestionType.QUIZ -> QuestionType.QUIZ
-                        QuestionType.RELATIONS -> QuestionType.RELATIONS
-                        QuestionType.QUIZ_IMAGE -> QuestionType.QUIZ_IMAGE
-                        QuestionType.CHALLENGE -> QuestionType.CHALLENGE
+                    val navigateGame = when (level.gameType) {
+                        GameType.QUIZ -> GameType.QUIZ
+                        GameType.RELATIONS -> GameType.RELATIONS
+                        GameType.QUIZ_IMAGE -> GameType.QUIZ_IMAGE
+                        GameType.CHALLENGE -> GameType.CHALLENGE
                     }
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
-                        isChallenge = level.questionType == QuestionType.CHALLENGE,
+                        isChallenge = level.gameType == GameType.CHALLENGE,
                         stage = level.stageType,
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-                                if (level.questionType == QuestionType.CHALLENGE) {
+                                if (level.gameType == GameType.CHALLENGE) {
                                     onNavigateToChallenge("${level.levelName} - ${level.stageType.label}")
                                 } else {
                                     onClickLevelItem(level, true, navigateGame)

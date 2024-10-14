@@ -3,7 +3,8 @@ package com.gg.spora.quiz.ui
 import androidx.lifecycle.ViewModel
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
-import com.gg.spora.core.utils.enums.QuestionType
+import com.gg.spora.core.utils.enums.GameType
+import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.model.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,11 +48,11 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getRandomQuestions() {
-        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, QuestionType.QUIZ)
+        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, GameType.QUIZ, TypeQuestion.MARTIN)
     }
 
     fun isAnswerCorrect(answerId: String) {
-        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answerId == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 // si la respuesta es la correcta
