@@ -1,4 +1,4 @@
-package com.gg.spora.tutorials
+package com.gg.spora.tutorials.model
 
 import com.gg.spora.core.utils.enums.ChampyStates
 
