@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
@@ -49,7 +50,7 @@ fun Preview() {
                 champyStates = ChampyStates.SMILING,
                 mushyStates = MushyStates.IDLE,
                 text = "Oh querido Champy y un amigo, ¿Cómo están?",
-                isChampyTalking = false
+                isChampyTalking = true
             )
         }
     }
@@ -99,21 +100,44 @@ fun ChampyWithBottomTextAndMushy(
             horizontalArrangement = Arrangement.SpaceAround
         ) {
 
-            Image(
-                painter = painterResource(id = mushyStates.image),
-                contentDescription = "Mushy state",
-                modifier = Modifier
-                    .size(220.dp)
-                    .offset(x = (-30).dp, y = (-50).dp)
-            )
+            if (isChampyTalking) {
+                Image(
+                    painter = painterResource(id = mushyStates.image),
+                    contentDescription = "Mushy state",
+                    modifier = Modifier
+                        .size(220.dp)
+                        .offset(x = (-30).dp, y = (-50).dp),
+                    colorFilter = ColorFilter.lighting(Color.Gray, add = Color.Transparent)
+                )
 
-            Image(
-                painter = painterResource(id = champyStates.image),
-                contentDescription = "Champy state",
-                modifier = Modifier
-                    .size(220.dp)
-                    .offset(y = (-50).dp)
-            )
+                Image(
+                    painter = painterResource(id = champyStates.image),
+                    contentDescription = "Champy state",
+                    modifier = Modifier
+                        .size(220.dp)
+                        .offset(y = (-50).dp)
+                )
+
+            }
+            else {
+
+                Image(
+                    painter = painterResource(id = mushyStates.image),
+                    contentDescription = "Mushy state",
+                    modifier = Modifier
+                        .size(220.dp)
+                        .offset(x = (-30).dp, y = (-50).dp)
+                )
+
+                Image(
+                    painter = painterResource(id = champyStates.image),
+                    contentDescription = "Champy state",
+                    modifier = Modifier
+                        .size(220.dp)
+                        .offset(y = (-50).dp),
+                    colorFilter = ColorFilter.lighting(Color.Gray, add = Color.Transparent)
+                )
+            }
         }
 
         DialogueWithBottomText(modifier = Modifier, text, isChampyTalking)
