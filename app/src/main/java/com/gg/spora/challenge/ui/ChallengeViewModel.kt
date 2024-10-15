@@ -9,14 +9,14 @@ import javax.inject.Inject
 @HiltViewModel
 class ChallengeViewModel @Inject constructor() : ViewModel () {
 
+    // MutableLiveData para manejar el estado mutable
     private val _objectsChallenge = MutableLiveData<MutableMap<String, Boolean>>()
-
-    var objectsChallenge: LiveData<MutableMap<String, Boolean>> = _objectsChallenge
+    val objectsChallenge: LiveData<MutableMap<String, Boolean>> = _objectsChallenge
 
     private val _selectedObject = MutableLiveData<String>()
-    val selectedObject: LiveData<String> get() = _selectedObject
+    val selectedObject: LiveData<String> = _selectedObject
 
-    init{
+    init {
         setObjectsChallengeData()
     }
 
@@ -24,16 +24,16 @@ class ChallengeViewModel @Inject constructor() : ViewModel () {
         _selectedObject.value = objectName
     }
 
-    fun setObjectsChallenge(newObjectsChallenge : MutableMap<String, Boolean>) {
-        _objectsChallenge.value = newObjectsChallenge
-        objectsChallenge = _objectsChallenge
+    fun setObjectInObjectsChallenge() {
+        val currentMap = _objectsChallenge.value ?: mutableMapOf()
+        currentMap[selectedObject.toString()] = true
+        _objectsChallenge.value = currentMap
     }
 
-    private fun setObjectsChallengeData(){
+    private fun setObjectsChallengeData() {
         _objectsChallenge.value = mutableMapOf(
             "Botella de plastico" to false,
-//            "Caja de carton" to false,
+            "Caja de carton" to false,
         )
     }
-
 }
