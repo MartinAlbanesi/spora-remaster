@@ -18,16 +18,16 @@ class StageViewModel @Inject constructor(
     private val _stage = MutableStateFlow<StageLevel?>(null)
     val stage = _stage.asStateFlow()
 
-    private val _levels = MutableStateFlow<List<Level>>(emptyList())
-    val levels = _levels.asStateFlow()
+//    private val _levels = MutableStateFlow<List<Level>>(emptyList())
+//    val levels = _levels.asStateFlow()
 
     private val _currentLevel = MutableStateFlow<Level?>(null)
     val currentLevel = _currentLevel.asStateFlow()
 
     init {
-        getLevels()
-        getCurrentLevel()
+//        getLevels()
         getStage()
+        getCurrentLevel()
     }
 
     private fun getStage(){
@@ -35,15 +35,19 @@ class StageViewModel @Inject constructor(
     }
 
     private fun getCurrentLevel() {
-        _currentLevel.value = _levels.value.first()
+        _currentLevel.value = _stage.value?.levels?.first()
     }
 
-    private fun getLevels() {
-        _levels.value = stageRepository.getLevels(TypeStage.FOREST)
-    }
+//    private fun getLevels() {
+//        _levels.value = stageRepository.getLevels(TypeStage.FOREST)
+//    }
 
     fun onLevelSelected(level: Level) {
         _currentLevel.value = level
+    }
+
+    fun updateLevel(level: Level) {
+        stageRepository.updateLevel(level)
     }
 
 

@@ -116,23 +116,6 @@ class MainActivity : ComponentActivity() {
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
                                     navController.navigate(NavigationRoutes.QuizGame(currentLevel!!.getLevelWithStage()))
-//                                    when (localQuestionType) {
-//                                        0 -> {
-//                                            navController.navigate(NavigationRoutes.QuizGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-//                                        }
-//
-//                                        1 -> {
-//                                            navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-//                                        }
-//
-////                                        2 -> {
-////                                            navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-////                                        }
-//
-//                                        2 -> {
-//                                            navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
-//                                        }
-//                                    }
                                 },
                                 onClickSecondaryButton = {
                                     showLevelPreview = false

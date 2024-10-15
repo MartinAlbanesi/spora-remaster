@@ -9,14 +9,14 @@ import com.gg.spora.miniGames.domain.model.Challenge
 
 object FakeStageModels {
 
-    val fakeChallenge = Challenge(
+    var fakeChallenge = Challenge(
         id = "1",
         objets = mapOf(
             "Botella de plastico" to false,
         ),
     )
 
-    val fakeLevels = listOf(
+    var fakeLevels = listOf(
 
         Level(
             id = "1",
@@ -69,7 +69,7 @@ object FakeStageModels {
 //        )
     )
 
-    val fakeStage = StageLevel(
+    var fakeStage = StageLevel(
         id = "1",
         typeStage = TypeStage.FOREST,
         levels = fakeLevels,

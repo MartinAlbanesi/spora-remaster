@@ -8,5 +8,7 @@ interface IStageRepository {
 
     fun getStage(typeStage: TypeStage): StageLevel
 
-    fun getLevels(typeStage: TypeStage): List<Level>
+//    fun getLevels(typeStage: TypeStage): List<Level>
+
+    fun updateLevel(level: Level)
 }
