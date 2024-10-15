@@ -141,13 +141,8 @@ fun CameraScreen(
                                         val bitmap = imageProxy.toBitmap()
                                         classifyImage(context, bitmap, nameObject) { result ->
                                             if (result) {
-                                                challengeViewModel.setObjectsChallenge(
-                                                    objectsChallenge.toMutableMap().apply {
-                                                        this[nameObject] = true
-                                                    }
-                                                )
+                                                challengeViewModel.setObjectInObjectsChallenge()
                                                 isCapturing = false
-//                                                onNavigateToChallengeScreen()
                                                 isScanComplete = true
                                             }
                                         }
