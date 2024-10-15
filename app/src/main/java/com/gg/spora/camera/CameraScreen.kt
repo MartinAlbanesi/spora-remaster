@@ -96,6 +96,8 @@ fun CameraScreen(
 
                 LaunchedEffect(lottie.isComplete) {
                     delay(1600)
+                    challengeViewModel.selectObject(nameObject)
+                    challengeViewModel.setObjectInObjectsChallenge()
                     onNavigateToChallengeScreen()
                 }
             }
@@ -141,20 +143,18 @@ fun CameraScreen(
                                         val bitmap = imageProxy.toBitmap()
                                         classifyImage(context, bitmap, nameObject) { result ->
                                             if (result) {
-                                                challengeViewModel.setObjectInObjectsChallenge()
                                                 isCapturing = false
                                                 isScanComplete = true
                                             }
                                         }
                                         imageProxy.close()
                                     }
-
                                     override fun onError(exception: ImageCaptureException) {
                                         Log.e("CameraScreen", "Image capture failed", exception)
                                     }
                                 }
                             )
-                            handler.postDelayed(this, 2000)
+                            handler.postDelayed(this, 3000)
                         }
                     }
                 }

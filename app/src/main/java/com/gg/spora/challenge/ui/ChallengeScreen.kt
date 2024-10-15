@@ -112,7 +112,6 @@ fun ChallengeScreen(
                         .clip(MaterialTheme.shapes.large)
                         .height(60.dp)
                         .clickable {
-                            challengeViewModel.selectObject(nameObject)
                             onNavigateToCameraScreen(nameObject)
                         },
                     isValidate = it.value
@@ -147,10 +146,10 @@ fun ChallengeScreen(
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-
                     )
             )
         }
+
         Spacer(modifier = Modifier.height(24.dp))
 
     }
