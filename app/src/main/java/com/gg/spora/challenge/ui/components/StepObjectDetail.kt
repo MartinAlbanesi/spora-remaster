@@ -4,24 +4,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
@@ -41,7 +34,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun StepValidationDetail(
     modifier: Modifier = Modifier,
-    stepImage: Int, // Cambié el nombre del parámetro para mayor claridad
+    stepImage: Int,
     stepTitle: String,
     stepDescription: String,
     onPreviousStep: () -> Unit,
@@ -57,52 +50,50 @@ fun StepValidationDetail(
         IconButton(
             onClick = { onPreviousStep() },
             modifier = Modifier
+                .weight(1f)
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.primary),
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                painter = painterResource(id = R.drawable.back_icon),
                 contentDescription = "Previous Step",
-                tint = Color.Black,
-                modifier = Modifier.height(50.dp)
+                modifier = Modifier.size(25.dp)
             )
         }
 
-        // Contenido del paso
         Column(
             modifier = Modifier
-                .weight(1f)
+                .weight(8f)
                 .padding(horizontal = 16.dp)
         ) {
             Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Ícono del paso
                 Image(
-                    painter = painterResource(id = stepImage), // Usa tu imagen
+                    painter = painterResource(id = stepImage),
                     contentDescription = "Step Icon",
-                    modifier = Modifier.size(25.dp) // Tamaño adecuado del ícono
+                    modifier = Modifier.size(25.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp)) // Espacio entre ícono y texto
-                // Título
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = stepTitle,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
 
-            // Línea divisoria
-            Divider(
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 8.dp),
                 thickness = 1.dp,
-                modifier = Modifier.padding(vertical = 8.dp)
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
 
-            // Descripción
             Text(
                 text = stepDescription,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
@@ -110,14 +101,14 @@ fun StepValidationDetail(
         IconButton(
             onClick = { onNextStep() },
             modifier = Modifier
-                .width(25.dp)
+                .weight(1f)
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.primary)
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                painter = painterResource(id = R.drawable.next_icon),
                 contentDescription = "Next Step",
-                tint = Color.Black
+                modifier = Modifier.size(25.dp)
             )
         }
     }
@@ -140,75 +131,3 @@ fun StepValidationDetailPreview() {
         }
     }
 }
-/*
-@Composable
-fun StepObjectDetail(
-    modifier: Modifier = Modifier,
-    onNextButton: () -> Unit,
-    stepImage : Int,
-    stepTitle : String,
-    stepDescription : String
-) {
-
-    Column(
-        modifier = Modifier
-            .clip(
-                RoundedCornerShape(
-                    topStart = 20.dp,
-                )
-            )
-            .background(MaterialTheme.colorScheme.primaryContainer),
-    ){
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier.clip(shape = RoundedCornerShape(20.dp))
-                .background(color = MaterialTheme.colorScheme.background)
-                .padding(10.dp)
-        )
-        {
-            Column(
-                modifier = modifier.width(30.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = stepImage),
-                    contentDescription = "Step",
-                    modifier = modifier.size(30.dp)
-                )
-            }
-            Column(
-                modifier = modifier.width(50.dp)
-            )
-            {
-                Text(
-                    text = stepTitle,
-
-                    color = Color.Black,
-                    fontSize = 24.sp
-                )
-            }
-        }
-    }
-
-
-}
-
-@Preview
-@Composable
-private fun ChampyDialogConfirmPreview() {
-    SporaTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            StepObjectDetail(
-                onNextButton = {},
-                stepImage = 1,
-                stepTitle = "Recicla",
-                stepDescription = "Podes reciclar tu botella de plastico"
-            )
-        }
-    }
-}
-
- */
