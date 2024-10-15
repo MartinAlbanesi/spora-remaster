@@ -1,7 +1,7 @@
 package com.gg.spora.quiz.data.local
 
 import com.gg.spora.core.fake.FakeQuizModels
-import com.gg.spora.core.utils.enums.GameType
+import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.quiz.domain.IQuizLocalRepository
 import com.gg.spora.quiz.domain.model.Answer
@@ -14,9 +14,9 @@ class FakeQuizLocalRepository @Inject constructor(
 
     private val fakeModelsQuiz = FakeQuizModels.fakeQuestions
 
-    override fun getRandomQuestions(count: Int, type: GameType, typeQuestion: TypeQuestion): List<Question> {
+    override fun getRandomQuestions(count: Int, type: TypeGame, typeQuestion: TypeQuestion): List<Question> {
         val randomQuestions = fakeModelsQuiz
-            .filter { it.gameType == type && it.typeQuestion == typeQuestion }
+            .filter { it.typeGame == type && it.typeQuestion == typeQuestion }
             .shuffled()
             .take(count)
         return randomQuestions
@@ -26,7 +26,7 @@ class FakeQuizLocalRepository @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun getRandomAnswers(count: Int, type: GameType): List<Answer> {
+    override fun getRandomAnswers(count: Int, type: TypeGame): List<Answer> {
         TODO("Not yet implemented")
     }
 

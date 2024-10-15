@@ -24,7 +24,7 @@ import com.gg.spora.core.fake.FakeLevelModels
 import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.enums.GameType
+import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -34,7 +34,7 @@ fun StageScreen(
     oxygen: Int,
     levels: List<Level>,
     onNavigateToChallenge: (String) -> Unit,
-    onClickLevelItem: (Level, Boolean, GameType) -> Unit,
+    onClickLevelItem: (Level, Boolean) -> Unit,
     popBackStack: () -> Unit,
 ) {
     Scaffold(
@@ -73,25 +73,25 @@ fun StageScreen(
                     levels,
                     key = { _, level -> level.id }
                 ) { index, level ->
-                    val navigateGame = when (level.gameType) {
-                        GameType.QUIZ -> GameType.QUIZ
-                        GameType.RELATIONS -> GameType.RELATIONS
-                        GameType.QUIZ_IMAGE -> GameType.QUIZ_IMAGE
-                        GameType.CHALLENGE -> GameType.CHALLENGE
-                    }
+//                    val navigateGame = when (level.typeGame) {
+//                        TypeGame.QUIZ -> TypeGame.QUIZ
+//                        TypeGame.RELATIONS -> TypeGame.RELATIONS
+//                        TypeGame.QUIZ_IMAGE -> TypeGame.QUIZ_IMAGE
+//                        TypeGame.CHALLENGE -> TypeGame.CHALLENGE
+//                    }
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
-                        isChallenge = level.gameType == GameType.CHALLENGE,
+                        isChallenge = false,
                         stage = level.stageType,
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-                                if (level.gameType == GameType.CHALLENGE) {
-                                    onNavigateToChallenge("${level.levelName} - ${level.stageType.label}")
-                                } else {
-                                    onClickLevelItem(level, true, navigateGame)
-                                }
+//                                if (level.typeGame == TypeGame.CHALLENGE) {
+//                                    onNavigateToChallenge("${level.levelName} - ${level.stageType.label}")
+//                                } else {
+                                    onClickLevelItem(level, true)
+//                                }
                             }
                     )
                 }
@@ -114,7 +114,7 @@ private fun StageScreenPreview() {
                 levels = FakeLevelModels.fakeLevels,
                 onNavigateToChallenge = {},
                 popBackStack = {},
-                onClickLevelItem = { _, _, _ -> }
+                onClickLevelItem = { _, _-> }
 
             )
         }

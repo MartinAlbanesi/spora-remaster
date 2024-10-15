@@ -32,6 +32,7 @@ import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
 import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.forestStage.domain.model.getLevelWithStage
 import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
@@ -103,9 +104,9 @@ class MainActivity : ComponentActivity() {
                                 mutableStateOf(false)
                             }
 
-                            var localQuestionType by rememberSaveable {
-                                mutableIntStateOf(0)
-                            }
+//                            var localQuestionType by rememberSaveable {
+//                                mutableIntStateOf(0)
+//                            }
 
                             LevelPreview(
                                 isVisible = showLevelPreview,
@@ -113,23 +114,24 @@ class MainActivity : ComponentActivity() {
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
-                                    when (localQuestionType) {
-                                        0 -> {
-                                            navController.navigate(NavigationRoutes.QuizGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-                                        }
-
-                                        1 -> {
-                                            navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-                                        }
-
-//                                        2 -> {
-//                                            navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
+                                    navController.navigate(NavigationRoutes.QuizGame(currentLevel!!.getLevelWithStage()))
+//                                    when (localQuestionType) {
+//                                        0 -> {
+//                                            navController.navigate(NavigationRoutes.QuizGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
 //                                        }
-
-                                        2 -> {
-                                            navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
-                                        }
-                                    }
+//
+//                                        1 -> {
+//                                            navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
+//                                        }
+//
+////                                        2 -> {
+////                                            navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
+////                                        }
+//
+//                                        2 -> {
+//                                            navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
+//                                        }
+//                                    }
                                 },
                                 onClickSecondaryButton = {
                                     showLevelPreview = false
@@ -145,10 +147,10 @@ class MainActivity : ComponentActivity() {
                                 popBackStack = {
                                     navController.popBackStack()
                                 },
-                                onClickLevelItem = { level, showPreview, questionType ->
+                                onClickLevelItem = { level, showPreview ->
                                     stageViewModel.onLevelSelected(level)
                                     showLevelPreview = showPreview
-                                    localQuestionType = questionType.typeNumber
+//                                    localQuestionType = questionType.typeNumber
                                 }
                             )
                         }

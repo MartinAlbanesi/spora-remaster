@@ -1,6 +1,6 @@
 package com.gg.spora.core.fake
 
-import com.gg.spora.core.utils.enums.GameType
+import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.quiz.domain.model.Answer
 import com.gg.spora.quiz.domain.model.Question
@@ -255,7 +255,7 @@ object FakeQuizModels {
             question = "¿Cuál de estas acciones pertenece a la regla de las 3 erres de la sostenibilidad?",
             answers = listOf(fakeAnswers[11], fakeAnswers[12], fakeAnswers[13]),
             answerId = fakeAnswers[10].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -263,7 +263,7 @@ object FakeQuizModels {
             question = "¿Cuál de estos colores pertenece a un contenedor de reciclaje?",
             answers = listOf(fakeAnswers[15], fakeAnswers[16], fakeAnswers[17]),
             answerId = fakeAnswers[14].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -271,7 +271,7 @@ object FakeQuizModels {
             question = "¿Para qué se utiliza el contenedor rojo?",
             answers = listOf(fakeAnswers[19], fakeAnswers[20], fakeAnswers[21]),
             answerId = fakeAnswers[18].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -279,7 +279,7 @@ object FakeQuizModels {
             question = "¿Cuánto tarda, como promedio, en degradarse una botella de plástico?",
             answers = listOf(fakeAnswers[23], fakeAnswers[24], fakeAnswers[25]),
             answerId = fakeAnswers[22].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -287,7 +287,7 @@ object FakeQuizModels {
             question = "¿A qué contenedor deberías tirar los bricks?",
             answers = listOf(fakeAnswers[27], fakeAnswers[28], fakeAnswers[29]),
             answerId = fakeAnswers[26].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -295,7 +295,7 @@ object FakeQuizModels {
             question = "¿A qué contenedor deberías tirar las latas?",
             answers = listOf(fakeAnswers[27], fakeAnswers[28], fakeAnswers[29]),
             answerId = fakeAnswers[26].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -303,7 +303,7 @@ object FakeQuizModels {
             question = "¿Cuál de estos objetos no deben tirarse en el contenedor de vidrio?",
             answers = listOf(fakeAnswers[31], fakeAnswers[32], fakeAnswers[33]),
             answerId = fakeAnswers[30].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -311,7 +311,7 @@ object FakeQuizModels {
             question = "¿Dónde debes depositar los residuos eléctricos y electrónicos cuando ya no son útiles?",
             answers = listOf(fakeAnswers[35], fakeAnswers[36], fakeAnswers[37]),
             answerId = fakeAnswers[34].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -319,7 +319,7 @@ object FakeQuizModels {
             question = "¿Cómo podemos solucionar la deforestación?",
             answers = listOf(fakeAnswers[39], fakeAnswers[40], fakeAnswers[41]),
             answerId = fakeAnswers[38].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
         Question(
@@ -327,7 +327,7 @@ object FakeQuizModels {
             question = "¿Qué es el esmog?",
             answers = listOf(fakeAnswers[43], fakeAnswers[44], fakeAnswers[45]),
             answerId = fakeAnswers[42].id,
-            gameType = GameType.QUIZ,
+            typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
         ),
     )

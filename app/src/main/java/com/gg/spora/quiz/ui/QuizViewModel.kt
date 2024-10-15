@@ -3,7 +3,7 @@ package com.gg.spora.quiz.ui
 import androidx.lifecycle.ViewModel
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
-import com.gg.spora.core.utils.enums.GameType
+import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.quiz.domain.model.Question
@@ -48,7 +48,7 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getRandomQuestions() {
-        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, GameType.QUIZ, TypeQuestion.MARTIN)
+        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, TypeGame.QUIZ, TypeQuestion.MARTIN)
     }
 
     fun isAnswerCorrect(answerId: String) {

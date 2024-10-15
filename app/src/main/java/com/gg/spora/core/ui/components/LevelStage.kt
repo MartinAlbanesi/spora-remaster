@@ -35,7 +35,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun LevelStageItem(
     modifier: Modifier = Modifier,
-    itemNumber: Int,
+    itemNumber: String,
     starsState: StarState,
     stage: StageType,
     isChallenge: Boolean,
@@ -71,7 +71,7 @@ fun LevelStageItem(
         )
         if (!isChallenge) {
             Text(
-                text = itemNumber.toString(),
+                text = itemNumber,
                 color = Color.Black,
                 fontWeight = FontWeight.Black,
                 fontSize = 44.sp,
@@ -106,8 +106,8 @@ private fun LevelStageItemPreview() {
         ) {
             LevelStageItem(
                 modifier = Modifier,
-                itemNumber = 1,
-                starsState = StarState.STAR_ZERO,
+                itemNumber = "1",
+                starsState = StarState.ZERO,
                 stage = StageType.FOREST,
                 isChallenge = false,
 //                rewards = listOf(10, 20, 30)
