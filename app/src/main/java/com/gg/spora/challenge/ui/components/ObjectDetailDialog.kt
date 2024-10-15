@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,7 +34,7 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun ChampyDialogConfirm(
+fun ObjectDetailDialog(
     modifier: Modifier = Modifier,
     onContinueButton: () -> Unit,
     nameObject : String,
@@ -152,7 +151,7 @@ private fun ChampyDialogConfirmPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ChampyDialogConfirm(
+            ObjectDetailDialog(
                 onContinueButton = {},
                 nameObject = "Botella de plastico",
                 contentObjectDescription = "Objeto de alta importancia ecologica"
