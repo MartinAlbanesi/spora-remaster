@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -107,7 +108,7 @@ fun ChampyDialogConfirm(
 
                     Text(
                         modifier = Modifier.padding(vertical = 10.dp),
-                        text = "¿Como reciclarlo?",
+                        text = stringResource(R.string.question_recycle),
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp,
                     )
@@ -119,23 +120,26 @@ fun ChampyDialogConfirm(
                         onPreviousStep = {},
                         onNextStep = {}
                     )
-                }
 
-                Row(
-                    modifier = modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    SporaPrimaryButton(
-                        text = "Continuar",
-                        onClick = onContinueButton,
+                    Row(
                         modifier = modifier
-                            .padding(10.dp)
-                    )
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        SporaPrimaryButton(
+                            text = stringResource(R.string.text_continue),
+                            onClick = onContinueButton,
+                            modifier = modifier
+                                .padding(top = 15.dp, bottom = 10.dp)
+                                .fillMaxWidth()
+                        )
 
+                    }
                 }
-            }
+                }
+
+
         }
 
 }
