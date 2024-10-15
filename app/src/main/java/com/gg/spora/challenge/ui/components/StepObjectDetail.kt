@@ -32,7 +32,7 @@ import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun StepValidationDetail(
+fun StepObjectDetail(
     modifier: Modifier = Modifier,
     stepImage: Int,
     stepTitle: String,
@@ -41,10 +41,9 @@ fun StepValidationDetail(
     onNextStep: () -> Unit
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .clip(RoundedCornerShape(20.dp))
-            .height(100.dp)
+            .height(140.dp)
             .background(color = MaterialTheme.colorScheme.primaryContainer)
     ) {
         IconButton(
@@ -57,14 +56,16 @@ fun StepValidationDetail(
             Icon(
                 painter = painterResource(id = R.drawable.back_icon),
                 contentDescription = "Previous Step",
-                modifier = Modifier.size(25.dp)
+                modifier = Modifier.size(30.dp),
+                tint = Color.Black
+
             )
         }
 
         Column(
             modifier = Modifier
                 .weight(8f)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -74,12 +75,12 @@ fun StepValidationDetail(
                 Image(
                     painter = painterResource(id = stepImage),
                     contentDescription = "Step Icon",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(30.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = stepTitle,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -93,7 +94,7 @@ fun StepValidationDetail(
 
             Text(
                 text = stepDescription,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
@@ -108,7 +109,8 @@ fun StepValidationDetail(
             Icon(
                 painter = painterResource(id = R.drawable.next_icon),
                 contentDescription = "Next Step",
-                modifier = Modifier.size(25.dp)
+                modifier = Modifier.size(30.dp),
+                tint = Color.Black
             )
         }
     }
@@ -116,12 +118,12 @@ fun StepValidationDetail(
 
 @Preview
 @Composable
-fun StepValidationDetailPreview() {
+fun StepObjectDetailPreview() {
     SporaTheme {
         Surface(
             color = Color.Transparent
         ) {
-            StepValidationDetail(
+            StepObjectDetail(
                 stepImage = R.drawable.step_one, // Asegúrate de tener el ícono correcto
                 stepTitle = "Validación",
                 stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
