@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,7 +51,8 @@ fun ChampyDialogConfirm(
         ) {
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondary
+                    containerColor = Color(0xFF215727),
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 ),
                 shape = RoundedCornerShape(16.dp),
                 modifier = modifier
@@ -67,21 +69,30 @@ fun ChampyDialogConfirm(
                         fontSize = 25.sp
                     )
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
                         modifier = modifier.clip(shape = RoundedCornerShape(20.dp))
-                            .background(color = MaterialTheme.colorScheme.background)
+                            .background(color = MaterialTheme.colorScheme.primaryContainer)
                             .padding(10.dp)
                     )
                     {
                         Column(
-                            modifier = modifier.width(220.dp)
+                            modifier = modifier.width(220.dp),
+                            verticalArrangement = Arrangement.Top
                         )
                         {
                             Text(
+                                text = "Detalle",
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                            Text(
+                                modifier = modifier.padding(top = 5.dp),
                                 text = contentObjectDescription,
-                                color = Color.Black,
-                                fontSize = 24.sp
-                            ) }
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+
                         Column(
                             modifier = modifier.width(120.dp),
                             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -93,6 +104,21 @@ fun ChampyDialogConfirm(
                             )
                         }
                     }
+
+                    Text(
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        text = "¿Como reciclarlo?",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 25.sp,
+                    )
+
+                    StepObjectDetail(
+                        stepImage = R.drawable.step_one, // Asegúrate de tener el ícono correcto
+                        stepTitle = "Validación",
+                        stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
+                        onPreviousStep = {},
+                        onNextStep = {}
+                    )
                 }
 
                 Row(
@@ -105,7 +131,7 @@ fun ChampyDialogConfirm(
                         text = "Continuar",
                         onClick = onContinueButton,
                         modifier = modifier
-                            .padding(8.dp)
+                            .padding(10.dp)
                     )
 
                 }
