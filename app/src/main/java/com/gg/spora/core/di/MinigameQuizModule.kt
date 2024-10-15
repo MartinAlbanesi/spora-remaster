@@ -1,9 +1,9 @@
 package com.gg.spora.core.di
 
 
-import com.gg.spora.quiz.data.local.FakeQuizLocalRepository
-import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
-import com.gg.spora.quiz.domain.IQuizLocalRepository
+import com.gg.spora.miniGames.data.local.FakeQuizLocalRepository
+import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
+import com.gg.spora.miniGames.domain.IQuizLocalRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

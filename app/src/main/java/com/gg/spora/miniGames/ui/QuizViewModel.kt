@@ -1,12 +1,12 @@
-package com.gg.spora.quiz.ui
+package com.gg.spora.miniGames.ui
 
 import androidx.lifecycle.ViewModel
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.quiz.domain.GetRandomQuestionFromTypeUseCase
-import com.gg.spora.quiz.domain.model.Question
+import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
+import com.gg.spora.miniGames.domain.model.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

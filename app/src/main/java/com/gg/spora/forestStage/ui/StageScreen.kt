@@ -20,11 +20,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.fake.FakeLevelModels
+import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.core.ui.components.ChallengeStageItem
 import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.enums.TypeGame
+import com.gg.spora.core.utils.enums.TypeStage
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -82,16 +83,22 @@ fun StageScreen(
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
-                        isChallenge = false,
-                        stage = level.stageType,
+                        stage = level.typeStage,
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-//                                if (level.typeGame == TypeGame.CHALLENGE) {
-//                                    onNavigateToChallenge("${level.levelName} - ${level.stageType.label}")
-//                                } else {
-                                    onClickLevelItem(level, true)
-//                                }
+
+                                onClickLevelItem(level, true)
+                            }
+                    )
+                }
+                item {
+                    ChallengeStageItem(
+                        stage = TypeStage.FOREST,
+                        modifier = Modifier
+                            .offset(x = SporaConstant.PATH_LADDER[levels.size].dp)
+                            .clickable {
+                                onNavigateToChallenge("Desafío")
                             }
                     )
                 }
@@ -111,10 +118,10 @@ private fun StageScreenPreview() {
         ) {
             StageScreen(
                 oxygen = 0,
-                levels = FakeLevelModels.fakeLevels,
+                levels = FakeStageModels.fakeStage.levels,
                 onNavigateToChallenge = {},
                 popBackStack = {},
-                onClickLevelItem = { _, _-> }
+                onClickLevelItem = { _, _ -> }
 
             )
         }

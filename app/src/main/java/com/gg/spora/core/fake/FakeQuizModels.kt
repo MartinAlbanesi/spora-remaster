@@ -2,8 +2,8 @@ package com.gg.spora.core.fake
 
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.quiz.domain.model.Answer
-import com.gg.spora.quiz.domain.model.Question
+import com.gg.spora.miniGames.domain.model.Answer
+import com.gg.spora.miniGames.domain.model.Question
 
 object FakeQuizModels {
 

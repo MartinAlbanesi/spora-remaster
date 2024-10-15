@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -40,8 +39,8 @@ import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
-import com.gg.spora.quiz.ui.QuizScreen
-import com.gg.spora.quiz.ui.QuizViewModel
+import com.gg.spora.miniGames.ui.QuizScreen
+import com.gg.spora.miniGames.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
@@ -96,7 +95,9 @@ class MainActivity : ComponentActivity() {
 
                             val stageViewModel = hiltViewModel<StageViewModel>()
 
-                            val levels by stageViewModel.levels.collectAsState()
+                            val stage by stageViewModel.stage.collectAsState()
+
+//                            val levels by stageViewModel.levels.collectAsState()
 
                             val currentLevel by stageViewModel.currentLevel.collectAsState()
 
@@ -140,7 +141,7 @@ class MainActivity : ComponentActivity() {
 
                             StageScreen(
                                 oxygen = 75,
-                                levels = levels,
+                                levels = stage!!.levels,
                                 onNavigateToChallenge = { title ->
                                     navController.navigate(NavigationRoutes.Challenge)
                                 },

@@ -1,18 +1,27 @@
 package com.gg.spora.core.fake
 
-import com.gg.spora.forestStage.domain.model.Level
-import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
+import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.forestStage.domain.model.Level
+import com.gg.spora.forestStage.domain.model.StageLevel
+import com.gg.spora.miniGames.domain.model.Challenge
 
-object FakeLevelModels {
+object FakeStageModels {
+
+    val fakeChallenge = Challenge(
+        id = "1",
+        objets = mapOf(
+            "Botella de plastico" to false,
+        ),
+    )
 
     val fakeLevels = listOf(
 
         Level(
             id = "1",
             levelName = "Nivel 1",
-            stageType = StageType.FOREST,
+            typeStage = TypeStage.FOREST,
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
             starState = StarState.THREE,
@@ -26,7 +35,7 @@ object FakeLevelModels {
         Level(
             id = "2",
             levelName = "Nivel 2",
-            stageType = StageType.FOREST,
+            typeStage = TypeStage.FOREST,
             requiredOxygen = 30,
             rewardsOxygen = listOf(15, 25, 35),
             starState = StarState.ZERO,
@@ -36,8 +45,7 @@ object FakeLevelModels {
             imageCount = 5,
             relationsCount = 0
         ),
-
-//        Level(
+        //        Level(
 //            id = 3,
 //            levelName = "Nivel 3",
 //            stageType = StageType.FOREST,
@@ -48,18 +56,23 @@ object FakeLevelModels {
 //        ),
 //        Level(
 //            id = "3",
-//            levelName = "Nivel 3",
-//            stageType = StageType.FOREST,
+//            levelName = "Desafio",
+//            typeStage = TypeStage.FOREST,
 //            requiredOxygen = 0,
-//            levelState = LevelState(
-//                rewardOxygen = listOf(15, 25, 40),
-//                starState = StarState.ZERO,
-//                isComplete = false,
-//                typeQuestion = TypeQuestion.RECYCLE,
-//                quizCount = 0,
-//                imageCount = 0,
-//                relationsCount = 3
-//            )
+//            rewardsOxygen = listOf(0, 0, 0),
+//            starState = StarState.ZERO,
+//            isComplete = false,
+//            typeQuestion = TypeQuestion.RECYCLE,
+//            quizCount = 4,
+//            imageCount = 4,
+//            relationsCount = 0
 //        )
+    )
+
+    val fakeStage = StageLevel(
+        id = "1",
+        typeStage = TypeStage.FOREST,
+        levels = fakeLevels,
+        challenge = fakeChallenge
     )
 }

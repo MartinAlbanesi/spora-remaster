@@ -1,4 +1,4 @@
-package com.gg.spora.quiz.ui
+package com.gg.spora.miniGames.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.OptionItemButton
-import com.gg.spora.quiz.domain.model.Answer
+import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.ui.theme.SporaTheme
 
 

@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,7 +34,7 @@ import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.functions.getStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
-import com.gg.spora.quiz.ui.QuizScreen
+import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 
 /**

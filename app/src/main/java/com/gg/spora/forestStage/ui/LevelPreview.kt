@@ -19,9 +19,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.core.fake.FakeLevelModels
+import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.core.ui.components.ChampyDialog
-import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -41,7 +40,7 @@ fun LevelPreview(
         modifier = modifier,
         backgroundImage = backgroundImage,
         champyImage = champyImage,
-        title = "${level.levelName} - ${level.stageType.label}",
+        title = "${level.levelName} - ${level.typeStage.label}",
         isVisible = isVisible,
         starsState = level.starState,
         rewards = level.rewardsOxygen,
@@ -83,7 +82,7 @@ fun GameResultPopupPreview() {
             LevelPreview(
                 isVisible = true,
                 backgroundImage = R.drawable.fondo_minijuegos_crop,
-                level = FakeLevelModels.fakeLevels.first(),
+                level = FakeStageModels.fakeLevels.first(),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},
             )

@@ -1,11 +1,11 @@
-package com.gg.spora.quiz.data.local
+package com.gg.spora.miniGames.data.local
 
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.quiz.domain.IQuizLocalRepository
-import com.gg.spora.quiz.domain.model.Answer
-import com.gg.spora.quiz.domain.model.Question
+import com.gg.spora.miniGames.domain.IQuizLocalRepository
+import com.gg.spora.miniGames.domain.model.Answer
+import com.gg.spora.miniGames.domain.model.Question
 import javax.inject.Inject
 
 class FakeQuizLocalRepository @Inject constructor(

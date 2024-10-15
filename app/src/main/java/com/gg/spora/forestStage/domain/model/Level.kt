@@ -1,13 +1,13 @@
 package com.gg.spora.forestStage.domain.model
 
-import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.core.utils.enums.TypeStage
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
 
 data class Level(
     val id: String,
     val levelName : String,
-    val stageType: StageType,
+    val typeStage: TypeStage,
     val requiredOxygen: Int,
     val rewardsOxygen: List<Int>,
     val starState: StarState = StarState.ZERO,
@@ -19,5 +19,5 @@ data class Level(
 )
 
 fun Level.getLevelWithStage(): String {
-    return "$levelName - ${stageType.label}"
+    return "$levelName - ${typeStage.label}"
 }

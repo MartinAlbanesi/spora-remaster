@@ -1,4 +1,4 @@
-package com.gg.spora.quiz.domain.model
+package com.gg.spora.miniGames.domain.model
 
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
