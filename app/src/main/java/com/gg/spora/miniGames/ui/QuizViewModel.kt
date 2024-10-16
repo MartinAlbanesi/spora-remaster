@@ -1,7 +1,11 @@
 package com.gg.spora.miniGames.ui
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.navigation.toRoute
+import com.gg.spora.R
+import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.core.utils.enums.TypeGame
@@ -10,6 +14,7 @@ import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
@@ -18,6 +23,8 @@ class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(){
+
+    private val quizRoute = savedStateHandle.toRoute<NavigationRoutes.QuizGame>()
 
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
 //    val questions = _questions.asStateFlow()
@@ -40,9 +47,13 @@ class QuizViewModel @Inject constructor(
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
+    private val _currentImageResId = MutableStateFlow(R.drawable.recurso_viento)
+    val currentImageResId = _currentImageResId.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
     }
 
     private fun getCurrentQuestion() {
@@ -50,11 +61,32 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getRandomQuestions() {
-        _questions.value = getRandomQuestionFromTypeUseCase(
-            count = MAX_QUESTIONS,
+
+//        _questions.value = getRandomQuestionFromTypeUseCase(
+//            count = MAX_QUESTIONS,
+//            typeQuestion = TypeQuestion.MARTIN,
+//            typeGame = TypeGame.QUIZ
+//        )
+
+        val quizGame = getRandomQuestionFromTypeUseCase(
+            count = quizRoute.quizCount,
             typeQuestion = TypeQuestion.MARTIN,
             typeGame = TypeGame.QUIZ
         )
+
+        val imageGame = getRandomQuestionFromTypeUseCase(
+            count = quizRoute.imageCount,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE
+        )
+
+//        val relationsGame = getRandomQuestionFromTypeUseCase(
+//            count = quizRoute.relationsCount,
+//            typeQuestion = TypeQuestion.RECYCLE,
+//            typeGame = TypeGame.RELATIONS
+//        )
+
+        _questions.value = (quizGame + imageGame).shuffled()
     }
 
     fun isAnswerCorrect(answerId: String) {
@@ -87,6 +119,7 @@ class QuizViewModel @Inject constructor(
         _currentQuestionIndex.value++
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
         _isCorrect.value = null
     }
 
@@ -98,6 +131,7 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value = null
         getRandomQuestions()
         getCurrentQuestion()
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
     }
 
 }

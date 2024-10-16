@@ -30,7 +30,7 @@ class QuizImageViewModel @Inject constructor(
     private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
 
-    private val _currentImageResId = MutableStateFlow<Int>(R.drawable.recurso_viento)
+    private val _currentImageResId = MutableStateFlow(R.drawable.recurso_viento)
     val currentImageResId: StateFlow<Int> = _currentImageResId.asStateFlow()
 
     private val _isCorrect = MutableStateFlow<Boolean?>(null)

@@ -12,7 +12,10 @@ object NavigationRoutes {
 
     @Serializable
     data class QuizGame(
-        val title: String
+        val title: String,
+        val quizCount: Int,
+        val imageCount: Int,
+        val relationsCount: Int,
     )
 
     @Serializable

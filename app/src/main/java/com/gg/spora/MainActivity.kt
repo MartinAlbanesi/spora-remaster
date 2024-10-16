@@ -31,6 +31,7 @@ import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
 import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.forestStage.domain.model.getLevelWithStage
 import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
@@ -115,7 +116,15 @@ class MainActivity : ComponentActivity() {
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
-                                    navController.navigate(NavigationRoutes.QuizImage(currentLevel!!.getLevelWithStage()))
+                                    navController
+                                        .navigate(
+                                            NavigationRoutes.QuizGame(
+                                                title = currentLevel!!.getLevelWithStage(),
+                                                quizCount = currentLevel!!.quizCount,
+                                                imageCount = currentLevel!!.imageCount,
+                                                relationsCount = currentLevel!!.relationsCount
+                                            )
+                                        )
                                 },
                                 onClickSecondaryButton = {
                                     showLevelPreview = false
@@ -154,6 +163,8 @@ class MainActivity : ComponentActivity() {
 
                             val counterQuestion by quizViewModel.counterQuestion.collectAsState()
 
+                            val currentImage by quizViewModel.currentImageResId.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 title = title.title,
@@ -167,15 +178,35 @@ class MainActivity : ComponentActivity() {
                                 onResetGame = quizViewModel::resetGame,
                                 onBackForestStage = { navController.popBackStack() },
                                 content = {
-                                    QuizScreen(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .padding(16.dp),
-                                        isCorrect = isCorrect,
-                                        questionTitle = currentQuestion!!.question,
-                                        answerOptions = currentQuestion!!.answers,
-                                        onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                    )
+                                    when(currentQuestion!!.typeGame){
+                                        TypeGame.QUIZ -> {
+                                            QuizScreen(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(16.dp),
+                                                isCorrect = isCorrect,
+                                                questionTitle = currentQuestion!!.question,
+                                                answerOptions = currentQuestion!!.answers,
+                                                onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                            )
+                                        }
+                                        TypeGame.QUIZ_IMAGE -> {
+                                            QuizImageScreen(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(horizontal = 8.dp),
+                                                questionTitle = currentQuestion!!.question,
+                                                answerOptions = currentQuestion!!.answers,
+                                                currentImageResIdState = currentImage,
+                                                isCorrect = isCorrect,
+                                                onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                                areOptionsEnabled = true, //BORRAR SI NO FUNCIONA
+                                            )
+                                        }
+                                        TypeGame.RELATIONS -> TODO()
+                                        TypeGame.CHALLENGE -> TODO()
+                                    }
+
                                 }
                             )
                         }
@@ -271,7 +302,7 @@ class MainActivity : ComponentActivity() {
                                         answerOptions = currentImageQuestion!!.answers,
                                         currentImageResIdState = currentImageResIdState,
                                         onAnswerSelected = quizImageViewModel::isAnswerCorrect,
-                                        onNextQuestion = quizImageViewModel::nextQuestion,
+//                                        onNextQuestion = quizImageViewModel::nextQuestion,
                                         areOptionsEnabled = areOptionsEnabled, //BORRAR SI NO FUNCIONA
                                     )
                                 }
@@ -293,7 +324,7 @@ class MainActivity : ComponentActivity() {
                                 onResetGame = { /* Ingresar logica de reset */ },
                                 onBackForestStage = { navController.popBackStack() },
                                 content = {
-                                    MinigameRelationsScreen() {
+                                    MinigameRelationsScreen {
 
                                     }
                                 }

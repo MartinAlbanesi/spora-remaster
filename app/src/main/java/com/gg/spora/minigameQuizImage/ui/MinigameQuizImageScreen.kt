@@ -42,7 +42,7 @@ fun QuizImageScreen(
     answerOptions: List<Answer>,
     currentImageResIdState: Int,
     onAnswerSelected: (String) -> Unit,
-    onNextQuestion: () -> Unit,
+//    onNextQuestion: () -> Unit,
     areOptionsEnabled: Boolean
 ) {
 
@@ -52,8 +52,6 @@ fun QuizImageScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 8.dp)
     ) {
             Image(
                 painter = painterResource(id = currentImageResIdState),
@@ -109,7 +107,7 @@ private fun QuizImageScreenPreview() {
                 answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
                 currentImageResIdState = FakeQuizModels.fakeQuestions.random().image!!,
                 onAnswerSelected = {},
-                onNextQuestion = {},
+//                onNextQuestion = {},
                 areOptionsEnabled = true, //BORRAR SI NO FUNCIONA
             )
         }
