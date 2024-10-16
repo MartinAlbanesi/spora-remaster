@@ -26,6 +26,7 @@ import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.functions.getIsCompleteFromPreviousLevel
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -54,8 +55,6 @@ fun StageScreen(
     ) { paddingValue ->
 
         Box(modifier = Modifier.fillMaxSize()) {
-
-
             Image(
                 painter = painterResource(id = R.drawable.fondo_area1),
                 contentDescription = "Area 1 background",
@@ -74,27 +73,22 @@ fun StageScreen(
                     levels,
                     key = { _, level -> level.id }
                 ) { index, level ->
-//                    val navigateGame = when (level.typeGame) {
-//                        TypeGame.QUIZ -> TypeGame.QUIZ
-//                        TypeGame.RELATIONS -> TypeGame.RELATIONS
-//                        TypeGame.QUIZ_IMAGE -> TypeGame.QUIZ_IMAGE
-//                        TypeGame.CHALLENGE -> TypeGame.CHALLENGE
-//                    }
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
                         stage = level.typeStage,
+                        isBlocked = levels.getIsCompleteFromPreviousLevel(index),
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-
-                                onClickLevelItem(level, true)
+                                if(level.isComplete){onClickLevelItem(level, true)}
                             }
                     )
                 }
                 item {
                     ChallengeStageItem(
                         stage = TypeStage.FOREST,
+                        isBlocked = levels.getIsCompleteFromPreviousLevel(levels.size),
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[levels.size].dp)
                             .clickable {
@@ -103,7 +97,6 @@ fun StageScreen(
                     )
                 }
             }
-
         }
     }
 }

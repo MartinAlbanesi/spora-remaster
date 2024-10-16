@@ -24,11 +24,11 @@ object FakeStageModels {
             typeStage = TypeStage.FOREST,
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
-            starState = StarState.THREE,
-            isComplete = true,
+            starState = StarState.ZERO,
+            isComplete = false,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 4,
-            imageCount = 4,
+            quizCount = 8,
+            imageCount = 2,
             relationsCount = 0
 
         ),
@@ -41,8 +41,8 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = false,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 3,
-            imageCount = 5,
+            quizCount = 2,
+            imageCount = 8,
             relationsCount = 0
         ),
         //        Level(

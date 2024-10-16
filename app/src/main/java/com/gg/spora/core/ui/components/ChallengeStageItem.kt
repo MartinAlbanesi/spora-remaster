@@ -16,6 +16,7 @@ import com.gg.spora.core.utils.enums.TypeStage
 fun ChallengeStageItem(
     modifier: Modifier = Modifier,
     stage: TypeStage,
+    isBlocked: Boolean = false
 ) {
     val challengeImage = when (stage) {
         TypeStage.FOREST -> R.drawable.chanllenger_icon
@@ -23,24 +24,27 @@ fun ChallengeStageItem(
         TypeStage.RIVER -> 2
     }
 
+    val currentImage = if (isBlocked) R.drawable.nivel_bloqueado else challengeImage
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(challengeImage),
+            painter = painterResource(currentImage),
             contentDescription = "Level Item",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .size(120.dp)
         )
-
-        Image(
-            painter = painterResource(R.drawable.crown_icon),
-            contentDescription = "Challenge Icon",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .size(64.dp)
-        )
+        if (!isBlocked) {
+            Image(
+                painter = painterResource(R.drawable.crown_icon),
+                contentDescription = "Challenge Icon",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .size(64.dp)
+            )
+        }
     }
 }

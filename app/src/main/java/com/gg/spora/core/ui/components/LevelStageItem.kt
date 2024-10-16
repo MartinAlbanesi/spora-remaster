@@ -28,6 +28,7 @@ fun LevelStageItem(
     itemNumber: String,
     starsState: StarState,
     stage: TypeStage,
+    isBlocked: Boolean = false
 ) {
 
     val stageImage = when (stage) {
@@ -36,28 +37,32 @@ fun LevelStageItem(
         TypeStage.RIVER -> 2
     }
 
+    val currentImage = if (isBlocked) R.drawable.nivel_bloqueado else stageImage
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(stageImage),
+            painter = painterResource(currentImage),
             contentDescription = "Level Item",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .size(100.dp)
         )
-        Text(
-            text = itemNumber,
-            color = Color.Black,
-            fontWeight = FontWeight.Black,
-            fontSize = 44.sp,
-        )
-        StarsGroup(
-            starState = starsState,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-        )
+        if (!isBlocked) {
+            Text(
+                text = itemNumber,
+                color = Color.Black,
+                fontWeight = FontWeight.Black,
+                fontSize = 44.sp,
+            )
+            StarsGroup(
+                starState = starsState,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+            )
+        }
     }
 
 }
