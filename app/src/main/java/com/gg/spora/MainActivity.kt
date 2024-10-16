@@ -37,8 +37,7 @@ import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
-import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
+import com.gg.spora.miniGames.ui.QuizImageScreen
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
 import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
@@ -260,50 +259,6 @@ class MainActivity : ComponentActivity() {
                                             navController.navigate(NavigationRoutes.ForestStage)
                                         },
                                         challengeViewModel = challengeViewModel
-                                    )
-                                }
-                            )
-                        }
-                        composable<NavigationRoutes.QuizImage> {
-
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
-
-                            val quizImageViewModel = hiltViewModel<QuizImageViewModel>()
-
-                            val currentImageQuestion by quizImageViewModel.currentQuestion.collectAsState()
-
-                            val isCorrect by quizImageViewModel.isCorrect.collectAsState()
-
-                            val currentImageResIdState by quizImageViewModel.currentImageResId.collectAsState()
-
-                            val isFinished by quizImageViewModel.isFinished.collectAsState()
-
-                            val lives by quizImageViewModel.lives.collectAsState()
-
-                            val counterQuestion by quizImageViewModel.counterQuestion.collectAsState()
-
-                            val areOptionsEnabled by quizImageViewModel.areOptionsEnabled.collectAsState() //BORRAR SI NO FUNCIONA
-
-                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
-                                imageBackground = R.drawable.fondo_minijuegos,
-                                title = title.title,
-                                isCorrect = isCorrect,
-                                questionSize = SporaConstant.MAX_QUESTIONS,
-                                isFinished = isFinished,
-                                lives = lives,
-                                counterQuestion = counterQuestion,
-                                onNextQuestion = quizImageViewModel::nextQuestion,
-                                onResetGame = quizImageViewModel::resetGame,
-                                onBackForestStage = { navController.popBackStack() },
-                                content = {
-                                    QuizImageScreen(
-                                        modifier = Modifier,
-                                        questionTitle = currentImageQuestion!!.question,
-                                        answerOptions = currentImageQuestion!!.answers,
-                                        currentImageResIdState = currentImageResIdState,
-                                        onAnswerSelected = quizImageViewModel::isAnswerCorrect,
-//                                        onNextQuestion = quizImageViewModel::nextQuestion,
-                                        areOptionsEnabled = areOptionsEnabled, //BORRAR SI NO FUNCIONA
                                     )
                                 }
                             )

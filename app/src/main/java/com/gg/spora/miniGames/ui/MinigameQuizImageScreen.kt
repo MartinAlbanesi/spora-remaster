@@ -1,4 +1,4 @@
-package com.gg.spora.minigameQuizImage.ui
+package com.gg.spora.miniGames.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -27,11 +27,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.gg.spora.core.fake.FakeQuizImageModels
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.OptionItemButton
 import com.gg.spora.miniGames.domain.model.Answer
-import com.gg.spora.minigameQuizImage.domain.model.model.AnswerImage
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
@@ -75,8 +73,7 @@ fun QuizImageScreen(
             OptionItemButton(
                 textItem = answer.answer,
                 isCorrect = answer.isCorrect,
-                //enabled =  true,
-                enabled = areOptionsEnabled, //BORRAR SI NO FUNCIONA
+                enabled =  isCorrect == null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
