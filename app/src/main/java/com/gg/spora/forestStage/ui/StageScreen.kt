@@ -77,22 +77,22 @@ fun StageScreen(
                         itemNumber = level.id,
                         starsState = level.starState,
                         stage = level.typeStage,
-                        isBlocked = levels.getIsCompleteFromPreviousLevel(index),
+                        isBlocked = !levels.getIsCompleteFromPreviousLevel(index),
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-                                if(!level.isComplete){onClickLevelItem(level, true)}
+                                if(levels.getIsCompleteFromPreviousLevel(index)) onClickLevelItem(level, true)
                             }
                     )
                 }
                 item {
                     ChallengeStageItem(
                         stage = TypeStage.FOREST,
-                        isBlocked = levels.getIsCompleteFromPreviousLevel(levels.size),
+                        isBlocked = !levels.getIsCompleteFromPreviousLevel(levels.size),
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[levels.size].dp)
                             .clickable {
-                                onNavigateToChallenge("Desafío")
+                                if(levels.getIsCompleteFromPreviousLevel(levels.size)) onNavigateToChallenge("Desafío")
                             }
                     )
                 }

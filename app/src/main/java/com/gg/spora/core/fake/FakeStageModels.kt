@@ -27,8 +27,8 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = false,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 8,
-            imageCount = 2,
+            quizCount = 5,
+            imageCount = 5,
             relationsCount = 0
 
         ),
