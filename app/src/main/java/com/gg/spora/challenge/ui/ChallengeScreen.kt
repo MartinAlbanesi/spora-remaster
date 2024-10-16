@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gg.spora.R
+import com.gg.spora.challenge.domain.model.ObjectDetail
+import com.gg.spora.challenge.domain.model.StepObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.challenge.ui.components.ObjectDetailDialog
 
@@ -58,10 +60,12 @@ fun ChallengeScreen(
     var champyImage by remember { mutableIntStateOf(R.drawable.champy_sonriente_brazosalcuerpo) }
     var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
     var showDialog by remember { mutableStateOf(false) }
+    var selectedObject by remember { mutableStateOf("") }
 
     LaunchedEffect(challengeViewModel.selectedObject) {
-        challengeViewModel.selectedObject.observe(lifecycleOwner) { selectedObject ->
-            if(selectedObject != null && selectedObject != ""){
+        challengeViewModel.selectedObject.observe(lifecycleOwner) { selectedObjectObserve ->
+            if(selectedObjectObserve != null && selectedObjectObserve != ""){
+                selectedObject = selectedObjectObserve
                 showDialog = true
             }
         }
@@ -78,11 +82,12 @@ fun ChallengeScreen(
         buttonContinueEnabled = true
     }
 
-    if(showDialog){
+    if(showDialog && selectedObject != ""){
+        val stepsObjectDetail = getStepsObjectDetail(selectedObject)
         ObjectDetailDialog(
             onContinueButton = { showDialog = false },
-            nameObject = "Botella de plastico",
-            contentObjectDescription = "Objeto de alta importancia ecologica"
+            objectDetail = ObjectDetail(1, selectedObject,
+                stepsObjectDetail, "Objeto de alta importancia ecologica")
         )
     }
 
@@ -152,5 +157,40 @@ fun ChallengeScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+    }
+}
+
+//Por ahora harcodeado, la idea es que estos datos se obtengan a traves de una consulta a la base
+fun getStepsObjectDetail(selectedObject : String) : List<StepObjectDetail> {
+    if(selectedObject == "Botella de plastico"){
+            return mutableListOf(StepObjectDetail(1, "Limpieza",
+                "Vaciá y limpiá las botellas enjuagándolas " +
+                    "con agua y unas gotitas de detergente.",
+                0, true, false),
+                StepObjectDetail(2, "Validación",
+                    "Una botella de plástico que se puede " +
+                            "reciclar debera tener un ícono de reciclaje. ",
+                    0, false, false),
+                StepObjectDetail(3, "Reciclado",
+                    "Si la botella se puede reciclar entonces se " +
+                            "puede ingresar en los contenedores de reciclado.",
+                    0, false, false),
+                StepObjectDetail(4, "Crear",
+                    "Si no se pueda reciclar, entonces se pueden hacer " +
+                            "manualidades u objetos de decoración con los materiales.",
+                    0, false, true))
+    }
+    else{
+        return mutableListOf(StepObjectDetail(1, "Limpieza",
+            "Asegurate que la caja de Carton este limpia " +
+                    "y sin ningun elemento que pueda interferir con su reciclaje",
+            0, true, false),
+            StepObjectDetail(2, "Recortar",
+                "Acompañado de un adulto, recorta la caja de carton en pequeños trozos",
+                0, false, false),
+            StepObjectDetail(3, "Crear",
+                "Con estos pequeños trozos de carton podes " +
+                        "hacer manualidades divertidas.",
+                0, false, true))
     }
 }

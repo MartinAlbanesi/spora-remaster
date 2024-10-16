@@ -17,7 +17,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,29 +25,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.ui.theme.SporaTheme
+import com.gg.spora.challenge.domain.model.StepObjectDetail
 
 @Composable
 fun StepObjectDetail(
     modifier: Modifier = Modifier,
-    stepImage: Int,
-    stepTitle: String,
-    stepDescription: String,
+    stepObjectDetail: StepObjectDetail,
     onPreviousStep: () -> Unit,
     onNextStep: () -> Unit,
-    isFirstStep : Boolean,
-    isLastStep : Boolean
 ) {
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(20.dp))
-            .height(140.dp)
+            .height(170.dp)
             .background(color = MaterialTheme.colorScheme.primaryContainer)
     ) {
-        if(!isFirstStep){
+        if(!stepObjectDetail.isFirst){
             IconButton(
                 onClick = { onPreviousStep() },
                 modifier = Modifier
@@ -76,14 +70,10 @@ fun StepObjectDetail(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = painterResource(id = stepImage),
-                    contentDescription = "Step Icon",
-                    modifier = Modifier.size(30.dp)
-                )
+                ValidateImageStep(stepObjectDetail.number)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = stepTitle,
+                    text = stepObjectDetail.title,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -97,13 +87,13 @@ fun StepObjectDetail(
             )
 
             Text(
-                text = stepDescription,
+                text = stepObjectDetail.description,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
 
-        if(!isLastStep){
+        if(!stepObjectDetail.isLast){
             IconButton(
                 onClick = { onNextStep() },
                 modifier = Modifier
@@ -122,6 +112,25 @@ fun StepObjectDetail(
     }
 }
 
+@Composable
+fun ValidateImageStep(numberStep : Int){
+
+    val image : Int = when(numberStep){
+        1 -> R.drawable.step_one
+        2 -> R.drawable.step_two
+        3 -> R.drawable.step_three
+        4 -> R.drawable.step_four
+        else -> R.drawable.camera_icon
+    }
+
+    Image(
+        painter = painterResource(id = image),
+        contentDescription = "Step Icon",
+        modifier = Modifier.size(30.dp)
+    )
+}
+
+/*
 @Preview
 @Composable
 fun StepObjectDetailPreview() {
@@ -141,3 +150,4 @@ fun StepObjectDetailPreview() {
         }
     }
 }
+ */

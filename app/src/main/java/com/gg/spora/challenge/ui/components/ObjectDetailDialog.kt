@@ -6,19 +6,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,21 +33,18 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.SporaPrimaryButton
-import com.gg.spora.ui.theme.SporaTheme
+import com.gg.spora.challenge.domain.model.ObjectDetail
 
 @Composable
 fun ObjectDetailDialog(
     modifier: Modifier = Modifier,
     onContinueButton: () -> Unit,
-    nameObject : String,
-    contentObjectDescription : String
+    objectDetail : ObjectDetail
 ) {
 
     var buttonContinueEnabled by remember { mutableStateOf(false) }
@@ -80,6 +76,7 @@ fun ObjectDetailDialog(
                 shape = RoundedCornerShape(16.dp),
                 modifier = modifier
                     .padding(15.dp)
+                    .wrapContentHeight()
             ) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -87,7 +84,7 @@ fun ObjectDetailDialog(
                         .padding(15.dp)
                 ){
                     Text(
-                        text = nameObject,
+                        text = objectDetail.name,
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )
@@ -110,7 +107,7 @@ fun ObjectDetailDialog(
                             )
                             Text(
                                 modifier = modifier.padding(top = 5.dp),
-                                text = contentObjectDescription,
+                                text = objectDetail.description,
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -120,11 +117,7 @@ fun ObjectDetailDialog(
                             modifier = modifier.width(120.dp),
                             verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.botella_de_plastico),
-                                contentDescription = "Botella de Plastico",
-                                modifier = modifier.size(100.dp)
-                            )
+                            ValidateImageOfObjectDetail(objectDetail.name)
                         }
                     }
 
@@ -136,25 +129,18 @@ fun ObjectDetailDialog(
                     )
 
                     Crossfade(targetState = currentStep, label = "") { step ->
-                        when (step) {
-                            1 -> StepObjectDetail(
-                                stepImage = R.drawable.step_one,
-                                stepTitle = "Validación",
-                                stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
-                                onPreviousStep = {  },
-                                onNextStep = { currentStep = 2 },
-                                isFirstStep = true,
-                                isLastStep = false
-                            )
-                            2 -> StepObjectDetail(
-                                stepImage = R.drawable.step_two,
-                                stepTitle = "Paso Dos",
-                                stepDescription = "Descripción del paso dos.",
-                                onPreviousStep = { currentStep = 1 },
-                                onNextStep = { /* Logica para avanzar a otro paso */ },
-                                isFirstStep = false,
-                                isLastStep = true
-                            )
+                        objectDetail.steps.forEach { stepObject ->
+                            if (step == stepObject.number) {
+                                StepObjectDetail(
+                                    stepObjectDetail = stepObject,
+                                    onPreviousStep = {
+                                        if (currentStep > 1) currentStep--
+                                    },
+                                    onNextStep = {
+                                        if (currentStep < objectDetail.steps.size) currentStep++
+                                    }
+                                )
+                            }
                         }
                     }
 
@@ -196,6 +182,23 @@ fun ObjectDetailDialog(
 
 }
 
+@Composable
+fun ValidateImageOfObjectDetail(objectDetailName : String){
+    val image : Int = if(objectDetailName == "Botella de plastico"){
+        R.drawable.botella_de_plastico
+    }
+    else{
+        R.drawable.caja_de_carton
+    }
+
+    Image(
+        painter = painterResource(id = image),
+        contentDescription = "Image Detail",
+        modifier = Modifier.size(100.dp)
+    )
+}
+
+/*
 @Preview
 @Composable
 private fun ChampyDialogConfirmPreview() {
@@ -212,3 +215,5 @@ private fun ChampyDialogConfirmPreview() {
         }
     }
 }
+
+ */
