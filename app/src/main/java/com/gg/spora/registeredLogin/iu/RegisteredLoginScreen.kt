@@ -1,4 +1,4 @@
-package com.gg.spora.registeredLogin
+package com.gg.spora.registeredLogin.iu
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,11 +21,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.password
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -34,10 +40,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.login.component.LoginTextField
-import com.gg.spora.login.ui.LoginScreen
 
 @Composable
 fun RegisteredLoginScreen(
@@ -46,6 +52,13 @@ fun RegisteredLoginScreen(
     onGoogleLoginClick: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
+
+    val registeredLoginViewModel = viewModel<RegisteredLoginViewModel>()
+    val email by registeredLoginViewModel.email.observeAsState("")
+    val password by registeredLoginViewModel.password.observeAsState("")
+    val isAccountValid by registeredLoginViewModel.isAccountValid.observeAsState(false)
+    val isPasswordCorrect by registeredLoginViewModel.isPasswordCorrect.observeAsState(false)
+
     Box(modifier = Modifier.fillMaxSize()) {
         // Imagen de fondo oscurecida
         Image(
@@ -53,8 +66,10 @@ fun RegisteredLoginScreen(
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .graphicsLayer { alpha = 0.5f },
-            contentScale = androidx.compose.ui.layout.ContentScale.FillBounds
+                .graphicsLayer { alpha = 1f },
+            contentScale = androidx.compose.ui.layout.ContentScale.FillBounds,
+            colorFilter = ColorFilter.tint(Color.Black.copy(alpha = 0.5f),
+                BlendMode.Darken)
         )
 
         // Contenido principal centrado verticalmente
@@ -78,15 +93,15 @@ fun RegisteredLoginScreen(
             // Campos de entrada
             LoginTextField(
                 placeholder = "Correo",
-                value = "",
-                onValueChange = { /*TODO*/ },
+                value = email,
+                onValueChange = registeredLoginViewModel::onEmailChanged,
                 modifier = Modifier.fillMaxWidth()
             )
 
             LoginTextField(
                 placeholder = "Contraseña",
-                value = "",
-                onValueChange = { /*TODO*/ },
+                value = password,
+                onValueChange = registeredLoginViewModel::onPasswordChanged,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
@@ -102,10 +117,11 @@ fun RegisteredLoginScreen(
             )
 
             // Botón de confirmar
+            val context = LocalContext.current
             SporaPrimaryButton(
                 text = "Confirmar",
                 textSize = 20,
-                onClick = onLoginClick,
+                onClick = { registeredLoginViewModel.onLoginClick(context) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -156,8 +172,8 @@ fun RegisteredLoginScreen(
         IconButton(
             onClick = onBackClick,
             modifier = Modifier
-                .align(Alignment.TopStart) // Posiciona la flecha en la esquina superior izquierda
-                .padding(16.dp) // Espaciado desde el borde de la pantalla
+                .align(Alignment.TopStart)
+                .padding(16.dp)
         ) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowLeft,
@@ -167,7 +183,7 @@ fun RegisteredLoginScreen(
             )
         }
 
-        // Texto de "¿No tienes una cuenta?" en la parte inferior centrado
+        // Texto de "¿No tienes una cuenta?"
         Text(
             text = buildAnnotatedString {
                 withStyle(style = SpanStyle(color = Color.White)) {
@@ -183,7 +199,7 @@ fun RegisteredLoginScreen(
                 }
             },
             modifier = Modifier
-                .align(Alignment.BottomCenter) // Posiciona el texto en la parte inferior central
+                .align(Alignment.BottomCenter)
                 .padding(16.dp)
                 .clickable { onRegisterClick() }
         )

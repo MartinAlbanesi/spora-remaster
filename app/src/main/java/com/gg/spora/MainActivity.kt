@@ -15,9 +15,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -43,6 +45,8 @@ import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
+import com.gg.spora.registeredLogin.iu.RegisteredLoginScreen
+import com.gg.spora.registeredLogin.iu.RegisteredLoginViewModel
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
@@ -107,6 +111,8 @@ class MainActivity : ComponentActivity() {
                         composable<NavigationRoutes.Grove> {
 
                         }
+
+
                         composable<NavigationRoutes.ForestStage> {
 
                             val stageViewModel = hiltViewModel<StageViewModel>()

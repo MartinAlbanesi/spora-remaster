@@ -223,13 +223,13 @@ fun LoginQuestionLink() {
 @Composable
 fun IconButtonArrowLogin() {
     Box(
-        modifier = Modifier.fillMaxSize() // Asegura que el Box ocupe toda la pantalla
+        modifier = Modifier.fillMaxSize()
     ) {
         IconButton(
             onClick = {  },
             modifier = Modifier
-                .align(Alignment.TopStart) // Posiciona la flecha en la esquina superior izquierda dentro del Box
-                .padding(16.dp) // Espaciado desde el borde de la pantalla
+                .align(Alignment.TopStart)
+                .padding(16.dp)
         ) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowLeft,
