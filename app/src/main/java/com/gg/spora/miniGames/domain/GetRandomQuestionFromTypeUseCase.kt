@@ -8,10 +8,9 @@ import javax.inject.Inject
 class GetRandomQuestionFromTypeUseCase @Inject constructor(
     private val quizLocalRepository: IQuizLocalRepository
 ) {
-    operator fun invoke(count : Int, type: TypeGame, typeQuestion: TypeQuestion): List<Question> {
-
+    operator fun invoke(count : Int, typeQuestion: TypeQuestion, typeGame: TypeGame): List<Question> {
         val randomQuestions = quizLocalRepository
-            .getRandomQuestions(count,type,typeQuestion)
+            .getRandomQuestions(count,typeQuestion,typeGame)
             .map { question ->
                 val answer = quizLocalRepository.getAnswerById(question.answerId)
                 val newQuestion = question.copy(

@@ -1,5 +1,7 @@
 package com.gg.spora.minigameQuizImage.domain.model.model
 
+
+
 data class AnswerImage(
     val id: String,
     val answer: String,

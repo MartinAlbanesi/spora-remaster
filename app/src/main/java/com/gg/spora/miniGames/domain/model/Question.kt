@@ -11,4 +11,5 @@ data class Question(
     val answerId: String,
     val typeGame: TypeGame,
     val typeQuestion: TypeQuestion,
+    val image: Int? = null
 )

@@ -1,5 +1,6 @@
 package com.gg.spora.miniGames.ui
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
-    private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase
+    private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel(){
 
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
@@ -48,7 +50,11 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getRandomQuestions() {
-        _questions.value = getRandomQuestionFromTypeUseCase(MAX_QUESTIONS, TypeGame.QUIZ, TypeQuestion.MARTIN)
+        _questions.value = getRandomQuestionFromTypeUseCase(
+            count = MAX_QUESTIONS,
+            typeQuestion = TypeQuestion.MARTIN,
+            typeGame = TypeGame.QUIZ
+        )
     }
 
     fun isAnswerCorrect(answerId: String) {

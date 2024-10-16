@@ -115,7 +115,7 @@ class MainActivity : ComponentActivity() {
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
-                                    navController.navigate(NavigationRoutes.QuizGame(currentLevel!!.getLevelWithStage()))
+                                    navController.navigate(NavigationRoutes.QuizImage(currentLevel!!.getLevelWithStage()))
                                 },
                                 onClickSecondaryButton = {
                                     showLevelPreview = false

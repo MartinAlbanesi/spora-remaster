@@ -5,6 +5,10 @@ import com.gg.spora.R
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
+import com.gg.spora.core.utils.enums.TypeGame
+import com.gg.spora.core.utils.enums.TypeQuestion
+import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
+import com.gg.spora.miniGames.domain.model.Question
 import com.gg.spora.minigameQuizImage.domain.model.GetRamdonQuestionImage
 import com.gg.spora.minigameQuizImage.domain.model.model.ImageQuestionType
 import com.gg.spora.minigameQuizImage.domain.model.model.QuestionImage
@@ -16,14 +20,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizImageViewModel @Inject constructor(
-    private val getRamdonQuestionImage: GetRamdonQuestionImage
+    private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase
 ) : ViewModel() {
 
-    private val _questions = MutableStateFlow<List<QuestionImage>>(emptyList())
+    private val _questions = MutableStateFlow<List<Question>>(emptyList())
 
     private val _currentQuestionIndex = MutableStateFlow(0)
 
-    private val _currentQuestion = MutableStateFlow<QuestionImage?>(null)
+    private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
 
     private val _currentImageResId = MutableStateFlow<Int>(R.drawable.recurso_viento)
@@ -47,21 +51,23 @@ class QuizImageViewModel @Inject constructor(
     init {
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
     }
-
-    val questionImageResId = currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
 
     private fun getCurrentQuestion() {
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
     }
 
     private fun getRandomQuestions() {
-        _questions.value = getRamdonQuestionImage(MAX_QUESTIONS, ImageQuestionType.RECYCLINGIMAGE)
+        _questions.value = getRandomQuestionFromTypeUseCase(
+            count = MAX_QUESTIONS,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE
+        )
     }
 
     fun isAnswerCorrect(answerId: String) {
-        _isCorrect.value = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _isCorrect.value = _questions.value[_currentQuestionIndex.value].answerId == answerId
         _areOptionsEnabled.value = false
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
@@ -88,7 +94,7 @@ class QuizImageViewModel @Inject constructor(
         _currentQuestionIndex.value++
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
-        _currentImageResId.value = _currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
         _isCorrect.value = null
         _areOptionsEnabled.value = true //BORRAR SI NO FUNCIONA
     }
@@ -102,7 +108,7 @@ class QuizImageViewModel @Inject constructor(
         _areOptionsEnabled.value = true
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
 
     }
 

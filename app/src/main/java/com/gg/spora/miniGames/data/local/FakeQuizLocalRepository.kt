@@ -10,13 +10,17 @@ import javax.inject.Inject
 
 class FakeQuizLocalRepository @Inject constructor(
 
-): IQuizLocalRepository {
+) : IQuizLocalRepository {
 
     private val fakeModelsQuiz = FakeQuizModels.fakeQuestions
 
-    override fun getRandomQuestions(count: Int, type: TypeGame, typeQuestion: TypeQuestion): List<Question> {
+    override fun getRandomQuestions(
+        count: Int,
+        typeQuestion: TypeQuestion,
+        typeGame: TypeGame,
+    ): List<Question> {
         val randomQuestions = fakeModelsQuiz
-            .filter { it.typeGame == type && it.typeQuestion == typeQuestion }
+            .filter { it.typeGame == typeGame && it.typeQuestion == typeQuestion }
             .shuffled()
             .take(count)
         return randomQuestions

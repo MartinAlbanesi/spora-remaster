@@ -1,5 +1,6 @@
 package com.gg.spora.core.fake
 
+import com.gg.spora.R
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.miniGames.domain.model.Answer
@@ -11,241 +12,363 @@ object FakeQuizModels {
         Answer(
             answer = "Aire",
             id = "0",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Smog",
             id = "1",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Agua",
             id = "2",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Compost",
             id = "3",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Desecho",
             id = "4",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Contaminación",
             id = "5",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Recursos naturales",
             id = "6",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Ecosistema",
             id = "7",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Ambiente",
             id = "8",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Reforestación",
             id = "9",
-            type = TypeQuestion.RECYCLE
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 1
         Answer(
             answer = "Reciclar",
             id = "10",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Realizar",
             id = "11",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Recolectar",
             id = "12",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Respetar",
             id = "13",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 2
         Answer(
             answer = "Rojo",
             id = "14",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Blanco",
             id = "15",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Celeste",
             id = "16",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Violeta",
             id = "17",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 3
         Answer(
             answer = "Pilas y desechos peligrosos",
             id = "18",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Aceites e insecticidas",
             id = "19",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Desechos orgánicos",
             id = "20",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Plásticos y envases metálicos",
             id = "21",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 4
         Answer(
             answer = "700 años",
             id = "22",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "80 años",
             id = "23",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "120 años",
             id = "24",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "300 años",
             id = "25",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 5 y 6
         Answer(
             answer = "Amarillo",
             id = "26",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Verde",
             id = "27",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Azul",
             id = "28",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Naranja",
             id = "29",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 7
         Answer(
             answer = "Espejos rotos",
             id = "30",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Frascos de mermelada vacíos",
             id = "31",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Botellas de vidrio",
             id = "32",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Tarros de vidrio",
             id = "33",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 8
         Answer(
             answer = "En un punto limpio",
             id = "34",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Contenedor gris",
             id = "35",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Contenedor de desechos generales",
             id = "36",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Contenedor azul",
             id = "37",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 9
         Answer(
             answer = "Reforestando",
             id = "38",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Usando menos papel",
             id = "39",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Plantando flores",
             id = "40",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Prohibiendo la madera",
             id = "41",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         // Pregunta 10
         Answer(
             answer = "Una forma de niebla en ciudades",
             id = "42",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Una mezcla de polvo y humo",
             id = "43",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Un tipo de aire fresco",
             id = "44",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
         ),
         Answer(
             answer = "Vapor de agua en el ambiente",
             id = "45",
-            type = TypeQuestion.MARTIN
+            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeGame = TypeGame.QUIZ
+        ),
+
+        // ----------------------- QUIZ_IMAGE -----------------------
+
+
+        Answer(
+            answer = "Símbolo de Reciclaje",
+            id = "46",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.simbolo_reciclaje
+        ),
+        Answer(
+            answer = "Calentamiento Global",
+            id = "47",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.calentamiento_global
+        ),
+        Answer(
+            answer = "Deforestación",
+            id = "48",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.deforestacion
+        ),
+        Answer(
+            answer = "Smog",
+            id = "49",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.smog
+        ),
+        Answer(
+            answer = "Contaminación",
+            id = "50",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.contaminacion
+        ),
+        Answer(
+            answer = "Energia Eólica",
+            id = "51",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.recurso_viento
+        ),
+        Answer(
+            answer = "Desechos Electrónicos",
+            id = "52",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.desechos_electronicos
+
+        ),
+        Answer(
+            answer = "Agujero de Ozono",
+            id = "53",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.agujero_ozono
+        ),
+        Answer(
+            answer = "Residuo Tóxico",
+            id = "54",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.residuo_toxico
+        ),
+        Answer(
+            answer = "Panel Solar",
+            id = "55",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE
+//            imageResId = R.drawable.panel_solar
+
         ),
     )
 
@@ -329,6 +452,99 @@ object FakeQuizModels {
             answerId = fakeAnswers[42].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = TypeQuestion.MARTIN
+        ),
+
+        // ----------------------- QUIZ_IMAGE -----------------------
+
+        Question(
+            id = "46",
+            question = "¿Qué representa la imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "46" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[46].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.simbolo_reciclaje
+        ),
+        Question(
+            id = "47",
+            question = "¿Qué representa la imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "47" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[47].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.calentamiento_global
+        ),
+        Question(
+            id = "48",
+            question = "¿Qué pasó en el bosque?",
+            answers = fakeAnswers.filter { fake -> fake.id != "48" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[48].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.deforestacion
+        ),
+        Question(
+            id = "49",
+            question = "¿Qué produce el humo?",
+            answers = fakeAnswers.filter { fake -> fake.id != "49" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[49].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.smog
+        ),
+        Question(
+            id = "50",
+            question = "¿Qué está pasando en la imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "50" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[50].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.contaminacion
+        ),
+        Question(
+            id = "51",
+            question = "¿Qué tipo de energía es?",
+            answers = fakeAnswers.filter { fake -> fake.id != "51" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[51].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.recurso_viento
+        ),
+        Question(
+            id = "52",
+            question = "¿Qué tipo de desecho es?",
+            answers = fakeAnswers.filter { fake -> fake.id != "52" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[52].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.desechos_electronicos
+        ),
+        Question(
+            id = "53",
+            question = "¿Qué representa la imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "53" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[53].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.agujero_ozono
+        ),
+        Question(
+            id = "54",
+            question = "¿Qué tipo de residuo es?",
+            answers = fakeAnswers.filter { fake -> fake.id != "54" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[54].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.residuo_toxico
+        ),
+        Question(
+            id = "55",
+            question = "¿Qué es el objeto de la imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "55" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answerId = fakeAnswers[55].id,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.panel_solar
         ),
     )
 }

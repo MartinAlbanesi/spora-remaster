@@ -10,7 +10,7 @@ import com.gg.spora.miniGames.domain.model.Question
  */
 interface IQuizLocalRepository {
 
-    fun getRandomQuestions(count: Int, type: TypeGame, typeQuestion: TypeQuestion): List<Question>
+    fun getRandomQuestions(count: Int, typeQuestion: TypeQuestion, typeGame: TypeGame): List<Question>
 
     fun getQuestionById(id: String): Question
 
