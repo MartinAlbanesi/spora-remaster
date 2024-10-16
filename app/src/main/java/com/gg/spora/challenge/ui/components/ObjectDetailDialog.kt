@@ -60,6 +60,10 @@ fun ObjectDetailDialog(
         Color.Gray
     }
 
+    if(currentStep == 2){
+        buttonContinueEnabled = true
+    }
+
         Dialog(
             onDismissRequest = { },
             properties = DialogProperties(
@@ -131,21 +135,25 @@ fun ObjectDetailDialog(
                         fontSize = 25.sp,
                     )
 
-                    Crossfade(targetState = currentStep) { step ->
+                    Crossfade(targetState = currentStep, label = "") { step ->
                         when (step) {
                             1 -> StepObjectDetail(
                                 stepImage = R.drawable.step_one,
                                 stepTitle = "Validación",
                                 stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
-                                onPreviousStep = { currentStep = 2 },
-                                onNextStep = { currentStep = 2 } // Cambia a otro paso según tu lógica
+                                onPreviousStep = {  },
+                                onNextStep = { currentStep = 2 },
+                                isFirstStep = true,
+                                isLastStep = false
                             )
                             2 -> StepObjectDetail(
                                 stepImage = R.drawable.step_two,
                                 stepTitle = "Paso Dos",
                                 stepDescription = "Descripción del paso dos.",
                                 onPreviousStep = { currentStep = 1 },
-                                onNextStep = { /* Logica para avanzar a otro paso */ }
+                                onNextStep = { /* Logica para avanzar a otro paso */ },
+                                isFirstStep = false,
+                                isLastStep = true
                             )
                         }
                     }

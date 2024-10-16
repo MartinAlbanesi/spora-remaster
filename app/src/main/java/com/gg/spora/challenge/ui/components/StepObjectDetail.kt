@@ -38,7 +38,9 @@ fun StepObjectDetail(
     stepTitle: String,
     stepDescription: String,
     onPreviousStep: () -> Unit,
-    onNextStep: () -> Unit
+    onNextStep: () -> Unit,
+    isFirstStep : Boolean,
+    isLastStep : Boolean
 ) {
     Row(
         modifier = modifier
@@ -46,20 +48,22 @@ fun StepObjectDetail(
             .height(140.dp)
             .background(color = MaterialTheme.colorScheme.primaryContainer)
     ) {
-        IconButton(
-            onClick = { onPreviousStep() },
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .background(MaterialTheme.colorScheme.primary),
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.back_icon),
-                contentDescription = "Previous Step",
-                modifier = Modifier.size(30.dp),
-                tint = Color.Black
+        if(!isFirstStep){
+            IconButton(
+                onClick = { onPreviousStep() },
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(MaterialTheme.colorScheme.primary),
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.back_icon),
+                    contentDescription = "Previous Step",
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Black
 
-            )
+                )
+            }
         }
 
         Column(
@@ -99,19 +103,21 @@ fun StepObjectDetail(
             )
         }
 
-        IconButton(
-            onClick = { onNextStep() },
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .background(MaterialTheme.colorScheme.primary)
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.next_icon),
-                contentDescription = "Next Step",
-                modifier = Modifier.size(30.dp),
-                tint = Color.Black
-            )
+        if(!isLastStep){
+            IconButton(
+                onClick = { onNextStep() },
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(MaterialTheme.colorScheme.primary)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.next_icon),
+                    contentDescription = "Next Step",
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Black
+                )
+            }
         }
     }
 }
@@ -128,7 +134,9 @@ fun StepObjectDetailPreview() {
                 stepTitle = "Validación",
                 stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
                 onPreviousStep = {},
-                onNextStep = {}
+                onNextStep = {},
+                isFirstStep = true,
+                isLastStep = false
             )
         }
     }
