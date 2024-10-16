@@ -1,5 +1,6 @@
 package com.gg.spora.challenge.ui.components
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +22,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,6 +52,7 @@ fun ObjectDetailDialog(
 ) {
 
     var buttonContinueEnabled by remember { mutableStateOf(false) }
+    var currentStep by remember { mutableIntStateOf(1) }
 
     val continueButtonColor = if (buttonContinueEnabled)  {
         Color(0xFFFFA500)
@@ -128,13 +131,24 @@ fun ObjectDetailDialog(
                         fontSize = 25.sp,
                     )
 
-                    StepObjectDetail(
-                        stepImage = R.drawable.step_one,
-                        stepTitle = "Validación",
-                        stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
-                        onPreviousStep = {},
-                        onNextStep = {}
-                    )
+                    Crossfade(targetState = currentStep) { step ->
+                        when (step) {
+                            1 -> StepObjectDetail(
+                                stepImage = R.drawable.step_one,
+                                stepTitle = "Validación",
+                                stepDescription = "Una botella de plástico que se puede reciclar deberá tener un ícono de reciclaje.",
+                                onPreviousStep = { currentStep = 2 },
+                                onNextStep = { currentStep = 2 } // Cambia a otro paso según tu lógica
+                            )
+                            2 -> StepObjectDetail(
+                                stepImage = R.drawable.step_two,
+                                stepTitle = "Paso Dos",
+                                stepDescription = "Descripción del paso dos.",
+                                onPreviousStep = { currentStep = 1 },
+                                onNextStep = { /* Logica para avanzar a otro paso */ }
+                            )
+                        }
+                    }
 
                     Row(
                         modifier = modifier
@@ -169,7 +183,6 @@ fun ObjectDetailDialog(
                     }
                 }
                 }
-
 
         }
 
