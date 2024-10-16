@@ -40,8 +40,6 @@ fun QuizImageScreen(
     answerOptions: List<Answer>,
     currentImageResIdState: Int,
     onAnswerSelected: (String) -> Unit,
-//    onNextQuestion: () -> Unit,
-    areOptionsEnabled: Boolean
 ) {
 
     var isAnswerSelected by remember { mutableStateOf(false) }
@@ -104,8 +102,6 @@ private fun QuizImageScreenPreview() {
                 answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
                 currentImageResIdState = FakeQuizModels.fakeQuestions.random().image!!,
                 onAnswerSelected = {},
-//                onNextQuestion = {},
-                areOptionsEnabled = true, //BORRAR SI NO FUNCIONA
             )
         }
     }

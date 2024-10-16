@@ -121,7 +121,8 @@ class MainActivity : ComponentActivity() {
                                                 title = currentLevel!!.getLevelWithStage(),
                                                 quizCount = currentLevel!!.quizCount,
                                                 imageCount = currentLevel!!.imageCount,
-                                                relationsCount = currentLevel!!.relationsCount
+                                                relationsCount = currentLevel!!.relationsCount,
+                                                levelId = currentLevel!!.id
                                             )
                                         )
                                 },
@@ -199,7 +200,6 @@ class MainActivity : ComponentActivity() {
                                                 currentImageResIdState = currentImage,
                                                 isCorrect = isCorrect,
                                                 onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                                areOptionsEnabled = true, //BORRAR SI NO FUNCIONA
                                             )
                                         }
                                         TypeGame.RELATIONS -> TODO()

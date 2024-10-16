@@ -16,6 +16,7 @@ object NavigationRoutes {
         val quizCount: Int,
         val imageCount: Int,
         val relationsCount: Int,
+        val levelId: String,
     )
 
     @Serializable

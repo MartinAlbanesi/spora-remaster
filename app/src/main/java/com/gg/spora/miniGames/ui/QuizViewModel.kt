@@ -10,6 +10,8 @@ import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
+import com.gg.spora.core.utils.functions.getStarState
+import com.gg.spora.forestStage.domain.UpdateLevelStateUseCase
 import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
+    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(){
 
@@ -112,7 +115,15 @@ class QuizViewModel @Inject constructor(
     }
 
     fun nextQuestion() {
-        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1 || _lives.value <= 0) {
+        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1) {
+            _isFinished.value = true
+
+            val currentStarState = getStarState(lives = _lives.value)
+            updateLevelStateUseCase(quizRoute.levelId, currentStarState)
+
+            return
+        }
+        if(_lives.value <= 0){
             _isFinished.value = true
             return
         }

@@ -81,7 +81,7 @@ fun StageScreen(
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-                                if(level.isComplete){onClickLevelItem(level, true)}
+                                if(!level.isComplete){onClickLevelItem(level, true)}
                             }
                     )
                 }

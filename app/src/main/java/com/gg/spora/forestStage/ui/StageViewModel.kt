@@ -46,9 +46,9 @@ class StageViewModel @Inject constructor(
         _currentLevel.value = level
     }
 
-    fun updateLevel(level: Level) {
-        stageRepository.updateLevel(level)
-    }
+//    fun updateLevel(level: Level) {
+//        stageRepository.updateLevel(level)
+//    }
 
 
 }
