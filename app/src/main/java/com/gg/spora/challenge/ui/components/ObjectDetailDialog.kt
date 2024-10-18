@@ -56,7 +56,7 @@ fun ObjectDetailDialog(
         Color.Gray
     }
 
-    if(currentStep == 2){
+    if(currentStep == objectDetail.steps.size){
         buttonContinueEnabled = true
     }
 
@@ -184,11 +184,19 @@ fun ObjectDetailDialog(
 
 @Composable
 fun ValidateImageOfObjectDetail(objectDetailName : String){
-    val image : Int = if(objectDetailName == "Botella de plastico"){
-        R.drawable.botella_de_plastico
+    val image : Int
+
+        if(objectDetailName == "Botella de plastico"){
+            image = R.drawable.botella_de_plastico
+    }
+    else if(objectDetailName == "Caja de carton"){
+            image = R.drawable.caja_de_carton
+    }
+    else if(objectDetailName == "Lata de metal"){
+            image = R.drawable.caja_de_carton
     }
     else{
-        R.drawable.caja_de_carton
+            image = 0
     }
 
     Image(

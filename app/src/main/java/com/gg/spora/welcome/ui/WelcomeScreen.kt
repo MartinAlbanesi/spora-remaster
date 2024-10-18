@@ -299,8 +299,8 @@ fun GuestEnterNameScreen(
 
                 SporaPrimaryButton(
                     modifier.size(width = 350.dp, height = 50.dp),
-                    "Siguente",
-                    textSize = 32,
+                    "Siguiente",
+                    textSize = 30,
                     onClick = onClick
                 )
 
@@ -333,7 +333,7 @@ fun ChampyTalkGuestScreen(
 
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_celebrando_brazoslevantados,
-                dialogue = "¡Genial, ${guestName}!\n vamos a mi hogar",
+                dialogue = "¡Genial, ${guestName}!\n Vamos a mi hogar",
                 x = -(30).dp,
                 y = -(22).dp,
                 modifier = Modifier.align(Alignment.Center)
