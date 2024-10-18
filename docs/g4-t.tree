@@ -7,9 +7,8 @@
                  start-page="Inicio.md">
 
     <toc-element topic="Inicio.md"/>
+    <toc-element topic="Introduccion.md"/>
     <toc-element topic="Nosotros.md"/>
-    <toc-element topic="Descripción.md"/>
-    <toc-element topic="Brief-Del-Servicio.md"/>
     <toc-element topic="Aventura.md"/>
     <toc-element topic="Conceptos.md"/>
     <toc-element topic="Niveles.md"/>
