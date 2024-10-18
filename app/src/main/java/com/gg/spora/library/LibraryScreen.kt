@@ -6,25 +6,32 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
+import com.gg.spora.core.ui.animations.MushyBlinkAnimation
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
+/**
+ * @param modifier Modifier
+ * @param onClickFirst Lambda function to navigate to first screen
+ * @param onClickSecond Lambda function to navigate to second screen
+ * @param onClickThird Lambda function to navigate to third screen
+ * @param onBackButtonClick Lambda function to navigate to previous screen
+ */
 
 @Preview(showBackground = true)
 @Composable
@@ -33,7 +40,12 @@ fun PreviewLibrary() {
 }
 
 @Composable
-fun LibraryScreen() {
+fun LibraryScreen(
+    onBackButtonClick: () -> Unit = {},
+    onClickFirst: () -> Unit = {},
+    onClickSecond: () -> Unit = {},
+    onClickThird: () -> Unit = {}
+) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -46,46 +58,94 @@ fun LibraryScreen() {
         )
 
         TopAppBarOnlyBackArrow {
-            //onBackButtonClick()
+            onBackButtonClick()
         }
 
-        BookcaseScreenClicker(modifier = Modifier)
+        BookcaseScreenClicker(
+            modifier = Modifier,
+            onClickFirst = onClickFirst,
+            onClickSecond = onClickSecond,
+            onClickThird = onClickThird
+        )
+
+        MushyAndTable(modifier = Modifier)
+    }
+}
+
+@Composable
+fun MushyAndTable(modifier: Modifier) {
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(bottom = 80.dp, end = 180.dp),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        MushyBlinkAnimation(
+            modifier
+                .size(220.dp)
+                .offset(y = -(20).dp, x = 5.dp)
+        )
+
+        Image(
+            painter = painterResource(R.drawable.library_table),
+            contentDescription = "Table",
+        )
     }
 }
 
 
 @Composable
-fun BookcaseScreenClicker(modifier: Modifier) {
+fun BookcaseScreenClicker(
+    modifier: Modifier,
+    onClickFirst: () -> Unit = {},
+    onClickSecond: () -> Unit = {},
+    onClickThird: () -> Unit = {}
+) {
 
-    Box(modifier = Modifier
-        .width(170.dp)
-        .height(70.dp)
-        .offset(x = 210.dp, y = 225.dp)
-        .background(color = Color.Transparent)
-        .clickable(onClick = {
-            //Nav to info recycler
-        }),
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.CenterEnd) {
+        Column(
+            modifier
+                .fillMaxHeight()
+                .padding(end = 15.dp, bottom = 170.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(170.dp)
+                    .height(70.dp)
+                    .background(color = Color.Transparent)
+                    .clickable(onClick = {
+                        //Nav to info recycler
+                        onClickFirst()
+                    }),
         )
 
-    Box(modifier = Modifier
-        .width(170.dp)
-        .height(60.dp)
-        .offset(x = 210.dp, y = 310.dp)
-        .background(color = Color.Transparent)
-        .clickable(onClick = {
-            //Nav to info watercare
-        }),
-    )
+            Box(
+                modifier = Modifier
+                    .width(170.dp)
+                    .height(70.dp)
+                    .background(color = Color.Transparent)
+                    .clickable(onClick = {
+                        //Nav to info watercare
+                        onClickSecond()
+                    }),
+            )
 
-    Box(modifier = Modifier
-        .width(170.dp)
-        .height(70.dp)
-        .offset(x = 210.dp, y = 380.dp)
-        .background(color = Color.Transparent)
-        .clickable(onClick = {
-            //Nav to info eco energy
-        }),
-    )
+            Box(
+                modifier = Modifier
+                    .width(170.dp)
+                    .height(70.dp)
+                    .background(color = Color.Transparent)
+                    .clickable(onClick = {
+                        //Nav to info eco energy
+                        onClickThird()
+                    }),
+            )
+        }
+
+    }
+
 
 
 

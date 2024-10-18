@@ -28,14 +28,15 @@ import com.gg.spora.camera.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
-import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.animations.screenFadeWithSlideInToLeft
 import com.gg.spora.core.ui.animations.screenFadeWithSlideOutToRight
+import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
+import com.gg.spora.library.LibraryScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
         val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
-            screenSplash.setKeepOnScreenCondition{ false }
+            screenSplash.setKeepOnScreenCondition { false }
             SporaTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
@@ -61,7 +62,7 @@ class MainActivity : ComponentActivity() {
                     val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.Library,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -313,6 +314,12 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
 
+                        }
+
+                        composable<NavigationRoutes.Library> {
+                            LibraryScreen(
+                                onBackButtonClick = { navController.popBackStack() }
+                            )
                         }
                     }
                 }

@@ -19,6 +19,9 @@ object NavigationRoutes {
     object Welcome
 
     @Serializable
+    object Library
+
+    @Serializable
     object Grove
 
     @Serializable
