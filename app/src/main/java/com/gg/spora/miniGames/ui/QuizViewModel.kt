@@ -32,7 +32,7 @@ class QuizViewModel @Inject constructor(
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
 //    val questions = _questions.asStateFlow()
 
-    private val _currentQuestionIndex = MutableStateFlow(0)
+//    private val _currentQuestionIndex = MutableStateFlow(0)
 //    val currentQuestionIndex = _currentQuestionIndex.asStateFlow()
 
     private val _currentQuestion = MutableStateFlow<Question?>(null)
@@ -60,7 +60,7 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getCurrentQuestion() {
-        _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
+        _currentQuestion.value = _questions.value[_counterQuestion.value]
     }
 
     private fun getRandomQuestions() {
@@ -93,7 +93,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        _isCorrect.value  = _questions.value[_currentQuestionIndex.value].answerId == answerId
+        _isCorrect.value  = _questions.value[_counterQuestion.value].answerId == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 // si la respuesta es la correcta
@@ -115,7 +115,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun nextQuestion() {
-        if(_currentQuestionIndex.value == MAX_QUESTIONS - 1) {
+        if(_counterQuestion.value == MAX_QUESTIONS - 1) {
             _isFinished.value = true
 
             val currentStarState = getStarState(lives = _lives.value)
@@ -127,16 +127,14 @@ class QuizViewModel @Inject constructor(
             _isFinished.value = true
             return
         }
-        _currentQuestionIndex.value++
         _counterQuestion.value++
-        _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
+        _currentQuestion.value = _questions.value[_counterQuestion.value]
         _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
         _isCorrect.value = null
     }
 
     fun resetGame() {
         _counterQuestion.value = 0
-        _currentQuestionIndex.value = 0
         _lives.value = MAX_LIVES
         _isFinished.value = false
         _isCorrect.value = null

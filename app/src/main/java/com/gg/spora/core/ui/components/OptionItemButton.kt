@@ -26,6 +26,7 @@ fun OptionItemButton(
     textItem: String,
     isCorrect: Boolean?,
     enabled: Boolean,
+    hasIcon: Boolean = true,
     onAnswerSelected: () -> Unit,
 ) {
 
@@ -67,12 +68,14 @@ fun OptionItemButton(
                 text = textItem,
                 color = textColor,
             )
-            Icon(
-                imageVector = Icons.Default.CheckCircle,
-                tint = textColor,
-                modifier = Modifier.size(40.dp),
-                contentDescription = Icons.Default.CheckCircle.name,
-            )
+            if(hasIcon){
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    tint = textColor,
+                    modifier = Modifier.size(40.dp),
+                    contentDescription = Icons.Default.CheckCircle.name,
+                )
+            }
 
         }
     }

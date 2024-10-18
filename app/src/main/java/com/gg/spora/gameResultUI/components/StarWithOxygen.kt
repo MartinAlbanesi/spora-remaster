@@ -63,27 +63,11 @@ private fun StarWithOxygenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-            ) {
-                StarWithOxygen(
-                    oxygenAmount = 50,
-                    starImage = R.drawable.estrella_gris,
-                    modifier = Modifier.rotate(-25f)
-                )
-                StarWithOxygen(
-                    oxygenAmount = 10,
-                    starImage = R.drawable.estrella,
-                    modifier = Modifier.offset(y = (-16).dp)
-                )
-                StarWithOxygen(
-                    oxygenAmount = 10,
-                    starImage = R.drawable.estrella_gris,
-                    modifier = Modifier.rotate(25f)
-                )
-            }
+            StarWithOxygen(
+                oxygenAmount = 10,
+                starImage = R.drawable.estrella,
+                modifier = Modifier.offset(y = (-16).dp)
+            )
         }
     }
 }

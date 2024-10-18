@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.OptionItemButton
 import com.gg.spora.miniGames.domain.model.Answer
@@ -49,14 +50,14 @@ fun QuizImageScreen(
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier = modifier
     ) {
-            Image(
-                painter = painterResource(id = currentImageResIdState),
-                contentDescription = "Imagen",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .size(140.dp)
-            )
+        AsyncImage(
+            model = painterResource(id = currentImageResIdState),
+            contentDescription = "Imagen",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .padding(8.dp)
+                .size(140.dp)
+        )
         Text(
             text = questionTitle,
             textAlign = TextAlign.Center,
@@ -71,7 +72,7 @@ fun QuizImageScreen(
             OptionItemButton(
                 textItem = answer.answer,
                 isCorrect = answer.isCorrect,
-                enabled =  isCorrect == null,
+                enabled = isCorrect == null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)

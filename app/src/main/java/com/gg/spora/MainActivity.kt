@@ -38,7 +38,6 @@ import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.miniGames.ui.QuizImageScreen
-import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
 import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
 import com.gg.spora.ui.theme.SporaTheme
@@ -262,29 +261,6 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             )
-                        }
-                        composable<NavigationRoutes.RelationsGame> {
-
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
-
-                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
-                                imageBackground = R.drawable.fondo_minijuegos,
-                                title = title.title,
-                                isCorrect = null, // <- Cambiar por tu variable de estado
-                                questionSize = SporaConstant.MAX_QUESTIONS,
-                                isFinished = false, // <- Cambiar por tu variable de estado
-                                lives = 5, // <- Cambiar por tu variable de estado
-                                counterQuestion = 0, // <- Cambiar por tu variable de estado
-                                onNextQuestion = { /* Ingresar logica de siguiente */ },
-                                onResetGame = { /* Ingresar logica de reset */ },
-                                onBackForestStage = { navController.popBackStack() },
-                                content = {
-                                    MinigameRelationsScreen {
-
-                                    }
-                                }
-                            )
-
                         }
                     }
                 }

@@ -368,10 +368,49 @@ object FakeQuizModels {
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
 //            imageResId = R.drawable.panel_solar
-
         ),
+
+        // ----------------------- RELATIONS -----------------------
+
+        Answer(
+            answer = "Reciclable",
+            id = "56",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Answer(
+            answer = "Biodegradable",
+            id = "57",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Plástico",
+            id = "58",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Answer(
+            answer = "No reciclable",
+            id = "59",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Contaminante",
+            id = "60",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Answer(
+            answer = "Orgánico",
+            id = "61",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        )
     )
 
+    // Wea
     val fakeQuestions = listOf(
         Question(
             id = "1",
@@ -545,6 +584,16 @@ object FakeQuizModels {
             typeQuestion = TypeQuestion.RECYCLE,
             typeGame = TypeGame.QUIZ_IMAGE,
             image = R.drawable.panel_solar
+        ),
+
+        // ----------------------- RELATIONS -----------------------
+        Question(
+            id = "56",
+            question = "Botella",
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]),
+            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.RELATIONS,
         ),
     )
 }
