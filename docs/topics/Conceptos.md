@@ -14,6 +14,8 @@ Son un grupo de hongos que habitan en la base del Árbol Madre y actúan como gu
 ### Antagonistas
 La sociedad humana se convirtió en la antagonista principal de la historia, ya que ha contaminado el bosque y dañado el medio ambiente debido a la falta de educación sobre su cuidado desde la juventud.
 
+## Objetos
+
 ### Oxígeno (O2)
 El oxígeno es una recompensa que funciona como medidor de experiencia o progreso, y se utiliza como medio para competir en un Ranking contra otros usuarios, en el que se podrán obtener diferentes recompensas. Además, se utiliza para desbloquear los niveles que requieren una cantidad de oxígeno para ser jugados. Se puede obtener de dos maneras:
 - Los árboles del bosque otorgan una cantidad X de oxígeno (dependiendo del tipo de árbol), pero solo cuando alcanzan su etapa adulta.

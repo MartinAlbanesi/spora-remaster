@@ -1,7 +1,5 @@
 # Descripción del Producto
 
-## Funcionalidades Principales
-
 ### 1 - Welcome
 
 La Pantalla de Bienvenida muestra el logo de la aplicación y ofrece al usuario la opción de iniciar sesión, registrarse o jugar como invitado. En esta pantalla, Champy se presenta y guía al usuario hacia el Árbol Madre, marcando el inicio de la aventura.
