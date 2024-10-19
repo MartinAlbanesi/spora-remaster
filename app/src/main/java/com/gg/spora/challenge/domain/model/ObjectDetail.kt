@@ -1,8 +1,49 @@
 package com.gg.spora.challenge.domain.model
 
+import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
+
 data class ObjectDetail(
-    val id : Int,
-    val name : String,
-    val steps : List<StepObjectDetail>,
-    val description : String
-)
+    val idObjectDetail : Int,
+    val nameObjectDetail : String?,
+    val description : String?,
+    val isValidate : Boolean
+){
+
+    private fun entityToObjectDetailModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {
+        return ObjectDetail(
+            idObjectDetail = objectDetailEntity.idObjectDetail,
+            nameObjectDetail =  objectDetailEntity.nameObjectDetail,
+            description = objectDetailEntity.description,
+            isValidate = objectDetailEntity.isValidate,
+        )
+    }
+
+    fun objectsDetailEntityToModels(objectDetailEntities : List<ObjectDetailEntity>) : List<ObjectDetail>{
+
+        val listObjectDetails = mutableListOf<ObjectDetail>()
+
+        for(entity in objectDetailEntities){
+            listObjectDetails.add(entityObjectDetailToModel(entity))
+        }
+
+        return listObjectDetails
+    }
+
+    private fun toObjectDetailEntity(): ObjectDetailEntity {
+        return ObjectDetailEntity(
+            idObjectDetail = idObjectDetail,
+            nameObjectDetail =  nameObjectDetail,
+            description = description,
+            isValidate = isValidate
+        )
+    }
+
+    private fun entityObjectDetailToModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {
+        return ObjectDetail(
+            idObjectDetail = idObjectDetail,
+            nameObjectDetail =  nameObjectDetail,
+            description = description,
+            isValidate = isValidate
+        )
+    }
+}
