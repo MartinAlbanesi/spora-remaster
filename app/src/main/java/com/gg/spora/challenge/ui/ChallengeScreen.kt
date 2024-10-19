@@ -163,34 +163,29 @@ fun ChallengeScreen(
 //Por ahora harcodeado, la idea es que estos datos se obtengan a traves de una consulta a la base
 fun getStepsObjectDetail(selectedObject : String) : List<StepObjectDetail> {
     if(selectedObject == "Botella de plastico"){
-            return mutableListOf(StepObjectDetail(1, "Limpieza",
+            return mutableListOf(StepObjectDetail(1, 1,"Limpieza",
                 "Vaciá y limpiá las botellas enjuagándolas " +
                     "con agua y unas gotitas de detergente.",
-                0, true, false),
-                StepObjectDetail(2, "Validación",
+                true, false),
+                StepObjectDetail(1, 2,"Validación",
                     "Una botella de plástico que se puede " +
-                            "reciclar debera tener un ícono de reciclaje. ",
-                    0, false, false),
-                StepObjectDetail(3, "Reciclado",
+                            "reciclar debera tener un ícono de reciclaje. "),
+                StepObjectDetail(1, 3,"Reciclado",
                     "Si la botella se puede reciclar entonces se " +
-                            "puede ingresar en los contenedores de reciclado.",
-                    0, false, false),
-                StepObjectDetail(4, "Crear",
+                            "puede ingresar en los contenedores de reciclado."),
+                StepObjectDetail(1, 4,"Crear",
                     "Si no se pueda reciclar, entonces se pueden hacer " +
                             "manualidades u objetos de decoración con los materiales.",
-                    0, false, true))
+                     false, true))
     }
     else{
-        return mutableListOf(StepObjectDetail(1, "Limpieza",
+        return mutableListOf(StepObjectDetail(2, 1,"Limpieza",
             "Asegurate que la caja de Carton este limpia " +
-                    "y sin ningun elemento que pueda interferir con su reciclaje",
-            0, true, false),
-            StepObjectDetail(2, "Recortar",
-                "Acompañado de un adulto, recorta la caja de carton en pequeños trozos",
-                0, false, false),
-            StepObjectDetail(3, "Crear",
+                    "y sin ningun elemento que pueda interferir con su reciclaje",true, false),
+            StepObjectDetail(2, 2,"Recortar",
+                "Acompañado de un adulto, recorta la caja de carton en pequeños trozos"),
+            StepObjectDetail(2, 3,"Crear",
                 "Con estos pequeños trozos de carton podes " +
-                        "hacer manualidades divertidas.",
-                0, false, true))
+                        "hacer manualidades divertidas.",false, true))
     }
 }

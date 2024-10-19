@@ -17,6 +17,7 @@ class ChallengeViewModel @Inject constructor() : ViewModel () {
 
     init {
         setObjectsChallengeData()
+        setObjectsDetailInDataBase()
     }
 
     fun selectObject(objectName: String) {
@@ -30,12 +31,5 @@ class ChallengeViewModel @Inject constructor() : ViewModel () {
             currentMap[it] = true
             _objectsChallenge.value = currentMap
         }
-    }
-
-    private fun setObjectsChallengeData() {
-        _objectsChallenge.value = mutableMapOf(
-            "Botella de plastico" to false,
-            "Caja de carton" to false,
-        )
     }
 }
