@@ -9,8 +9,13 @@
     <toc-element topic="Inicio.md"/>
     <toc-element topic="Introducción.md"/>
     <toc-element topic="Nosotros.md"/>
-    <toc-element topic="Aventura.md"/>
-    <toc-element topic="Descripción-del-Producto.md"/>
-    <toc-element topic="Conceptos.md"/>
+    <toc-element topic="Historia.md"/>
+    <toc-element topic="Funcionalidades-Principales.md"/>
+    <toc-element topic="Arboleda.md"/>
+    <toc-element topic="Áreas.md"/>
+    <toc-element topic="Niveles.md"/>
+    <toc-element topic="Minijuegos.md"/>
     <toc-element topic="Desafíos.md"/>
+    <toc-element topic="Funcionalidades-Secundarias.md"/>
+
 </instance-profile>

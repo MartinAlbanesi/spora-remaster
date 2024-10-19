@@ -1,12 +1,10 @@
 # Desafíos
 
-## Descripción
-
-Los desafíos son una parte fundamental para la creación de hábitos de manera recreacional y educativa. Se realizarán actividades lúdicas y entretenidas que fomenten la conciencia ambiental y el cuidado del medio ambiente. Los desafíos pueden ser de diferentes tipos, como juegos de habilidad, destreza, memoria, rapidez, entre otros. Cada desafío estará relacionado con el tema principal de la etapa, permitiéndole al usuario aprender de manera práctica y divertida.
+## Variantes de desafíos
 
 ### Desafío del Bosque - Escaneo de Objetos (Disruptiva)
 - **Objetivo:** Fomentar el reciclaje y la identificación de objetos reciclables.
-- **Mecánica:** El usuario debe identificar los objetos reciclables que aparecen en una lista utilizando la cámara de su dispositivo. Se implementará un sistema de reconocimiento de patrones para detectar los objetos. Una vez identificados, se mostrará información sobre su impacto ambiental, el tiempo que tardan en degradarse y las instrucciones para reciclarlos adecuadamente.
+- **Mecánica:** El usuario debe identificar los objetos reciclables que aparecen en una lista utilizando la cámara de su dispositivo. Se implementará un sistema de reconocimiento de patrones para detectar los objetos. Una vez identificado un objeto, se pintará de verde en la lista y se mostrará información sobre su impacto ambiental, el tiempo que tarda en degradarse y las instrucciones para reciclarlo adecuadamente.
 - **Recompensa:** Árbol Semillero Pino.
 - **Pérdida:** No hay penalización por errores.
 - **Comentarios adicionales:** No se pierde el progreso al salir del desafío. Al completarlo, se bloquea durante cierto tiempo, para evitar que el usuario lo realice repetidamente. Se puede repetir una vez que se desbloquee.

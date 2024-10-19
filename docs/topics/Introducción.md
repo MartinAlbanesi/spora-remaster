@@ -29,7 +29,7 @@ Su característica más novedosa es la búsqueda de objetos reciclables utilizan
 #### Perfil demográfico: Edad / Género / Ocupación / Lugar de residencia / Nivel socioeconómico
 
 Dirigido al público joven (entre 10 a 15 años), específicamente a niños que no estén informados sobre el impacto negativo que causan al medio ambiente a lo largo de su vida. Sin distinción de género, estudiantes de primaria, residentes de cualquier lugar del mundo. No se podrán realizar compras, por lo que el usuario puede usar la aplicación sin necesidad de preocuparse por su nivel socioeconómico.
-<br></br>
+
 Los niños durante esta edad descubren la importancia del cuidado del medio ambiente mediante la educación en las escuelas y de sus padres, es por esto que muchos infantes buscarán aprender más sobre el tema de manera visual y divertida. Es importante tener en cuenta que un gran porcentaje de niños tienen acceso a un celular, lo que facilitará encontrar nuestra aplicación como alternativa a los medios de educación tradicionales.
 
 #### Perfil psicográfico: Intereses / Valores / Ideales / Cualidades / Consumos / Relación con el servicio
@@ -38,8 +38,8 @@ Interesados en diversos temas relacionados a la ecología, la sustentabilidad y 
 
 ## Accesibilidad
 
-La aplicación estará disponible en la tienda de aplicaciones de Android, y se podrá acceder a ella en cualquier momento y lugar, siempre y cuando se cuente con una conexión a internet. Se utilizará principalmente en dispositivos móviles, como smartphones y tablets. El usuario podrá jugar en su tiempo libre, en casa, en la escuela, o en cualquier lugar donde se encuentre. No es necesario la presencia de otra persona para realizar las actividades pero si es aconsejable la supervisión de un mayor para realizar algunas de las actividades solicitadas (apagar/desconectar elementos electrónicos, tirar objetos a la bolsa de reciclaje).
+La aplicación estará disponible en la tienda de aplicaciones de Android, y se podrá acceder a ella en cualquier momento y lugar, siempre y cuando se cuente con una conexión a internet. Se utilizará principalmente en dispositivos móviles, como smartphones y tablets. El usuario podrá jugar en su tiempo libre, en casa, en la escuela, o en cualquier lugar donde se encuentre. \
+No es necesario la presencia de otra persona para realizar las actividades pero si es aconsejable la supervisión de un mayor para realizar algunas de las actividades solicitadas (apagar/desconectar elementos electrónicos, tirar objetos a la bolsa de reciclaje).
 
-
-<br></br>
+\
 <a href="Inicio.md">Volver a la página de inicio</a>
