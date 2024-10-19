@@ -12,7 +12,7 @@ interface ChallengeDao {
 
     //region ObjectDetailEntity
     @Query("SELECT * FROM object_detail")
-    suspend fun getAllObjectsDetail() : List<StepObjectDetail>
+    suspend fun getAllObjectsDetail() : List<ObjectDetailEntity>
 
     @Insert
     suspend fun insertObjetDetail(objectDetailEntity: ObjectDetailEntity)
@@ -28,7 +28,7 @@ interface ChallengeDao {
 
     //region StepObjectDetailEntity
     @Query("SELECT * FROM object_detail_step")
-    suspend fun getAllStepsObjectDetail() : List<StepObjectDetail>
+    suspend fun getAllStepsObjectDetail() : List<StepObjectDetailEntity>
 
     @Insert
     suspend fun insertStepObjetDetail(stepObjectDetail: StepObjectDetailEntity)
@@ -36,7 +36,7 @@ interface ChallengeDao {
     @Query("SELECT ods.* FROM object_detail od JOIN object_detail_step ods " +
             "ON od.id_object_detail = ods.id_object_detail" +
             " WHERE id_object_detail = :idObjectDetail")
-    suspend fun getAllStepsObjectDetailWithId(idObjectDetail : Int) : List<StepObjectDetail>
+    suspend fun getAllStepsObjectDetailWithId(idObjectDetail : Int) : List<StepObjectDetailEntity>
 
     @Query("DELETE FROM object_detail_step")
     suspend fun deleteAllStepsObjectDetail()

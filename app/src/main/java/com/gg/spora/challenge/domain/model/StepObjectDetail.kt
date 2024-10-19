@@ -9,27 +9,29 @@ data class StepObjectDetail(
     val description : String?
 ){
 
-    private fun entityToStepObjectDetailModel(stepObjectDetailEntity: StepObjectDetailEntity) : StepObjectDetail {
-        return StepObjectDetail(
-            idObjectDetail = stepObjectDetailEntity.idObjectDetail,
-            numberStep =  stepObjectDetailEntity.numberStep,
-            nameObjectDetail = stepObjectDetailEntity.nameObjectDetail,
-            description = stepObjectDetailEntity.description,
-        )
-    }
-
-    fun objectsDetailEntityToModels(stepsObjectDetailEntities : List<StepObjectDetailEntity>) : List<StepObjectDetail>{
-
-        val listStepsObjectDetails = mutableListOf<StepObjectDetail>()
-
-        for(entity in stepsObjectDetailEntities){
-            listStepsObjectDetails.add(entityToStepObjectDetailModel(entity))
+    companion object{
+        private fun entityToStepObjectDetailModel(stepObjectDetailEntity: StepObjectDetailEntity) : StepObjectDetail {
+            return StepObjectDetail(
+                idObjectDetail = stepObjectDetailEntity.idObjectDetail,
+                numberStep =  stepObjectDetailEntity.numberStep,
+                nameObjectDetail = stepObjectDetailEntity.nameObjectDetail,
+                description = stepObjectDetailEntity.description,
+            )
         }
 
-        return listStepsObjectDetails
+        fun objectsDetailEntityToModels(stepsObjectDetailEntities : List<StepObjectDetailEntity>) : List<StepObjectDetail>{
+
+            val listStepsObjectDetails = mutableListOf<StepObjectDetail>()
+
+            for(entity in stepsObjectDetailEntities){
+                listStepsObjectDetails.add(entityToStepObjectDetailModel(entity))
+            }
+
+            return listStepsObjectDetails
+        }
     }
 
-    private fun toStepObjectDetailEntity(): StepObjectDetailEntity {
+    fun toStepObjectDetailEntity(): StepObjectDetailEntity {
         return StepObjectDetailEntity(
             idObjectDetail = idObjectDetail,
             numberStep =  numberStep,

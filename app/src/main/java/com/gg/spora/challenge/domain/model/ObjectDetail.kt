@@ -8,28 +8,29 @@ data class ObjectDetail(
     val description : String?,
     val isValidate : Boolean
 ){
-
-    private fun entityToObjectDetailModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {
-        return ObjectDetail(
-            idObjectDetail = objectDetailEntity.idObjectDetail,
-            nameObjectDetail =  objectDetailEntity.nameObjectDetail,
-            description = objectDetailEntity.description,
-            isValidate = objectDetailEntity.isValidate,
-        )
-    }
-
-    fun objectsDetailEntityToModels(objectDetailEntities : List<ObjectDetailEntity>) : List<ObjectDetail>{
-
-        val listObjectDetails = mutableListOf<ObjectDetail>()
-
-        for(entity in objectDetailEntities){
-            listObjectDetails.add(entityToObjectDetailModel(entity))
+    companion object{
+        private fun entityToObjectDetailModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {
+            return ObjectDetail(
+                idObjectDetail = objectDetailEntity.idObjectDetail,
+                nameObjectDetail =  objectDetailEntity.nameObjectDetail,
+                description = objectDetailEntity.description,
+                isValidate = objectDetailEntity.isValidate,
+            )
         }
 
-        return listObjectDetails
+        fun objectsDetailEntityToModels(objectDetailEntities : List<ObjectDetailEntity>) : List<ObjectDetail>{
+
+            val listObjectDetails = mutableListOf<ObjectDetail>()
+
+            for(entity in objectDetailEntities){
+                listObjectDetails.add(entityToObjectDetailModel(entity))
+            }
+
+            return listObjectDetails
+        }
     }
 
-    private fun toObjectDetailEntity(): ObjectDetailEntity {
+    fun toObjectDetailEntity(): ObjectDetailEntity {
         return ObjectDetailEntity(
             idObjectDetail = idObjectDetail,
             nameObjectDetail =  nameObjectDetail,
