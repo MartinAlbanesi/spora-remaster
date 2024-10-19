@@ -48,4 +48,4 @@ La Biblioteca de Mushy es el centro de información de la aplicación, donde se 
 - **Diario Ecológico** En esta sección, se recopilan los datos y las estadísticas del usuario, como la cantidad total de árboles plantados, la cantidad de semillas obtenidas, el total de niveles completados, el tiempo jugado y la posición en el ranking.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

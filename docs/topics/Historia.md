@@ -29,4 +29,4 @@ El honguito pequeño, llamado **Champy**, comienza su viaje en la base del Árbo
 Al final de su viaje, Champy regresa al Árbol Madre con todo el conocimiento adquirido. Junto a Mushy y la comunidad de hongos, comienzan a trabajar para salvar el bosque y cuidar el medio ambiente. Gracias a sus esfuerzos, el bosque comienza a recuperarse, y el Árbol Madre vuelve a florecer, brindando oxígeno y vida a todo el bosque. La comunidad de hongos celebra la victoria, y Champy se convierte en un héroe para todos los habitantes del bosque. A partir de ese momento, Champy se convierte en el guardián del bosque, y junto a los hongos, se encarga de proteger y cuidar el bosque para las generaciones futuras.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

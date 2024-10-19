@@ -64,4 +64,4 @@ El oxígeno es una recompensa que funciona como medidor de experiencia o progres
 - Los niveles otorgan oxígeno al completarlos, basado en la cantidad de estrellas ganadas, las cuales dependen del rendimiento del usuario.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

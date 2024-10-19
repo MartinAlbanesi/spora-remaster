@@ -15,4 +15,4 @@ Si el usuario no logra obtener la máxima cantidad de estrellas o desea mejorar 
 - Relacionar los Conceptos: Se presenta una consigna, una palabra clave y seis posibles respuestas. El usuario selecciona tres opciones y, al confirmar, se validan las respuestas. Si el usuario elige las tres respuestas correctas, se habilita un botón para continuar. Si selecciona al menos una respuesta incorrecta, se pierde una vida y se avanza al siguiente minijuego.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

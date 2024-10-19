@@ -14,4 +14,4 @@
     Se enfocará en temas como las energías renovables, la contaminación causada por las petroleras y el daño a la capa de ozono.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

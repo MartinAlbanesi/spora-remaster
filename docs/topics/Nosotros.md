@@ -25,4 +25,4 @@ Actualmente, tenemos una versión estable de la aplicación con las funciones pr
 Una vez que la aplicación esté lista, planeamos continuar trabajando en ella para mejorarla y agregar nuevas funcionalidades. Estamos emocionados por lo que nos depara el futuro, y confiamos en que este proyecto nos abrirá nuevas puertas y oportunidades en el mundo laboral. Estamos seguros de que este proyecto será el comienzo de una carrera exitosa en el desarrollo de aplicaciones móviles, y estamos ansiosos por ver a dónde nos llevará.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

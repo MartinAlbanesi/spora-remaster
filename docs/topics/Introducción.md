@@ -42,4 +42,4 @@ La aplicación estará disponible en la tienda de aplicaciones de Android, y se 
 No es necesario la presencia de otra persona para realizar las actividades pero si es aconsejable la supervisión de un mayor para realizar algunas de las actividades solicitadas (apagar/desconectar elementos electrónicos, tirar objetos a la bolsa de reciclaje).
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>

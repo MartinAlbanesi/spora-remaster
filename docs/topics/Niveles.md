@@ -15,4 +15,4 @@ Al seleccionar un nivel, se abrirá una pantalla que presentará la siguiente in
 - **Requisito de Oxígeno:** Se especificará la cantidad de oxígeno que el usuario necesita acumular para poder acceder a este nivel, estableciendo un objetivo claro para la progresión en la aventura.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>
