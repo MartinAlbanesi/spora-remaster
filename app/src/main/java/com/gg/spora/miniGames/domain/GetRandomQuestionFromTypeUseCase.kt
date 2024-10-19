@@ -12,6 +12,9 @@ class GetRandomQuestionFromTypeUseCase @Inject constructor(
         val randomQuestions = quizLocalRepository
             .getRandomQuestions(count,typeQuestion,typeGame)
             .map { question ->
+                if(typeGame.typeNumber == 2) {
+                    return@map question
+                }
                 val answer = quizLocalRepository.getAnswerById(question.answerId)
                 val newQuestion = question.copy(
                     answers = (question.answers + answer).shuffled()

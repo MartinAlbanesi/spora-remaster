@@ -48,6 +48,16 @@ room = "2.6.1"
 # lottie
 lottie = "6.5.2"
 
+# Mockk
+mockk = "1.13.12"
+
+# Kotlin Coroutines Test
+kotlinCoroutinesTest = "1.8.0"
+
+# Constraint Layout compose
+constraintLayoutCompose = "1.0.1"
+
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
@@ -109,6 +119,16 @@ lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", versio
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+# Mockk
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
+# Kotlin Coroutines Test
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutinesTest" }
+
+# Constraint Layout Compose
+constraint-layout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintLayoutCompose" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

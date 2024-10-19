@@ -50,8 +50,8 @@ fun QuizImageScreen(
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier = modifier
     ) {
-        AsyncImage(
-            model = painterResource(id = currentImageResIdState),
+        Image(
+            painter = painterResource(id = currentImageResIdState),
             contentDescription = "Imagen",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier

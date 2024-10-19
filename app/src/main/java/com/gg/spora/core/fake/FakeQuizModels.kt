@@ -590,7 +590,7 @@ object FakeQuizModels {
         Question(
             id = "56",
             question = "Botella",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]),
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
             answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
             typeQuestion = TypeQuestion.RECYCLE,
             typeGame = TypeGame.RELATIONS,

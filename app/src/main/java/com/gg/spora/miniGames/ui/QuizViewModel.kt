@@ -53,6 +53,9 @@ class QuizViewModel @Inject constructor(
     private val _currentImageResId = MutableStateFlow(R.drawable.recurso_viento)
     val currentImageResId = _currentImageResId.asStateFlow()
 
+    private val _relationsItems = MutableStateFlow<List<String>>(emptyList())
+    val relationsItems = _relationsItems.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -64,12 +67,6 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getRandomQuestions() {
-
-//        _questions.value = getRandomQuestionFromTypeUseCase(
-//            count = MAX_QUESTIONS,
-//            typeQuestion = TypeQuestion.MARTIN,
-//            typeGame = TypeGame.QUIZ
-//        )
 
         val quizGame = getRandomQuestionFromTypeUseCase(
             count = quizRoute.quizCount,
@@ -83,13 +80,13 @@ class QuizViewModel @Inject constructor(
             typeGame = TypeGame.QUIZ_IMAGE
         )
 
-//        val relationsGame = getRandomQuestionFromTypeUseCase(
-//            count = quizRoute.relationsCount,
-//            typeQuestion = TypeQuestion.RECYCLE,
-//            typeGame = TypeGame.RELATIONS
-//        )
+        val relationsGame = getRandomQuestionFromTypeUseCase(
+            count = quizRoute.relationsCount,
+            typeQuestion = TypeQuestion.RECYCLE,
+            typeGame = TypeGame.RELATIONS
+        )
 
-        _questions.value = (quizGame + imageGame).shuffled()
+        _questions.value = (quizGame + imageGame + relationsGame).shuffled()
     }
 
     fun isAnswerCorrect(answerId: String) {
@@ -114,8 +111,32 @@ class QuizViewModel @Inject constructor(
         }
     }
 
+    fun onSelectedItem(answerId: String) {
+
+        if(_relationsItems.value.contains(answerId)) {
+            _relationsItems.value -= answerId
+            return
+        }
+
+        if(_relationsItems.value.size < 3) {
+            _relationsItems.value += answerId
+        }
+    }
+
+    fun relationsAnswerSelected(){
+        val correctAnswer = _currentQuestion.value!!.answerId.split(",").map { it.toInt() }.toSet()
+        val selectedAnswers = _relationsItems.value.map { it.toInt() }.toSet()
+
+        if (correctAnswer == selectedAnswers) {
+            _isCorrect.value = true
+        } else {
+            _isCorrect.value = false
+            _lives.value--
+        }
+    }
+
     fun nextQuestion() {
-        if(_counterQuestion.value == MAX_QUESTIONS - 1) {
+        if(_counterQuestion.value == _questions.value.size - 1) {
             _isFinished.value = true
 
             val currentStarState = getStarState(lives = _lives.value)

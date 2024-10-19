@@ -1,5 +1,6 @@
 package com.gg.spora.miniGames.ui
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,23 +10,38 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.MiniGameScreen
-import com.gg.spora.core.ui.components.OptionItemButton
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.ui.theme.SporaTheme
@@ -36,15 +52,33 @@ fun RelationsScreen(
     modifier: Modifier = Modifier,
     objectName: String,
     answers: List<Answer>,
+    selectedItems: List<String>,
+    isCorrect: Boolean?,
+    onSelectedItem: (answerId: String) -> Unit,
+    onConfirmSelecteds: () -> Unit
 ) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+
+
+    ConstraintLayout(
+        modifier = modifier
     ) {
+
+        val (title, item, options, confirmButton) = createRefs()
+
+        val topGuideline = createGuidelineFromTop(0.05f)
+        val bottomGuideline = createGuidelineFromBottom(0.2f)
+//        createVerticalChain(title, item, options, chainStyle = ChainStyle.Spread)
+
         Text(
             text = "Seleciona 3 conceptos relacionados",
-            color = Color.Black
+            color = Color.Black,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.constrainAs(title) {
+                top.linkTo(topGuideline)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            }
         )
         Box(
             contentAlignment = Alignment.Center,
@@ -53,38 +87,124 @@ fun RelationsScreen(
                 .height(44.dp)
                 .width(200.dp)
                 .background(colorResource(R.color.tertiary))
-        ){
+                .constrainAs(item) {
+                    top.linkTo(title.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(options.top)
+                }
+        ) {
             Text(
                 text = objectName,
                 color = Color.White,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
+                modifier = Modifier,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
             )
         }
 
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp),
+            modifier = Modifier.constrainAs(options) {
+                top.linkTo(item.bottom)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                bottom.linkTo(bottomGuideline)
+            }
         ) {
             answers.forEach { answer ->
-                OptionItemButton(
-                    textItem = answer.answer,
-                    isCorrect = answer.isCorrect,
-                    enabled = true,
-                    onAnswerSelected = {},
-                    hasIcon = false,
+                RelationItemSelected(
                     modifier = Modifier
                         .width(180.dp)
-                        .height(60.dp)
+                        .height(60.dp),
+                    answer = answer.answer,
+                    isCorrect = answer.isCorrect,
+                    isSelected = selectedItems.contains(answer.id),
+                    onSelected = { onSelectedItem(answer.id) }
                 )
+
+            }
+        }
+
+        if (selectedItems.size == 3 && isCorrect == null) {
+            Button(
+                onClick = onConfirmSelecteds,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .height(60.dp)
+                    .width(200.dp)
+                    .constrainAs(confirmButton) {
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+            ) {
+                Text(text = "Confirmar")
             }
         }
 
     }
 }
 
-@PreviewLightDark
-//@Preview
+@Composable
+fun RelationItemSelected(
+    modifier: Modifier = Modifier,
+    answer: String,
+    isCorrect: Boolean?,
+    isSelected: Boolean,
+    onSelected: () -> Unit
+) {
+
+    val textColor by animateColorAsState(
+        when (isCorrect) {
+            true -> Color.White
+            false -> Color.White
+            null -> colorResource(R.color.primary_10)
+        }, label = "textColor"
+    )
+
+    val backgroundColor by animateColorAsState(
+        when (isCorrect) {
+            true -> colorResource(R.color.secondary)
+            false -> colorResource(R.color.error)
+            null -> colorResource(R.color.cream)
+        },
+        label = "backgroundColor"
+    )
+
+    FilterChip(
+        onClick = onSelected,
+        label = {
+            Text(
+                text = answer,
+            )
+        },
+        colors = FilterChipDefaults.filterChipColors(
+            containerColor = backgroundColor,
+            labelColor = textColor,
+            selectedLabelColor = Color.Black,
+            selectedContainerColor = colorResource(R.color.primary),
+            selectedLeadingIconColor = Color.Black
+        ),
+        selected = isSelected,
+        shape = MaterialTheme.shapes.large,
+        leadingIcon = {
+            if (isSelected) {
+                Icon(
+                    imageVector = Icons.Filled.Done,
+                    contentDescription = "Done icon",
+                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                )
+            }
+        },
+        modifier = modifier
+    )
+}
+
+//@PreviewLightDark
+@Preview
 //@PreviewFontScale
 //@PreviewScreenSizes
 @Composable
@@ -94,6 +214,9 @@ private fun RelationsScreenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
+
+            val isCorrect by rememberSaveable { mutableStateOf<Boolean?>(null) }
+
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
                 title = "Titi",
@@ -102,17 +225,23 @@ private fun RelationsScreenPreview() {
                 questionSize = SporaConstant.MAX_QUESTIONS,
                 isFinished = false,
                 lives = 5,
+                showButtonContinue = isCorrect != null,
                 counterQuestion = 0,
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = { },
                 content = {
                     RelationsScreen(
-                        objectName = "Botella",
-                        answers = FakeQuizModels.fakeAnswers.filter { it.id.toInt() > 55 },
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(vertical = 16.dp)
+                            .padding(vertical = 0.dp),
+                        objectName = "Botella",
+                        answers = FakeQuizModels.fakeAnswers.filter { it.id.toInt() > 55 }.take(6)
+                            .shuffled(),
+                        selectedItems = listOf("55", "56", "57"),
+                        isCorrect = isCorrect,
+                        onSelectedItem = { },
+                        onConfirmSelecteds = {},
                     )
                 }
             )

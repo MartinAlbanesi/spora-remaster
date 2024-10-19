@@ -138,4 +138,13 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+
+    // kotlin corrutines
+    testImplementation (libs.kotlinx.coroutines.test)
+
+    // Mockk
+    testImplementation (libs.mockk)
+
+    // Constraint Layout Compose
+    implementation(libs.constraint.layout.compose)
 }

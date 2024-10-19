@@ -40,6 +40,7 @@ import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.miniGames.ui.QuizImageScreen
 import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
+import com.gg.spora.miniGames.ui.RelationsScreen
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
@@ -164,6 +165,8 @@ class MainActivity : ComponentActivity() {
 
                             val currentImage by quizViewModel.currentImageResId.collectAsState()
 
+                            val selectedItems by quizViewModel.relationsItems.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 title = title.title,
@@ -173,6 +176,7 @@ class MainActivity : ComponentActivity() {
                                 isFinished = isFinished,
                                 lives = lives,
                                 counterQuestion = counterQuestion,
+                                showButtonContinue = isCorrect != null,
                                 onNextQuestion = quizViewModel::nextQuestion,
                                 onResetGame = quizViewModel::resetGame,
                                 onBackForestStage = { navController.popBackStack() },
@@ -201,10 +205,20 @@ class MainActivity : ComponentActivity() {
                                                 onAnswerSelected = quizViewModel::isAnswerCorrect,
                                             )
                                         }
-                                        TypeGame.RELATIONS -> TODO()
-                                        TypeGame.CHALLENGE -> TODO()
+                                        TypeGame.RELATIONS -> {
+                                            RelationsScreen(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(vertical = 24.dp),
+                                                objectName = currentQuestion!!.question,
+                                                answers = currentQuestion!!.answers,
+                                                selectedItems = selectedItems,
+                                                isCorrect = isCorrect,
+                                                onSelectedItem = quizViewModel::onSelectedItem,
+                                                onConfirmSelecteds = quizViewModel::relationsAnswerSelected,
+                                            )
+                                        }
                                     }
-
                                 }
                             )
                         }
@@ -218,7 +232,6 @@ class MainActivity : ComponentActivity() {
                             CameraScreen(
                                 nameObject = nameObject,
                                 onNavigateToChallengeScreen = {
-//                                    navController.navigate(NavigationRoutes.Challenge)
                                     navController.popBackStack()
                                 },
                                 challengeViewModel = challengeViewModel

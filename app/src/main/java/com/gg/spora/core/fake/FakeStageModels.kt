@@ -25,7 +25,7 @@ object FakeStageModels {
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
             starState = StarState.ZERO,
-            isComplete = false,
+            isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
             quizCount = 5,
             imageCount = 5,
@@ -36,37 +36,28 @@ object FakeStageModels {
             id = "2",
             levelName = "Nivel 2",
             typeStage = TypeStage.FOREST,
-            requiredOxygen = 30,
+            requiredOxygen = 0,
             rewardsOxygen = listOf(15, 25, 35),
             starState = StarState.ZERO,
-            isComplete = false,
+            isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
             quizCount = 2,
             imageCount = 8,
             relationsCount = 0
         ),
-        //        Level(
-//            id = 3,
-//            levelName = "Nivel 3",
-//            stageType = StageType.FOREST,
-//            requiredOxygen = 80,
-//            rewardsOxygen = listOf(15, 25, 40),
-//            questionType = QuestionType.RELATIONS,
-//            starState = StarState.STAR_TWO
-//        ),
-//        Level(
-//            id = "3",
-//            levelName = "Desafio",
-//            typeStage = TypeStage.FOREST,
-//            requiredOxygen = 0,
-//            rewardsOxygen = listOf(0, 0, 0),
-//            starState = StarState.ZERO,
-//            isComplete = false,
-//            typeQuestion = TypeQuestion.RECYCLE,
-//            quizCount = 4,
-//            imageCount = 4,
-//            relationsCount = 0
-//        )
+        Level(
+            id = "3",
+            levelName = "Nivel 3",
+            typeStage = TypeStage.FOREST,
+            requiredOxygen = 30,
+            rewardsOxygen = listOf(15, 25, 35),
+            starState = StarState.ZERO,
+            isComplete = true,
+            typeQuestion = TypeQuestion.RECYCLE,
+            quizCount = 0,
+            imageCount = 0,
+            relationsCount = 10
+        ),
     )
 
     var fakeStage = StageLevel(
