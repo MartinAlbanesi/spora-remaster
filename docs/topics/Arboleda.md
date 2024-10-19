@@ -23,4 +23,4 @@ El Árbol del Bosque surge de las semillas otorgadas por los árboles semilleros
 3. Adulto: La tercera y última etapa del árbol. Se mostrará con una imagen del tipo de árbol al que pertenece y comenzará a otorgar oxígeno diariamente.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>
