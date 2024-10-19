@@ -13,3 +13,6 @@ Al seleccionar un nivel, se abrirá una pantalla que presentará la siguiente in
 - **Posibles Recompensas:** Se enumerarán las recompensas disponibles para este nivel, incentivando al usuario a completar el desafío.
 - **Nombre del Área:** Se indicará el nombre del área a la que pertenece el nivel, brindando contexto sobre el entorno y los temas tratados.
 - **Requisito de Oxígeno:** Se especificará la cantidad de oxígeno que el usuario necesita acumular para poder acceder a este nivel, estableciendo un objetivo claro para la progresión en la aventura.
+
+\
+<a href="Inicio.md">Volver a la página de inicio</a>

@@ -46,3 +46,6 @@ La Biblioteca de Mushy es el centro de información de la aplicación, donde se 
 
 - **Estante de Libros** Aquí se presentan los conceptos y lecciones aprendidas en los niveles y desafíos de la aventura, separados por áreas y temas. Cada libro contiene información detallada sobre el tema tratado, incluyendo imágenes, gráficos y datos relevantes.
 - **Diario Ecológico** En esta sección, se recopilan los datos y las estadísticas del usuario, como la cantidad total de árboles plantados, la cantidad de semillas obtenidas, el total de niveles completados, el tiempo jugado y la posición en el ranking.
+
+\
+<a href="Inicio.md">Volver a la página de inicio</a>

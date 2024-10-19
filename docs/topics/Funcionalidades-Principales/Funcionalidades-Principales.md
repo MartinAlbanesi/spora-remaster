@@ -63,6 +63,5 @@ El oxígeno es una recompensa que funciona como medidor de experiencia o progres
 - Los árboles del bosque otorgan una cantidad X de oxígeno (dependiendo del tipo de árbol), pero solo cuando alcanzan su etapa adulta.
 - Los niveles otorgan oxígeno al completarlos, basado en la cantidad de estrellas ganadas, las cuales dependen del rendimiento del usuario.
 
-
 \
 <a href="Inicio.md">Volver a la página de inicio</a>

@@ -13,3 +13,6 @@ Si el usuario no logra obtener la máxima cantidad de estrellas o desea mejorar 
 - Quiz: Se presenta una pregunta relacionada con los temas del área del nivel actual y cuatro posibles respuestas. El usuario selecciona una respuesta, que se valida como correcta o incorrecta. Si es correcta, se pinta de verde y Champy celebra con un salto. Si es incorrecta, se pinta de rojo, se descuenta una vida y Champy se muestra triste, indicando cuál era la respuesta correcta. Tras verificar la respuesta, se habilita un botón para continuar.
 - Quiz de Imágenes: Similar al Quiz, pero se muestra una ilustración relacionada con la temática del área junto con una pregunta y cuatro respuestas. La validación y los resultados siguen el mismo proceso que el Quiz.
 - Relacionar los Conceptos: Se presenta una consigna, una palabra clave y seis posibles respuestas. El usuario selecciona tres opciones y, al confirmar, se validan las respuestas. Si el usuario elige las tres respuestas correctas, se habilita un botón para continuar. Si selecciona al menos una respuesta incorrecta, se pierde una vida y se avanza al siguiente minijuego.
+
+\
+<a href="Inicio.md">Volver a la página de inicio</a>

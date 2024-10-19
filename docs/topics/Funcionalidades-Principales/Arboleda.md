@@ -21,3 +21,6 @@ El Árbol del Bosque surge de las semillas otorgadas por los árboles semilleros
 1. Brote: Es la primera etapa del árbol. Se visualizará un pequeño brote en el lugar donde fue plantado y comenzará el temporizador de crecimiento.
 2. Mediano: En esta segunda etapa, se visualizará un pequeño árbol o arbusto, representando un árbol en pleno crecimiento.
 3. Adulto: La tercera y última etapa del árbol. Se mostrará con una imagen del tipo de árbol al que pertenece y comenzará a otorgar oxígeno diariamente.
+
+\
+<a href="Inicio.md">Volver a la página de inicio</a>
