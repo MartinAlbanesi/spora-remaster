@@ -23,7 +23,7 @@ data class ObjectDetail(
         val listObjectDetails = mutableListOf<ObjectDetail>()
 
         for(entity in objectDetailEntities){
-            listObjectDetails.add(entityObjectDetailToModel(entity))
+            listObjectDetails.add(entityToObjectDetailModel(entity))
         }
 
         return listObjectDetails
@@ -31,15 +31,6 @@ data class ObjectDetail(
 
     private fun toObjectDetailEntity(): ObjectDetailEntity {
         return ObjectDetailEntity(
-            idObjectDetail = idObjectDetail,
-            nameObjectDetail =  nameObjectDetail,
-            description = description,
-            isValidate = isValidate
-        )
-    }
-
-    private fun entityObjectDetailToModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {
-        return ObjectDetail(
             idObjectDetail = idObjectDetail,
             nameObjectDetail =  nameObjectDetail,
             description = description,
