@@ -25,7 +25,7 @@ class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
     private val updateLevelStateUseCase: UpdateLevelStateUseCase,
     savedStateHandle: SavedStateHandle,
-) : ViewModel(){
+) : ViewModel() {
 
     private val quizRoute = savedStateHandle.toRoute<NavigationRoutes.QuizGame>()
 
@@ -90,7 +90,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        _isCorrect.value  = _questions.value[_counterQuestion.value].answerId == answerId
+        _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 // si la respuesta es la correcta
@@ -106,24 +106,24 @@ class QuizViewModel @Inject constructor(
             }
         )
 
-        if(_isCorrect.value == false) {
+        if (_isCorrect.value == false) {
             _lives.value--
         }
     }
 
     fun onSelectedItem(answerId: String) {
 
-        if(_relationsItems.value.contains(answerId)) {
+        if (_relationsItems.value.contains(answerId)) {
             _relationsItems.value -= answerId
             return
         }
 
-        if(_relationsItems.value.size < 3) {
+        if (_relationsItems.value.size < 3) {
             _relationsItems.value += answerId
         }
     }
 
-    fun relationsAnswerSelected(){
+    fun relationsAnswerSelected() {
         val correctAnswer = _currentQuestion.value!!.answerId.split(",").map { it.toInt() }.toSet()
         val selectedAnswers = _relationsItems.value.map { it.toInt() }.toSet()
 
@@ -133,10 +133,26 @@ class QuizViewModel @Inject constructor(
             _isCorrect.value = false
             _lives.value--
         }
+
+        _relationsItems.value = emptyList()
+
+        _currentQuestion.value = _currentQuestion.value?.copy(
+            answers = _currentQuestion.value!!
+                .answers
+                .map {
+                    if (selectedAnswers.contains(it.id.toInt())) {
+                        it.copy(
+                            isCorrect = correctAnswer.contains(it.id.toInt())
+                        )
+                    } else {
+                        it
+                    }
+                }
+        )
     }
 
     fun nextQuestion() {
-        if(_counterQuestion.value == _questions.value.size - 1) {
+        if (_counterQuestion.value == _questions.value.size - 1) {
             _isFinished.value = true
 
             val currentStarState = getStarState(lives = _lives.value)
@@ -144,7 +160,7 @@ class QuizViewModel @Inject constructor(
 
             return
         }
-        if(_lives.value <= 0){
+        if (_lives.value <= 0) {
             _isFinished.value = true
             return
         }

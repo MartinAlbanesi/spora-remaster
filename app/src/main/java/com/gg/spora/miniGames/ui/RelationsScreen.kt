@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -134,7 +135,7 @@ fun RelationsScreen(
                 modifier = Modifier
                     .padding(16.dp)
                     .height(60.dp)
-                    .width(200.dp)
+                    .fillMaxWidth()
                     .constrainAs(confirmButton) {
                         bottom.linkTo(parent.bottom)
                         start.linkTo(parent.start)
@@ -225,7 +226,7 @@ private fun RelationsScreenPreview() {
                 questionSize = SporaConstant.MAX_QUESTIONS,
                 isFinished = false,
                 lives = 5,
-                showButtonContinue = isCorrect != null,
+                showButtonContinue = true,
                 counterQuestion = 0,
                 onNextQuestion = {},
                 onResetGame = {},

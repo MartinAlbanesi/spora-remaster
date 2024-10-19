@@ -209,7 +209,7 @@ class MainActivity : ComponentActivity() {
                                             RelationsScreen(
                                                 modifier = Modifier
                                                     .fillMaxSize()
-                                                    .padding(vertical = 24.dp),
+                                                    .padding(vertical = 0.dp),
                                                 objectName = currentQuestion!!.question,
                                                 answers = currentQuestion!!.answers,
                                                 selectedItems = selectedItems,
