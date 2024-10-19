@@ -6,7 +6,9 @@ data class StepObjectDetail(
     val idObjectDetail : Int,
     val numberStep : Int,
     val nameObjectDetail : String?,
-    val description : String?
+    val description : String?,
+    val isFirst : Boolean = false,
+    val isLast : Boolean = false
 ){
 
     companion object{
