@@ -33,4 +33,4 @@
 - **Pérdida:** No hay penalización por errores.
 
 \
-<a href="Inicio.md">Volver a la página de inicio</a>
+<a href="../../README.md">Volver a la página de inicio</a>
