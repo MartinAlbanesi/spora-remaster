@@ -88,7 +88,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
 
+    //mockk
+    testImplementation ("io.mockk:mockk:1.13.12")
 
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
@@ -128,6 +131,7 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.room.testing)
     ksp(libs.room.compiler)
 
     // Lottie
