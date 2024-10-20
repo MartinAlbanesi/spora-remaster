@@ -37,6 +37,7 @@ import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.grove.ui.GroveScreen
+import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
@@ -64,7 +65,7 @@ class MainActivity : ComponentActivity() {
                     val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.Grove,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -95,7 +96,16 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<NavigationRoutes.Grove> {
-                            GroveScreen()
+                            val groveViewModel = hiltViewModel<GroveViewModel>()
+                            val seedTrees by groveViewModel.seedTrees.collectAsState()
+                            val forestTrees by groveViewModel.forestTrees.collectAsState()
+
+                            GroveScreen(
+                                seedTrees = seedTrees,
+                                forestTrees = forestTrees,
+                                plantSeedInForest = { seed -> groveViewModel.plantSeedInForest(seed) },
+                                updateTree = { tree -> groveViewModel.updateTree(tree) }
+                            )
                         }
                         composable<NavigationRoutes.ForestStage> {
 

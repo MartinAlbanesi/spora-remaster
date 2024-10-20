@@ -51,8 +51,8 @@ class GroveModule {
 
     @Provides
     @Singleton
-    fun provideGroveViewModel(getSeedTreesUseCase: GetSeedTreesUseCase, getForestTreesUseCase: GetForestTreesUseCase, plantSeedUseCase: PlantSeedUseCase, collectOxygenUseCase: CollectOxygenUseCase): GroveViewModel {
-        return GroveViewModel(getSeedTreesUseCase, getForestTreesUseCase, plantSeedUseCase, collectOxygenUseCase)
+    fun provideGroveViewModel(getSeedTreesUseCase: GetSeedTreesUseCase, getForestTreesUseCase: GetForestTreesUseCase, plantSeedUseCase: PlantSeedUseCase,/* collectOxygenUseCase: CollectOxygenUseCase*/): GroveViewModel {
+        return GroveViewModel(getSeedTreesUseCase, getForestTreesUseCase, plantSeedUseCase, /*collectOxygenUseCase*/)
     }
 
 }

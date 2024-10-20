@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,19 +33,29 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
     // State para el árbol del bosque
     var treeState by remember { mutableStateOf(tree) }
 
+    // Un flag para saber cuando el árbol llegue a la etapa adulta y detener el contador de crecimiento
+    var hasReachedAdultStage by remember { mutableStateOf(false) }
+
     // Imagen correspondiente al estado del árbol
-    val imageResource = when (treeState.currentStage) {
-        GrowthStage.SPROUT -> R.drawable.sprout_tree
-        GrowthStage.MEDIUM -> R.drawable.medium_tree
-        GrowthStage.ADULT -> treeState.type.imageResource
+    val imageResource by remember(treeState.currentStage) {
+        derivedStateOf {
+            when (treeState.currentStage) {
+                GrowthStage.SPROUT -> R.drawable.sprout_tree
+                GrowthStage.MEDIUM -> R.drawable.medium_tree
+                GrowthStage.ADULT -> treeState.type.imageResource
+            }
+        }
     }
 
     // Efecto que actualiza el estado del árbol cada segundo
     LaunchedEffect(key1 = tree, key2 = treeState.currentStage) {
-        while (true) {
+        while (!hasReachedAdultStage) { // Stop when adult stage is reached
             delay(1000)
             val updatedTree = treeState.copy()
             updatedTree.updateGrowthStage()
+            if (updatedTree.currentStage == GrowthStage.ADULT) {
+                hasReachedAdultStage = true
+            }
             onTreeUpdated(updatedTree)
             treeState = updatedTree
         }

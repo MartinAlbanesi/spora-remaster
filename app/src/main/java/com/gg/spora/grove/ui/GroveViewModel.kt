@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.grove.data.models.ForestTree
 import com.gg.spora.grove.data.models.Seed
 import com.gg.spora.grove.data.models.SeedTree
-import com.gg.spora.grove.domain.models.CollectOxygenUseCase
 import com.gg.spora.grove.domain.models.GetForestTreesUseCase
 import com.gg.spora.grove.domain.models.GetSeedTreesUseCase
 import com.gg.spora.grove.domain.models.PlantSeedUseCase
@@ -28,7 +27,7 @@ class GroveViewModel @Inject constructor(
     private val getSeedTreesUseCase: GetSeedTreesUseCase,
     private val getForestTreesUseCase: GetForestTreesUseCase,
     private val plantSeedUseCase: PlantSeedUseCase,
-    private val collectOxygenUseCase: CollectOxygenUseCase
+    // private val collectOxygenUseCase: CollectOxygenUseCase
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque
@@ -41,6 +40,14 @@ class GroveViewModel @Inject constructor(
 
     private val _forestTree = MutableStateFlow<ForestTree?>(null)
     // val forestTree = _forestTree.asStateFlow()
+
+    fun getSeedTrees(): List<SeedTree> {
+        return _seedTrees.value
+    }
+
+    fun getForestTrees(): List<List<ForestTree?>> {
+        return _forestTrees.value
+    }
 
     // Inicialización de los casos de uso
     init {
@@ -58,7 +65,6 @@ class GroveViewModel @Inject constructor(
 
     // Actualización del estado del árbol
     fun updateTree(updatedTree: ForestTree) {
-        // Find the tree in the forest and update it
         val updatedForest = _forestTrees.value.mapIndexed { rowIndex, row ->
             row.mapIndexed { colIndex, tree ->
                 if (tree != null && tree.id == updatedTree.id) {

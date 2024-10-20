@@ -21,26 +21,35 @@ data class ForestTree(
     val plantingDate: LocalDateTime = LocalDateTime.now()
 ) : Tree(id, type) {
 
-    // Fecha de plantación del árbol y variables de estado
     @RequiresApi(Build.VERSION_CODES.O)
-    var accumulatedOxygen: Int = 0
+//  var accumulatedOxygen: Int = 0
     var currentStage: GrowthStage = GrowthStage.SPROUT
+    private var hasReachedAdultStage = false
 
     // Actualiza el estado de crecimiento del árbol
     fun updateGrowthStage() {
-        var secondsGoneBy = Duration.between(plantingDate, LocalDateTime.now()).toSeconds().toInt()
+        if (!hasReachedAdultStage) {
+            var secondsGoneBy = Duration.between(plantingDate, LocalDateTime.now()).toSeconds().toInt()
 
-        Log.d("ForestTree", "Seconds gone by: $secondsGoneBy")
+            Log.d("ForestTree", "Seconds gone by: $secondsGoneBy")
 
-        currentStage = when {
-            secondsGoneBy < 5 -> GrowthStage.SPROUT // 5 seconds
-            secondsGoneBy in 5..10 -> GrowthStage.MEDIUM // 5-10 seconds
-            else -> GrowthStage.ADULT // 10 seconds or more
+            currentStage = when {
+                secondsGoneBy < 5 -> GrowthStage.SPROUT // 5 seconds
+                secondsGoneBy in 5..10 -> GrowthStage.MEDIUM // 5-10 seconds
+                else -> {
+                    hasReachedAdultStage = true // Set flag when reaching ADULT stage
+                    GrowthStage.ADULT // 10 seconds or more
+                }
+            }
+
+            if (currentStage == GrowthStage.ADULT) {
+                hasReachedAdultStage = true
+            }
         }
-
         Log.d("ForestTree", "Current stage: $currentStage")
     }
 
+    /*
     // Calcula la cantidad de oxígeno generado por el árbol
     @RequiresApi(Build.VERSION_CODES.O)
     fun calculateGeneratedOxygen(): Int {
@@ -53,7 +62,9 @@ data class ForestTree(
             0 // No generates oxygen until it becomes an adult tree
         }
     }
+     */
 
+    /*
     // Recolecta el oxígeno generado por el árbol
     @RequiresApi(Build.VERSION_CODES.O)
     fun collectOxygen(): Int {
@@ -61,4 +72,5 @@ data class ForestTree(
         accumulatedOxygen = 0
         return oxygen
     }
+     */
 }
