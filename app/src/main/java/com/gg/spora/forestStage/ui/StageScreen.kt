@@ -37,10 +37,7 @@ fun StageScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     levels: List<Level>,
-    onNavigateToQuizGame: (String) -> Unit,
     onNavigateToChallenge: (String) -> Unit,
-    onNavigateToQuizImage: (String) -> Unit,
-    onNavigateToRelationsGame: (String) -> Unit,
     onClickLevelItem: (Level, Boolean, QuestionType) -> Unit,
     popBackStack: () -> Unit,
 ) {
@@ -91,27 +88,16 @@ fun StageScreen(
                         starsState = level.starState,
                         isChallenge = level.questionType == QuestionType.CHALLENGE,
                         stage = level.stageType,
-//                        rewards = level.rewardsOxygen,
                         modifier = Modifier
                             .offset(x = SporaConstant.PATH_LADDER[index].dp)
                             .clickable {
-//                                navigateGame("${level.levelName} - ${level.stageType.label}")
-//                                showLevelPreview = true
-                                onClickLevelItem(level, true, navigateGame)
+                                if (level.questionType == QuestionType.CHALLENGE) {
+                                    onNavigateToChallenge("${level.levelName} - ${level.stageType.label}")
+                                } else {
+                                    onClickLevelItem(level, true, navigateGame)
+                                }
                             }
                     )
-
-//                    LevelPreview(
-//                        isVisible = showLevelPreview,
-//                        backgroundImage = R.drawable.fondo_minijuegos_crop,
-//                        level = level,
-//                        onClickPrimaryButton = {
-//                            navigateGame()
-//                        },
-//                        onClickSecondaryButton = {
-//                            showLevelPreview = false
-//                        },
-//                    )
                 }
             }
 
@@ -130,12 +116,9 @@ private fun StageScreenPreview() {
             StageScreen(
                 oxygen = 0,
                 levels = FakeLevelModels.fakeLevels,
-                onNavigateToQuizGame = {},
                 onNavigateToChallenge = {},
-                onNavigateToQuizImage = {},
                 popBackStack = {},
-                onNavigateToRelationsGame = {},
-                onClickLevelItem = {_, _ , _-> }
+                onClickLevelItem = { _, _, _ -> }
 
             )
         }

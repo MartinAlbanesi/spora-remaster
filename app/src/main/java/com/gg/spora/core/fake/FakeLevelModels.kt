@@ -13,9 +13,10 @@ object FakeLevelModels {
             id = 1,
             levelName = "Nivel 1",
             stageType = StageType.FOREST,
-            requiredOxygen = 10,
+            requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
-            questionType = QuestionType.QUIZ
+            questionType = QuestionType.QUIZ,
+            starState = StarState.STAR_THREE
         ),
         Level(
             id = 2,
@@ -23,20 +24,21 @@ object FakeLevelModels {
             stageType = StageType.FOREST,
             requiredOxygen = 30,
             rewardsOxygen = listOf(15, 25, 35),
-            questionType = QuestionType.QUIZ_IMAGE
+            questionType = QuestionType.QUIZ_IMAGE,
+            starState = StarState.STAR_ONE
         ),
 
+//        Level(
+//            id = 3,
+//            levelName = "Nivel 3",
+//            stageType = StageType.FOREST,
+//            requiredOxygen = 80,
+//            rewardsOxygen = listOf(15, 25, 40),
+//            questionType = QuestionType.RELATIONS,
+//            starState = StarState.STAR_TWO
+//        ),
         Level(
             id = 3,
-            levelName = "Nivel 3",
-            stageType = StageType.FOREST,
-            requiredOxygen = 80,
-            rewardsOxygen = listOf(15, 25, 40),
-            questionType = QuestionType.RELATIONS,
-            starState = StarState.STAR_THREE
-        ),
-        Level(
-            id = 4,
             levelName = "Desafio",
             stageType = StageType.FOREST,
             requiredOxygen = 0,

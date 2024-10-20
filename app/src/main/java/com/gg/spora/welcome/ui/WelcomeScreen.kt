@@ -52,7 +52,10 @@ fun WelcomeScreen(
         5
     })
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
 
             HorizontalPager(
                 state = pagerState,
@@ -123,27 +126,32 @@ fun LogoScreen(
             modifier = Modifier.matchParentSize()
         )
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(5.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+//        Column(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(5.dp),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
 
-            LogoInitialAnimation(modifier = modifier, image = R.drawable.logo_reborde_slogan)
+            LogoInitialAnimation(
+                image = R.drawable.logo_reborde_slogan,
+                modifier = modifier.align(Alignment.Center)
+            )
 
             SporaPrimaryButton(
-                modifier
-                    .size(width = 350.dp, height = 50.dp)
-                    .offset(y = 60.dp),
-                "Continuar",
+//                    .offset(y = 60.dp),
+                text = "Continuar",
                 textSize = 30,
-                onClick = onClick
+                onClick = onClick,
+                modifier = modifier
+                    .size(width = 350.dp, height = 50.dp)
+                    .align(Alignment.BottomCenter)
+                    .offset(y = -60.dp),
             )
 
         }
-    }
+//    }
 }
 
 
@@ -165,25 +173,29 @@ fun ChampyTalkScreen(
             modifier = Modifier.matchParentSize()
         )
 
-        Column(
-            modifier = modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+//        Column(
+//            modifier = modifier.fillMaxHeight(),
+//            verticalArrangement = Arrangement.SpaceEvenly,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_sonriente_brazo_izquierdo_levantado,
                 dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi hogar.",
                 x = -(30).dp,
-                y = -(22).dp
+                y = -(22).dp,
+                modifier = Modifier.align(Alignment.Center)
             )
 
             SporaPrimaryButton(
-                modifier = modifier.size(width = 350.dp, height = 50.dp),
                 text = "Continuar",
                 textSize = 30,
-                onClick = onClick
+                onClick = onClick,
+                modifier = modifier
+                    .size(width = 350.dp, height = 50.dp)
+                    .align(Alignment.BottomCenter)
+                    .offset(y = -60.dp),
             )
-        }
+//        }
     }
 }
 
@@ -206,35 +218,39 @@ fun TypeUserSelectionScreen(
             modifier = Modifier.matchParentSize()
         )
 
-        Column(
-            modifier = modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+//        Column(
+//            modifier = modifier.fillMaxHeight(),
+//            verticalArrangement = Arrangement.SpaceEvenly,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
 
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_curioso_brazos_al_cuerpo,
-                dialogue = "Pero primero, ¿me contas sobre vos?",
-                x = -(30).dp
+                dialogue = "Pero primero, ¿me contás sobre vos?",
+                x = -(30).dp,
+                modifier = Modifier.align(Alignment.Center)
             )
 
 
-            Column(
-                modifier = modifier.height(120.dp), verticalArrangement = Arrangement.SpaceBetween
-            ) {
+//            Column(
+//                modifier = modifier.height(120.dp), verticalArrangement = Arrangement.SpaceBetween
+//            ) {
 //                SporaPrimaryButton(modifier = modifier, text = "Crear cuenta") {
 //                    /*Nav to Sign Up screen*/
 //                }
 
                 SporaPrimaryInverseButton(
-                    modifier = modifier.size(width = 350.dp, height = 50.dp),
                     text = "Jugar como invitado",
-                    textSize = 30,
-                    onClick = onClick
+                    textSize = 20,
+                    onClick = onClick,
+                    modifier = modifier
+                        .size(width = 350.dp, height = 50.dp)
+                        .align(Alignment.BottomCenter)
+                        .offset(y = -60.dp),
                 )
             }
-        }
-    }
+//        }
+//    }
 }
 
 @Composable
@@ -258,24 +274,25 @@ fun GuestEnterNameScreen(
             modifier = Modifier.matchParentSize()
         )
 
-        Column(
-            modifier = Modifier
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+//        Column(
+//            modifier = Modifier
+//                .fillMaxHeight(),
+//            verticalArrangement = Arrangement.SpaceEvenly,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
 
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla,
-                "Entonces... " +
+                dialogue = "Entonces... " +
                         "\n¿Cómo te llamas?",
-                x = -(30).dp
+                x = -(30).dp,
+                modifier = Modifier.align(Alignment.Center)
             )
 
             Column(
-                modifier = modifier.height(120.dp),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = modifier.align(Alignment.BottomCenter).offset(y = -60.dp),
             ) {
 
                 SporaTextField(modifier = modifier, guestName, onValueChange)
@@ -289,7 +306,7 @@ fun GuestEnterNameScreen(
 
             }
         }
-    }
+//    }
 }
 
 @Composable
@@ -308,28 +325,32 @@ fun ChampyTalkGuestScreen(
             modifier = Modifier.matchParentSize()
         )
 
-        Column(
-            modifier = modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+//        Column(
+//            modifier = modifier.fillMaxHeight(),
+//            verticalArrangement = Arrangement.SpaceEvenly,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
 
             ChampyWithTopDialogue(
                 champy = R.drawable.champy_celebrando_brazoslevantados,
                 dialogue = "¡Genial, ${guestName}!\n vamos a mi hogar",
                 x = -(30).dp,
-                y = -(22).dp
+                y = -(22).dp,
+                modifier = Modifier.align(Alignment.Center)
             )
 
             SporaPrimaryButton(
-                modifier = modifier.size(width = 350.dp, height = 50.dp),
                 text = "Comenzar",
-                textSize = 32
+                textSize = 24,
+                modifier = modifier
+                    .size(width = 350.dp, height = 60.dp)
+                    .align(Alignment.BottomCenter)
+                    .offset(y = -60.dp),
             ) {
                 onClick()
             }
         }
-    }
+//    }
 }
 
 @Preview(showBackground = true)

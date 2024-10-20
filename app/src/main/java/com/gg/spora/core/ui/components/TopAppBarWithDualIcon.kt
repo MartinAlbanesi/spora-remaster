@@ -55,11 +55,13 @@ fun TopAppBarWithDualIcon(
             ),
             title = {
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp).align(Alignment.TopCenter),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(top = 8.dp)
+//                        .align(Alignment.TopCenter)
                 ) {
-                    ImageWithTextHorizontal(imageResource = firstIcon, text = firstLabel)
-                    Spacer(Modifier.size(50.dp))
+//                    ImageWithTextHorizontal(imageResource = firstIcon, text = firstLabel)
+//                    Spacer(Modifier.size(50.dp))
                     ImageWithTextHorizontal(imageResource = secondIcon, text = secondLabel)
                 }
             },

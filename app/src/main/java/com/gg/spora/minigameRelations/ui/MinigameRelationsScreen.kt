@@ -57,11 +57,11 @@ fun MinigameRelationsScreen(
     ) {
         Text(
             text = "Selecciona los conceptos relacionados",
-            style = MaterialTheme.typography.bodyLarge.copy(
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier
+                .fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.gg.spora.R
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
+import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.minigameQuizImage.domain.model.GetRamdonQuestionImage
 import com.gg.spora.minigameQuizImage.domain.model.model.ImageQuestionType
 import com.gg.spora.minigameQuizImage.domain.model.model.QuestionImage
@@ -12,8 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
-
-const val MAX_QUESTIONS = 5
 
 @HiltViewModel
 class QuizImageViewModel @Inject constructor(
@@ -42,6 +41,9 @@ class QuizImageViewModel @Inject constructor(
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
+    private val _areOptionsEnabled = MutableStateFlow(true) //BORRAR SI NO FUNCIONA
+    val areOptionsEnabled: StateFlow<Boolean> = _areOptionsEnabled.asStateFlow()//BORRAR SI NO FUNCIONA
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -60,6 +62,7 @@ class QuizImageViewModel @Inject constructor(
 
     fun isAnswerCorrect(answerId: String) {
         _isCorrect.value = _questions.value[_currentQuestionIndex.value].answer.id == answerId
+        _areOptionsEnabled.value = false
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 if (it.id == answerId) {
@@ -87,6 +90,7 @@ class QuizImageViewModel @Inject constructor(
         _currentQuestion.value = _questions.value[_currentQuestionIndex.value]
         _currentImageResId.value = _currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
         _isCorrect.value = null
+        _areOptionsEnabled.value = true //BORRAR SI NO FUNCIONA
     }
 
     fun resetGame() {
@@ -95,9 +99,11 @@ class QuizImageViewModel @Inject constructor(
         _lives.value = MAX_LIVES
         _isFinished.value = false
         _isCorrect.value = null
+        _areOptionsEnabled.value = true
         getRandomQuestions()
         getCurrentQuestion()
         _currentImageResId.value = _currentQuestion.value?.imageResId ?: R.drawable.recurso_viento
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gg.spora.core.ui.components
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -54,6 +55,9 @@ fun MiniGameScreen(
     lives: Int,
     counterQuestion: Int,
     isFinished: Boolean = false,
+    showIcon: Boolean = true,
+    showButtonContinue: Boolean = true,
+    showProgressBar: Boolean = true,
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
@@ -87,9 +91,12 @@ fun MiniGameScreen(
         )
     }
 
+    BackHandler {
+        showDialogConfirm = true
+    }
+
     ChampyDialogConfirm(
-//        modifier = Modifier.fillMaxSize(),
-        backgroundImage = imageBackground,
+        backgroundImage = R.drawable.fondo_minijuegos_crop,
         isVisible = showDialogConfirm,
         onConfirmRequest = {
             showDialogConfirm = false
@@ -121,44 +128,50 @@ fun MiniGameScreen(
                     showDialogConfirm = true
                 },
                 lives = lives,
+                showIcon = showIcon
             )
-            LinearProgressIndicator(
-                progress = { progressIndicator },
-                gapSize = 0.dp,
-                strokeCap = StrokeCap.Butt,
-                color = Color(0xFFf58c0a),
-                trackColor = Color(0xFFffeacc),
-                modifier = Modifier
-                    .height(24.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .clip(MaterialTheme.shapes.large)
-            )
+            if(showProgressBar){
+                LinearProgressIndicator(
+                    progress = { progressIndicator },
+                    gapSize = 0.dp,
+                    strokeCap = StrokeCap.Butt,
+                    color = Color(0xFFf58c0a),
+                    trackColor = Color(0xFFffeacc),
+                    modifier = Modifier
+                        .height(24.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .clip(MaterialTheme.shapes.large)
+                )
+            }
             ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),
                 champyImage = champyImage,
+                isCorrect = isCorrect,
             ) {
                 content()
             }
         }
-        Button(
-            enabled = isCorrect != null,
-            onClick = {
-                onNextQuestion()
-            },
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White,
-                containerColor = Color(0xFFf58c0a),
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(16.dp)
-                .height(60.dp)
-        ) {
-            Text(
-                text = "Continuar",
-                color = Color.White,
-            )
+        if(showButtonContinue){
+            Button(
+                enabled = isCorrect != null,
+                onClick = {
+                    onNextQuestion()
+                },
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White,
+                    containerColor = Color(0xFFf58c0a),
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp)
+                    .height(60.dp)
+            ) {
+                Text(
+                    text = "Continuar",
+                    color = Color.White,
+                )
+            }
         }
     }
 }
