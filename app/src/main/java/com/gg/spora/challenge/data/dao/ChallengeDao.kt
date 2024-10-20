@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
-import com.gg.spora.challenge.domain.model.StepObjectDetail
 
 @Dao
 interface ChallengeDao {
@@ -23,7 +22,7 @@ interface ChallengeDao {
     @Query(
         "UPDATE object_detail SET is_validate = 1 " +
             "WHERE id_object_detail = :idObjectDetail")
-    suspend fun updateObjectDetailWithId(idObjectDetail : Int)
+    suspend fun setValidObjectDetailInDatabase(idObjectDetail : Int)
     //endregion
 
     //region StepObjectDetailEntity
