@@ -37,7 +37,7 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
     var hasReachedAdultStage by remember { mutableStateOf(false) }
 
     // Imagen correspondiente al estado del árbol
-    val imageResource by remember(treeState.currentStage) {
+    val imageResource by remember(treeState.currentStage, treeState.type.imageResource) { // Add treeState.type.imageResource as a dependency
         derivedStateOf {
             when (treeState.currentStage) {
                 GrowthStage.SPROUT -> R.drawable.sprout_tree

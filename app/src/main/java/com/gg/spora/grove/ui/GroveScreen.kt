@@ -37,7 +37,8 @@ fun GroveScreen(
     seedTrees: List<SeedTree>,
     forestTrees: List<List<ForestTree?>>,
     plantSeedInForest: (Seed) -> Unit,
-    updateTree: (ForestTree) -> Unit
+    updateTree: (ForestTree) -> Unit,
+    popBackStack: () -> Unit
 ) {
     // State para los árboles semilleros
     val seedTrees = seedTrees
@@ -53,12 +54,13 @@ fun GroveScreen(
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
+                modifier = ModifierStyle.brush,
                 firstLabel = "12",
                 firstIcon = R.drawable.trees_icon,
                 secondLabel = "465",
                 secondIcon = R.drawable.o2_icon,
                 showBackArrow = true,
-                modifier = ModifierStyle.brush
+                onBackClick = popBackStack
             )
         },
         modifier = modifier

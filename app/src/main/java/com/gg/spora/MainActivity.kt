@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
                     val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Grove,
+                        startDestination = NavigationRoutes.Home,
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -104,7 +104,10 @@ class MainActivity : ComponentActivity() {
                                 seedTrees = seedTrees,
                                 forestTrees = forestTrees,
                                 plantSeedInForest = { seed -> groveViewModel.plantSeedInForest(seed) },
-                                updateTree = { tree -> groveViewModel.updateTree(tree) }
+                                updateTree = { tree -> groveViewModel.updateTree(tree) },
+                                popBackStack = {
+                                    navController.popBackStack()
+                                },
                             )
                         }
                         composable<NavigationRoutes.ForestStage> {
