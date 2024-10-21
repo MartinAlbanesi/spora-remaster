@@ -20,7 +20,7 @@ class FakeQuizLocalRepository @Inject constructor(
         typeGame: TypeGame,
     ): List<Question> {
         val randomQuestions = fakeModelsQuiz
-            .filter { it.typeGame == typeGame && it.typeQuestion == typeQuestion }
+            .filter { it.typeGame == typeGame && it.typeQuestion.contains(typeQuestion) }
             .shuffled()
             .take(count)
         return randomQuestions

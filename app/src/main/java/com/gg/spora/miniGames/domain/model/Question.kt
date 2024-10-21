@@ -10,6 +10,6 @@ data class Question(
     val answers: List<Answer>,
     val answerId: String,
     val typeGame: TypeGame,
-    val typeQuestion: TypeQuestion,
+    val typeQuestion: List<TypeQuestion>,
     val image: Int? = null
 )

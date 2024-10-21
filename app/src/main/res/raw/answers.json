@@ -5,7 +5,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Smog",
@@ -13,7 +14,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Agua",
@@ -21,7 +23,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Compost",
@@ -29,7 +32,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Desecho",
@@ -37,7 +41,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Contaminación",
@@ -45,7 +50,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Recursos naturales",
@@ -53,7 +59,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Ecosistema",
@@ -61,7 +68,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Ambiente",
@@ -69,7 +77,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Reforestación",
@@ -77,7 +86,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Reciclar",
@@ -85,7 +95,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Realizar",
@@ -93,7 +104,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Recolectar",
@@ -101,7 +113,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Respetar",
@@ -109,7 +122,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Rojo",
@@ -117,7 +131,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Blanco",
@@ -125,7 +140,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Celeste",
@@ -133,7 +149,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Violeta",
@@ -141,7 +158,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Pilas y desechos peligrosos",
@@ -149,7 +167,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Aceites e insecticidas",
@@ -157,7 +176,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Desechos orgánicos",
@@ -165,7 +185,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Plásticos y envases metálicos",
@@ -173,7 +194,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "700 años",
@@ -181,7 +203,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "80 años",
@@ -189,7 +212,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "120 años",
@@ -197,7 +221,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "300 años",
@@ -205,7 +230,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Amarillo",
@@ -213,7 +239,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Verde",
@@ -221,7 +248,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Azul",
@@ -229,7 +257,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Naranja",
@@ -237,7 +266,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Espejos rotos",
@@ -245,7 +275,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Frascos de mermelada vacíos",
@@ -253,7 +284,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Botellas de vidrio",
@@ -261,7 +293,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Tarros de vidrio",
@@ -269,7 +302,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "En un punto limpio",
@@ -277,7 +311,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Contenedor gris",
@@ -285,7 +320,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Contenedor de desechos generales",
@@ -293,7 +329,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Contenedor azul",
@@ -301,7 +338,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Reforestando",
@@ -309,7 +347,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Usando menos papel",
@@ -317,7 +356,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Plantando flores",
@@ -325,7 +365,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Prohibiendo la madera",
@@ -333,7 +374,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Una forma de niebla en ciudades",
@@ -341,7 +383,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Una mezcla de polvo y humo",
@@ -349,7 +392,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Un tipo de aire fresco",
@@ -357,7 +401,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Vapor de agua en el ambiente",
@@ -365,7 +410,8 @@
     "typeQuestion": [
       "MARTIN"
     ],
-    "typeGame": "QUIZ"
+    "typeGame": "QUIZ",
+    "isCorrect": null
   },
   {
     "answer": "Símbolo de Reciclaje",
@@ -373,7 +419,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Calentamiento Global",
@@ -381,7 +428,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Deforestación",
@@ -389,7 +437,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Smog",
@@ -397,7 +446,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Contaminación",
@@ -405,7 +455,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Energia Eólica",
@@ -413,7 +464,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Desechos Electrónicos",
@@ -421,7 +473,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Agujero de Ozono",
@@ -429,7 +482,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Residuo Tóxico",
@@ -437,7 +491,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Panel Solar",
@@ -445,7 +500,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "QUIZ_IMAGE"
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
   },
   {
     "answer": "Reciclable",
@@ -453,7 +509,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "RELATIONS"
+    "typeGame": "RELATIONS",
+    "isCorrect": null
   },
   {
     "answer": "Biodegradable",
@@ -461,7 +518,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "RELATIONS"
+    "typeGame": "RELATIONS",
+    "isCorrect": null
   },
   {
     "answer": "Plástico",
@@ -469,7 +527,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "RELATIONS"
+    "typeGame": "RELATIONS",
+    "isCorrect": null
   },
   {
     "answer": "No reciclable",
@@ -477,7 +536,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "RELATIONS"
+    "typeGame": "RELATIONS",
+    "isCorrect": null
   },
   {
     "answer": "Contaminante",
@@ -485,7 +545,8 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "RELATIONS"
+    "typeGame": "RELATIONS",
+    "isCorrect": null
   },
   {
     "answer": "Orgánico",
@@ -493,6 +554,7 @@
     "typeQuestion": [
       "RECYCLE"
     ],
-    "typeGame": "RELATIONS"
+    "typeGame": "RELATIONS",
+    "isCorrect": null
   }
 ]

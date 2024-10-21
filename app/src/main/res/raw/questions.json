@@ -185,7 +185,7 @@
     "answerId": "46",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.simbolo_reciclaje"
+    "image": "simbolo_reciclaje"
   },
   {
     "id": "47",
@@ -203,7 +203,7 @@
     "answerId": "47",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.calentamiento_global"
+    "image": "calentamiento_global"
   },
   {
     "id": "48",
@@ -221,7 +221,7 @@
     "answerId": "48",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.deforestacion"
+    "image": "deforestacion"
   },
   {
     "id": "49",
@@ -239,7 +239,7 @@
     "answerId": "49",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.smog"
+    "image": "smog"
   },
   {
     "id": "50",
@@ -257,7 +257,7 @@
     "answerId": "50",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.contaminacion"
+    "image": "contaminacion"
   },
   {
     "id": "51",
@@ -275,7 +275,7 @@
     "answerId": "51",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.recurso_viento"
+    "image": "recurso_viento"
   },
   {
     "id": "52",
@@ -293,7 +293,7 @@
     "answerId": "52",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.desechos_electronicos"
+    "image": "desechos_electronicos"
   },
   {
     "id": "53",
@@ -311,7 +311,7 @@
     "answerId": "53",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.agujero_ozono"
+    "image": "agujero_ozono"
   },
   {
     "id": "54",
@@ -329,7 +329,7 @@
     "answerId": "54",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.residuo_toxico"
+    "image": "residuo_toxico"
   },
   {
     "id": "55",
@@ -347,7 +347,7 @@
     "answerId": "55",
     "typeQuestion": ["RECYCLE"],
     "typeGame": "QUIZ_IMAGE",
-    "image": "R.drawable.panel_solar"
+    "image": "panel_solar"
   },
   {
     "id": "56",

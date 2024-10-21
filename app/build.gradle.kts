@@ -147,4 +147,9 @@ dependencies {
 
     // Constraint Layout Compose
     implementation(libs.constraint.layout.compose)
+
+    // Retrofit
+//    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation (libs.converter.gson)
+
 }
