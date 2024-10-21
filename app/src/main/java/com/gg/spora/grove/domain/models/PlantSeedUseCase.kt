@@ -6,7 +6,7 @@ import com.gg.spora.grove.data.models.Seed
 
 // Caso de uso para plantar una semilla
 class PlantSeedUseCase(private val groveRepository: IGroveRepository) {
-    suspend operator fun invoke(seed: Seed): ForestTree? {
+    operator fun invoke(seed: Seed): ForestTree? {
         return groveRepository.plantSeed(seed)
     }
 }

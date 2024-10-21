@@ -18,12 +18,12 @@ import java.util.UUID
 data class ForestTree(
     override val id: UUID = UUID.randomUUID(),
     override val type: TreeType,
+    var currentStage: GrowthStage = GrowthStage.SPROUT,
     val plantingDate: LocalDateTime = LocalDateTime.now()
 ) : Tree(id, type) {
 
     @RequiresApi(Build.VERSION_CODES.O)
 //  var accumulatedOxygen: Int = 0
-    var currentStage: GrowthStage = GrowthStage.SPROUT
     private var hasReachedAdultStage = false
 
     // Actualiza el estado de crecimiento del árbol

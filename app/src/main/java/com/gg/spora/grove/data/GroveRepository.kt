@@ -44,7 +44,7 @@ class GroveRepository : IGroveRepository {
      * Planta una semilla en un árbol del bosque.
      * @param seed La semilla a plantar.
      */
-    override suspend fun plantSeed(seed: Seed): ForestTree? {
+    override fun plantSeed(seed: Seed): ForestTree? {
         Log.d("GroveRepositoryImpl", "plantSeed called with seed: $seed")
 
         // 1. Encuentra un lugar vacío en el bosque

@@ -39,28 +39,32 @@ class GroveViewModel @Inject constructor(
 
 
     private val _forestTree = MutableStateFlow<ForestTree?>(null)
-    // val forestTree = _forestTree.asStateFlow()
-
-    fun getSeedTrees(): List<SeedTree> {
-        return _seedTrees.value
-    }
-
-    fun getForestTrees(): List<List<ForestTree?>> {
-        return _forestTrees.value
-    }
+    val forestTree = _forestTree.asStateFlow()
 
     // Inicialización de los casos de uso
     init {
+        getSeedTrees()
+        getForestTrees()
+    }
+
+    fun getSeedTrees() {
         viewModelScope.launch {
             getSeedTreesUseCase().collect { seedTrees ->
                 _seedTrees.value = seedTrees
             }
         }
+    }
+
+    fun getForestTrees() {
         viewModelScope.launch {
             getForestTreesUseCase().collect { forestTrees ->
                 _forestTrees.value = forestTrees
             }
         }
+    }
+
+    fun setInitialForest(forest: List<List<ForestTree?>>) {
+        _forestTrees.value = forest
     }
 
     // Actualización del estado del árbol

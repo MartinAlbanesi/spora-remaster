@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface IGroveRepository {
     fun getSeedTrees(): Flow<List<SeedTree>>
     fun getForestTrees(): Flow<List<List<ForestTree?>>>
-    suspend fun plantSeed(seed: Seed): ForestTree?
+    fun plantSeed(seed: Seed): ForestTree?
     suspend fun collectOxygen(): Int
 }
