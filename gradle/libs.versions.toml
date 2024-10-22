@@ -58,6 +58,7 @@ kotlinCoroutinesTest = "1.8.0"
 constraintLayoutCompose = "1.0.1"
 
 converterGson = "2.9.0"
+junitJupiter = "5.8.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -134,6 +135,7 @@ constraint-layout-compose = { group = "androidx.constraintlayout", name = "const
 
 # Retrofit
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

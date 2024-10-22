@@ -8,11 +8,10 @@ import com.gg.spora.miniGames.domain.mappers.toAnswer
 import com.gg.spora.miniGames.domain.mappers.toQuestion
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class QuizLocalRepository @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     private val quizLocalService: QuizLocalService
 ) : IQuizLocalRepository {
 

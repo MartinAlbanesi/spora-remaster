@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.OptionItemButton
 import com.gg.spora.miniGames.domain.model.Answer
@@ -101,7 +100,7 @@ private fun QuizImageScreenPreview() {
                 modifier = Modifier,
                 questionTitle = "Titi",
                 answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
-                currentImageResIdState = FakeQuizModels.fakeQuestions.random().image!!,
+                currentImageResIdState = FakeQuizModels.fakeQuizQuestions.random().image!!,
                 onAnswerSelected = {},
             )
         }

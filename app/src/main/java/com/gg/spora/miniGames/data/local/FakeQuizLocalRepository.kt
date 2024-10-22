@@ -12,7 +12,7 @@ class FakeQuizLocalRepository @Inject constructor(
 
 ) : IQuizLocalRepository {
 
-    private val fakeModelsQuiz = FakeQuizModels.fakeQuestions
+    private val fakeModelsQuiz = FakeQuizModels.fakeQuizQuestions
 
     override fun getRandomQuestions(
         count: Int,

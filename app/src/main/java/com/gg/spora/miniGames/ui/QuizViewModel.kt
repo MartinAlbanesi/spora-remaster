@@ -70,19 +70,19 @@ class QuizViewModel @Inject constructor(
 
         val quizGame = getRandomQuestionFromTypeUseCase(
             count = quizRoute.quizCount,
-            typeQuestion = TypeQuestion.MARTIN,
+            typeQuestion = listOf(TypeQuestion.MARTIN),
             typeGame = TypeGame.QUIZ
         )
 
         val imageGame = getRandomQuestionFromTypeUseCase(
             count = quizRoute.imageCount,
-            typeQuestion = TypeQuestion.RECYCLE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
         )
 
         val relationsGame = getRandomQuestionFromTypeUseCase(
             count = quizRoute.relationsCount,
-            typeQuestion = TypeQuestion.RECYCLE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         )
 

@@ -53,6 +53,7 @@ object FakeQuizModels {
         )
     )
 
+
     val fakeAnswers = listOf(
         Answer(
             answer = "Aire",
@@ -454,9 +455,8 @@ object FakeQuizModels {
             typeGame = TypeGame.RELATIONS
         )
     )
-
     // Wea
-    val fakeQuestions = listOf(
+    val fakeQuizQuestions = listOf(
         Question(
             id = "1",
             question = "¿Cuál de estas acciones pertenece a la regla de las 3 erres de la sostenibilidad?",
@@ -639,6 +639,132 @@ object FakeQuizModels {
             answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
+        ),
+    )
+
+    val fakeQuestionRelations = listOf(
+        Question(
+            id = "56",
+            question = "Botella",
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
+            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "57",
+            question = "Wea",
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
+            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "58",
+            question = "Lala",
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
+            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "59",
+            question = "Pepe",
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
+            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "60",
+            question = "Titi",
+            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
+            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+    )
+
+    val fakeQuestionQuizTypeMartin = listOf(
+        Question(
+            id = "1",
+            question = "¿Cuál de estas acciones pertenece a la regla de las 3 erres de la sostenibilidad?",
+            answers = listOf(fakeAnswers[11], fakeAnswers[12], fakeAnswers[13]),
+            answerId = fakeAnswers[10].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "2",
+            question = "¿Cuál de estos colores pertenece a un contenedor de reciclaje?",
+            answers = listOf(fakeAnswers[15], fakeAnswers[16], fakeAnswers[17]),
+            answerId = fakeAnswers[14].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "3",
+            question = "¿Para qué se utiliza el contenedor rojo?",
+            answers = listOf(fakeAnswers[19], fakeAnswers[20], fakeAnswers[21]),
+            answerId = fakeAnswers[18].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "4",
+            question = "¿Cuánto tarda, como promedio, en degradarse una botella de plástico?",
+            answers = listOf(fakeAnswers[23], fakeAnswers[24], fakeAnswers[25]),
+            answerId = fakeAnswers[22].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "5",
+            question = "¿A qué contenedor deberías tirar los bricks?",
+            answers = listOf(fakeAnswers[27], fakeAnswers[28], fakeAnswers[29]),
+            answerId = fakeAnswers[26].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "6",
+            question = "¿A qué contenedor deberías tirar las latas?",
+            answers = listOf(fakeAnswers[27], fakeAnswers[28], fakeAnswers[29]),
+            answerId = fakeAnswers[26].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "7",
+            question = "¿Cuál de estos objetos no deben tirarse en el contenedor de vidrio?",
+            answers = listOf(fakeAnswers[31], fakeAnswers[32], fakeAnswers[33]),
+            answerId = fakeAnswers[30].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "8",
+            question = "¿Dónde debes depositar los residuos eléctricos y electrónicos cuando ya no son útiles?",
+            answers = listOf(fakeAnswers[35], fakeAnswers[36], fakeAnswers[37]),
+            answerId = fakeAnswers[34].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "9",
+            question = "¿Cómo podemos solucionar la deforestación?",
+            answers = listOf(fakeAnswers[39], fakeAnswers[40], fakeAnswers[41]),
+            answerId = fakeAnswers[38].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
+        ),
+        Question(
+            id = "10",
+            question = "¿Qué es el esmog?",
+            answers = listOf(fakeAnswers[43], fakeAnswers[44], fakeAnswers[45]),
+            answerId = fakeAnswers[42].id,
+            typeGame = TypeGame.QUIZ,
+            typeQuestion = listOf(TypeQuestion.MARTIN)
         ),
     )
 }
