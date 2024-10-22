@@ -67,6 +67,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+    packaging{
+        resources {
+            resources.excludes.add("META-INF/LICENSE.md")
+            resources.excludes.add("META-INF/LICENSE-notice.md")
+        }
+    }
+//    testOptions{
+//        unitTests{
+//            isIncludeAndroidResources = true
+//        }
+//    }
 }
 
 dependencies {
@@ -88,7 +99,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
 
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
@@ -144,6 +154,8 @@ dependencies {
 
     // Mockk
     testImplementation (libs.mockk)
+    androidTestImplementation (libs.mockk.android)
+    androidTestImplementation (libs.mockk.agent)
 
     // Constraint Layout Compose
     implementation(libs.constraint.layout.compose)

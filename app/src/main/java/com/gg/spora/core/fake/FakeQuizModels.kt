@@ -3,10 +3,55 @@ package com.gg.spora.core.fake
 import com.gg.spora.R
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
+import com.gg.spora.miniGames.data.local.model.AnswerLocal
+import com.gg.spora.miniGames.data.local.model.QuestionLocal
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
 
 object FakeQuizModels {
+
+    val fakeLocalAnswers = listOf(
+        AnswerLocal(
+            answer = "Reciclar",
+            id = "10",
+            typeQuestion = listOf(TypeQuestion.MARTIN.name, TypeQuestion.RELATIONS_QUESTION.name),
+            typeGame = TypeGame.QUIZ.name,
+            isCorrect = true
+        ),
+        AnswerLocal(
+            answer = "Realizar",
+            id = "11",
+            typeQuestion = listOf(TypeQuestion.MARTIN.name, TypeQuestion.RECYCLE.name),
+            typeGame = TypeGame.QUIZ.name,
+            isCorrect = false
+        ),
+        AnswerLocal(
+            answer = "Recolectar",
+            id = "12",
+            typeQuestion = listOf(TypeQuestion.MARTIN.name),
+            typeGame = TypeGame.QUIZ.name,
+            isCorrect = false
+        ),
+        AnswerLocal(
+            answer = "Respetar",
+            id = "13",
+            typeQuestion = listOf(TypeQuestion.MARTIN.name),
+            typeGame = TypeGame.QUIZ.name,
+            isCorrect = false
+        ),
+    )
+
+    val fakeLocalQuestions = listOf(
+        QuestionLocal(
+            id = "1",
+            question = "¿Cuál de estas acciones pertenece a la regla de las 3 erres de la sostenibilidad?",
+            answersLocal = listOf(fakeLocalAnswers[1], fakeLocalAnswers[2], fakeLocalAnswers[3]),
+            answerId = fakeLocalAnswers[0].id,
+            typeGame = TypeGame.QUIZ.name,
+            typeQuestion = listOf(TypeQuestion.MARTIN.name),
+            image = null
+        )
+    )
 
     val fakeAnswers = listOf(
         Answer(

@@ -1,46 +1,52 @@
 package com.gg.spora.miniGames.data.local
 
 import android.content.Context
-import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.miniGames.data.local.model.AnswerLocal
-import com.gg.spora.miniGames.data.local.model.QuestionLocal
 import com.gg.spora.miniGames.domain.IQuizLocalRepository
+import com.gg.spora.miniGames.domain.mappers.toAnswer
+import com.gg.spora.miniGames.domain.mappers.toQuestion
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
-import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
-import readJsonFile
 import javax.inject.Inject
 
 class QuizLocalRepository @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val quizLocalService: QuizLocalService
 ) : IQuizLocalRepository {
-
-    private val questionsJson = readJsonFile(SporaConstant.QUESTIONS_FILE_PATH)
-    val questionsLocal = Gson().fromJson(questionsJson, Array<QuestionLocal>::class.java).toList()
-
-    private val answersJson = readJsonFile(SporaConstant.ANSWERS_FILE_PATH)
-    val answersLocal = Gson().fromJson(answersJson, Array<AnswerLocal>::class.java).toList()
 
     override fun getRandomQuestions(
         count: Int,
-        typeQuestion: TypeQuestion,
+        typeQuestion: List<TypeQuestion>,
         typeGame: TypeGame
     ): List<Question> {
-        TODO("Not yet implemented")
+        val questionsLocal = quizLocalService.getLocalQuestions()
+            .map { it.toQuestion(context) }
+            .filter { it.typeQuestion.intersect(typeQuestion.toSet()).isNotEmpty() }
+            .filter { it.typeGame == typeGame }
+            .shuffled()
+            .take(count)
+        return questionsLocal
     }
 
-    override fun getQuestionById(id: String): Question {
-        TODO("Not yet implemented")
+    override fun getQuestionById(id: String): Question? {
+        val questionLocal = quizLocalService.getLocalQuestions().find { it.id == id }
+        return questionLocal?.toQuestion(context)
     }
 
-    override fun getRandomAnswers(count: Int, type: TypeGame): List<Answer> {
-        TODO("Not yet implemented")
+    override fun getRandomAnswers(count: Int, typeQuestion: List<TypeQuestion>, typeGame: TypeGame): List<Answer> {
+        val answersLocal = quizLocalService.getLocalAnswers()
+            .map { it.toAnswer() }
+            .filter { it.typeQuestion.intersect(typeQuestion.toSet()).isNotEmpty() }
+            .filter { it.typeGame == typeGame }
+            .shuffled()
+            .take(count)
+        return answersLocal
     }
 
-    override fun getAnswerById(id: String): Answer {
-        TODO("Not yet implemented")
+    override fun getAnswerById(id: String): Answer? {
+        val answerLocal = quizLocalService.getLocalAnswers().find { it.id == id }
+        return answerLocal?.toAnswer()
     }
 }

@@ -16,11 +16,11 @@ class FakeQuizLocalRepository @Inject constructor(
 
     override fun getRandomQuestions(
         count: Int,
-        typeQuestion: TypeQuestion,
+        typeQuestion: List<TypeQuestion>,
         typeGame: TypeGame,
     ): List<Question> {
         val randomQuestions = fakeModelsQuiz
-            .filter { it.typeGame == typeGame && it.typeQuestion.contains(typeQuestion) }
+            .filter { it.typeGame == typeGame && it.typeQuestion.intersect(typeQuestion.toSet()).isNotEmpty() }
             .shuffled()
             .take(count)
         return randomQuestions
@@ -30,7 +30,7 @@ class FakeQuizLocalRepository @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun getRandomAnswers(count: Int, type: TypeGame): List<Answer> {
+    override fun getRandomAnswers(count: Int, typeQuestion: List<TypeQuestion>, typeGame: TypeGame): List<Answer> {
         TODO("Not yet implemented")
     }
 
