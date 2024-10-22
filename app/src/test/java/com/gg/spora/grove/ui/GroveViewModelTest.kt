@@ -33,18 +33,18 @@ class GroveViewModelTest {
     fun setup() {
         Dispatchers.setMain(StandardTestDispatcher())
 
-        // Mock dependencies using MockK
+        // Mockear las dependencias usando MockK
         val getSeedTreesUseCase = mockk<GetSeedTreesUseCase>()
         val getForestTreesUseCase = mockk<GetForestTreesUseCase>()
         plantSeedUseCase = mockk<PlantSeedUseCase>()
 
-        // Mock the behavior of GetSeedTreesUseCase
+        // Mockea el comportamiento de GetSeedTreesUseCase
         every { getSeedTreesUseCase() } returns flowOf(emptyList<SeedTree>())
 
-        // Mock the behavior of GetForestTreesUseCase
+        // Mockea el comportamiento de GetForestTreesUseCase
         every { getForestTreesUseCase() } returns flowOf(emptyList<List<ForestTree?>>())
 
-        // Mock the behavior of plantSeedUseCase
+        // Mockea el comportamiento de PlantSeedUseCase
         every { plantSeedUseCase(any<Seed>() as Seed) } answers {
             if (firstArg<Seed>().type == TreeType.SECUOYA) {
                 ForestTree(type = TreeType.SECUOYA, currentStage = GrowthStage.SPROUT)
@@ -52,17 +52,17 @@ class GroveViewModelTest {
                 ForestTree(
                     type = firstArg<Seed>().type,
                     currentStage = GrowthStage.SPROUT
-                ) // Return a default ForestTree
+                )
             }
         }
 
-        // Create ViewModel instance
+        // Crea la instancia del ViewModel
         viewModel = GroveViewModel(getSeedTreesUseCase, getForestTreesUseCase, plantSeedUseCase)
     }
 
     @After
     fun tearDown() {
-        Dispatchers.resetMain() // Reset main dispatcher after tests
+        Dispatchers.resetMain() // Resetea el dispatcher a su estado original
     }
 
     @Test
@@ -74,7 +74,7 @@ class GroveViewModelTest {
         viewModel.setInitialForest(initialForest)
 
         val updatedTree =
-            tree1.copy(currentStage = GrowthStage.ADULT) // Use copy to create updated tree
+            tree1.copy(currentStage = GrowthStage.ADULT)
 
         // Act
         viewModel.updateTree(updatedTree)
@@ -100,8 +100,8 @@ class GroveViewModelTest {
         // Act
         viewModel.plantSeedInForest(seed)
 
-        // Wait for coroutines to complete
-        advanceUntilIdle() // Add this line
+        // Espera a que terminen las corrutinas
+        advanceUntilIdle()
 
         // Assert
         Assert.assertEquals(plantedTree, viewModel.forestTree.value)

@@ -28,11 +28,8 @@ data class SeedTree(
     // Genera una semilla si es posible, y retorna la semilla generada o null si no es posible generar una semilla
     @RequiresApi(Build.VERSION_CODES.O)
     fun generateSeed(): Seed? {
-        if (isSeedAvailable()) {
-            nextSeedAvailableTime = System.currentTimeMillis() + timeToGenerateSeed.toMillis()
-            amountOfSeedsGenerated++
-            return Seed(type)
-        }
-        return null
+        nextSeedAvailableTime = System.currentTimeMillis() + timeToGenerateSeed.toMillis()
+        amountOfSeedsGenerated++
+        return Seed(type)
     }
 }

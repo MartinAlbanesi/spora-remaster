@@ -1,10 +1,12 @@
 package com.gg.spora.grove.ui.components
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +30,11 @@ import kotlinx.coroutines.delay
  */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SeedTreeItem(seedTree: SeedTree, onSeedGenerated: (Seed) -> Unit) {
+fun SeedTreeItem(
+    modifier: Modifier = Modifier,
+    seedTree: SeedTree,
+    onSeedGenerated: (Seed) -> Unit
+) {
     // Estado para el cooldown
     var isCooldownActive by remember { mutableStateOf(!seedTree.isSeedAvailable()) }
     var remainingCooldown by remember { mutableStateOf(0L) }
@@ -45,7 +51,8 @@ fun SeedTreeItem(seedTree: SeedTree, onSeedGenerated: (Seed) -> Unit) {
     }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         Image(
             painter = painterResource(id = seedTree.type.imageResource),
@@ -54,10 +61,14 @@ fun SeedTreeItem(seedTree: SeedTree, onSeedGenerated: (Seed) -> Unit) {
         )
 
         Button(
+            modifier = Modifier.
+                width(100.dp),
             onClick = {
                 // Si el cooldown no está activo, genera una semilla
                 val generatedSeed = seedTree.generateSeed()
+                Log.d("SeedTreeItem", "Generated Seed: $generatedSeed")
                 generatedSeed?.let { seed ->
+                    Log.d("SeedTreeItem", "Seed generated: $seed")
                     onSeedGenerated(seed)
                     isCooldownActive = true
                     remainingCooldown = seedTree.nextSeedAvailableTime - System.currentTimeMillis()
@@ -67,9 +78,9 @@ fun SeedTreeItem(seedTree: SeedTree, onSeedGenerated: (Seed) -> Unit) {
         ) {
             // Muestra el texto correspondiente al cooldown
             if(isCooldownActive){
-                Text("Nueva semilla en: ${remainingCooldown / 1000}s")
+                Text("${remainingCooldown / 1000}s")
             } else {
-                Text("Reclamar Semilla")
+                Text("Claim")
             }
         }
     }

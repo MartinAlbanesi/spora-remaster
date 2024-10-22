@@ -40,12 +40,6 @@ fun GroveScreen(
     updateTree: (ForestTree) -> Unit,
     popBackStack: () -> Unit
 ) {
-    // State para los árboles semilleros
-    val seedTrees = seedTrees
-
-    // State para los árboles del bosque
-    val forestTrees = forestTrees
-
     /*
     val forestTree = groveViewModel.forestTree.collectAsState()
     val currentTree = forestTree.value
@@ -79,7 +73,6 @@ fun GroveScreen(
                     .matchParentSize()
             )
         }
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -95,7 +88,7 @@ fun GroveScreen(
             ) {
                 // Componente para cada árbol semillero
                 for (seedTree in seedTrees) {
-                    SeedTreeItem(seedTree) { seed ->
+                    SeedTreeItem(seedTree = seedTree) { seed ->
                         plantSeedInForest(seed)
                     }
                 }
@@ -113,6 +106,7 @@ fun GroveScreen(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(16.dp)
+                    .offset(y = (-50).dp)
             ) {
                 // Componente para cada árbol del bosque
                 items(forestTrees.flatten()) { tree ->
@@ -140,7 +134,12 @@ private fun GrovePreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             GroveScreen(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                seedTrees = emptyList(),
+                forestTrees = emptyList(),
+                plantSeedInForest = {},
+                updateTree = {},
+                popBackStack = {}
             )
         }
     }

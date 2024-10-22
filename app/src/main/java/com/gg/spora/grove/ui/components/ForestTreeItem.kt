@@ -3,9 +3,7 @@ package com.gg.spora.grove.ui.components
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -16,7 +14,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.grove.data.models.ForestTree
 import com.gg.spora.grove.data.models.GrowthStage
@@ -67,11 +64,12 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
         contentDescription = "Tree in ${treeState.currentStage.name} stage", // More descriptive
         modifier = Modifier.size(64.dp)
     )
-
+/*
     // Estado actual del árbol
     Text(
         text = treeState.currentStage.name,
         fontSize = 12.sp,
         modifier = Modifier.fillMaxWidth()
     )
+ */
 }

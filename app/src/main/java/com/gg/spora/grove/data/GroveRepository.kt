@@ -26,8 +26,9 @@ class GroveRepository : IGroveRepository {
     init {
         // Inicializa con árboles semilleros de ejemplo
         _seedTrees.value = listOf(
-            SeedTree(type = TreeType.MANGROVE, timeToGenerateSeed = Duration.ofSeconds(5)),
-            SeedTree(type = TreeType.SECUOYA, timeToGenerateSeed = Duration.ofSeconds(5))
+            SeedTree(type = TreeType.BAOBAB, timeToGenerateSeed = Duration.ofSeconds(5)),
+            SeedTree(type = TreeType.SECUOYA, timeToGenerateSeed = Duration.ofSeconds(5)),
+            SeedTree(type = TreeType.PINE, timeToGenerateSeed = Duration.ofSeconds(5))
         )
 
         // Inicializa con 5 filas y 5 columnas de árboles del bosque vacíos
