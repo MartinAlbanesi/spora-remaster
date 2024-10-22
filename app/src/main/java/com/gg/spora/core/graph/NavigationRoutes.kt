@@ -22,6 +22,15 @@ object NavigationRoutes {
     object Library
 
     @Serializable
+    object LibraryForestInfo
+
+    @Serializable
+    object LibraryDesertInfo
+
+    @Serializable
+    object LibraryRiverInfo
+
+    @Serializable
     object Grove
 
     @Serializable

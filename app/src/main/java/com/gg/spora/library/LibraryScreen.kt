@@ -51,7 +51,7 @@ fun LibraryScreen(
 
 
         Image(
-            painter = painterResource(R.drawable.library_background_v2),
+            painter = painterResource(R.drawable.library_background_v3),
             contentDescription = "Library background",
             modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.FillBounds
@@ -107,16 +107,17 @@ fun BookcaseScreenClicker(
         Column(
             modifier
                 .fillMaxHeight()
-                .padding(end = 15.dp, bottom = 170.dp),
-            verticalArrangement = Arrangement.Center
+                .padding(end = 15.dp, bottom = 150.dp),
+            verticalArrangement = Arrangement.Center,
         ) {
+
             Box(
                 modifier = Modifier
                     .width(170.dp)
                     .height(70.dp)
                     .background(color = Color.Transparent)
                     .clickable(onClick = {
-                        //Nav to info recycler
+                        //Nav to forest area info
                         onClickFirst()
                     }),
         )
@@ -127,7 +128,7 @@ fun BookcaseScreenClicker(
                     .height(70.dp)
                     .background(color = Color.Transparent)
                     .clickable(onClick = {
-                        //Nav to info watercare
+                        //Nav to river area info
                         onClickSecond()
                     }),
             )
@@ -138,10 +139,11 @@ fun BookcaseScreenClicker(
                     .height(70.dp)
                     .background(color = Color.Transparent)
                     .clickable(onClick = {
-                        //Nav to info eco energy
+                        //Nav to desert area info
                         onClickThird()
-                    }),
+                    })
             )
+
         }
 
     }

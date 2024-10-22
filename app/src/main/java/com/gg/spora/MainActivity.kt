@@ -37,6 +37,8 @@ import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.library.LibraryScreen
+import com.gg.spora.library.data.FakeInfoCardModels
+import com.gg.spora.library.ui.LibraryCardBook
 import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
 import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
@@ -313,12 +315,37 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }
                             )
-
                         }
 
                         composable<NavigationRoutes.Library> {
                             LibraryScreen(
+                                onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
+                                onClickSecond = { navController.navigate(NavigationRoutes.LibraryRiverInfo) },
+                                onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
                                 onBackButtonClick = { navController.popBackStack() }
+                            )
+                        }
+
+                        composable<NavigationRoutes.LibraryForestInfo> {
+
+                            LibraryCardBook(
+                                onBackClick = { navController.navigate(NavigationRoutes.Library) },
+                                cardList = FakeInfoCardModels.FakeInfoCardModels
+                                //Insertar lista de cartas.
+                            )
+                        }
+
+                        composable<NavigationRoutes.LibraryRiverInfo> {
+                            LibraryCardBook(
+                                onBackClick = { navController.navigate(NavigationRoutes.Library) },
+                                //Insertar lista de cartas.
+                            )
+                        }
+
+                        composable<NavigationRoutes.LibraryDesertInfo> {
+                            LibraryCardBook(
+                                onBackClick = { navController.navigate(NavigationRoutes.Library) },
+                                //Insertar lista de cartas.
                             )
                         }
                     }
