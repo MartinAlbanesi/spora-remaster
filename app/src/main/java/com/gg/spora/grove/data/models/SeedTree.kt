@@ -30,6 +30,6 @@ data class SeedTree(
     fun generateSeed(): Seed? {
         nextSeedAvailableTime = System.currentTimeMillis() + timeToGenerateSeed.toMillis()
         amountOfSeedsGenerated++
-        return Seed(type)
+        return Seed(type = type)
     }
 }
