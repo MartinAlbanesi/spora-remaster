@@ -1,12 +1,17 @@
 package com.gg.spora.registeredLogin.iu
 
 import android.content.Context
+import android.util.Patterns
 import android.widget.Toast
 import androidx.compose.ui.semantics.password
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
+import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.registeredLogin.data.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
 class RegisteredLoginViewModel : ViewModel() {
 
@@ -22,41 +27,35 @@ class RegisteredLoginViewModel : ViewModel() {
     private val _isPasswordCorrect = MutableLiveData<Boolean>()
     val isPasswordCorrect: LiveData<Boolean> = _isPasswordCorrect
 
-    private val mockUsers = listOf(
-        User("champy@example.com", "Spora1"),
-        User("mushy@example.com", "Spora2")
-    )
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun onEmailChanged(newEmail: String) {
         _email.value = newEmail
-        _isAccountValid.value = mockUsers.any { it.email == newEmail }
+        _isAccountValid.value = isValidEmail(newEmail)
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun onPasswordChanged(newPassword: String) {
         _password.value = newPassword
     }
 
-    fun onLoginClick(context: Context) {
-        val user = mockUsers.find { it.email == email.value }
-        _isPasswordCorrect.value = user != null && user.password == password.value
 
-        if (_isPasswordCorrect.value == true) {
-            Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(context, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-        }
+    fun onLoginClick(context: Context, navController: NavHostController) {
+        val email = email.value.toString().trim()
+        val password = password.value.toString().trim()
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    //Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                    navController.navigate(NavigationRoutes.Home)
+                } else {
+                    Toast.makeText(context, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
-    /*fun onLoginClick() {
-        val user = mockUsers.find { it.email == email.value }
-        _isPasswordCorrect.value = user != null && user.password == password.value
-
-        // Si las credenciales son válidas, puedes navegar a la siguiente pantalla o realizar otras acciones
-        // Por ejemplo:
-        // if (_isPasswordCorrect.value == true) {
-        //     // Navegar a la pantalla principal
-        // } else {
-        //     // Mostrar un mensaje de error
-        // }
-    }*/
 }

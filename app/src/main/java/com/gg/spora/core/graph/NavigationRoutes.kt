@@ -23,6 +23,9 @@ object NavigationRoutes {
     object SignUp
 
     @Serializable
+    object RegisteredLogin
+
+    @Serializable
     object Grove
 
     @Serializable

@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,7 +38,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.gg.spora.R
+import com.gg.spora.core.graph.NavigationRoutes
 
 
 @Composable
@@ -199,27 +202,29 @@ fun GoogleLoginButton() {
 }
 
 @Composable
-fun LoginQuestionLink() {
+fun LoginQuestionLink(navController: NavHostController) {
     Box(
-        modifier = Modifier.fillMaxSize() // Esto asegura que el Text puede alinearse en la parte inferior
+        modifier = Modifier.fillMaxSize()
     ) {
         Text(
             text = buildAnnotatedString {
                 withStyle(style = SpanStyle(color = Color.White)) {
-                    append("¿No tienes una cuenta? ")
+                    append("¿Ya tenés una cuenta? ")
                 }
                 withStyle(style = SpanStyle(color = Color.Cyan, textDecoration = TextDecoration.Underline)) {
-                    append("Regístrate")
+                    append("Ingresar")
                 }
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
                 .clickable {
+                    navController.navigate(NavigationRoutes.RegisteredLogin)
                 }
         )
     }
 }
+
 @Composable
 fun IconButtonArrowLogin() {
     Box(

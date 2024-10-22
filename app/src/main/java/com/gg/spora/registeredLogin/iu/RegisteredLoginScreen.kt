@@ -41,7 +41,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.gg.spora.R
+import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.login.component.LoginTextField
 
@@ -50,7 +52,8 @@ fun RegisteredLoginScreen(
     onBackClick: () -> Unit,
     onLoginClick: () -> Unit,
     onGoogleLoginClick: () -> Unit,
-    onRegisterClick: () -> Unit
+    onRegisterClick: () -> Unit,
+    navController: NavHostController
 ) {
 
     val registeredLoginViewModel = viewModel<RegisteredLoginViewModel>()
@@ -60,7 +63,7 @@ fun RegisteredLoginScreen(
     val isPasswordCorrect by registeredLoginViewModel.isPasswordCorrect.observeAsState(false)
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Imagen de fondo oscurecida
+        // Imagen de fondo
         Image(
             painter = painterResource(id = R.drawable.fondo_introduccion),
             contentDescription = null,
@@ -72,7 +75,7 @@ fun RegisteredLoginScreen(
                 BlendMode.Darken)
         )
 
-        // Contenido principal centrado verticalmente
+        // Contenido principal
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -121,7 +124,7 @@ fun RegisteredLoginScreen(
             SporaPrimaryButton(
                 text = "Confirmar",
                 textSize = 20,
-                onClick = { registeredLoginViewModel.onLoginClick(context) },
+                onClick = { registeredLoginViewModel.onLoginClick(context,navController) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -201,7 +204,9 @@ fun RegisteredLoginScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
-                .clickable { onRegisterClick() }
+                .clickable {
+                    navController.navigate(NavigationRoutes.SignUp) // Navegar a LoginScreen
+                }
         )
     }
 }
@@ -213,6 +218,7 @@ fun RegisteredLoginScreenPreview() {
         onBackClick = { /*TODO*/ },
         onLoginClick = { /*TODO*/ },
         onGoogleLoginClick = { /*TODO*/ },
-        onRegisterClick = { /*TODO*/ }
+        onRegisterClick = { /*TODO*/ },
+        navController = NavHostController(LocalContext.current)
     )
 }

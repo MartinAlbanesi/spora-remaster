@@ -97,7 +97,19 @@ class MainActivity : ComponentActivity() {
                             val loginViewModel = hiltViewModel<LoginViewModel>()
 
                             LoginScreen(
-                                viewModel = loginViewModel
+                                viewModel = loginViewModel,
+                                navController = navController
+                            )
+                        }
+
+                        composable<NavigationRoutes.RegisteredLogin> {
+
+                            RegisteredLoginScreen(
+                                onBackClick = { navController.popBackStack() },
+                                onGoogleLoginClick = {  },
+                                onLoginClick = {  },
+                                onRegisterClick = {  },
+                                navController = navController
                             )
                         }
 
