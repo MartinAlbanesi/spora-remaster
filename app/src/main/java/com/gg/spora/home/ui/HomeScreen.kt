@@ -31,6 +31,7 @@ import com.gg.spora.ui.theme.SporaTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToExpoStage: () -> Unit,
 ) {
 
     // Icons in the left
@@ -150,6 +151,15 @@ fun HomeScreen(
                     .offset(y = (-40).dp, x = (-80).dp)
                     .clickable(onClick = onNavigateToForestStage)
             )
+
+            SignButton(
+                image = R.drawable.forest_sign,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .size(120.dp)
+//                    .offset(y = (-40).dp, x = (-80).dp)
+                    .clickable(onClick = onNavigateToExpoStage)
+            )
         }
     }
 }
@@ -163,8 +173,10 @@ private fun MiniGameScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             HomeScreen(
-                modifier = Modifier.fillMaxSize()
-            ) {}
+                modifier = Modifier.fillMaxSize(),
+                onNavigateToForestStage = {},
+                onNavigateToExpoStage = {}
+            )
         }
     }
 }

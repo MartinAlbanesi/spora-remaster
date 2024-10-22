@@ -35,6 +35,7 @@ fun LevelStageItem(
         TypeStage.FOREST -> R.drawable.stage_forest_minigames
         TypeStage.DESERT -> 1
         TypeStage.RIVER -> 2
+        TypeStage.EXPO -> R.drawable.stage_forest_minigames
     }
 
     val currentImage = if (isBlocked) R.drawable.nivel_bloqueado else stageImage

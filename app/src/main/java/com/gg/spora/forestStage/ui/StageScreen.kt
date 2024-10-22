@@ -33,8 +33,10 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun StageScreen(
     modifier: Modifier = Modifier,
+    title: String,
     oxygen: Int,
     levels: List<Level>,
+    backgroundImage: Int,
     onNavigateToChallenge: (String) -> Unit,
     onClickLevelItem: (Level, Boolean) -> Unit,
     popBackStack: () -> Unit,
@@ -43,7 +45,7 @@ fun StageScreen(
         modifier = modifier,
         topBar = {
             TopAppBarWithO2Icon(
-                title = "Área del Bosque",
+                title = title,
                 firstLabel = oxygen.toString(),
                 firstIcon = R.drawable.o2,
                 showBackArrow = true,
@@ -56,7 +58,7 @@ fun StageScreen(
 
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
-                painter = painterResource(id = R.drawable.fondo_area1),
+                painter = painterResource(id = backgroundImage),
                 contentDescription = "Area 1 background",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier.matchParentSize()
@@ -111,7 +113,9 @@ private fun StageScreenPreview() {
         ) {
             StageScreen(
                 oxygen = 0,
-                levels = FakeStageModels.fakeStage.levels,
+                title = "Titi",
+                levels = FakeStageModels.fakeStage[0].levels,
+                backgroundImage = R.drawable.fondo_area1,
                 onNavigateToChallenge = {},
                 popBackStack = {},
                 onClickLevelItem = { _, _ -> }

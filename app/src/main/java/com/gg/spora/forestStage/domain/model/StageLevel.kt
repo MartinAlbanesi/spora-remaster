@@ -7,5 +7,7 @@ data class StageLevel(
     val id: String,
     val typeStage: TypeStage,
     val levels : List<Level>,
-    val challenge: Challenge
+    val challenge: Challenge,
+    val levelPreviewImage: Int,
+    val stageBackgroundImage: Int,
 )

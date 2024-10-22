@@ -1,5 +1,6 @@
 package com.gg.spora.core.fake
 
+import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.enums.TypeStage
@@ -13,6 +14,23 @@ object FakeStageModels {
         id = "1",
         objets = mapOf(
             "Botella de plastico" to false,
+        ),
+    )
+
+    var fakeExpoLevels = listOf(
+
+        Level(
+            id = "1",
+            levelName = "Nivel 1",
+            typeStage = TypeStage.FOREST,
+            requiredOxygen = 0,
+            rewardsOxygen = listOf(10, 20, 30),
+            starState = StarState.ZERO,
+            isComplete = true,
+            typeQuestion = TypeQuestion.RECYCLE,
+            quizCount = 2,
+            imageCount = 2,
+            relationsCount = 1
         ),
     )
 
@@ -60,10 +78,22 @@ object FakeStageModels {
         ),
     )
 
-    var fakeStage = StageLevel(
-        id = "1",
-        typeStage = TypeStage.FOREST,
-        levels = fakeLevels,
-        challenge = fakeChallenge
+    var fakeStage = listOf(
+        StageLevel(
+            id = "1",
+            typeStage = TypeStage.FOREST,
+            levels = fakeLevels,
+            challenge = fakeChallenge,
+            levelPreviewImage = R.drawable.fondo_minijuegos_crop,
+            stageBackgroundImage = R.drawable.fondo_area1
+        ),
+        StageLevel(
+            id = "2",
+            typeStage = TypeStage.EXPO,
+            levels = fakeExpoLevels,
+            challenge = fakeChallenge,
+            levelPreviewImage = R.drawable.cara_splash,
+            stageBackgroundImage = R.drawable.deforestacion
+        ),
     )
 }

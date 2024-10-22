@@ -61,7 +61,8 @@ class MainActivity : ComponentActivity() {
                     val challengeViewModel = ChallengeViewModel()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.ForestStage,
+                        startDestination = NavigationRoutes.Welcome,
+//                        startDestination = NavigationRoutes.Stage("2"),
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -84,14 +85,17 @@ class MainActivity : ComponentActivity() {
                         composable<NavigationRoutes.Home> {
                             HomeScreen(
                                 onNavigateToForestStage = {
-                                    navController.navigate(NavigationRoutes.ForestStage)
+                                    navController.navigate(NavigationRoutes.Stage("1"))
+                                },
+                                onNavigateToExpoStage = {
+                                    navController.navigate(NavigationRoutes.Stage("2"))
                                 }
                             )
                         }
                         composable<NavigationRoutes.Grove> {
 
                         }
-                        composable<NavigationRoutes.ForestStage> {
+                        composable<NavigationRoutes.Stage> {
 
                             val stageViewModel = hiltViewModel<StageViewModel>()
 
@@ -111,7 +115,7 @@ class MainActivity : ComponentActivity() {
 
                             LevelPreview(
                                 isVisible = showLevelPreview,
-                                backgroundImage = R.drawable.fondo_minijuegos_crop,
+                                backgroundImage = stage!!.levelPreviewImage,
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
@@ -133,7 +137,9 @@ class MainActivity : ComponentActivity() {
 
                             StageScreen(
                                 oxygen = 75,
+                                title = stage!!.typeStage.label,
                                 levels = stage!!.levels,
+                                backgroundImage = stage!!.stageBackgroundImage,
                                 onNavigateToChallenge = { title ->
                                     navController.navigate(NavigationRoutes.Challenge)
                                 },
@@ -268,7 +274,7 @@ class MainActivity : ComponentActivity() {
                                             )
                                         },
                                         onNavigateToForestStage = {
-                                            navController.navigate(NavigationRoutes.ForestStage)
+                                            navController.navigate(NavigationRoutes.Stage)
                                         },
                                         challengeViewModel = challengeViewModel
                                     )

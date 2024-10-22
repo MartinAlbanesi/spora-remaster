@@ -8,7 +8,9 @@ object NavigationRoutes {
     object Home
 
     @Serializable
-    object ForestStage
+    data class Stage(
+        val stageId: String,
+    )
 
     @Serializable
     data class QuizGame(
@@ -29,19 +31,9 @@ object NavigationRoutes {
     object Challenge
 
     @Serializable
-    data class QuizImage(
-        val title: String
-    )
-
-    @Serializable
     object Camera {
         const val route = "camera/{nameObject}"
         fun createRoute(nameObject: String) = "camera/$nameObject"
     }
-
-    @Serializable
-    data class RelationsGame(
-        val title: String
-    )
 
 }

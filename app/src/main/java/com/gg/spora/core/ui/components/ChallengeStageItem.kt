@@ -22,6 +22,7 @@ fun ChallengeStageItem(
         TypeStage.FOREST -> R.drawable.chanllenger_icon
         TypeStage.DESERT -> 1
         TypeStage.RIVER -> 2
+        TypeStage.EXPO -> R.drawable.chanllenger_icon
     }
 
     val currentImage = if (isBlocked) R.drawable.nivel_bloqueado else challengeImage

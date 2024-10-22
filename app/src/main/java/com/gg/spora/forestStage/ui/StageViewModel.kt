@@ -1,6 +1,9 @@
 package com.gg.spora.forestStage.ui
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.navigation.toRoute
+import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.utils.enums.TypeStage
 import com.gg.spora.forestStage.domain.IStageRepository
 import com.gg.spora.forestStage.domain.model.Level
@@ -12,8 +15,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StageViewModel @Inject constructor(
-    private val stageRepository: IStageRepository
+    private val stageRepository: IStageRepository,
+    savedStateHandle: SavedStateHandle,
 ): ViewModel() {
+
+    private val stageRoute = savedStateHandle.toRoute<NavigationRoutes.Stage>()
 
     private val _stage = MutableStateFlow<StageLevel?>(null)
     val stage = _stage.asStateFlow()
@@ -31,7 +37,7 @@ class StageViewModel @Inject constructor(
     }
 
     private fun getStage(){
-        _stage.value = stageRepository.getStage(TypeStage.FOREST)
+        _stage.value = stageRepository.getStage(stageRoute.stageId)
     }
 
     private fun getCurrentLevel() {

@@ -12,24 +12,25 @@ class FakeStageLocalRepository @Inject constructor() : IStageRepository {
 
     private var fakeStage = FakeStageModels.fakeStage
 
-    override fun getStage(typeStage: TypeStage): StageLevel {
-        return fakeStage
+    override fun getStage(stageId: String): StageLevel {
+        val currentStage = fakeStage.find { it.id == stageId }
+        return currentStage!!
     }
 
     override fun updateLevel(levelId: String, starStageLevel: StarState) {
-        val currentLevel = fakeStage.levels.first { it.id == levelId }
-        if(currentLevel.starState.starCount < starStageLevel.starCount) {
-            val newFakeStage = fakeStage.copy(
-                levels = fakeStage.levels.map {
-                    if(it.id == levelId) {
-                        it.copy(starState = starStageLevel)
-                    } else {
-                        it
-                    }
-                }
-            )
-            fakeStage = newFakeStage
-        }
+//        val currentLevel = fakeStage.levels.first { it.id == levelId }
+//        if(currentLevel.starState.starCount < starStageLevel.starCount) {
+//            val newFakeStage = fakeStage.copy(
+//                levels = fakeStage.levels.map {
+//                    if(it.id == levelId) {
+//                        it.copy(starState = starStageLevel)
+//                    } else {
+//                        it
+//                    }
+//                }
+//            )
+//            fakeStage = newFakeStage
+//        }
 
     }
 

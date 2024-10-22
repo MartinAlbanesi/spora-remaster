@@ -7,7 +7,7 @@ import com.gg.spora.forestStage.domain.model.StageLevel
 
 interface IStageRepository {
 
-    fun getStage(typeStage: TypeStage): StageLevel
+    fun getStage(stageId: String): StageLevel
 
 //    fun getLevels(typeStage: TypeStage): List<Level>
 
