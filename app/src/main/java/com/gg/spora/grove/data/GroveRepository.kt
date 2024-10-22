@@ -4,7 +4,6 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.Seed
 import com.gg.spora.grove.data.models.SeedTree
 import com.gg.spora.grove.data.models.TreeType
 import kotlinx.coroutines.flow.Flow
@@ -26,9 +25,9 @@ class GroveRepository : IGroveRepository {
     init {
         // Inicializa con árboles semilleros de ejemplo
         _seedTrees.value = listOf(
-            SeedTree(type = TreeType.BAOBAB, timeToGenerateSeed = Duration.ofSeconds(5)),
-            SeedTree(type = TreeType.SECUOYA, timeToGenerateSeed = Duration.ofSeconds(5)),
-            SeedTree(type = TreeType.PINE, timeToGenerateSeed = Duration.ofSeconds(5))
+            SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(5)),
+            SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
+            SeedTree(type = TreeType.PINE, timeToGenerateForestTree = Duration.ofSeconds(5))
         )
 
         // Inicializa con 5 filas y 5 columnas de árboles del bosque vacíos
@@ -45,8 +44,8 @@ class GroveRepository : IGroveRepository {
      * Planta una semilla en un árbol del bosque.
      * @param seed La semilla a plantar.
      */
-    override fun plantSeed(seed: Seed): ForestTree? {
-        Log.d("GroveRepositoryImpl", "plantSeed called with seed: $seed")
+    override fun plantForestTree(type: TreeType): ForestTree? {
+        Log.d("GroveRepositoryImpl", "plantSeed called with seed: $type")
 
         // 1. Encuentra un lugar vacío en el bosque
         val emptySpots = _forestTrees.value.flatMapIndexed { row, cols ->
@@ -60,7 +59,7 @@ class GroveRepository : IGroveRepository {
 
         // 3. Planta la semilla en un lugar aleatorio
         val (randomRow, randomCol) = emptySpots.random()
-        val newTree = ForestTree(type = seed.type)
+        val newTree = ForestTree(type = type)
 
         // Actualiza la arboleda con el nuevo árbol
         _forestTrees.value = _forestTrees.value.mapIndexed { row, cols ->

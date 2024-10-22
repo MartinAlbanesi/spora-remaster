@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
                             GroveScreen(
                                 seedTrees = seedTrees,
                                 forestTrees = forestTrees,
-                                plantSeedInForest = { seed -> groveViewModel.plantSeedInForest(seed) },
+                                plantSeedInForest = { treeType -> groveViewModel.plantSeedInForest(treeType) },
                                 updateTree = { tree -> groveViewModel.updateTree(tree) },
                                 popBackStack = {
                                     navController.popBackStack()

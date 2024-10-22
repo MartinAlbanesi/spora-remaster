@@ -19,31 +19,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.gg.spora.grove.data.models.Seed
 import com.gg.spora.grove.data.models.SeedTree
+import com.gg.spora.grove.data.models.TreeType
 import kotlinx.coroutines.delay
 
 /**
  * Composable que representa un árbol semillero en la interfaz de usuario.
  * @param seedTree El árbol semillero a representar.
- * @param onSeedGenerated Una función lambda que se llama cuando se genera una semilla.
+ * @param onForestTreeGenerated Una función lambda que se llama cuando se genera una semilla.
  */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    onSeedGenerated: (Seed) -> Unit
+    onForestTreeGenerated: (TreeType) -> Unit
 ) {
     // Estado para el cooldown
-    var isCooldownActive by remember { mutableStateOf(!seedTree.isSeedAvailable()) }
+    var isCooldownActive by remember { mutableStateOf(!seedTree.isForestTreeAvailable()) }
     var remainingCooldown by remember { mutableStateOf(0L) }
 
     // Efecto que actualiza el cooldown
     LaunchedEffect(key1 = seedTree, key2 = remainingCooldown) {
         if (isCooldownActive) {
             while (remainingCooldown > 0) {
-                remainingCooldown = seedTree.nextSeedAvailableTime - System.currentTimeMillis()
+                remainingCooldown = seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
                 delay(1000)
             }
             isCooldownActive = false
@@ -65,13 +65,13 @@ fun SeedTreeItem(
                 width(100.dp),
             onClick = {
                 // Si el cooldown no está activo, genera una semilla
-                val generatedSeed = seedTree.generateSeed()
-                Log.d("SeedTreeItem", "Generated Seed: $generatedSeed")
-                generatedSeed?.let { seed ->
-                    Log.d("SeedTreeItem", "Seed generated: $seed")
-                    onSeedGenerated(seed)
+                val generatedForestTree = seedTree.generateForestTree()
+                Log.d("SeedTreeItem", "Generated ForestTree: $generatedForestTree")
+                generatedForestTree?.let { forestTree ->
+                    Log.d("SeedTreeItem", "Forest Tree generated: $forestTree.type")
+                    onForestTreeGenerated(forestTree.type)
                     isCooldownActive = true
-                    remainingCooldown = seedTree.nextSeedAvailableTime - System.currentTimeMillis()
+                    remainingCooldown = seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
                 }
             },
             enabled = !isCooldownActive, // Deshabilita el botón si el cooldown está activo

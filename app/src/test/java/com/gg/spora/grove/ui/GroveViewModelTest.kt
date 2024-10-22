@@ -2,7 +2,6 @@ package com.gg.spora.grove.ui
 
 import com.gg.spora.grove.data.models.ForestTree
 import com.gg.spora.grove.data.models.GrowthStage
-import com.gg.spora.grove.data.models.Seed
 import com.gg.spora.grove.data.models.SeedTree
 import com.gg.spora.grove.data.models.TreeType
 import com.gg.spora.grove.domain.models.GetForestTreesUseCase
@@ -22,6 +21,7 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.time.Duration
 
 @ExperimentalCoroutinesApi
 class GroveViewModelTest {
@@ -45,12 +45,12 @@ class GroveViewModelTest {
         every { getForestTreesUseCase() } returns flowOf(emptyList<List<ForestTree?>>())
 
         // Mockea el comportamiento de PlantSeedUseCase
-        every { plantSeedUseCase(any<Seed>() as Seed) } answers {
-            if (firstArg<Seed>().type == TreeType.SECUOYA) {
+        every { plantSeedUseCase(any<TreeType>() as TreeType) } answers {
+            if (firstArg<TreeType>() == TreeType.SECUOYA) {
                 ForestTree(type = TreeType.SECUOYA, currentStage = GrowthStage.SPROUT)
             } else {
                 ForestTree(
-                    type = firstArg<Seed>().type,
+                    type = firstArg<TreeType>(),
                     currentStage = GrowthStage.SPROUT
                 )
             }
@@ -87,18 +87,18 @@ class GroveViewModelTest {
     @Test
     fun `plantSeedInForest should plant a seed and update forestTree`() = runTest {
         // Arrange
-        val seed = Seed(type = TreeType.SECUOYA)
+        val seedTree = SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(1))
         val plantedTree = ForestTree(type = TreeType.SECUOYA, currentStage = GrowthStage.SPROUT)
-        every { plantSeedUseCase(any<Seed>() as Seed) } answers {
-            if (firstArg<Seed>().type == TreeType.SECUOYA) {
+        every { plantSeedUseCase(any<TreeType>() as TreeType) } answers {
+            if (firstArg<TreeType>() == TreeType.SECUOYA) {
                 plantedTree
             } else {
-                ForestTree(type = firstArg<Seed>().type, currentStage = GrowthStage.SPROUT)
+                ForestTree(type = firstArg<TreeType>(), currentStage = GrowthStage.SPROUT)
             }
         }
 
         // Act
-        viewModel.plantSeedInForest(seed)
+        viewModel.plantSeedInForest(seedTree.type)
 
         // Espera a que terminen las corrutinas
         advanceUntilIdle()

@@ -3,8 +3,8 @@ package com.gg.spora.grove.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.Seed
 import com.gg.spora.grove.data.models.SeedTree
+import com.gg.spora.grove.data.models.TreeType
 import com.gg.spora.grove.domain.models.GetForestTreesUseCase
 import com.gg.spora.grove.domain.models.GetSeedTreesUseCase
 import com.gg.spora.grove.domain.models.PlantSeedUseCase
@@ -82,9 +82,9 @@ class GroveViewModel @Inject constructor(
     }
 
     // Plantar una semilla en el bosque
-    fun plantSeedInForest(seed: Seed) {
+    fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch {
-            _forestTree.value = plantSeedUseCase(seed) // No need to store the result in currentTree
+            _forestTree.value = plantSeedUseCase(type) // No need to store the result in currentTree
         }
     }
 

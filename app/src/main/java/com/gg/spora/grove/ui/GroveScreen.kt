@@ -24,8 +24,8 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.Seed
 import com.gg.spora.grove.data.models.SeedTree
+import com.gg.spora.grove.data.models.TreeType
 import com.gg.spora.grove.ui.components.ForestTreeItem
 import com.gg.spora.grove.ui.components.PlantingPlaceholder
 import com.gg.spora.grove.ui.components.SeedTreeItem
@@ -36,7 +36,7 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     seedTrees: List<SeedTree>,
     forestTrees: List<List<ForestTree?>>,
-    plantSeedInForest: (Seed) -> Unit,
+    plantSeedInForest: (TreeType) -> Unit,
     updateTree: (ForestTree) -> Unit,
     popBackStack: () -> Unit
 ) {
@@ -88,8 +88,8 @@ fun GroveScreen(
             ) {
                 // Componente para cada árbol semillero
                 for (seedTree in seedTrees) {
-                    SeedTreeItem(seedTree = seedTree) { seed ->
-                        plantSeedInForest(seed)
+                    SeedTreeItem(seedTree = seedTree) { treeType ->
+                        plantSeedInForest(treeType)
                     }
                 }
             }
