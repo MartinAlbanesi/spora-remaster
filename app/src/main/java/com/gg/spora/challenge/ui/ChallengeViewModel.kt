@@ -30,6 +30,10 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
         _selectedObject.value = objectName
     }
 
+    fun setEmptySelectedObject(){
+        _selectedObject.value = ""
+    }
+
     fun setObjectInObjectsChallengeWithName(nameObjectDetail: String) {
         viewModelScope.launch {
 

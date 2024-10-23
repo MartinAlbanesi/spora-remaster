@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
@@ -78,6 +79,10 @@ fun CameraScreen(
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
             objectsChallenge = objects
         }
+    }
+    BackHandler {
+        isCapturing = false
+        onNavigateToChallengeScreen()
     }
 
     if (isScanComplete) {

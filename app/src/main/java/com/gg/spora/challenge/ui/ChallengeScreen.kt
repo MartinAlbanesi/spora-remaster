@@ -85,7 +85,10 @@ fun ChallengeScreen(
     if(showDialog && selectedObject != ""){
         val objectDetail = challengeViewModel.getObjectDetailWithName(selectedObject)
         ObjectDetailDialog(
-            onContinueButton = { showDialog = false },
+            onContinueButton = {
+                showDialog = false
+                challengeViewModel.setEmptySelectedObject()
+                },
             objectDetail = objectDetail
         )
     }
