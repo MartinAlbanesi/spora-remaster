@@ -36,7 +36,6 @@ fun HomeScreen(
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
-        /*
         HomeIcon(
             image = R.drawable.profile_icon,
             text = "Perfil",
@@ -52,12 +51,10 @@ fun HomeScreen(
             text = "Misiones",
             onClick = {}
         )
-         */
     )
 
     // Icons in the right
     val rightIcons = listOf<HomeIcon>(
-        /*
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
@@ -68,7 +65,6 @@ fun HomeScreen(
             text = "Arboleda",
             onClick = {}
         )
-         */
     )
 
     Scaffold(
@@ -76,7 +72,7 @@ fun HomeScreen(
             TopAppBarWithDualIcon(
                 firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
-                secondLabel = "75",
+                secondLabel = "0",
                 secondIcon = R.drawable.o2_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
@@ -106,26 +102,28 @@ fun HomeScreen(
                 .padding(top = paddingValue.calculateTopPadding(), start = 8.dp, end = 8.dp)
         ) {
             Column(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
+                modifier = Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally
+                    //.align(Alignment.TopStart)
             ) {
                 leftIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = { onClick }),
+                        // modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
             Column(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
+                    .align(Alignment.TopEnd),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 rightIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = { onClick }),
+                        // modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
