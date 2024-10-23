@@ -311,7 +311,7 @@ class MainActivity : ComponentActivity() {
                                             )
                                         },
                                         onNavigateToForestStage = {
-                                            navController.navigate(NavigationRoutes.Stage)
+                                            navController.popBackStack()
                                         },
                                         challengeViewModel = challengeViewModel
                                     )

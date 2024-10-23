@@ -9,7 +9,6 @@ import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.domain.model.StepObjectDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.hamcrest.Condition.Step
 import javax.inject.Inject
 
 @HiltViewModel
