@@ -103,6 +103,7 @@ fun RegisteredLoginScreen(
 
             LoginTextField(
                 placeholder = "Contraseña",
+                isPassword = true,
                 value = password,
                 onValueChange = registeredLoginViewModel::onPasswordChanged,
                 modifier = Modifier.fillMaxWidth()

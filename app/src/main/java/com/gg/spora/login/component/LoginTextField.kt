@@ -57,7 +57,7 @@ fun LoginTextField(
             unfocusedIndicatorColor = Color.Transparent,
             cursorColor = MaterialTheme.colorScheme.primary,
             unfocusedLabelColor = MaterialTheme.colorScheme.onSurface
-        )
+        ),
     )
 }
 
