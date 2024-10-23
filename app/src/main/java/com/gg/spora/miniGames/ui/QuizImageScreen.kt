@@ -54,8 +54,8 @@ fun QuizImageScreen(
             contentDescription = "Imagen",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .padding(8.dp)
-                .size(140.dp)
+                .padding(4.dp)
+                .size(130.dp)
         )
         Text(
             text = questionTitle,
@@ -64,7 +64,7 @@ fun QuizImageScreen(
             fontSize = 20.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp)
+                .padding(top = 4.dp)
         )
 
         answerOptions.forEach { answer ->
@@ -74,7 +74,7 @@ fun QuizImageScreen(
                 enabled = isCorrect == null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 4.dp)
                     .clip(MaterialTheme.shapes.large)
                     .height(50.dp)
                     .clickable {
