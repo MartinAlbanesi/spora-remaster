@@ -56,7 +56,7 @@ fun ObjectDetailDialog(
         Color.Gray
     }
 
-    if(currentStep == objectDetail.steps.size){
+    if(currentStep == objectDetail.stepsObjectDetail.size){
         buttonContinueEnabled = true
     }
 
@@ -84,7 +84,7 @@ fun ObjectDetailDialog(
                         .padding(15.dp)
                 ){
                     Text(
-                        text = objectDetail.name,
+                        text = objectDetail.nameObjectDetail!!,
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )
@@ -107,7 +107,7 @@ fun ObjectDetailDialog(
                             )
                             Text(
                                 modifier = modifier.padding(top = 5.dp),
-                                text = objectDetail.description,
+                                text = objectDetail.description!!,
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -117,7 +117,7 @@ fun ObjectDetailDialog(
                             modifier = modifier.width(120.dp),
                             verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
-                            ValidateImageOfObjectDetail(objectDetail.name)
+                            ValidateImageOfObjectDetail(objectDetail.nameObjectDetail)
                         }
                     }
 
@@ -129,15 +129,15 @@ fun ObjectDetailDialog(
                     )
 
                     Crossfade(targetState = currentStep, label = "") { step ->
-                        objectDetail.steps.forEach { stepObject ->
-                            if (step == stepObject.number) {
+                        objectDetail.stepsObjectDetail.forEach { stepObject ->
+                            if (step == stepObject.numberStep) {
                                 StepObjectDetail(
                                     stepObjectDetail = stepObject,
                                     onPreviousStep = {
                                         if (currentStep > 1) currentStep--
                                     },
                                     onNextStep = {
-                                        if (currentStep < objectDetail.steps.size) currentStep++
+                                        if (currentStep < objectDetail.stepsObjectDetail.size) currentStep++
                                     }
                                 )
                             }
@@ -184,19 +184,20 @@ fun ObjectDetailDialog(
 
 @Composable
 fun ValidateImageOfObjectDetail(objectDetailName : String){
-    val image : Int
 
-        if(objectDetailName == "Botella de plastico"){
-            image = R.drawable.botella_de_plastico
-    }
-    else if(objectDetailName == "Caja de carton"){
-            image = R.drawable.caja_de_carton
-    }
-    else if(objectDetailName == "Lata de metal"){
-            image = R.drawable.caja_de_carton
-    }
-    else{
-            image = 0
+    val image : Int = when (objectDetailName) {
+        "Botella de plastico" -> {
+            R.drawable.botella_de_plastico
+        }
+        "Caja de carton" -> {
+            R.drawable.caja_de_carton
+        }
+        "Tapita de plástico" -> {
+            R.drawable.caja_de_carton
+        }
+        else -> {
+            0
+        }
     }
 
     Image(

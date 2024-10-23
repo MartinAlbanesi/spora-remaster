@@ -70,10 +70,10 @@ fun StepObjectDetail(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                ValidateImageStep(stepObjectDetail.number)
+                ValidateImageStep(stepObjectDetail.numberStep)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = stepObjectDetail.title,
+                    text = stepObjectDetail.nameObjectDetail!!,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -87,7 +87,7 @@ fun StepObjectDetail(
             )
 
             Text(
-                text = stepObjectDetail.description,
+                text = stepObjectDetail.description!!,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
