@@ -47,6 +47,8 @@ room = "2.6.1"
 
 # lottie
 lottie = "6.5.2"
+runtimeLivedata = "1.7.3"
+firebaseFirestoreKtx = "25.1.0"
 
 # Mockk
 mockk = "1.13.13"
@@ -121,6 +123,8 @@ lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", versio
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 # Mockk
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }

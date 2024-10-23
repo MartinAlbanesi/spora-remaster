@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 object NavigationRoutes {
 
+
     @Serializable
     object Home
 
@@ -23,6 +24,12 @@ object NavigationRoutes {
 
     @Serializable
     object Welcome
+
+    @Serializable
+    object SignUp
+
+    @Serializable
+    object RegisteredLogin
 
     @Serializable
     object Grove

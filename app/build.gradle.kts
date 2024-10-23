@@ -92,6 +92,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.firestore.ktx)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)
