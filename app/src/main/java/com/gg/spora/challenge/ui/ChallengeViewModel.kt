@@ -9,10 +9,11 @@ import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.domain.model.StepObjectDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.hamcrest.Condition.Step
 import javax.inject.Inject
 
 @HiltViewModel
-class ChallengeViewModel @Inject constructor(val challengeRepository: ChallengeRepository) : ViewModel () {
+class ChallengeViewModel @Inject constructor(private val challengeRepository: ChallengeRepository) : ViewModel () {
 
     private val _objectsChallenge = MutableLiveData<MutableList<ObjectDetail>>()
     val objectsChallenge: LiveData<MutableList<ObjectDetail>> = _objectsChallenge
@@ -21,10 +22,7 @@ class ChallengeViewModel @Inject constructor(val challengeRepository: ChallengeR
     val selectedObject: LiveData<String> get() = _selectedObject
 
     init {
-        // Cargar los objetos desafío desde la base de datos
-        //loadObjectsChallenge()
         insertObjectsDetailInDatabase()
-        insertStepsObjectDetailInDatabase()
         loadObjectsChallenge()
     }
 
@@ -32,10 +30,9 @@ class ChallengeViewModel @Inject constructor(val challengeRepository: ChallengeR
         _selectedObject.value = objectName
     }
 
-    fun setValidObjectDetailInDatabase(idObjectDetail: Int) {
+    fun setObjectInObjectsChallengeWithName(nameObjectDetail: String) {
         viewModelScope.launch {
-            challengeRepository.setValidObjectDetailInDatabase(idObjectDetail)
-            //_objectsChallenge.value?.put(selectedValue, true)
+            challengeRepository.setValidObjectDetailInDatabase(nameObjectDetail)
         }
     }
 
@@ -45,70 +42,70 @@ class ChallengeViewModel @Inject constructor(val challengeRepository: ChallengeR
         }
     }
 
-    private fun getStepsObjectsChallenge(idObjectDetail: Int) : List<StepObjectDetail> {
+    private fun getStepsObjectsChallenge(nameObjectDetail: String) : List<StepObjectDetail> {
         var listSteps = listOf<StepObjectDetail>()
         viewModelScope.launch{
-            listSteps =  challengeRepository.getAllStepsObjectDetailWithId(idObjectDetail)
+            listSteps =  challengeRepository.getAllStepsObjectDetailWithName(nameObjectDetail)
         }
         return listSteps
+    }
+
+    fun getObjectDetailWithName(objectDetailName : String) : ObjectDetail{
+        var objectDetail = ObjectDetail( "", "",false)
+
+        for(objectDetailList in objectsChallenge.value!!){
+            if(objectDetailList.nameObjectDetail == objectDetailName){
+                objectDetail =  objectDetailList
+            }
+        }
+        return objectDetail
     }
 
     private fun insertObjectsDetailInDatabase(){
         viewModelScope.launch{
             val listObjects = mutableListOf(
                 ObjectDetail(
-                    1,
                     "Botella de plástico",
                     "Muchas botellas de plástico son reciclables y se pueden encontrar por cualquier parte de la casa.",
-                    false
+                    false,
+                    mutableListOf(StepObjectDetail( 1,"Limpieza",
+                        "Vaciá y limpiá las botellas enjuagándolas " +
+                                "con agua y unas gotitas de detergente.",
+                        true, false),
+                        StepObjectDetail( 2,"Validación",
+                            "Una botella de plástico que se puede " +
+                                    "reciclar debera tener un ícono de reciclaje. "),
+                        StepObjectDetail( 3,"Reciclado",
+                            "Si la botella se puede reciclar entonces se " +
+                                    "puede ingresar en los contenedores de reciclado."),
+                        StepObjectDetail(4,"Crear",
+                            "Si no se pueda reciclar, entonces se pueden hacer " +
+                                    "manualidades u objetos de decoración con los materiales.",
+                            false, true))
                 ),
                 ObjectDetail(
-                    2,
                     "Caja de carton",
                     "Al reutilizar el carton cuidamos al planeta y a nuestros amigos los arboles!",
-                    false
+                    false,
+                    mutableListOf(StepObjectDetail( 1,"Limpieza",
+                        "Asegurate que la caja de Carton este limpia " +
+                                "y sin ningun elemento que pueda interferir con su reciclaje",true, false),
+                        StepObjectDetail( 2,"Recortar",
+                            "Acompañado de un adulto, recorta la caja de carton en pequeños trozos"),
+                        StepObjectDetail( 3,"Crear",
+                            "Con estos pequeños trozos de carton podes " +
+                                    "hacer manualidades divertidas.",false, true))
                 ),
                 ObjectDetail(
-                    3,
-                    "Tapitas de botella",
+                    "Tapita de plástico",
                     "Las tapitas de plastico se pueden encontrar por cualquier lado y su reciclaje es muy facil!.",
                     false
                 )
             )
 
             for(objectDetail in listObjects){
-                challengeRepository.insertObjectDetail(objectDetail)
-            }
-        }
-    }
-
-    private fun insertStepsObjectDetailInDatabase(){
-        viewModelScope.launch {
-            val listSteps = mutableListOf(
-                StepObjectDetail(1, 1,"Limpieza",
-                "Vaciá y limpiá las botellas enjuagándolas " +
-                        "con agua y unas gotitas de detergente.",
-                true, false),
-                StepObjectDetail(1, 2,"Validación",
-                    "Una botella de plástico que se puede " +
-                            "reciclar debera tener un ícono de reciclaje. "),
-                StepObjectDetail(1, 3,"Reciclado",
-                    "Si la botella se puede reciclar entonces se " +
-                            "puede ingresar en los contenedores de reciclado."),
-                StepObjectDetail(1, 4,"Crear",
-                    "Si no se pueda reciclar, entonces se pueden hacer " +
-                            "manualidades u objetos de decoración con los materiales.",
-                    false, true),
-                StepObjectDetail(2, 1,"Limpieza",
-                    "Asegurate que la caja de Carton este limpia " +
-                            "y sin ningun elemento que pueda interferir con su reciclaje",true, false),
-                StepObjectDetail(2, 2,"Recortar",
-                    "Acompañado de un adulto, recorta la caja de carton en pequeños trozos"),
-                StepObjectDetail(2, 3,"Crear",
-                    "Con estos pequeños trozos de carton podes " +
-                            "hacer manualidades divertidas.",false, true))
-            for(step in listSteps){
-                challengeRepository.insertStepObjectDetail(step)
+                _objectsChallenge.value?.add(objectDetail)
+                //challengeRepository.insertObjectDetail(objectDetail)
             }
         }
     }
