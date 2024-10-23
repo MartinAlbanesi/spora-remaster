@@ -55,6 +55,9 @@ object FakeQuizModels {
 
 
     val fakeAnswers = listOf(
+
+        // ----------------------- QUIZ -----------------------
+
         Answer(
             answer = "Aire",
             id = "0",
@@ -343,55 +346,47 @@ object FakeQuizModels {
 
         // ----------------------- QUIZ_IMAGE -----------------------
 
-
         Answer(
             answer = "Símbolo de Reciclaje",
             id = "46",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.simbolo_reciclaje
         ),
         Answer(
             answer = "Calentamiento Global",
             id = "47",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.calentamiento_global
         ),
         Answer(
             answer = "Deforestación",
             id = "48",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.deforestacion
         ),
         Answer(
             answer = "Smog",
             id = "49",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.smog
         ),
         Answer(
             answer = "Contaminación",
             id = "50",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.contaminacion
         ),
         Answer(
             answer = "Energia Eólica",
             id = "51",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.recurso_viento
         ),
         Answer(
             answer = "Desechos Electrónicos",
             id = "52",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.desechos_electronicos
 
         ),
         Answer(
@@ -399,64 +394,179 @@ object FakeQuizModels {
             id = "53",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.agujero_ozono
         ),
         Answer(
             answer = "Residuo Tóxico",
             id = "54",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.residuo_toxico
         ),
         Answer(
             answer = "Panel Solar",
             id = "55",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
-//            imageResId = R.drawable.panel_solar
+        ),
+        Answer(
+            answer = "Contaminación por plásticos",
+            id = "56",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Gases de efecto invernadero",
+            id = "57",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Derrame de petróleo",
+            id = "58",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Separación de residuos para reciclaje",
+            id = "59",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Reforestación",
+            id = "60",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Menos huella de carbono al usar energía limpia",
+            id = "61",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Incendio forestal",
+            id = "62",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Contaminación del agua",
+            id = "63",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Desertificación",
+            id = "64",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "No emite gases contaminantes",
+            id = "65",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Compostaje",
+            id = "66",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Agricultura urbana",
+            id = "67",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Purifican el aire",
+            id = "68",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Polinización de plantas",
+            id = "69",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Bajo consumo de energía",
+            id = "70",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Generan menos residuos",
+            id = "71",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Facilita el reciclaje",
+            id = "72",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Protege el suelo y el agua",
+            id = "73",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            answer = "Ahorra energía",
+            id = "74",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
         ),
 
         // ----------------------- RELATIONS -----------------------
 
         Answer(
             answer = "Reciclable",
-            id = "56",
+            id = "75",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Answer(
             answer = "Biodegradable",
-            id = "57",
+            id = "76",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         ),
         Answer(
             answer = "Plástico",
-            id = "58",
+            id = "77",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Answer(
             answer = "No reciclable",
-            id = "59",
+            id = "78",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         ),
         Answer(
             answer = "Contaminante",
-            id = "60",
+            id = "79",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Answer(
             answer = "Orgánico",
-            id = "61",
+            id = "80",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
-        )
+        ),
     )
+
     // Wea
     val fakeQuizQuestions = listOf(
+
+        // ----------------------- QUIZ -----------------------
+
         Question(
             id = "1",
             question = "¿Cuál de estas acciones pertenece a la regla de las 3 erres de la sostenibilidad?",
@@ -531,7 +641,7 @@ object FakeQuizModels {
         ),
         Question(
             id = "10",
-            question = "¿Qué es el esmog?",
+            question = "¿Qué es el smog?",
             answers = listOf(fakeAnswers[43], fakeAnswers[44], fakeAnswers[45]),
             answerId = fakeAnswers[42].id,
             typeGame = TypeGame.QUIZ,
@@ -630,56 +740,380 @@ object FakeQuizModels {
             typeGame = TypeGame.QUIZ_IMAGE,
             image = R.drawable.panel_solar
         ),
+        Question(
+            id = "56",
+            question = "¿Qué problema afecta a este río?",
+            answers = fakeAnswers.filter { fake -> fake.id != "56" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[56].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.rio_contaminado
+        ),
+        Question(
+            id = "57",
+            question = "¿Cómo se llama este tipo de emisión de gas?",
+            answers = fakeAnswers.filter { fake -> fake.id != "57" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[57].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.auto_contaminando
+        ),
+        Question(
+            id = "58",
+            question = "¿Qué tipo de desastre ambiental es este?",
+            answers = fakeAnswers.filter { fake -> fake.id != "58" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[58].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.derrame_petroleo
+        ),
+        Question(
+            id = "59",
+            question = "¿Qué práctica está realizando esta persona?",
+            answers = fakeAnswers.filter { fake -> fake.id != "59" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[59].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.separacion_residuos
+        ),
+        Question(
+            id = "60",
+            question = "¿Qué práctica está realizando esta persona?",
+            answers = fakeAnswers.filter { fake -> fake.id != "60" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[60].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.plantar_arboles
+        ),
+        Question(
+            id = "61",
+            question = "¿Qué hace el tren eléctrico para ayudar al medio ambiente?",
+            answers = fakeAnswers.filter { fake -> fake.id != "61" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[61].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.tren_electrico
+        ),
+        Question(
+            id = "62",
+            question = "¿Qué desastre natural ocurrió aquí?",
+            answers = fakeAnswers.filter { fake -> fake.id != "62" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[62].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.bosque_quemado
+        ),
+        Question(
+            id = "63",
+            question = "¿Qué pudo haber causado esto?",
+            answers = fakeAnswers.filter { fake -> fake.id != "63" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[63].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.lago_contaminado
+        ),
+        Question(
+            id = "64",
+            question = "¿Qué fenómeno ambiental representa esta imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "64" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[64].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.desertificacion
+        ),
+        Question(
+            id = "65",
+            question = "¿Por qué es mejor utilizar un auto eléctrico?",
+            answers = fakeAnswers.filter { fake -> fake.id != "65" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[65].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.auto_electrico
+        ),
+        Question(
+            id = "66",
+            question = "¿Qué se hace con los residuos en este contenedor?",
+            answers = fakeAnswers.filter { fake -> fake.id != "66" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[66].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.compose
+        ),
+        Question(
+            id = "67",
+            question = "¿Qué práctica está representada en la imagen?",
+            answers = fakeAnswers.filter { fake -> fake.id != "67" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[67].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.agricultura_urbana
+        ),
+        Question(
+            id = "68",
+            question = "¿Qué beneficio brindan los árboles al medio ambiente?",
+            answers = fakeAnswers.filter { fake -> fake.id != "68" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[68].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.arbol
+        ),
+        Question(
+            id = "69",
+            question = "¿Cuál es el papel de los insectos en este ecosistema?",
+            answers = fakeAnswers.filter { fake -> fake.id != "69" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[69].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.polinizacion
+        ),
+        Question(
+            id = "70",
+            question = "¿Qué indica la etiqueta de eficiencia energética?",
+            answers = fakeAnswers.filter { fake -> fake.id != "70" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[70].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.eficiencia
+        ),
+        Question(
+            id = "71",
+            question = "¿Por qué es mejor usar bolsas reutilizables que de plástico?",
+            answers = fakeAnswers.filter { fake -> fake.id != "71" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answerId = fakeAnswers[71].id,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.QUIZ_IMAGE,
+            image = R.drawable.bolsa_tela
+        ),
 
         // ----------------------- RELATIONS -----------------------
         Question(
-            id = "56",
+            id = "72",
             question = "Botella",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
-            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            answers = listOf(fakeAnswers[75], fakeAnswers[76], fakeAnswers[77], fakeAnswers[78], fakeAnswers[79], fakeAnswers[80]).shuffled(),
+            answerId = "${fakeAnswers[75].id},${fakeAnswers[77].id},${fakeAnswers[79].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
+        /*
+        Question(
+            id = "73",
+            question = "Reciclaje",
+            answers = listOf(fakeAnswers[81], fakeAnswers[82], fakeAnswers[83], fakeAnswers[84], fakeAnswers[85], fakeAnswers[86]).shuffled(),
+            answerId = "${fakeAnswers[81].id},${fakeAnswers[83].id},${fakeAnswers[85].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "74",
+            question = "Deforestación",
+            answers = listOf(fakeAnswers[87], fakeAnswers[88], fakeAnswers[89], fakeAnswers[90], fakeAnswers[91], fakeAnswers[92]).shuffled(),
+            answerId = "${fakeAnswers[87].id},${fakeAnswers[88].id},${fakeAnswers[89].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "75",
+            question = "Reforestación",
+            answers = listOf(fakeAnswers[93], fakeAnswers[94], fakeAnswers[95], fakeAnswers[96], fakeAnswers[97], fakeAnswers[98]).shuffled(),
+            answerId = "${fakeAnswers[93].id},${fakeAnswers[95].id},${fakeAnswers[97].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "76",
+            question = "Contaminación del aire",
+            answers = listOf(fakeAnswers[99], fakeAnswers[100], fakeAnswers[101], fakeAnswers[102], fakeAnswers[103], fakeAnswers[104]).shuffled(),
+            answerId = "${fakeAnswers[99].id},${fakeAnswers[100].id},${fakeAnswers[101].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "77",
+            question = "Incendios forestales",
+            answers = listOf(fakeAnswers[105], fakeAnswers[106], fakeAnswers[107], fakeAnswers[108], fakeAnswers[109], fakeAnswers[110]).shuffled(),
+            answerId = "${fakeAnswers[105].id},${fakeAnswers[106].id},${fakeAnswers[107].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "78",
+            question = "Calentamiento global",
+            answers = listOf(fakeAnswers[111], fakeAnswers[112], fakeAnswers[113], fakeAnswers[114], fakeAnswers[115], fakeAnswers[116]).shuffled(),
+            answerId = "${fakeAnswers[111].id},${fakeAnswers[113].id},${fakeAnswers[115].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "79",
+            question = "Fauna",
+            answers = listOf(fakeAnswers[117], fakeAnswers[118], fakeAnswers[119], fakeAnswers[120], fakeAnswers[121], fakeAnswers[122]).shuffled(),
+            answerId = "${fakeAnswers[117].id},${fakeAnswers[118].id},${fakeAnswers[119].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "80",
+            question = "Flora",
+            answers = listOf(fakeAnswers[123], fakeAnswers[124], fakeAnswers[125], fakeAnswers[126], fakeAnswers[127], fakeAnswers[128]).shuffled(),
+            answerId = "${fakeAnswers[123].id},${fakeAnswers[124].id},${fakeAnswers[125].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "81",
+            question = "Energía solar",
+            answers = listOf(fakeAnswers[129], fakeAnswers[130], fakeAnswers[131], fakeAnswers[132], fakeAnswers[133], fakeAnswers[134]).shuffled(),
+            answerId = "${fakeAnswers[129].id},${fakeAnswers[131].id},${fakeAnswers[133].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "82",
+            question = "Agua limpia",
+            answers = listOf(fakeAnswers[135], fakeAnswers[136], fakeAnswers[137], fakeAnswers[138], fakeAnswers[139], fakeAnswers[140]).shuffled(),
+            answerId = "${fakeAnswers[135].id},${fakeAnswers[137].id},${fakeAnswers[139].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "83",
+            question = "Reciclaje de plástico",
+            answers = listOf(fakeAnswers[141], fakeAnswers[142], fakeAnswers[143], fakeAnswers[144], fakeAnswers[145], fakeAnswers[146]).shuffled(),
+            answerId = "${fakeAnswers[141].id},${fakeAnswers[143].id},${fakeAnswers[145].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "84",
+            question = "Bosques tropicales",
+            answers = listOf(fakeAnswers[147], fakeAnswers[148], fakeAnswers[149], fakeAnswers[150], fakeAnswers[151], fakeAnswers[152]).shuffled(),
+            answerId = "${fakeAnswers[147].id},${fakeAnswers[148].id},${fakeAnswers[149].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "85",
+            question = "Energía renovable",
+            answers = listOf(fakeAnswers[153], fakeAnswers[154], fakeAnswers[155], fakeAnswers[156], fakeAnswers[157], fakeAnswers[158]).shuffled(),
+            answerId = "${fakeAnswers[153].id},${fakeAnswers[155].id},${fakeAnswers[157].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "86",
+            question = "Oso polar",
+            answers = listOf(fakeAnswers[159], fakeAnswers[160], fakeAnswers[161], fakeAnswers[162], fakeAnswers[163], fakeAnswers[164]).shuffled(),
+            answerId = "${fakeAnswers[159].id},${fakeAnswers[161].id},${fakeAnswers[163].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "87",
+            question = "Biodiversidad",
+            answers = listOf(fakeAnswers[165], fakeAnswers[166], fakeAnswers[167], fakeAnswers[168], fakeAnswers[169], fakeAnswers[170]).shuffled(),
+            answerId = "${fakeAnswers[165].id},${fakeAnswers[166].id},${fakeAnswers[167].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "88",
+            question = "Reciclaje de papel",
+            answers = listOf(fakeAnswers[171], fakeAnswers[172], fakeAnswers[173], fakeAnswers[174], fakeAnswers[175], fakeAnswers[176]).shuffled(),
+            answerId = "${fakeAnswers[171].id},${fakeAnswers[173].id},${fakeAnswers[175].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "89",
+            question = "Erosión del suelo",
+            answers = listOf(fakeAnswers[177], fakeAnswers[178], fakeAnswers[179], fakeAnswers[180], fakeAnswers[181], fakeAnswers[182]).shuffled(),
+            answerId = "${fakeAnswers[177].id},${fakeAnswers[178].id},${fakeAnswers[179].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "90",
+            question = "Incendio forestal",
+            answers = listOf(fakeAnswers[183], fakeAnswers[184], fakeAnswers[185], fakeAnswers[186], fakeAnswers[187], fakeAnswers[188]).shuffled(),
+            answerId = "${fakeAnswers[183].id},${fakeAnswers[184].id},${fakeAnswers[185].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "91",
+            question = "Selva amazónica",
+            answers = listOf(fakeAnswers[189], fakeAnswers[190], fakeAnswers[191], fakeAnswers[192], fakeAnswers[193], fakeAnswers[194]).shuffled(),
+            answerId = "${fakeAnswers[189].id},${fakeAnswers[191].id},${fakeAnswers[193].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+        Question(
+            id = "92",
+            question = "Aire limpio",
+            answers = listOf(fakeAnswers[195], fakeAnswers[196], fakeAnswers[197], fakeAnswers[198], fakeAnswers[199], fakeAnswers[200]).shuffled(),
+            answerId = "${fakeAnswers[195].id},${fakeAnswers[196].id},${fakeAnswers[197].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+         */
     )
 
     val fakeQuestionRelations = listOf(
         Question(
-            id = "56",
+            id = "73",
             question = "Botella",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
-            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            answers = listOf(fakeAnswers[72], fakeAnswers[73], fakeAnswers[74], fakeAnswers[75], fakeAnswers[76], fakeAnswers[77]).shuffled(),
+            answerId = "${fakeAnswers[72].id},${fakeAnswers[74].id},${fakeAnswers[76].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
-            id = "57",
+            id = "74",
             question = "Wea",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
-            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            answers = listOf(fakeAnswers[72], fakeAnswers[73], fakeAnswers[74], fakeAnswers[75], fakeAnswers[76], fakeAnswers[77]).shuffled(),
+            answerId = "${fakeAnswers[72].id},${fakeAnswers[74].id},${fakeAnswers[76].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
-            id = "58",
+            id = "75",
             question = "Lala",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
-            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            answers = listOf(fakeAnswers[72], fakeAnswers[73], fakeAnswers[74], fakeAnswers[75], fakeAnswers[76], fakeAnswers[77]).shuffled(),
+            answerId = "${fakeAnswers[72].id},${fakeAnswers[74].id},${fakeAnswers[76].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
-            id = "59",
+            id = "76",
             question = "Pepe",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
-            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            answers = listOf(fakeAnswers[72], fakeAnswers[73], fakeAnswers[74], fakeAnswers[75], fakeAnswers[76], fakeAnswers[77]).shuffled(),
+            answerId = "${fakeAnswers[72].id},${fakeAnswers[74].id},${fakeAnswers[76].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
-            id = "60",
+            id = "77",
             question = "Titi",
-            answers = listOf(fakeAnswers[56], fakeAnswers[57], fakeAnswers[58], fakeAnswers[59], fakeAnswers[60], fakeAnswers[61]).shuffled(),
-            answerId = "${fakeAnswers[56].id},${fakeAnswers[58].id},${fakeAnswers[60].id}",
+            answers = listOf(fakeAnswers[72], fakeAnswers[73], fakeAnswers[74], fakeAnswers[75], fakeAnswers[76], fakeAnswers[77]).shuffled(),
+            answerId = "${fakeAnswers[72].id},${fakeAnswers[74].id},${fakeAnswers[76].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
@@ -760,7 +1194,7 @@ object FakeQuizModels {
         ),
         Question(
             id = "10",
-            question = "¿Qué es el esmog?",
+            question = "¿Qué es el smog?",
             answers = listOf(fakeAnswers[43], fakeAnswers[44], fakeAnswers[45]),
             answerId = fakeAnswers[42].id,
             typeGame = TypeGame.QUIZ,

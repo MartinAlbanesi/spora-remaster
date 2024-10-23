@@ -1,5 +1,5 @@
 package com.gg.spora.core.fake
-
+/*
 import com.gg.spora.R
 import com.gg.spora.minigameQuizImage.domain.model.model.AnswerImage
 import com.gg.spora.minigameQuizImage.domain.model.model.ImageQuestionType
@@ -441,3 +441,4 @@ object FakeQuizImageModels {
         ),
     )
 }
+ */
