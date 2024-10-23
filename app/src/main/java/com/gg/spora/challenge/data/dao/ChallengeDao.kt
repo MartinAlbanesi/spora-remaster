@@ -21,8 +21,8 @@ interface ChallengeDao {
 
     @Query(
         "UPDATE object_detail SET is_validate = 1 " +
-            "WHERE id_object_detail = :idObjectDetail")
-    suspend fun setValidObjectDetailInDatabase(idObjectDetail : Int)
+            "WHERE name_object_detail = :nameObjectDetail")
+    suspend fun setValidObjectDetailInDatabase(nameObjectDetail : String)
     //endregion
 
     //region StepObjectDetailEntity
@@ -33,9 +33,9 @@ interface ChallengeDao {
     suspend fun insertStepObjetDetail(stepObjectDetail: StepObjectDetailEntity)
 
     @Query("SELECT ods.* FROM object_detail od JOIN object_detail_step ods " +
-            "ON od.id_object_detail = ods.id_object_detail" +
-            " WHERE id_object_detail = :idObjectDetail")
-    suspend fun getAllStepsObjectDetailWithId(idObjectDetail : Int) : List<StepObjectDetailEntity>
+            "ON od.name_object_detail = ods.name_object_detail" +
+            " WHERE od.name_object_detail = :nameObjectDetail")
+    suspend fun getAllStepsObjectDetailWithName(nameObjectDetail : String) : List<StepObjectDetailEntity>
 
     @Query("DELETE FROM object_detail_step")
     suspend fun deleteAllStepsObjectDetail()
