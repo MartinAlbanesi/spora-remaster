@@ -139,6 +139,7 @@ fun HomeScreen(
                     modifier = Modifier
                         .size(140.dp)
                         .align(Alignment.Center)
+                        .offset(x = (-20).dp)
                 )
             }
 
@@ -156,7 +157,7 @@ fun HomeScreen(
                 image = R.drawable.expo_sign,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
-                    .size(120.dp)
+                    .size(140.dp)
 //                    .offset(y = (-40).dp, x = (-80).dp)
                     .clickable(onClick = onNavigateToExpoStage)
             )
