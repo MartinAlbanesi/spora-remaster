@@ -1,4 +1,4 @@
-package com.gg.spora.core.utils.functions
+package com.gg.spora.challenge
 
 import com.gg.spora.challenge.data.dao.ChallengeDao
 import com.gg.spora.challenge.data.repositories.ChallengeRepository
@@ -26,8 +26,8 @@ class ChallengeRepositoryMockKTest {
     @Test
     fun `test getAllObjectsDetail`() = runBlocking {
         val objectDetailEntities = listOf(
-            ObjectDetailEntity(1, "Test Object 1", "Description 1", false),
-            ObjectDetailEntity(2, "Test Object 2", "Description 2", true)
+            ObjectDetailEntity("Test Object 1", "Description 1", false),
+            ObjectDetailEntity("Test Object 2", "Description 2", true)
         )
 
         coEvery { challengeDao.getAllObjectsDetail() } returns objectDetailEntities
@@ -43,7 +43,7 @@ class ChallengeRepositoryMockKTest {
 
     @Test
     fun `test insertObjectDetail`() = runBlocking {
-        val objectDetail = ObjectDetail(1, "Test Object", "Test Description", false)
+        val objectDetail = ObjectDetail("Test Object", "Test Description", false)
 
         challengeRepository.insertObjectDetail(objectDetail)
 
@@ -52,9 +52,9 @@ class ChallengeRepositoryMockKTest {
 
     @Test
     fun `test updateObjectDetailWithId`() = runBlocking {
-        challengeRepository.setValidObjectDetailInDatabase(1)
+        challengeRepository.setValidObjectDetailInDatabase("Test Object")
 
         // Verificar que se llamó al método de actualización en el DAO
-        coVerify { challengeDao.setValidObjectDetailInDatabase(1) }
+        coVerify { challengeDao.setValidObjectDetailInDatabase("Test Object") }
     }
 }
