@@ -1,0 +1,560 @@
+[
+  {
+    "answer": "Aire",
+    "id": "0",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Smog",
+    "id": "1",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Agua",
+    "id": "2",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Compost",
+    "id": "3",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Desecho",
+    "id": "4",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Contaminación",
+    "id": "5",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Recursos naturales",
+    "id": "6",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Ecosistema",
+    "id": "7",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Ambiente",
+    "id": "8",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Reforestación",
+    "id": "9",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Reciclar",
+    "id": "10",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Realizar",
+    "id": "11",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Recolectar",
+    "id": "12",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Respetar",
+    "id": "13",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Rojo",
+    "id": "14",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Blanco",
+    "id": "15",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Celeste",
+    "id": "16",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Violeta",
+    "id": "17",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Pilas y desechos peligrosos",
+    "id": "18",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Aceites e insecticidas",
+    "id": "19",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Desechos orgánicos",
+    "id": "20",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Plásticos y envases metálicos",
+    "id": "21",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "700 años",
+    "id": "22",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "80 años",
+    "id": "23",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "120 años",
+    "id": "24",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "300 años",
+    "id": "25",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Amarillo",
+    "id": "26",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Verde",
+    "id": "27",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Azul",
+    "id": "28",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Naranja",
+    "id": "29",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Espejos rotos",
+    "id": "30",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Frascos de mermelada vacíos",
+    "id": "31",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Botellas de vidrio",
+    "id": "32",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Tarros de vidrio",
+    "id": "33",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "En un punto limpio",
+    "id": "34",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Contenedor gris",
+    "id": "35",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Contenedor de desechos generales",
+    "id": "36",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Contenedor azul",
+    "id": "37",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Reforestando",
+    "id": "38",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Usando menos papel",
+    "id": "39",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Plantando flores",
+    "id": "40",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Prohibiendo la madera",
+    "id": "41",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Una forma de niebla en ciudades",
+    "id": "42",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Una mezcla de polvo y humo",
+    "id": "43",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Un tipo de aire fresco",
+    "id": "44",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Vapor de agua en el ambiente",
+    "id": "45",
+    "typeQuestion": [
+      "MARTIN"
+    ],
+    "typeGame": "QUIZ",
+    "isCorrect": null
+  },
+  {
+    "answer": "Símbolo de Reciclaje",
+    "id": "46",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Calentamiento Global",
+    "id": "47",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Deforestación",
+    "id": "48",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Smog",
+    "id": "49",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Contaminación",
+    "id": "50",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Energia Eólica",
+    "id": "51",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Desechos Electrónicos",
+    "id": "52",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Agujero de Ozono",
+    "id": "53",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Residuo Tóxico",
+    "id": "54",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Panel Solar",
+    "id": "55",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "QUIZ_IMAGE",
+    "isCorrect": null
+  },
+  {
+    "answer": "Reciclable",
+    "id": "56",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "RELATIONS",
+    "isCorrect": null
+  },
+  {
+    "answer": "Biodegradable",
+    "id": "57",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "RELATIONS",
+    "isCorrect": null
+  },
+  {
+    "answer": "Plástico",
+    "id": "58",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "RELATIONS",
+    "isCorrect": null
+  },
+  {
+    "answer": "No reciclable",
+    "id": "59",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "RELATIONS",
+    "isCorrect": null
+  },
+  {
+    "answer": "Contaminante",
+    "id": "60",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "RELATIONS",
+    "isCorrect": null
+  },
+  {
+    "answer": "Orgánico",
+    "id": "61",
+    "typeQuestion": [
+      "RECYCLE"
+    ],
+    "typeGame": "RELATIONS",
+    "isCorrect": null
+  }
+]

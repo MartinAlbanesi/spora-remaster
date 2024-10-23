@@ -17,7 +17,7 @@ class GetStarStateTest{
         val result = getStarState(lives)
 
         // Then
-        assertEquals(StarState.STAR_THREE, result)
+        assertEquals(StarState.THREE, result)
     }
 
     @Test
@@ -29,7 +29,7 @@ class GetStarStateTest{
         val result = getStarState(lives)
 
         // Then
-        assertEquals(StarState.STAR_TWO, result)
+        assertEquals(StarState.TWO, result)
     }
 
     @Test
@@ -41,7 +41,7 @@ class GetStarStateTest{
         val result = getStarState(lives)
 
         // Then
-        assertEquals(StarState.STAR_ONE, result)
+        assertEquals(StarState.ONE, result)
     }
 
     @Test
@@ -53,7 +53,7 @@ class GetStarStateTest{
         val result = getStarState(lives)
 
         // Then
-        assertEquals(StarState.STAR_ZERO, result)
+        assertEquals(StarState.ZERO, result)
     }
 
 }

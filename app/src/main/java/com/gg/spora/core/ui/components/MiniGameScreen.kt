@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -27,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +35,7 @@ import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.functions.getStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
-import com.gg.spora.quiz.ui.QuizScreen
+import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -159,7 +159,7 @@ fun MiniGameScreen(
                 },
                 colors = ButtonDefaults.buttonColors(
                     contentColor = Color.White,
-                    containerColor = Color(0xFFf58c0a),
+                    containerColor = colorResource(id = R.color.primary),
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
