@@ -22,8 +22,8 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
         challengeDao.deleteAllObjectsDetail()
     }
 
-    suspend fun setValidObjectDetailInDatabase(idObjectDetail: Int) {
-        challengeDao.setValidObjectDetailInDatabase(idObjectDetail)
+    suspend fun setValidObjectDetailInDatabase(nameObjectDetail: String) {
+        challengeDao.setValidObjectDetailInDatabase(nameObjectDetail)
     }
 
     //endregion
@@ -38,8 +38,8 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
         challengeDao.insertStepObjetDetail(stepObjectDetail.toStepObjectDetailEntity())
     }
 
-    suspend fun getAllStepsObjectDetailWithId(idObjectDetail: Int): List<StepObjectDetail> {
-        val stepsEntities = challengeDao.getAllStepsObjectDetailWithId(idObjectDetail)
+    suspend fun getAllStepsObjectDetailWithName(nameObjectDetail: String): List<StepObjectDetail> {
+        val stepsEntities = challengeDao.getAllStepsObjectDetailWithName(nameObjectDetail)
         return StepObjectDetail.objectsDetailEntityToModels(stepsEntities)
     }
 
