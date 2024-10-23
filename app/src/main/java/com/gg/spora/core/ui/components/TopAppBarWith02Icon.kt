@@ -44,6 +44,7 @@ fun TopAppBarWithO2Icon(
     firstLabel: String,
     firstIcon: Int,
     showBackArrow: Boolean = true,
+    showIcon: Boolean = true,
     onBackClick: () -> Unit = {}
 ) {
     Box(
@@ -73,10 +74,12 @@ fun TopAppBarWithO2Icon(
                         fontStyle = MaterialTheme.typography.titleLarge.fontStyle,
                     )
 
-                    ImageWithTextHorizontal(
-                        imageResource = firstIcon,
-                        text = firstLabel
-                    )
+                    if (showIcon){
+                        ImageWithTextHorizontal(
+                            imageResource = firstIcon,
+                            text = firstLabel
+                        )
+                    }
 
                 }
             },

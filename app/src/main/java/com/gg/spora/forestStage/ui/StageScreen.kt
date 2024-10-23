@@ -50,6 +50,7 @@ fun StageScreen(
                 firstLabel = oxygen.toString(),
                 firstIcon = R.drawable.o2,
                 showBackArrow = true,
+                showIcon = false,
                 onBackClick = {
                     popBackStack()
                 },
