@@ -3,15 +3,14 @@ package com.gg.spora.challenge.domain.model
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 
 data class ObjectDetail(
-    val idObjectDetail : Int,
     val nameObjectDetail : String?,
     val description : String?,
-    val isValidate : Boolean
+    val isValidate : Boolean,
+    val stepsObjectDetail : MutableList<StepObjectDetail> = mutableListOf()
 ){
     companion object{
         private fun entityToObjectDetailModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {
             return ObjectDetail(
-                idObjectDetail = objectDetailEntity.idObjectDetail,
                 nameObjectDetail =  objectDetailEntity.nameObjectDetail,
                 description = objectDetailEntity.description,
                 isValidate = objectDetailEntity.isValidate,
@@ -32,8 +31,7 @@ data class ObjectDetail(
 
     fun toObjectDetailEntity(): ObjectDetailEntity {
         return ObjectDetailEntity(
-            idObjectDetail = idObjectDetail,
-            nameObjectDetail =  nameObjectDetail,
+            nameObjectDetail =  nameObjectDetail!!,
             description = description,
             isValidate = isValidate
         )

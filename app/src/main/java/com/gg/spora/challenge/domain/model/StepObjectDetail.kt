@@ -3,7 +3,6 @@ package com.gg.spora.challenge.domain.model
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
 
 data class StepObjectDetail(
-    val idObjectDetail : Int,
     val numberStep : Int,
     val nameObjectDetail : String?,
     val description : String?,
@@ -14,7 +13,6 @@ data class StepObjectDetail(
     companion object{
         private fun entityToStepObjectDetailModel(stepObjectDetailEntity: StepObjectDetailEntity) : StepObjectDetail {
             return StepObjectDetail(
-                idObjectDetail = stepObjectDetailEntity.idObjectDetail,
                 numberStep =  stepObjectDetailEntity.numberStep,
                 nameObjectDetail = stepObjectDetailEntity.nameObjectDetail,
                 description = stepObjectDetailEntity.description,
@@ -35,9 +33,8 @@ data class StepObjectDetail(
 
     fun toStepObjectDetailEntity(): StepObjectDetailEntity {
         return StepObjectDetailEntity(
-            idObjectDetail = idObjectDetail,
             numberStep =  numberStep,
-            nameObjectDetail = nameObjectDetail,
+            nameObjectDetail = nameObjectDetail!!,
             description = description,
         )
     }
