@@ -53,12 +53,13 @@ fun ChampyDialogConfirm(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(24.dp)
+                    .padding(horizontal = 8.dp)
             ) {
 
                 Image(
                     painter = painterResource(id = backgroundImage),
                     contentDescription = "Fondo minijuegos",
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(300.dp)

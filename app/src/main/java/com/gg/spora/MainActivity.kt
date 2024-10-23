@@ -173,6 +173,7 @@ class MainActivity : ComponentActivity() {
                                 title = stage!!.typeStage.label,
                                 levels = stage!!.levels,
                                 backgroundImage = stage!!.stageBackgroundImage,
+                                pathLadder = stage!!.pathLadder,
                                 onNavigateToChallenge = { title ->
                                     navController.navigate(NavigationRoutes.Challenge)
                                 },
@@ -213,7 +214,7 @@ class MainActivity : ComponentActivity() {
                                 title = title.title,
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 isCorrect = isCorrect,
-                                questionSize = questions.size,
+                                questionSize = questions.size - 1,
                                 isFinished = isFinished,
                                 lives = lives,
                                 counterQuestion = counterQuestion,

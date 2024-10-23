@@ -37,6 +37,7 @@ fun StageScreen(
     oxygen: Int,
     levels: List<Level>,
     backgroundImage: Int,
+    pathLadder: List<Pair<Int,Int>>,
     onNavigateToChallenge: (String) -> Unit,
     onClickLevelItem: (Level, Boolean) -> Unit,
     popBackStack: () -> Unit,
@@ -81,7 +82,10 @@ fun StageScreen(
                         stage = level.typeStage,
                         isBlocked = !levels.getIsCompleteFromPreviousLevel(index),
                         modifier = Modifier
-                            .offset(x = SporaConstant.PATH_LADDER[index].dp)
+                            .offset(
+                                x = pathLadder[index].first.dp,
+                                y = pathLadder[index].second.dp
+                            )
                             .clickable {
                                 if(levels.getIsCompleteFromPreviousLevel(index)) onClickLevelItem(level, true)
                             }
@@ -92,7 +96,10 @@ fun StageScreen(
                         stage = TypeStage.FOREST,
                         isBlocked = !levels.getIsCompleteFromPreviousLevel(levels.size),
                         modifier = Modifier
-                            .offset(x = SporaConstant.PATH_LADDER[levels.size].dp)
+                            .offset(
+                                x = pathLadder[levels.size].first.dp,
+                                y = pathLadder[levels.size].second.dp
+                            )
                             .clickable {
                                 if(levels.getIsCompleteFromPreviousLevel(levels.size)) onNavigateToChallenge("Desafío")
                             }
@@ -114,8 +121,9 @@ private fun StageScreenPreview() {
             StageScreen(
                 oxygen = 0,
                 title = "Titi",
-                levels = FakeStageModels.fakeStage[0].levels,
-                backgroundImage = R.drawable.fondo_area1,
+                levels = FakeStageModels.fakeStage[1].levels,
+                backgroundImage = R.drawable.expo_proyecto_stage_background,
+                pathLadder = SporaConstant.PATH_LADDER_EXPO,
                 onNavigateToChallenge = {},
                 popBackStack = {},
                 onClickLevelItem = { _, _ -> }

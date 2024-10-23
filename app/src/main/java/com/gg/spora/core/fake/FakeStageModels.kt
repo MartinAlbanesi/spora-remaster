@@ -1,6 +1,7 @@
 package com.gg.spora.core.fake
 
 import com.gg.spora.R
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.enums.TypeStage
@@ -85,7 +86,8 @@ object FakeStageModels {
             levels = fakeLevels,
             challenge = fakeChallenge,
             levelPreviewImage = R.drawable.fondo_minijuegos_crop,
-            stageBackgroundImage = R.drawable.fondo_area1
+            stageBackgroundImage = R.drawable.fondo_area1,
+            pathLadder = SporaConstant.PATH_LADDER
         ),
         StageLevel(
             id = "2",
@@ -93,7 +95,8 @@ object FakeStageModels {
             levels = fakeExpoLevels,
             challenge = fakeChallenge,
             levelPreviewImage = R.drawable.fondo_minijuegos_crop,
-            stageBackgroundImage = R.drawable.expo_proyecto_stage_background
+            stageBackgroundImage = R.drawable.expo_proyecto_stage_background,
+            pathLadder = SporaConstant.PATH_LADDER_EXPO
         ),
     )
 }

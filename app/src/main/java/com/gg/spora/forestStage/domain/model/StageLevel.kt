@@ -10,4 +10,5 @@ data class StageLevel(
     val challenge: Challenge,
     val levelPreviewImage: Int,
     val stageBackgroundImage: Int,
+    val pathLadder: List<Pair<Int,Int>>
 )
