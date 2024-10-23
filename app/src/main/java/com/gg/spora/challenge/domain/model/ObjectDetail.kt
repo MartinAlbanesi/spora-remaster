@@ -5,7 +5,7 @@ import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 data class ObjectDetail(
     val nameObjectDetail : String?,
     val description : String?,
-    val isValidate : Boolean,
+    var isValidate : Boolean,
     val stepsObjectDetail : MutableList<StepObjectDetail> = mutableListOf()
 ){
     companion object{

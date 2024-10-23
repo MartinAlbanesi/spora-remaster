@@ -1,4 +1,4 @@
-package com.gg.spora.camera
+package com.gg.spora.camera.ui
 
 import android.Manifest
 import android.content.Context

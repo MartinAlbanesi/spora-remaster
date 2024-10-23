@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ChallengeViewModel @Inject constructor(private val challengeRepository: ChallengeRepository) : ViewModel () {
 
-    private val _objectsChallenge = MutableLiveData<MutableList<ObjectDetail>>()
+    private val _objectsChallenge = MutableLiveData<MutableList<ObjectDetail>>(mutableListOf())
     val objectsChallenge: LiveData<MutableList<ObjectDetail>> = _objectsChallenge
 
     private val _selectedObject = MutableLiveData<String>()
@@ -23,7 +23,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
 
     init {
         insertObjectsDetailInDatabase()
-        loadObjectsChallenge()
+        //loadObjectsChallenge()
     }
 
     fun selectObject(objectName: String) {
@@ -32,6 +32,16 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
 
     fun setObjectInObjectsChallengeWithName(nameObjectDetail: String) {
         viewModelScope.launch {
+
+            val currentList = _objectsChallenge.value ?: mutableListOf()
+
+            val objectToModify = currentList.find { it.nameObjectDetail == nameObjectDetail }
+
+            objectToModify?.let {
+                it.isValidate = true
+            }
+
+            _objectsChallenge.value = currentList
             challengeRepository.setValidObjectDetailInDatabase(nameObjectDetail)
         }
     }
@@ -62,7 +72,6 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
     }
 
     private fun insertObjectsDetailInDatabase(){
-        viewModelScope.launch{
             val listObjects = mutableListOf(
                 ObjectDetail(
                     "Botella de plástico",
@@ -99,7 +108,16 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
                 ObjectDetail(
                     "Tapita de plástico",
                     "Las tapitas de plastico se pueden encontrar por cualquier lado y su reciclaje es muy facil!.",
-                    false
+                    false,
+                    mutableListOf(StepObjectDetail( 1,"Juntar",
+                        "Juntá tapitas plásticas de gaseosas, aguas, juegos " +
+                                "y productos de limpieza que son las que se reciclan.",true, false),
+                        StepObjectDetail( 2,"Limpieza",
+                            "Lava las tapitas para sacar residuos de líquidos o " +
+                                    "cualquier tipo de suciedad que pueda afectar el reciclado"),
+                        StepObjectDetail( 3,"Crear o llevar",
+                            "Puedes usar las tapitas para hacer decoraciones o " +
+                                    "llevarlas a una planta de reciclaje. Ellos sabran que hacer!!",false, true))
                 )
             )
 
@@ -107,6 +125,6 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
                 _objectsChallenge.value?.add(objectDetail)
                 //challengeRepository.insertObjectDetail(objectDetail)
             }
-        }
+
     }
 }

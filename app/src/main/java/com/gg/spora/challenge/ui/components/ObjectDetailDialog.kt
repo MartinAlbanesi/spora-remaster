@@ -193,7 +193,7 @@ fun ValidateImageOfObjectDetail(objectDetailName : String){
             R.drawable.caja_de_carton
         }
         "Tapita de plástico" -> {
-            R.drawable.caja_de_carton
+            R.drawable.tapa_de_botella
         }
         else -> {
             0

@@ -37,7 +37,7 @@ import com.gg.spora.challenge.domain.model.StepObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.challenge.ui.components.ObjectDetailDialog
 
-val classes = arrayOf("Botella de plastico", "Caja de carton", "Nada")
+val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita de plástico")
 
 /**
  * Screen for mini games with Spora and progress bar

@@ -1,4 +1,4 @@
-package com.gg.spora.camera
+package com.gg.spora.camera.domain
 
 import android.content.Context
 
