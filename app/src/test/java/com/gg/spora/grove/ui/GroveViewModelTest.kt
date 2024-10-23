@@ -1,12 +1,13 @@
 package com.gg.spora.grove.ui
 
-import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.GrowthStage
-import com.gg.spora.grove.data.models.SeedTree
-import com.gg.spora.grove.data.models.TreeType
-import com.gg.spora.grove.domain.models.GetForestTreesUseCase
-import com.gg.spora.grove.domain.models.GetSeedTreesUseCase
-import com.gg.spora.grove.domain.models.PlantSeedUseCase
+import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.GrowthStage
+import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.grove.domain.GetForestTreesUseCase
+import com.gg.spora.grove.domain.GetSeedTreesUseCase
+import com.gg.spora.grove.domain.PlantSeedUseCase
+import com.gg.spora.grove.domain.models.Tree
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -98,7 +99,7 @@ class GroveViewModelTest {
         }
 
         // Act
-        viewModel.plantSeedInForest(seedTree.type)
+        viewModel.plantSeedInForest(Tree.type)
 
         // Espera a que terminen las corrutinas
         advanceUntilIdle()

@@ -1,7 +1,8 @@
-package com.gg.spora.grove.data.models
+package com.gg.spora.grove.domain.models
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 import java.time.Duration
 import java.util.UUID
 
@@ -19,6 +20,37 @@ data class SeedTree(
 
     var amountOfForestTreesGenerated: Int = 0
     var nextForestTreeAvailableTime: Long = 0L
+
+    companion object{
+        private fun entityToSeedTreeModel(seedTreeEntity: SeedTreeEntity) : SeedTree {
+            return SeedTree(
+                id = seedTreeEntity.idSeedTree,
+                type = seedTreeEntity.treeType,
+                timeToGenerateForestTree = seedTreeEntity.timeToGenerateForestTree
+            )
+        }
+
+        fun seedTreesEntitiesToModels(seedTreesEntities : List<SeedTreeEntity>) : List<SeedTree>{
+
+            val listSeedTrees = mutableListOf<SeedTree>()
+
+            for(entity in seedTreesEntities){
+                listSeedTrees.add(entityToSeedTreeModel(entity))
+            }
+
+            return listSeedTrees
+        }
+    }
+
+    fun toSeedTreeEntity(): SeedTreeEntity {
+        return SeedTreeEntity(
+            idSeedTree = id,
+            treeType = type,
+            timeToGenerateForestTree = timeToGenerateForestTree,
+            amountOfForestTreesGenerated = amountOfForestTreesGenerated,
+            nextForestTreeAvailableTime = nextForestTreeAvailableTime
+        )
+    }
 
     // Verifica si es posible generar una semilla
     fun isForestTreeAvailable(): Boolean {

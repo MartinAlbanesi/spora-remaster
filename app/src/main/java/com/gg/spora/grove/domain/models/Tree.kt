@@ -1,4 +1,4 @@
-package com.gg.spora.grove.data.models
+package com.gg.spora.grove.domain.models
 
 import java.util.UUID
 

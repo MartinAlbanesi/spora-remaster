@@ -1,9 +1,10 @@
-package com.gg.spora.grove.data.models
+package com.gg.spora.grove.domain.models
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import java.time.Duration
 import java.time.LocalDateTime
 import java.util.UUID
@@ -25,6 +26,37 @@ data class ForestTree(
     @RequiresApi(Build.VERSION_CODES.O)
 //  var accumulatedOxygen: Int = 0
     private var hasReachedAdultStage = false
+
+    // Mappers
+    companion object{
+        private fun entityToForestTreeModel(forestTreeEntity: ForestTreeEntity) : ForestTree {
+            return ForestTree(
+                id = forestTreeEntity.idForestTree,
+                type = forestTreeEntity.treeType,
+                currentStage = forestTreeEntity.currentStage,
+                plantingDate = forestTreeEntity.plantingDate
+            )
+        }
+
+        fun forestTreesEntitiesToModels(forestTreesEntities : List<ForestTreeEntity>) : List<ForestTree>{
+            val listForestTrees = mutableListOf<ForestTree>()
+
+            for(entity in forestTreesEntities){
+                listForestTrees.add(entityToForestTreeModel(entity))
+            }
+
+            return listForestTrees
+        }
+    }
+
+    fun toForestTreeEntity(): ForestTreeEntity {
+        return ForestTreeEntity(
+            idForestTree = id,
+            treeType = type,
+            currentStage = currentStage,
+            plantingDate = plantingDate
+        )
+    }
 
     // Actualiza el estado de crecimiento del árbol
     fun updateGrowthStage() {

@@ -19,8 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.gg.spora.grove.data.models.SeedTree
-import com.gg.spora.grove.data.models.TreeType
+import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.grove.domain.models.ForestTree
 import kotlinx.coroutines.delay
 
 /**
@@ -55,7 +56,7 @@ fun SeedTreeItem(
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(id = seedTree.type.imageResource),
+            painter = painterResource(id = TreeType.imageResource),
             contentDescription = null,
             modifier = Modifier.size(64.dp)
         )
@@ -69,7 +70,7 @@ fun SeedTreeItem(
                 Log.d("SeedTreeItem", "Generated ForestTree: $generatedForestTree")
                 generatedForestTree?.let { forestTree ->
                     Log.d("SeedTreeItem", "Forest Tree generated: $forestTree.type")
-                    onForestTreeGenerated(forestTree.type)
+                    onForestTreeGenerated(ForestTree.type)
                     isCooldownActive = true
                     remainingCooldown = seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
                 }

@@ -2,12 +2,12 @@ package com.gg.spora.grove.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.SeedTree
-import com.gg.spora.grove.data.models.TreeType
-import com.gg.spora.grove.domain.models.GetForestTreesUseCase
-import com.gg.spora.grove.domain.models.GetSeedTreesUseCase
-import com.gg.spora.grove.domain.models.PlantSeedUseCase
+import com.gg.spora.grove.domain.GetForestTreesUseCase
+import com.gg.spora.grove.domain.GetSeedTreesUseCase
+import com.gg.spora.grove.domain.PlantSeedUseCase
+import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +36,6 @@ class GroveViewModel @Inject constructor(
 
     private val _forestTrees = MutableStateFlow<List<List<ForestTree?>>>(emptyList())
     val forestTrees: StateFlow<List<List<ForestTree?>>> = _forestTrees.asStateFlow()
-
 
     private val _forestTree = MutableStateFlow<ForestTree?>(null)
     val forestTree = _forestTree.asStateFlow()
@@ -67,11 +66,18 @@ class GroveViewModel @Inject constructor(
         _forestTrees.value = forest
     }
 
+    // Plantar una semilla en el bosque
+    fun plantSeedInForest(type: TreeType) {
+        viewModelScope.launch {
+            _forestTree.value = plantSeedUseCase(type) // No need to store the result in currentTree
+        }
+    }
+
     // Actualización del estado del árbol
     fun updateTree(updatedTree: ForestTree) {
         val updatedForest = _forestTrees.value.mapIndexed { rowIndex, row ->
             row.mapIndexed { colIndex, tree ->
-                if (tree != null && tree.id == updatedTree.id) {
+                if (tree != null && ForestTree == ForestTree) {
                     updatedTree
                 } else {
                     tree
@@ -79,13 +85,6 @@ class GroveViewModel @Inject constructor(
             }
         }
         _forestTrees.value = updatedForest
-    }
-
-    // Plantar una semilla en el bosque
-    fun plantSeedInForest(type: TreeType) {
-        viewModelScope.launch {
-            _forestTree.value = plantSeedUseCase(type) // No need to store the result in currentTree
-        }
     }
 
     /*

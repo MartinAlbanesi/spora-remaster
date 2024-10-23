@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
-import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.SeedTree
-import com.gg.spora.grove.data.models.TreeType
+import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.ui.components.ForestTreeItem
 import com.gg.spora.grove.ui.components.PlantingPlaceholder
 import com.gg.spora.grove.ui.components.SeedTreeItem

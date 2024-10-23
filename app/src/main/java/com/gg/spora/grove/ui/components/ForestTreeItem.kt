@@ -15,8 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.grove.data.models.ForestTree
-import com.gg.spora.grove.data.models.GrowthStage
+import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.GrowthStage
+import com.gg.spora.grove.domain.models.TreeType
 import kotlinx.coroutines.delay
 
 /**
@@ -34,12 +35,12 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
     var hasReachedAdultStage by remember { mutableStateOf(false) }
 
     // Imagen correspondiente al estado del árbol
-    val imageResource by remember(treeState.currentStage, treeState.type.imageResource) { // Add treeState.type.imageResource as a dependency
+    val imageResource by remember(treeState.currentStage, TreeType.imageResource) { // Add treeState.type.imageResource as a dependency
         derivedStateOf {
             when (treeState.currentStage) {
                 GrowthStage.SPROUT -> R.drawable.sprout_tree
                 GrowthStage.MEDIUM -> R.drawable.medium_tree
-                GrowthStage.ADULT -> treeState.type.imageResource
+                GrowthStage.ADULT -> TreeType.imageResource
             }
         }
     }

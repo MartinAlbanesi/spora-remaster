@@ -1,4 +1,4 @@
-package com.gg.spora.grove.data.models
+package com.gg.spora.grove.domain.models
 
 /**
  * Clase GrowthStage que representa las diferentes etapas de crecimiento de un árbol del bosque

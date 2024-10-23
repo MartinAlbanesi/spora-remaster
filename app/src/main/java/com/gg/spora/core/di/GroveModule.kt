@@ -3,10 +3,10 @@ package com.gg.spora.core.di
 import android.annotation.SuppressLint
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
-import com.gg.spora.grove.domain.models.CollectOxygenUseCase
-import com.gg.spora.grove.domain.models.GetForestTreesUseCase
-import com.gg.spora.grove.domain.models.GetSeedTreesUseCase
-import com.gg.spora.grove.domain.models.PlantSeedUseCase
+import com.gg.spora.grove.domain.CollectOxygenUseCase
+import com.gg.spora.grove.domain.GetForestTreesUseCase
+import com.gg.spora.grove.domain.GetSeedTreesUseCase
+import com.gg.spora.grove.domain.PlantSeedUseCase
 import com.gg.spora.grove.ui.GroveViewModel
 import dagger.Module
 import dagger.Provides
