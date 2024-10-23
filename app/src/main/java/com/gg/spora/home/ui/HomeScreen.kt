@@ -153,7 +153,7 @@ fun HomeScreen(
             )
 
             SignButton(
-                image = R.drawable.forest_sign,
+                image = R.drawable.expo_sign,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .size(120.dp)

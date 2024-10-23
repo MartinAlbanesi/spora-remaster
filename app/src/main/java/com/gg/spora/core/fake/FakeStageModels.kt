@@ -28,9 +28,9 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 0,
-            imageCount = 0,
-            relationsCount = 5
+            quizCount = 2,
+            imageCount = 2,
+            relationsCount = 2
         ),
     )
 
@@ -93,7 +93,7 @@ object FakeStageModels {
             levels = fakeExpoLevels,
             challenge = fakeChallenge,
             levelPreviewImage = R.drawable.fondo_minijuegos_crop,
-            stageBackgroundImage = R.drawable.deforestacion
+            stageBackgroundImage = R.drawable.expo_proyecto_stage_background
         ),
     )
 }
