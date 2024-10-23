@@ -33,6 +33,16 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
         _selectedObject.value = ""
     }
 
+    fun setObjectsChallengeEmpty(){
+        val currentList = _objectsChallenge.value ?: mutableListOf()
+
+        val updatedList = currentList.map { objectDetail ->
+            objectDetail.copy(isValidate = false)
+        }.toMutableList()
+
+        _objectsChallenge.value = updatedList
+    }
+
     fun setObjectInObjectsChallengeWithName(nameObjectDetail: String) {
         viewModelScope.launch {
 
@@ -45,7 +55,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
             }
 
             _objectsChallenge.value = currentList
-            challengeRepository.setValidObjectDetailInDatabase(nameObjectDetail)
+            //challengeRepository.setValidObjectDetailInDatabase(nameObjectDetail)
         }
     }
 

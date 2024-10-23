@@ -283,7 +283,6 @@ class MainActivity : ComponentActivity() {
 
                         composable<NavigationRoutes.Challenge> {
 
-//                            val title = it.toRoute<NavigationRoutes.QuizGame>()
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 imageBackground = R.drawable.fondo_minijuegos,
@@ -298,11 +297,12 @@ class MainActivity : ComponentActivity() {
                                 showProgressBar = false,
                                 onNextQuestion = {},
                                 onResetGame = {},
-                                onBackForestStage = { navController.popBackStack() },
+                                onBackForestStage = { navController.popBackStack()
+                                    challengeViewModel.setObjectsChallengeEmpty()
+                                                    },
                                 content = {
                                     ChallengeScreen(
                                         modifier = Modifier,
-                                        onBackClick = { },
                                         onNavigateToCameraScreen = { nameObject ->
                                             navController.navigate(
                                                 NavigationRoutes.Camera.createRoute(

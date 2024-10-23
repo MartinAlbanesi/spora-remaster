@@ -1,5 +1,6 @@
 package com.gg.spora.challenge.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -48,7 +49,6 @@ val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita 
 @Composable
 fun ChallengeScreen(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit,
     onNavigateToCameraScreen: (Any?) -> Unit,
     onNavigateToForestStage: () -> Unit,
     challengeViewModel: ChallengeViewModel = hiltViewModel()
