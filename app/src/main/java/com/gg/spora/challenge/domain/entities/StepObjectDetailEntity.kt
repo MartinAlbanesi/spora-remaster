@@ -9,16 +9,15 @@ import androidx.room.ForeignKey
     foreignKeys = [
         ForeignKey(
             entity = ObjectDetailEntity::class,
-            parentColumns = ["id_object_detail"],
-            childColumns = ["id_object_detail"],
+            parentColumns = ["name_object_detail"],
+            childColumns = ["name_object_detail"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    primaryKeys = ["id_object_detail", "numberStep"]
+    primaryKeys = ["name_object_detail", "number_step"]
 )
 data class StepObjectDetailEntity(
-    @ColumnInfo(name = "id_object_detail") val idObjectDetail: Int,
+    @ColumnInfo(name = "name_object_detail") val nameObjectDetail: String,
     @ColumnInfo(name = "number_step") val numberStep: Int,
-    @ColumnInfo(name = "name_object_detail") val nameObjectDetail: String?,
     @ColumnInfo(name = "description") val description: String?
 )
