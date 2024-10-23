@@ -1,13 +1,11 @@
 package com.gg.spora.miniGames.ui
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.toRoute
 import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
-import com.gg.spora.core.utils.SporaConstant.MAX_QUESTIONS
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.functions.getStarState
@@ -16,7 +14,6 @@ import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
@@ -30,7 +27,7 @@ class QuizViewModel @Inject constructor(
     private val quizRoute = savedStateHandle.toRoute<NavigationRoutes.QuizGame>()
 
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
-//    val questions = _questions.asStateFlow()
+    val questions = _questions.asStateFlow()
 
 //    private val _currentQuestionIndex = MutableStateFlow(0)
 //    val currentQuestionIndex = _currentQuestionIndex.asStateFlow()

@@ -531,28 +531,28 @@ object FakeQuizModels {
             typeGame = TypeGame.RELATIONS,
         ),
         Answer(
-            answer = "Biodegradable",
+            answer = "Plástico",
             id = "76",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            typeGame = TypeGame.RELATIONS
+            typeGame = TypeGame.RELATIONS,
         ),
         Answer(
-            answer = "Plástico",
+            answer = "Contaminante",
             id = "77",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
         Answer(
-            answer = "No reciclable",
+            answer = "Biodegradable",
             id = "78",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         ),
         Answer(
-            answer = "Contaminante",
+            answer = "No reciclable",
             id = "79",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            typeGame = TypeGame.RELATIONS,
+            typeGame = TypeGame.RELATIONS
         ),
         Answer(
             answer = "Orgánico",
@@ -560,7 +560,228 @@ object FakeQuizModels {
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         ),
-    )
+        Answer(
+            answer = "Papel",
+            id = "81",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Madera",
+            id = "82",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Vidrio",
+            id = "83",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Gasolina",
+            id = "84",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Plástico",
+            id = "85",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Arena",
+            id = "86",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+
+        Answer(
+            answer = "Plantación",
+            id = "87",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Fuegos",
+            id = "88",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Bosques",
+            id = "89",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Ladrillos",
+            id = "90",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Semillas",
+            id = "91",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Asfalto",
+            id = "92",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+
+        Answer(
+            answer = "Humo",
+            id = "93",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Flores",
+            id = "94",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Gases",
+            id = "95",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Animales",
+            id = "96",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Fábricas",
+            id = "97",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Rocas",
+            id = "98",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+
+        Answer(
+            answer = "Calor",
+            id = "99",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Compostaje",
+            id = "100",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Sequía",
+            id = "101",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Smog",
+            id = "102",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Cenizas",
+            id = "103",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Contaminación",
+            id = "104",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+
+        Answer(
+            answer = "Cambio climático",
+            id = "105",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Reciclaje",
+            id = "106",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Hielo derretido",
+            id = "107",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Tierra fértil",
+            id = "108",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "CO₂",
+            id = "109",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Oxígeno",
+            id = "110",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+
+        Answer(
+            answer = "Animales",
+            id = "111",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Metales",
+            id = "112",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Ecosistema",
+            id = "113",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Carreteras",
+            id = "114",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Especies",
+            id = "115",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        Answer(
+            answer = "Petróleo",
+            id = "116",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS
+        ),
+        )
 
     // Wea
     val fakeQuizQuestions = listOf(
@@ -890,11 +1111,10 @@ object FakeQuizModels {
             id = "72",
             question = "Botella",
             answers = listOf(fakeAnswers[75], fakeAnswers[76], fakeAnswers[77], fakeAnswers[78], fakeAnswers[79], fakeAnswers[80]).shuffled(),
-            answerId = "${fakeAnswers[75].id},${fakeAnswers[77].id},${fakeAnswers[79].id}",
+            answerId = "${fakeAnswers[75].id},${fakeAnswers[76].id},${fakeAnswers[77].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
-        /*
         Question(
             id = "73",
             question = "Reciclaje",
@@ -904,37 +1124,26 @@ object FakeQuizModels {
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
-            id = "74",
-            question = "Deforestación",
+            id = "75",
+            question = "Reforestación",
             answers = listOf(fakeAnswers[87], fakeAnswers[88], fakeAnswers[89], fakeAnswers[90], fakeAnswers[91], fakeAnswers[92]).shuffled(),
-            answerId = "${fakeAnswers[87].id},${fakeAnswers[88].id},${fakeAnswers[89].id}",
+            answerId = "${fakeAnswers[87].id},${fakeAnswers[89].id},${fakeAnswers[91].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
-
         Question(
-            id = "75",
-            question = "Reforestación",
+            id = "76",
+            question = "Contaminación del aire",
             answers = listOf(fakeAnswers[93], fakeAnswers[94], fakeAnswers[95], fakeAnswers[96], fakeAnswers[97], fakeAnswers[98]).shuffled(),
             answerId = "${fakeAnswers[93].id},${fakeAnswers[95].id},${fakeAnswers[97].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
-
-        Question(
-            id = "76",
-            question = "Contaminación del aire",
-            answers = listOf(fakeAnswers[99], fakeAnswers[100], fakeAnswers[101], fakeAnswers[102], fakeAnswers[103], fakeAnswers[104]).shuffled(),
-            answerId = "${fakeAnswers[99].id},${fakeAnswers[100].id},${fakeAnswers[101].id}",
-            typeQuestion = listOf(TypeQuestion.RECYCLE),
-            typeGame = TypeGame.RELATIONS,
-        ),
-
         Question(
             id = "77",
             question = "Incendios forestales",
-            answers = listOf(fakeAnswers[105], fakeAnswers[106], fakeAnswers[107], fakeAnswers[108], fakeAnswers[109], fakeAnswers[110]).shuffled(),
-            answerId = "${fakeAnswers[105].id},${fakeAnswers[106].id},${fakeAnswers[107].id}",
+            answers = listOf(fakeAnswers[99], fakeAnswers[100], fakeAnswers[101], fakeAnswers[102], fakeAnswers[103], fakeAnswers[104]).shuffled(),
+            answerId = "${fakeAnswers[99].id},${fakeAnswers[101].id},${fakeAnswers[103].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
@@ -942,21 +1151,23 @@ object FakeQuizModels {
         Question(
             id = "78",
             question = "Calentamiento global",
+            answers = listOf(fakeAnswers[105], fakeAnswers[106], fakeAnswers[107], fakeAnswers[108], fakeAnswers[109], fakeAnswers[110]).shuffled(),
+            answerId = "${fakeAnswers[105].id},${fakeAnswers[107].id},${fakeAnswers[109].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+
+
+        Question(
+            id = "79",
+            question = "Fauna",
             answers = listOf(fakeAnswers[111], fakeAnswers[112], fakeAnswers[113], fakeAnswers[114], fakeAnswers[115], fakeAnswers[116]).shuffled(),
             answerId = "${fakeAnswers[111].id},${fakeAnswers[113].id},${fakeAnswers[115].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS,
         ),
 
-        Question(
-            id = "79",
-            question = "Fauna",
-            answers = listOf(fakeAnswers[117], fakeAnswers[118], fakeAnswers[119], fakeAnswers[120], fakeAnswers[121], fakeAnswers[122]).shuffled(),
-            answerId = "${fakeAnswers[117].id},${fakeAnswers[118].id},${fakeAnswers[119].id}",
-            typeQuestion = listOf(TypeQuestion.RECYCLE),
-            typeGame = TypeGame.RELATIONS,
-        ),
-
+        /*
         Question(
             id = "80",
             question = "Flora",

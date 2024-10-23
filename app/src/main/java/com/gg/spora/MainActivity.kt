@@ -202,12 +202,14 @@ class MainActivity : ComponentActivity() {
 
                             val selectedItems by quizViewModel.relationsItems.collectAsState()
 
+                            val questions by quizViewModel.questions.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 title = title.title,
                                 imageBackground = R.drawable.fondo_minijuegos,
                                 isCorrect = isCorrect,
-                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                questionSize = questions.size,
                                 isFinished = isFinished,
                                 lives = lives,
                                 counterQuestion = counterQuestion,
