@@ -39,6 +39,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
+import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.challenge.ui.classes
 import com.gg.spora.ml.ModelObjects
@@ -70,7 +71,7 @@ fun CameraScreen(
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-    var objectsChallenge by remember { mutableStateOf(mapOf<String, Boolean>()) }
+    var objectsChallenge by remember { mutableStateOf(listOf<ObjectDetail>()) }
     var isCapturing by remember { mutableStateOf(true) }
 
     LaunchedEffect(challengeViewModel.objectsChallenge) {
@@ -97,7 +98,7 @@ fun CameraScreen(
                 LaunchedEffect(lottie.isComplete) {
                     delay(1600)
                     challengeViewModel.selectObject(nameObject)
-                    challengeViewModel.setObjectInObjectsChallenge()
+                    challengeViewModel.setObjectInObjectsChallengeWithName(nameObject)
                     onNavigateToChallengeScreen()
                 }
             }
