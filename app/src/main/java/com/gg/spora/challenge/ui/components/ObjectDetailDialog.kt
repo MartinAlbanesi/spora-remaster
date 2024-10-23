@@ -162,7 +162,7 @@ fun ObjectDetailDialog(
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = continueButtonColor,
-                                contentColor = colorResource(id = R.color.white)
+                                contentColor = colorResource(id = R.color.cream)
                             )
                         ) {
                             Text(
@@ -186,7 +186,7 @@ fun ObjectDetailDialog(
 fun ValidateImageOfObjectDetail(objectDetailName : String){
 
     val image : Int = when (objectDetailName) {
-        "Botella de plastico" -> {
+        "Botella de plástico" -> {
             R.drawable.botella_de_plastico
         }
         "Caja de carton" -> {

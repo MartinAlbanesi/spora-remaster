@@ -107,7 +107,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
                 ),
                 ObjectDetail(
                     "Tapita de plástico",
-                    "Las tapitas de plastico se pueden encontrar por cualquier lado y su reciclaje es muy facil!.",
+                    "Las tapitas de plastico se pueden encontrar por cualquier lado y su reciclaje es muy facil",
                     false,
                     mutableListOf(StepObjectDetail( 1,"Juntar",
                         "Juntá tapitas plásticas de gaseosas, aguas, juegos " +
@@ -117,7 +117,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
                                     "cualquier tipo de suciedad que pueda afectar el reciclado"),
                         StepObjectDetail( 3,"Crear o llevar",
                             "Puedes usar las tapitas para hacer decoraciones o " +
-                                    "llevarlas a una planta de reciclaje. Ellos sabran que hacer!!",false, true))
+                                    "llevarlas a una planta de reciclaje. ¡Ellos sabran que hacer!",false, true))
                 )
             )
 
