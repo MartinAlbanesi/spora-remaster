@@ -1,4 +1,4 @@
-package com.gg.spora.grove.domain.models
+package com.gg.spora.grove.domain
 
 import com.gg.spora.grove.data.IGroveRepository
 
