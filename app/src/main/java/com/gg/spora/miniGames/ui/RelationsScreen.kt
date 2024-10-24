@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
@@ -27,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.contentcapture.ContentCaptureManager.Companion.isEnabled
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -41,6 +44,7 @@ import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.miniGames.domain.model.Answer
+import com.gg.spora.miniGames.ui.components.RelationItemSelected
 import com.gg.spora.ui.theme.SporaTheme
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -80,9 +84,10 @@ fun RelationsScreen(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
+                .padding(8.dp)
                 .clip(MaterialTheme.shapes.medium)
-                .height(50.dp)
-                .width(200.dp)
+                .heightIn(min = 50.dp)
+                .widthIn(min = 200.dp)
                 .background(colorResource(R.color.tertiary))
                 .constrainAs(item) {
                     top.linkTo(title.bottom)
@@ -95,7 +100,7 @@ fun RelationsScreen(
                 text = objectName,
                 color = Color.White,
                 textAlign = TextAlign.Center,
-                modifier = Modifier,
+                modifier = Modifier.padding(8.dp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
             )
@@ -118,6 +123,7 @@ fun RelationsScreen(
                         .height(60.dp),
                     answer = answer.answer,
                     isCorrect = answer.isCorrect,
+                    isEnabled = isCorrect == null,
                     isSelected = selectedItems.contains(answer.id),
                     onSelected = { onSelectedItem(answer.id) }
                 )
@@ -143,61 +149,6 @@ fun RelationsScreen(
         }
 
     }
-}
-
-@Composable
-fun RelationItemSelected(
-    modifier: Modifier = Modifier,
-    answer: String,
-    isCorrect: Boolean?,
-    isSelected: Boolean,
-    onSelected: () -> Unit
-) {
-
-    val textColor by animateColorAsState(
-        when (isCorrect) {
-            true -> Color.White
-            false -> Color.White
-            null -> colorResource(R.color.primary_10)
-        }, label = "textColor"
-    )
-
-    val backgroundColor by animateColorAsState(
-        when (isCorrect) {
-            true -> colorResource(R.color.secondary)
-            false -> colorResource(R.color.error)
-            null -> colorResource(R.color.cream)
-        },
-        label = "backgroundColor"
-    )
-
-    FilterChip(
-        onClick = onSelected,
-        label = {
-            Text(
-                text = answer,
-            )
-        },
-        colors = FilterChipDefaults.filterChipColors(
-            containerColor = backgroundColor,
-            labelColor = textColor,
-            selectedLabelColor = Color.Black,
-            selectedContainerColor = colorResource(R.color.primary),
-            selectedLeadingIconColor = Color.Black
-        ),
-        selected = isSelected,
-        shape = MaterialTheme.shapes.large,
-        leadingIcon = {
-            if (isSelected) {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Done icon",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
-            }
-        },
-        modifier = modifier
-    )
 }
 
 //@PreviewLightDark
@@ -232,7 +183,7 @@ private fun RelationsScreenPreview() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(vertical = 0.dp),
-                        objectName = "Botella",
+                        objectName = "Botella de plastico",
                         answers = FakeQuizModels.fakeAnswers.filter { it.id.toInt() > 55 }.take(6)
                             .shuffled(),
                         selectedItems = listOf("55", "56", "57"),
