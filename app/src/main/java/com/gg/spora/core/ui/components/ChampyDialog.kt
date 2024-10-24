@@ -16,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.CompositingStrategy
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +51,15 @@ fun ChampyDialog(
 
     val localRewards = getStarWithOxygen(starsState, rewards)
 
+    val colorFilter = if (backgroundImage == R.drawable.expo_background) {
+        ColorFilter.lighting(
+            add = Color.Black,
+            multiply = Color(0xFF717171)
+        )
+    } else {
+        null
+    }
+
     if (isVisible) {
 
         Dialog(
@@ -72,6 +81,7 @@ fun ChampyDialog(
                     painter = painterResource(id = backgroundImage),
                     contentDescription = "Fondo minijuegos",
                     contentScale = ContentScale.Crop,
+                    colorFilter = colorFilter, // Pass the ColorFilter object
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(300.dp)
@@ -146,7 +156,7 @@ private fun ChampyDialogConfirmPreview() {
                 textPrimaryButton = "Jugar",
                 textSecondaryButton = "Cancelar",
                 onClickPrimaryButton = {},
-                onClickSecondaryButton = {  },
+                onClickSecondaryButton = { },
             ) {
 
             }
