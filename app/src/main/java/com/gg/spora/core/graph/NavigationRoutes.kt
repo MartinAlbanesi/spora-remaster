@@ -20,6 +20,7 @@ object NavigationRoutes {
         val imageCount: Int,
         val relationsCount: Int,
         val levelId: String,
+        val imageBackground: Int,
     )
 
     @Serializable

@@ -159,7 +159,8 @@ class MainActivity : ComponentActivity() {
                                                 quizCount = currentLevel!!.quizCount,
                                                 imageCount = currentLevel!!.imageCount,
                                                 relationsCount = currentLevel!!.relationsCount,
-                                                levelId = currentLevel!!.id
+                                                levelId = currentLevel!!.id,
+                                                imageBackground = stage!!.levelPreviewImage
                                             )
                                         )
                                 },
@@ -189,6 +190,8 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<NavigationRoutes.QuizGame> {
 
+                            val imageBackground = it.toRoute<NavigationRoutes.QuizGame>().imageBackground
+
                             val title = it.toRoute<NavigationRoutes.QuizGame>()
 
                             val quizViewModel = hiltViewModel<QuizViewModel>()
@@ -212,7 +215,7 @@ class MainActivity : ComponentActivity() {
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 title = title.title,
-                                imageBackground = R.drawable.fondo_minijuegos,
+                                imageBackground = imageBackground,
                                 isCorrect = isCorrect,
                                 questionSize = questions.size - 1,
                                 isFinished = isFinished,

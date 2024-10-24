@@ -23,7 +23,7 @@ object FakeStageModels {
         Level(
             id = "1",
             levelName = "Nivel 1",
-            typeStage = TypeStage.FOREST,
+            typeStage = TypeStage.EXPO,
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
             starState = StarState.ZERO,
@@ -94,7 +94,7 @@ object FakeStageModels {
             typeStage = TypeStage.EXPO,
             levels = fakeExpoLevels,
             challenge = fakeChallenge,
-            levelPreviewImage = R.drawable.fondo_minijuegos_crop,
+            levelPreviewImage = R.drawable.expo_background,
             stageBackgroundImage = R.drawable.expo_proyecto_stage_background,
             pathLadder = SporaConstant.PATH_LADDER_EXPO
         ),
