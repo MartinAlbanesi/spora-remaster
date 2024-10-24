@@ -98,7 +98,9 @@ class QuizViewModel @Inject constructor(
                 }
                 // si la respuesta es incorrecta
                 else {
-                    it
+                    it.copy(
+                        isCorrect = if(it.id == _currentQuestion.value!!.answerId) true else null,
+                    )
                 }
             }
         )
@@ -142,7 +144,9 @@ class QuizViewModel @Inject constructor(
                             isCorrect = correctAnswer.contains(it.id.toInt())
                         )
                     } else {
-                        it
+                        it.copy(
+                            isCorrect = if (correctAnswer.contains(it.id.toInt())) true else null
+                        )
                     }
                 }
         )

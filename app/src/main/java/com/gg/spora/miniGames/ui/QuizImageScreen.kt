@@ -68,7 +68,7 @@ fun QuizImageScreen(
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.7f)
+                        .fillMaxHeight(0.5f)
                         .clip(MaterialTheme.shapes.large)
                         .clickable {
                             showImageFullScreen = false
