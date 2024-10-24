@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -125,7 +126,7 @@ fun MiniGameScreen(
             contentScale = androidx.compose.ui.layout.ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.4f)
+                .fillMaxHeight(0.5f)
                 .align(Alignment.TopCenter)
         )
         Column(
@@ -174,7 +175,8 @@ fun MiniGameScreen(
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
                     .padding(16.dp)
-                    .height(60.dp)
+                    .heightIn(min = 48.dp, max = 60.dp)
+//                    .fillMaxHeight(0.07f)
             ) {
                 Text(
                     text = "Continuar",
