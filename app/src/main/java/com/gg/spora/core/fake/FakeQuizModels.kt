@@ -88,7 +88,7 @@ object FakeQuizModels {
             typeGame = TypeGame.QUIZ
         ),
         Answer(
-            answer = "Contaminación",
+            answer = "Contaminación del aire",
             id = "5",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ
@@ -371,7 +371,7 @@ object FakeQuizModels {
             typeGame = TypeGame.QUIZ_IMAGE
         ),
         Answer(
-            answer = "Contaminación",
+            answer = "Contaminación del aire",
             id = "50",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
@@ -951,7 +951,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[50].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.contaminacion
+            image = R.drawable.contaminacion_aire
         ),
         Question(
             id = "51",
