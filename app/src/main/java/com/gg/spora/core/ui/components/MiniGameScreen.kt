@@ -68,7 +68,7 @@ fun MiniGameScreen(
     content: @Composable () -> Unit,
 ) {
     val champyImage = when (isCorrect) {
-        true -> R.drawable.champy_celebrando_brazoslevantados
+        true -> R.drawable.champy_celebrando_brazoslevantados_sinsombra
         false -> R.drawable.champy_triste_brazosalcuerpo
         else -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
     }

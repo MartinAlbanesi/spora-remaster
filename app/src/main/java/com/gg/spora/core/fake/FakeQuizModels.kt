@@ -911,7 +911,7 @@ object FakeQuizModels {
         Question(
             id = "46",
             question = "¿Qué representa la imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "46" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "46" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[46].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -920,7 +920,7 @@ object FakeQuizModels {
         Question(
             id = "47",
             question = "¿Qué representa la imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "47" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "47" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[47].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -929,7 +929,7 @@ object FakeQuizModels {
         Question(
             id = "48",
             question = "¿Qué pasó en el bosque?",
-            answers = fakeAnswers.filter { fake -> fake.id != "48" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "48" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[48].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -938,7 +938,7 @@ object FakeQuizModels {
         Question(
             id = "49",
             question = "¿Qué produce el humo?",
-            answers = fakeAnswers.filter { fake -> fake.id != "49" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "49" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[49].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -947,7 +947,7 @@ object FakeQuizModels {
         Question(
             id = "50",
             question = "¿Qué está pasando en la imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "50" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "50" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[50].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -956,7 +956,7 @@ object FakeQuizModels {
         Question(
             id = "51",
             question = "¿Qué tipo de energía es?",
-            answers = fakeAnswers.filter { fake -> fake.id != "51" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "51" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[51].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -965,7 +965,7 @@ object FakeQuizModels {
         Question(
             id = "52",
             question = "¿Qué tipo de desecho es?",
-            answers = fakeAnswers.filter { fake -> fake.id != "52" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "52" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[52].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -974,7 +974,7 @@ object FakeQuizModels {
         Question(
             id = "53",
             question = "¿Qué representa la imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "53" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "53" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[53].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -983,7 +983,7 @@ object FakeQuizModels {
         Question(
             id = "54",
             question = "¿Qué tipo de residuo es?",
-            answers = fakeAnswers.filter { fake -> fake.id != "54" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "54" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[54].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -992,7 +992,7 @@ object FakeQuizModels {
         Question(
             id = "55",
             question = "¿Qué es el objeto de la imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "55" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "55" && fake.typeGame == TypeGame.QUIZ_IMAGE  }.shuffled().take(3),
             answerId = fakeAnswers[55].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1001,7 +1001,7 @@ object FakeQuizModels {
         Question(
             id = "56",
             question = "¿Qué problema afecta a este río?",
-            answers = fakeAnswers.filter { fake -> fake.id != "56" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "56" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[56].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1010,7 +1010,7 @@ object FakeQuizModels {
         Question(
             id = "57",
             question = "¿Cómo se llama este tipo de emisión de gas?",
-            answers = fakeAnswers.filter { fake -> fake.id != "57" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "57" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[57].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1019,7 +1019,7 @@ object FakeQuizModels {
         Question(
             id = "58",
             question = "¿Qué tipo de desastre ambiental es este?",
-            answers = fakeAnswers.filter { fake -> fake.id != "58" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "58" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[58].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1028,7 +1028,7 @@ object FakeQuizModels {
         Question(
             id = "59",
             question = "¿Qué práctica está realizando esta persona?",
-            answers = fakeAnswers.filter { fake -> fake.id != "59" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "59" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[59].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1037,7 +1037,7 @@ object FakeQuizModels {
         Question(
             id = "60",
             question = "¿Qué práctica está realizando esta persona?",
-            answers = fakeAnswers.filter { fake -> fake.id != "60" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "60" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[60].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1046,7 +1046,7 @@ object FakeQuizModels {
         Question(
             id = "61",
             question = "¿Qué hace el tren eléctrico para ayudar al medio ambiente?",
-            answers = fakeAnswers.filter { fake -> fake.id != "61" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "61" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[61].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1055,7 +1055,7 @@ object FakeQuizModels {
         Question(
             id = "62",
             question = "¿Qué desastre natural ocurrió aquí?",
-            answers = fakeAnswers.filter { fake -> fake.id != "62" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "62" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[62].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1064,7 +1064,7 @@ object FakeQuizModels {
         Question(
             id = "63",
             question = "¿Qué pudo haber causado esto?",
-            answers = fakeAnswers.filter { fake -> fake.id != "63" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "63" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[63].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1073,7 +1073,7 @@ object FakeQuizModels {
         Question(
             id = "64",
             question = "¿Qué fenómeno ambiental representa esta imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "64" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "64" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[64].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1082,7 +1082,7 @@ object FakeQuizModels {
         Question(
             id = "65",
             question = "¿Por qué es mejor utilizar un auto eléctrico?",
-            answers = fakeAnswers.filter { fake -> fake.id != "65" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "65" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[65].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1091,7 +1091,7 @@ object FakeQuizModels {
         Question(
             id = "66",
             question = "¿Qué se hace con los residuos en este contenedor?",
-            answers = fakeAnswers.filter { fake -> fake.id != "66" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "66" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[66].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1100,7 +1100,7 @@ object FakeQuizModels {
         Question(
             id = "67",
             question = "¿Qué práctica está representada en la imagen?",
-            answers = fakeAnswers.filter { fake -> fake.id != "67" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "67" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[67].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1109,7 +1109,7 @@ object FakeQuizModels {
         Question(
             id = "68",
             question = "¿Qué beneficio brindan los árboles al medio ambiente?",
-            answers = fakeAnswers.filter { fake -> fake.id != "68" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "68" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[68].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1118,7 +1118,7 @@ object FakeQuizModels {
         Question(
             id = "69",
             question = "¿Cuál es el papel de los insectos en este ecosistema?",
-            answers = fakeAnswers.filter { fake -> fake.id != "69" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "69" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[69].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1127,7 +1127,7 @@ object FakeQuizModels {
         Question(
             id = "70",
             question = "¿Qué indica la etiqueta de eficiencia energética?",
-            answers = fakeAnswers.filter { fake -> fake.id != "70" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "70" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[70].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1136,7 +1136,7 @@ object FakeQuizModels {
         Question(
             id = "71",
             question = "¿Por qué es mejor usar bolsas reutilizables que de plástico?",
-            answers = fakeAnswers.filter { fake -> fake.id != "71" && fake.typeGame == TypeGame.QUIZ_IMAGE }.take(3),
+            answers = fakeAnswers.filter { fake -> fake.id != "71" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
             answerId = fakeAnswers[71].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
@@ -1292,7 +1292,7 @@ object FakeQuizModels {
         ),
         Question(
             id = "5",
-            question = "¿A qué contenedor deberías tirar los bricks?",
+            question = "¿A qué contenedor deberías tirar los tetra briks?",
             answers = listOf(fakeAnswers[27], fakeAnswers[28], fakeAnswers[29]),
             answerId = fakeAnswers[26].id,
             typeGame = TypeGame.QUIZ,
