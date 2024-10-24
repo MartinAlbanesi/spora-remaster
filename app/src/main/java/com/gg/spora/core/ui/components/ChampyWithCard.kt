@@ -60,6 +60,7 @@ fun ChampyWithCard(
             painter = painterResource(champyImage),
             contentDescription = null,
             modifier = Modifier
+                .weight(1f)
                 .size(200.dp)
                 .offset{
                     if (isCorrect == true) {
@@ -76,6 +77,7 @@ fun ChampyWithCard(
             ),
             modifier = Modifier
                 .fillMaxSize()
+                .weight(3.5f)
         ) {
             content()
         }
@@ -84,6 +86,10 @@ fun ChampyWithCard(
 
 }
 
+@Preview(
+    heightDp = 640,
+    widthDp = 360,
+)
 @Preview
 //@PreviewLightDark
 //@PreviewFontScale
