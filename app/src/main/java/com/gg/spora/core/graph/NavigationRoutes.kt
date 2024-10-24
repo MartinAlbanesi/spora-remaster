@@ -10,7 +10,7 @@ object NavigationRoutes {
 
     @Serializable
     data class Stage(
-        val stageId: String,
+        val stageId: String = "1",
     )
 
     @Serializable
@@ -21,6 +21,7 @@ object NavigationRoutes {
         val relationsCount: Int,
         val levelId: String,
         val imageBackground: Int,
+        val stageId: String,
     )
 
     @Serializable
@@ -36,7 +37,9 @@ object NavigationRoutes {
     object Grove
 
     @Serializable
-    object Challenge
+    data class Challenge(
+        val stageId: String,
+    )
 
     @Serializable
     object Camera {

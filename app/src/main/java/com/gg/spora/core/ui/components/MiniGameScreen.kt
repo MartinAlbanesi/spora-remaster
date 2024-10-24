@@ -64,6 +64,7 @@ fun MiniGameScreen(
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
+    onNavigateNextLevel: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     val champyImage = when (isCorrect) {
@@ -85,12 +86,15 @@ fun MiniGameScreen(
             backgroundImage = R.drawable.fondo_minijuegos_crop,
             starsState = getStarState(lives = lives),
             rewards = listOf(10, 20, 30),
-            onClickPrimaryButton = {
+            onBackStage = {
                 onBackForestStage()
             },
-            onClickSecondaryButton = {
+            onResetGame = {
                 onResetGame()
             },
+            onNavigateNextLevel = {
+                onNavigateNextLevel()
+            }
         )
     }
 
@@ -201,6 +205,7 @@ private fun MiniGameScreenPreview() {
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = {},
+                onNavigateNextLevel = {},
                 content = {
                 }
             )

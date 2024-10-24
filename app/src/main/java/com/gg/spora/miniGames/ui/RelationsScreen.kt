@@ -178,6 +178,7 @@ private fun RelationsScreenPreview() {
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = { },
+                onNavigateNextLevel = { },
                 content = {
                     RelationsScreen(
                         modifier = Modifier

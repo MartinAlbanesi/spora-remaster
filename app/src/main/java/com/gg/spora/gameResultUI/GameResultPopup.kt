@@ -31,8 +31,9 @@ fun GameResultPopUp(
     backgroundImage: Int,
     starsState: StarState,
     rewards: List<Int>,
-    onClickPrimaryButton: () -> Unit,
-    onClickSecondaryButton: () -> Unit,
+    onBackStage: () -> Unit,
+    onResetGame: () -> Unit,
+    onNavigateNextLevel: () -> Unit,
 ) {
 
 //    val (localRewards, totalOxygen) = getStarsRewards(starsState, rewards)
@@ -54,10 +55,10 @@ fun GameResultPopUp(
         isVisible = isVisible,
         starsState = starsState,
         rewards = rewards,
-        textPrimaryButton = if (starsState.starCount != 0) "Siguiente" else "Volver",
-        textSecondaryButton = "Reiniciar",
-        onClickPrimaryButton = onClickPrimaryButton,
-        onClickSecondaryButton = onClickSecondaryButton,
+        textPrimaryButton = if (starsState.starCount != 0) "Siguiente" else "Reiniciar",
+        textSecondaryButton = "Volver",
+        onClickPrimaryButton = if (starsState.starCount != 0) onNavigateNextLevel else onResetGame,
+        onClickSecondaryButton = onBackStage,
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -93,10 +94,11 @@ fun GameResultPopupPreview() {
             GameResultPopUp(
                 isVisible = true,
                 backgroundImage = R.drawable.fondo_minijuegos_crop,
-                starsState = StarState.ONE,
+                starsState = StarState.ZERO,
                 rewards = listOf(10, 20, 60),
-                onClickPrimaryButton = {},
-                onClickSecondaryButton = {},
+                onBackStage = {},
+                onResetGame = {},
+                onNavigateNextLevel = {},
             )
         }
 

@@ -160,7 +160,8 @@ class MainActivity : ComponentActivity() {
                                                 imageCount = currentLevel!!.imageCount,
                                                 relationsCount = currentLevel!!.relationsCount,
                                                 levelId = currentLevel!!.id,
-                                                imageBackground = stage!!.levelPreviewImage
+                                                imageBackground = stage!!.levelPreviewImage,
+                                                stageId = stage!!.id
                                             )
                                         )
                                 },
@@ -176,7 +177,7 @@ class MainActivity : ComponentActivity() {
                                 backgroundImage = stage!!.stageBackgroundImage,
                                 pathLadder = stage!!.pathLadder,
                                 onNavigateToChallenge = { title ->
-                                    navController.navigate(NavigationRoutes.Challenge)
+                                    navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id))
                                 },
                                 popBackStack = {
                                     navController.popBackStack()
@@ -190,9 +191,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<NavigationRoutes.QuizGame> {
 
-                            val imageBackground = it.toRoute<NavigationRoutes.QuizGame>().imageBackground
-
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
+                            val quizGameRoute = it.toRoute<NavigationRoutes.QuizGame>()
 
                             val quizViewModel = hiltViewModel<QuizViewModel>()
 
@@ -214,8 +213,8 @@ class MainActivity : ComponentActivity() {
 
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
-                                title = title.title,
-                                imageBackground = imageBackground,
+                                title = quizGameRoute.title,
+                                imageBackground = quizGameRoute.imageBackground,
                                 isCorrect = isCorrect,
                                 questionSize = questions.size - 1,
                                 isFinished = isFinished,
@@ -225,6 +224,13 @@ class MainActivity : ComponentActivity() {
                                 onNextQuestion = quizViewModel::nextQuestion,
                                 onResetGame = quizViewModel::resetGame,
                                 onBackForestStage = { navController.popBackStack() },
+                                onNavigateNextLevel = {
+                                    if(quizGameRoute.stageId == "2"){
+                                        navController.navigate(NavigationRoutes.Challenge(stageId = quizGameRoute.stageId))
+                                    }else{
+                                        navController.popBackStack()
+                                    }
+                                },
                                 content = {
                                     when (currentQuestion!!.typeGame) {
                                         TypeGame.QUIZ -> {
@@ -285,7 +291,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
-                        composable<NavigationRoutes.Challenge> {
+                        composable<NavigationRoutes.Challenge> { backStackEntry ->
+
+                            val challengeRoute =
+                                backStackEntry.toRoute<NavigationRoutes.Challenge>()
 
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
@@ -301,9 +310,16 @@ class MainActivity : ComponentActivity() {
                                 showProgressBar = false,
                                 onNextQuestion = {},
                                 onResetGame = {},
-                                onBackForestStage = { navController.popBackStack()
+                                onBackForestStage = {
+                                    navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
+                                        popUpTo<NavigationRoutes.Stage> {
+                                            inclusive = true
+                                        }
+                                    }
                                     challengeViewModel.setObjectsChallengeEmpty()
-                                                    },
+
+                                },
+                                onNavigateNextLevel = {},
                                 content = {
                                     ChallengeScreen(
                                         modifier = Modifier,
@@ -315,7 +331,15 @@ class MainActivity : ComponentActivity() {
                                             )
                                         },
                                         onNavigateToForestStage = {
-                                            navController.popBackStack()
+                                            navController.navigate(
+                                                NavigationRoutes.Stage(
+                                                    challengeRoute.stageId
+                                                )
+                                            ) {
+                                                popUpTo<NavigationRoutes.Stage> {
+                                                    inclusive = true
+                                                }
+                                            }
                                         },
                                         challengeViewModel = challengeViewModel
                                     )
