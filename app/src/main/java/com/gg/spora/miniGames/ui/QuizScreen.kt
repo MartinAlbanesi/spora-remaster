@@ -3,9 +3,11 @@ package com.gg.spora.miniGames.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -19,8 +21,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
+import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.components.OptionItemButton
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -58,7 +63,9 @@ fun QuizScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.large)
-                        .height(60.dp)
+                        .fillMaxWidth(0.4f)
+                        .heightIn(min = 44.dp)
+                        .fillMaxHeight(0.1f),
                 ){
                     onAnswerSelected(answer.id)
                 }
@@ -67,8 +74,12 @@ fun QuizScreen(
     }
 }
 
-//@PreviewLightDark
+@Preview(
+    heightDp = 640,
+    widthDp = 360,
+)
 @Preview
+//@PreviewLightDark
 //@PreviewFontScale
 //@PreviewScreenSizes
 @Composable
@@ -78,12 +89,30 @@ private fun MinigameQuizScreenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            QuizScreen(
-                modifier = Modifier.fillMaxSize().padding(16.dp),
-                questionTitle = "¿Cuál es la capital de España?",
-                answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
-                onAnswerSelected =  {},
+            MiniGameScreen(
+                modifier = Modifier.fillMaxSize(),
+                title = "Titi",
+                imageBackground = R.drawable.fondo_minijuegos_crop,
+                isCorrect = null,
+                questionSize = SporaConstant.MAX_QUESTIONS,
+                isFinished = false,
+                lives = 5,
+                showButtonContinue = true,
+                counterQuestion = 0,
+                onNextQuestion = {},
+                onResetGame = {},
+                onBackForestStage = { },
+                onNavigateNextLevel = { },
+                content = {
+                    QuizScreen(
+                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        questionTitle = "¿Cuál es la capital de España?",
+                        answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
+                        onAnswerSelected =  {},
+                    )
+                }
             )
+
         }
     }
 }
