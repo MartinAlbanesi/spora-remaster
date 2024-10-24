@@ -64,7 +64,7 @@ fun QuizScreen(
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.large)
                         .fillMaxWidth(0.4f)
-                        .heightIn(min = 44.dp)
+                        .heightIn(min = 54.dp)
                         .fillMaxHeight(0.1f),
                 ){
                     onAnswerSelected(answer.id)
