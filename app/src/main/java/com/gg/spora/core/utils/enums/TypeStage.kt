@@ -4,5 +4,5 @@ enum class TypeStage(val label: String) {
     FOREST ("Área del Bosque"),
     DESERT ("Desierto"),
     RIVER ("Río"),
-    EXPO ("ExpoProyecto  2024"),
+    EXPO ("Proyecto 2024"),
 }

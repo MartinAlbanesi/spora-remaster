@@ -22,7 +22,7 @@ object FakeStageModels {
 
         Level(
             id = "1",
-            levelName = "Nivel 1",
+            levelName = "Expo",
             typeStage = TypeStage.EXPO,
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
