@@ -107,7 +107,7 @@ fun PreviewTopAppBarWithO2Icon() {
     TopAppBarWithO2Icon(
         title = "Title",
         firstLabel = "10",
-        firstIcon = R.drawable.o2,
+        firstIcon = R.drawable.oxygen,
         showBackArrow = true,
     )
 }

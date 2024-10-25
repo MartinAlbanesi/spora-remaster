@@ -41,10 +41,10 @@ fun GameResultPopUp(
     val totalOxygen = getTotalOxygenFromStars(starsState, rewards)
 
     val champyImage = when (starsState) {
-        StarState.ZERO -> R.drawable.champy_derrotado_brazosalcuerpo
-        StarState.ONE -> R.drawable.champy_serio_idle
-        StarState.TWO -> R.drawable.champy_sonriente_idle
-        StarState.THREE -> R.drawable.champy_celebrando_brazoslevantados
+        StarState.ZERO -> R.drawable.champy_defeated_arms_body
+        StarState.ONE -> R.drawable.champy_serious_idle
+        StarState.TWO -> R.drawable.champy_smiling_idle
+        StarState.THREE -> R.drawable.champy_celebrating_raised_arms
     }
 
     ChampyDialog(
@@ -64,7 +64,7 @@ fun GameResultPopUp(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
-                painter = painterResource(id = R.drawable.o2_icon),
+                painter = painterResource(id = R.drawable.oxygen_icon),
                 contentDescription = "Oxígeno",
                 modifier = Modifier.size(48.dp)
             )
@@ -93,7 +93,7 @@ fun GameResultPopupPreview() {
         ) {
             GameResultPopUp(
                 isVisible = true,
-                backgroundImage = R.drawable.fondo_minijuegos_crop,
+                backgroundImage = R.drawable.minigame_background_crop,
                 starsState = StarState.ZERO,
                 rewards = listOf(10, 20, 60),
                 onBackStage = {},

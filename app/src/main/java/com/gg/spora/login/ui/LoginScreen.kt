@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -42,7 +40,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
             .fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Background",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()

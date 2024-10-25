@@ -3,8 +3,6 @@ package com.gg.spora.core.ui.components
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,10 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
@@ -30,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.colorResource
@@ -38,11 +32,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.functions.getStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
-import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -72,9 +64,9 @@ fun MiniGameScreen(
     content: @Composable () -> Unit,
 ) {
     val champyImage = when (isCorrect) {
-        true -> R.drawable.champy_celebrando_brazoslevantados_sinsombra
-        false -> R.drawable.champy_triste_brazosalcuerpo
-        else -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
+        true -> R.drawable.champy_celebrating_raised_arms_without_shadow
+        false -> R.drawable.champy_sad_arms_body
+        else -> R.drawable.champy_curious_left_arm_in_the_cheek
     }
 
     val progressIndicator by animateFloatAsState(
@@ -87,7 +79,7 @@ fun MiniGameScreen(
     if (isFinished) {
         GameResultPopUp(
             isVisible = true,
-            backgroundImage = R.drawable.fondo_minijuegos_crop,
+            backgroundImage = R.drawable.minigame_background_crop,
             starsState = getStarState(lives = lives),
             rewards = listOf(10, 20, 30),
             onBackStage = {
@@ -107,7 +99,7 @@ fun MiniGameScreen(
     }
 
     ChampyDialogConfirm(
-        backgroundImage = R.drawable.fondo_minijuegos_crop,
+        backgroundImage = R.drawable.minigame_background_crop,
         isVisible = showDialogConfirm,
         onConfirmRequest = {
             showDialogConfirm = false
@@ -207,7 +199,7 @@ private fun MiniGameScreenPreview() {
         ) {
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
-                imageBackground = R.drawable.fondo_minijuegos_crop,
+                imageBackground = R.drawable.minigame_background_crop,
                 questionSize = 5,
                 lives = 5,
                 counterQuestion = 0,

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -92,7 +91,7 @@ private fun MinigameQuizScreenPreview() {
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
                 title = "Titi",
-                imageBackground = R.drawable.fondo_minijuegos_crop,
+                imageBackground = R.drawable.minigame_background_crop,
                 isCorrect = null,
                 questionSize = SporaConstant.MAX_QUESTIONS,
                 isFinished = false,

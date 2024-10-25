@@ -85,8 +85,8 @@ object FakeStageModels {
             typeStage = TypeStage.FOREST,
             levels = fakeLevels,
             challenge = fakeChallenge,
-            levelPreviewImage = R.drawable.fondo_minijuegos_crop,
-            stageBackgroundImage = R.drawable.fondo_area1,
+            levelPreviewImage = R.drawable.minigame_background_crop,
+            stageBackgroundImage = R.drawable.stage1_area_background,
             pathLadder = SporaConstant.PATH_LADDER
         ),
         StageLevel(

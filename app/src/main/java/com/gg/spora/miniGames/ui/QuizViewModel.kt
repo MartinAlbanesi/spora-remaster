@@ -47,7 +47,7 @@ class QuizViewModel @Inject constructor(
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
-    private val _currentImageResId = MutableStateFlow(R.drawable.recurso_viento)
+    private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
     val currentImageResId = _currentImageResId.asStateFlow()
 
     private val _relationsItems = MutableStateFlow<List<String>>(emptyList())
@@ -56,7 +56,7 @@ class QuizViewModel @Inject constructor(
     init {
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
     }
 
     private fun getCurrentQuestion() {
@@ -167,7 +167,7 @@ class QuizViewModel @Inject constructor(
         }
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
         _isCorrect.value = null
     }
 
@@ -178,7 +178,7 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value = null
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.recurso_viento
+        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
     }
 
 }

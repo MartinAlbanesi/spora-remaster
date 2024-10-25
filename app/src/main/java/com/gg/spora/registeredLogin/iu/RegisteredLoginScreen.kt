@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.password
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -65,7 +64,7 @@ fun RegisteredLoginScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         // Imagen de fondo
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()

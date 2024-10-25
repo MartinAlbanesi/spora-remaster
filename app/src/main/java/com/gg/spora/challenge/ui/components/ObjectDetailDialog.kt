@@ -187,13 +187,13 @@ fun ValidateImageOfObjectDetail(objectDetailName : String){
 
     val image : Int = when (objectDetailName) {
         "Botella de plástico" -> {
-            R.drawable.botella_de_plastico
+            R.drawable.plastic_bottle
         }
         "Caja de carton" -> {
-            R.drawable.caja_de_carton
+            R.drawable.cardboard_box
         }
         "Tapita de plástico" -> {
-            R.drawable.tapa_de_botella
+            R.drawable.bottle_cap
         }
         else -> {
             0

@@ -51,7 +51,7 @@ fun StepObjectDetail(
                     .background(MaterialTheme.colorScheme.primary),
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.back_icon),
+                    painter = painterResource(id = R.drawable.back_arrow_icon),
                     contentDescription = "Previous Step",
                     modifier = Modifier.size(30.dp),
                     tint = Color.Black

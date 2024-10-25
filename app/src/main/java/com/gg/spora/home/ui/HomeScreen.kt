@@ -73,7 +73,7 @@ fun HomeScreen(
                 firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
                 secondLabel = "0",
-                secondIcon = R.drawable.o2_icon,
+                secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
             )
@@ -87,7 +87,7 @@ fun HomeScreen(
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.fondo_home),
+                painter = painterResource(id = R.drawable.home_background),
                 contentDescription = "Home Background",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier

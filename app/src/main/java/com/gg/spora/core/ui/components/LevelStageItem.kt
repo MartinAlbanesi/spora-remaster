@@ -38,7 +38,7 @@ fun LevelStageItem(
         TypeStage.EXPO -> R.drawable.stage_forest_minigames
     }
 
-    val currentImage = if (isBlocked) R.drawable.nivel_bloqueado else stageImage
+    val currentImage = if (isBlocked) R.drawable.locked_level else stageImage
 
     Box(
         contentAlignment = Alignment.Center,

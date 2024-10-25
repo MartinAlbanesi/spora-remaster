@@ -19,13 +19,13 @@ fun ChallengeStageItem(
     isBlocked: Boolean = false
 ) {
     val challengeImage = when (stage) {
-        TypeStage.FOREST -> R.drawable.chanllenger_icon
+        TypeStage.FOREST -> R.drawable.challenge_icon
         TypeStage.DESERT -> 1
         TypeStage.RIVER -> 2
-        TypeStage.EXPO -> R.drawable.chanllenger_icon
+        TypeStage.EXPO -> R.drawable.challenge_icon
     }
 
-    val currentImage = if (isBlocked) R.drawable.nivel_bloqueado else challengeImage
+    val currentImage = if (isBlocked) R.drawable.locked_level else challengeImage
 
     Box(
         contentAlignment = Alignment.Center,

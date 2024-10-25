@@ -83,7 +83,7 @@ fun ChampyDialogConfirm(
                     )
 
                     ChampyWithRewards(
-                        champyImage = R.drawable.champy_serio_idle,
+                        champyImage = R.drawable.champy_serious_idle,
                         title = "Al salir perderás tu progreso",
                         body = {},
                         modifier = Modifier
@@ -127,7 +127,7 @@ private fun ChampyDialogConfirmPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             ChampyDialogConfirm(
-                backgroundImage = R.drawable.fondo_minijuegos_crop,
+                backgroundImage = R.drawable.minigame_background_crop,
                 isVisible = true,
                 onConfirmRequest = {},
                 onDismissRequest = {}

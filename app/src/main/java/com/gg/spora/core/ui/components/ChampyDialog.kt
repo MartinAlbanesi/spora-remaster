@@ -147,8 +147,8 @@ private fun ChampyDialogConfirmPreview() {
         ) {
             ChampyDialog(
                 modifier = Modifier,
-                backgroundImage = R.drawable.fondo_minijuegos,
-                champyImage = R.drawable.champy_serio_idle,
+                backgroundImage = R.drawable.minigame_background,
+                champyImage = R.drawable.champy_serious_idle,
                 title = "Titi",
                 isVisible = true,
                 starsState = StarState.ZERO,

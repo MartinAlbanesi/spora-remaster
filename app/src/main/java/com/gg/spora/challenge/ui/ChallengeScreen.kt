@@ -1,6 +1,5 @@
 package com.gg.spora.challenge.ui
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -56,7 +55,7 @@ fun ChallengeScreen(
 
     val lifecycleOwner = LocalLifecycleOwner.current
     var buttonContinueEnabled by remember { mutableStateOf(false) }
-    var champyImage by remember { mutableIntStateOf(R.drawable.champy_sonriente_brazosalcuerpo) }
+    var champyImage by remember { mutableIntStateOf(R.drawable.champy_smiling_arms_body) }
     var objectsChallenge by remember { mutableStateOf(listOf<ObjectDetail>()) }
     var showDialog by remember { mutableStateOf(false) }
     var selectedObject by remember { mutableStateOf("") }
@@ -77,7 +76,7 @@ fun ChallengeScreen(
     }
 
     if(objectsChallenge.isNotEmpty() && objectsChallenge.all{ it.isValidate }){
-        champyImage = R.drawable.champy_celebrando_brazoslevantados
+        champyImage = R.drawable.champy_celebrating_raised_arms
         buttonContinueEnabled = true
     }
 

@@ -124,7 +124,7 @@ fun LogoScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -139,7 +139,7 @@ fun LogoScreen(
 //        ) {
 
         LogoInitialAnimation(
-            image = R.drawable.logo_reborde_slogan,
+            image = R.drawable.logo_with_border_slogan,
             modifier = modifier.align(Alignment.Center)
         )
 
@@ -171,7 +171,7 @@ fun ChampyTalkScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -183,7 +183,7 @@ fun ChampyTalkScreen(
 //            horizontalAlignment = Alignment.CenterHorizontally
 //        ) {
         ChampyWithTopDialogue(
-            champy = R.drawable.champy_sonriente_brazo_izquierdo_levantado,
+            champy = R.drawable.champy_smiling_left_arm_raised,
             dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi bosque.",
             x = -(30).dp,
             y = -(22).dp,
@@ -217,7 +217,7 @@ fun TypeUserSelectionScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -230,7 +230,7 @@ fun TypeUserSelectionScreen(
 //        ) {
 
         ChampyWithTopDialogue(
-            champy = R.drawable.champy_curioso_brazos_al_cuerpo,
+            champy = R.drawable.champy_curious_arms_to_body,
             dialogue = "Pero primero, ¿me contás sobre vos?",
             x = -(30).dp,
             modifier = Modifier.align(Alignment.Center)
@@ -292,7 +292,7 @@ fun GuestEnterNameScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -306,7 +306,7 @@ fun GuestEnterNameScreen(
 //        ) {
 
         ChampyWithTopDialogue(
-            champy = R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla,
+            champy = R.drawable.champy_curious_left_arm_in_the_cheek,
             dialogue = "Entonces... " +
                 "\n¿Cómo te llamás?",
             x = -(30).dp,
@@ -345,7 +345,7 @@ fun ChampyTalkGuestScreen(
     Box(modifier = modifier.fillMaxSize()) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -358,7 +358,7 @@ fun ChampyTalkGuestScreen(
 //        ) {
 
         ChampyWithTopDialogue(
-            champy = R.drawable.champy_celebrando_brazoslevantados,
+            champy = R.drawable.champy_celebrating_raised_arms,
             dialogue = "¡Genial, ${guestName}!\n Vamos a mi hogar",
             x = -(30).dp,
             y = -(22).dp,

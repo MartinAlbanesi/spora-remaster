@@ -915,7 +915,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[46].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.simbolo_reciclaje
+            image = R.drawable.recycling_symbol
         ),
         Question(
             id = "47",
@@ -924,7 +924,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[47].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.calentamiento_global
+            image = R.drawable.global_warming
         ),
         Question(
             id = "48",
@@ -933,7 +933,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[48].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.deforestacion
+            image = R.drawable.deforestation
         ),
         Question(
             id = "49",
@@ -951,7 +951,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[50].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.contaminacion_aire
+            image = R.drawable.air_pollution
         ),
         Question(
             id = "51",
@@ -960,7 +960,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[51].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.recurso_viento
+            image = R.drawable.wind_turbine
         ),
         Question(
             id = "52",
@@ -969,7 +969,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[52].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.desechos_electronicos
+            image = R.drawable.electronic_waste
         ),
         Question(
             id = "53",
@@ -978,7 +978,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[53].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.agujero_ozono
+            image = R.drawable.ozone_hole
         ),
         Question(
             id = "54",
@@ -987,7 +987,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[54].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.residuo_toxico
+            image = R.drawable.toxic_waste
         ),
         Question(
             id = "55",
@@ -996,7 +996,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[55].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.panel_solar
+            image = R.drawable.solar_panel
         ),
         Question(
             id = "56",
@@ -1005,7 +1005,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[56].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.rio_contaminado
+            image = R.drawable.plastic_pollution
         ),
         Question(
             id = "57",
@@ -1014,7 +1014,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[57].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.auto_contaminando
+            image = R.drawable.car_polluting
         ),
         Question(
             id = "58",
@@ -1023,7 +1023,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[58].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.derrame_petroleo
+            image = R.drawable.oil_spill
         ),
         Question(
             id = "59",
@@ -1032,7 +1032,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[59].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.separacion_residuos
+            image = R.drawable.waste_separation
         ),
         Question(
             id = "60",
@@ -1041,7 +1041,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[60].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.plantar_arboles
+            image = R.drawable.reforesting
         ),
         Question(
             id = "61",
@@ -1050,7 +1050,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[61].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.tren_electrico
+            image = R.drawable.electric_train
         ),
         Question(
             id = "62",
@@ -1059,7 +1059,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[62].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.bosque_quemado
+            image = R.drawable.burned_forest
         ),
         Question(
             id = "63",
@@ -1068,7 +1068,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[63].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.lago_contaminado
+            image = R.drawable.polluted_lake
         ),
         Question(
             id = "64",
@@ -1077,7 +1077,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[64].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.desertificacion
+            image = R.drawable.desertification
         ),
         Question(
             id = "65",
@@ -1086,7 +1086,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[65].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.auto_electrico
+            image = R.drawable.electric_car
         ),
         Question(
             id = "66",
@@ -1095,7 +1095,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[66].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.compose
+            image = R.drawable.composting
         ),
         Question(
             id = "67",
@@ -1104,7 +1104,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[67].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.agricultura_urbana
+            image = R.drawable.urban_agriculture
         ),
         Question(
             id = "68",
@@ -1113,7 +1113,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[68].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.arbol
+            image = R.drawable.tree_giving_oxygen
         ),
         Question(
             id = "69",
@@ -1122,7 +1122,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[69].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.polinizacion
+            image = R.drawable.pollination
         ),
         Question(
             id = "70",
@@ -1131,7 +1131,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[70].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.eficiencia
+            image = R.drawable.energy_efficiency
         ),
         Question(
             id = "71",
@@ -1140,7 +1140,7 @@ object FakeQuizModels {
             answerId = fakeAnswers[71].id,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE,
-            image = R.drawable.bolsa_tela
+            image = R.drawable.cloth_bag
         ),
 
         // ----------------------- RELATIONS -----------------------

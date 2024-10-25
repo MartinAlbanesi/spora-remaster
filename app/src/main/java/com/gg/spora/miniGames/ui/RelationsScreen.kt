@@ -175,7 +175,7 @@ private fun RelationsScreenPreview() {
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
                 title = "Titi",
-                imageBackground = R.drawable.fondo_minijuegos_crop,
+                imageBackground = R.drawable.minigame_background_crop,
                 isCorrect = null,
                 questionSize = SporaConstant.MAX_QUESTIONS,
                 isFinished = false,

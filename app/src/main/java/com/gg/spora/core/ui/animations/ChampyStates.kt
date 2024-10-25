@@ -13,11 +13,11 @@ enum class ChampyStates {
 
     val image: Int
         get() = when (this) {
-            SMILING -> R.drawable.champy_sonriente_brazosalcuerpo
-            SAD -> R.drawable.champy_triste_brazosalcuerpo
-            GREETING -> R.drawable.champy_celebrando_brazo_levantado
-            CURIOUS -> R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla
-            DEFEATED -> R.drawable.champy_derrotado_brazosalcuerpo
-            BLINK -> R.drawable.champy_sonriente_brazos_al_cuerpo_pestaneo
+            SMILING -> R.drawable.champy_smiling_arms_body
+            SAD -> R.drawable.champy_sad_arms_body
+            GREETING -> R.drawable.champy_celebrating_left_arm_raised
+            CURIOUS -> R.drawable.champy_curious_left_arm_in_the_cheek
+            DEFEATED -> R.drawable.champy_defeated_arms_body
+            BLINK -> R.drawable.champy_smiling_arms_to_the_body_blinking
         }
 }

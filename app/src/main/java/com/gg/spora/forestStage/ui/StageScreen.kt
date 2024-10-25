@@ -48,7 +48,7 @@ fun StageScreen(
             TopAppBarWithO2Icon(
                 title = title,
                 firstLabel = oxygen.toString(),
-                firstIcon = R.drawable.o2,
+                firstIcon = R.drawable.oxygen,
                 showBackArrow = true,
                 showIcon = false,
                 onBackClick = {

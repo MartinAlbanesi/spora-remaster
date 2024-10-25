@@ -34,7 +34,7 @@ fun LevelPreview(
     onClickSecondaryButton: () -> Unit,
 ) {
 
-    val champyImage = R.drawable.champy_sonriente_idle
+    val champyImage = R.drawable.champy_smiling_idle
 
     ChampyDialog(
         modifier = modifier,
@@ -63,7 +63,7 @@ fun LevelPreview(
                 ),
             )
             Image(
-                painter = painterResource(id = R.drawable.o2_icon),
+                painter = painterResource(id = R.drawable.oxygen_icon),
                 contentDescription = "Oxígeno",
                 modifier = Modifier.size(48.dp)
             )
@@ -81,7 +81,7 @@ fun GameResultPopupPreview() {
         ) {
             LevelPreview(
                 isVisible = true,
-                backgroundImage = R.drawable.fondo_minijuegos_crop,
+                backgroundImage = R.drawable.minigame_background_crop,
                 level = FakeStageModels.fakeLevels.first(),
                 onClickPrimaryButton = {},
                 onClickSecondaryButton = {},
