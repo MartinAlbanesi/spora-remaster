@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -29,7 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
@@ -69,7 +67,7 @@ fun RelationsScreen(
 //        createVerticalChain(title, item, options, chainStyle = ChainStyle.Spread)
 
             Text(
-                text = "Seleciona 3 conceptos relacionados",
+                text = "Seleccioná los 3 conceptos relacionados",
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
@@ -193,7 +191,7 @@ private fun RelationsScreenPreview() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(vertical = 0.dp),
-                        objectName = "Botella de plastico",
+                        objectName = "Botella de plástico",
                         answers = FakeQuizModels.fakeAnswers.filter { it.id.toInt() > 100 }.take(6)
                             .shuffled(),
                         selectedItems = listOf("55", "56", "57"),

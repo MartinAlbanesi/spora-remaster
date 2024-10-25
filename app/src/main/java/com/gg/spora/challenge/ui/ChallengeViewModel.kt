@@ -88,49 +88,40 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
             val listObjects = mutableListOf(
                 ObjectDetail(
                     "Botella de plástico",
-                    "Muchas botellas de plástico son reciclables y se pueden encontrar por cualquier parte de la casa.",
+                    "Muchas botellas de plástico se pueden reciclar, y seguro que encuentras varias en casa. ¡Aprovechemos y cuidemos el planeta reciclando!",
                     false,
                     mutableListOf(StepObjectDetail( 1,"Limpieza",
-                        "Vaciá y limpiá las botellas enjuagándolas " +
-                                "con agua y unas gotitas de detergente.",
+                        "Vacíá y limpiá las botellas: enjuagalas con agua y un poquito de detergente para dejarlas listas para reciclar.",
                         true, false),
                         StepObjectDetail( 2,"Validación",
-                            "Una botella de plástico que se puede " +
-                                    "reciclar debera tener un ícono de reciclaje. "),
+                            "Una botella de plástico que se puede reciclar debe tener un ícono de reciclaje. ¡Buscá el símbolo antes de desecharla!"),
                         StepObjectDetail( 3,"Reciclado",
-                            "Si la botella se puede reciclar entonces se " +
-                                    "puede ingresar en los contenedores de reciclado."),
+                            "Si la botella es reciclable, ¡podés ponerla en los contenedores de reciclaje para que tenga una nueva vida!"),
                         StepObjectDetail(4,"Crear",
-                            "Si no se pueda reciclar, entonces se pueden hacer " +
-                                    "manualidades u objetos de decoración con los materiales.",
+                            "Si la botella no es reciclable, ¡no te preocupes! Podés reutilizarla para hacer manualidades o crear objetos decorativos y divertidos.",
                             false, true))
                 ),
                 ObjectDetail(
-                    "Caja de carton",
-                    "Al reutilizar el carton cuidamos al planeta y a nuestros amigos los arboles!",
+                    "Caja de cartón",
+                    "Al reutilizar el cartón, ¡estamos cuidando el planeta y a nuestros amigos los árboles!",
                     false,
                     mutableListOf(StepObjectDetail( 1,"Limpieza",
-                        "Asegurate que la caja de Carton este limpia " +
-                                "y sin ningun elemento que pueda interferir con su reciclaje",true, false),
+                        "Asegurate de que la caja de cartón esté limpia y libre de cualquier elemento que pueda interferir con su reciclaje.",true, false),
                         StepObjectDetail( 2,"Recortar",
-                            "Acompañado de un adulto, recorta la caja de carton en pequeños trozos"),
+                            "Con la ayuda de un adulto, cortá la caja de cartón en pequeños trozos."),
                         StepObjectDetail( 3,"Crear",
-                            "Con estos pequeños trozos de carton podes " +
-                                    "hacer manualidades divertidas.",false, true))
+                            "Con estos pequeños trozos de cartón, ¡podés crear manualidades divertidas y darle una nueva vida al cartón!",false, true))
                 ),
                 ObjectDetail(
                     "Tapita de plástico",
-                    "Las tapitas de plastico se pueden encontrar por cualquier lado y su reciclaje es muy facil",
+                    "Las tapitas de plástico están en todos lados, ¡y reciclarlas es muy fácil!",
                     false,
                     mutableListOf(StepObjectDetail( 1,"Juntar",
-                        "Juntá tapitas plásticas de gaseosas, aguas, juegos " +
-                                "y productos de limpieza que son las que se reciclan.",true, false),
+                        "Reuní tapitas plásticas de gaseosas, aguas, juegos y productos de limpieza, ¡esas son las que se pueden reciclar!",true, false),
                         StepObjectDetail( 2,"Limpieza",
-                            "Lava las tapitas para sacar residuos de líquidos o " +
-                                    "cualquier tipo de suciedad que pueda afectar el reciclado"),
+                            "Lavá las tapitas para eliminar cualquier residuo de líquidos o suciedad que pueda afectar el reciclaje."),
                         StepObjectDetail( 3,"Crear o llevar",
-                            "Puedes usar las tapitas para hacer decoraciones o " +
-                                    "llevarlas a una planta de reciclaje. ¡Ellos sabran que hacer!",false, true))
+                            "Podés usar las tapitas para hacer decoraciones creativas o llevarlas a una planta de reciclaje. ¡Ellos sabrán qué hacer!",false, true))
                 )
             )
 

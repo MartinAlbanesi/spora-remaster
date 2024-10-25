@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationRoutes.Welcome,
+                        startDestination = NavigationRoutes.Home,
 //                        startDestination = NavigationRoutes.Stage("2"),
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
@@ -298,7 +298,7 @@ class MainActivity : ComponentActivity() {
 
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
-                                imageBackground = R.drawable.fondo_minijuegos,
+                                imageBackground = R.drawable.expo_background,
                                 title = "Desafío",
                                 isCorrect = null,
                                 questionSize = SporaConstant.MAX_QUESTIONS,

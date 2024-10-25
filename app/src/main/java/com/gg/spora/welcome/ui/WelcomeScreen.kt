@@ -184,7 +184,7 @@ fun ChampyTalkScreen(
 //        ) {
         ChampyWithTopDialogue(
             champy = R.drawable.champy_sonriente_brazo_izquierdo_levantado,
-            dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi hogar.",
+            dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi bosque.",
             x = -(30).dp,
             y = -(22).dp,
             modifier = Modifier.align(Alignment.Center)
@@ -308,7 +308,7 @@ fun GuestEnterNameScreen(
         ChampyWithTopDialogue(
             champy = R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla,
             dialogue = "Entonces... " +
-                "\n¿Cómo te llamas?",
+                "\n¿Cómo te llamás?",
             x = -(30).dp,
             modifier = Modifier.align(Alignment.Center)
         )
@@ -359,7 +359,7 @@ fun ChampyTalkGuestScreen(
 
         ChampyWithTopDialogue(
             champy = R.drawable.champy_celebrando_brazoslevantados,
-            dialogue = "¡Genial, ${guestName}!\n vamos a mi hogar",
+            dialogue = "¡Genial, ${guestName}!\n Vamos a mi hogar",
             x = -(30).dp,
             y = -(22).dp,
             modifier = Modifier.align(Alignment.Center)
