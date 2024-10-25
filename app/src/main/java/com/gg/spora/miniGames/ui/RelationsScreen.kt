@@ -71,11 +71,13 @@ fun RelationsScreen(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.constrainAs(title) {
                     top.linkTo(topGuideline)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
+                    .padding(horizontal = 5.dp)
             )
             Box(
                 contentAlignment = Alignment.Center,

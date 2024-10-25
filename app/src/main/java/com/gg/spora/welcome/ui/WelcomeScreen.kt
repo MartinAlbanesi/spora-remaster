@@ -371,7 +371,7 @@ fun ChampyTalkGuestScreen(
             modifier = modifier
                 .size(width = 350.dp, height = 60.dp)
                 .align(Alignment.BottomCenter)
-                .offset(y = -60.dp),
+                .offset(y = (-60).dp),
         ) {
             onClick()
         }

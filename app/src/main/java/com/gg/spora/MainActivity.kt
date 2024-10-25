@@ -63,6 +63,7 @@ class MainActivity : ComponentActivity() {
             SporaTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
+                    
                 ) {
                     val navController = rememberNavController()
 
