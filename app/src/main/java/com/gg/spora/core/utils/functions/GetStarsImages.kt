@@ -11,9 +11,9 @@ fun getStarsImages(
 
     for (i in 1..MAX_STAR) {
         if (i <= starsState.starCount) {
-            localStars.add(R.drawable.estrella)
+            localStars.add(R.drawable.star)
         } else {
-            localStars.add(R.drawable.estrella_gris)
+            localStars.add(R.drawable.gray_star)
         }
     }
 

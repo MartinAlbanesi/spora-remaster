@@ -12,9 +12,9 @@ fun getStarWithOxygen (
 
     for (i in 1..MAX_STAR) {
         if (i <= starsState.starCount) {
-            localRewards[oxygenRewards[i - 1]] = R.drawable.estrella
+            localRewards[oxygenRewards[i - 1]] = R.drawable.star
         } else {
-            localRewards[oxygenRewards[i - 1]] = R.drawable.estrella_gris
+            localRewards[oxygenRewards[i - 1]] = R.drawable.gray_star
         }
     }
 

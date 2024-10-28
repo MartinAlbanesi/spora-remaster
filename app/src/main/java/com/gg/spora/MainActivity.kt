@@ -3,13 +3,13 @@ package com.gg.spora
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -24,7 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.toRoute
-import com.gg.spora.camera.CameraScreen
+import com.gg.spora.camera.ui.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.graph.NavigationRoutes
@@ -32,15 +32,19 @@ import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
 import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.core.utils.enums.TypeGame
+import com.gg.spora.forestStage.domain.model.getLevelWithStage
 import com.gg.spora.forestStage.ui.LevelPreview
 import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
-import com.gg.spora.minigameQuizImage.ui.QuizImageScreen
-import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
-import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
-import com.gg.spora.quiz.ui.QuizScreen
-import com.gg.spora.quiz.ui.QuizViewModel
+import com.gg.spora.login.ui.LoginScreen
+import com.gg.spora.login.ui.LoginViewModel
+import com.gg.spora.miniGames.ui.QuizImageScreen
+import com.gg.spora.miniGames.ui.QuizScreen
+import com.gg.spora.miniGames.ui.QuizViewModel
+import com.gg.spora.miniGames.ui.RelationsScreen
+import com.gg.spora.registeredLogin.iu.RegisteredLoginScreen
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
@@ -48,20 +52,25 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val challengeViewModel: ChallengeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
-            screenSplash.setKeepOnScreenCondition{ false }
+            screenSplash.setKeepOnScreenCondition { false }
             SporaTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
+                    
                 ) {
                     val navController = rememberNavController()
-                    val challengeViewModel = ChallengeViewModel()
+
                     NavHost(
                         navController = navController,
                         startDestination = NavigationRoutes.Welcome,
+//                        startDestination = NavigationRoutes.Stage("2"),
                         enterTransition = ::screenFadeWithSlideInToLeft,
                         exitTransition = ::screenFadeWithSlideOutToRight,
                         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -79,23 +88,54 @@ class MainActivity : ComponentActivity() {
                                     }
                                 },
                                 setGuestName = { welcomeViewModel.setGuestName(it) },
+                                modifier = Modifier,
+                                onNavigateToSignUp = {
+                                    navController.navigate(NavigationRoutes.SignUp)
+                                }
                             )
                         }
+
+                        composable<NavigationRoutes.SignUp> {
+
+                            val loginViewModel = hiltViewModel<LoginViewModel>()
+
+                            LoginScreen(
+                                viewModel = loginViewModel,
+                                navController = navController
+                            )
+                        }
+
+                        composable<NavigationRoutes.RegisteredLogin> {
+
+                            RegisteredLoginScreen(
+                                onBackClick = { navController.popBackStack() },
+                                onGoogleLoginClick = { },
+                                onLoginClick = { },
+                                onRegisterClick = { },
+                                navController = navController
+                            )
+                        }
+
                         composable<NavigationRoutes.Home> {
                             HomeScreen(
                                 onNavigateToForestStage = {
-                                    navController.navigate(NavigationRoutes.ForestStage)
+                                    navController.navigate(NavigationRoutes.Stage("1"))
+                                },
+                                onNavigateToExpoStage = {
+                                    navController.navigate(NavigationRoutes.Stage("2"))
                                 }
                             )
                         }
                         composable<NavigationRoutes.Grove> {
 
                         }
-                        composable<NavigationRoutes.ForestStage> {
+                        composable<NavigationRoutes.Stage> {
 
                             val stageViewModel = hiltViewModel<StageViewModel>()
 
-                            val levels by stageViewModel.levels.collectAsState()
+                            val stage by stageViewModel.stage.collectAsState()
+
+//                            val levels by stageViewModel.levels.collectAsState()
 
                             val currentLevel by stageViewModel.currentLevel.collectAsState()
 
@@ -103,33 +143,28 @@ class MainActivity : ComponentActivity() {
                                 mutableStateOf(false)
                             }
 
-                            var localQuestionType by rememberSaveable {
-                                mutableIntStateOf(0)
-                            }
+//                            var localQuestionType by rememberSaveable {
+//                                mutableIntStateOf(0)
+//                            }
 
                             LevelPreview(
                                 isVisible = showLevelPreview,
-                                backgroundImage = R.drawable.fondo_minijuegos_crop,
+                                backgroundImage = stage!!.levelPreviewImage,
                                 level = currentLevel!!,
                                 onClickPrimaryButton = {
                                     showLevelPreview = false
-                                    when (localQuestionType) {
-                                        0 -> {
-                                            navController.navigate(NavigationRoutes.QuizGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-                                        }
-
-                                        1 -> {
-                                            navController.navigate(NavigationRoutes.QuizImage("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-                                        }
-
-//                                        2 -> {
-//                                            navController.navigate(NavigationRoutes.RelationsGame("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}"))
-//                                        }
-
-                                        2 -> {
-                                            navController.navigate(NavigationRoutes.Challenge/*("${currentLevel!!.levelName} - ${currentLevel!!.stageType.label}")*/)
-                                        }
-                                    }
+                                    navController
+                                        .navigate(
+                                            NavigationRoutes.QuizGame(
+                                                title = currentLevel!!.getLevelWithStage(),
+                                                quizCount = currentLevel!!.quizCount,
+                                                imageCount = currentLevel!!.imageCount,
+                                                relationsCount = currentLevel!!.relationsCount,
+                                                levelId = currentLevel!!.id,
+                                                imageBackground = stage!!.levelPreviewImage,
+                                                stageId = stage!!.id
+                                            )
+                                        )
                                 },
                                 onClickSecondaryButton = {
                                     showLevelPreview = false
@@ -138,23 +173,26 @@ class MainActivity : ComponentActivity() {
 
                             StageScreen(
                                 oxygen = 75,
-                                levels = levels,
+                                title = stage!!.typeStage.label,
+                                levels = stage!!.levels,
+                                backgroundImage = stage!!.stageBackgroundImage,
+                                pathLadder = stage!!.pathLadder,
                                 onNavigateToChallenge = { title ->
-                                    navController.navigate(NavigationRoutes.Challenge)
+                                    navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id))
                                 },
                                 popBackStack = {
                                     navController.popBackStack()
                                 },
-                                onClickLevelItem = { level, showPreview, questionType ->
+                                onClickLevelItem = { level, showPreview ->
                                     stageViewModel.onLevelSelected(level)
                                     showLevelPreview = showPreview
-                                    localQuestionType = questionType.typeNumber
+//                                    localQuestionType = questionType.typeNumber
                                 }
                             )
                         }
                         composable<NavigationRoutes.QuizGame> {
 
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
+                            val quizGameRoute = it.toRoute<NavigationRoutes.QuizGame>()
 
                             val quizViewModel = hiltViewModel<QuizViewModel>()
 
@@ -168,28 +206,73 @@ class MainActivity : ComponentActivity() {
 
                             val counterQuestion by quizViewModel.counterQuestion.collectAsState()
 
+                            val currentImage by quizViewModel.currentImageResId.collectAsState()
+
+                            val selectedItems by quizViewModel.relationsItems.collectAsState()
+
+                            val questions by quizViewModel.questions.collectAsState()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
-                                title = title.title,
-                                imageBackground = R.drawable.fondo_minijuegos,
+                                title = quizGameRoute.title,
+                                imageBackground = quizGameRoute.imageBackground,
                                 isCorrect = isCorrect,
-                                questionSize = SporaConstant.MAX_QUESTIONS,
+                                questionSize = questions.size - 1,
                                 isFinished = isFinished,
                                 lives = lives,
                                 counterQuestion = counterQuestion,
+                                showButtonContinue = isCorrect != null,
                                 onNextQuestion = quizViewModel::nextQuestion,
                                 onResetGame = quizViewModel::resetGame,
                                 onBackForestStage = { navController.popBackStack() },
+                                onNavigateNextLevel = {
+                                    if(quizGameRoute.stageId == "2"){
+                                        navController.navigate(NavigationRoutes.Challenge(stageId = quizGameRoute.stageId))
+                                    }else{
+                                        navController.popBackStack()
+                                    }
+                                },
                                 content = {
-                                    QuizScreen(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .padding(16.dp),
-                                        isCorrect = isCorrect,
-                                        questionTitle = currentQuestion!!.question,
-                                        answerOptions = currentQuestion!!.answers,
-                                        onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                    )
+                                    when (currentQuestion!!.typeGame) {
+                                        TypeGame.QUIZ -> {
+                                            QuizScreen(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(16.dp),
+                                                isCorrect = isCorrect,
+                                                questionTitle = currentQuestion!!.question,
+                                                answerOptions = currentQuestion!!.answers,
+                                                onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                            )
+                                        }
+
+                                        TypeGame.QUIZ_IMAGE -> {
+                                            QuizImageScreen(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(horizontal = 8.dp),
+                                                questionTitle = currentQuestion!!.question,
+                                                answerOptions = currentQuestion!!.answers,
+                                                currentImageResIdState = currentImage,
+                                                isCorrect = isCorrect,
+                                                onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                            )
+                                        }
+
+                                        TypeGame.RELATIONS -> {
+                                            RelationsScreen(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .padding(vertical = 0.dp),
+                                                objectName = currentQuestion!!.question,
+                                                answers = currentQuestion!!.answers,
+                                                selectedItems = selectedItems,
+                                                isCorrect = isCorrect,
+                                                onSelectedItem = quizViewModel::onSelectedItem,
+                                                onConfirmSelecteds = quizViewModel::relationsAnswerSelected,
+                                            )
+                                        }
+                                    }
                                 }
                             )
                         }
@@ -203,19 +286,20 @@ class MainActivity : ComponentActivity() {
                             CameraScreen(
                                 nameObject = nameObject,
                                 onNavigateToChallengeScreen = {
-//                                    navController.navigate(NavigationRoutes.Challenge)
                                     navController.popBackStack()
                                 },
                                 challengeViewModel = challengeViewModel
                             )
                         }
 
-                        composable<NavigationRoutes.Challenge> {
+                        composable<NavigationRoutes.Challenge> { backStackEntry ->
 
-//                            val title = it.toRoute<NavigationRoutes.QuizGame>()
+                            val challengeRoute =
+                                backStackEntry.toRoute<NavigationRoutes.Challenge>()
+
                             MiniGameScreen(
                                 modifier = Modifier.fillMaxSize(),
-                                imageBackground = R.drawable.fondo_minijuegos,
+                                imageBackground = R.drawable.expo_background,
                                 title = "Desafío",
                                 isCorrect = null,
                                 questionSize = SporaConstant.MAX_QUESTIONS,
@@ -227,11 +311,19 @@ class MainActivity : ComponentActivity() {
                                 showProgressBar = false,
                                 onNextQuestion = {},
                                 onResetGame = {},
-                                onBackForestStage = { navController.popBackStack() },
+                                onBackForestStage = {
+                                    navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
+                                        popUpTo<NavigationRoutes.Stage> {
+                                            inclusive = true
+                                        }
+                                    }
+                                    challengeViewModel.setObjectsChallengeEmpty()
+
+                                },
+                                onNavigateNextLevel = {},
                                 content = {
                                     ChallengeScreen(
                                         modifier = Modifier,
-                                        onBackClick = { },
                                         onNavigateToCameraScreen = { nameObject ->
                                             navController.navigate(
                                                 NavigationRoutes.Camera.createRoute(
@@ -240,84 +332,24 @@ class MainActivity : ComponentActivity() {
                                             )
                                         },
                                         onNavigateToForestStage = {
-                                            navController.navigate(NavigationRoutes.ForestStage)
+                                            navController.navigate(
+                                                NavigationRoutes.Stage(
+                                                    challengeRoute.stageId
+                                                )
+                                            ) {
+                                                popUpTo<NavigationRoutes.Stage> {
+                                                    inclusive = true
+                                                }
+                                            }
                                         },
                                         challengeViewModel = challengeViewModel
                                     )
                                 }
                             )
                         }
-                        composable<NavigationRoutes.QuizImage> {
-
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
-
-                            val quizImageViewModel = hiltViewModel<QuizImageViewModel>()
-
-                            val currentImageQuestion by quizImageViewModel.currentQuestion.collectAsState()
-
-                            val isCorrect by quizImageViewModel.isCorrect.collectAsState()
-
-                            val currentImageResIdState by quizImageViewModel.currentImageResId.collectAsState()
-
-                            val isFinished by quizImageViewModel.isFinished.collectAsState()
-
-                            val lives by quizImageViewModel.lives.collectAsState()
-
-                            val counterQuestion by quizImageViewModel.counterQuestion.collectAsState()
-
-                            val areOptionsEnabled by quizImageViewModel.areOptionsEnabled.collectAsState() //BORRAR SI NO FUNCIONA
-
-                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
-                                imageBackground = R.drawable.fondo_minijuegos,
-                                title = title.title,
-                                isCorrect = isCorrect,
-                                questionSize = SporaConstant.MAX_QUESTIONS,
-                                isFinished = isFinished,
-                                lives = lives,
-                                counterQuestion = counterQuestion,
-                                onNextQuestion = quizImageViewModel::nextQuestion,
-                                onResetGame = quizImageViewModel::resetGame,
-                                onBackForestStage = { navController.popBackStack() },
-                                content = {
-                                    QuizImageScreen(
-                                        modifier = Modifier,
-                                        questionTitle = currentImageQuestion!!.question,
-                                        answerOptions = currentImageQuestion!!.answers,
-                                        currentImageResIdState = currentImageResIdState,
-                                        onAnswerSelected = quizImageViewModel::isAnswerCorrect,
-                                        onNextQuestion = quizImageViewModel::nextQuestion,
-                                        areOptionsEnabled = areOptionsEnabled, //BORRAR SI NO FUNCIONA
-                                    )
-                                }
-                            )
-                        }
-                        composable<NavigationRoutes.RelationsGame> {
-
-                            val title = it.toRoute<NavigationRoutes.QuizGame>()
-
-                            MiniGameScreen(modifier = Modifier.fillMaxSize(),
-                                imageBackground = R.drawable.fondo_minijuegos,
-                                title = title.title,
-                                isCorrect = null, // <- Cambiar por tu variable de estado
-                                questionSize = SporaConstant.MAX_QUESTIONS,
-                                isFinished = false, // <- Cambiar por tu variable de estado
-                                lives = 5, // <- Cambiar por tu variable de estado
-                                counterQuestion = 0, // <- Cambiar por tu variable de estado
-                                onNextQuestion = { /* Ingresar logica de siguiente */ },
-                                onResetGame = { /* Ingresar logica de reset */ },
-                                onBackForestStage = { navController.popBackStack() },
-                                content = {
-                                    MinigameRelationsScreen() {
-
-                                    }
-                                }
-                            )
-
-                        }
                     }
                 }
             }
         }
     }
-
 }

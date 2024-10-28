@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
@@ -54,9 +53,9 @@ private fun StarWithOxygenGroupPreview() {
             StarWithOxygenGroup(
                 modifier = Modifier,
                 rewards = mapOf(
-                    10 to R.drawable.estrella,
-                    20 to R.drawable.estrella,
-                    30 to R.drawable.estrella
+                    10 to R.drawable.star,
+                    20 to R.drawable.star,
+                    30 to R.drawable.star
                 ),
                 rotateItems = mapOf(
                     -25f to 0,

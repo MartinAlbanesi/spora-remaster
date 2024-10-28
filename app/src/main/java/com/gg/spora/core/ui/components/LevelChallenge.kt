@@ -3,7 +3,6 @@ package com.gg.spora.core.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +18,7 @@ fun LevelChallenge(modifier: Modifier, blocked: Boolean = true, onClick: () -> U
     Box(modifier = modifier.clickable { onClick() }) {
         if(blocked){
             Image(
-                painter = painterResource(id = R.drawable.nivel_bloqueado),
+                painter = painterResource(id = R.drawable.locked_level),
                 contentDescription = "Level blocked",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
@@ -28,7 +27,7 @@ fun LevelChallenge(modifier: Modifier, blocked: Boolean = true, onClick: () -> U
             )
         }else{
             Image(
-                painter = painterResource(id = R.drawable.nivel_desafio),
+                painter = painterResource(id = R.drawable.challenge_level),
                 contentDescription = "Challenge level",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier

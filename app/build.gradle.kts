@@ -67,6 +67,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+    packaging{
+        resources {
+            resources.excludes.add("META-INF/LICENSE.md")
+            resources.excludes.add("META-INF/LICENSE-notice.md")
+        }
+    }
+//    testOptions{
+//        unitTests{
+//            isIncludeAndroidResources = true
+//        }
+//    }
 }
 
 dependencies {
@@ -81,14 +92,16 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.firestore.ktx)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
 
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
@@ -128,6 +141,7 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.room.testing)
     ksp(libs.room.compiler)
 
     // Lottie
@@ -135,4 +149,26 @@ dependencies {
 
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // kotlin corrutines
+    testImplementation (libs.kotlinx.coroutines.test)
+
+    // Mockk
+    testImplementation (libs.mockk)
+    androidTestImplementation (libs.mockk.android)
+    androidTestImplementation (libs.mockk.agent)
+
+    // Constraint Layout Compose
+    implementation(libs.constraint.layout.compose)
+
+    // Retrofit
+//    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation (libs.converter.gson)
+
+    // Material extend icons
+    implementation("androidx.compose.material:material-icons-extended")
+
 }
