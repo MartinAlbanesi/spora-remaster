@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -90,7 +89,7 @@ fun TopAppBarPreview() {
                 firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
                 secondLabel = "0",
-                secondIcon = R.drawable.o2_icon,
+                secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
                 onBackClick = {}
             )

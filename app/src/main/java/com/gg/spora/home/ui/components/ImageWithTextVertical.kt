@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,8 +37,18 @@ fun ImageWithTextVertical(
             painter = painterResource(image),
             contentDescription = null,
             alignment = Alignment.TopCenter,
+            colorFilter = ColorFilter.lighting(add = Color.Black, multiply = Color(0xFF444444)),
             modifier = Modifier
                 .size(64.dp)
+                /*
+                .drawWithContent {
+                    drawContent()
+                    // Clip the darkening rectangle to the image bounds
+                    clipRect {
+                        drawRect(Color.Black.copy(alpha = 0.5f)) // Adjust alpha for desired darkness
+                    }
+                }
+                 */
         )
         OutlinedText(text = text)
     }

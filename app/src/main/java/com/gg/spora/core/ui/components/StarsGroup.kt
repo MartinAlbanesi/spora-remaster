@@ -2,7 +2,6 @@ package com.gg.spora.core.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -14,10 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.PreviewFontScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.StarState
@@ -64,7 +60,7 @@ private fun StarsGroupPreview() {
         ) {
             StarsGroup(
                 modifier = Modifier,
-                starState = StarState.STAR_TWO
+                starState = StarState.TWO
             )
         }
     }

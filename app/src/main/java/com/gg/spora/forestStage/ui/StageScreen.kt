@@ -13,10 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -24,31 +20,37 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.fake.FakeLevelModels
+import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.core.ui.components.ChallengeStageItem
 import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.enums.QuestionType
+import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.functions.getIsCompleteFromPreviousLevel
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun StageScreen(
     modifier: Modifier = Modifier,
+    title: String,
     oxygen: Int,
     levels: List<Level>,
+    backgroundImage: Int,
+    pathLadder: List<Pair<Int,Int>>,
     onNavigateToChallenge: (String) -> Unit,
-    onClickLevelItem: (Level, Boolean, QuestionType) -> Unit,
+    onClickLevelItem: (Level, Boolean) -> Unit,
     popBackStack: () -> Unit,
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             TopAppBarWithO2Icon(
-                title = "Área del Bosque",
+                title = title,
                 firstLabel = oxygen.toString(),
-                firstIcon = R.drawable.o2,
+                firstIcon = R.drawable.oxygen,
                 showBackArrow = true,
+                showIcon = false,
                 onBackClick = {
                     popBackStack()
                 },
@@ -57,10 +59,8 @@ fun StageScreen(
     ) { paddingValue ->
 
         Box(modifier = Modifier.fillMaxSize()) {
-
-
             Image(
-                painter = painterResource(id = R.drawable.fondo_area1),
+                painter = painterResource(id = backgroundImage),
                 contentDescription = "Area 1 background",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier.matchParentSize()
@@ -77,30 +77,36 @@ fun StageScreen(
                     levels,
                     key = { _, level -> level.id }
                 ) { index, level ->
-                    val navigateGame = when (level.questionType) {
-                        QuestionType.QUIZ -> QuestionType.QUIZ
-                        QuestionType.RELATIONS -> QuestionType.RELATIONS
-                        QuestionType.QUIZ_IMAGE -> QuestionType.QUIZ_IMAGE
-                        QuestionType.CHALLENGE -> QuestionType.CHALLENGE
-                    }
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
-                        isChallenge = level.questionType == QuestionType.CHALLENGE,
-                        stage = level.stageType,
+                        stage = level.typeStage,
+                        isBlocked = !levels.getIsCompleteFromPreviousLevel(index),
                         modifier = Modifier
-                            .offset(x = SporaConstant.PATH_LADDER[index].dp)
+                            .offset(
+                                x = pathLadder[index].first.dp,
+                                y = pathLadder[index].second.dp
+                            )
                             .clickable {
-                                if (level.questionType == QuestionType.CHALLENGE) {
-                                    onNavigateToChallenge("${level.levelName} - ${level.stageType.label}")
-                                } else {
-                                    onClickLevelItem(level, true, navigateGame)
-                                }
+                                if(levels.getIsCompleteFromPreviousLevel(index)) onClickLevelItem(level, true)
+                            }
+                    )
+                }
+                item {
+                    ChallengeStageItem(
+                        stage = TypeStage.FOREST,
+                        isBlocked = !levels.getIsCompleteFromPreviousLevel(levels.size),
+                        modifier = Modifier
+                            .offset(
+                                x = pathLadder[levels.size].first.dp,
+                                y = pathLadder[levels.size].second.dp
+                            )
+                            .clickable {
+                                if(levels.getIsCompleteFromPreviousLevel(levels.size)) onNavigateToChallenge("Desafío")
                             }
                     )
                 }
             }
-
         }
     }
 }
@@ -115,10 +121,13 @@ private fun StageScreenPreview() {
         ) {
             StageScreen(
                 oxygen = 0,
-                levels = FakeLevelModels.fakeLevels,
+                title = "Titi",
+                levels = FakeStageModels.fakeStage[1].levels,
+                backgroundImage = R.drawable.expo_proyecto_stage_background,
+                pathLadder = SporaConstant.PATH_LADDER_EXPO,
                 onNavigateToChallenge = {},
                 popBackStack = {},
-                onClickLevelItem = { _, _, _ -> }
+                onClickLevelItem = { _, _ -> }
 
             )
         }

@@ -75,7 +75,7 @@ fun TopDialogue(x: Dp = 0.dp, y: Dp = 0.dp, padding: Dp = 70.dp, dialogue: Strin
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painterResource(R.drawable.burbuja_dialogo_introduccion),
+            painterResource(R.drawable.dialogue_bubble_introduction),
             contentDescription = "burbuja de dialogo",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
@@ -106,7 +106,7 @@ fun ChampyWithBubbleTextPreview() {
     SporaTheme {
 
         ChampyWithTopDialogue(
-            champy = R.drawable.champy_curioso_brazos_al_cuerpo,
+            champy = R.drawable.champy_curious_arms_to_body,
             dialogue = "Pero primero, ¿me contás sobre vos?",
             x = -(30).dp
         )

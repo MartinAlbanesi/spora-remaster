@@ -32,11 +32,11 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToForestStage: () -> Unit,
     onNavigateToGrove: () -> Unit,
+    onNavigateToExpoStage: () -> Unit,
 ) {
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
-        /*
         HomeIcon(
             image = R.drawable.profile_icon,
             text = "Perfil",
@@ -52,18 +52,15 @@ fun HomeScreen(
             text = "Misiones",
             onClick = {}
         )
-         */
     )
 
     // Icons in the right
     val rightIcons = listOf<HomeIcon>(
-        /*
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
             onClick = {}
         ),
-         */
         HomeIcon(
             image = R.drawable.grove_icon,
             text = "Arboleda",
@@ -76,8 +73,8 @@ fun HomeScreen(
             TopAppBarWithDualIcon(
                 firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
-                secondLabel = "75",
-                secondIcon = R.drawable.o2_icon,
+                secondLabel = "0",
+                secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
             )
@@ -91,7 +88,7 @@ fun HomeScreen(
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.fondo_home),
+                painter = painterResource(id = R.drawable.home_background),
                 contentDescription = "Home Background",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
@@ -106,26 +103,28 @@ fun HomeScreen(
                 .padding(top = paddingValue.calculateTopPadding(), start = 8.dp, end = 8.dp)
         ) {
             Column(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
+                modifier = Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally
+                    //.align(Alignment.TopStart)
             ) {
                 leftIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = { onClick }),
+                        // modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
             Column(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
+                    .align(Alignment.TopEnd),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 rightIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = onClick ),
+                        // modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
@@ -139,6 +138,7 @@ fun HomeScreen(
                     modifier = Modifier
                         .size(140.dp)
                         .align(Alignment.Center)
+                        .offset(x = (-20).dp)
                 )
             }
 
@@ -150,6 +150,15 @@ fun HomeScreen(
                     .size(140.dp)
                     .offset(y = (-40).dp, x = (-80).dp)
                     .clickable(onClick = onNavigateToForestStage)
+            )
+
+            SignButton(
+                image = R.drawable.expo_sign,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .size(140.dp)
+//                    .offset(y = (-40).dp, x = (-80).dp)
+                    .clickable(onClick = onNavigateToExpoStage)
             )
         }
     }
@@ -166,7 +175,8 @@ private fun HomePreview() {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
                 onNavigateToForestStage = {},
-                onNavigateToGrove = {}
+                onNavigateToGrove = {},
+                onNavigateToExpoStage = {}
             )
         }
     }

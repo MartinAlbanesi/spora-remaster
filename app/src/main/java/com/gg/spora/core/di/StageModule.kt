@@ -2,6 +2,7 @@ package com.gg.spora.core.di
 
 import com.gg.spora.forestStage.data.FakeStageLocalRepository
 import com.gg.spora.forestStage.domain.IStageRepository
+import com.gg.spora.forestStage.domain.UpdateLevelStateUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,4 +18,11 @@ class StageModule {
     fun provideStageRepository() : IStageRepository {
         return FakeStageLocalRepository()
     }
+
+    @Singleton
+    @Provides
+    fun provideUpdateLevelStateUseCase(stageRepository: IStageRepository) : UpdateLevelStateUseCase{
+        return UpdateLevelStateUseCase(stageRepository)
+    }
+
 }
