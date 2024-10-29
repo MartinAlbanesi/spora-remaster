@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import java.time.Duration
 import java.time.LocalDateTime
-import java.util.UUID
 
 /**
  * Clase ForestTree que gestiona el crecimiento y la generación de oxígeno en un árbol del bosque
@@ -17,7 +16,7 @@ import java.util.UUID
  */
 @SuppressLint("NewApi")
 data class ForestTree(
-    override val id: UUID = UUID.randomUUID(),
+    override val id: Int = 0,
     override val type: TreeType,
     var currentStage: GrowthStage = GrowthStage.SPROUT,
     val plantingDate: LocalDateTime = LocalDateTime.now()

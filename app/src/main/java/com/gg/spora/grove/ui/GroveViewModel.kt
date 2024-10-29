@@ -34,8 +34,8 @@ class GroveViewModel @Inject constructor(
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
     val seedTrees: StateFlow<List<SeedTree>> = _seedTrees.asStateFlow()
 
-    private val _forestTrees = MutableStateFlow<List<List<ForestTree?>>>(emptyList())
-    val forestTrees: StateFlow<List<List<ForestTree?>>> = _forestTrees.asStateFlow()
+    private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
+    val forestTrees: StateFlow<List<ForestTree?>> = _forestTrees.asStateFlow()
 
     private val _forestTree = MutableStateFlow<ForestTree?>(null)
     val forestTree = _forestTree.asStateFlow()
@@ -62,26 +62,33 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-    fun setInitialForest(forest: List<List<ForestTree?>>) {
+    fun setInitialForest(forest: List<ForestTree?>) {
         _forestTrees.value = forest
     }
 
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch {
-            _forestTree.value = plantSeedUseCase(type) // No need to store the result in currentTree
+            plantSeedUseCase(type).collect { randomIndex ->
+                if (randomIndex != null) {
+                    // Get the ForestTree from the forest list using the randomIndex
+                    val forest = forestTrees.value // Assuming forestTrees is a StateFlow<List<ForestTree?>>
+                    _forestTree.value = forest.getOrNull(randomIndex) // Access the element at the randomIndex safely
+                } else {
+                    // Handle the case where no empty spot was found
+                    _forestTree.value = null
+                }
+            }
         }
     }
 
     // Actualización del estado del árbol
     fun updateTree(updatedTree: ForestTree) {
-        val updatedForest = _forestTrees.value.mapIndexed { rowIndex, row ->
-            row.mapIndexed { colIndex, tree ->
-                if (tree != null && ForestTree == ForestTree) {
-                    updatedTree
-                } else {
-                    tree
-                }
+        val updatedForest = _forestTrees.value.map { tree ->
+            if (tree != null && tree.id == updatedTree.id) { // Verifica que el árbol no sea nulo y que su ID coincida
+                updatedTree
+            } else {
+                tree
             }
         }
         _forestTrees.value = updatedForest

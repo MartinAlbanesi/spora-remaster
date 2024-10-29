@@ -35,7 +35,7 @@ import com.gg.spora.grove.ui.components.SeedTreeItem
 fun GroveScreen(
     modifier: Modifier = Modifier,
     seedTrees: List<SeedTree>,
-    forestTrees: List<List<ForestTree?>>,
+    forestTrees: List<ForestTree?>,
     plantSeedInForest: (TreeType) -> Unit,
     updateTree: (ForestTree) -> Unit,
     popBackStack: () -> Unit
@@ -102,14 +102,14 @@ fun GroveScreen(
         ) {
             // Cuadricula de árboles del bosque
             LazyVerticalGrid(
-                columns = GridCells.Fixed(forestTrees[0].size),
+                columns = GridCells.Fixed(forestTrees.size),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(16.dp)
                     .offset(y = (-50).dp)
             ) {
                 // Componente para cada árbol del bosque
-                items(forestTrees.flatten()) { tree ->
+                items(forestTrees) { tree ->
                     if (tree != null) {
                         ForestTreeItem(tree) { updatedTree ->
                             updateTree(updatedTree)

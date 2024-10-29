@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 // Caso de uso para obtener los árboles del bosque
 class GetForestTreesUseCase(private val groveRepository: IGroveRepository) {
-    suspend operator fun invoke(): Flow<List<List<ForestTree?>>> = groveRepository.loadForestTreesFromDatabase()
+    suspend operator fun invoke(): Flow<List<ForestTree?>> = groveRepository.loadForestTreesFromDatabase()
 }

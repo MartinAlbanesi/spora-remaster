@@ -6,12 +6,10 @@ import androidx.room.PrimaryKey
 import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.TreeType
 import java.time.LocalDateTime
-import java.util.UUID
 
 @Entity(tableName = "forest_trees")
 data class ForestTreeEntity(
-    @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "id_forest_tree") val idForestTree: UUID,
+    @PrimaryKey(autoGenerate = true) val idForestTree: Int = 0,
     @ColumnInfo(name = "tree_type") val treeType: TreeType,
     @ColumnInfo(name = "current_stage") val currentStage: GrowthStage,
     @ColumnInfo(name = "planting_date") val plantingDate : LocalDateTime

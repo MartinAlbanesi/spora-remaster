@@ -10,8 +10,8 @@ interface IGroveRepository {
     fun getForestTrees(): Flow<List<List<ForestTree?>>>
      */
     suspend fun collectOxygen(): Int
-    suspend fun saveForestTrees(forest: List<List<ForestTree?>>)
-    suspend fun loadForestTreesFromDatabase(): Flow<List<List<ForestTree?>>>
+    suspend fun saveForestTrees(forest: List<ForestTree?>)
+    suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>>
     suspend fun saveSeedTrees(seedTrees: List<SeedTree>)
     suspend fun loadSeedTreesFromDatabase(): Flow<List<SeedTree>>
 }

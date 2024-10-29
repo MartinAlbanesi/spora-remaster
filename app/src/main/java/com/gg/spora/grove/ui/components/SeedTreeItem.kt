@@ -21,7 +21,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
-import com.gg.spora.grove.domain.models.ForestTree
 import kotlinx.coroutines.delay
 
 /**
@@ -44,7 +43,8 @@ fun SeedTreeItem(
     LaunchedEffect(key1 = seedTree, key2 = remainingCooldown) {
         if (isCooldownActive) {
             while (remainingCooldown > 0) {
-                remainingCooldown = seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
+                remainingCooldown =
+                    seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
                 delay(1000)
             }
             isCooldownActive = false
@@ -56,29 +56,29 @@ fun SeedTreeItem(
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(id = TreeType.imageResource),
+            painter = painterResource(id = seedTree.type.imageResource), // Access imageResource from seedTree.type
             contentDescription = null,
             modifier = Modifier.size(64.dp)
         )
 
         Button(
-            modifier = Modifier.
-                width(100.dp),
+            modifier = Modifier.width(100.dp),
             onClick = {
                 // Si el cooldown no está activo, genera una semilla
                 val generatedForestTree = seedTree.generateForestTree()
                 Log.d("SeedTreeItem", "Generated ForestTree: $generatedForestTree")
                 generatedForestTree?.let { forestTree ->
                     Log.d("SeedTreeItem", "Forest Tree generated: $forestTree.type")
-                    onForestTreeGenerated(ForestTree.type)
+                    onForestTreeGenerated(forestTree.type) // Access type from forestTree
                     isCooldownActive = true
-                    remainingCooldown = seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
+                    remainingCooldown =
+                        seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
                 }
             },
             enabled = !isCooldownActive, // Deshabilita el botón si el cooldown está activo
         ) {
             // Muestra el texto correspondiente al cooldown
-            if(isCooldownActive){
+            if (isCooldownActive) {
                 Text("${remainingCooldown / 1000}s")
             } else {
                 Text("Claim")

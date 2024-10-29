@@ -1,12 +1,10 @@
 package com.gg.spora.grove.data
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.domain.models.TreeType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +24,7 @@ class GroveRepository(
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
 
     // MutableStateFlow para los árboles del bosque
-    private val _forestTrees = MutableStateFlow<List<List<ForestTree?>>>(emptyList())
+    private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
 
     /*
         init {
@@ -61,24 +59,28 @@ class GroveRepository(
     override fun getForestTrees(): Flow<List<List<ForestTree?>>> = _forestTrees.asStateFlow()
  */
 
-    override suspend fun saveForestTrees(forest: List<List<ForestTree?>>) {
-        val forestTreeEntities = forest.flatten().filterNotNull().map { it.toForestTreeEntity() }
+    override suspend fun saveForestTrees(forest: List<ForestTree?>) {
+        val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
         groveDao.insertForestTrees(forestTreeEntities)
     }
 
-    override suspend fun loadForestTreesFromDatabase(): Flow<List<List<ForestTree?>>> =
-        flow {
+    override suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>> = flow {
         val forestTrees = ForestTree.forestTreesEntitiesToModels(groveDao.getForestTrees())
 
-        // Create a 5x5 grid and fill it with ForestTree objects
-        val forestGrid = List(5) { MutableList<ForestTree?>(5) { null } }
+        // Crea una lista mutable para almacenar los objetos ForestTree
+        val forestList = mutableListOf<ForestTree?>()
+
+        // Agrega los objetos ForestTree a la lista
         forestTrees.forEach { forestTree ->
-            val row = forestTree.id.hashCode() % 5 // Calculate row index based on tree ID
-            val col = forestTree.id.hashCode() / 5 % 5 // Calculate column index based on tree ID
-            forestGrid[row][col] = forestTree
+            forestList.add(forestTree)
         }
 
-        emit(forestGrid)
+        // Completa la lista con objetos null hasta completar 25 elementos (tamaño de una matriz 5x5)
+        while (forestList.size < 25) {
+            forestList.add(null)
+        }
+
+        emit(forestList)
     }
 
     override suspend fun saveSeedTrees(seedTrees: List<SeedTree>){

@@ -15,16 +15,13 @@ class PlantSeedUseCase(private val groveRepository: IGroveRepository) {
      * Planta una semilla en un árbol del bosque.
      * @param type El tipo de árbol que se va a plantar.
      */
-    operator fun invoke(type: TreeType): Flow<Pair<Int, Int>?> = flow {
+    operator fun invoke(type: TreeType): Flow<Int?> = flow {
         Log.d("GroveRepositoryImpl", "plantSeed called with seed: $type")
 
         val forest = groveRepository.loadForestTreesFromDatabase().first() // Obtener el bosque actual
+
         // 1. Encuentra un lugar vacío en el bosque
-        val emptySpots = forest.flatMapIndexed { row, cols ->
-            cols.mapIndexedNotNull { col, tree ->
-                if (tree == null) Pair(row, col) else null
-            }
-        }
+        val emptySpots = forest.withIndex().filter { it.value == null }.map { it.index }
 
         // 2. Si no encontró ningún lugar vacío, retorna null
         if (emptySpots.isEmpty()) {
@@ -32,26 +29,21 @@ class PlantSeedUseCase(private val groveRepository: IGroveRepository) {
             return@flow
         }
 
-        // 3. Planta la semilla en un lugar aleatorio
-        val (randomRow, randomCol) = emptySpots.random()
+        // 3. Planta el arbol en un lugar vacío aleatorio
+        val randomIndex = emptySpots.random()
         val newTree = ForestTree(type = type)
 
         // 4. Actualiza la arboleda con el nuevo árbol
-        val updatedForest = forest.mapIndexed { row, cols ->
-            if (row == randomRow) {
-                cols.mapIndexed { col, tree ->
-                    if (col == randomCol) newTree else tree
-                }
-            } else cols
-        }
+        val updatedForest = forest.toMutableList()
+        updatedForest[randomIndex] = newTree
 
-        // 5. Save the updated forest to the database
+        // 5. Guarda el bosque actualizado en la base de datos
         groveRepository.saveForestTrees(updatedForest)
 
         Log.d("GroveRepositoryImpl", "New tree planted: $newTree")
         Log.d("GroveRepositoryImpl", "Updated forest: $updatedForest")
 
         // 6. Emit the position of the new tree
-        emit(Pair(randomRow, randomCol))
+        emit(randomIndex)
     }
 }
