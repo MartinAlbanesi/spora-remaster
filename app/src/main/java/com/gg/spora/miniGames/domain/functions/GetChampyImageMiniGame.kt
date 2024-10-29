@@ -1,4 +1,4 @@
-package com.gg.spora.miniGames.utils
+package com.gg.spora.miniGames.domain.functions
 
 import com.gg.spora.R
 

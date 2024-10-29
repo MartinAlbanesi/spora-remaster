@@ -35,7 +35,7 @@ import com.gg.spora.R
 import com.gg.spora.core.utils.functions.getStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
-import com.gg.spora.miniGames.utils.getChampyImageMiniGame
+import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
 import com.gg.spora.ui.theme.SporaTheme
 
 
