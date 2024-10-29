@@ -47,8 +47,6 @@ fun ChampyDialog(
     onClickSecondaryButton: () -> Unit,
     content: @Composable () -> Unit
 ) {
-//    val (localRewards, totalOxygen) = getStarsRewards(starsState, rewards)
-
     val localRewards = getStarWithOxygen(starsState, rewards)
 
     val colorFilter = if (backgroundImage == R.drawable.expo_background) {
@@ -56,9 +54,7 @@ fun ChampyDialog(
             add = Color.Black,
             multiply = Color(0xFF717171)
         )
-    } else {
-        null
-    }
+    } else { null }
 
     if (isVisible) {
 
@@ -99,7 +95,7 @@ fun ChampyDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .align(Alignment.CenterHorizontally)
-                            .offset(y = -16.dp)
+                            .offset(y = (-16).dp)
                     )
                     ChampyWithRewards(
                         champyImage = champyImage,

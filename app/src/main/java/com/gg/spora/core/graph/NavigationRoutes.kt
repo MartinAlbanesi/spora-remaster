@@ -25,15 +25,6 @@ object NavigationRoutes {
     )
 
     @Serializable
-    object Welcome
-
-    @Serializable
-    object SignUp
-
-    @Serializable
-    object RegisteredLogin
-
-    @Serializable
     object Grove
 
     @Serializable
@@ -46,5 +37,17 @@ object NavigationRoutes {
         const val route = "camera/{nameObject}"
         fun createRoute(nameObject: String) = "camera/$nameObject"
     }
+
+    @Serializable
+    object AuthGraph
+
+    @Serializable
+    object Welcome
+
+    @Serializable
+    object SignUp
+
+    @Serializable
+    object RegisteredLogin
 
 }
