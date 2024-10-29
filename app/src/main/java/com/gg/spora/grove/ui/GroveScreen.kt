@@ -52,7 +52,7 @@ fun GroveScreen(
                 firstLabel = "12",
                 firstIcon = R.drawable.trees_icon,
                 secondLabel = "465",
-                secondIcon = R.drawable.o2_icon,
+                secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = true,
                 onBackClick = popBackStack
             )
