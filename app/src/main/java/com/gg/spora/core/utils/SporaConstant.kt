@@ -29,7 +29,7 @@ object SporaConstant {
         Pair(-40,0), Pair(-40,0), Pair(-10,0), Pair(50,0)
     )
 
-    val QUESTIONS_FILE_PATH = "src/main/res/raw/questions.json"
+    const val QUESTIONS_FILE_PATH = "src/main/res/raw/questions.json"
 
-    val ANSWERS_FILE_PATH = "src/main/res/raw/answers.json"
+    const val ANSWERS_FILE_PATH = "src/main/res/raw/answers.json"
 }

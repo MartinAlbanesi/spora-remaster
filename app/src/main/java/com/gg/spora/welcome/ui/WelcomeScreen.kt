@@ -80,9 +80,6 @@ fun WelcomeScreen(
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(page + 1)
                         }
-                    },
-                    onNavigateToSignUp = {
-                        onNavigateToSignUp()
                     }
                 )
 
@@ -207,8 +204,7 @@ fun ChampyTalkScreen(
 @Composable
 fun TypeUserSelectionScreen(
     modifier: Modifier,
-    onClick: () -> Unit,
-    onNavigateToSignUp: () -> Unit
+    onClick: () -> Unit
 ) {
     Box(
         modifier = modifier
