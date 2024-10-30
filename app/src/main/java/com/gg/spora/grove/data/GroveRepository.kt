@@ -67,6 +67,7 @@ class GroveRepository(
                         )
                     )
                     saveSeedTrees(initialSeedTrees)
+                    _seedTrees.value = initialSeedTrees // Emit initial seed trees immediately
                     Log.i("GroveRepository", "Inserted initial seed trees: $initialSeedTrees")
                 }
             }

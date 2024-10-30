@@ -14,7 +14,7 @@ fun PlantingPlaceholder(
     modifier: Modifier = Modifier,
 ) {
     Image(
-        painter = painterResource(id = R.drawable.plantacion_vacia),
+        painter = painterResource(id = R.drawable.empty_tree_spot),
         contentDescription = "Planting Placeholder",
         modifier = modifier
             .size(64.dp)

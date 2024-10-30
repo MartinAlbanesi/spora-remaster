@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,8 +43,10 @@ class GroveViewModel @Inject constructor(
 
     // Inicialización de los casos de uso
     init {
-        getSeedTrees()
-        getForestTrees()
+        viewModelScope.launch {
+            getSeedTrees()
+            getForestTrees()
+        }
     }
 
     fun getSeedTrees() {
@@ -69,11 +72,12 @@ class GroveViewModel @Inject constructor(
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch {
-            plantSeedUseCase(type).collect { updatedForest ->
-                // Update forestTrees state immutably, preserving existing items
-                _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
-                    updatedForest.getOrNull(index) ?: tree // Use updated tree if available, otherwise keep existing tree
-                }
+            // Call plantSeedUseCase and update forestTrees state only once
+            val updatedForest = plantSeedUseCase(type).first() // Get the updated forest list
+
+            // Update forestTrees state immutably, preserving existing items
+            _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
+                updatedForest.getOrNull(index) ?: tree // Use updated tree if available, otherwise keep existing tree
             }
         }
     }

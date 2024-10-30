@@ -67,7 +67,7 @@ fun GroveScreen(
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.fondo_generico_sin_pasto),
+                painter = painterResource(id = R.drawable.generic_background_no_grass),
                 contentDescription = "Grove Background",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
