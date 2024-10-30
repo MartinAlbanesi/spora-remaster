@@ -95,8 +95,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
-androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
-
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx"}
 
 # Camera X
 camerax-core = { group = "androidx.camera", name = "camera-core", version.ref = "camerax"}

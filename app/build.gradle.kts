@@ -90,7 +90,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.firebase.firestore.ktx)
@@ -119,6 +118,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
     //CameraX
     implementation(libs.camerax.core)
