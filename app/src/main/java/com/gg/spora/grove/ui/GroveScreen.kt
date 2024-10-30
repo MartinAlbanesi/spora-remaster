@@ -1,6 +1,7 @@
 package com.gg.spora.grove.ui
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -89,6 +90,7 @@ fun GroveScreen(
                 // Componente para cada árbol semillero
                 for (seedTree in seedTrees) {
                     SeedTreeItem(seedTree = seedTree) { treeType ->
+                        Log.i("GroveScreen", "Tree type clicked: $treeType")
                         plantSeedInForest(treeType)
                     }
                 }
@@ -102,7 +104,7 @@ fun GroveScreen(
         ) {
             // Cuadricula de árboles del bosque
             LazyVerticalGrid(
-                columns = GridCells.Fixed(forestTrees.size),
+                columns = GridCells.Fixed(5),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(16.dp)

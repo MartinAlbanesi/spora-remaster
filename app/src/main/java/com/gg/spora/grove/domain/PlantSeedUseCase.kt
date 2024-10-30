@@ -15,7 +15,7 @@ class PlantSeedUseCase(private val groveRepository: IGroveRepository) {
      * Planta una semilla en un árbol del bosque.
      * @param type El tipo de árbol que se va a plantar.
      */
-    operator fun invoke(type: TreeType): Flow<Int?> = flow {
+    operator fun invoke(type: TreeType): Flow<List<ForestTree?>> = flow {
         Log.d("GroveRepositoryImpl", "plantSeed called with seed: $type")
 
         val forest = groveRepository.loadForestTreesFromDatabase().first() // Obtener el bosque actual
@@ -23,9 +23,9 @@ class PlantSeedUseCase(private val groveRepository: IGroveRepository) {
         // 1. Encuentra un lugar vacío en el bosque
         val emptySpots = forest.withIndex().filter { it.value == null }.map { it.index }
 
-        // 2. Si no encontró ningún lugar vacío, retorna null
+        // 2. Si no encontró ningún lugar vacío, retorna la lista actual
         if (emptySpots.isEmpty()) {
-            emit(null)
+            emit(forest) // Emit the current forest list
             return@flow
         }
 
@@ -43,7 +43,7 @@ class PlantSeedUseCase(private val groveRepository: IGroveRepository) {
         Log.d("GroveRepositoryImpl", "New tree planted: $newTree")
         Log.d("GroveRepositoryImpl", "Updated forest: $updatedForest")
 
-        // 6. Emit the position of the new tree
-        emit(randomIndex)
+        // 6. Emit the updated forest list
+        emit(updatedForest)
     }
 }

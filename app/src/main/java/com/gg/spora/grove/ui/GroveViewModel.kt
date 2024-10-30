@@ -69,14 +69,10 @@ class GroveViewModel @Inject constructor(
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch {
-            plantSeedUseCase(type).collect { randomIndex ->
-                if (randomIndex != null) {
-                    // Get the ForestTree from the forest list using the randomIndex
-                    val forest = forestTrees.value // Assuming forestTrees is a StateFlow<List<ForestTree?>>
-                    _forestTree.value = forest.getOrNull(randomIndex) // Access the element at the randomIndex safely
-                } else {
-                    // Handle the case where no empty spot was found
-                    _forestTree.value = null
+            plantSeedUseCase(type).collect { updatedForest ->
+                // Update forestTrees state immutably, preserving existing items
+                _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
+                    updatedForest.getOrNull(index) ?: tree // Use updated tree if available, otherwise keep existing tree
                 }
             }
         }

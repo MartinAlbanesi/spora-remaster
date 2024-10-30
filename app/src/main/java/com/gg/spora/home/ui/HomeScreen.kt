@@ -124,7 +124,9 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = {
+                            onClick()
+                        }),
                     )
                 }
             }

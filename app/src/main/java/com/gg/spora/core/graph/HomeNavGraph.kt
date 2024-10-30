@@ -1,7 +1,9 @@
 package com.gg.spora.core.graph
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,7 +12,6 @@ import androidx.navigation.navigation
 import com.gg.spora.grove.ui.GroveScreen
 import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.home.ui.HomeScreen
-import androidx.compose.runtime.getValue
 
 @SuppressLint("NewApi")
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
@@ -22,6 +23,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     navController.navigate(NavigationRoutes.Stage("1"))
                 },
                 onNavigateToGrove = {
+                    Log.i("HomeScreen", "Clicked on Grove")
                     navController.navigate(NavigationRoutes.Grove)
                 },
                 onNavigateToExpoStage = {
@@ -29,6 +31,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 }
             )
         }
+
         composable<NavigationRoutes.Grove> {
             val groveViewModel = hiltViewModel<GroveViewModel>()
             val seedTrees by groveViewModel.seedTrees.collectAsState()
