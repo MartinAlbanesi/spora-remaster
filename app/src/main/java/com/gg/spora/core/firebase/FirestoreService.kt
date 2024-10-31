@@ -7,7 +7,10 @@ import javax.inject.Inject
 class FirestoreService @Inject constructor(
     private val firestore: FirebaseFirestore
 ) {
-    suspend fun setNewDocument(document: Any, collection: String) : String {
+    suspend fun setNewDocument(
+        collection: String,
+        document: Any,
+    ) : String {
 
         var id : String?
 

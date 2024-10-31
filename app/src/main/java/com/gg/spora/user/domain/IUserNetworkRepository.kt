@@ -5,11 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserNetworkRepository {
 
-    fun setUser(user: User) : String
+    suspend fun setUser(user: User) : String
 
-    fun updateUserById(user: User, id: String)
+    suspend fun updateUserById(user: User, id: String)
 
-    fun deleteUserById(id: String)
+    suspend fun deleteUserById(id: String)
 
     fun getUserByEmailFlow(email: String): Flow<User>
 }
