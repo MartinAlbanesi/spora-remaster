@@ -3,7 +3,7 @@ package com.gg.spora.user.domain
 import com.gg.spora.user.domain.models.User
 import kotlinx.coroutines.flow.Flow
 
-interface IUserNetworkRepository {
+interface IUserRepositoryNetwork {
 
     suspend fun setUser(user: User) : String
 

@@ -202,7 +202,10 @@ fun GoogleLoginButton() {
 }
 
 @Composable
-fun LoginQuestionLink(navController: NavHostController) {
+fun LoginQuestionLink(
+//    navController: NavHostController
+    onNavigateToRegisteredLogin: () -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -219,7 +222,8 @@ fun LoginQuestionLink(navController: NavHostController) {
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
                 .clickable {
-                    navController.navigate(NavigationRoutes.RegisteredLogin)
+//                    navController.navigate(NavigationRoutes.RegisteredLogin)
+                    onNavigateToRegisteredLogin()
                 }
         )
     }
