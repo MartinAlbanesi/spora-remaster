@@ -1,0 +1,60 @@
+package com.gg.spora.forestStage.domain
+
+import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.core.fake.FakeUserModels
+import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.forestStage.IStageRepositoryNetwork
+import com.gg.spora.forestStage.data.network.models.StageRepositoryNetwork
+import com.gg.spora.user.domain.GetUserFromDBUseCase
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Before
+import org.junit.Test
+import org.junit.jupiter.api.DisplayName
+
+class GetLevelsUseCaseTest {
+
+    private lateinit var getLevelsUseCase: GetLevelsUseCase
+
+    @RelaxedMockK
+    private lateinit var stageRepositoryNetwork: IStageRepositoryNetwork
+
+    @RelaxedMockK
+    private lateinit var getUserFromDBUseCase: GetUserFromDBUseCase
+
+
+    @Before
+    fun setUp() {
+        MockKAnnotations.init(this)
+
+        getLevelsUseCase = GetLevelsUseCase(stageRepositoryNetwork, getUserFromDBUseCase)
+    }
+
+    @DisplayName("Cuando se invoca al caso de uso, " +
+        "se debe retornar un flujo de niveles combinado con los niveles completados por el usuario")
+
+    @Test
+    operator fun invoke() = runTest {
+
+        // Given
+        val levelsFlow = flowOf(FakeStageModels.fakeLevels)
+        val userLevelsCompleted = flowOf(FakeUserModels.fakeUsers.first())
+
+        coEvery { getUserFromDBUseCase() } returns userLevelsCompleted
+        coEvery { stageRepositoryNetwork.getLevelsByStageType(any()) } returns levelsFlow
+
+        // When
+        val result = getLevelsUseCase(StageType.FOREST).first()
+
+        // Then
+        assertNotEquals(FakeStageModels.fakeLevels, result)
+        assertEquals(StarState.ONE, result.first().starState)
+    }
+}

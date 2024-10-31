@@ -19,7 +19,6 @@ object FakeStageModels {
     )
 
     var fakeExpoLevels = listOf(
-
         Level(
             id = "1",
             levelName = "Expo",

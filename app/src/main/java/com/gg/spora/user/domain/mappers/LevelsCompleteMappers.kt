@@ -10,6 +10,5 @@ fun LevelCompletedNetwork.toLevelCompleted() : LevelCompleted {
         levelId = levelId ?: "",
         stageType = getStageTypeByName(stageType ?: ""),
         starState = getStarStateByName(starState ?: ""),
-        rewardsOxygen = rewardsOxygen ?: emptyList(),
     )
 }
