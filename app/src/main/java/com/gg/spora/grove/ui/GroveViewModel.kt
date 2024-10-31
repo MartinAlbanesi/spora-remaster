@@ -72,10 +72,9 @@ class GroveViewModel @Inject constructor(
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch {
-            // Call plantSeedUseCase and update forestTrees state only once
             val updatedForest = plantSeedUseCase(type).first() // Get the updated forest list
 
-            // Update forestTrees state immutably, preserving existing items
+            // Update forestTrees state immutably, preserving existing items and keys
             _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
                 updatedForest.getOrNull(index) ?: tree // Use updated tree if available, otherwise keep existing tree
             }

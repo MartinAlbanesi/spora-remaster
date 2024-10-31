@@ -1,19 +1,12 @@
 package com.gg.spora.grove.data
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.domain.models.TreeType
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
-import java.time.Duration
 
 /**
  * Clase GroveRepository que implementa la interfaz IGroveRepository para interactuar con los árboles del bosque, generando semillas y recolectando oxígeno.
@@ -23,67 +16,46 @@ class GroveRepository(
     private val groveDao: GroveDao
 ) : IGroveRepository {
 
-    // MutableStateFlow para los árboles semilleros
-    private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
-
-    // MutableStateFlow para los árboles del bosque
-    private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
-
     /*
-        init {
+       // MutableStateFlow para los árboles semilleros
+       private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
 
-            // Inicializa con árboles semilleros de ejemplo
-            _seedTrees.value = listOf(
-                SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(5)),
-                SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
-                SeedTree(type = TreeType.PINE, timeToGenerateForestTree = Duration.ofSeconds(5))
-            )
+       // MutableStateFlow para los árboles del bosque
+       private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
 
-            // Inicializa con 5 filas y 5 columnas de árboles del bosque vacíos
-            _forestTrees.value = List(5) { MutableList<ForestTree?>(5) { null } }
-        }
-    */
-    init {
-        CoroutineScope(Dispatchers.IO).launch {
-            // Load existing seed trees from the database
-            loadSeedTreesFromDatabase().collect { seedTrees ->
-                _seedTrees.value = seedTrees
-                Log.i("GroveRepository", "Loaded seed trees: $seedTrees")
 
-                // If the database is empty, insert 3 seed trees
-                if (seedTrees.isEmpty()) {
-                    val initialSeedTrees = listOf(
-                        SeedTree(
-                            type = TreeType.BAOBAB,
-                            timeToGenerateForestTree = Duration.ofSeconds(5)
-                        ),
-                        SeedTree(
-                            type = TreeType.SECUOYA,
-                            timeToGenerateForestTree = Duration.ofSeconds(5)
-                        ),
-                        SeedTree(
-                            type = TreeType.PINE,
-                            timeToGenerateForestTree = Duration.ofSeconds(5)
-                        )
-                    )
-                    saveSeedTrees(initialSeedTrees)
-                    _seedTrees.value = initialSeedTrees // Emit initial seed trees immediately
-                    Log.i("GroveRepository", "Inserted initial seed trees: $initialSeedTrees")
-                }
-            }
-            loadForestTreesFromDatabase().collect { forestTrees ->
-                _forestTrees.value = forestTrees
-            }
-        }
-    }
+           init {
 
-    /*
-        // Devuelve los árboles semilleros
-        override fun getSeedTrees(): Flow<List<SeedTree>> = _seedTrees.asStateFlow()
+               // Inicializa con árboles semilleros de ejemplo
+               _seedTrees.value = listOf(
+                   SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(5)),
+                   SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
+                   SeedTree(type = TreeType.PINE, timeToGenerateForestTree = Duration.ofSeconds(5))
+               )
 
-        // Devuelve los árboles del bosque
-        override fun getForestTrees(): Flow<List<List<ForestTree?>>> = _forestTrees.asStateFlow()
-     */
+               // Inicializa con 5 filas y 5 columnas de árboles del bosque vacíos
+               _forestTrees.value = List(5) { MutableList<ForestTree?>(5) { null } }
+           }
+
+       init {
+           CoroutineScope(Dispatchers.IO).launch {
+               // Load existing seed trees from the database
+               loadSeedTreesFromDatabase().collect { seedTrees ->
+                   _seedTrees.value = seedTrees
+                   /*
+                   // If the database is empty, insert 3 seed trees
+                   if (seedTrees.isEmpty()) {
+                       saveSeedTrees(_seedTrees.value)
+                       Log.i("GroveRepository", "Inserted initial seed trees: ${_seedTrees.value}")
+                   }
+                    */
+               }
+               loadForestTreesFromDatabase().collect { forestTrees ->
+                   _forestTrees.value = forestTrees
+               }
+           }
+       }
+        */
 
     override suspend fun saveForestTrees(forest: List<ForestTree?>) {
         val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
