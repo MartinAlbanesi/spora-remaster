@@ -3,7 +3,8 @@ package com.gg.spora.core.di
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.user.data.network.UserRepositoryNetwork
 import com.gg.spora.user.domain.GetCurrentUserUseCase
-import com.gg.spora.user.domain.IUserNetworkRepository
+import com.gg.spora.user.domain.IUserRepositoryNetwork
+import com.gg.spora.user.domain.SetNewUserUseCase
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -19,7 +20,7 @@ class UserModule {
     @Singleton
     fun provideUserRepositoryNetwork(
         firestoreService: FirestoreService
-    ) : IUserNetworkRepository {
+    ) : IUserRepositoryNetwork {
         return UserRepositoryNetwork(firestoreService)
     }
 
@@ -29,5 +30,11 @@ class UserModule {
         firebaseAuth: FirebaseAuth,
     ): GetCurrentUserUseCase {
         return GetCurrentUserUseCase(firebaseAuth)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSetNewUserUseCase(userRepositoryNetwork: UserRepositoryNetwork) : SetNewUserUseCase{
+        return SetNewUserUseCase(userRepositoryNetwork)
     }
 }
