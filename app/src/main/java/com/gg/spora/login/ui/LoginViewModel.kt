@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -103,7 +104,10 @@ class LoginViewModel @Inject constructor(
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 setNewUserUseCase(email, name)
-                onNavigationToHome()
+                withContext(Dispatchers.Main) {
+                    onNavigationToHome()
+                }
+
             }
         }catch (e:Exception){
             _errorMessage.value = "Error al guardar usuario: ${e.localizedMessage}"
