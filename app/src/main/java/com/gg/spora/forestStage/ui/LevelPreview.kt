@@ -40,7 +40,7 @@ fun LevelPreview(
         modifier = modifier,
         backgroundImage = backgroundImage,
         champyImage = champyImage,
-        title = "${level.levelName} - ${level.typeStage.label}",
+        title = "${level.levelName} - ${level.stageType.label}",
         isVisible = isVisible,
         starsState = level.starState,
         rewards = level.rewardsOxygen,

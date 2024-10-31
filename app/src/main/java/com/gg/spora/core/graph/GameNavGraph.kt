@@ -33,6 +33,7 @@ import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
 import com.gg.spora.miniGames.ui.RelationsScreen
 
+@Suppress("LongMethod")
 fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.GameGraph>(startDestination = NavigationRoutes.Stage("1")) {
         composable<NavigationRoutes.Stage> {
@@ -73,7 +74,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             StageScreen(
                 oxygen = 75,
-                title = stage!!.typeStage.label,
+                title = stage!!.stageType.label,
                 levels = stage!!.levels,
                 backgroundImage = stage!!.stageBackgroundImage,
                 pathLadder = stage!!.pathLadder,

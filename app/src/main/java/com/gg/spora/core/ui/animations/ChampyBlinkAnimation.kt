@@ -19,7 +19,6 @@ fun ChampyBlinkAnimation(modifier: Modifier, ) {
     val initialFrame: Int = ChampyStates.SMILING.image
     val finalFrame: Int = ChampyStates.BLINK.image
     var isTimePassed by remember { mutableStateOf(false) }
-    var coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
 

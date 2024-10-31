@@ -34,7 +34,10 @@ import com.gg.spora.login.component.separatorLogin
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
+fun LoginScreen(
+    viewModel: LoginViewModel,
+    navController: NavHostController
+) {
     Box(
         Modifier
             .fillMaxSize()
@@ -52,7 +55,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
         )
         IconButtonArrowLogin()
 
-        Login(Modifier.align(Alignment.Center), viewModel, navController)
+        Login(Modifier.align(Alignment.Center), viewModel)
 
         LoginQuestionLink(navController = navController)
     }
@@ -60,7 +63,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
 
 
 @Composable
-fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavHostController) {
+fun Login(modifier: Modifier, viewModel: LoginViewModel) {
     val name: String by viewModel.name.observeAsState(initial = "")
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")

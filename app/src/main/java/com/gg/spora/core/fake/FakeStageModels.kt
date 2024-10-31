@@ -4,7 +4,7 @@ import com.gg.spora.R
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
 import com.gg.spora.miniGames.domain.model.Challenge
@@ -23,7 +23,7 @@ object FakeStageModels {
         Level(
             id = "1",
             levelName = "Expo",
-            typeStage = TypeStage.EXPO,
+            stageType = StageType.EXPO,
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
             starState = StarState.ZERO,
@@ -40,7 +40,7 @@ object FakeStageModels {
         Level(
             id = "1",
             levelName = "Nivel 1",
-            typeStage = TypeStage.FOREST,
+            stageType = StageType.FOREST,
             requiredOxygen = 0,
             rewardsOxygen = listOf(10, 20, 30),
             starState = StarState.ZERO,
@@ -54,7 +54,7 @@ object FakeStageModels {
         Level(
             id = "2",
             levelName = "Nivel 2",
-            typeStage = TypeStage.FOREST,
+            stageType = StageType.FOREST,
             requiredOxygen = 0,
             rewardsOxygen = listOf(15, 25, 35),
             starState = StarState.ZERO,
@@ -67,7 +67,7 @@ object FakeStageModels {
         Level(
             id = "3",
             levelName = "Nivel 3",
-            typeStage = TypeStage.FOREST,
+            stageType = StageType.FOREST,
             requiredOxygen = 30,
             rewardsOxygen = listOf(15, 25, 35),
             starState = StarState.ZERO,
@@ -82,7 +82,7 @@ object FakeStageModels {
     var fakeStage = listOf(
         StageLevel(
             id = "1",
-            typeStage = TypeStage.FOREST,
+            stageType = StageType.FOREST,
             levels = fakeLevels,
             challenge = fakeChallenge,
             levelPreviewImage = R.drawable.minigame_background_crop,
@@ -91,7 +91,7 @@ object FakeStageModels {
         ),
         StageLevel(
             id = "2",
-            typeStage = TypeStage.EXPO,
+            stageType = StageType.EXPO,
             levels = fakeExpoLevels,
             challenge = fakeChallenge,
             levelPreviewImage = R.drawable.expo_background,
