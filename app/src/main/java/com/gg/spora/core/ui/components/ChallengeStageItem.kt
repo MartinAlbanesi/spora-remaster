@@ -10,19 +10,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.enums.StageType
 
 @Composable
 fun ChallengeStageItem(
     modifier: Modifier = Modifier,
-    stage: TypeStage,
+    stage: StageType,
     isBlocked: Boolean = false
 ) {
     val challengeImage = when (stage) {
-        TypeStage.FOREST -> R.drawable.challenge_icon
-        TypeStage.DESERT -> 1
-        TypeStage.RIVER -> 2
-        TypeStage.EXPO -> R.drawable.challenge_icon
+        StageType.FOREST -> R.drawable.challenge_icon
+        StageType.DESERT -> 1
+        StageType.RIVER -> 2
+        StageType.EXPO -> R.drawable.challenge_icon
     }
 
     val currentImage = if (isBlocked) R.drawable.locked_level else challengeImage

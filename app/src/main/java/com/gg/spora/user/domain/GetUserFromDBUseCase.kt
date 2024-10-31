@@ -1,6 +1,6 @@
 package com.gg.spora.user.domain
 
-import com.gg.spora.user.data.network.models.UserRepositoryNetwork
+import com.gg.spora.user.data.network.UserRepositoryNetwork
 import com.gg.spora.user.domain.models.User
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

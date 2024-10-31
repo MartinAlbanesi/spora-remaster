@@ -25,7 +25,7 @@ import com.gg.spora.core.ui.components.ChallengeStageItem
 import com.gg.spora.core.ui.components.LevelStageItem
 import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
 import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.functions.getIsCompleteFromPreviousLevel
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
@@ -80,7 +80,7 @@ fun StageScreen(
                     LevelStageItem(
                         itemNumber = level.id,
                         starsState = level.starState,
-                        stage = level.typeStage,
+                        stage = level.stageType,
                         isBlocked = !levels.getIsCompleteFromPreviousLevel(index),
                         modifier = Modifier
                             .offset(
@@ -94,7 +94,7 @@ fun StageScreen(
                 }
                 item {
                     ChallengeStageItem(
-                        stage = TypeStage.FOREST,
+                        stage = StageType.FOREST,
                         isBlocked = !levels.getIsCompleteFromPreviousLevel(levels.size),
                         modifier = Modifier
                             .offset(

@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.toRoute
 import com.gg.spora.core.graph.NavigationRoutes
-import com.gg.spora.core.utils.enums.TypeStage
 import com.gg.spora.forestStage.domain.IStageRepository
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel

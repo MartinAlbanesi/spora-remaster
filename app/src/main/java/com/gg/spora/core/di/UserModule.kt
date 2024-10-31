@@ -1,7 +1,7 @@
 package com.gg.spora.core.di
 
 import com.gg.spora.core.firebase.FirestoreService
-import com.gg.spora.user.data.network.models.UserRepositoryNetwork
+import com.gg.spora.user.data.network.UserRepositoryNetwork
 import com.gg.spora.user.domain.IUserNetworkRepository
 import dagger.Module
 import dagger.Provides

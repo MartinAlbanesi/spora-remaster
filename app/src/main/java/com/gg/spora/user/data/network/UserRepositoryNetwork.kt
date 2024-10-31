@@ -1,8 +1,10 @@
-package com.gg.spora.user.data.network.models
+package com.gg.spora.user.data.network
 
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.core.utils.enums.CollectionsDataBase
+import com.gg.spora.user.data.network.models.UserNetwork
 import com.gg.spora.user.domain.IUserNetworkRepository
+import com.gg.spora.user.domain.mappers.toUser
 import com.gg.spora.user.domain.models.User
 import com.google.firebase.firestore.snapshots
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +34,9 @@ class UserRepositoryNetwork @Inject constructor(
             .whereEqualTo("email", email)
             .snapshots()
             .map {
-                it.toObjects(User::class.java).first()
+                it.toObjects(UserNetwork::class.java)
+                    .first()
+                    .toUser()
             }
     }
 }

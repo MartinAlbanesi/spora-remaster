@@ -74,7 +74,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             StageScreen(
                 oxygen = 75,
-                title = stage!!.typeStage.label,
+                title = stage!!.stageType.label,
                 levels = stage!!.levels,
                 backgroundImage = stage!!.stageBackgroundImage,
                 pathLadder = stage!!.pathLadder,
