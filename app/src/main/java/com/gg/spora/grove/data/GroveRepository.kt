@@ -16,47 +16,6 @@ class GroveRepository(
     private val groveDao: GroveDao
 ) : IGroveRepository {
 
-    /*
-       // MutableStateFlow para los árboles semilleros
-       private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
-
-       // MutableStateFlow para los árboles del bosque
-       private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
-
-
-           init {
-
-               // Inicializa con árboles semilleros de ejemplo
-               _seedTrees.value = listOf(
-                   SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(5)),
-                   SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
-                   SeedTree(type = TreeType.PINE, timeToGenerateForestTree = Duration.ofSeconds(5))
-               )
-
-               // Inicializa con 5 filas y 5 columnas de árboles del bosque vacíos
-               _forestTrees.value = List(5) { MutableList<ForestTree?>(5) { null } }
-           }
-
-       init {
-           CoroutineScope(Dispatchers.IO).launch {
-               // Load existing seed trees from the database
-               loadSeedTreesFromDatabase().collect { seedTrees ->
-                   _seedTrees.value = seedTrees
-                   /*
-                   // If the database is empty, insert 3 seed trees
-                   if (seedTrees.isEmpty()) {
-                       saveSeedTrees(_seedTrees.value)
-                       Log.i("GroveRepository", "Inserted initial seed trees: ${_seedTrees.value}")
-                   }
-                    */
-               }
-               loadForestTreesFromDatabase().collect { forestTrees ->
-                   _forestTrees.value = forestTrees
-               }
-           }
-       }
-        */
-
     override suspend fun saveForestTrees(forest: List<ForestTree?>) {
         val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
         groveDao.insertForestTrees(forestTreeEntities)

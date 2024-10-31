@@ -8,9 +8,10 @@ import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.CollectOxygenUseCase
-import com.gg.spora.grove.domain.GetForestTreesUseCase
-import com.gg.spora.grove.domain.GetSeedTreesUseCase
-import com.gg.spora.grove.domain.PlantSeedUseCase
+import com.gg.spora.grove.domain.LoadForestTreesUseCase
+import com.gg.spora.grove.domain.LoadSeedTreesUseCase
+import com.gg.spora.grove.domain.SaveForestTreesUseCase
+import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.ui.GroveViewModel
 import dagger.Module
 import dagger.Provides
@@ -48,20 +49,26 @@ class GroveModule {
 
     @Provides
     @Singleton
-    fun provideGetSeedTreesUseCase(groveRepository: IGroveRepository): GetSeedTreesUseCase {
-        return GetSeedTreesUseCase(groveRepository)
+    fun provideLoadSeedTreesUseCase(groveRepository: IGroveRepository): LoadSeedTreesUseCase {
+        return LoadSeedTreesUseCase(groveRepository)
     }
 
     @Provides
     @Singleton
-    fun provideGetForestTreesUseCase(groveRepository: IGroveRepository): GetForestTreesUseCase {
-        return GetForestTreesUseCase(groveRepository)
+    fun provideSaveSeedTreesUseCase(groveRepository: IGroveRepository): SaveSeedTreesUseCase {
+        return SaveSeedTreesUseCase(groveRepository)
     }
 
     @Provides
     @Singleton
-    fun providePlantSeedUseCase(groveRepository: IGroveRepository): PlantSeedUseCase {
-        return PlantSeedUseCase(groveRepository)
+    fun provideLoadForestTreesUseCase(groveRepository: IGroveRepository): LoadForestTreesUseCase {
+        return LoadForestTreesUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveForestTreesUseCase(groveRepository: IGroveRepository): SaveForestTreesUseCase {
+        return SaveForestTreesUseCase(groveRepository)
     }
 
     @Provides
@@ -73,14 +80,21 @@ class GroveModule {
     @Provides
     @Singleton
     fun provideGroveViewModel(
+        loadSeedTreesUseCase: LoadSeedTreesUseCase,
+        saveSeedTreesUseCase: SaveSeedTreesUseCase,
+        loadForestTreesUseCase: LoadForestTreesUseCase,
+        saveForestTreesUseCase: SaveForestTreesUseCase,
+        /*
         getSeedTreesUseCase: GetSeedTreesUseCase,
         getForestTreesUseCase: GetForestTreesUseCase,
         plantSeedUseCase: PlantSeedUseCase/* collectOxygenUseCase: CollectOxygenUseCase*/
+         */
     ): GroveViewModel {
         return GroveViewModel(
-            getSeedTreesUseCase,
-            getForestTreesUseCase,
-            plantSeedUseCase /*collectOxygenUseCase*/
+            loadSeedTreesUseCase,
+            saveSeedTreesUseCase,
+            loadForestTreesUseCase,
+            saveForestTreesUseCase,
         )
     }
 

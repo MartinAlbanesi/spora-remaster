@@ -2,9 +2,10 @@ package com.gg.spora.grove.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.grove.domain.GetForestTreesUseCase
-import com.gg.spora.grove.domain.GetSeedTreesUseCase
-import com.gg.spora.grove.domain.PlantSeedUseCase
+import com.gg.spora.grove.domain.LoadForestTreesUseCase
+import com.gg.spora.grove.domain.LoadSeedTreesUseCase
+import com.gg.spora.grove.domain.SaveForestTreesUseCase
+import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
@@ -12,8 +13,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.time.Duration
 import javax.inject.Inject
 
 /**
@@ -25,10 +26,13 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class GroveViewModel @Inject constructor(
-    private val getSeedTreesUseCase: GetSeedTreesUseCase,
-    private val getForestTreesUseCase: GetForestTreesUseCase,
-    private val plantSeedUseCase: PlantSeedUseCase,
-    // private val collectOxygenUseCase: CollectOxygenUseCase
+    // private val getSeedTreesUseCase: GetSeedTreesUseCase,
+    // private val getForestTreesUseCase: GetForestTreesUseCase,
+    // private val plantSeedUseCase: PlantSeedUseCase,
+    private val loadSeedTreesUseCase: LoadSeedTreesUseCase,
+    private val saveSeedTreesUseCase: SaveSeedTreesUseCase,
+    private val loadForestTreesUseCase: LoadForestTreesUseCase,
+    private val saveForestTreesUseCase: SaveForestTreesUseCase,
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque
@@ -44,40 +48,81 @@ class GroveViewModel @Inject constructor(
     // Inicialización de los casos de uso
     init {
         viewModelScope.launch {
+            initSeedTrees()
+            saveSeedTrees()
             getSeedTrees()
             getForestTrees()
         }
     }
 
+    fun initSeedTrees() {
+        if (_seedTrees.value.isEmpty()) {
+            _seedTrees.value = listOf(
+                SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(5)),
+                SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
+                SeedTree(type = TreeType.MANGROVE, timeToGenerateForestTree = Duration.ofSeconds(5)),
+            )
+        }
+    }
+
     fun getSeedTrees() {
         viewModelScope.launch {
-            getSeedTreesUseCase().collect { seedTrees ->
-                _seedTrees.value = seedTrees
-            }
+            _seedTrees.value = loadSeedTreesUseCase()
         }
     }
 
     fun getForestTrees() {
         viewModelScope.launch {
-            getForestTreesUseCase().collect { forestTrees ->
-                _forestTrees.value = forestTrees
-            }
+            _forestTrees.value = loadForestTreesUseCase()
         }
     }
 
-    fun setInitialForest(forest: List<ForestTree?>) {
-        _forestTrees.value = forest
+    fun saveSeedTrees() {
+        viewModelScope.launch {
+            saveSeedTreesUseCase(_seedTrees.value)
+        }
+    }
+
+    fun saveForestTrees() {
+        viewModelScope.launch {
+            saveForestTreesUseCase(_forestTrees.value)
+        }
     }
 
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch {
+
+            // Encuentra un lugar vacío en el bosque
+            val emptySpots = _forestTrees.value.withIndex().filter { it.value == null }.map { it.index }
+
+            // Si no encontró ningún lugar vacío, retorna
+            if (emptySpots.isEmpty()) {
+                return@launch
+            }
+
+            // Planta el arbol en un lugar vacío aleatorio
+            val randomIndex = emptySpots.random()
+            val newTree = ForestTree(type = type)
+
+            // Actualiza la arboleda con el nuevo árbol
+            val updatedForest = _forestTrees.value.toMutableList()
+            updatedForest[randomIndex] = newTree
+            _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
+                updatedForest.getOrNull(index)
+                    ?: tree // Use updated tree if available, otherwise keep existing tree
+            }
+
+            /*
+            // Llama al caso de uso para plantar el arbol
             val updatedForest = plantSeedUseCase(type).first() // Get the updated forest list
 
             // Update forestTrees state immutably, preserving existing items and keys
             _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
-                updatedForest.getOrNull(index) ?: tree // Use updated tree if available, otherwise keep existing tree
+                updatedForest.getOrNull(index)
+                    ?: tree // Use updated tree if available, otherwise keep existing tree
             }
+             */
         }
     }
 
