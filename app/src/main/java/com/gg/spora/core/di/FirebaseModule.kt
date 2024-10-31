@@ -27,12 +27,12 @@ class FirebaseModule {
         return FirestoreService(firestore)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideFirebaseAuth(): FirebaseAuth {
-//        return FirebaseAuth.getInstance()
-//    }
-//
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
+
 //    @Singleton
 //    @Provides
 //    fun provideFirebaseStorage(): FirebaseStorage {

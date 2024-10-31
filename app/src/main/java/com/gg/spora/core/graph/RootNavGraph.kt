@@ -13,10 +13,11 @@ import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
 @Composable
 fun RootNavigationGraph(
     navController: NavHostController = rememberNavController(),
+    isUserLoggedIn: Boolean,
 ){
     NavHost(
         navController = navController,
-        startDestination = NavigationRoutes.AuthGraph,
+        startDestination = if(!isUserLoggedIn) NavigationRoutes.AuthGraph else NavigationRoutes.HomeGraph,
         enterTransition = ::screenFadeWithSlideInToLeft,
         exitTransition = ::screenFadeWithSlideOutToRight,
         popEnterTransition = ::screenFadeWithSlideInToLeft,
