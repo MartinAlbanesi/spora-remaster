@@ -146,7 +146,7 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    implementation(libs.room.testing)
+    testImplementation(libs.room.testing)
     ksp(libs.room.compiler)
 
     // Lottie

@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
+import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,11 +16,14 @@ interface UserDao {
 
     @Transaction
     @Query("SELECT * FROM user_entity")
-    fun getUsers(): Flow<List<UserEntity>>
+    fun getUsersWithLevelsCompleted(): Flow<List<UserWithLevelsCompletedEntity>>
+
+    @Query("SELECT * FROM user_entity WHERE id = :userId")
+    fun getUser(userId: String): Flow<UserEntity>
 
 
     @Query("SELECT * FROM level_completed_entity WHERE userId = :userId")
-    fun getLevelsCompletedByUserId(userId: String): Flow<List<UserEntity>>
+    fun getLevelsCompletedByUserId(userId: String): Flow<List<LevelCompletedEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserEntity)
