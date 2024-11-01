@@ -1,0 +1,41 @@
+package com.gg.spora.user.domain
+
+import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.user.domain.models.LevelCompleted
+import kotlinx.coroutines.flow.first
+import javax.inject.Inject
+
+class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
+    private val userRepositoryLocal: IUserRepositoryLocal,
+    private val userRepositoryNetwork: IUserRepositoryNetwork,
+    private val getCurrentUserUseCase: GetCurrentUserUseCase
+) {
+    suspend operator fun invoke(
+        userId: String,
+        levelId: String,
+        starState: StarState,
+        stageType: StageType,
+        oxygen: Int
+    ) {
+        val userLocal = userRepositoryLocal.getUserByIdFlow(userId).first()
+
+        val levelCompleted = LevelCompleted(
+            levelId = levelId,
+            stageType = stageType,
+            starState = starState
+        )
+        val userUpdated = userLocal.copy(
+            oxygen =+ oxygen,
+            levelsCompleted = userLocal.levelsCompleted.toMutableList().apply {
+                add(levelCompleted)
+            }
+        )
+
+        userRepositoryLocal.updateUserWithLevelCompleted(userUpdated, levelCompleted)
+
+        if(getCurrentUserUseCase() != null) {
+            userRepositoryNetwork.updateUserById(userUpdated, userId)
+        }
+    }
+}

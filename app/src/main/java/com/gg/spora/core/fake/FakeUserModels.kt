@@ -23,7 +23,7 @@ object FakeUserModels {
         levelsCompleted = fakeLevelsCompletedEntity
     )
 
-    private val fakeLevelsCompleted = listOf(
+    val fakeLevelsCompleted = listOf(
         LevelCompleted(
             levelId = "1",
             stageType = StageType.FOREST,

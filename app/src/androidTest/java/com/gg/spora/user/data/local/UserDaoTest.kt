@@ -192,4 +192,12 @@ class UserDaoTest {
         assertNotEquals("1", actualUser.id)
         assertEquals("123", actualUser.id)
     }
+
+    @Test
+    fun getUsersWithLevelsCompleted_WhenDBIsEmpty_ThenReturnEmptyList() = runTest {
+
+        val actual = userDao.getUsersWithLevelsCompleted().first()
+
+        assertEquals(emptyList<UserEntity>(), actual)
+    }
 }
