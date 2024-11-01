@@ -1,72 +1,76 @@
-package com.gg.spora.library.data
+package com.gg.spora.library.data.repository
 
 import com.gg.spora.R
-import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.core.utils.enums.TypeStage
 import com.gg.spora.library.domain.InfoCard
+import javax.inject.Inject
 
-object FakeInfoCardModels {
+class FakeRepositoryInfoCard @Inject constructor() {
 
-    val FakeInfoCardModels = listOf<InfoCard>(
+    val fakeInfoCardModels = listOf<InfoCard>(
 
         InfoCard(
             title = "Deforestación",
             info = "Tala indiscriminada de arboles.",
-            image = R.drawable.deforestacion,
-            category = StageType.FOREST,
+            image = R.drawable.deforestation,
+            category = TypeStage.FOREST,
             isUnlocked = true
         ),
         InfoCard(
             title = "Smog",
             info = "Humo contaminado, usualmente creado a partir de los desechos industriales.",
             image = R.drawable.smog,
-            category = StageType.FOREST
+            category = TypeStage.FOREST
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT,
+            image = R.drawable.solar_panel,
+            category = TypeStage.DESERT,
             isUnlocked = true
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT,
+            image = R.drawable.solar_panel,
+            category = TypeStage.DESERT,
             isUnlocked = true
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT,
+            image = R.drawable.solar_panel,
+            category = TypeStage.DESERT,
             isUnlocked = true
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT
+            image = R.drawable.solar_panel,
+            category = TypeStage.DESERT
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT
+            image = R.drawable.solar_panel,
+            category = TypeStage.DESERT
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT,
+            image = R.drawable.solar_panel,
+            category = TypeStage.DESERT,
             isUnlocked = true
         ),
         InfoCard(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.panel_solar,
-            category = StageType.DESERT
+            image = R.drawable.solar_panel,
+            category = TypeStage.RIVER
         ),
-
         )
+
+    fun getAllInfoCards(): List<InfoCard> {
+        return fakeInfoCardModels
+    }
 }

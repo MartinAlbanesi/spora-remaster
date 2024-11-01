@@ -36,9 +36,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
+import com.gg.spora.core.ui.animations.ChampyStates
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
-import com.gg.spora.core.utils.enums.ChampyStates
-import com.gg.spora.library.data.FakeInfoCardModels
+import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
 import com.gg.spora.library.domain.InfoCard
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -208,7 +208,7 @@ fun InfoCard(
                 )
 
                 Image(
-                    painter = painterResource(id = R.drawable.nivel_bloqueado),
+                    painter = painterResource(id = R.drawable.locked_level),
                     contentDescription = "library card image",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
@@ -227,7 +227,7 @@ fun PreviewCard() {
 
     SporaTheme {
         LibraryCardBook(
-            cardList = FakeInfoCardModels.FakeInfoCardModels
+            cardList = FakeRepositoryInfoCard().getAllInfoCards()
         )
     }
 

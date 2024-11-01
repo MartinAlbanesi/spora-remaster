@@ -39,8 +39,9 @@ import com.gg.spora.forestStage.ui.StageScreen
 import com.gg.spora.forestStage.ui.StageViewModel
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.library.LibraryScreen
-import com.gg.spora.library.data.FakeInfoCardModels
+import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
 import com.gg.spora.library.ui.LibraryCardBook
+import com.gg.spora.library.ui.LibraryViewModel
 import com.gg.spora.login.ui.LoginScreen
 import com.gg.spora.login.ui.LoginViewModel
 import com.gg.spora.miniGames.ui.QuizImageScreen
@@ -361,23 +362,28 @@ class MainActivity : ComponentActivity() {
 
                         composable<NavigationRoutes.LibraryForestInfo> {
 
+                            val libraryViewModel = hiltViewModel<LibraryViewModel>()
                             LibraryCardBook(
                                 onBackClick = { navController.navigate(NavigationRoutes.Library) },
-                                cardList = FakeInfoCardModels.FakeInfoCardModels
+                                cardList = libraryViewModel.getForestInfoCards()
                                 //Insertar lista de cartas.
                             )
                         }
 
                         composable<NavigationRoutes.LibraryRiverInfo> {
+                            val libraryViewModel = hiltViewModel<LibraryViewModel>()
                             LibraryCardBook(
                                 onBackClick = { navController.navigate(NavigationRoutes.Library) },
+                                cardList = libraryViewModel.getRiverInfoCards()
                                 //Insertar lista de cartas.
                             )
                         }
 
                         composable<NavigationRoutes.LibraryDesertInfo> {
+                            val libraryViewModel = hiltViewModel<LibraryViewModel>()
                             LibraryCardBook(
                                 onBackClick = { navController.navigate(NavigationRoutes.Library) },
+                                cardList = libraryViewModel.getDesertInfoCards()
                                 //Insertar lista de cartas.
                             )
                         }

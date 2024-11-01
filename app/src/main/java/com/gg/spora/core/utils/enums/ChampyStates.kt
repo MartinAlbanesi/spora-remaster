@@ -21,7 +21,7 @@ enum class ChampyStates {
             CURIOUS -> R.drawable.champy_curious_left_arm_in_the_cheek
             DEFEATED -> R.drawable.champy_defeated_arms_body
             BLINK -> R.drawable.champy_smiling_arms_to_the_body_blinking
-            NORMAL -> R.drawable.champy_serio_idle
+            NORMAL -> R.drawable.champy_serious_idle
             ANGRY -> R.drawable.champy_angry_up_arms
         }
 }

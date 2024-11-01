@@ -1,6 +1,7 @@
 package com.gg.spora.tutorials.data
 
-import com.gg.spora.core.utils.enums.ChampyStates
+
+import com.gg.spora.core.ui.animations.ChampyStates
 import com.gg.spora.tutorials.model.Tutorial
 
 object TutorialModels {
