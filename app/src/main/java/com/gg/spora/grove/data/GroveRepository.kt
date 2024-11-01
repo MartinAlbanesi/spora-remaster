@@ -6,7 +6,7 @@ import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /**
  * Clase GroveRepository que implementa la interfaz IGroveRepository para interactuar con los árboles del bosque, generando semillas y recolectando oxígeno.
@@ -21,7 +21,11 @@ class GroveRepository(
         groveDao.insertForestTrees(forestTreeEntities)
     }
 
-    override suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>> = flow {
+    override suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>> {
+
+        return groveDao.getForestTrees().map { ForestTree.forestTreesEntitiesToModels(it) }
+
+        /*
         val forestTrees = ForestTree.forestTreesEntitiesToModels(groveDao.getForestTrees())
 
         // Crea una lista mutable para almacenar los objetos ForestTree
@@ -38,6 +42,7 @@ class GroveRepository(
         }
 
         emit(forestList)
+         */
     }
 
     override suspend fun saveSeedTrees(seedTrees: List<SeedTree>) {
@@ -45,8 +50,9 @@ class GroveRepository(
         groveDao.insertSeedTrees(seedTreeEntities)
     }
 
-    override suspend fun loadSeedTreesFromDatabase(): Flow<List<SeedTree>> = flow {
-        emit(SeedTree.seedTreesEntitiesToModels(groveDao.getSeedTrees()))
+    override suspend fun loadSeedTreesFromDatabase(): Flow<List<SeedTree>> {
+        // return SeedTree.seedTreesEntitiesToModels(groveDao.getSeedTrees())
+        return groveDao.getSeedTrees().map { SeedTree.seedTreesEntitiesToModels(it) }
     }
 
     // Recolecta el oxígeno de los árboles del bosque

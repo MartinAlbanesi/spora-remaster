@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GroveDao {
@@ -13,11 +14,11 @@ interface GroveDao {
     suspend fun insertForestTrees(forestTrees: List<ForestTreeEntity>)
 
     @Query("SELECT * FROM forest_trees")
-    suspend fun getForestTrees(): List<ForestTreeEntity>
+    fun getForestTrees(): Flow<List<ForestTreeEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
 
     @Query("SELECT * FROM seed_trees")
-    suspend fun getSeedTrees(): List<SeedTreeEntity>
+    fun getSeedTrees(): Flow<List<SeedTreeEntity>>
 }

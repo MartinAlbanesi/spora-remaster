@@ -1,5 +1,6 @@
 package com.gg.spora.grove.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
@@ -10,6 +11,7 @@ import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,38 +49,57 @@ class GroveViewModel @Inject constructor(
 
     // Inicialización de los casos de uso
     init {
-        viewModelScope.launch {
-            initSeedTrees()
-            saveSeedTrees()
-            getSeedTrees()
-            getForestTrees()
-        }
+        getForestTrees()
+        getSeedTrees()
+        initSeedTrees()
     }
 
     fun initSeedTrees() {
-        if (_seedTrees.value.isEmpty()) {
-            _seedTrees.value = listOf(
-                SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(5)),
-                SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
-                SeedTree(type = TreeType.MANGROVE, timeToGenerateForestTree = Duration.ofSeconds(5)),
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            // getSeedTrees()
+            if (_seedTrees.value.isEmpty()) {
+                Log.i("GroveViewModel", "BEFORE initSeedTrees ${_seedTrees.value}")
+                val initialSeedTrees = listOf(
+                    SeedTree(
+                        type = TreeType.BAOBAB,
+                        timeToGenerateForestTree = Duration.ofSeconds(5)
+                    ),
+                    SeedTree(
+                        type = TreeType.SECUOYA,
+                        timeToGenerateForestTree = Duration.ofSeconds(5)
+                    ),
+                    SeedTree(
+                        type = TreeType.MANGROVE,
+                        timeToGenerateForestTree = Duration.ofSeconds(5)
+                    ),
+                )
+                // _seedTrees.value = initialSeedTrees
+                saveSeedTreesUseCase(initialSeedTrees)
+                // saveSeedTrees() // Save to database
+                // getSeedTrees()
+                Log.i("GroveViewModel", "AFTER initSeedTrees ${_seedTrees.value}")
+            }
         }
     }
 
     fun getSeedTrees() {
-        viewModelScope.launch {
-            _seedTrees.value = loadSeedTreesUseCase()
+        viewModelScope.launch(Dispatchers.IO) {
+            loadSeedTreesUseCase().collect {
+                _seedTrees.value = it
+            }
         }
     }
 
     fun getForestTrees() {
-        viewModelScope.launch {
-            _forestTrees.value = loadForestTreesUseCase()
+        viewModelScope.launch(Dispatchers.IO) {
+            loadForestTreesUseCase().collect {
+                _forestTrees.value = it
+            }
         }
     }
 
     fun saveSeedTrees() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             saveSeedTreesUseCase(_seedTrees.value)
         }
     }
@@ -91,10 +112,11 @@ class GroveViewModel @Inject constructor(
 
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             // Encuentra un lugar vacío en el bosque
-            val emptySpots = _forestTrees.value.withIndex().filter { it.value == null }.map { it.index }
+            val emptySpots =
+                _forestTrees.value.withIndex().filter { it.value == null }.map { it.index }
 
             // Si no encontró ningún lugar vacío, retorna
             if (emptySpots.isEmpty()) {
@@ -112,6 +134,8 @@ class GroveViewModel @Inject constructor(
                 updatedForest.getOrNull(index)
                     ?: tree // Use updated tree if available, otherwise keep existing tree
             }
+
+            saveForestTrees()
 
             /*
             // Llama al caso de uso para plantar el arbol
