@@ -8,6 +8,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
+/**
+ * Caso de uso que devuelve los niveles de un tipo de escenario
+ * con la información de si el usuario ha completado el nivel
+ * y con cuantas estrellas lo ha completado.
+ */
 class GetLevelsUseCase @Inject constructor(
     private val stageRepositoryNetwork: IStageRepositoryNetwork,
     private val getUserFromDBUseCase: GetUserFromDBUseCase
