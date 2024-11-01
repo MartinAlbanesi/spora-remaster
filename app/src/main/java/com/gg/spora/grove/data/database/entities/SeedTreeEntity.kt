@@ -3,6 +3,7 @@ package com.gg.spora.grove.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import java.time.Duration
 
@@ -14,3 +15,14 @@ data class SeedTreeEntity(
     @ColumnInfo(name = "time_to_generate_forest_tree") val timeToGenerateForestTree: Duration,
     @ColumnInfo(name = "amountOfForestTreesGenerated") var amountOfForestTreesGenerated: Int,
 )
+
+fun SeedTreeEntity.toSeedTree(): SeedTree {
+    return SeedTree(
+        id = idSeedTree,
+        type = treeType,
+        timeToGenerateForestTree = timeToGenerateForestTree
+    ).apply {
+        amountOfForestTreesGenerated = 444
+        nextForestTreeAvailableTime = 555L
+    }
+}

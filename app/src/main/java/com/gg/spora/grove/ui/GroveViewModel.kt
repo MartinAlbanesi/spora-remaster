@@ -12,6 +12,7 @@ import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -49,16 +50,20 @@ class GroveViewModel @Inject constructor(
 
     // Inicialización de los casos de uso
     init {
-        getForestTrees()
+//        getForestTrees()
         getSeedTrees()
         initSeedTrees()
     }
 
-    fun initSeedTrees() {
+    private fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
-            // getSeedTrees()
+            Log.i("titi - 1", _seedTrees.value.toString())
+
+            delay(1000)
+
+            Log.i("titi - 2", _seedTrees.value.toString())
+
             if (_seedTrees.value.isEmpty()) {
-                Log.i("GroveViewModel", "BEFORE initSeedTrees ${_seedTrees.value}")
                 val initialSeedTrees = listOf(
                     SeedTree(
                         type = TreeType.BAOBAB,
@@ -72,12 +77,9 @@ class GroveViewModel @Inject constructor(
                         type = TreeType.MANGROVE,
                         timeToGenerateForestTree = Duration.ofSeconds(5)
                     ),
-                )
-                // _seedTrees.value = initialSeedTrees
+
+                    )
                 saveSeedTreesUseCase(initialSeedTrees)
-                // saveSeedTrees() // Save to database
-                // getSeedTrees()
-                Log.i("GroveViewModel", "AFTER initSeedTrees ${_seedTrees.value}")
             }
         }
     }

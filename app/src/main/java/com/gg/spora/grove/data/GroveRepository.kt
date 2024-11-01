@@ -3,6 +3,7 @@ package com.gg.spora.grove.data
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import kotlinx.coroutines.flow.Flow
@@ -52,7 +53,10 @@ class GroveRepository(
 
     override suspend fun loadSeedTreesFromDatabase(): Flow<List<SeedTree>> {
         // return SeedTree.seedTreesEntitiesToModels(groveDao.getSeedTrees())
-        return groveDao.getSeedTrees().map { SeedTree.seedTreesEntitiesToModels(it) }
+        return groveDao.getSeedTrees().map {
+//            SeedTree.seedTreesEntitiesToModels(it)
+            it.map { seedTreeEntity -> seedTreeEntity.toSeedTree() }
+        }
     }
 
     // Recolecta el oxígeno de los árboles del bosque

@@ -14,7 +14,7 @@ import java.time.Duration
 data class SeedTree(
     override val id: Int = 0,
     override val type: TreeType,
-    private val timeToGenerateForestTree: Duration
+    val timeToGenerateForestTree: Duration
 ) : Tree(id, type) {
 
     var amountOfForestTreesGenerated: Int = 0
@@ -63,4 +63,14 @@ data class SeedTree(
         amountOfForestTreesGenerated++
         return ForestTree(type = type)
     }
+}
+
+fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {
+    return SeedTreeEntity(
+        idSeedTree = id,
+        treeType = type,
+        timeToGenerateForestTree = timeToGenerateForestTree,
+        amountOfForestTreesGenerated = amountOfForestTreesGenerated,
+        nextForestTreeAvailableTime = nextForestTreeAvailableTime
+    )
 }
