@@ -2,7 +2,7 @@ package com.gg.spora.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.user.domain.GetUserFromDBUseCase
+import com.gg.spora.user.domain.GetUserFromNetworkDBUseCase
 import com.gg.spora.user.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getUserFromDBUseCase: GetUserFromDBUseCase
+    private val getUserFromNetworkDBUseCase: GetUserFromNetworkDBUseCase
 ) : ViewModel(){
 
     private val _user = MutableStateFlow<User?>(null)
@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
     private fun getUser(){
         viewModelScope.launch {
             _isLoading.value = true
-            getUserFromDBUseCase().collect{
+            getUserFromNetworkDBUseCase().collect{
                 _user.value = it
             }
             _isLoading.value = false

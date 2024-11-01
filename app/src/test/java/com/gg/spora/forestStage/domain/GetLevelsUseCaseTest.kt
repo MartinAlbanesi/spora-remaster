@@ -4,8 +4,7 @@ import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
-import com.gg.spora.forestStage.IStageRepositoryNetwork
-import com.gg.spora.user.domain.GetUserFromDBUseCase
+import com.gg.spora.user.domain.GetUserFromNetworkDBUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
@@ -26,14 +25,14 @@ class GetLevelsUseCaseTest {
     private lateinit var stageRepositoryNetwork: IStageRepositoryNetwork
 
     @RelaxedMockK
-    private lateinit var getUserFromDBUseCase: GetUserFromDBUseCase
+    private lateinit var getUserFromNetworkDBUseCase: GetUserFromNetworkDBUseCase
 
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
 
-        getLevelsUseCase = GetLevelsUseCase(stageRepositoryNetwork, getUserFromDBUseCase)
+        getLevelsUseCase = GetLevelsUseCase(stageRepositoryNetwork, getUserFromNetworkDBUseCase)
     }
 
     @DisplayName("Cuando se invoca al caso de uso, " +
@@ -46,7 +45,7 @@ class GetLevelsUseCaseTest {
         val levelsFlow = flowOf(FakeStageModels.fakeLevels)
         val userLevelsCompleted = flowOf(FakeUserModels.fakeUsers.first())
 
-        coEvery { getUserFromDBUseCase() } returns userLevelsCompleted
+        coEvery { getUserFromNetworkDBUseCase() } returns userLevelsCompleted
         coEvery { stageRepositoryNetwork.getLevelsByStageType(any()) } returns levelsFlow
 
         // When

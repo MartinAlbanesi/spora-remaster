@@ -35,14 +35,17 @@ interface UserDao {
     @Delete
     suspend fun deleteUser(user: UserEntity)
 
+    @Query("DELETE FROM user_entity WHERE id = :userId")
+    suspend fun deleteUserById(userId: String)
+
     @Delete
     suspend fun deleteLevelCompleted(levelsCompleted: LevelCompletedEntity)
 
     @Update
     suspend fun updateUser(user: UserEntity)
 
-    @Query("update user_entity set id = :userId where email = :email")
-    suspend fun updateUserIdByEmail(userId: String, email: String)
+    @Query("update user_entity set id = :userId where userName = :userName")
+    suspend fun updateUserIdByUserName(userId: String, userName: String)
 
     @Update
     suspend fun updateLevelCompleted(levelsCompleted: LevelCompletedEntity)

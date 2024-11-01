@@ -3,7 +3,7 @@ package com.gg.spora.forestStage.data.network.models
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.core.utils.enums.CollectionsDataBase
 import com.gg.spora.core.utils.enums.StageType
-import com.gg.spora.forestStage.IStageRepositoryNetwork
+import com.gg.spora.forestStage.domain.IStageRepositoryNetwork
 import com.gg.spora.forestStage.domain.mappers.toLevel
 import com.gg.spora.forestStage.domain.model.Level
 import com.google.firebase.firestore.snapshots

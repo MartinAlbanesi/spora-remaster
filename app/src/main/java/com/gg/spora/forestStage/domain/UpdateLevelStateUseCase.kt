@@ -4,9 +4,9 @@ import com.gg.spora.core.utils.enums.StarState
 import javax.inject.Inject
 
 class UpdateLevelStateUseCase @Inject constructor(
-    private val stageRepository: IStageRepository
+    private val stageRepository: IStageRepositoryLocal
 ) {
     operator fun invoke(levelId: String, starStageLevel: StarState) {
-        stageRepository.updateLevel(levelId = levelId, starStageLevel = starStageLevel)
+//        stageRepository.updateLevel(levelId = levelId, starStageLevel = starStageLevel)
     }
 }

@@ -3,11 +3,11 @@ package com.gg.spora.forestStage.data
 import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
-import com.gg.spora.forestStage.domain.IStageRepository
+import com.gg.spora.forestStage.domain.IStageRepositoryLocal
 import com.gg.spora.forestStage.domain.model.StageLevel
 import javax.inject.Inject
 
-class FakeStageLocalRepository @Inject constructor() : IStageRepository {
+class FakeStageLocalRepositoryLocal @Inject constructor() : IStageRepositoryLocal {
 
     private var fakeStage = FakeStageModels.fakeStage
 
@@ -16,7 +16,7 @@ class FakeStageLocalRepository @Inject constructor() : IStageRepository {
         return currentStage!!
     }
 
-    override fun updateLevel(levelId: String, starStageLevel: StarState) {
+//    override fun updateLevel(levelId: String, starStageLevel: StarState) {
 //        val currentLevel = fakeStage.levels.first { it.id == levelId }
 //        if(currentLevel.starState.starCount < starStageLevel.starCount) {
 //            val newFakeStage = fakeStage.copy(
@@ -30,8 +30,8 @@ class FakeStageLocalRepository @Inject constructor() : IStageRepository {
 //            )
 //            fakeStage = newFakeStage
 //        }
-
-    }
+//
+//    }
 
 //    override fun getLevels(typeStage: TypeStage): List<Level> {
 //        return fakeModels.fakeLevels

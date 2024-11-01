@@ -185,7 +185,7 @@ class UserDaoTest {
         userDao.insertUser(expectedUser)
 
         // When
-        userDao.updateUserIdByEmail("123", expectedUser.email)
+        userDao.updateUserIdByUserName("123", expectedUser.userName)
 
         // Then
         val actualUser = userDao.getUserByEmail(expectedUser.email).first()
