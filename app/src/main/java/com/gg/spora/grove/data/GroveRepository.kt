@@ -20,11 +20,28 @@ class GroveRepository(
     private val groveDao: GroveDao
 ) : IGroveRepository {
 
+    // Guarda los árboles semilleros en la base de datos
+    override suspend fun saveSeedTrees(seedTrees: List<SeedTree>) {
+        val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }
+        groveDao.insertSeedTrees(seedTreeEntities)
+    }
+
+    // Carga los árboles semilleros desde la base de datos
+    override suspend fun loadSeedTreesFromDatabase(): Flow<List<SeedTree>> {
+        // return SeedTree.seedTreesEntitiesToModels(groveDao.getSeedTrees())
+        return groveDao.getSeedTrees().map {
+//            SeedTree.seedTreesEntitiesToModels(it)
+            it.map { seedTreeEntity -> seedTreeEntity.toSeedTree() }
+        }
+    }
+
+    // Guarda los árboles del bosque en la base de datos
     override suspend fun saveForestTrees(forest: List<ForestTree?>) {
         val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
         groveDao.insertForestTrees(forestTreeEntities)
     }
 
+    // Carga los árboles del bosque desde la base de datos
     override suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>> {
         return groveDao.getForestTrees().map {
             it.map {
@@ -33,17 +50,15 @@ class GroveRepository(
         }
     }
 
-    override suspend fun saveSeedTrees(seedTrees: List<SeedTree>) {
-        val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }
-        groveDao.insertSeedTrees(seedTreeEntities)
+    // Inserta un árbol de bosque en la base de datos
+    override suspend fun insertForestTree(forestTree: ForestTree){
+        val forestTreeEntity = forestTree.toForestTreeEntity()
+        groveDao.insertForestTree(forestTreeEntity)
     }
 
-    override suspend fun loadSeedTreesFromDatabase(): Flow<List<SeedTree>> {
-        // return SeedTree.seedTreesEntitiesToModels(groveDao.getSeedTrees())
-        return groveDao.getSeedTrees().map {
-//            SeedTree.seedTreesEntitiesToModels(it)
-            it.map { seedTreeEntity -> seedTreeEntity.toSeedTree() }
-        }
+    // Carga un árbol del bosque por su ID desde la base de datos
+    override suspend fun getForestTreeById(id: Int): Flow<ForestTree?> {
+        return groveDao.getForestTreeById(id).map { it.toForestTree() }
     }
 
     // Recolecta el oxígeno de los árboles del bosque

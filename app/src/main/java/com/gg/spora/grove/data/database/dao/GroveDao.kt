@@ -11,14 +11,26 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GroveDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
+
+    @Query("SELECT * FROM seed_trees")
+    fun getSeedTrees(): Flow<List<SeedTreeEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertForestTrees(forestTrees: List<ForestTreeEntity>)
 
     @Query("SELECT * FROM forest_trees")
     fun getForestTrees(): Flow<List<ForestTreeEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
+    suspend fun insertForestTree(forestTree: ForestTreeEntity)
 
-    @Query("SELECT * FROM seed_trees")
-    fun getSeedTrees(): Flow<List<SeedTreeEntity>>
+    @Query("SELECT * FROM forest_trees WHERE idForestTree = :id")
+    fun getForestTreeById(id: Int): Flow<ForestTreeEntity>
+
+    @Query("DELETE FROM forest_trees WHERE idForestTree = :id")
+    suspend fun deleteForestTreeById(id: Int)
+
+    @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
+    suspend fun updateForestTreeGrowthStageById(id: Int, newStage: String)
 }
