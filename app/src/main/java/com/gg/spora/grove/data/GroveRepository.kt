@@ -21,7 +21,7 @@ class GroveRepository(
 ) : IGroveRepository {
 
     override suspend fun saveForestTrees(forest: List<ForestTree?>) {
-        val forestTreeEntities = forest.map { it?.toForestTreeEntity() ?: throw IllegalArgumentException("ForestTree cannot be null") }
+        val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
         groveDao.insertForestTrees(forestTreeEntities)
     }
 

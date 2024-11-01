@@ -1,5 +1,6 @@
 package com.gg.spora.grove.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
@@ -51,14 +52,16 @@ class GroveViewModel @Inject constructor(
     init {
 //        getForestTrees()
         getSeedTrees()
+        getForestTrees()
         initSeedTrees()
+        // initForestTrees()
     }
 
     private fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
 
             // Tiempo necesario para que se carguen los árboles semilleros
-            delay(1000)
+            delay (500)
 
             if (_seedTrees.value.isEmpty()) {
                 val initialSeedTrees = listOf(
@@ -77,6 +80,19 @@ class GroveViewModel @Inject constructor(
 
                     )
                 saveSeedTreesUseCase(initialSeedTrees)
+            }
+        }
+    }
+
+    private fun initForestTrees() {
+        viewModelScope.launch(Dispatchers.IO) {
+            delay (2000)
+
+            Log.i("GroveViewModel", "BEFORE ForestTrees: ${_forestTrees.value}")
+
+            if (_forestTrees.value.isEmpty()) {
+                val initialForestTrees = List(25) { null }
+                saveForestTreesUseCase(initialForestTrees)
             }
         }
     }
@@ -134,7 +150,7 @@ class GroveViewModel @Inject constructor(
                     ?: tree // Use updated tree if available, otherwise keep existing tree
             }
 
-            saveForestTrees()
+            saveForestTreesUseCase(_forestTrees.value)
 
             /*
             // Llama al caso de uso para plantar el arbol
