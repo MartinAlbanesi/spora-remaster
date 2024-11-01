@@ -19,8 +19,8 @@ interface UserDao {
     @Query("SELECT * FROM user_entity")
     fun getUsersWithLevelsCompleted(): Flow<List<UserWithLevelsCompletedEntity>>
 
-    @Query("SELECT * FROM user_entity WHERE id = :userId")
-    fun getUser(userId: String): Flow<UserEntity>
+    @Query("SELECT * FROM user_entity WHERE email = :userEmail")
+    fun getUserByEmail(userEmail: String): Flow<UserEntity>
 
 
     @Query("SELECT * FROM level_completed_entity WHERE userId = :userId")
@@ -40,6 +40,9 @@ interface UserDao {
 
     @Update
     suspend fun updateUser(user: UserEntity)
+
+    @Query("update user_entity set id = :userId where email = :email")
+    suspend fun updateUserIdByEmail(userId: String, email: String)
 
     @Update
     suspend fun updateLevelCompleted(levelsCompleted: LevelCompletedEntity)

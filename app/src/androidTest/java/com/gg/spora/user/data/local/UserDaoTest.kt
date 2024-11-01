@@ -45,17 +45,17 @@ class UserDaoTest {
     fun insertUser_WhenInsertedOneValidUser_ReturnUserInserted() = runTest {
         val expectedUser = UserEntity("1", "test", "titi@gmail.com", 100)
 
-        val actualUserEmpty = userDao.getUser("1").first()
+        val actualUserEmpty = userDao.getUserByEmail("titi@gmail.com").first()
         Assert.assertNull(actualUserEmpty)
 
         userDao.insertUser(expectedUser)
 
-        val actualUser = userDao.getUser("1").first()
+        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
         assertEquals(expectedUser, actualUser)
     }
 
     @Test
-    fun getUsersWithLevelsCompleted_WhenSearchByUserId_ThenReturnUserWithLevelsCompleted() =
+    fun getUsersWithLevelsCompleted_WhenSearchByUserId_ThenReturnUserByEmailWithLevelsCompleted() =
         runTest {
 
             // Given
@@ -112,7 +112,7 @@ class UserDaoTest {
         userDao.deleteUser(expectedUser)
 
         // Then
-        val actualUser = userDao.getUser("1").first()
+        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
         Assert.assertNull(actualUser)
     }
 
@@ -152,7 +152,7 @@ class UserDaoTest {
         userDao.updateUser(updatedUser)
 
         // Then
-        val actualUser = userDao.getUser("1").first()
+        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
         assertEquals("titi", actualUser.userName)
     }
 
@@ -175,5 +175,21 @@ class UserDaoTest {
 
         assertNotEquals("ONE", actualLevelCompleted[0].starState)
         assertEquals("THREE", actualLevelCompleted[0].starState)
+    }
+
+    @Test
+    fun updateUserIdByEmail_SetAValidUserIdToUpdate_UpdatedUserIdFromDB() = runTest {
+
+        // Given
+        val expectedUser = FakeUserModels.fakeUserEntity
+        userDao.insertUser(expectedUser)
+
+        // When
+        userDao.updateUserIdByEmail("123", expectedUser.email)
+
+        // Then
+        val actualUser = userDao.getUserByEmail(expectedUser.email).first()
+        assertNotEquals("1", actualUser.id)
+        assertEquals("123", actualUser.id)
     }
 }
