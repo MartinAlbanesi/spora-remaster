@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,7 +37,7 @@ import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.challenge.ui.components.ObjectDetailDialog
 
-val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita de plástico")
+val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita de plástico", "Lata de Metal")
 
 /**
  * Screen for mini games with Spora and progress bar
@@ -52,42 +53,27 @@ fun ChallengeScreen(
     onNavigateToForestStage: () -> Unit,
     challengeViewModel: ChallengeViewModel = hiltViewModel()
 ) {
-
-    val lifecycleOwner = LocalLifecycleOwner.current
-    var buttonContinueEnabled by remember { mutableStateOf(false) }
-    var champyImage by remember { mutableIntStateOf(R.drawable.champy_smiling_arms_body) }
-    var objectsChallenge by remember { mutableStateOf(listOf<ObjectDetail>()) }
+    val selectedObject by challengeViewModel.selectedObject.observeAsState()
+    val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
+    val buttonContinueEnabled = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
     var showDialog by remember { mutableStateOf(false) }
-    var selectedObject by remember { mutableStateOf("") }
+    var champyImage by remember { mutableIntStateOf(R.drawable.champy_smiling_arms_body) }
 
-    LaunchedEffect(challengeViewModel.selectedObject) {
-        challengeViewModel.selectedObject.observe(lifecycleOwner) { selectedObjectObserve ->
-            if(selectedObjectObserve != null && selectedObjectObserve != ""){
-                selectedObject = selectedObjectObserve
-                showDialog = true
-            }
+    if (buttonContinueEnabled) champyImage = R.drawable.champy_celebrating_raised_arms
+
+    LaunchedEffect(selectedObject) {
+        if (!selectedObject.isNullOrEmpty()) {
+            showDialog = true
         }
     }
 
-    LaunchedEffect(challengeViewModel.objectsChallenge) {
-        challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
-            objectsChallenge = objects
-        }
-    }
-
-    if(objectsChallenge.isNotEmpty() && objectsChallenge.all{ it.isValidate }){
-        champyImage = R.drawable.champy_celebrating_raised_arms
-        buttonContinueEnabled = true
-    }
-
-    if(showDialog && selectedObject != ""){
-        val objectDetail = challengeViewModel.getObjectDetailWithName(selectedObject)
+    if (showDialog && !selectedObject.isNullOrEmpty()) {
         ObjectDetailDialog(
             onContinueButton = {
                 showDialog = false
                 challengeViewModel.setEmptySelectedObject()
-                },
-            objectDetail = objectDetail
+            },
+            objectDetail = challengeViewModel.getObjectDetailWithName(selectedObject!!)
         )
     }
 
@@ -102,61 +88,76 @@ fun ChallengeScreen(
             modifier = Modifier.padding(10.dp)
         )
 
-        if(objectsChallenge.isNotEmpty()){
-            objectsChallenge.forEach {
-                val nameObject = it.nameObjectDetail
-
-                ButtonObjectScannerChallenge(
-                    textObject = nameObject!!,
-                    modifier = Modifier
-                        .shadow(
-                            elevation = 4.dp,
-                            shape = MaterialTheme.shapes.large,
-                            ambientColor = DefaultShadowColor
-                        )
-                        .fillMaxWidth()
-                        .clip(MaterialTheme.shapes.large)
-                        .height(60.dp)
-                        .clickable {
-                            onNavigateToCameraScreen(nameObject)
-                        },
-                    isValidate = it.isValidate
-                )
-            }
-        }
+        ObjectsChallengeList(objectsChallenge, onNavigateToCameraScreen)
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        val continueButtonColor = if (buttonContinueEnabled)  {
-            Color(0xFFFFA500)
-        } else {
-            Color.Gray
-        }
-
-        Button(
-            modifier = Modifier
-                .height(50.dp)
-                .fillMaxWidth(1.0f),
-            onClick = {
-                if (buttonContinueEnabled) {
-                    onNavigateToForestStage()
-                }
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = continueButtonColor,
-                contentColor = colorResource(id = R.color.cream)
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.text_continue),
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    )
-            )
-        }
+        ContinueButton(
+            enabled = buttonContinueEnabled,
+            onClick = onNavigateToForestStage
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
+    }
+}
 
+/**
+ * Displays a list of objects for the current challenge, each as a clickable button
+ * @param objectsChallenge List of objects that are part of the challenge
+ * @param onNavigateToCameraScreen Action triggered when a button is clicked, to navigate to the Camera Screen with the object name
+ */
+@Composable
+fun ObjectsChallengeList(
+    objectsChallenge: List<ObjectDetail>,
+    onNavigateToCameraScreen: (String) -> Unit
+) {
+    objectsChallenge.forEach { objectDetail ->
+        ButtonObjectScannerChallenge(
+            textObject = objectDetail.nameObjectDetail ?: "",
+            modifier = Modifier
+                .shadow(
+                    elevation = 4.dp,
+                    shape = MaterialTheme.shapes.large,
+                    ambientColor = DefaultShadowColor
+                )
+                .fillMaxWidth()
+                .clip(MaterialTheme.shapes.large)
+                .height(60.dp)
+                .clickable {
+                    onNavigateToCameraScreen(objectDetail.nameObjectDetail ?: "")
+                },
+            isValidate = objectDetail.isValidate
+        )
+    }
+}
+
+/**
+ * Renders a continue button that enables navigation to the next stage when activated
+ * @param enabled Boolean indicating if the button should be enabled
+ * @param onClick Action triggered when the button is clicked to proceed to the next stage
+ */
+@Composable
+fun ContinueButton(
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    val continueButtonColor = if (enabled) Color(0xFFFFA500) else Color.Gray
+    Button(
+        modifier = Modifier
+            .height(50.dp)
+            .fillMaxWidth(),
+        onClick = { if (enabled) onClick() },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = continueButtonColor,
+            contentColor = colorResource(id = R.color.cream)
+        )
+    ) {
+        Text(
+            text = stringResource(R.string.text_continue),
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+            )
+        )
     }
 }
