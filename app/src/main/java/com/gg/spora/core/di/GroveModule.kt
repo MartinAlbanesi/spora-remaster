@@ -8,6 +8,8 @@ import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.CollectOxygenUseCase
+import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
+import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
@@ -69,6 +71,18 @@ class GroveModule {
     @Singleton
     fun provideSaveForestTreesUseCase(groveRepository: IGroveRepository): SaveForestTreesUseCase {
         return SaveForestTreesUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetForestTreeByIdUseCase(groveRepository: IGroveRepository): GetForestTreeByIdUseCase {
+        return GetForestTreeByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInsertForestTreeUseCase(groveRepository: IGroveRepository): InsertForestTreeUseCase {
+        return InsertForestTreeUseCase(groveRepository)
     }
 
     @Provides

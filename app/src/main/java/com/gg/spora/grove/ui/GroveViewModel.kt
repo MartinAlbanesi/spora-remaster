@@ -3,6 +3,8 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
+import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
@@ -36,6 +38,8 @@ class GroveViewModel @Inject constructor(
     private val saveSeedTreesUseCase: SaveSeedTreesUseCase,
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
     private val saveForestTreesUseCase: SaveForestTreesUseCase,
+    private val insertForestTreeUseCase: InsertForestTreeUseCase,
+    private val getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque
@@ -54,14 +58,14 @@ class GroveViewModel @Inject constructor(
         getSeedTrees()
         getForestTrees()
         initSeedTrees()
-        // initForestTrees()
+//        initForestTrees()
     }
 
     private fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
 
             // Tiempo necesario para que se carguen los árboles semilleros
-            delay (500)
+            delay(500)
 
             if (_seedTrees.value.isEmpty()) {
                 val initialSeedTrees = listOf(
@@ -77,7 +81,6 @@ class GroveViewModel @Inject constructor(
                         type = TreeType.MANGROVE,
                         timeToGenerateForestTree = Duration.ofSeconds(5)
                     ),
-
                     )
                 saveSeedTreesUseCase(initialSeedTrees)
             }
@@ -86,7 +89,7 @@ class GroveViewModel @Inject constructor(
 
     private fun initForestTrees() {
         viewModelScope.launch(Dispatchers.IO) {
-            delay (2000)
+            delay(2000)
 
             Log.i("GroveViewModel", "BEFORE ForestTrees: ${_forestTrees.value}")
 
