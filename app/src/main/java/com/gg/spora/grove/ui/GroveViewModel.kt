@@ -38,8 +38,8 @@ class GroveViewModel @Inject constructor(
     private val saveSeedTreesUseCase: SaveSeedTreesUseCase,
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
     private val saveForestTreesUseCase: SaveForestTreesUseCase,
-    private val insertForestTreeUseCase: InsertForestTreeUseCase,
     private val getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
+    private val insertForestTreeUseCase: InsertForestTreeUseCase,
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque

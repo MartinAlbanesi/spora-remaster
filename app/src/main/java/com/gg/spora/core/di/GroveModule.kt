@@ -98,17 +98,16 @@ class GroveModule {
         saveSeedTreesUseCase: SaveSeedTreesUseCase,
         loadForestTreesUseCase: LoadForestTreesUseCase,
         saveForestTreesUseCase: SaveForestTreesUseCase,
-        /*
-        getSeedTreesUseCase: GetSeedTreesUseCase,
-        getForestTreesUseCase: GetForestTreesUseCase,
-        plantSeedUseCase: PlantSeedUseCase/* collectOxygenUseCase: CollectOxygenUseCase*/
-         */
+        getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
+        insertForestTreeUseCase: InsertForestTreeUseCase,
     ): GroveViewModel {
         return GroveViewModel(
             loadSeedTreesUseCase,
             saveSeedTreesUseCase,
             loadForestTreesUseCase,
             saveForestTreesUseCase,
+            getForestTreeByIdUseCase,
+            insertForestTreeUseCase,
         )
     }
 
