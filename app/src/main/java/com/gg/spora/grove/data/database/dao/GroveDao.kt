@@ -28,9 +28,9 @@ interface GroveDao {
     @Query("SELECT * FROM forest_trees WHERE idForestTree = :id")
     fun getForestTreeById(id: Int): Flow<ForestTreeEntity>
 
-    @Query("DELETE FROM forest_trees WHERE idForestTree = :id")
-    suspend fun deleteForestTreeById(id: Int)
-
-    @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
-    suspend fun updateForestTreeGrowthStageById(id: Int, newStage: String)
+//    @Query("DELETE FROM forest_trees WHERE idForestTree = :id")
+//    suspend fun deleteForestTreeById(id: Int)
+//
+//    @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
+//    suspend fun updateForestTreeGrowthStageById(id: Int, newStage: String)
 }
