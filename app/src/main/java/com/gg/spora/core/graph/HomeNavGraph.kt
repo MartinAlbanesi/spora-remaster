@@ -12,6 +12,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
 
@@ -37,10 +38,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 HomeScreen(
                     oxygen = user?.oxygen ?: 0,
                     onNavigateToForestStage = {
-                        navController.navigate(NavigationRoutes.Stage("1"))
+                        navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },
                     onNavigateToExpoStage = {
-                        navController.navigate(NavigationRoutes.Stage("2"))
+                        navController.navigate(NavigationRoutes.Stage(StageType.EXPO.name))
                     }
                 )
             }

@@ -2,12 +2,10 @@ package com.gg.spora.forestStage.domain
 
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.IStageRepositoryNetwork
-import com.gg.spora.forestStage.data.network.models.StageRepositoryNetwork
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.user.domain.GetUserFromDBUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class GetLevelsUseCase @Inject constructor(
@@ -28,6 +26,7 @@ class GetLevelsUseCase @Inject constructor(
                 if(levelCompleted != null){
                     level.copy(
                         starState = levelCompleted.starState,
+                        isComplete = true
                     )
                 } else {
                     level

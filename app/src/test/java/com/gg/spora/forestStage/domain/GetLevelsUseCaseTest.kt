@@ -5,7 +5,6 @@ import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.forestStage.IStageRepositoryNetwork
-import com.gg.spora.forestStage.data.network.models.StageRepositoryNetwork
 import com.gg.spora.user.domain.GetUserFromDBUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

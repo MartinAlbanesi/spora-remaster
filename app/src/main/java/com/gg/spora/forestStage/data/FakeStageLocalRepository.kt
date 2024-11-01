@@ -1,6 +1,7 @@
 package com.gg.spora.forestStage.data
 
 import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.forestStage.domain.IStageRepository
 import com.gg.spora.forestStage.domain.model.StageLevel
@@ -10,8 +11,8 @@ class FakeStageLocalRepository @Inject constructor() : IStageRepository {
 
     private var fakeStage = FakeStageModels.fakeStage
 
-    override fun getStage(stageId: String): StageLevel {
-        val currentStage = fakeStage.find { it.id == stageId }
+    override fun getStage(stageType: StageType): StageLevel {
+        val currentStage = fakeStage.find { it.stageType == stageType }
         return currentStage!!
     }
 

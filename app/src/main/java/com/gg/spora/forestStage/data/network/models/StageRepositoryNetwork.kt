@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class StageRepositoryNetwork @Inject constructor(
-    private val firestoreService: FirestoreService
+    firestoreService: FirestoreService
 ) : IStageRepositoryNetwork {
 
     private val firestore = firestoreService.getFirestore()

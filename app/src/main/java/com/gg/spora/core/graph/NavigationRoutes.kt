@@ -36,7 +36,7 @@ object NavigationRoutes {
 
     @Serializable
     data class Stage(
-        val stageId: String = "1",
+        val stageType: String = "FOREST",
     )
 
     @Serializable
