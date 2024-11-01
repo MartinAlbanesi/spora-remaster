@@ -17,8 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.gg.spora.R
 
 @Composable
 fun OptionItemButton(
@@ -26,6 +28,7 @@ fun OptionItemButton(
     textItem: String,
     isCorrect: Boolean?,
     enabled: Boolean,
+    hasIcon: Boolean = true,
     onAnswerSelected: () -> Unit,
 ) {
 
@@ -33,15 +36,15 @@ fun OptionItemButton(
         when (isCorrect) {
             true -> Color.White
             false -> Color.White
-            null -> Color(0xff442801)
+            null -> colorResource(R.color.primary_10)
         }, label = "textColor"
     )
 
     val backgroundColor by animateColorAsState(
         when (isCorrect) {
-            true -> Color(0xff538c21)
-            false -> Color(0xffb3261e)
-            null -> Color(0xFFffeacc)
+            true -> colorResource(R.color.secondary)
+            false -> colorResource(R.color.error)
+            null -> colorResource(R.color.cream)
         },
         label = "backgroundColor"
     )
@@ -67,12 +70,14 @@ fun OptionItemButton(
                 text = textItem,
                 color = textColor,
             )
-            Icon(
-                imageVector = Icons.Default.CheckCircle,
-                tint = textColor,
-                modifier = Modifier.size(40.dp),
-                contentDescription = Icons.Default.CheckCircle.name,
-            )
+            if(hasIcon){
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    tint = textColor,
+                    modifier = Modifier.size(40.dp),
+                    contentDescription = Icons.Default.CheckCircle.name,
+                )
+            }
 
         }
     }

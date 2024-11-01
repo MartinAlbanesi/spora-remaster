@@ -7,21 +7,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -109,14 +106,14 @@ private fun ChampyWithRewardsPreview() {
         ) {
             ChampyWithRewards(
                 modifier = Modifier.fillMaxWidth(),
-                champyImage = R.drawable.champy_sonriente_idle,
+                champyImage = R.drawable.champy_smiling_idle,
                 title = "Recompensa",
                 body = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.o2_icon),
+                            painter = painterResource(id = R.drawable.oxygen_icon),
                             contentDescription = "Oxígeno",
                             modifier = Modifier.size(48.dp)
                         )

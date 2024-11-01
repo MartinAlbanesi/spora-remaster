@@ -3,4 +3,5 @@
     <string name="title_challenge">Desafío</string>
     <string name="label_challenge">Escanea los objetos de la lista con tu cámara para finalizar el desafío.</string>
     <string name="text_continue">Continuar</string>
+    <string name="question_recycle">¿Como reciclar?</string>
 </resources>

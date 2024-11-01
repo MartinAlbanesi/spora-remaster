@@ -1,0 +1,409 @@
+[
+  {
+    "id": "1",
+    "question": "¿Cuál de estas acciones pertenece a la regla de las 3 erres de la sostenibilidad?",
+    "answers": [
+      {
+        "answer": "Reciclar",
+        "id": "10",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "10",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "2",
+    "question": "¿Cuál de estos colores pertenece a un contenedor de reciclaje?",
+    "answers": [
+      {
+        "answer": "Rojo",
+        "id": "14",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "14",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "3",
+    "question": "¿Para qué se utiliza el contenedor rojo?",
+    "answers": [
+      {
+        "answer": "Pilas y desechos peligrosos",
+        "id": "18",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "18",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "4",
+    "question": "¿Cuánto tarda, como promedio, en degradarse una botella de plástico?",
+    "answers": [
+      {
+        "answer": "700 años",
+        "id": "22",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "22",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "5",
+    "question": "¿A qué contenedor deberías tirar los bricks?",
+    "answers": [
+      {
+        "answer": "Amarillo",
+        "id": "26",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "26",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "6",
+    "question": "¿A qué contenedor deberías tirar las latas?",
+    "answers": [
+      {
+        "answer": "Amarillo",
+        "id": "26",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "26",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "7",
+    "question": "¿Cuál de estos objetos no deben tirarse en el contenedor de vidrio?",
+    "answers": [
+      {
+        "answer": "Espejos rotos",
+        "id": "30",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "30",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "8",
+    "question": "¿Dónde debes depositar los residuos eléctricos y electrónicos cuando ya no son útiles?",
+    "answers": [
+      {
+        "answer": "En un punto limpio",
+        "id": "34",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "34",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "9",
+    "question": "¿Cómo podemos solucionar la deforestación?",
+    "answers": [
+      {
+        "answer": "Reforestando",
+        "id": "38",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "38",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "10",
+    "question": "¿Qué es el esmog?",
+    "answers": [
+      {
+        "answer": "Una forma de niebla en ciudades",
+        "id": "42",
+        "typeQuestion": [
+          "MARTIN"
+        ],
+        "typeGame": "QUIZ"
+      }
+    ],
+    "answerId": "42",
+    "typeGame": "QUIZ",
+    "typeQuestion": ["MARTIN"]
+  },
+  {
+    "id": "46",
+    "question": "¿Qué representa la imagen?",
+    "answers": [
+      {
+        "answer": "Símbolo de Reciclaje",
+        "id": "46",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "46",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "simbolo_reciclaje"
+  },
+  {
+    "id": "47",
+    "question": "¿Qué representa la imagen?",
+    "answers": [
+      {
+        "answer": "Calentamiento Global",
+        "id": "47",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "47",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "calentamiento_global"
+  },
+  {
+    "id": "48",
+    "question": "¿Qué pasó en el bosque?",
+    "answers": [
+      {
+        "answer": "Deforestación",
+        "id": "48",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "48",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "deforestacion"
+  },
+  {
+    "id": "49",
+    "question": "¿Qué produce el humo?",
+    "answers": [
+      {
+        "answer": "Smog",
+        "id": "49",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "49",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "smog"
+  },
+  {
+    "id": "50",
+    "question": "¿Qué está pasando en la imagen?",
+    "answers": [
+      {
+        "answer": "Contaminación",
+        "id": "50",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "50",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "contaminacion"
+  },
+  {
+    "id": "51",
+    "question": "¿Qué tipo de energía es?",
+    "answers": [
+      {
+        "answer": "Energia Eólica",
+        "id": "51",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "51",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "recurso_viento"
+  },
+  {
+    "id": "52",
+    "question": "¿Qué tipo de desecho es?",
+    "answers": [
+      {
+        "answer": "Desechos Electrónicos",
+        "id": "52",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "52",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "desechos_electronicos"
+  },
+  {
+    "id": "53",
+    "question": "¿Qué representa la imagen?",
+    "answers": [
+      {
+        "answer": "Agujero de Ozono",
+        "id": "53",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "53",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "agujero_ozono"
+  },
+  {
+    "id": "54",
+    "question": "¿Qué tipo de residuo es?",
+    "answers": [
+      {
+        "answer": "Residuo Tóxico",
+        "id": "54",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "54",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "residuo_toxico"
+  },
+  {
+    "id": "55",
+    "question": "¿Qué es el objeto de la imagen?",
+    "answers": [
+      {
+        "answer": "Panel Solar",
+        "id": "55",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "QUIZ_IMAGE"
+      }
+    ],
+    "answerId": "55",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "QUIZ_IMAGE",
+    "image": "panel_solar"
+  },
+  {
+    "id": "56",
+    "question": "Botella",
+    "answers": [
+      {
+        "answer": "Reciclable",
+        "id": "56",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "RELATIONS"
+      },
+      {
+        "answer": "Biodegradable",
+        "id": "57",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "RELATIONS"
+      },
+      {
+        "answer": "Plástico",
+        "id": "58",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "RELATIONS"
+      },
+      {
+        "answer": "No reciclable",
+        "id": "59",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "RELATIONS"
+      },
+      {
+        "answer": "Contaminante",
+        "id": "60",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "RELATIONS"
+      },
+      {
+        "answer": "Orgánico",
+        "id": "61",
+        "typeQuestion": [
+          "RECYCLE"
+        ],
+        "typeGame": "RELATIONS"
+      }
+    ],
+    "answerId": "56,58,60",
+    "typeQuestion": ["RECYCLE"],
+    "typeGame": "RELATIONS"
+  }
+]
