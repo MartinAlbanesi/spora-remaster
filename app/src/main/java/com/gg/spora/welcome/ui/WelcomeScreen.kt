@@ -81,9 +81,7 @@ fun WelcomeScreen(
                             pagerState.animateScrollToPage(page + 1)
                         }
                     },
-                    onNavigateToSignUp = {
-                        onNavigateToSignUp()
-                    }
+                    onNavigateToSignUp = onNavigateToSignUp
                 )
 
                 3 -> GuestEnterNameScreen(
@@ -259,7 +257,6 @@ fun TypeUserSelectionScreen(
 //                    .align(Alignment.BottomCenter)
 //                    .offset(y = -60.dp),
             )
-/*
             SporaPrimaryButton(
                 text = "Crear cuenta",
                 textSize = 20,
@@ -270,7 +267,6 @@ fun TypeUserSelectionScreen(
                     .size(width = 350.dp, height = 50.dp)
 //                    .offset(y = 10.dp),
             )
- */
         }
     }
 //        }

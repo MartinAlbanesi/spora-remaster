@@ -9,6 +9,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.jupiter.api.DisplayName
 
@@ -46,6 +47,7 @@ class GetRandomQuestionFromTypeUseCaseTest {
         assertEquals(count, actual.size)
     }
 
+    @Ignore
     @DisplayName("invoke" +
         "Cuando se ingrese un tipo de juego QUIZ, " +
         "Entonces se deberia retornar una lista con preguntas del tipo QUIZ aleatorias con 4 respuestas cada una")

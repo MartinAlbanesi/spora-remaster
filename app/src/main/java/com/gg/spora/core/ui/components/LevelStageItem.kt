@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -27,15 +27,15 @@ fun LevelStageItem(
     modifier: Modifier = Modifier,
     itemNumber: String,
     starsState: StarState,
-    stage: TypeStage,
+    stage: StageType,
     isBlocked: Boolean = false
 ) {
 
     val stageImage = when (stage) {
-        TypeStage.FOREST -> R.drawable.stage_forest_minigames
-        TypeStage.DESERT -> 1
-        TypeStage.RIVER -> 2
-        TypeStage.EXPO -> R.drawable.stage_forest_minigames
+        StageType.FOREST -> R.drawable.stage_forest_minigames
+        StageType.DESERT -> 1
+        StageType.RIVER -> 2
+        StageType.EXPO -> R.drawable.stage_forest_minigames
     }
 
     val currentImage = if (isBlocked) R.drawable.locked_level else stageImage
@@ -80,7 +80,7 @@ private fun LevelStageItemPreview() {
                 modifier = Modifier,
                 itemNumber = "1",
                 starsState = StarState.ZERO,
-                stage = TypeStage.FOREST,
+                stage = StageType.FOREST,
             )
         }
     }

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.gg.spora.R
+import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.login.component.EmailField
 import com.gg.spora.login.component.GoogleLoginButton
 import com.gg.spora.login.component.IconButtonArrowLogin
@@ -34,7 +35,12 @@ import com.gg.spora.login.component.separatorLogin
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
+fun LoginScreen(
+    viewModel: LoginViewModel,
+//    navController: NavHostController,
+    onNavigationToHome: () -> Unit,
+    onNavigateToRegisteredLogin: () -> Unit
+) {
     Box(
         Modifier
             .fillMaxSize()
@@ -52,15 +58,28 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavHostController) {
         )
         IconButtonArrowLogin()
 
-        Login(Modifier.align(Alignment.Center), viewModel, navController)
+        Login(
+            Modifier.align(Alignment.Center),
+            viewModel
+        ){
+//            navController.navigate(NavigationRoutes.HomeGraph)
+            onNavigationToHome()
+        }
 
-        LoginQuestionLink(navController = navController)
+        LoginQuestionLink(
+//            navController = navController
+            onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
+        )
     }
 }
 
 
 @Composable
-fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavHostController) {
+fun Login(
+    modifier: Modifier,
+    viewModel: LoginViewModel,
+    onNavigationToHome: () -> Unit
+) {
     val name: String by viewModel.name.observeAsState(initial = "")
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
@@ -69,7 +88,7 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavHostC
     val loginSuccess: Boolean by viewModel.loginSuccess.observeAsState(initial = false)
     val errorMessage: String? by viewModel.errorMessage.observeAsState()
 
-    val coroutineScope = rememberCoroutineScope()
+//    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
     if (isLoading) {
@@ -87,9 +106,10 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavHostC
             PasswordField(password) { viewModel.onLoginChanged(name, email, it) }
             Spacer(modifier = Modifier.padding(16.dp))
             LoginButton(loginEnable) {
-                coroutineScope.launch {
-                    viewModel.onLoginSelected()
-                }
+//                coroutineScope.launch {
+                    viewModel.onLoginSelected { }
+//                }
+                onNavigationToHome()
             }
             Spacer(modifier = Modifier.padding(8.dp))
             separatorLogin()
