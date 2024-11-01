@@ -65,7 +65,18 @@ class UserRepositoryLocalTest {
         coVerify(exactly = 1) { userDao.getLevelsCompletedByUserId(user.id) }
         coVerify(exactly = 1) { userDao.updateLevelCompleted(any()) }
         coVerify(exactly = 0) { userDao.insertLevelCompleted(any()) }
+    }
 
+    @Test
+    fun `getCurrentUserFlow - When the DB is empty, Then return an empty list`() = runTest {
 
+        // Given
+        coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(emptyList())
+
+        // When
+        val result = userRepositoryLocal.getCurrentUserFlow()
+
+        // Then
+        Assert.assertEquals(result, emptyList<User>())
     }
 }

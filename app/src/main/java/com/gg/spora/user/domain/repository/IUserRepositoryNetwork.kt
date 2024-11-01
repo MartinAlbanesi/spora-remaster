@@ -1,4 +1,4 @@
-package com.gg.spora.user.domain
+package com.gg.spora.user.domain.repository
 
 import com.gg.spora.user.domain.models.User
 import kotlinx.coroutines.flow.Flow

@@ -3,6 +3,8 @@ package com.gg.spora.user.domain
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.user.domain.models.LevelCompleted
+import com.gg.spora.user.domain.repository.IUserRepositoryLocal
+import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 

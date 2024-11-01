@@ -3,14 +3,14 @@ package com.gg.spora.user.domain
 import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
-import com.google.firebase.auth.FirebaseAuth
+import com.gg.spora.user.domain.repository.IUserRepositoryLocal
+import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.google.firebase.auth.FirebaseUser
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
-import io.mockk.mockkStatic
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before

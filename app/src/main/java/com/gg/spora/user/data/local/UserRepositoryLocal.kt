@@ -1,6 +1,6 @@
 package com.gg.spora.user.data.local
 
-import com.gg.spora.user.domain.IUserRepositoryLocal
+import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.mappers.toLevelCompletedEntity
 import com.gg.spora.user.domain.mappers.toUser
 import com.gg.spora.user.domain.mappers.toUserEntity
@@ -45,5 +45,9 @@ class UserRepositoryLocal @Inject constructor(
         return userDao.getUsersWithLevelsCompleted().map { users ->
             users.first { it.user.id == userId }.toUser()
         }
+    }
+
+    override suspend fun getCurrentUserFlow(): List<User> {
+        return userDao.getUsersWithLevelsCompleted().first().map { it.toUser() }
     }
 }

@@ -1,4 +1,4 @@
-package com.gg.spora.user.domain
+package com.gg.spora.user.domain.repository
 
 import com.gg.spora.user.domain.models.LevelCompleted
 import com.gg.spora.user.domain.models.User
@@ -15,4 +15,6 @@ interface IUserRepositoryLocal {
 //    suspend fun deleteUserById(id: String)
 
     fun getUserByIdFlow(userId: String): Flow<User>
+
+    suspend fun getCurrentUserFlow(): List<User>
 }
