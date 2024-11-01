@@ -10,17 +10,17 @@ import java.time.Duration
 @Entity(tableName = "seed_trees")
 data class SeedTreeEntity(
     @PrimaryKey(autoGenerate = true) val idSeedTree: Int = 0,
-    @ColumnInfo(name = "tree_type") val treeType: TreeType,
+    @ColumnInfo(name = "tree_type") val treeType: String,
     @ColumnInfo(name = "next_forest_tree_available_time") val nextForestTreeAvailableTime: Long,
-    @ColumnInfo(name = "time_to_generate_forest_tree") val timeToGenerateForestTree: Duration,
+    @ColumnInfo(name = "time_to_generate_forest_tree") val timeToGenerateForestTree: Long,
     @ColumnInfo(name = "amountOfForestTreesGenerated") var amountOfForestTreesGenerated: Int,
 )
 
 fun SeedTreeEntity.toSeedTree(): SeedTree {
     return SeedTree(
         id = idSeedTree,
-        type = treeType,
-        timeToGenerateForestTree = timeToGenerateForestTree
+        type = TreeType.valueOf(treeType),
+        timeToGenerateForestTree = Duration.ofMillis(timeToGenerateForestTree)
     ).apply {
         amountOfForestTreesGenerated = 444
         nextForestTreeAvailableTime = 555L

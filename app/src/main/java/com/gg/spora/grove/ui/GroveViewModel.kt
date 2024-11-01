@@ -1,6 +1,5 @@
 package com.gg.spora.grove.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
@@ -57,11 +56,9 @@ class GroveViewModel @Inject constructor(
 
     private fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i("titi - 1", _seedTrees.value.toString())
 
+            // Tiempo necesario para que se carguen los árboles semilleros
             delay(1000)
-
-            Log.i("titi - 2", _seedTrees.value.toString())
 
             if (_seedTrees.value.isEmpty()) {
                 val initialSeedTrees = listOf(

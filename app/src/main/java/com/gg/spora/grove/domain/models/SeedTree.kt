@@ -14,42 +14,10 @@ import java.time.Duration
 data class SeedTree(
     override val id: Int = 0,
     override val type: TreeType,
-    val timeToGenerateForestTree: Duration
-) : Tree(id, type) {
-
-    var amountOfForestTreesGenerated: Int = 0
+    val timeToGenerateForestTree: Duration,
+    var amountOfForestTreesGenerated: Int = 0,
     var nextForestTreeAvailableTime: Long = 0L
-
-    companion object{
-        private fun entityToSeedTreeModel(seedTreeEntity: SeedTreeEntity) : SeedTree {
-            return SeedTree(
-                id = seedTreeEntity.idSeedTree,
-                type = seedTreeEntity.treeType,
-                timeToGenerateForestTree = seedTreeEntity.timeToGenerateForestTree
-            )
-        }
-
-        fun seedTreesEntitiesToModels(seedTreesEntities : List<SeedTreeEntity>) : List<SeedTree>{
-
-            val listSeedTrees = mutableListOf<SeedTree>()
-
-            for(entity in seedTreesEntities){
-                listSeedTrees.add(entityToSeedTreeModel(entity))
-            }
-
-            return listSeedTrees
-        }
-    }
-
-    fun toSeedTreeEntity(): SeedTreeEntity {
-        return SeedTreeEntity(
-            idSeedTree = id,
-            treeType = type,
-            timeToGenerateForestTree = timeToGenerateForestTree,
-            amountOfForestTreesGenerated = amountOfForestTreesGenerated,
-            nextForestTreeAvailableTime = nextForestTreeAvailableTime
-        )
-    }
+) : Tree(id, type) {
 
     // Verifica si es posible generar una semilla
     fun isForestTreeAvailable(): Boolean {
@@ -68,8 +36,8 @@ data class SeedTree(
 fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {
     return SeedTreeEntity(
         idSeedTree = id,
-        treeType = type,
-        timeToGenerateForestTree = timeToGenerateForestTree,
+        treeType = type.name,
+        timeToGenerateForestTree = timeToGenerateForestTree.toMillis(),
         amountOfForestTreesGenerated = amountOfForestTreesGenerated,
         nextForestTreeAvailableTime = nextForestTreeAvailableTime
     )

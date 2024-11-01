@@ -3,9 +3,12 @@ package com.gg.spora.grove.data
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.toForestTreeEntity
+import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -18,32 +21,16 @@ class GroveRepository(
 ) : IGroveRepository {
 
     override suspend fun saveForestTrees(forest: List<ForestTree?>) {
-        val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
+        val forestTreeEntities = forest.map { it?.toForestTreeEntity() ?: throw IllegalArgumentException("ForestTree cannot be null") }
         groveDao.insertForestTrees(forestTreeEntities)
     }
 
     override suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>> {
-
-        return groveDao.getForestTrees().map { ForestTree.forestTreesEntitiesToModels(it) }
-
-        /*
-        val forestTrees = ForestTree.forestTreesEntitiesToModels(groveDao.getForestTrees())
-
-        // Crea una lista mutable para almacenar los objetos ForestTree
-        val forestList = mutableListOf<ForestTree?>()
-
-        // Agrega los objetos ForestTree a la lista
-        forestTrees.forEach { forestTree ->
-            forestList.add(forestTree)
+        return groveDao.getForestTrees().map {
+            it.map {
+                forestTreeEntity -> forestTreeEntity.toForestTree()
+            }
         }
-
-        // Completa la lista con objetos null hasta completar 25 elementos (tamaño de una matriz 5x5)
-        while (forestList.size < 25) {
-            forestList.add(null)
-        }
-
-        emit(forestList)
-         */
     }
 
     override suspend fun saveSeedTrees(seedTrees: List<SeedTree>) {
