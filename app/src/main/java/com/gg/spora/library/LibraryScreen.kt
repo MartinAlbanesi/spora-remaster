@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,15 +22,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
 /**
  * @param modifier Modifier
- * @param onClickFirst Lambda function to navigate to first screen
- * @param onClickSecond Lambda function to navigate to second screen
- * @param onClickThird Lambda function to navigate to third screen
+ * @param onClickFirst Lambda function to navigate to forest screen
+ * @param onClickSecond Lambda function to navigate to river screen
+ * @param onClickThird Lambda function to navigate to desert screen
  * @param onBackButtonClick Lambda function to navigate to previous screen
  */
 
@@ -47,6 +53,7 @@ fun LibraryScreen(
     onClickThird: () -> Unit = {}
 ) {
 
+
     Box(modifier = Modifier.fillMaxSize()) {
 
 
@@ -61,6 +68,8 @@ fun LibraryScreen(
             onBackButtonClick()
         }
 
+        TorchFire(modifier = Modifier)
+
         BookcaseScreenClicker(
             modifier = Modifier,
             onClickFirst = onClickFirst,
@@ -70,6 +79,27 @@ fun LibraryScreen(
 
         MushyAndTable(modifier = Modifier)
     }
+}
+
+@Composable
+fun TorchFire(modifier: Modifier) {
+    val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.fire))
+    Box(
+        modifier = modifier
+            .fillMaxHeight()
+            .padding(bottom = 300.dp, end = 5.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+
+        LottieAnimation(
+            composition = lottie.value,
+            iterations = LottieConstants.IterateForever,
+            speed = 0.7f,
+            modifier = Modifier.size(55.dp)
+        )
+
+    }
+
 }
 
 @Composable
