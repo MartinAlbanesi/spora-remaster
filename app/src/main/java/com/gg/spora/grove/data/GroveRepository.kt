@@ -44,9 +44,7 @@ class GroveRepository(
     // Carga los árboles del bosque desde la base de datos
     override suspend fun loadForestTreesFromDatabase(): Flow<List<ForestTree?>> {
         return groveDao.getForestTrees().map {
-            it.map {
-                forestTreeEntity -> forestTreeEntity.toForestTree()
-            }
+            it.map { forestTreeEntity -> forestTreeEntity.toForestTree() }
         }
     }
 

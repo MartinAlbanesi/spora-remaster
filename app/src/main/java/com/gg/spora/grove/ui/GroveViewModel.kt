@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.Duration
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 /**
@@ -58,6 +59,7 @@ class GroveViewModel @Inject constructor(
         getSeedTrees()
         getForestTrees()
         initSeedTrees()
+        initForestTrees()
 //        initForestTrees()
     }
 
@@ -96,6 +98,7 @@ class GroveViewModel @Inject constructor(
             if (_forestTrees.value.isEmpty()) {
                 val initialForestTrees = List(25) { null }
                 saveForestTreesUseCase(initialForestTrees)
+                Log.i("GroveViewModel", "AFTER ForestTrees: ${_forestTrees.value}")
             }
         }
     }
@@ -131,40 +134,24 @@ class GroveViewModel @Inject constructor(
     // Plantar una semilla en el bosque
     fun plantSeedInForest(type: TreeType) {
         viewModelScope.launch(Dispatchers.IO) {
-
             // Encuentra un lugar vacío en el bosque
-            val emptySpots =
-                _forestTrees.value.withIndex().filter { it.value == null }.map { it.index }
+            val emptySpots = _forestTrees.value.withIndex().filter { it.value == null }.map { it.index }
 
             // Si no encontró ningún lugar vacío, retorna
             if (emptySpots.isEmpty()) {
                 return@launch
             }
 
-            // Planta el arbol en un lugar vacío aleatorio
+            // Dentro de los lugares vacíos, busca un lugar aleatorio
             val randomIndex = emptySpots.random()
-            val newTree = ForestTree(type = type)
+            val newTree = ForestTree(type = type, plantingDate = LocalDateTime.now()) // Initialize plantingDate
 
-            // Actualiza la arboleda con el nuevo árbol
+            // Actualiza la arboleda con el nuevo árbol (immutable update)
             val updatedForest = _forestTrees.value.toMutableList()
             updatedForest[randomIndex] = newTree
-            _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
-                updatedForest.getOrNull(index)
-                    ?: tree // Use updated tree if available, otherwise keep existing tree
-            }
+            _forestTrees.value = updatedForest.toList() // Assign the new list to _forestTrees.value
 
             saveForestTreesUseCase(_forestTrees.value)
-
-            /*
-            // Llama al caso de uso para plantar el arbol
-            val updatedForest = plantSeedUseCase(type).first() // Get the updated forest list
-
-            // Update forestTrees state immutably, preserving existing items and keys
-            _forestTrees.value = _forestTrees.value.mapIndexed { index, tree ->
-                updatedForest.getOrNull(index)
-                    ?: tree // Use updated tree if available, otherwise keep existing tree
-            }
-             */
         }
     }
 
