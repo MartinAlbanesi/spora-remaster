@@ -9,7 +9,7 @@ class SetNewUserUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal
 ) {
-    suspend operator fun invoke(email: String?, userName: String) {
+    suspend operator fun invoke(email: String, userName: String) {
 
         val userLocal = userRepositoryLocal.getCurrentUserFlow()
 
