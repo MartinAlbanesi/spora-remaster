@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
 import kotlinx.coroutines.flow.first
@@ -12,6 +13,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -115,8 +117,7 @@ class UserDaoTest {
     }
 
     @Test
-    fun deleteLevelCompleted_SetAValidLevelCompletedToDelete_DeletedLevelCompletedFromDB() =
-        runTest {
+    fun deleteLevelCompleted_SetAValidLevelCompletedToDelete_DeletedLevelCompletedFromDB() = runTest {
 
             // Given
             val expectedLevelsCompleted = listOf(
@@ -136,5 +137,43 @@ class UserDaoTest {
             val actualLevelCompleted = userDao.getLevelsCompletedByUserId("1").first()
 
             assertEquals(expectedLevelsCompleted[1], actualLevelCompleted[0])
+    }
+
+    @Test
+    fun updateUser_SetAValidUserToUpdate_UpdatedUserFromDB() = runTest {
+
+        // Given
+        val expectedUser = FakeUserModels.fakeUserEntity
+        userDao.insertUser(expectedUser)
+
+
+        // When
+        val updatedUser = FakeUserModels.fakeUserEntity.copy(userName = "titi")
+        userDao.updateUser(updatedUser)
+
+        // Then
+        val actualUser = userDao.getUser("1").first()
+        assertEquals("titi", actualUser.userName)
+    }
+
+    @Test
+    fun updateLevelCompleted_SetAValidLevelCompletedToUpdate_UpdatedLevelCompletedFromDB() = runTest {
+
+        // Given
+        val expectedLevelsCompleted = FakeUserModels.fakeLevelsCompletedEntity
+
+        expectedLevelsCompleted.forEach {
+            userDao.insertLevelCompleted(it)
         }
+
+        // When
+        val updatedLevelCompleted = FakeUserModels.fakeLevelsCompletedEntity[0].copy(starState = "THREE")
+        userDao.updateLevelCompleted(updatedLevelCompleted)
+
+        // Then
+        val actualLevelCompleted = userDao.getLevelsCompletedByUserId("1").first()
+
+        assertNotEquals("ONE", actualLevelCompleted[0].starState)
+        assertEquals("THREE", actualLevelCompleted[0].starState)
+    }
 }

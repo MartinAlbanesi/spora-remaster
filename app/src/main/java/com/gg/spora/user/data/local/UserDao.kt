@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
 import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
@@ -36,4 +37,10 @@ interface UserDao {
 
     @Delete
     suspend fun deleteLevelCompleted(levelsCompleted: LevelCompletedEntity)
+
+    @Update
+    suspend fun updateUser(user: UserEntity)
+
+    @Update
+    suspend fun updateLevelCompleted(levelsCompleted: LevelCompletedEntity)
 }
