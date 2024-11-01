@@ -1,6 +1,7 @@
 package com.gg.spora.camera.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
@@ -21,6 +22,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,14 +35,17 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionResult
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.camera.domain.ClassifyTf
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.ChallengeViewModel
+import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.delay
 
 
@@ -57,16 +62,15 @@ fun CameraScreen(
     challengeViewModel: ChallengeViewModel = hiltViewModel(),
 ) {
 
-    var isScanComplete by remember { mutableStateOf(false) }
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.success))
-
+    val isCapturing = remember { mutableStateOf(true) }
+    val isScanComplete = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
     var objectsChallenge by remember { mutableStateOf(listOf<ObjectDetail>()) }
-    var isCapturing by remember { mutableStateOf(true) }
 
     LaunchedEffect(challengeViewModel.objectsChallenge) {
         challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
@@ -74,33 +78,12 @@ fun CameraScreen(
         }
     }
     BackHandler {
-        isCapturing = false
+        isCapturing.value = false
         onNavigateToChallengeScreen()
     }
 
-    if (isScanComplete) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-            contentAlignment = Alignment.Center,
-        ) {
-            Dialog(onDismissRequest = {}) {
-                LottieAnimation(
-                    composition = lottie.value,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Center),
-                )
-
-                LaunchedEffect(lottie.isComplete) {
-                    delay(1600)
-                    challengeViewModel.selectObject(nameObject)
-                    challengeViewModel.setObjectInObjectsChallengeWithName(nameObject)
-                    onNavigateToChallengeScreen()
-                }
-            }
-        }
+    if (isScanComplete.value) {
+        ShowDialogScanSuccess(nameObject, onNavigateToChallengeScreen, challengeViewModel, lottie)
     }
 
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
@@ -111,59 +94,115 @@ fun CameraScreen(
             modifier = Modifier.fillMaxSize()
         )
 
+
         LaunchedEffect(Unit) {
             cameraProviderFuture.addListener({
-                val cameraProvider = cameraProviderFuture.get()
-                val preview = androidx.camera.core.Preview.Builder().build().also {
-                    it.setSurfaceProvider(previewView.surfaceProvider)
-                }
-                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-                try {
-                    cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(
-                        lifecycleOwner,
-                        cameraSelector,
-                        preview,
-                        imageCapture
-                    )
-                } catch (exc: Exception) {
-                    Log.e("CameraScreen", "Camera binding failed", exc)
-                }
+                prepareFunctionOfCamera(cameraProviderFuture, previewView, lifecycleOwner, imageCapture)
+                setFunctionsOfCamera(isCapturing, imageCapture, context, nameObject, isScanComplete)
 
-                val handler = Handler(Looper.getMainLooper())
-                val runnable = object : Runnable {
-                    override fun run() {
-                        if (isCapturing) {
-                            imageCapture.takePicture(
-                                ContextCompat.getMainExecutor(context),
-                                object : ImageCapture.OnImageCapturedCallback() {
-                                    override fun onCaptureSuccess(imageProxy: ImageProxy) {
-                                        val bitmap = imageProxy.toBitmap()
-                                        ClassifyTf(context).classifyImage(context, bitmap, nameObject) { result ->
-                                            if (result) {
-                                                isCapturing = false
-                                                isScanComplete = true
-                                            }
-                                        }
-                                        imageProxy.close()
-                                    }
-                                    override fun onError(exception: ImageCaptureException) {
-                                        Log.e("CameraScreen", "Image capture failed", exception)
-                                    }
-                                }
-                            )
-                            handler.postDelayed(this, 3000)
-                        }
-                    }
-                }
-                handler.post(runnable)
+
             }, ContextCompat.getMainExecutor(context))
         }
     } else {
         LaunchPermissionRequest(cameraPermissionState)
     }
 }
+
+@Composable
+fun ShowDialogScanSuccess(
+    nameObject: String,
+    onNavigateToChallengeScreen: () -> Unit,
+    challengeViewModel: ChallengeViewModel,
+    lottie: LottieCompositionResult
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Dialog(onDismissRequest = {}) {
+            LottieAnimation(
+                composition = lottie.value,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.Center),
+            )
+
+            LaunchedEffect(lottie.isComplete) {
+                delay(1600)
+                challengeViewModel.selectObject(nameObject)
+                challengeViewModel.setObjectInObjectsChallengeWithName(nameObject)
+                onNavigateToChallengeScreen()
+            }
+        }
+    }
+}
+
+fun prepareFunctionOfCamera(
+    cameraProviderFuture: ListenableFuture<ProcessCameraProvider>,
+    previewView: PreviewView,
+    lifecycleOwner: LifecycleOwner,
+    imageCapture: ImageCapture
+) {
+
+    val cameraProvider = cameraProviderFuture.get()
+    val preview = androidx.camera.core.Preview.Builder().build().also {
+        it.setSurfaceProvider(previewView.surfaceProvider)
+    }
+    val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+    try {
+        cameraProvider.unbindAll()
+        cameraProvider.bindToLifecycle(
+            lifecycleOwner,
+            cameraSelector,
+            preview,
+            imageCapture
+        )
+    } catch (exc: Exception) {
+        Log.e("CameraScreen", "Camera binding failed", exc)
+    }
+}
+
+fun setFunctionsOfCamera(
+    isCapturing: MutableState<Boolean>,
+    imageCapture: ImageCapture,
+    context: Context,
+    nameObject: String,
+    isScanComplete: MutableState<Boolean>
+) {
+
+    val handler = Handler(Looper.getMainLooper())
+    val runnable = object : Runnable {
+        override fun run() {
+            if (isCapturing.value) {
+                imageCapture.takePicture(
+                    ContextCompat.getMainExecutor(context),
+                    object : ImageCapture.OnImageCapturedCallback() {
+                        override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                            val bitmap = imageProxy.toBitmap()
+                            ClassifyTf(context).classifyImage(context, bitmap, nameObject) { result ->
+                                if (result) {
+                                    isCapturing.value = false
+                                    isScanComplete.value = true
+                                }
+                            }
+                            imageProxy.close()
+                        }
+                        override fun onError(exception: ImageCaptureException) {
+                            Log.e("CameraScreen", "Image capture failed", exception)
+                        }
+                    }
+                )
+                handler.postDelayed(this, 3000)
+            }
+        }
+    }
+    handler.post(runnable)
+}
+
 
 
 /**
