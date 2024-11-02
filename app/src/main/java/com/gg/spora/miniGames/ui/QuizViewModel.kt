@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
-    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
+//    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -157,7 +157,7 @@ class QuizViewModel @Inject constructor(
             _isFinished.value = true
 
             val currentStarState = getStarState(lives = _lives.value)
-            updateLevelStateUseCase(quizRoute.levelId, currentStarState)
+//            updateLevelStateUseCase(quizRoute.levelId, currentStarState)
 
             return
         }

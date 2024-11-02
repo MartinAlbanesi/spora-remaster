@@ -31,6 +31,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    oxygen: Int,
     onNavigateToForestStage: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
 ) {
@@ -73,7 +74,7 @@ fun HomeScreen(
             TopAppBarWithDualIcon(
 //                firstLabel = "0",
 //                firstIcon = R.drawable.trees_icon,
-                secondLabel = "0",
+                secondLabel = oxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
@@ -174,6 +175,7 @@ private fun MiniGameScreenPreview() {
         ) {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
+                oxygen = 0,
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {}
             )

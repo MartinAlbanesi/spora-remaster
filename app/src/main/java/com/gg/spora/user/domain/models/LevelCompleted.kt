@@ -7,5 +7,5 @@ data class LevelCompleted(
     val levelId: String,
     val stageType: StageType,
     val starState: StarState,
-    val rewardsOxygen: List<Byte>
+//    val rewardsOxygen: List<Byte>
 )

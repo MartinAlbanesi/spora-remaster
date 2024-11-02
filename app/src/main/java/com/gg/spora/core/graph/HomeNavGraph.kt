@@ -1,23 +1,51 @@
 package com.gg.spora.core.graph
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.home.ui.HomeScreen
+import com.gg.spora.home.ui.HomeViewModel
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
     navigation<NavigationRoutes.HomeGraph>(startDestination = NavigationRoutes.Home) {
         composable<NavigationRoutes.Home> {
-            HomeScreen(
-                onNavigateToForestStage = {
-                    navController.navigate(NavigationRoutes.Stage("1"))
-                },
-                onNavigateToExpoStage = {
-                    navController.navigate(NavigationRoutes.Stage("2"))
+
+            val homeViewModel: HomeViewModel = hiltViewModel()
+
+            val user by homeViewModel.user.collectAsState()
+
+            val isLoading by homeViewModel.isLoading.collectAsState()
+
+            if(!isLoading){
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ){
+                    CircularProgressIndicator()
                 }
-            )
+            }else{
+                HomeScreen(
+                    oxygen = user?.oxygen ?: 0,
+                    onNavigateToForestStage = {
+                        navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
+                    },
+                    onNavigateToExpoStage = {
+                        navController.navigate(NavigationRoutes.Stage(StageType.EXPO.name))
+                    }
+                )
+            }
+
         }
         composable<NavigationRoutes.Grove> {
 

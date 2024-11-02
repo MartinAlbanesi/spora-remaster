@@ -5,7 +5,7 @@ import com.gg.spora.user.domain.models.User
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetUserFromDBUseCase @Inject constructor(
+class GetUserFromNetworkDBUseCase @Inject constructor(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val userRepositoryNetwork: UserRepositoryNetwork
 ) {

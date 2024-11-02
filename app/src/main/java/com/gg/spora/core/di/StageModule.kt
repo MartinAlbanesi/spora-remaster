@@ -1,8 +1,13 @@
 package com.gg.spora.core.di
 
-import com.gg.spora.forestStage.data.FakeStageLocalRepository
-import com.gg.spora.forestStage.domain.IStageRepository
+import com.gg.spora.core.firebase.FirestoreService
+import com.gg.spora.forestStage.domain.IStageRepositoryNetwork
+import com.gg.spora.forestStage.data.FakeStageLocalRepositoryLocal
+import com.gg.spora.forestStage.data.network.models.StageRepositoryNetwork
+import com.gg.spora.forestStage.domain.GetLevelsUseCase
+import com.gg.spora.forestStage.domain.IStageRepositoryLocal
 import com.gg.spora.forestStage.domain.UpdateLevelStateUseCase
+import com.gg.spora.user.domain.GetUserFromNetworkDBUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,14 +20,31 @@ class StageModule {
 
     @Provides
     @Singleton
-    fun provideStageRepository() : IStageRepository {
-        return FakeStageLocalRepository()
+    fun provideStageRepository() : IStageRepositoryLocal {
+        return FakeStageLocalRepositoryLocal()
+    }
+
+//    @Singleton
+//    @Provides
+//    fun provideUpdateLevelStateUseCase(stageRepository: IStageRepositoryLocal) : UpdateLevelStateUseCase{
+//        return UpdateLevelStateUseCase(stageRepository)
+//    }
+
+    @Singleton
+    @Provides
+    fun provideStageRepositoryNetwork(
+        firestoreService: FirestoreService
+    ) : IStageRepositoryNetwork {
+        return StageRepositoryNetwork(firestoreService)
     }
 
     @Singleton
     @Provides
-    fun provideUpdateLevelStateUseCase(stageRepository: IStageRepository) : UpdateLevelStateUseCase{
-        return UpdateLevelStateUseCase(stageRepository)
+    fun provideGetLevelsUseCase(
+        stageRepositoryNetwork: IStageRepositoryNetwork,
+        getUserFromNetworkDBUseCase: GetUserFromNetworkDBUseCase
+    ): GetLevelsUseCase {
+        return GetLevelsUseCase(stageRepositoryNetwork,getUserFromNetworkDBUseCase)
     }
 
 }

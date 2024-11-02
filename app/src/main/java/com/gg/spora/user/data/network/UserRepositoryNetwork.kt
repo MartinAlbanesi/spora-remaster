@@ -3,7 +3,7 @@ package com.gg.spora.user.data.network
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.core.utils.enums.CollectionsDataBase
 import com.gg.spora.user.data.network.models.UserNetwork
-import com.gg.spora.user.domain.IUserRepositoryNetwork
+import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.gg.spora.user.domain.mappers.toUser
 import com.gg.spora.user.domain.models.User
 import com.google.firebase.firestore.snapshots
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class UserRepositoryNetwork @Inject constructor(
     private val firestoreService: FirestoreService
-) :  IUserRepositoryNetwork{
+) : IUserRepositoryNetwork {
     private val firestore = firestoreService.getFirestore()
 
     override suspend fun setUser(user: User) : String {

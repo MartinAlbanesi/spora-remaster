@@ -42,6 +42,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val stage by stageViewModel.stage.collectAsState()
 
+            val levels by stageViewModel.levels.collectAsState()
+
             val currentLevel by stageViewModel.currentLevel.collectAsState()
 
             var showLevelPreview by rememberSaveable {
@@ -75,7 +77,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             StageScreen(
                 oxygen = 75,
                 title = stage!!.stageType.label,
-                levels = stage!!.levels,
+                levels = levels,
                 backgroundImage = stage!!.stageBackgroundImage,
                 pathLadder = stage!!.pathLadder,
                 onNavigateToChallenge = { title ->

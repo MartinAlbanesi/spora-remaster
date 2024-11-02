@@ -16,20 +16,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ChallengeModule {
 
-    @Provides
-    @Singleton
-    fun provideChallengeDatabase(@ApplicationContext context: Context): SporaDatabase {
-        return Room.databaseBuilder(
-            context,
-            SporaDatabase::class.java,
-            "spora_database"
-        ).build()
-    }
-
-    @Provides
-    fun provideChallengeDao(database: SporaDatabase): ChallengeDao {
-        return database.challengeDao()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideChallengeDatabase(@ApplicationContext context: Context): SporaDatabase {
+//        return Room.databaseBuilder(
+//            context,
+//            SporaDatabase::class.java,
+//            "spora_database"
+//        ).build()
+//    }
+//
+//    @Provides
+//    fun provideChallengeDao(database: SporaDatabase): ChallengeDao {
+//        return database.challengeDao()
+//    }
 
     @Provides
     fun provideChallengeRepository(challengeDao: ChallengeDao): ChallengeRepository {
