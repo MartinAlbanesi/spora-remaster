@@ -27,7 +27,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
     private lateinit var userRepositoryNetwork: IUserRepositoryNetwork
 
     @RelaxedMockK
-    private lateinit var getCurrentUserUseCase: GetCurrentUserUseCase
+    private lateinit var getUserAuthUseCase: GetUserAuthUseCase
 
     @Before
     fun setUp() {
@@ -36,7 +36,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         updateUserLevelsAndOxygenUseCase = UpdateUserLevelsAndOxygenUseCase(
             userRepositoryLocal,
             userRepositoryNetwork,
-            getCurrentUserUseCase
+            getUserAuthUseCase
         )
     }
 
@@ -52,7 +52,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
 
         coEvery { userRepositoryLocal.getUserByIdFlow(userId) } returns flowOf(FakeUserModels.fakeUsers.first())
         coEvery { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) } returns Unit
-        coEvery { getCurrentUserUseCase() } returns currentUser
+        coEvery { getUserAuthUseCase() } returns currentUser
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
 
         // When
@@ -61,7 +61,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         // Then
         coVerify(exactly = 1) { userRepositoryLocal.getUserByIdFlow(userId) }
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
-        coVerify(exactly = 1) { getCurrentUserUseCase() }
+        coVerify(exactly = 1) { getUserAuthUseCase() }
         coVerify(exactly = 1) { userRepositoryNetwork.updateUserById(any(), any()) }
     }
 
@@ -77,7 +77,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
 
         coEvery { userRepositoryLocal.getUserByIdFlow(userId) } returns flowOf(FakeUserModels.fakeUsers.first())
         coEvery { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) } returns Unit
-        coEvery { getCurrentUserUseCase() } returns currentUser
+        coEvery { getUserAuthUseCase() } returns currentUser
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
 
         // When
@@ -86,7 +86,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         // Then
         coVerify(exactly = 1) { userRepositoryLocal.getUserByIdFlow(userId) }
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
-        coVerify(exactly = 1) { getCurrentUserUseCase() }
+        coVerify(exactly = 1) { getUserAuthUseCase() }
         coVerify(exactly = 0) { userRepositoryNetwork.updateUserById(any(), any()) }
     }
 }

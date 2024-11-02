@@ -11,7 +11,7 @@ import javax.inject.Inject
 class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal,
     private val userRepositoryNetwork: IUserRepositoryNetwork,
-    private val getCurrentUserUseCase: GetCurrentUserUseCase
+    private val getUserAuthUseCase: GetUserAuthUseCase
 ) {
     suspend operator fun invoke(
         userId: String,
@@ -36,7 +36,7 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
 
         userRepositoryLocal.updateUserWithLevelCompleted(userUpdated, levelCompleted)
 
-        if(getCurrentUserUseCase() != null) {
+        if(getUserAuthUseCase() != null) {
             userRepositoryNetwork.updateUserById(userUpdated, userId)
         }
     }

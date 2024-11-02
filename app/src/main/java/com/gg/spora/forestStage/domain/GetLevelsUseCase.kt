@@ -2,7 +2,7 @@ package com.gg.spora.forestStage.domain
 
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.domain.model.Level
-import com.gg.spora.user.domain.GetUserFromNetworkDBUseCase
+import com.gg.spora.user.domain.GetUserNetworkUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
@@ -14,11 +14,11 @@ import javax.inject.Inject
  */
 class GetLevelsUseCase @Inject constructor(
     private val stageRepositoryNetwork: IStageRepositoryNetwork,
-    private val getUserFromNetworkDBUseCase: GetUserFromNetworkDBUseCase
+    private val getUserNetworkUseCase: GetUserNetworkUseCase
 ) {
     operator fun invoke(stageType: StageType) : Flow<List<Level>> {
 
-        val userLevelsCompletedFlow = getUserFromNetworkDBUseCase()
+        val userLevelsCompletedFlow = getUserNetworkUseCase()
         val levelsFlow = stageRepositoryNetwork.getLevelsByStageType(stageType)
 
         val combineLevels = levelsFlow.combine(userLevelsCompletedFlow){ levels, user ->

@@ -6,8 +6,7 @@ import com.gg.spora.forestStage.data.FakeStageLocalRepositoryLocal
 import com.gg.spora.forestStage.data.network.models.StageRepositoryNetwork
 import com.gg.spora.forestStage.domain.GetLevelsUseCase
 import com.gg.spora.forestStage.domain.IStageRepositoryLocal
-import com.gg.spora.forestStage.domain.UpdateLevelStateUseCase
-import com.gg.spora.user.domain.GetUserFromNetworkDBUseCase
+import com.gg.spora.user.domain.GetUserNetworkUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,9 +41,9 @@ class StageModule {
     @Provides
     fun provideGetLevelsUseCase(
         stageRepositoryNetwork: IStageRepositoryNetwork,
-        getUserFromNetworkDBUseCase: GetUserFromNetworkDBUseCase
+        getUserNetworkUseCase: GetUserNetworkUseCase
     ): GetLevelsUseCase {
-        return GetLevelsUseCase(stageRepositoryNetwork,getUserFromNetworkDBUseCase)
+        return GetLevelsUseCase(stageRepositoryNetwork,getUserNetworkUseCase)
     }
 
 }

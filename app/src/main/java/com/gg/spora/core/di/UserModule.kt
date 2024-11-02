@@ -4,7 +4,7 @@ import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.user.data.local.UserDao
 import com.gg.spora.user.data.local.UserRepositoryLocal
 import com.gg.spora.user.data.network.UserRepositoryNetwork
-import com.gg.spora.user.domain.GetCurrentUserUseCase
+import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.gg.spora.user.domain.SetNewUserUseCase
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
@@ -39,8 +39,8 @@ class UserModule {
     @Provides
     fun provideGetCurrentUserUseCase(
         firebaseAuth: FirebaseAuth,
-    ): GetCurrentUserUseCase {
-        return GetCurrentUserUseCase(firebaseAuth)
+    ): GetUserAuthUseCase {
+        return GetUserAuthUseCase(firebaseAuth)
     }
 
     @Singleton
