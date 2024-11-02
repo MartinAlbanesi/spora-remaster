@@ -19,8 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.domain.models.TreeType
 import kotlinx.coroutines.delay
 
 /**
@@ -33,7 +33,7 @@ import kotlinx.coroutines.delay
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    onForestTreeGenerated: (TreeType) -> Unit
+    onForestTreeGenerated: (ForestTree) -> Unit
 ) {
     // Estado para el cooldown
     var isCooldownActive by remember { mutableStateOf(!seedTree.isForestTreeAvailable()) }
@@ -68,8 +68,8 @@ fun SeedTreeItem(
                 val generatedForestTree = seedTree.generateForestTree()
                 Log.d("SeedTreeItem", "Generated ForestTree: $generatedForestTree")
                 generatedForestTree?.let { forestTree ->
+                    onForestTreeGenerated(forestTree)
                     Log.d("SeedTreeItem", "Forest Tree generated: $forestTree.type")
-                    onForestTreeGenerated(forestTree.type) // Access type from forestTree
                     isCooldownActive = true
                     remainingCooldown =
                         seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()

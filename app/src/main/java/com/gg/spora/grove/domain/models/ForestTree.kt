@@ -20,7 +20,8 @@ data class ForestTree(
     override val id: Int = 0,
     override val type: TreeType,
     var currentStage: GrowthStage = GrowthStage.SPROUT,
-    val plantingDate: LocalDateTime = LocalDateTime.now()
+    val plantingDate: LocalDateTime = LocalDateTime.now(),
+    var position: Int
 ) : Tree(id, type) {
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -81,6 +82,7 @@ fun ForestTree.toForestTreeEntity(): ForestTreeEntity {
         idForestTree = id,
         treeType = type.name,
         currentStage = currentStage.toString(),
-        plantingDate = plantingDate.toEpochSecond(ZoneOffset.UTC)
+        plantingDate = plantingDate.toEpochSecond(ZoneOffset.UTC),
+        position = position
     )
 }

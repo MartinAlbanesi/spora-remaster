@@ -6,5 +6,6 @@ package com.gg.spora.grove.domain.models
 enum class GrowthStage {
     SPROUT,
     MEDIUM,
-    ADULT
+    ADULT,
+    NONE
 }

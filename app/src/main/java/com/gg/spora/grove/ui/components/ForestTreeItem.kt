@@ -39,7 +39,8 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
             when (treeState.currentStage) {
                 GrowthStage.SPROUT -> R.drawable.sprout_tree
                 GrowthStage.MEDIUM -> R.drawable.medium_tree
-                GrowthStage.ADULT -> treeState.type.imageResource // Access imageResource from treeState.type
+                GrowthStage.ADULT -> treeState.type.imageResource
+                GrowthStage.NONE -> R.drawable.empty_tree_spot // Access imageResource from treeState.type
             }
         }
     }

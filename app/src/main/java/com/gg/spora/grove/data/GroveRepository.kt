@@ -3,10 +3,13 @@ package com.gg.spora.grove.data
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.domain.models.toForestTreeEntity
 import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import kotlinx.coroutines.flow.Flow
@@ -37,7 +40,16 @@ class GroveRepository(
 
     // Guarda los árboles del bosque en la base de datos
     override suspend fun saveForestTrees(forest: List<ForestTree?>) {
-        val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
+        groveDao.deleteAllForestTrees()
+        val forestTreeEntities = forest.map {
+            it?.toForestTreeEntity() ?: ForestTreeEntity(
+                idForestTree = 0,
+                TreeType.NONE.toString(),
+                GrowthStage.NONE.toString(),
+                plantingDate = 0,
+                position = 0
+            )
+        }
         groveDao.insertForestTrees(forestTreeEntities)
     }
 
@@ -49,7 +61,7 @@ class GroveRepository(
     }
 
     // Inserta un árbol de bosque en la base de datos
-    override suspend fun insertForestTree(forestTree: ForestTree){
+    override suspend fun insertForestTree(forestTree: ForestTree) {
         val forestTreeEntity = forestTree.toForestTreeEntity()
         groveDao.insertForestTree(forestTreeEntity)
     }

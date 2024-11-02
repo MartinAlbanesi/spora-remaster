@@ -10,7 +10,8 @@ enum class TreeType(val oxygenPerDay: Int) {
     SECUOYA(3),
     PINE(5),
     MANGROVE(10),
-    BAOBAB(15);
+    BAOBAB(15),
+    NONE(0);
 
     /**
      * Retorna la imagen correspondiente al tipo de árbol
@@ -21,5 +22,6 @@ enum class TreeType(val oxygenPerDay: Int) {
             SECUOYA -> R.drawable.mother_tree_back
             BAOBAB -> R.drawable.baobab_tree
             PINE -> R.drawable.pine_tree
+            NONE -> R.drawable.empty_tree_spot
         }
 }

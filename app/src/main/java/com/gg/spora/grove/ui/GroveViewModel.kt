@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.Duration
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 /**
@@ -55,12 +54,10 @@ class GroveViewModel @Inject constructor(
 
     // Inicialización de los casos de uso
     init {
-//        getForestTrees()
         getSeedTrees()
         getForestTrees()
         initSeedTrees()
         initForestTrees()
-//        initForestTrees()
     }
 
     fun initSeedTrees() {
@@ -92,14 +89,11 @@ class GroveViewModel @Inject constructor(
 
     fun initForestTrees() {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(2000)
-
-            Log.i("GroveViewModel", "BEFORE ForestTrees: ${_forestTrees.value}")
+            delay(500) // Optional delay
 
             if (_forestTrees.value.isEmpty()) {
-                val initialForestTrees = List(25) { null }
-                saveForestTreesUseCase(initialForestTrees)
-                Log.i("GroveViewModel", "AFTER ForestTrees: ${_forestTrees.value}")
+                _forestTrees.value = MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
+                Log.i("GroveViewModel", "ForestTrees initialized: ${_forestTrees.value}")
             }
         }
     }
@@ -130,29 +124,25 @@ class GroveViewModel @Inject constructor(
         _seedTrees.value = seedTrees
     }
 
-    // Plantar una semilla en el bosque
-    fun plantSeedInForest(type: TreeType) {
+    fun plantSeedInForest(forestTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            // Encuentra un lugar vacío en el bosque
-            val emptySpots = _forestTrees.value.withIndex().filter { it.value == null }.map { it.index }
-
-            // Si no encontró ningún lugar vacío, retorna
-            if (emptySpots.isEmpty()) {
-                return@launch
+            Log.i("GroveViewModel", "BEFORE PLANTING plantForestTreeInForest: ${_forestTrees.value.size}")
+            var position = forestTree.position
+            while (_forestTrees.value.getOrNull(position) != null) { // Check if position is occupied
+                position = (0..24).random() // Generate new random position
             }
+            forestTree.position = position // Update tree's position
 
-            // Dentro de los lugares vacíos, busca un lugar aleatorio
-            val randomIndex = emptySpots.random()
-            val newTree = ForestTree(type = type, plantingDate = LocalDateTime.now()) // Initialize plantingDate
-
-            // Actualiza la arboleda con el nuevo árbol (immutable update)
+            // Directly update the element at the desired position
             val updatedForest = _forestTrees.value.toMutableList()
-            updatedForest[randomIndex] = newTree
-            _forestTrees.value = updatedForest.toList() // Assign the new list to _forestTrees.value
+            updatedForest[position] = forestTree
 
-            saveForestTreesUseCase(_forestTrees.value)
+            Log.i("GroveViewModel", "AFTER PLANTING plantForestTreeInForest: ${_forestTrees.value}")
+
+            saveForestTreesUseCase(updatedForest) // Save to database
         }
     }
+
 
     // Actualización del estado del árbol
     fun updateTree(updatedTree: ForestTree) {

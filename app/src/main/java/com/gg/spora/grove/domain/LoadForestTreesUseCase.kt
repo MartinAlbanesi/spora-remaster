@@ -6,15 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class LoadForestTreesUseCase(private val groveRepository: IGroveRepository) {
     suspend operator fun invoke(): Flow<List<ForestTree?>> {
-        /*
-        val forestTreesList = mutableListOf<ForestTree?>()
-        groveRepository.loadForestTreesFromDatabase().collect { forestTrees ->
-            forestTrees.forEach { forestTrees ->
-                forestTreesList.add(forestTrees)
-            }
-        }
-         */
         return groveRepository.loadForestTreesFromDatabase()
     }
-
 }

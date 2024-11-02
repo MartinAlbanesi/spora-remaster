@@ -4,7 +4,6 @@ import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
-import com.gg.spora.grove.domain.PlantSeedUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.models.ForestTree
@@ -39,7 +38,6 @@ class GroveViewModelTest {
     private lateinit var loadForestTreesUseCase: LoadForestTreesUseCase
     private lateinit var saveSeedTreesUseCase: SaveSeedTreesUseCase
     private lateinit var saveForestTreesUseCase: SaveForestTreesUseCase
-    private lateinit var plantSeedUseCase: PlantSeedUseCase
     private lateinit var getForestTreeByIdUseCase: GetForestTreeByIdUseCase
     private lateinit var insertForestTreeUseCase: InsertForestTreeUseCase
 
@@ -52,7 +50,6 @@ class GroveViewModelTest {
         loadForestTreesUseCase = mockk()
         saveSeedTreesUseCase = mockk()
         saveForestTreesUseCase = mockk()
-        plantSeedUseCase = mockk()
         getForestTreeByIdUseCase = mockk()
         insertForestTreeUseCase = mockk()
 
@@ -61,14 +58,6 @@ class GroveViewModelTest {
         coEvery { loadForestTreesUseCase() } returns flowOf(emptyList())
         coEvery { saveSeedTreesUseCase(any<List<SeedTree>>()) } just runs
         coEvery { saveForestTreesUseCase(any<List<ForestTree?>>()) } just runs
-        coEvery { plantSeedUseCase(any<TreeType>()) } returns flowOf(
-            listOf(
-                ForestTree(
-                    type = TreeType.SECUOYA,
-                    plantingDate = LocalDateTime.now()
-                )
-            )
-        )
         coEvery { getForestTreeByIdUseCase(any<Int>()) } returns flowOf(
             ForestTree(
                 type = TreeType.SECUOYA,

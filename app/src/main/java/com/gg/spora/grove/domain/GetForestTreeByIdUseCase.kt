@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 class GetForestTreeByIdUseCase(private val groveRepository: IGroveRepository) {
     suspend operator fun invoke(id: Int): Flow<ForestTree?> {
         return groveRepository.getForestTreeById(id = id)
-}
     }
+}

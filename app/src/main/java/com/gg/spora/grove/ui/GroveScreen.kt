@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +26,6 @@ import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.ui.components.ForestTreeItem
 import com.gg.spora.grove.ui.components.PlantingPlaceholder
 import com.gg.spora.grove.ui.components.SeedTreeItem
@@ -37,7 +36,7 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     seedTrees: List<SeedTree>,
     forestTrees: List<ForestTree?>,
-    plantSeedInForest: (TreeType) -> Unit,
+    plantSeedInForest: (ForestTree) -> Unit,
     updateTree: (ForestTree) -> Unit,
     popBackStack: () -> Unit
 ) {
@@ -89,9 +88,9 @@ fun GroveScreen(
             ) {
                 // Componente para cada árbol semillero
                 for (seedTree in seedTrees) {
-                    SeedTreeItem(seedTree = seedTree) { treeType ->
-                        Log.i("GroveScreen", "Tree type clicked: $treeType")
-                        plantSeedInForest(treeType)
+                    SeedTreeItem(seedTree = seedTree) { forestTree ->
+                        Log.i("GroveScreen", "Tree type clicked: $forestTree")
+                        plantSeedInForest(forestTree)
                     }
                 }
             }
@@ -110,14 +109,13 @@ fun GroveScreen(
                     .padding(16.dp)
                     .offset(y = (-50).dp)
             ) {
-                // Componente para cada árbol del bosque
-                items(forestTrees) { tree ->
-                    if (tree != null) {
-                        ForestTreeItem(tree) { updatedTree ->
-                            updateTree(updatedTree)
-                        }
-                    } else {
+                itemsIndexed(forestTrees) { index, tree -> // Use itemsIndexed here
+                    if (tree == null) {
                         PlantingPlaceholder() // Componente de plantacion vacia
+                    } else {
+                        ForestTreeItem(tree) {
+                            updateTree(tree)
+                        }
                     }
                 }
             }

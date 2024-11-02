@@ -15,6 +15,7 @@ data class ForestTreeEntity(
     @ColumnInfo(name = "tree_type") val treeType: String,
     @ColumnInfo(name = "current_stage") val currentStage: String,
     @ColumnInfo(name = "planting_date") val plantingDate : Long,
+    @ColumnInfo(name = "position") val position: Int
 )
 
 fun ForestTreeEntity.toForestTree(): ForestTree {
@@ -22,6 +23,7 @@ fun ForestTreeEntity.toForestTree(): ForestTree {
         id = idForestTree,
         type = TreeType.valueOf(treeType), // Convert String to TreeType using valueOf
         currentStage = GrowthStage.valueOf(currentStage), // Assuming currentStage is already a String
-        plantingDate = LocalDateTime.ofEpochSecond(plantingDate, 0, ZoneOffset.UTC) // Convert Long to LocalDateTime
+        plantingDate = LocalDateTime.ofEpochSecond(plantingDate, 0, ZoneOffset.UTC), // Convert Long to LocalDateTime
+        position = position
     )
 }
