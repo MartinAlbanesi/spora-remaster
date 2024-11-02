@@ -20,6 +20,10 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
     private val _selectedObject = MutableLiveData<String>()
     val selectedObject: LiveData<String> get() = _selectedObject
 
+
+    private val _isLoading = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     init {
         insertObjectsDetailInDatabase()
         getObjectsValidate()
@@ -146,6 +150,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
                 _objectsChallenge.value?.add(objectDetail)
                 challengeRepository.insertObjectDetail(objectDetail)
             }
+            _isLoading.value = false
         }
 
     }
