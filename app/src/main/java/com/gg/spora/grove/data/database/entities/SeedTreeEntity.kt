@@ -11,9 +11,9 @@ import java.time.Duration
 data class SeedTreeEntity(
     @PrimaryKey(autoGenerate = true) val idSeedTree: Int = 0,
     @ColumnInfo(name = "tree_type") val treeType: String,
-    @ColumnInfo(name = "next_forest_tree_available_time") val nextForestTreeAvailableTime: Long,
     @ColumnInfo(name = "time_to_generate_forest_tree") val timeToGenerateForestTree: Long,
-    @ColumnInfo(name = "amountOfForestTreesGenerated") var amountOfForestTreesGenerated: Int,
+    @ColumnInfo(name = "next_forest_tree_available_time") val nextForestTreeAvailableTime: Long = 0,
+    @ColumnInfo(name = "amountOfForestTreesGenerated") var amountOfForestTreesGenerated: Int = 0,
 )
 
 fun SeedTreeEntity.toSeedTree(): SeedTree {
