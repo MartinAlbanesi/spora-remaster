@@ -1,11 +1,14 @@
 package com.gg.spora.user.domain
 
+import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -33,7 +36,7 @@ class SetNewUserUseCaseTest{
         val email = ""
         val userName = "titi"
 
-//        coEvery { userRepositoryLocal.getCurrentUserFlow() } returns emptyList()
+        coEvery { userRepositoryLocal.getUser() } returns flowOf(null)
         coEvery { userRepositoryLocal.setUserLocal(any()) } returns Unit
         coEvery { userRepositoryNetwork.setUser(any()) } returns ""
 
@@ -41,7 +44,7 @@ class SetNewUserUseCaseTest{
         setNewUserUseCase(email, userName)
 
         // Then
-//        coVerify(exactly = 1) { userRepositoryLocal.getCurrentUserFlow() }
+        coVerify(exactly = 1) { userRepositoryLocal.getUser() }
         coVerify(exactly = 1) { userRepositoryLocal.setUserLocal(any()) }
         coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
     }
@@ -52,16 +55,15 @@ class SetNewUserUseCaseTest{
         val email = ""
         val userName = "titi"
 
-//        coEvery { userRepositoryLocal.getCurrentUserFlow() } returns listOf(mockk())
-        coEvery { userRepositoryLocal.setUserLocal(any()) } returns Unit
-        coEvery { userRepositoryNetwork.setUser(any()) } returns ""
+        coEvery { userRepositoryLocal.getUser() } returns flowOf(FakeUserModels.fakeUsers.first())
+        coEvery { userRepositoryNetwork.setUser(any()) } returns "titi"
 
         // When
         setNewUserUseCase(email, userName)
 
         // Then
-//        coVerify(exactly = 1) { userRepositoryLocal.getCurrentUserFlow() }
-        coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
+        coVerify(exactly = 1) { userRepositoryLocal.getUser() }
         coVerify(exactly = 0) { userRepositoryLocal.setUserLocal(any()) }
+        coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
     }
 }

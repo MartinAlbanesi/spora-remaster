@@ -12,20 +12,20 @@ class SetNewUserUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(email: String, userName: String) {
 
-//        val userLocal = userRepositoryLocal.getUser().first()
-//
-//        if(userLocal.isNotEmpty()) {
-//            userRepositoryNetwork.setUser(userLocal.first())
-//        }else{
-//            val user = User(
-//                id = "",
-//                userName = userName,
-//                email = email?: "",
-//                oxygen = 0,
-//                levelsCompleted = emptyList()
-//            )
-//            userRepositoryLocal.setUserLocal(user)
-//            userRepositoryNetwork.setUser(user)
-//        }
+        val userLocal = userRepositoryLocal.getUser().first()
+
+        if(userLocal != null) {
+            userRepositoryNetwork.setUser(userLocal)
+        }else{
+            val user = User(
+                id = "",
+                userName = userName,
+                email = email,
+                oxygen = 0,
+                levelsCompleted = emptyList()
+            )
+            userRepositoryLocal.setUserLocal(user)
+            userRepositoryNetwork.setUser(user)
+        }
     }
 }
