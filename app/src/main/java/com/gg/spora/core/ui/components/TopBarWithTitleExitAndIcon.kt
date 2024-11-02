@@ -22,10 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -70,7 +72,7 @@ fun TopBarWithTitleExitAndIcon(
                     Icon(
                         Icons.Default.Favorite,
                         contentDescription = null,
-                        tint = Color(0xFFbc0000),
+                        tint = colorResource(id = R.color.error),
                         modifier = Modifier.size(44.dp)
                     )
                     Text(

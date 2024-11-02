@@ -1,7 +1,7 @@
 package com.gg.spora.core.utils.functions
 
 import com.gg.spora.core.utils.enums.TypeQuestion
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 
 import org.junit.Test
 

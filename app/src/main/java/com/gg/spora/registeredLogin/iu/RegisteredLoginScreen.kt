@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -49,9 +50,9 @@ import com.gg.spora.login.component.LoginTextField
 @Composable
 fun RegisteredLoginScreen(
     onBackClick: () -> Unit,
-    onLoginClick: () -> Unit,
+//    onLoginClick: () -> Unit,
     onGoogleLoginClick: () -> Unit,
-    onRegisterClick: () -> Unit,
+//    onRegisterClick: () -> Unit,
     navController: NavHostController
 ) {
 
@@ -179,7 +180,7 @@ fun RegisteredLoginScreen(
                 .padding(16.dp)
         ) {
             Icon(
-                imageVector = Icons.Filled.KeyboardArrowLeft,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                 contentDescription = "Volver",
                 tint = Color.White,
                 modifier = Modifier.size(32.dp)
@@ -216,9 +217,9 @@ fun RegisteredLoginScreen(
 fun RegisteredLoginScreenPreview() {
     RegisteredLoginScreen(
         onBackClick = { /*TODO*/ },
-        onLoginClick = { /*TODO*/ },
+//        onLoginClick = { /*TODO*/ },
         onGoogleLoginClick = { /*TODO*/ },
-        onRegisterClick = { /*TODO*/ },
+//        onRegisterClick = { /*TODO*/ },
         navController = NavHostController(LocalContext.current)
     )
 }
