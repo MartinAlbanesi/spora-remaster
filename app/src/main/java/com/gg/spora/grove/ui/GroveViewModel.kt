@@ -63,7 +63,7 @@ class GroveViewModel @Inject constructor(
 //        initForestTrees()
     }
 
-    private fun initSeedTrees() {
+    fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
 
             // Tiempo necesario para que se carguen los árboles semilleros
@@ -85,11 +85,12 @@ class GroveViewModel @Inject constructor(
                     ),
                     )
                 saveSeedTreesUseCase(initialSeedTrees)
+                // _seedTrees.value = initialSeedTrees
             }
         }
     }
 
-    private fun initForestTrees() {
+    fun initForestTrees() {
         viewModelScope.launch(Dispatchers.IO) {
             delay(2000)
 
@@ -125,10 +126,8 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-    fun saveForestTrees() {
-        viewModelScope.launch {
-            saveForestTreesUseCase(_forestTrees.value)
-        }
+    fun setSeedTrees(seedTrees: List<SeedTree>){
+        _seedTrees.value = seedTrees
     }
 
     // Plantar una semilla en el bosque

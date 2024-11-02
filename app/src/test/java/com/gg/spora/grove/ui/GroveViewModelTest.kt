@@ -1,41 +1,92 @@
 package com.gg.spora.grove.ui
 
-/*
+import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
+import com.gg.spora.grove.domain.InsertForestTreeUseCase
+import com.gg.spora.grove.domain.LoadForestTreesUseCase
+import com.gg.spora.grove.domain.LoadSeedTreesUseCase
+import com.gg.spora.grove.domain.PlantSeedUseCase
+import com.gg.spora.grove.domain.SaveForestTreesUseCase
+import com.gg.spora.grove.domain.SaveSeedTreesUseCase
+import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.runs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import java.time.Duration
+import java.time.LocalDateTime
+
+
 @ExperimentalCoroutinesApi
 class GroveViewModelTest {
 
     private lateinit var viewModel: GroveViewModel
+    private lateinit var loadSeedTreesUseCase: LoadSeedTreesUseCase
+    private lateinit var loadForestTreesUseCase: LoadForestTreesUseCase
+    private lateinit var saveSeedTreesUseCase: SaveSeedTreesUseCase
+    private lateinit var saveForestTreesUseCase: SaveForestTreesUseCase
     private lateinit var plantSeedUseCase: PlantSeedUseCase
+    private lateinit var getForestTreeByIdUseCase: GetForestTreeByIdUseCase
+    private lateinit var insertForestTreeUseCase: InsertForestTreeUseCase
 
     @Before
-    fun setup() {
+    fun setup() = runTest {
         Dispatchers.setMain(StandardTestDispatcher())
 
-        // Mockear las dependencias usando MockK
-        val getSeedTreesUseCase = mockk<GetSeedTreesUseCase>()
-        val getForestTreesUseCase = mockk<GetForestTreesUseCase>()
-        plantSeedUseCase = mockk<PlantSeedUseCase>()
+        // Mock use cases
+        loadSeedTreesUseCase = mockk()
+        loadForestTreesUseCase = mockk()
+        saveSeedTreesUseCase = mockk()
+        saveForestTreesUseCase = mockk()
+        plantSeedUseCase = mockk()
+        getForestTreeByIdUseCase = mockk()
+        insertForestTreeUseCase = mockk()
 
-        // Mockea el comportamiento de GetSeedTreesUseCase
-        every { getSeedTreesUseCase() } returns flowOf(emptyList<SeedTree>())
-
-        // Mockea el comportamiento de GetForestTreesUseCase
-        every { getForestTreesUseCase() } returns flowOf(emptyList<List<ForestTree?>>())
-
-        // Mockea el comportamiento de PlantSeedUseCase
-        every { plantSeedUseCase(any<TreeType>() as TreeType) } answers {
-            if (firstArg<TreeType>() == TreeType.SECUOYA) {
-                ForestTree(type = TreeType.SECUOYA, currentStage = GrowthStage.SPROUT)
-            } else {
+        // Mock use case behaviors (if needed)
+        coEvery { loadSeedTreesUseCase() } returns flowOf(emptyList())
+        coEvery { loadForestTreesUseCase() } returns flowOf(emptyList())
+        coEvery { saveSeedTreesUseCase(any<List<SeedTree>>()) } just runs
+        coEvery { saveForestTreesUseCase(any<List<ForestTree?>>()) } just runs
+        coEvery { plantSeedUseCase(any<TreeType>()) } returns flowOf(
+            listOf(
                 ForestTree(
-                    type = firstArg<TreeType>(),
-                    currentStage = GrowthStage.SPROUT
+                    type = TreeType.SECUOYA,
+                    plantingDate = LocalDateTime.now()
                 )
-            }
-        }
+            )
+        )
+        coEvery { getForestTreeByIdUseCase(any<Int>()) } returns flowOf(
+            ForestTree(
+                type = TreeType.SECUOYA,
+                plantingDate = LocalDateTime.now()
+            )
+        )
+        coEvery { insertForestTreeUseCase(any<ForestTree>()) } just runs
 
-        // Crea la instancia del ViewModel
-        viewModel = GroveViewModel(getSeedTreesUseCase, getForestTreesUseCase, plantSeedUseCase)
+
+        // Create ViewModel instance
+        viewModel = GroveViewModel(
+            loadSeedTreesUseCase,
+            saveSeedTreesUseCase,
+            loadForestTreesUseCase,
+            saveForestTreesUseCase,
+            getForestTreeByIdUseCase,
+            insertForestTreeUseCase,
+        )
     }
 
     @After
@@ -44,45 +95,64 @@ class GroveViewModelTest {
     }
 
     @Test
-    fun `updateTree should update growth stage of existing tree`() = runTest {
-        // Arrange
-        val tree1 = ForestTree(type = TreeType.BAOBAB, currentStage = GrowthStage.SPROUT)
-        val tree2 = ForestTree(type = TreeType.SECUOYA, currentStage = GrowthStage.MEDIUM)
-        val initialForest = listOf(listOf(tree1), listOf(tree2))
-        viewModel.setInitialForest(initialForest)
+    fun `initSeedTrees should save initial seed trees if empty`() = runTest {
+        // Given
+        coEvery { loadSeedTreesUseCase() } returns flowOf(emptyList())
+        coEvery { saveSeedTreesUseCase(any<List<SeedTree>>()) } just runs
 
-        val updatedTree =
-            tree1.copy(currentStage = GrowthStage.ADULT)
+        // Set _seedTrees.value to empty list
+        viewModel.setSeedTrees(emptyList()) // Add this line
 
-        // Act
-        viewModel.updateTree(updatedTree)
+        // When
+        viewModel.initSeedTrees()
 
-        // Assert
-        val expectedForest = listOf(listOf(updatedTree), listOf(tree2))
-        Assert.assertEquals(expectedForest, viewModel.forestTrees.value)
+        // Advance virtual time to allow delay to complete
+        advanceUntilIdle()
+
+        // Then
+        coVerify { saveSeedTreesUseCase(any<List<SeedTree>>()) }
     }
 
     @Test
-    fun `plantSeedInForest should plant a seed and update forestTree`() = runTest {
-        // Arrange
-        val seedTree = SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(1))
-        val plantedTree = ForestTree(type = TreeType.SECUOYA, currentStage = GrowthStage.SPROUT)
-        every { plantSeedUseCase(any<TreeType>() as TreeType) } answers {
-            if (firstArg<TreeType>() == TreeType.SECUOYA) {
-                plantedTree
-            } else {
-                ForestTree(type = firstArg<TreeType>(), currentStage = GrowthStage.SPROUT)
-            }
-        }
+    fun `initForestTrees should save initial forest trees if empty`() = runTest {
+        // Given
+        coEvery { loadForestTreesUseCase() } returns flowOf(emptyList())
+        coEvery { saveForestTreesUseCase(any<List<ForestTree?>>()) } just runs
 
-        // Act
-        viewModel.plantSeedInForest(Tree.type)
+        // When
+        viewModel.initForestTrees()
 
-        // Espera a que terminen las corrutinas
-        advanceUntilIdle()
+        // Then
+        coVerify { saveForestTreesUseCase(any<List<ForestTree?>>()) }
+    }
 
-        // Assert
-        Assert.assertEquals(plantedTree, viewModel.forestTree.value)
+    @Test
+    fun `getSeedTrees should update seed trees state flow`() = runTest {
+        // Given
+        val expectedSeedTrees = listOf(
+            SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5))
+        )
+        coEvery { loadSeedTreesUseCase() } returns flowOf(expectedSeedTrees)
+
+        // When
+        viewModel.getSeedTrees()
+
+        // Then
+        Assert.assertEquals(expectedSeedTrees, viewModel.seedTrees.value)
+    }
+
+    @Test
+    fun `getForestTrees should update forest trees state flow`() = runTest {
+        // Given
+        val expectedForestTrees = listOf(
+            ForestTree(type = TreeType.SECUOYA, plantingDate = LocalDateTime.now())
+        )
+        coEvery { loadForestTreesUseCase() } returns flowOf(expectedForestTrees)
+
+        // When
+        viewModel.getForestTrees()
+
+        // Then
+        Assert.assertEquals(expectedForestTrees, viewModel.forestTrees.value)
     }
 }
- */
