@@ -12,7 +12,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class ChallengeRepositoryMockKTest {
+class ChallengeRepositoryTest {
 
     private lateinit var challengeDao: ChallengeDao
     private lateinit var challengeRepository: ChallengeRepository
