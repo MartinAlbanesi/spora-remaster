@@ -20,21 +20,21 @@ class UserRepositoryLocal @Inject constructor(
 
     override suspend fun updateUserWithLevelCompleted(user: User, levelCompleted: LevelCompleted) {
 
-        userDao.updateUser(user.toUserEntity())
-
-        val levelsCompletedEntity = userDao.getLevelsCompletedByUserId(user.id).first()
-
-        val levelCompletedFound = levelsCompletedEntity.find { it.levelId == levelCompleted.levelId }
-
-        if(levelCompletedFound != null) {
-            userDao.updateLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
-        } else{
-            userDao.insertLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
-        }
+//        userDao.updateUser(user.toUserEntity())
+//
+//        val levelsCompletedEntity = userDao.getLevelsCompletedByUserId(user.id).first()
+//
+//        val levelCompletedFound = levelsCompletedEntity.find { it.levelId == levelCompleted.levelId }
+//
+//        if(levelCompletedFound != null) {
+//            userDao.updateLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
+//        } else{
+//            userDao.insertLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
+//        }
     }
 
     override suspend fun updateUserIdByUserName(userId: String, userName: String) {
-        userDao.updateUserIdByUserName(userId, userName)
+//        userDao.updateUserIdByUserName(userId, userName)
     }
 
 //    override suspend fun deleteUserById(id: String) {

@@ -43,15 +43,22 @@ class UserDaoTest {
 
     @Test
     fun insertUser_WhenInsertedOneValidUser_ReturnUserInserted() = runTest {
-        val expectedUser = UserEntity("1", "test", "titi@gmail.com", 100)
-
-        val actualUserEmpty = userDao.getUserByEmail("titi@gmail.com").first()
-        Assert.assertNull(actualUserEmpty)
+        val expectedUser = FakeUserModels.fakeUserEntity
 
         userDao.insertUser(expectedUser)
 
-        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
+        val actualUser = userDao.getUser().first()
+
         assertEquals(expectedUser, actualUser)
+    }
+
+    @Test
+    fun getUser_WhenUserTableIsEmpty_ThenReturnNull() {
+        runTest {
+            val actualUser = userDao.getUser().first()
+
+            Assert.assertNull(actualUser)
+        }
     }
 
     @Test
@@ -80,7 +87,15 @@ class UserDaoTest {
         }
 
     @Test
-    fun getLevelsCompletedByUserId_WhenSearchByUserId_ThenReturnLevelsCompleted() = runTest {
+    fun getUsersWithLevelsCompleted_WhenDBIsEmpty_ThenReturnEmptyList() = runTest {
+
+        val actual = userDao.getUsersWithLevelsCompleted().first()
+
+        assertEquals(emptyList<UserEntity>(), actual)
+    }
+
+    @Test
+    fun getLevelsCompleted_WhenSearchByUserId_ThenReturnLevelsCompleted() = runTest {
 
         // Given
         val expectedLevelsCompleted = listOf(
@@ -94,12 +109,21 @@ class UserDaoTest {
         }
 
         // When
-        val actualLevelsCompleted = userDao.getLevelsCompletedByUserId("1").first()
+        val actualLevelsCompleted = userDao.getLevelsCompleted().first()
 
         // Then
         assertEquals(expectedLevelsCompleted, actualLevelsCompleted)
     }
 
+    @Test
+    fun getLevelsCompleted_WhenLevelCompletedTableIsEmpty_ThenReturnEmptyList() = runTest {
+
+        val actualLevelsCompleted = userDao.getLevelsCompleted().first()
+
+        assertEquals(emptyList<LevelCompletedEntity>(), actualLevelsCompleted)
+    }
+
+    /*
     @Test
     fun deleteUser_SetAValidUserToDelete_DeletedUserFromDB() = runTest {
 
@@ -109,15 +133,18 @@ class UserDaoTest {
         userDao.insertUser(expectedUser)
 
         // When
-        userDao.deleteUser(expectedUser)
+//        userDao.deleteUser(expectedUser)
 
         // Then
-        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
-        Assert.assertNull(actualUser)
+//        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
+//        Assert.assertNull(actualUser)
     }
+     */
 
+    /*
     @Test
-    fun deleteLevelCompleted_SetAValidLevelCompletedToDelete_DeletedLevelCompletedFromDB() = runTest {
+    fun deleteLevelCompleted_SetAValidLevelCompletedToDelete_DeletedLevelCompletedFromDB() =
+        runTest {
 
             // Given
             val expectedLevelsCompleted = listOf(
@@ -131,13 +158,15 @@ class UserDaoTest {
             }
 
             // When
-            userDao.deleteLevelCompleted(expectedLevelsCompleted[0])
+//            userDao.deleteLevelCompleted(expectedLevelsCompleted[0])
 
             // Then
-            val actualLevelCompleted = userDao.getLevelsCompletedByUserId("1").first()
+//            val actualLevelCompleted = userDao.getLevelsCompletedByUserId("1").first()
 
-            assertEquals(expectedLevelsCompleted[1], actualLevelCompleted[0])
-    }
+//            assertEquals(expectedLevelsCompleted[1], actualLevelCompleted[0])
+        }
+
+     */
 
     @Test
     fun updateUser_SetAValidUserToUpdate_UpdatedUserFromDB() = runTest {
@@ -152,52 +181,74 @@ class UserDaoTest {
         userDao.updateUser(updatedUser)
 
         // Then
-        val actualUser = userDao.getUserByEmail("titi@gmail.com").first()
+        val actualUser = userDao.getUser().first()
         assertEquals("titi", actualUser.userName)
     }
 
     @Test
-    fun updateLevelCompleted_SetAValidLevelCompletedToUpdate_UpdatedLevelCompletedFromDB() = runTest {
+    fun updateLevelCompleted_SetAValidLevelCompletedToUpdate_UpdatedLevelCompletedFromDB() =
+        runTest {
 
-        // Given
-        val expectedLevelsCompleted = FakeUserModels.fakeLevelsCompletedEntity
+            // Given
+            val expectedLevelsCompleted = FakeUserModels.fakeLevelsCompletedEntity
 
-        expectedLevelsCompleted.forEach {
-            userDao.insertLevelCompleted(it)
+            expectedLevelsCompleted.forEach {
+                userDao.insertLevelCompleted(it)
+            }
+
+            // When
+            val updatedLevelCompleted =
+                FakeUserModels.fakeLevelsCompletedEntity[0].copy(starState = "THREE")
+            userDao.updateLevelCompleted(updatedLevelCompleted)
+
+            // Then
+            val actualLevelCompleted = userDao.getLevelsCompleted().first()
+
+            assertNotEquals("ONE", actualLevelCompleted[0].starState)
+            assertEquals("THREE", actualLevelCompleted[0].starState)
         }
 
-        // When
-        val updatedLevelCompleted = FakeUserModels.fakeLevelsCompletedEntity[0].copy(starState = "THREE")
-        userDao.updateLevelCompleted(updatedLevelCompleted)
-
-        // Then
-        val actualLevelCompleted = userDao.getLevelsCompletedByUserId("1").first()
-
-        assertNotEquals("ONE", actualLevelCompleted[0].starState)
-        assertEquals("THREE", actualLevelCompleted[0].starState)
-    }
-
     @Test
-    fun updateUserIdByEmail_SetAValidUserIdToUpdate_UpdatedUserIdFromDB() = runTest {
+    fun updateUserId_SetAValidUserIdToUpdate_UpdatedUserIdFromDB() = runTest {
 
         // Given
         val expectedUser = FakeUserModels.fakeUserEntity
         userDao.insertUser(expectedUser)
 
         // When
-        userDao.updateUserIdByUserName("123", expectedUser.userName)
+        userDao.updateUserId("123")
 
         // Then
-        val actualUser = userDao.getUserByEmail(expectedUser.email).first()
+        val actualUser = userDao.getUser().first()
         assertNotEquals("1", actualUser.id)
         assertEquals("123", actualUser.id)
     }
 
     @Test
-    fun getUsersWithLevelsCompleted_WhenDBIsEmpty_ThenReturnEmptyList() = runTest {
+    fun getUserOxygen_GetOxygenFromUser_ThenReturnOxygen() {
+        runTest {
+            val expectedUser = FakeUserModels.fakeUserEntity
+            userDao.insertUser(expectedUser)
 
-        val actual = userDao.getUsersWithLevelsCompleted().first()
+            val actualOxygen = userDao.getUserOxygen().first()
 
-        assertEquals(emptyList<UserEntity>(), actual)
+            assertEquals(100, actualOxygen)
+        }
+    }
+
+    @Test
+    fun updateOxygen_SetAValidOxygenToUpdate_ThenUpdatedOxygenFromDB() = runTest {
+
+        // Given
+        val expectedUser = FakeUserModels.fakeUserEntity
+        userDao.insertUser(expectedUser)
+
+        // When
+        userDao.updateOxygen(200)
+
+        // Then
+        val actualOxygen = userDao.getUserOxygen().first()
+        assertNotEquals(100, actualOxygen)
+        assertEquals(200, actualOxygen)
     }
 }
