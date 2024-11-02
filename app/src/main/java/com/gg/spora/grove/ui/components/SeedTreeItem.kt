@@ -65,15 +65,11 @@ fun SeedTreeItem(
             modifier = Modifier.width(100.dp),
             onClick = {
                 // Si el cooldown no está activo, genera una semilla
-                val generatedForestTree = seedTree.generateForestTree()
-                Log.d("SeedTreeItem", "Generated ForestTree: $generatedForestTree")
-                generatedForestTree?.let { forestTree ->
-                    onForestTreeGenerated(forestTree)
-                    Log.d("SeedTreeItem", "Forest Tree generated: $forestTree.type")
-                    isCooldownActive = true
-                    remainingCooldown =
-                        seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
-                }
+                val newForestTree = ForestTree(type = seedTree.type)
+                onForestTreeGenerated(newForestTree)
+                Log.d("SeedTreeItem", "Forest Tree generated: $newForestTree")
+                isCooldownActive = true
+                remainingCooldown = seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
             },
             enabled = !isCooldownActive, // Deshabilita el botón si el cooldown está activo
         ) {

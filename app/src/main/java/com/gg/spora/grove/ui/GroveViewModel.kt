@@ -9,6 +9,7 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
+import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
@@ -40,6 +41,7 @@ class GroveViewModel @Inject constructor(
     private val saveForestTreesUseCase: SaveForestTreesUseCase,
     private val getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
+    private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque
@@ -142,17 +144,21 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-
     // Actualización del estado del árbol
-    fun updateTree(updatedTree: ForestTree) {
-        val updatedForest = _forestTrees.value.map { tree ->
-            if (tree != null && tree.id == updatedTree.id) { // Verifica que el árbol no sea nulo y que su ID coincida
-                updatedTree
-            } else {
-                tree
+    fun updateForestTreeGrowthStage(updatedTree: ForestTree) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateForestTreeGrowthStageByIdUseCase(updatedTree.id, updatedTree.currentStage)
+
+            // Update the UI state
+            val updatedForest = _forestTrees.value.map { tree ->
+                if (tree != null && tree.id == updatedTree.id) {
+                    updatedTree
+                } else {
+                    tree
+                }
             }
+            _forestTrees.value = updatedForest
         }
-        _forestTrees.value = updatedForest
     }
 
     /*

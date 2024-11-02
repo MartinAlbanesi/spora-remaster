@@ -2,10 +2,8 @@ package com.gg.spora.grove.domain.models
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
-import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
@@ -28,6 +26,7 @@ data class ForestTree(
 //  var accumulatedOxygen: Int = 0
     private var hasReachedAdultStage = false
 
+    /*
     // Actualiza el estado de crecimiento del árbol
     fun updateGrowthStage() {
         if (!hasReachedAdultStage) {
@@ -50,6 +49,7 @@ data class ForestTree(
         }
         Log.d("ForestTree", "Current stage: $currentStage")
     }
+     */
 
     /*
     // Calcula la cantidad de oxígeno generado por el árbol

@@ -1,10 +1,7 @@
 package com.gg.spora.grove.domain.models
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 import java.time.Duration
-import kotlin.inc
 
 /**
  * Clase SeedTree que representa un árbol semillero del bosque, capaz de generar semillas a un tiempo determinado
@@ -25,6 +22,7 @@ data class SeedTree(
         return System.currentTimeMillis() >= nextForestTreeAvailableTime
     }
 
+    /*
     // Genera una semilla si es posible, y retorna la semilla generada o null si no es posible generar una semilla
     @RequiresApi(Build.VERSION_CODES.O)
     fun generateForestTree(): ForestTree? {
@@ -33,6 +31,7 @@ data class SeedTree(
         val randomPosition = (0..24).random() // Generate random position
         return ForestTree(type = type, position = randomPosition) // Assign random position
     }
+     */
 }
 
 fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {

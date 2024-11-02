@@ -43,7 +43,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 plantSeedInForest = { forestTree ->
                     groveViewModel.plantSeedInForest(forestTree)
                 },
-                updateTree = { tree -> groveViewModel.updateTree(tree) },
+                updateTree = { tree -> groveViewModel.updateForestTreeGrowthStage(tree) },
                 popBackStack = {
                     navController.popBackStack()
                 },
