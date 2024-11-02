@@ -11,36 +11,39 @@ import java.nio.ByteOrder
 
 class ClassifyTf(val context: Context) {
     /**
-     * Classifies with Tensor flow the image when the camera takes screen
-     * @param context: Context
+     * Classifies with TensorFlow the image when the camera takes a screenshot.
      * @param bitmap: Bitmap of the image
-     * @param selectedObject: String of the object that the user wants scan
+     * @param selectedObject: String of the object that the user wants to scan
      */
-    fun classifyImage(context : Context, bitmap: Bitmap, selectedObject: String, onResult: (Boolean) -> Unit) {
+    fun classifyImage(bitmap: Bitmap, selectedObject: String, onResult: (Boolean, Float) -> Unit) {
         var resultScan = false
+        var confidence = 0f
 
-        // Carga el modelo de TensorFlow Lite
         val modelObj = ModelObjects.newInstance(context)
 
         val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-
         inputFeature0.loadBuffer(preprocessImage(bitmap))
-
 
         val outputs = modelObj.process(inputFeature0)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
         val outputArray = outputFeature0.floatArray
-        val maxConfidenceIndex = outputArray.indices.maxByOrNull { outputArray[it] } ?: 0
 
-        if(selectedObject == classes[maxConfidenceIndex])
-            resultScan = true
+        val selectedIndex = classes.indexOf(selectedObject)
+        if (selectedIndex != -1) {
+            confidence = outputArray[selectedIndex] * 100
 
-        onResult(resultScan)
+            if (confidence >= 100) {
+                resultScan = true
+            }
+        }
+
+        onResult(resultScan, confidence)
     }
 
+
     /**
-     * Converter bitmap of image to the format necessary
+     * Converts bitmap of image to the format necessary for TensorFlow.
      * @param bitmap: Bitmap of the image
      */
     private fun preprocessImage(bitmap: Bitmap): ByteBuffer {
@@ -49,7 +52,6 @@ class ClassifyTf(val context: Context) {
         byteBuffer.order(ByteOrder.nativeOrder())
 
         val intValue = IntArray(224 * 224)
-
         resizedBitmap.getPixels(intValue, 0, resizedBitmap.width, 0, 0, resizedBitmap.width, resizedBitmap.height)
 
         for (pixelValue in intValue) {
