@@ -27,7 +27,8 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
             stageType = stageType,
             starState = starState
         )
-        val userUpdated = userLocal.copy(
+
+        val userUpdated = userLocal!!.copy(
             oxygen =+ oxygen,
             levelsCompleted = userLocal.levelsCompleted.toMutableList().apply {
                 add(levelCompleted)

@@ -14,7 +14,7 @@ interface IUserRepositoryLocal {
 
 //    suspend fun deleteUserById(id: String)
 
-    fun getUser(): Flow<User>
+    fun getUser(): Flow<User?>
 
 //    suspend fun getCurrentUserFlow(): List<User>
 }

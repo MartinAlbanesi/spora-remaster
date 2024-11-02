@@ -16,11 +16,11 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Transaction
-    @Query("SELECT * FROM user_entity")
-    fun getUsersWithLevelsCompleted(): Flow<List<UserWithLevelsCompletedEntity>>
-
     @Query("SELECT * FROM user_entity LIMIT 1")
-    fun getUser(): Flow<UserEntity>
+    fun getUsersWithLevelsCompleted(): Flow<UserWithLevelsCompletedEntity?>
+
+//    @Query("SELECT * FROM user_entity LIMIT 1")
+//    fun getUser(): Flow<UserEntity>
 
     @Query("SELECT oxygen FROM user_entity")
     fun getUserOxygen(): Flow<Int>

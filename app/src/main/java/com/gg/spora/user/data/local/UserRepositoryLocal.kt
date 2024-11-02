@@ -42,8 +42,8 @@ class UserRepositoryLocal @Inject constructor(
 //        userDao.deleteUserById(id)
 //    }
 
-    override fun getUser(): Flow<User> {
-        return userDao.getUsersWithLevelsCompleted().map { it.first().toUser() }
+    override fun getUser(): Flow<User?> {
+        return userDao.getUsersWithLevelsCompleted().map { it?.toUser() }
     }
 
 //    override suspend fun getCurrentUserFlow(): List<User> {

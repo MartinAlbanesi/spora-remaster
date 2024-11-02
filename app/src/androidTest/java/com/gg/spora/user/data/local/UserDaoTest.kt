@@ -47,18 +47,9 @@ class UserDaoTest {
 
         userDao.insertUser(expectedUser)
 
-        val actualUser = userDao.getUser().first()
+        val actualUser = userDao.getUsersWithLevelsCompleted().first()?.user
 
         assertEquals(expectedUser, actualUser)
-    }
-
-    @Test
-    fun getUser_WhenUserTableIsEmpty_ThenReturnNull() {
-        runTest {
-            val actualUser = userDao.getUser().first()
-
-            Assert.assertNull(actualUser)
-        }
     }
 
     @Test
@@ -83,7 +74,7 @@ class UserDaoTest {
             // Then
             val actualUserWithLevelsCompleted = userDao.getUsersWithLevelsCompleted().first()
 
-            assertEquals(expectedUser, actualUserWithLevelsCompleted[0].user)
+            assertEquals(expectedUser, actualUserWithLevelsCompleted?.user)
         }
 
     @Test
@@ -91,7 +82,7 @@ class UserDaoTest {
 
         val actual = userDao.getUsersWithLevelsCompleted().first()
 
-        assertEquals(emptyList<UserEntity>(), actual)
+        assertEquals(null, actual)
     }
 
     @Test
@@ -181,8 +172,8 @@ class UserDaoTest {
         userDao.updateUser(updatedUser)
 
         // Then
-        val actualUser = userDao.getUser().first()
-        assertEquals("titi", actualUser.userName)
+        val actualUser = userDao.getUsersWithLevelsCompleted().first()
+        assertEquals("titi", actualUser?.user?.userName)
     }
 
     @Test
@@ -219,9 +210,9 @@ class UserDaoTest {
         userDao.updateUserId("123")
 
         // Then
-        val actualUser = userDao.getUser().first()
-        assertNotEquals("1", actualUser.id)
-        assertEquals("123", actualUser.id)
+        val actualUser = userDao.getUsersWithLevelsCompleted().first()?.user
+        assertNotEquals("1", actualUser?.id)
+        assertEquals("123", actualUser?.id)
     }
 
     @Test

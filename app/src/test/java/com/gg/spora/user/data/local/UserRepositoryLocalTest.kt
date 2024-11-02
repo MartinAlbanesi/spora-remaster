@@ -34,7 +34,7 @@ class UserRepositoryLocalTest {
 
         // Given
         val expected = "test"
-        coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(listOf(FakeUserModels.fakeUserWithLevelsCompletedEntity))
+        coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(FakeUserModels.fakeUserWithLevelsCompletedEntity)
 
         // When
         var result : User? = null
