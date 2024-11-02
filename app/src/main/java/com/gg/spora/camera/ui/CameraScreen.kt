@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -112,7 +111,6 @@ fun CameraScreen(
                         .border(2.dp, Color.Green)
                         .background(Color(0x8000FF00))
                         .align(Alignment.TopCenter)
-                        .padding(8.dp)
                 ) {
                     Text(
                         text = "${nameObject}: ${confidence.toInt()}%",
