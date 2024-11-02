@@ -10,11 +10,11 @@ interface IUserRepositoryLocal {
 
     suspend fun updateUserWithLevelCompleted(user: User, levelCompleted: LevelCompleted)
 
-    suspend fun updateUserIdByUserName(userId: String, userName: String)
+    suspend fun updateUserId(userId: String)
 
 //    suspend fun deleteUserById(id: String)
 
-    fun getUserByIdFlow(userId: String): Flow<User>
+    fun getUser(): Flow<User>
 
-    suspend fun getCurrentUserFlow(): List<User>
+//    suspend fun getCurrentUserFlow(): List<User>
 }

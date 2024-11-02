@@ -8,6 +8,6 @@ class GetUserLocalUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal
 ) {
     suspend operator fun invoke(): List<User> {
-        return userRepositoryLocal.getCurrentUserFlow()
+        return emptyList()//userRepositoryLocal.getCurrentUserFlow()
     }
 }

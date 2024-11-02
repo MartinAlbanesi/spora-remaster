@@ -20,7 +20,7 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
         stageType: StageType,
         oxygen: Int
     ) {
-        val userLocal = userRepositoryLocal.getUserByIdFlow(userId).first()
+        val userLocal = userRepositoryLocal.getUser().first()
 
         val levelCompleted = LevelCompleted(
             levelId = levelId,

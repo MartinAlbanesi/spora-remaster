@@ -34,7 +34,7 @@ class SetNewUserUseCaseTest{
         val email = ""
         val userName = "titi"
 
-        coEvery { userRepositoryLocal.getCurrentUserFlow() } returns emptyList()
+//        coEvery { userRepositoryLocal.getCurrentUserFlow() } returns emptyList()
         coEvery { userRepositoryLocal.setUserLocal(any()) } returns Unit
         coEvery { userRepositoryNetwork.setUser(any()) } returns ""
 
@@ -42,7 +42,7 @@ class SetNewUserUseCaseTest{
         setNewUserUseCase(email, userName)
 
         // Then
-        coVerify(exactly = 1) { userRepositoryLocal.getCurrentUserFlow() }
+//        coVerify(exactly = 1) { userRepositoryLocal.getCurrentUserFlow() }
         coVerify(exactly = 1) { userRepositoryLocal.setUserLocal(any()) }
         coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
     }
@@ -53,7 +53,7 @@ class SetNewUserUseCaseTest{
         val email = ""
         val userName = "titi"
 
-        coEvery { userRepositoryLocal.getCurrentUserFlow() } returns listOf(mockk())
+//        coEvery { userRepositoryLocal.getCurrentUserFlow() } returns listOf(mockk())
         coEvery { userRepositoryLocal.setUserLocal(any()) } returns Unit
         coEvery { userRepositoryNetwork.setUser(any()) } returns ""
 
@@ -61,7 +61,7 @@ class SetNewUserUseCaseTest{
         setNewUserUseCase(email, userName)
 
         // Then
-        coVerify(exactly = 1) { userRepositoryLocal.getCurrentUserFlow() }
+//        coVerify(exactly = 1) { userRepositoryLocal.getCurrentUserFlow() }
         coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
         coVerify(exactly = 0) { userRepositoryLocal.setUserLocal(any()) }
     }

@@ -8,6 +8,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -29,32 +30,34 @@ class UserRepositoryLocalTest {
     }
 
     @Test
-    fun `getUserByIdFlow - Cuando se llama al método getUserByIdFlow, entonces se debe retornar un Flow de User`() = runTest{
+    fun `getUser - Cuando se llama al método getUserByIdFlow, entonces se debe retornar un Flow de User`() = runTest{
 
         // Given
-        val userId = "1"
-
+        val expected = "test"
         coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(listOf(FakeUserModels.fakeUserWithLevelsCompletedEntity))
 
         // When
         var result : User? = null
-        userRepositoryLocal.getUserByIdFlow(userId).collect {
+        userRepositoryLocal.getUser().collect {
             result = it
         }
 
         // Then
         Assert.assertEquals(result, FakeUserModels.fakeUsers.first())
+        Assert.assertEquals(expected, result?.userName)
     }
 
     @Test
-    fun `updateUserWithLevelCompleted - When new levelCompleted is added, Then update user in local`() = runTest {
+    fun `updateUserWithLevelCompleted - When new levelCompleted is added, Then insert user in local`() = runTest {
 
         // Given
         val user = FakeUserModels.fakeUsers.first()
-        val levelCompleted = FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id)
+        val levelCompleted = FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id).copy(
+            levelId = "22"
+        )
 
         coEvery { userDao.updateUser(any()) } returns Unit
-        coEvery { userDao.getLevelsCompletedByUserId(user.id) } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
+        coEvery { userDao.getLevelsCompleted() } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
         coEvery { userDao.updateLevelCompleted(any()) } returns Unit
         coEvery { userDao.insertLevelCompleted(any()) } returns Unit
 
@@ -62,21 +65,29 @@ class UserRepositoryLocalTest {
         userRepositoryLocal.updateUserWithLevelCompleted(user, levelCompleted.toLevelCompleted())
 
         coVerify(exactly = 1) { userDao.updateUser(any()) }
-        coVerify(exactly = 1) { userDao.getLevelsCompletedByUserId(user.id) }
-        coVerify(exactly = 1) { userDao.updateLevelCompleted(any()) }
-        coVerify(exactly = 0) { userDao.insertLevelCompleted(any()) }
+        coVerify(exactly = 1) { userDao.getLevelsCompleted() }
+        coVerify(exactly = 0) { userDao.updateLevelCompleted(any()) }
+        coVerify(exactly = 1) { userDao.insertLevelCompleted(any()) }
     }
 
     @Test
-    fun `getCurrentUserFlow - When the DB is empty, Then return an empty list`() = runTest {
+    fun `updateUserWithLevelCompleted - When levelCompleted added Exist, Then update user in local`() = runTest {
 
         // Given
-        coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(emptyList())
+        val user = FakeUserModels.fakeUsers.first()
+        val levelCompleted = FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id)
+
+        coEvery { userDao.updateUser(any()) } returns Unit
+        coEvery { userDao.getLevelsCompleted() } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
+        coEvery { userDao.updateLevelCompleted(any()) } returns Unit
+        coEvery { userDao.insertLevelCompleted(any()) } returns Unit
 
         // When
-        val result = userRepositoryLocal.getCurrentUserFlow()
+        userRepositoryLocal.updateUserWithLevelCompleted(user, levelCompleted.toLevelCompleted())
 
-        // Then
-        Assert.assertEquals(result, emptyList<User>())
+        coVerify(exactly = 1) { userDao.updateUser(any()) }
+        coVerify(exactly = 1) { userDao.getLevelsCompleted() }
+        coVerify(exactly = 1) { userDao.updateLevelCompleted(any()) }
+        coVerify(exactly = 0) { userDao.insertLevelCompleted(any()) }
     }
 }

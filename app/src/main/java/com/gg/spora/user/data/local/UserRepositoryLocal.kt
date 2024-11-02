@@ -14,40 +14,39 @@ import javax.inject.Inject
 class UserRepositoryLocal @Inject constructor(
     private val userDao: UserDao
 ) : IUserRepositoryLocal {
+
     override suspend fun setUserLocal(user: User) {
         userDao.insertUser(user.toUserEntity())
     }
 
     override suspend fun updateUserWithLevelCompleted(user: User, levelCompleted: LevelCompleted) {
 
-//        userDao.updateUser(user.toUserEntity())
-//
-//        val levelsCompletedEntity = userDao.getLevelsCompletedByUserId(user.id).first()
-//
-//        val levelCompletedFound = levelsCompletedEntity.find { it.levelId == levelCompleted.levelId }
-//
-//        if(levelCompletedFound != null) {
-//            userDao.updateLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
-//        } else{
-//            userDao.insertLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
-//        }
+        userDao.updateUser(user.toUserEntity())
+
+        val levelsCompletedEntity = userDao.getLevelsCompleted().first()
+
+        val levelCompletedFound = levelsCompletedEntity.find { it.levelId == levelCompleted.levelId }
+
+        if(levelCompletedFound != null) {
+            userDao.updateLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
+        } else{
+            userDao.insertLevelCompleted(levelCompleted.toLevelCompletedEntity(user.id))
+        }
     }
 
-    override suspend fun updateUserIdByUserName(userId: String, userName: String) {
-//        userDao.updateUserIdByUserName(userId, userName)
+    override suspend fun updateUserId(userId: String) {
+        userDao.updateUserId(userId)
     }
 
 //    override suspend fun deleteUserById(id: String) {
 //        userDao.deleteUserById(id)
 //    }
 
-    override fun getUserByIdFlow(userId: String): Flow<User> {
-        return userDao.getUsersWithLevelsCompleted().map { users ->
-            users.first { it.user.id == userId }.toUser()
-        }
+    override fun getUser(): Flow<User> {
+        return userDao.getUsersWithLevelsCompleted().map { it.first().toUser() }
     }
 
-    override suspend fun getCurrentUserFlow(): List<User> {
-        return userDao.getUsersWithLevelsCompleted().first().map { it.toUser() }
-    }
+//    override suspend fun getCurrentUserFlow(): List<User> {
+//        return userDao.getUsersWithLevelsCompleted().first().map { it.toUser() }
+//    }
 }

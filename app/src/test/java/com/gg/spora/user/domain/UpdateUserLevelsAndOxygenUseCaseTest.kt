@@ -50,7 +50,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         val starState = StarState.TWO
         val currentUser = mockk<FirebaseUser>()
 
-        coEvery { userRepositoryLocal.getUserByIdFlow(userId) } returns flowOf(FakeUserModels.fakeUsers.first())
+        coEvery { userRepositoryLocal.getUser() } returns flowOf(FakeUserModels.fakeUsers.first())
         coEvery { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) } returns Unit
         coEvery { getUserAuthUseCase() } returns currentUser
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
@@ -59,7 +59,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         updateUserLevelsAndOxygenUseCase(userId, levelId, starState, stageType, 100)
 
         // Then
-        coVerify(exactly = 1) { userRepositoryLocal.getUserByIdFlow(userId) }
+        coVerify(exactly = 1) { userRepositoryLocal.getUser() }
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
         coVerify(exactly = 1) { getUserAuthUseCase() }
         coVerify(exactly = 1) { userRepositoryNetwork.updateUserById(any(), any()) }
@@ -75,7 +75,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         val starState = StarState.TWO
         val currentUser = null
 
-        coEvery { userRepositoryLocal.getUserByIdFlow(userId) } returns flowOf(FakeUserModels.fakeUsers.first())
+        coEvery { userRepositoryLocal.getUser() } returns flowOf(FakeUserModels.fakeUsers.first())
         coEvery { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) } returns Unit
         coEvery { getUserAuthUseCase() } returns currentUser
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
@@ -84,7 +84,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         updateUserLevelsAndOxygenUseCase(userId, levelId, starState, stageType, 100)
 
         // Then
-        coVerify(exactly = 1) { userRepositoryLocal.getUserByIdFlow(userId) }
+        coVerify(exactly = 1) { userRepositoryLocal.getUser() }
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
         coVerify(exactly = 1) { getUserAuthUseCase() }
         coVerify(exactly = 0) { userRepositoryNetwork.updateUserById(any(), any()) }
