@@ -21,7 +21,7 @@ data class ForestTree(
     override val type: TreeType,
     var currentStage: GrowthStage = GrowthStage.SPROUT,
     val plantingDate: LocalDateTime = LocalDateTime.now(),
-    var position: Int
+    var position: Int = 0
 ) : Tree(id, type) {
 
     @RequiresApi(Build.VERSION_CODES.O)

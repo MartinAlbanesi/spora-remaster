@@ -74,7 +74,8 @@ class GroveRepositoryTest{
         val result = groveRepository.getForestTreesFromDatabase().first()
 
         // Then
-        Assert.assertEquals(emptyList<ForestTree>(), result)
+        val expectedList = MutableList<ForestTree?>(25) { null }
+        Assert.assertEquals(expectedList, result)
     }
 
     @Test
@@ -84,7 +85,8 @@ class GroveRepositoryTest{
             idForestTree = 1,
             treeType = TreeType.SECUOYA.name,
             currentStage = GrowthStage.SPROUT.toString(),
-            plantingDate = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
+            plantingDate = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+            position = 0
         )
         val expectedForestTree = forestTreeEntity.toForestTree()
         coEvery { groveDao.getForestTrees() } returns flowOf(listOf(forestTreeEntity))
@@ -93,6 +95,8 @@ class GroveRepositoryTest{
         val result = groveRepository.getForestTreesFromDatabase().first()
 
         // Then
-        Assert.assertEquals(listOf(expectedForestTree), result)
+        val expectedList = MutableList<ForestTree?>(25) { null }
+        expectedList[forestTreeEntity.position] = expectedForestTree
+        Assert.assertEquals(expectedList, result)
     }
 }
