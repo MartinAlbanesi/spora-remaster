@@ -5,6 +5,6 @@ import com.gg.spora.grove.domain.models.SeedTree
 
 class SaveSeedTreesUseCase(private val groveRepository: IGroveRepository) {
     suspend operator fun invoke(seedTrees: List<SeedTree>) {
-        groveRepository.saveSeedTrees(seedTrees)
+        groveRepository.insertAllSeedTrees(seedTrees)
     }
 }

@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class LoadForestTreesUseCase(private val groveRepository: IGroveRepository) {
     suspend operator fun invoke(): Flow<List<ForestTree?>> {
-        return groveRepository.loadForestTreesFromDatabase()
+        return groveRepository.getForestTreesFromDatabase()
     }
 }

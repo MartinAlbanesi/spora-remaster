@@ -32,12 +32,12 @@ class SaveForestTreesUseCaseTest {
             ForestTree(type = TreeType.SECUOYA, plantingDate = LocalDateTime.now()),
             ForestTree(type = TreeType.BAOBAB, plantingDate = LocalDateTime.now())
         )
-        coEvery { groveRepository.saveForestTrees(forestTrees) } just runs
+        coEvery { groveRepository.insertAllForestTrees(forestTrees) } just runs
 
         // When
         saveForestTreesUseCase(forestTrees)
 
         // Then
-        coVerify { groveRepository.saveForestTrees(forestTrees) }
+        coVerify { groveRepository.insertAllForestTrees(forestTrees) }
     }
 }

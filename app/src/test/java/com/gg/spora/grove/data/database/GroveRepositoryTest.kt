@@ -44,7 +44,7 @@ class GroveRepositoryTest{
         coEvery { groveDao.getSeedTrees() } returns flowOf(emptyList<SeedTreeEntity>())
 
         // When
-        val result = groveRepository.loadSeedTreesFromDatabase().first()
+        val result = groveRepository.getSeedTreesFromDatabase().first()
 
         // Then
         Assert.assertEquals(emptyList<SeedTree>(), result)
@@ -58,7 +58,7 @@ class GroveRepositoryTest{
         coEvery { groveDao.getSeedTrees() } returns flowOf(listOf(seedTreeEntity))
 
         // When
-        val result = groveRepository.loadSeedTreesFromDatabase().first()
+        val result = groveRepository.getSeedTreesFromDatabase().first()
 
         // Then
         Assert.assertEquals(listOf(expectedSeedTree), result)
@@ -71,7 +71,7 @@ class GroveRepositoryTest{
         coEvery { groveDao.getForestTrees() } returns flowOf(emptyList<ForestTreeEntity>())
 
         // When
-        val result = groveRepository.loadForestTreesFromDatabase().first()
+        val result = groveRepository.getForestTreesFromDatabase().first()
 
         // Then
         Assert.assertEquals(emptyList<ForestTree>(), result)
@@ -90,7 +90,7 @@ class GroveRepositoryTest{
         coEvery { groveDao.getForestTrees() } returns flowOf(listOf(forestTreeEntity))
 
         // When
-        val result = groveRepository.loadForestTreesFromDatabase().first()
+        val result = groveRepository.getForestTreesFromDatabase().first()
 
         // Then
         Assert.assertEquals(listOf(expectedForestTree), result)

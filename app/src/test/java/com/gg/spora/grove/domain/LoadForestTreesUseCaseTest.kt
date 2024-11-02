@@ -32,7 +32,7 @@ class LoadForestTreesUseCaseTest {
             ForestTree(type = TreeType.SECUOYA, plantingDate = LocalDateTime.now()),
             ForestTree(type = TreeType.BAOBAB, plantingDate = LocalDateTime.now())
         )
-        coEvery { groveRepository.loadForestTreesFromDatabase() } returns flowOf(expectedForestTrees)
+        coEvery { groveRepository.getForestTreesFromDatabase() } returns flowOf(expectedForestTrees)
 
         // When
         val result = loadForestTreesUseCase().first()

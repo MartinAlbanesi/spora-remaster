@@ -136,10 +136,9 @@ class GroveViewModel @Inject constructor(
             // Directly update the element at the desired position
             val updatedForest = _forestTrees.value.toMutableList()
             updatedForest[position] = forestTree
+            _forestTrees.value = updatedForest
 
-            Log.i("GroveViewModel", "AFTER PLANTING plantForestTreeInForest: ${_forestTrees.value}")
-
-            saveForestTreesUseCase(updatedForest) // Save to database
+            insertForestTreeUseCase(forestTree) // Save only the planted tree
         }
     }
 
