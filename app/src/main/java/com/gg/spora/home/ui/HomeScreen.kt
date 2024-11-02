@@ -34,6 +34,7 @@ fun HomeScreen(
     oxygen: Int,
     onNavigateToForestStage: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
+    onNavigateToLibrary: () -> Unit
 ) {
 
     // Icons in the left
@@ -60,7 +61,10 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
-            onClick = {}
+            onClick =
+            {
+                onNavigateToLibrary()
+            }
         ),
         HomeIcon(
             image = R.drawable.grove_icon,
@@ -125,7 +129,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = { onClick() }),
                     )
                 }
             }
@@ -177,7 +181,8 @@ private fun MiniGameScreenPreview() {
                 modifier = Modifier.fillMaxSize(),
                 oxygen = 0,
                 onNavigateToForestStage = {},
-                onNavigateToExpoStage = {}
+                onNavigateToExpoStage = {},
+                onNavigateToLibrary = {}
             )
         }
     }

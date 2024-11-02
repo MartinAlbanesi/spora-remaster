@@ -2,8 +2,9 @@ package com.gg.spora.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.gg.spora.challenge.data.dao.ChallengeDao
+import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.user.data.local.UserDao
 import dagger.Module
 import dagger.Provides
@@ -36,5 +37,10 @@ class RoomModule {
     @Provides
     fun provideChallengeDao(sporaDatabase: SporaDatabase): ChallengeDao {
         return sporaDatabase.challengeDao()
+    }
+
+    @Provides
+    fun provideInfoCardDao(database: SporaDatabase): InfoCardDAO {
+        return database.infoCardDao()
     }
 }

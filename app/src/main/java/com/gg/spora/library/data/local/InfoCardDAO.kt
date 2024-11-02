@@ -1,0 +1,39 @@
+package com.gg.spora.library.data.local
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+import com.gg.spora.library.data.local.entity.InfoCardEntity
+
+@Dao
+interface InfoCardDAO {
+
+    @Query("SELECT * FROM info_cards")
+    suspend fun getAllInfoCards(): List<InfoCardEntity>
+
+    @Query("SELECT * FROM info_cards WHERE id = :id")
+    suspend fun getInfoCardById(id: Int): InfoCardEntity?
+
+
+    @Query("SELECT * FROM info_cards WHERE category = :category")
+    suspend fun getInfoCardsByCategory(category: String): List<InfoCardEntity>
+
+    @Insert
+    suspend fun insertInfoCard(infoCardEntity: InfoCardEntity)
+
+    @Insert
+    fun insertInfoCardList(infoCardEntities: List<InfoCardEntity>)
+
+    @Update
+    suspend fun updateInfoCard(infoCardEntity: InfoCardEntity)
+
+    @Delete
+    suspend fun deleteInfoCard(infoCardEntity: InfoCardEntity)
+
+    @Query("DELETE FROM info_cards")
+    suspend fun deleteAllInfoCards()
+
+
+}

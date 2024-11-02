@@ -1,6 +1,6 @@
 package com.gg.spora.challenge.data.repositories
 
-import com.gg.spora.challenge.data.dao.ChallengeDao
+import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.domain.model.StepObjectDetail
 import javax.inject.Inject

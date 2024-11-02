@@ -42,10 +42,25 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     },
                     onNavigateToExpoStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.EXPO.name))
+                    },
+                    onNavigateToLibrary = {
+                        navController.navigate(NavigationRoutes.LibraryGraph)
                     }
                 )
             }
 
+            HomeScreen(
+                onNavigateToForestStage = {
+                    navController.navigate(NavigationRoutes.Stage("1"))
+                },
+                onNavigateToExpoStage = {
+                    navController.navigate(NavigationRoutes.Stage("2"))
+                },
+                onNavigateToLibrary = {
+                    navController.navigate(NavigationRoutes.LibraryGraph)
+                },
+                oxygen = user?.oxygen ?: 0
+            )
         }
         composable<NavigationRoutes.Grove> {
 

@@ -50,6 +50,10 @@ object NavigationRoutes {
         val stageId: String,
     )
 
+    // Library Graph ------------------------------------------------------
+
+    @Serializable
+    object LibraryGraph
 
     @Serializable
     object Library
@@ -63,6 +67,7 @@ object NavigationRoutes {
     @Serializable
     object LibraryRiverInfo
 
+    // Challenge Graph ------------------------------------------------------
 
     @Serializable
     data class Challenge(

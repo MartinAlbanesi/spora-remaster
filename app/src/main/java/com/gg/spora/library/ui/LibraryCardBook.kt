@@ -5,6 +5,7 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,15 +37,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.ui.animations.ChampyStates
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
-import com.gg.spora.library.domain.InfoCard
+import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun LibraryCardBook(
-    cardList: List<InfoCard> = emptyList(),
+    cardList: List<InfoCardEntity>,
+    unlockCard: () -> Unit,
     onBackClick: () -> Unit = {}
 ) {
 
@@ -74,7 +75,11 @@ fun LibraryCardBook(
                 onBackClick = onBackClick
             )
 
-            if (cardList.isNotEmpty()) {
+            ListInfoCard(
+                cardList = cardList,
+                unlockCard = unlockCard
+            )
+            /*if (cardList.isNotEmpty()) {
                 ListInfoCard(
                     cardList = cardList
                 )
@@ -92,7 +97,7 @@ fun LibraryCardBook(
                     contentDescription = "champy sad image",
                     modifier = Modifier.padding(5.dp)
                 )
-            }
+            }*/
 
         }
 
@@ -100,7 +105,7 @@ fun LibraryCardBook(
 }
 
 @Composable
-fun ListInfoCard(cardList: List<InfoCard>) {
+fun ListInfoCard(cardList: List<InfoCardEntity>, unlockCard: () -> Unit) {
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Adaptive(150.dp),
@@ -109,7 +114,7 @@ fun ListInfoCard(cardList: List<InfoCard>) {
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
     ) {
         items(cardList.size) {
-            InfoCard(cardList[it], cardList[it].isUnlocked)
+            InfoCard(cardList[it], cardList[it].isUnlocked, unlockCard)
         }
     }
 
@@ -118,8 +123,9 @@ fun ListInfoCard(cardList: List<InfoCard>) {
 
 @Composable
 fun InfoCard(
-    card: InfoCard,
-    isUnlocked: Boolean = false
+    card: InfoCardEntity,
+    isUnlocked: Boolean = false,
+    unlockCard: () -> Unit = {}
 ) {
 
     if (isUnlocked) {
@@ -144,7 +150,10 @@ fun InfoCard(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(2.dp),
+                    .padding(2.dp)
+                    .clickable{
+                        unlockCard()
+                    },
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -227,7 +236,8 @@ fun PreviewCard() {
 
     SporaTheme {
         LibraryCardBook(
-            cardList = FakeRepositoryInfoCard().getAllInfoCards()
+            cardList = FakeRepositoryInfoCard().getAllInfoCards(),
+            unlockCard = {}
         )
     }
 

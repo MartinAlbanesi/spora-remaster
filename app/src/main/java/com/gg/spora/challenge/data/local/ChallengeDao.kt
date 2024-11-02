@@ -1,4 +1,4 @@
-package com.gg.spora.challenge.data.dao
+package com.gg.spora.challenge.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
