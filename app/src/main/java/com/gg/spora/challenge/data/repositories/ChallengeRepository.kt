@@ -15,7 +15,8 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
     }
 
     suspend fun insertObjectDetail(objectDetail: ObjectDetail) {
-        challengeDao.insertObjetDetail(objectDetail.toObjectDetailEntity())
+        if(challengeDao.validateIfExistsObjectDetail(objectDetail.nameObjectDetail!!) == 0)
+            challengeDao.insertObjetDetail(objectDetail.toObjectDetailEntity())
     }
 
     suspend fun deleteAllObjectsDetail() {
