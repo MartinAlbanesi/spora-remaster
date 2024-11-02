@@ -31,7 +31,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gg.spora.R
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
@@ -42,7 +41,7 @@ val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita 
 /**
  * Screen for mini games with Spora and progress bar
  * @param modifier: Modifier
- * @param onBackClick: Click listener for back button
+ * @param onNavigateToCameraScreen: Click listener for back button
  * @param onNavigateToCameraScreen: Action for navigate to Camera Screen
  * @param challengeViewModel: View model for the Challenge
  */
@@ -55,6 +54,7 @@ fun ChallengeScreen(
 ) {
     val selectedObject by challengeViewModel.selectedObject.observeAsState()
     val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
+    val isLoading by challengeViewModel.isLoading.observeAsState(true)
     val buttonContinueEnabled = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
     var showDialog by remember { mutableStateOf(false) }
     var champyImage by remember { mutableIntStateOf(R.drawable.champy_smiling_arms_body) }
@@ -77,27 +77,29 @@ fun ChallengeScreen(
         )
     }
 
-    Column(
-        modifier = modifier.padding(15.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        Text(
-            text = stringResource(R.string.label_challenge),
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(10.dp)
-        )
+    if (!isLoading) {
+        Column(
+            modifier = modifier.padding(15.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.label_challenge),
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(10.dp)
+            )
 
-        ObjectsChallengeList(objectsChallenge, onNavigateToCameraScreen)
+            ObjectsChallengeList(objectsChallenge, onNavigateToCameraScreen)
 
-        Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(48.dp))
 
-        ContinueButton(
-            enabled = buttonContinueEnabled,
-            onClick = onNavigateToForestStage
-        )
+            ContinueButton(
+                enabled = buttonContinueEnabled,
+                onClick = onNavigateToForestStage
+            )
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
+        }
     }
 }
 
