@@ -67,8 +67,8 @@ import kotlinx.coroutines.delay
 fun CameraScreen(
     nameObject: String,
     onNavigateToChallengeScreen: () -> Unit,
-    challengeViewModel: ChallengeViewModel = hiltViewModel(),
 ) {
+    val challengeViewModel = hiltViewModel<ChallengeViewModel>()
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.success))
     val isCapturing = remember { mutableStateOf(true) }
     val isScanComplete = remember { mutableStateOf(false) }
@@ -103,7 +103,6 @@ fun CameraScreen(
                 modifier = Modifier.fillMaxSize()
             )
 
-            // Cuadro verde con el porcentaje de coincidencia
             if (confidence > 0) {
                 Box(
                     modifier = Modifier

@@ -2,7 +2,6 @@ package com.gg.spora.camera.domain
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.gg.spora.challenge.ui.classes
 import com.gg.spora.ml.ModelObjects
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -10,6 +9,9 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class ClassifyTf(val context: Context) {
+
+    private val OBJECTS = arrayOf("Botella de plástico", "Caja de cartón", "Nada", "Tapita de plástico", "Lata de Aluminio")
+
     /**
      * Classifies with TensorFlow the image when the camera takes a screenshot.
      * @param bitmap: Bitmap of the image
@@ -29,7 +31,7 @@ class ClassifyTf(val context: Context) {
 
         val outputArray = outputFeature0.floatArray
 
-        val selectedIndex = classes.indexOf(selectedObject)
+        val selectedIndex = OBJECTS.indexOf(selectedObject)
         if (selectedIndex != -1) {
             confidence = outputArray[selectedIndex] * 100
 

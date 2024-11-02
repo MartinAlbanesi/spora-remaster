@@ -35,8 +35,8 @@ import com.gg.spora.R
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.challenge.ui.components.ObjectDetailDialog
+import com.gg.spora.forestStage.ui.StageViewModel
 
-val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita de plástico", "Lata de Metal")
 
 /**
  * Screen for mini games with Spora and progress bar
@@ -49,9 +49,9 @@ val classes = arrayOf("Botella de plástico", "Caja de carton", "Nada", "Tapita 
 fun ChallengeScreen(
     modifier: Modifier = Modifier,
     onNavigateToCameraScreen: (Any?) -> Unit,
-    onNavigateToForestStage: () -> Unit,
-    challengeViewModel: ChallengeViewModel = hiltViewModel()
+    onNavigateToForestStage: () -> Unit
 ) {
+    val challengeViewModel = hiltViewModel<ChallengeViewModel>()
     val selectedObject by challengeViewModel.selectedObject.observeAsState()
     val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
     val isLoading by challengeViewModel.isLoading.observeAsState(true)
