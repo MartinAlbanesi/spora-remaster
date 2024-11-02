@@ -33,7 +33,7 @@ class ClassifyTf(val context: Context) {
         if (selectedIndex != -1) {
             confidence = outputArray[selectedIndex] * 100
 
-            if (confidence >= 100) {
+            if (confidence >= 99) {
                 resultScan = true
             }
         }
