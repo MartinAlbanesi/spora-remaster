@@ -34,7 +34,7 @@ fun classifyImageObjectDetail(objectDetailName : String) : Int{
             R.drawable.aluminum_can
         }
         else -> {
-            0
+            R.drawable.challenge_level
         }
     }
 
