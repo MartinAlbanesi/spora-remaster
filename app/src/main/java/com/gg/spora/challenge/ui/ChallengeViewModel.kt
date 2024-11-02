@@ -143,6 +143,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
             )
 
             for(objectDetail in listObjects){
+                _objectsChallenge.value?.add(objectDetail)
                 challengeRepository.insertObjectDetail(objectDetail)
             }
         }
