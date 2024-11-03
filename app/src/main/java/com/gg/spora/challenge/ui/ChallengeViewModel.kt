@@ -89,7 +89,6 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
 
             objectToModify?.let {
                 it.isValidate = true
-                it.isSelected = true
             }
 
             _objectsChallenge.postValue(currentList)
