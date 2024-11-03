@@ -31,11 +31,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gg.spora.R
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.challenge.ui.components.ObjectDetailDialog
-import com.gg.spora.forestStage.ui.StageViewModel
 
 
 /**
@@ -43,64 +43,64 @@ import com.gg.spora.forestStage.ui.StageViewModel
  * @param modifier: Modifier
  * @param onNavigateToCameraScreen: Click listener for back button
  * @param onNavigateToCameraScreen: Action for navigate to Camera Screen
- * @param challengeViewModel: View model for the Challenge
  */
 @Composable
 fun ChallengeScreen(
     modifier: Modifier = Modifier,
     onNavigateToCameraScreen: (Any?) -> Unit,
-    onNavigateToForestStage: () -> Unit
+    onNavigateToForestStage: () -> Unit,
+    challengeObjects: List<ObjectDetail>,
+    continueDialogObjectDetail: () -> Unit,
+    selectedObject : ObjectDetail
 ) {
-    val challengeViewModel = hiltViewModel<ChallengeViewModel>()
-    val selectedObject by challengeViewModel.selectedObject.observeAsState()
-    val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
-    val isLoading by challengeViewModel.isLoading.observeAsState(true)
-    val buttonContinueEnabled = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
+    val buttonContinueEnabled = challengeObjects.isNotEmpty() && challengeObjects.all { it.isValidate }
     var showDialog by remember { mutableStateOf(false) }
-    var champyImage by remember { mutableIntStateOf(R.drawable.champy_smiling_arms_body) }
 
-    if (buttonContinueEnabled) champyImage = R.drawable.champy_celebrating_raised_arms
-
-    LaunchedEffect(selectedObject) {
-        if (!selectedObject.isNullOrEmpty()) {
-            showDialog = true
-        }
+    if (!selectedObject.nameObjectDetail.isNullOrEmpty()) {
+        showDialog = true
     }
+    /*LaunchedEffect(challengeViewModel.selectedObject) {
+        challengeViewModel.selectedObject.observe(lifecycleOwner) { selecteObject ->
+            if (!selecteObject.isNullOrEmpty()) {
+                objectChallengeName = selecteObject
+                showDialog = true
+            }
+        }
+    }*/
 
-    if (showDialog && !selectedObject.isNullOrEmpty()) {
+    if (showDialog) {
         ObjectDetailDialog(
             onContinueButton = {
                 showDialog = false
-                challengeViewModel.setEmptySelectedObject()
+                continueDialogObjectDetail()
             },
-            objectDetail = challengeViewModel.getObjectDetailWithName(selectedObject!!)
+            objectDetail = selectedObject
         )
     }
 
-    if (!isLoading) {
-        Column(
-            modifier = modifier.padding(15.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            Text(
-                text = stringResource(R.string.label_challenge),
-                textAlign = TextAlign.Center,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(10.dp)
-            )
+    Column(
+        modifier = modifier.padding(15.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.label_challenge),
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(10.dp)
+        )
 
-            ObjectsChallengeList(objectsChallenge, onNavigateToCameraScreen)
+        ObjectsChallengeList(challengeObjects, onNavigateToCameraScreen)
 
-            Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
-            ContinueButton(
-                enabled = buttonContinueEnabled,
-                onClick = onNavigateToForestStage
-            )
+        ContinueButton(
+            enabled = buttonContinueEnabled,
+            onClick = onNavigateToForestStage
+        )
 
-            Spacer(modifier = Modifier.height(24.dp))
-        }
+        Spacer(modifier = Modifier.height(24.dp))
     }
+
 }
 
 /**
