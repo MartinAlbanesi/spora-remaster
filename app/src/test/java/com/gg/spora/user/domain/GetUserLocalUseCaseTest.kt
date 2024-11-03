@@ -5,6 +5,7 @@ import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -30,7 +31,7 @@ class GetUserLocalUseCaseTest{
          coEvery { userRepositoryLocal.getUser() } returns flowOf(null)
 
         // When
-        val actual = getUserLocalUseCase()
+        val actual = getUserLocalUseCase().first()
 
         // Then
         assertEquals(null, actual)
@@ -44,7 +45,7 @@ class GetUserLocalUseCaseTest{
         coEvery { userRepositoryLocal.getUser() } returns flowOf(user)
 
         // When
-        val actual = getUserLocalUseCase()
+        val actual = getUserLocalUseCase().first()
 
         // Then
         assertEquals(user, actual)
