@@ -10,29 +10,36 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GroveDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
 
     @Query("SELECT * FROM seed_trees")
     fun getSeedTrees(): Flow<List<SeedTreeEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertForestTrees(forestTrees: List<ForestTreeEntity>)
-
     @Query("SELECT * FROM forest_trees")
     fun getForestTrees(): Flow<List<ForestTreeEntity>>
 
-    @Query("DELETE FROM forest_trees")
-    fun deleteAllForestTrees()
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertForestTree(forestTree: ForestTreeEntity)
+    @Query("SELECT * FROM seed_trees WHERE idSeedTree = :id")
+    fun getSeedTreeById(id: Int): Flow<SeedTreeEntity>
 
     @Query("SELECT * FROM forest_trees WHERE idForestTree = :id")
     fun getForestTreeById(id: Int): Flow<ForestTreeEntity>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertForestTrees(forestTrees: List<ForestTreeEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertForestTree(forestTree: ForestTreeEntity)
+
+    @Query("DELETE FROM forest_trees")
+    fun deleteAllForestTrees()
+
     @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
     suspend fun updateForestTreeGrowthStageById(id: Int, newStage: String)
+
+    @Query("UPDATE seed_trees SET amount_of_forest_trees_generated = :amount, next_forest_tree_available_time = :nextAvailableTime WHERE idSeedTree = :id")
+    suspend fun updateSeedTreeCooldown(id: Int, amount: Int, nextAvailableTime: Long)
 
 //    @Query("DELETE FROM forest_trees WHERE idForestTree = :id")
 //    suspend fun deleteForestTreeById(id: Int)

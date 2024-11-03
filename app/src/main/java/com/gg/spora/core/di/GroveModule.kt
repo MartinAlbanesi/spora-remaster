@@ -9,12 +9,14 @@ import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.CollectOxygenUseCase
 import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
+import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.UpdateSeedCooldownUseCase
 import com.gg.spora.grove.ui.GroveViewModel
 import dagger.Module
 import dagger.Provides
@@ -88,8 +90,20 @@ class GroveModule {
 
     @Provides
     @Singleton
-    fun updateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
+    fun provideUpdateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
         return UpdateForestTreeGrowthStageByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSeedTreeByIdUseCase(groveRepository: IGroveRepository): GetSeedTreeByIdUseCase {
+        return GetSeedTreeByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdateSeedCooldownUseCase(groveRepository: IGroveRepository): UpdateSeedCooldownUseCase {
+        return UpdateSeedCooldownUseCase(groveRepository)
     }
 
     @Provides
@@ -108,6 +122,8 @@ class GroveModule {
         getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
         insertForestTreeUseCase: InsertForestTreeUseCase,
         updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
+        getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
+        updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
     ): GroveViewModel {
         return GroveViewModel(
             loadSeedTreesUseCase,
@@ -116,7 +132,9 @@ class GroveModule {
             saveForestTreesUseCase,
             getForestTreeByIdUseCase,
             insertForestTreeUseCase,
-            updateForestTreeGrowthStageByIdUseCase
+            updateForestTreeGrowthStageByIdUseCase,
+            getSeedTreeByIdUseCase,
+            updateSeedCooldownUseCase
         )
     }
 

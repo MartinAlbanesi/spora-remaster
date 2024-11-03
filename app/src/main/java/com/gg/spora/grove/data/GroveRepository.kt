@@ -6,7 +6,6 @@ import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.ForestTree
-import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.toForestTreeEntity
 import com.gg.spora.grove.domain.models.toSeedTreeEntity
@@ -48,6 +47,11 @@ class GroveRepository @Inject constructor(
         return groveDao.getForestTreeById(id).map { it.toForestTree() }
     }
 
+    // Carga un árbol semillero por su ID desde la base de datos
+    override suspend fun getSeedTreeById(id: Int): Flow<SeedTree?> {
+        return groveDao.getSeedTreeById(id).map { it.toSeedTree() }
+    }
+
     // Guarda los árboles semilleros en la base de datos
     override suspend fun insertAllSeedTrees(seedTrees: List<SeedTree>) {
         val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }
@@ -66,8 +70,12 @@ class GroveRepository @Inject constructor(
         groveDao.insertForestTree(forestTreeEntity)
     }
 
-    override suspend fun updateForestTreeGrowthStageById(id: Int, growthStage: GrowthStage) {
-        groveDao.updateForestTreeGrowthStageById(id, growthStage.toString())
+    override suspend fun updateForestTreeGrowthStage(forestTree: ForestTree) {
+        groveDao.updateForestTreeGrowthStageById(forestTree.id, forestTree.currentStage.toString())
+    }
+
+    override suspend fun updateSeedTreeCooldown(seedTree: SeedTree) {
+        groveDao.updateSeedTreeCooldown(seedTree.id, seedTree.amountOfForestTreesGenerated, seedTree.nextForestTreeAvailableTime)
     }
 
     // Recolecta el oxígeno de los árboles del bosque
