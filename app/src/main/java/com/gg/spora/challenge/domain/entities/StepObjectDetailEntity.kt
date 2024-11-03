@@ -21,3 +21,5 @@ data class StepObjectDetailEntity(
     @ColumnInfo(name = "number_step") val numberStep: Int,
     @ColumnInfo(name = "description") val description: String?
 )
+
+fun StepObjectDetailEntity.toStepObjectDetail() = StepObjectDetailEntity(nameObjectDetail, numberStep, description)
