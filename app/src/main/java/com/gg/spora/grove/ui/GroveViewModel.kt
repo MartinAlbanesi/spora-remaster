@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
+import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.UpdateSeedCooldownUseCase
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
@@ -41,7 +43,9 @@ class GroveViewModel @Inject constructor(
     private val saveForestTreesUseCase: SaveForestTreesUseCase,
     private val getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
-    private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase
+    private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
+    private val getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
+    private val updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque
@@ -147,7 +151,7 @@ class GroveViewModel @Inject constructor(
     // Actualización del estado del árbol
     fun updateForestTreeGrowthStage(updatedTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            updateForestTreeGrowthStageByIdUseCase(updatedTree.id, updatedTree.currentStage)
+            updateForestTreeGrowthStageByIdUseCase(updatedTree)
 
             // Update the UI state
             val updatedForest = _forestTrees.value.map { tree ->

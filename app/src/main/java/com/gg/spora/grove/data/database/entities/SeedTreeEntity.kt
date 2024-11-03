@@ -13,7 +13,7 @@ data class SeedTreeEntity(
     @ColumnInfo(name = "tree_type") val treeType: String,
     @ColumnInfo(name = "time_to_generate_forest_tree") val timeToGenerateForestTree: Long,
     @ColumnInfo(name = "next_forest_tree_available_time") val nextForestTreeAvailableTime: Long = 0,
-    @ColumnInfo(name = "amountOfForestTreesGenerated") var amountOfForestTreesGenerated: Int = 0,
+    @ColumnInfo(name = "amount_of_forest_trees_generated") var amountOfForestTreesGenerated: Int = 0,
 )
 
 fun SeedTreeEntity.toSeedTree(): SeedTree {
