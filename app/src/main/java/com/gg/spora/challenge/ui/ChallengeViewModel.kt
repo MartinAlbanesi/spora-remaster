@@ -14,30 +14,29 @@ import javax.inject.Inject
 @HiltViewModel
 class ChallengeViewModel @Inject constructor(private val challengeRepository: ChallengeRepository) : ViewModel () {
 
-    private val _objectsChallenge = MutableLiveData<MutableList<ObjectDetail>>(mutableListOf())
-    val objectsChallenge: LiveData<MutableList<ObjectDetail>> = _objectsChallenge
+    private val _objectsChallenge = MutableLiveData<List<ObjectDetail>>(mutableListOf())
+    val objectsChallenge: LiveData<List<ObjectDetail>> = _objectsChallenge
 
     private val _selectedObject = MutableLiveData<String>()
-    val selectedObject: LiveData<String> get() = _selectedObject
+    val selectedObject: LiveData<String> = _selectedObject
 
+    private val _objectDetail = MutableLiveData<ObjectDetail>()
+    val objectDetail: LiveData<ObjectDetail> get() = _objectDetail
 
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     init {
         insertObjectsDetailInDatabase()
-        getObjectsValidate()
+        getObjectsInDatabase()
     }
 
     fun selectObject(objectName: String) {
-        viewModelScope.launch {
-            _objectsChallenge.value?.add(ObjectDetail(objectName, "", true))
-            _selectedObject.value = objectName
-        }
+        _selectedObject.postValue(objectName)
     }
 
     fun setEmptySelectedObject(){
-        _selectedObject.value = ""
+        _selectedObject.postValue("")
     }
 
     fun setObjectsChallengeEmpty(){
@@ -47,22 +46,37 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
             objectDetail.copy(isValidate = false)
         }.toMutableList()
 
-        _objectsChallenge.value = updatedList
+        _objectsChallenge.postValue(updatedList)
     }
 
-    private fun getObjectsValidate() {
-        viewModelScope.launch {
-            val currentList = _objectsChallenge.value ?: mutableListOf()
-            val listData = challengeRepository.getAllObjectsDetail()
+    fun getObjectDetailWithName(nameObjectDetail : String) : ObjectDetail{
+        var objectDetail = ObjectDetail( "", "",false)
 
-            for (objectChallenge in listData) {
-                val matchingObject = currentList.find { it.nameObjectDetail == objectChallenge.nameObjectDetail }
-                if (matchingObject != null) {
-                    matchingObject.isValidate = true
-                }
+        for(objectDetailList in objectsChallenge.value!!){
+            if(objectDetailList.nameObjectDetail == nameObjectDetail){
+                objectDetail =  objectDetailList
             }
 
-            _objectsChallenge.value = currentList
+        }
+        return objectDetail
+    }
+
+    private fun getObjectsInDatabase() {
+        viewModelScope.launch {
+            val currentList = _objectsChallenge.value ?: mutableListOf()
+            challengeRepository.getAllObjectsDetail().observeForever{
+                _objectsChallenge.value = it
+            }
+            //val listData = challengeRepository.getAllObjectsDetail()
+            /*
+                for (objectChallenge in listData) {
+                    val matchingObject = currentList.find { it.nameObjectDetail == objectChallenge.nameObjectDetail }
+                    if (matchingObject != null) {
+                        matchingObject.isValidate = true
+                    }
+                }
+            */
+            _objectsChallenge.postValue(currentList)
         }
     }
 
@@ -75,24 +89,33 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
 
             objectToModify?.let {
                 it.isValidate = true
+                it.isSelected = true
             }
 
-            _objectsChallenge.value = currentList
+            _objectsChallenge.postValue(currentList)
         }
     }
 
-
+    /*
     fun getObjectDetailWithName(objectDetailName : String) : ObjectDetail{
-        var objectDetail = ObjectDetail( "", "",false)
+    //        var objectDetail = ObjectDetail( "", "",false)
+    viewModelScope.launch{
 
-        for(objectDetailList in objectsChallenge.value!!){
-            if(objectDetailList.nameObjectDetail == objectDetailName){
-                objectDetail =  objectDetailList
+        objectDetail = challengeRepository.getObjectDetailWithName(objectDetailName)
+    /*
+        if(challengeRepository.getAllObjectsDetail().value != null){
+
+            for(objectDetailList in challengeRepository.getAllObjectsDetail().value!!){
+                if(objectDetailList.nameObjectDetail == objectDetailName){
+                    objectDetail =  objectDetailList
+                }
             }
         }
-        return objectDetail
+     */
     }
-
+    return objectDetail
+    }
+    */
     private fun insertObjectsDetailInDatabase(){
         viewModelScope.launch{
             val listObjects = mutableListOf(
@@ -147,7 +170,6 @@ class ChallengeViewModel @Inject constructor(private val challengeRepository: Ch
             )
 
             for(objectDetail in listObjects){
-                _objectsChallenge.value?.add(objectDetail)
                 challengeRepository.insertObjectDetail(objectDetail)
             }
             _isLoading.value = false
