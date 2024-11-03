@@ -11,7 +11,6 @@ import com.gg.spora.user.data.local.entities.UserEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
@@ -228,14 +227,14 @@ class UserDaoTest {
     }
 
     @Test
-    fun updateOxygen_SetAValidOxygenToUpdate_ThenUpdatedOxygenFromDB() = runTest {
+    fun updateOxygen_SetAValidOxygenToUpdate_ThenUpdatedUserOxygenFromDB() = runTest {
 
         // Given
         val expectedUser = FakeUserModels.fakeUserEntity
         userDao.insertUser(expectedUser)
 
         // When
-        userDao.updateOxygen(200)
+        userDao.updateUserOxygen(200)
 
         // Then
         val actualOxygen = userDao.getUserOxygen().first()

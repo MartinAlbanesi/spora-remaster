@@ -1,7 +1,6 @@
 package com.gg.spora.user.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -50,7 +49,7 @@ interface UserDao {
     suspend fun updateUserId(userId: String)
 
     @Query("update user_entity set oxygen = :oxygen")
-    suspend fun updateOxygen(oxygen: Int)
+    suspend fun updateUserOxygen(oxygen: Int)
 
     @Update
     suspend fun updateLevelCompleted(levelsCompleted: LevelCompletedEntity)

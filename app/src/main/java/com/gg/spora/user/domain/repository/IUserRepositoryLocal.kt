@@ -1,5 +1,6 @@
 package com.gg.spora.user.domain.repository
 
+import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.domain.models.LevelCompleted
 import com.gg.spora.user.domain.models.User
 import kotlinx.coroutines.flow.Flow
@@ -12,9 +13,11 @@ interface IUserRepositoryLocal {
 
     suspend fun updateUserId(userId: String)
 
-//    suspend fun deleteUserById(id: String)
-
     fun getUser(): Flow<User?>
 
-//    suspend fun getCurrentUserFlow(): List<User>
+    suspend fun getUserOxygen(): Flow<Int>
+
+    suspend fun updateUserOxygen(oxygen: Int)
+
+    suspend fun updateLevelCompleted(levelCompleted: LevelCompletedEntity)
 }

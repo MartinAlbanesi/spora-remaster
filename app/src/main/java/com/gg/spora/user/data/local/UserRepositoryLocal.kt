@@ -1,5 +1,6 @@
 package com.gg.spora.user.data.local
 
+import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.mappers.toLevelCompletedEntity
 import com.gg.spora.user.domain.mappers.toUser
@@ -44,6 +45,18 @@ class UserRepositoryLocal @Inject constructor(
 
     override fun getUser(): Flow<User?> {
         return userDao.getUsersWithLevelsCompleted().map { it?.toUser() }
+    }
+
+    override suspend fun getUserOxygen(): Flow<Int> {
+        return userDao.getUserOxygen()
+    }
+
+    override suspend fun updateUserOxygen(oxygen: Int) {
+        userDao.updateUserOxygen(oxygen)
+    }
+
+    override suspend fun updateLevelCompleted(levelCompleted: LevelCompletedEntity) {
+        userDao.updateLevelCompleted(levelCompleted)
     }
 
 //    override suspend fun getCurrentUserFlow(): List<User> {
