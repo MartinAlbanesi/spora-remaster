@@ -27,6 +27,11 @@ interface ChallengeDao {
     @Query("SELECT COUNT(*) FROM object_detail " +
             "WHERE name_object_detail = :nameObjectDetail")
     suspend fun validateIfExistsObjectDetail(nameObjectDetail : String) : Int
+
+    @Query("SELECT * FROM object_detail " +
+            "WHERE name_object_detail = :nameObjectDetail")
+    suspend fun getObjectDetailWithName(nameObjectDetail : String) : ObjectDetailEntity
+
     //endregion
 
     //region StepObjectDetailEntity

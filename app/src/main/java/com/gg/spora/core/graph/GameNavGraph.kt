@@ -135,9 +135,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                             },
                             challengeObjects = objectsChallenge,
                             continueDialogObjectDetail = { challengeViewModel.setEmptySelectedObject() },
-                            isLoadingChallengeObjects = isLoading,
-                            selectedObjectName = challengeRoute.nameObject/*,
-                            selectedObject2 = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)*/
+                            selectedObject = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)
                         )
                     }
             )
