@@ -33,7 +33,9 @@ class MainActivity : ComponentActivity() {
             }
 
             LaunchedEffect(true) {
-                isUserLoggedIn = getUserLocalUseCase() != null
+                getUserLocalUseCase().collect{
+                    isUserLoggedIn = it != null
+                }
             }
 
             screenSplash.apply {

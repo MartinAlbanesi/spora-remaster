@@ -56,7 +56,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
 
         // When
-        updateUserLevelsAndOxygenUseCase(userId, levelId, starState, stageType, 100)
+        updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, 100)
 
         // Then
         coVerify(exactly = 1) { userRepositoryLocal.getUser() }
@@ -81,7 +81,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
 
         // When
-        updateUserLevelsAndOxygenUseCase(userId, levelId, starState, stageType, 100)
+        updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, 100)
 
         // Then
         coVerify(exactly = 1) { userRepositoryLocal.getUser() }

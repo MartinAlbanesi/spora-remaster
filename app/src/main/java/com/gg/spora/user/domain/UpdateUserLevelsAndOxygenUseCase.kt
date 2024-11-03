@@ -14,13 +14,12 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
     private val getUserAuthUseCase: GetUserAuthUseCase
 ) {
     suspend operator fun invoke(
-        userId: String = "",
         levelId: String,
         starState: StarState,
         stageType: StageType,
         oxygen: Int
     ) {
-        val userLocal = userRepositoryLocal.getUser().first()
+        val userLocal = userRepositoryLocal.getUser().first()!!
 
         val levelCompleted = LevelCompleted(
             levelId = levelId,
@@ -28,17 +27,21 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
             starState = starState
         )
 
-        val userUpdated = userLocal!!.copy(
+        val userLevelCompleted = userLocal.levelsCompleted.toMutableSet()
+        userLevelCompleted.add(levelCompleted)
+
+        val userUpdated = userLocal.copy(
             oxygen =+ oxygen,
-            levelsCompleted = userLocal.levelsCompleted.toMutableList().apply {
-                add(levelCompleted)
-            }
+            levelsCompleted = userLevelCompleted.toList()
         )
+
+        if(getUserAuthUseCase() != null) {
+            // TODO: Arreglar el problema que se guarda mal el StarState.
+            userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
+        }
 
         userRepositoryLocal.updateUserWithLevelCompleted(userUpdated, levelCompleted)
 
-        if(getUserAuthUseCase() != null) {
-            userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
-        }
+
     }
 }

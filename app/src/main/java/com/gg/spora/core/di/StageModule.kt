@@ -6,6 +6,7 @@ import com.gg.spora.forestStage.data.FakeStageLocalRepositoryLocal
 import com.gg.spora.forestStage.data.network.models.StageRepositoryNetwork
 import com.gg.spora.forestStage.domain.GetLevelsUseCase
 import com.gg.spora.forestStage.domain.IStageRepositoryLocal
+import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.GetUserNetworkUseCase
 import dagger.Module
 import dagger.Provides
@@ -41,9 +42,9 @@ class StageModule {
     @Provides
     fun provideGetLevelsUseCase(
         stageRepositoryNetwork: IStageRepositoryNetwork,
-        getUserNetworkUseCase: GetUserNetworkUseCase
+        getUserLocalUseCase: GetUserLocalUseCase
     ): GetLevelsUseCase {
-        return GetLevelsUseCase(stageRepositoryNetwork,getUserNetworkUseCase)
+        return GetLevelsUseCase(stageRepositoryNetwork,getUserLocalUseCase)
     }
 
 }
