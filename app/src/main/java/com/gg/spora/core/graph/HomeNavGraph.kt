@@ -40,10 +40,11 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             GroveScreen(
                 seedTrees = seedTrees,
                 forestTrees = forestTrees,
-                plantSeedInForest = { forestTree ->
-                    groveViewModel.plantSeedInForest(forestTree)
+                plantSeedInForest = { forestTree, seedTreeId ->
+                    groveViewModel.plantSeedInForest(forestTree, seedTreeId)
                 },
-                updateTree = { tree -> groveViewModel.updateForestTreeGrowthStage(tree) },
+                updateTree = { /*tree -> groveViewModel.updateForestTreeGrowthStage(tree)*/ },
+                onCooldownTriggered = { /*tree -> groveViewModel.onCooldownTriggered(tree)*/ },
                 popBackStack = {
                     navController.popBackStack()
                 },

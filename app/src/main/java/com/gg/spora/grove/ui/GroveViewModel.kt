@@ -10,8 +10,6 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
-import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
-import com.gg.spora.grove.domain.UpdateSeedCooldownUseCase
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
@@ -43,9 +41,9 @@ class GroveViewModel @Inject constructor(
     private val saveForestTreesUseCase: SaveForestTreesUseCase,
     private val getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
-    private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
     private val getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
-    private val updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
+//    private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
+//    private val updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
 ) : ViewModel() {
 
     // State para los árboles semilleros y los árboles del bosque
@@ -55,8 +53,8 @@ class GroveViewModel @Inject constructor(
     private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
     val forestTrees: StateFlow<List<ForestTree?>> = _forestTrees.asStateFlow()
 
-    private val _forestTree = MutableStateFlow<ForestTree?>(null)
-    val forestTree = _forestTree.asStateFlow()
+//    private val _forestTree = MutableStateFlow<ForestTree?>(null)
+//    val forestTree = _forestTree.asStateFlow()
 
     // Inicialización de los casos de uso
     init {
@@ -66,6 +64,7 @@ class GroveViewModel @Inject constructor(
         initForestTrees()
     }
 
+    // Inicializa los árboles semilleros la primera vez que se abre la pantalla
     fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -93,6 +92,7 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    // Inicializa los árboles del bosque la primera vez que se abre la pantalla
     fun initForestTrees() {
         viewModelScope.launch(Dispatchers.IO) {
             delay(500) // Optional delay
@@ -104,6 +104,7 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    // Carga los árboles semilleros desde la base de datos
     fun getSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
             loadSeedTreesUseCase().collect {
@@ -112,6 +113,7 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    // Carga los árboles del bosque desde la base de datos para Test
     fun getForestTrees() {
         viewModelScope.launch(Dispatchers.IO) {
             loadForestTreesUseCase().collect {
@@ -120,17 +122,19 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-    fun saveSeedTrees() {
-        viewModelScope.launch(Dispatchers.IO) {
-            saveSeedTreesUseCase(_seedTrees.value)
-        }
-    }
+//    // Guarda los árboles semilleros en la base de datos
+//    fun saveSeedTrees() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            saveSeedTreesUseCase(_seedTrees.value)
+//        }
+//    }
 
+    // Guarda los árboles semilleros en la variable de estado
     fun setSeedTrees(seedTrees: List<SeedTree>){
         _seedTrees.value = seedTrees
     }
 
-    fun plantSeedInForest(forestTree: ForestTree) {
+    fun plantSeedInForest(forestTree: ForestTree, seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i("GroveViewModel", "BEFORE PLANTING plantForestTreeInForest: ${_forestTrees.value.size}")
             var position = forestTree.position
@@ -145,25 +149,37 @@ class GroveViewModel @Inject constructor(
             _forestTrees.value = updatedForest
 
             insertForestTreeUseCase(forestTree) // Save only the planted tree
+//            onCooldownTriggered(seedTreeId) // Trigger cooldown after planting
         }
     }
 
-    // Actualización del estado del árbol
-    fun updateForestTreeGrowthStage(updatedTree: ForestTree) {
-        viewModelScope.launch(Dispatchers.IO) {
-            updateForestTreeGrowthStageByIdUseCase(updatedTree)
-
-            // Update the UI state
-            val updatedForest = _forestTrees.value.map { tree ->
-                if (tree != null && tree.id == updatedTree.id) {
-                    updatedTree
-                } else {
-                    tree
-                }
-            }
-            _forestTrees.value = updatedForest
-        }
-    }
+//    // Actualización del estado del árbol
+//    fun updateForestTreeGrowthStage(updatedTree: ForestTree) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            updateForestTreeGrowthStageByIdUseCase(updatedTree)
+//
+//            // Update the UI state
+//            val updatedForest = _forestTrees.value.map { tree ->
+//                if (tree != null && tree.id == updatedTree.id) {
+//                    updatedTree
+//                } else {
+//                    tree
+//                }
+//            }
+//            _forestTrees.value = updatedForest
+//        }
+//    }
+//
+//    fun onCooldownTriggered(seedTreeId: Int) {
+//        viewModelScope.launch {
+//            val seedTree = getSeedTreeByIdUseCase(seedTreeId).firstOrNull()
+//            if (seedTree != null) {
+//                seedTree.nextForestTreeAvailableTime = System.currentTimeMillis() + seedTree.timeToGenerateForestTree.toMillis()
+//                seedTree.amountOfForestTreesGenerated++
+//                updateSeedCooldownUseCase(seedTree) // Update database
+//            }
+//        }
+//    }
 
     /*
     fun collectOxygen() {

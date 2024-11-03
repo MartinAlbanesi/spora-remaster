@@ -70,6 +70,7 @@ class GroveRepository @Inject constructor(
         groveDao.insertForestTree(forestTreeEntity)
     }
 
+    /*
     override suspend fun updateForestTreeGrowthStage(forestTree: ForestTree) {
         groveDao.updateForestTreeGrowthStageById(forestTree.id, forestTree.currentStage.toString())
     }
@@ -77,23 +78,5 @@ class GroveRepository @Inject constructor(
     override suspend fun updateSeedTreeCooldown(seedTree: SeedTree) {
         groveDao.updateSeedTreeCooldown(seedTree.id, seedTree.amountOfForestTreesGenerated, seedTree.nextForestTreeAvailableTime)
     }
-
-    // Recolecta el oxígeno de los árboles del bosque
-    override suspend fun collectOxygen(): Int {
-        /*
-        var totalOxygen = 0
-
-        // Recorre los árboles del bosque y recolecta el oxígeno de los árboles adultos
-        for (row in _forestTrees.value) {
-            for (tree in row) {
-                if (tree != null && tree.currentStage == GrowthStage.ADULT) {
-                    totalOxygen += tree.collectOxygen()
-                }
-            }
-        }
-        return totalOxygen
-
-         */
-        return 0
-    }
+     */
 }

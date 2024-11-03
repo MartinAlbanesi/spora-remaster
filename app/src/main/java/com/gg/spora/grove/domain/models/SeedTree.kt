@@ -17,21 +17,10 @@ data class SeedTree(
     var nextForestTreeAvailableTime: Long = 0L
 ) : Tree(id, type) {
 
-    // Verifica si es posible generar una semilla
-    fun isForestTreeAvailable(): Boolean {
-        return System.currentTimeMillis() >= nextForestTreeAvailableTime
-    }
-
-    /*
-    // Genera una semilla si es posible, y retorna la semilla generada o null si no es posible generar una semilla
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun generateForestTree(): ForestTree? {
-        nextForestTreeAvailableTime = System.currentTimeMillis() + timeToGenerateForestTree.toMillis()
-        amountOfForestTreesGenerated++
-        val randomPosition = (0..24).random() // Generate random position
-        return ForestTree(type = type, position = randomPosition) // Assign random position
-    }
-     */
+//    // Verifica si es posible generar una semilla
+//    fun isForestTreeAvailable(): Boolean {
+//        return System.currentTimeMillis() >= nextForestTreeAvailableTime
+//    }
 }
 
 fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {

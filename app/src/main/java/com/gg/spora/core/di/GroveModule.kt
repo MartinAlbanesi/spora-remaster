@@ -7,7 +7,6 @@ import com.gg.spora.core.data.database.GroveDatabase
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
-import com.gg.spora.grove.domain.CollectOxygenUseCase
 import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
 import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
@@ -15,8 +14,6 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
-import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
-import com.gg.spora.grove.domain.UpdateSeedCooldownUseCase
 import com.gg.spora.grove.ui.GroveViewModel
 import dagger.Module
 import dagger.Provides
@@ -88,11 +85,6 @@ class GroveModule {
         return InsertForestTreeUseCase(groveRepository)
     }
 
-    @Provides
-    @Singleton
-    fun provideUpdateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
-        return UpdateForestTreeGrowthStageByIdUseCase(groveRepository)
-    }
 
     @Provides
     @Singleton
@@ -100,17 +92,23 @@ class GroveModule {
         return GetSeedTreeByIdUseCase(groveRepository)
     }
 
-    @Provides
-    @Singleton
-    fun provideUpdateSeedCooldownUseCase(groveRepository: IGroveRepository): UpdateSeedCooldownUseCase {
-        return UpdateSeedCooldownUseCase(groveRepository)
-    }
+//    @Provides
+//    @Singleton
+//    fun provideUpdateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
+//        return UpdateForestTreeGrowthStageByIdUseCase(groveRepository)
+//    }
 
-    @Provides
-    @Singleton
-    fun provideCollectOxygenUseCase(groveRepository: IGroveRepository): CollectOxygenUseCase {
-        return CollectOxygenUseCase(groveRepository)
-    }
+//    @Provides
+//    @Singleton
+//    fun provideUpdateSeedCooldownUseCase(groveRepository: IGroveRepository): UpdateSeedCooldownUseCase {
+//        return UpdateSeedCooldownUseCase(groveRepository)
+//    }
+//
+//    @Provides
+//    @Singleton
+//    fun provideCollectOxygenUseCase(groveRepository: IGroveRepository): CollectOxygenUseCase {
+//        return CollectOxygenUseCase(groveRepository)
+//    }
 
     @Provides
     @Singleton
@@ -121,9 +119,9 @@ class GroveModule {
         saveForestTreesUseCase: SaveForestTreesUseCase,
         getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
         insertForestTreeUseCase: InsertForestTreeUseCase,
-        updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
         getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
-        updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
+//        updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
+//        updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
     ): GroveViewModel {
         return GroveViewModel(
             loadSeedTreesUseCase,
@@ -132,9 +130,9 @@ class GroveModule {
             saveForestTreesUseCase,
             getForestTreeByIdUseCase,
             insertForestTreeUseCase,
-            updateForestTreeGrowthStageByIdUseCase,
             getSeedTreeByIdUseCase,
-            updateSeedCooldownUseCase
+//            updateForestTreeGrowthStageByIdUseCase,
+//            updateSeedCooldownUseCase
         )
     }
 

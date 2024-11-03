@@ -12,7 +12,7 @@ interface IGroveRepository {
     suspend fun insertAllSeedTrees(seedTrees: List<SeedTree>)
     suspend fun insertAllForestTrees(forest: List<ForestTree?>)
     suspend fun insertForestTree(forestTree: ForestTree)
-    suspend fun updateForestTreeGrowthStage(forestTree: ForestTree)
-    suspend fun updateSeedTreeCooldown(seedTree: SeedTree)
-    suspend fun collectOxygen(): Int
+//    suspend fun updateForestTreeGrowthStage(forestTree: ForestTree)
+//    suspend fun updateSeedTreeCooldown(seedTree: SeedTree)
+//    suspend fun collectOxygen(): Int
 }

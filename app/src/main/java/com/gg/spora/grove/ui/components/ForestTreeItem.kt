@@ -50,7 +50,7 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
         while (!hasReachedAdultStage) { // Stop when adult stage is reached
             delay(1000)
             val updatedTree = treeState.copy()
-            updatedTree.updateGrowthStage()
+//            updatedTree.updateGrowthStage()
             if (updatedTree.currentStage == GrowthStage.ADULT) {
                 hasReachedAdultStage = true
             }
@@ -65,12 +65,4 @@ fun ForestTreeItem(tree: ForestTree, onTreeUpdated: (ForestTree) -> Unit) {
         contentDescription = "Tree in ${treeState.currentStage.name} stage", // More descriptive
         modifier = Modifier.size(64.dp)
     )
-/*
-    // Estado actual del árbol
-    Text(
-        text = treeState.currentStage.name,
-        fontSize = 12.sp,
-        modifier = Modifier.fillMaxWidth()
-    )
- */
 }

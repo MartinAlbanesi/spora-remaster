@@ -1,7 +1,6 @@
 package com.gg.spora.grove.ui
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -36,8 +35,9 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     seedTrees: List<SeedTree>,
     forestTrees: List<ForestTree?>,
-    plantSeedInForest: (ForestTree) -> Unit,
+    plantSeedInForest: (ForestTree, Int) -> Unit,
     updateTree: (ForestTree) -> Unit,
+    onCooldownTriggered: (Int) -> Unit,
     popBackStack: () -> Unit
 ) {
     /*
@@ -88,10 +88,13 @@ fun GroveScreen(
             ) {
                 // Componente para cada árbol semillero
                 for (seedTree in seedTrees) {
-                    SeedTreeItem(seedTree = seedTree) { forestTree ->
-                        Log.i("GroveScreen", "Tree type clicked: $forestTree")
-                        plantSeedInForest(forestTree)
-                    }
+                    SeedTreeItem(
+                        seedTree = seedTree,
+                        onForestTreeGenerated = { forestTree, seedTreeId ->
+                            plantSeedInForest(forestTree, seedTreeId)
+                        },
+                        onCooldownTriggered = onCooldownTriggered
+                    )
                 }
             }
         }
