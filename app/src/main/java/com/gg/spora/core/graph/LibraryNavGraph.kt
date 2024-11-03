@@ -18,8 +18,8 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.LibraryGraph>(startDestination = NavigationRoutes.Library) {
 
         composable<NavigationRoutes.Library> {
-            //val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            //val cardList by libraryViewModel.infoCardEntityList.collectAsState()
+            val libraryViewModel = hiltViewModel<LibraryViewModel>()
+            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryScreen(
                 onBackButtonClick = { navController.navigate(NavigationRoutes.Home) },
