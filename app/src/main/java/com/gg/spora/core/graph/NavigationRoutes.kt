@@ -47,7 +47,8 @@ object NavigationRoutes {
         val relationsCount: Int,
         val levelId: String,
         val imageBackground: Int,
-        val stageId: String,
+        val stageType: String,
+        val oxygenRewards: List<Int>,
     )
 
 

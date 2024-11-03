@@ -36,8 +36,8 @@ class StageViewModel @Inject constructor(
     val currentLevel = _currentLevel.asStateFlow()
 
     init {
-        getLevels()
         getStage()
+        getLevels()
         getCurrentLevel()
     }
 
@@ -50,7 +50,7 @@ class StageViewModel @Inject constructor(
     }
 
     private fun getStage(){
-//        _stage.value = stageRepository.getStage(getStageTypeByName(stageRoute.stageType))
+        _stage.value = stageRepository.getStage(getStageTypeByName(stageRoute.stageType))
     }
 
     private fun getCurrentLevel() {

@@ -14,7 +14,7 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
     private val getUserAuthUseCase: GetUserAuthUseCase
 ) {
     suspend operator fun invoke(
-        userId: String,
+        userId: String = "",
         levelId: String,
         starState: StarState,
         stageType: StageType,
@@ -38,7 +38,7 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
         userRepositoryLocal.updateUserWithLevelCompleted(userUpdated, levelCompleted)
 
         if(getUserAuthUseCase() != null) {
-            userRepositoryNetwork.updateUserById(userUpdated, userId)
+            userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
         }
     }
 }

@@ -23,7 +23,9 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val homeViewModel: HomeViewModel = hiltViewModel()
 
-            val user by homeViewModel.user.collectAsState()
+//            val user by homeViewModel.user.collectAsState()
+
+            val userOxygen by homeViewModel.oxygen.collectAsState()
 
             val isLoading by homeViewModel.isLoading.collectAsState()
 
@@ -36,7 +38,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 }
             }else{
                 HomeScreen(
-                    oxygen = user?.oxygen ?: 0,
+                    oxygen = userOxygen,
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },

@@ -24,8 +24,9 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList()
             )
+            val userId = userRepositoryNetwork.setUser(user)
             userRepositoryLocal.setUserLocal(user)
-            userRepositoryNetwork.setUser(user)
+            userRepositoryLocal.updateUserId(userId)
         }
     }
 }

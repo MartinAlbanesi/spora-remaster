@@ -89,7 +89,6 @@ fun Login(
     val loginSuccess: Boolean by viewModel.loginSuccess.observeAsState(initial = false)
     val errorMessage: String? by viewModel.errorMessage.observeAsState()
 
-    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
     if (isLoading) {

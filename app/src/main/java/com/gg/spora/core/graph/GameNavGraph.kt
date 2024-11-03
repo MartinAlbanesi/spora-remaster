@@ -65,7 +65,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                 relationsCount = currentLevel!!.relationsCount,
                                 levelId = currentLevel!!.id,
                                 imageBackground = stage!!.levelPreviewImage,
-                                stageId = stage!!.id
+                                stageType = stage!!.stageType.name,
+                                oxygenRewards = currentLevel!!.rewardsOxygen
                             )
                         )
                 },
@@ -107,6 +108,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val lives by quizViewModel.lives.collectAsState()
 
+            val livesLost by quizViewModel.livesLost.collectAsState()
+
             val counterQuestion by quizViewModel.counterQuestion.collectAsState()
 
             val currentImage by quizViewModel.currentImageResId.collectAsState()
@@ -123,17 +126,14 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 questionSize = questions.size - 1,
                 isFinished = isFinished,
                 lives = lives,
+                livesLost = livesLost,
                 counterQuestion = counterQuestion,
                 showButtonContinue = isCorrect != null,
                 onNextQuestion = quizViewModel::nextQuestion,
                 onResetGame = quizViewModel::resetGame,
                 onBackForestStage = { navController.popBackStack() },
                 onNavigateNextLevel = {
-                    if(quizGameRoute.stageId == "2"){
-                        navController.navigate(NavigationRoutes.Challenge(stageId = quizGameRoute.stageId))
-                    }else{
-                        navController.popBackStack()
-                    }
+                    navController.popBackStack()
                 },
                 content = {
                     when (currentQuestion!!.typeGame) {
