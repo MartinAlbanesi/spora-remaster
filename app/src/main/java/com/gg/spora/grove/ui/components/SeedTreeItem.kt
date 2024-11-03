@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,8 +26,10 @@ import com.gg.spora.grove.domain.models.SeedTree
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    onForestTreeGenerated: (ForestTree, Int) -> Unit,
-    onCooldownTriggered: (Int) -> Unit
+    seedTreeCooldowns: Map<Int, Long>,
+    onSeedTreeButtonClicked: (Int, Long) -> Unit,
+    onPlantForestTree: (ForestTree, Int) -> Unit,
+//    onCooldownTriggered: (Int) -> Unit
 ) {
 //    // Estado para el cooldown
 //    var isCooldownActive by remember { mutableStateOf(!seedTree.isForestTreeAvailable()) }
@@ -44,6 +47,8 @@ fun SeedTreeItem(
 //        }
 //    }
 
+    val cooldownRemaining = seedTreeCooldowns[seedTree.id] ?: 0L
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -57,6 +62,13 @@ fun SeedTreeItem(
         Button(
             modifier = Modifier.width(100.dp),
             onClick = {
+                if (cooldownRemaining == 0L) {
+                    onSeedTreeButtonClicked(
+                        seedTree.id,
+                        seedTree.timeToGenerateForestTree.toMillis()
+                    )
+                    onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
+                }
 //                if (!isCooldownActive) { // Only generate if not on cooldown
 //                    val newForestTree = ForestTree(type = seedTree.type)
 //                    onForestTreeGenerated(newForestTree, seedTree.id)
@@ -70,14 +82,15 @@ fun SeedTreeItem(
 //                    remainingCooldown = seedTree.timeToGenerateForestTree.toMillis()
 //                }
             },
+            enabled = cooldownRemaining == 0L
 //            enabled = !isCooldownActive, // Deshabilita el botón si el cooldown está activo
         ) {
             // Muestra el texto correspondiente al cooldown
-//            if (isCooldownActive) {
-//                Text("${remainingCooldown / 1000}s")
-//            } else {
-//                Text("Claim")
-//            }
+            if (cooldownRemaining > 0) {
+                Text("${cooldownRemaining / 1000}s")
+            } else {
+                Text("Claim")
+            }
         }
     }
 }

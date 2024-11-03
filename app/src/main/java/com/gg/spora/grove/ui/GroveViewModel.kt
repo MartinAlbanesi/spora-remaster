@@ -53,6 +53,9 @@ class GroveViewModel @Inject constructor(
     private val _forestTrees = MutableStateFlow<List<ForestTree?>>(emptyList())
     val forestTrees: StateFlow<List<ForestTree?>> = _forestTrees.asStateFlow()
 
+    private val _seedTreeCooldowns = MutableStateFlow<Map<Int, Long>>(emptyMap())
+    val seedTreeCooldowns: StateFlow<Map<Int, Long>> = _seedTreeCooldowns.asStateFlow()
+
 //    private val _forestTree = MutableStateFlow<ForestTree?>(null)
 //    val forestTree = _forestTree.asStateFlow()
 
@@ -85,7 +88,7 @@ class GroveViewModel @Inject constructor(
                         type = TreeType.MANGROVE,
                         timeToGenerateForestTree = Duration.ofSeconds(5)
                     ),
-                    )
+                )
                 saveSeedTreesUseCase(initialSeedTrees)
                 // _seedTrees.value = initialSeedTrees
             }
@@ -98,7 +101,8 @@ class GroveViewModel @Inject constructor(
             delay(500) // Optional delay
 
             if (_forestTrees.value.isEmpty()) {
-                _forestTrees.value = MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
+                _forestTrees.value =
+                    MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
                 Log.i("GroveViewModel", "ForestTrees initialized: ${_forestTrees.value}")
             }
         }
@@ -130,13 +134,12 @@ class GroveViewModel @Inject constructor(
 //    }
 
     // Guarda los árboles semilleros en la variable de estado
-    fun setSeedTrees(seedTrees: List<SeedTree>){
+    fun setSeedTrees(seedTrees: List<SeedTree>) {
         _seedTrees.value = seedTrees
     }
 
-    fun plantSeedInForest(forestTree: ForestTree, seedTreeId: Int) {
+    fun plantForestTree(forestTree: ForestTree, seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i("GroveViewModel", "BEFORE PLANTING plantForestTreeInForest: ${_forestTrees.value.size}")
             var position = forestTree.position
             while (_forestTrees.value.getOrNull(position) != null) { // Check if position is occupied
                 position = (0..24).random() // Generate new random position
@@ -153,6 +156,26 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    fun onSeedTreeButtonClicked(seedTreeId: Int, cooldownDuration: Long) {
+        viewModelScope.launch {
+            _seedTreeCooldowns.value += mapOf(seedTreeId to cooldownDuration)
+            startCooldownUpdateLoop()
+        }
+    }
+
+    private fun startCooldownUpdateLoop() {
+        viewModelScope.launch {
+            while (true) {
+                delay(1000)
+                val updatedCooldowns = _seedTreeCooldowns.value.mapValues { (_, remainingTime) ->
+                    maxOf(0, remainingTime - 1000) // Use underscore for unused parameter
+                }
+                _seedTreeCooldowns.value = updatedCooldowns.filterValues { it > 0 }
+            }
+        }
+
+    }
+}
 //    // Actualización del estado del árbol
 //    fun updateForestTreeGrowthStage(updatedTree: ForestTree) {
 //        viewModelScope.launch(Dispatchers.IO) {
@@ -181,12 +204,3 @@ class GroveViewModel @Inject constructor(
 //        }
 //    }
 
-    /*
-    fun collectOxygen() {
-        viewModelScope.launch {
-            val oxygen = collectOxygenUseCase() // Delegate to use case
-            // Update UI or state with the collected oxygen
-        }
-    }
-     */
-}

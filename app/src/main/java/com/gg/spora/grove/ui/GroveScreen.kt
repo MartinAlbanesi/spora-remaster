@@ -35,7 +35,9 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     seedTrees: List<SeedTree>,
     forestTrees: List<ForestTree?>,
-    plantSeedInForest: (ForestTree, Int) -> Unit,
+    seedTreeCooldowns: Map<Int, Long>,
+    onSeedTreeButtonClicked: (Int, Long) -> Unit,
+    plantForestTree: (ForestTree, Int) -> Unit,
     updateTree: (ForestTree) -> Unit,
     onCooldownTriggered: (Int) -> Unit,
     popBackStack: () -> Unit
@@ -90,10 +92,12 @@ fun GroveScreen(
                 for (seedTree in seedTrees) {
                     SeedTreeItem(
                         seedTree = seedTree,
-                        onForestTreeGenerated = { forestTree, seedTreeId ->
-                            plantSeedInForest(forestTree, seedTreeId)
+                        seedTreeCooldowns = seedTreeCooldowns,
+                        onSeedTreeButtonClicked = onSeedTreeButtonClicked,
+                        onPlantForestTree = { forestTree, seedTreeId ->
+                            plantForestTree(forestTree, seedTreeId)
                         },
-                        onCooldownTriggered = onCooldownTriggered
+//                        onCooldownTriggered = onCooldownTriggered
                     )
                 }
             }

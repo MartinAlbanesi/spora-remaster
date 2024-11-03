@@ -36,12 +36,17 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val groveViewModel = hiltViewModel<GroveViewModel>()
             val seedTrees by groveViewModel.seedTrees.collectAsState()
             val forestTrees by groveViewModel.forestTrees.collectAsState()
+            val seedTreeCooldowns by groveViewModel.seedTreeCooldowns.collectAsState()
 
             GroveScreen(
                 seedTrees = seedTrees,
                 forestTrees = forestTrees,
-                plantSeedInForest = { forestTree, seedTreeId ->
-                    groveViewModel.plantSeedInForest(forestTree, seedTreeId)
+                seedTreeCooldowns = seedTreeCooldowns,
+                onSeedTreeButtonClicked = { seedTreeId, timeToGenerateForestTree ->
+                    groveViewModel.onSeedTreeButtonClicked(seedTreeId, timeToGenerateForestTree)
+                },
+                plantForestTree = { forestTree, seedTreeId ->
+                    groveViewModel.plantForestTree(forestTree, seedTreeId)
                 },
                 updateTree = { /*tree -> groveViewModel.updateForestTreeGrowthStage(tree)*/ },
                 onCooldownTriggered = { /*tree -> groveViewModel.onCooldownTriggered(tree)*/ },
