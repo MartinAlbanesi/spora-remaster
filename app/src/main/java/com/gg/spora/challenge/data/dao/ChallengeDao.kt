@@ -1,17 +1,19 @@
 package com.gg.spora.challenge.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ChallengeDao {
 
     //region ObjectDetailEntity
     @Query("SELECT * FROM object_detail")
-    suspend fun getAllObjectsDetail() : List<ObjectDetailEntity>
+    fun getAllObjectsDetail() : LiveData<List<ObjectDetailEntity>>
 
     @Insert
     suspend fun insertObjetDetail(objectDetailEntity: ObjectDetailEntity)
@@ -27,6 +29,10 @@ interface ChallengeDao {
     @Query("SELECT COUNT(*) FROM object_detail " +
             "WHERE name_object_detail = :nameObjectDetail")
     suspend fun validateIfExistsObjectDetail(nameObjectDetail : String) : Int
+
+    @Query("SELECT * FROM object_detail " +
+            "WHERE name_object_detail = :nameObjectDetail")
+    suspend fun getObjectDetailWithName(nameObjectDetail : String) : ObjectDetailEntity
     //endregion
 
     //region StepObjectDetailEntity
