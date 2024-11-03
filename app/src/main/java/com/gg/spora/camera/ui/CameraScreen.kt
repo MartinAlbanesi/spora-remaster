@@ -68,7 +68,6 @@ fun CameraScreen(
     nameObject: String,
     onNavigateToChallengeScreen: () -> Unit,
 ) {
-    val challengeViewModel = hiltViewModel<ChallengeViewModel>()
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.success))
     val isCapturing = remember { mutableStateOf(true) }
     val isScanComplete = remember { mutableStateOf(false) }
@@ -77,21 +76,15 @@ fun CameraScreen(
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-    var objectsChallenge by remember { mutableStateOf(listOf<ObjectDetail>()) }
     var confidence by remember { mutableFloatStateOf(0f) }
 
-    LaunchedEffect(challengeViewModel.objectsChallenge) {
-        challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
-            objectsChallenge = objects
-        }
-    }
     BackHandler {
         isCapturing.value = false
         onNavigateToChallengeScreen()
     }
 
     if (isScanComplete.value) {
-        ShowDialogScanSuccess(nameObject, onNavigateToChallengeScreen, challengeViewModel, lottie)
+        ShowDialogScanSuccess(onNavigateToChallengeScreen, lottie)
     }
 
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
@@ -181,11 +174,10 @@ fun setFunctionsOfCamera(
 
 @Composable
 fun ShowDialogScanSuccess(
-    nameObject: String,
     onNavigateToChallengeScreen: () -> Unit,
-    challengeViewModel: ChallengeViewModel,
     lottie: LottieCompositionResult
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -202,8 +194,6 @@ fun ShowDialogScanSuccess(
 
             LaunchedEffect(lottie.isComplete) {
                 delay(1600)
-                challengeViewModel.selectObject(nameObject)
-                challengeViewModel.setObjectInObjectsChallengeWithName(nameObject)
                 onNavigateToChallengeScreen()
             }
         }
@@ -235,45 +225,6 @@ fun prepareFunctionOfCamera(
         Log.e("CameraScreen", "Camera binding failed", exc)
     }
 }
-/*
-fun setFunctionsOfCamera(
-    isCapturing: MutableState<Boolean>,
-    imageCapture: ImageCapture,
-    context: Context,
-    nameObject: String,
-    isScanComplete: MutableState<Boolean>
-) {
-
-    val handler = Handler(Looper.getMainLooper())
-    val runnable = object : Runnable {
-        override fun run() {
-            if (isCapturing.value) {
-                imageCapture.takePicture(
-                    ContextCompat.getMainExecutor(context),
-                    object : ImageCapture.OnImageCapturedCallback() {
-                        override fun onCaptureSuccess(imageProxy: ImageProxy) {
-                            val bitmap = imageProxy.toBitmap()
-                            ClassifyTf(context).classifyImage(context, bitmap, nameObject) { result ->
-                                if (result) {
-                                    isCapturing.value = false
-                                    isScanComplete.value = true
-                                }
-                            }
-                            imageProxy.close()
-                        }
-                        override fun onError(exception: ImageCaptureException) {
-                            Log.e("CameraScreen", "Image capture failed", exception)
-                        }
-                    }
-                )
-                handler.postDelayed(this, 3000)
-            }
-        }
-    }
-    handler.post(runnable)
-}
-*/
-
 
 /**
  * Get the permission state
