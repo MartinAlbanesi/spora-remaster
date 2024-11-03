@@ -22,3 +22,12 @@ fun InfoCard.toInfoCardEntity() = InfoCardEntity(
     isUnlocked = isUnlocked,
     category = category,
 )
+
+fun InfoCardEntity.toInfoCard() = InfoCard(
+    id = id,
+    title = title,
+    info = info,
+    image = image,
+    isUnlocked = isUnlocked,
+    category = category
+)

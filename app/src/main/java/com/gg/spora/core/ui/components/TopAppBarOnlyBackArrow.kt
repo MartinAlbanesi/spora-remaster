@@ -21,12 +21,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@Preview
+@Composable
+fun PreviewTopAppBarOnlyBackArrow() {
+    TopAppBarOnlyBackArrow(title = "Forest")
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier, onBackClick: () -> Unit = {}) {
+fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier,title:String, onBackClick: () -> Unit = {}) {
 
     Box(
         modifier = modifier
@@ -35,7 +43,7 @@ fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier, onBackClick: () -> Uni
                     colors = listOf(Color.Black, Color.Transparent)
                 )
             )
-            .height(100.dp)
+            .height(80.dp)
     ) {
         CenterAlignedTopAppBar(
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -45,14 +53,15 @@ fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier, onBackClick: () -> Uni
             title = {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround,
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "",
-                        fontSize = 26.sp,
+                        text = title,
+                        fontSize = 32.sp,
                         color = MaterialTheme.colorScheme.background,
                         fontStyle = MaterialTheme.typography.titleLarge.fontStyle,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             },

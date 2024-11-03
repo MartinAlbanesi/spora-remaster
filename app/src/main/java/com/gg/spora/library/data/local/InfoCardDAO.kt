@@ -6,19 +6,19 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.gg.spora.library.data.local.entity.InfoCardEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface InfoCardDAO {
 
     @Query("SELECT * FROM info_cards")
-    suspend fun getAllInfoCards(): List<InfoCardEntity>
+    fun getAllInfoCards(): Flow<List<InfoCardEntity>>
 
     @Query("SELECT * FROM info_cards WHERE id = :id")
     suspend fun getInfoCardById(id: Int): InfoCardEntity?
 
-
     @Query("SELECT * FROM info_cards WHERE category = :category")
-    suspend fun getInfoCardsByCategory(category: String): List<InfoCardEntity>
+    fun getInfoCardsByCategory(category: String): Flow<List<InfoCardEntity>>
 
     @Insert
     suspend fun insertInfoCard(infoCardEntity: InfoCardEntity)

@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
 import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.ui.theme.SporaTheme
@@ -45,6 +46,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun LibraryCardBook(
     cardList: List<InfoCardEntity>,
+    category: StageType,
     unlockCard: () -> Unit,
     onBackClick: () -> Unit = {}
 ) {
@@ -72,33 +74,14 @@ fun LibraryCardBook(
 
             TopAppBarOnlyBackArrow(
                 modifier = Modifier,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                title = category.label
             )
 
             ListInfoCard(
                 cardList = cardList,
                 unlockCard = unlockCard
             )
-            /*if (cardList.isNotEmpty()) {
-                ListInfoCard(
-                    cardList = cardList
-                )
-            } else {
-
-                Text(
-                    text = "¡Esta vacio!",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier.padding(top = 5.dp)
-                )
-                Image(
-                    painter = painterResource(ChampyStates.SAD.image),
-                    contentDescription = "champy sad image",
-                    modifier = Modifier.padding(5.dp)
-                )
-            }*/
-
         }
 
     }
@@ -237,7 +220,8 @@ fun PreviewCard() {
     SporaTheme {
         LibraryCardBook(
             cardList = FakeRepositoryInfoCard().getAllInfoCards(),
-            unlockCard = {}
+            unlockCard = {},
+            category = StageType.FOREST
         )
     }
 
