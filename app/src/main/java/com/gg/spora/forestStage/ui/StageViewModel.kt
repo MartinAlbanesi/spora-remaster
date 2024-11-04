@@ -8,6 +8,7 @@ import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.utils.functions.getStageTypeByName
 import com.gg.spora.forestStage.domain.GetLevelsUseCase
 import com.gg.spora.forestStage.domain.IStageRepositoryLocal
+import com.gg.spora.forestStage.domain.model.GetStageLevelByStageTypeUseCase
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StageViewModel @Inject constructor(
-    private val stageRepository: IStageRepositoryLocal,
+    private val getStageLevelByStageTypeUseCase: GetStageLevelByStageTypeUseCase,
     private val getLevelsUseCase: GetLevelsUseCase,
     savedStateHandle: SavedStateHandle,
 ): ViewModel() {
@@ -50,7 +51,7 @@ class StageViewModel @Inject constructor(
     }
 
     private fun getStage(){
-//        _stage.value = stageRepository.getStage(getStageTypeByName(stageRoute.stageType))
+        _stage.value = getStageLevelByStageTypeUseCase(getStageTypeByName(stageRoute.stageType))
     }
 
     private fun getCurrentLevel() {
