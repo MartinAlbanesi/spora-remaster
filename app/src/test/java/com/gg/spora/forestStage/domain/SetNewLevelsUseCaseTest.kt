@@ -6,6 +6,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
@@ -23,7 +24,7 @@ class SetNewLevelsUseCaseTest {
     }
 
     @Test
-    fun `invoke - When Levels Count is Greater than MAX_STAGES_LEVEL - Then Not Save New Levels`() {
+    fun `invoke - When Levels Count is Greater than MAX_STAGES_LEVEL - Then Not Save New Levels`() = runTest {
 
         // Given
         val levels = FakeStageModels.fakeLevels
@@ -39,7 +40,7 @@ class SetNewLevelsUseCaseTest {
     }
 
     @Test
-    fun `invoke - When Levels Count is Zero - Then Save New Levels`() {
+    fun `invoke - When Levels Count is Zero - Then Save New Levels`() = runTest {
 
         // Given
         val levels = FakeStageModels.fakeLevels

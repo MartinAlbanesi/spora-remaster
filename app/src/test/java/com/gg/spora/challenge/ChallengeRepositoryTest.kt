@@ -1,6 +1,6 @@
 package com.gg.spora.challenge
 
-import com.gg.spora.challenge.data.dao.ChallengeDao
+import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.challenge.data.repositories.ChallengeRepository
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.model.ObjectDetail
