@@ -10,7 +10,7 @@ import java.nio.ByteOrder
 
 class ClassifyTf(val context: Context) {
 
-    private val OBJECTS = arrayOf("Botella de plástico", "Caja de cartón", "Nada", "Tapita de plástico", "Lata de Aluminio")
+    private val OBJECTS = arrayOf("Botella de plástico", "Caja de cartón", "Nada", "Tapita de plástico", "Lata de aluminio")
 
     /**
      * Classifies with TensorFlow the image when the camera takes a screenshot.
