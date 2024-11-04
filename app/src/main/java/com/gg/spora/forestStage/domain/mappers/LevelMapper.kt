@@ -56,3 +56,7 @@ fun LevelEntity.toLevel() : Level{
         relationsCount = relationsCount
     )
 }
+
+fun List<LevelEntity>.toLevelList() : List<Level>{
+    return map { it.toLevel() }
+}

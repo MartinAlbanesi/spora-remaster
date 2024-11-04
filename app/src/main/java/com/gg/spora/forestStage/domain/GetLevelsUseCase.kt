@@ -14,13 +14,13 @@ import javax.inject.Inject
  * y con cuantas estrellas lo ha completado.
  */
 class GetLevelsUseCase @Inject constructor(
-    private val stageRepositoryNetwork: IStageRepositoryNetwork,
+    private val stageLocalRepositoryLocal: IStageRepositoryLocal,
     private val getUserLocalUseCase: GetUserLocalUseCase
 ) {
     operator fun invoke(stageType: StageType) : Flow<List<Level>> {
 
         val userLevelsCompletedFlow = getUserLocalUseCase()
-        val levelsFlow = stageRepositoryNetwork.getLevelsByStageType(stageType)
+        val levelsFlow = stageLocalRepositoryLocal.getLevelsByStageType(stageType)
 
         val combineLevels = levelsFlow.combine(userLevelsCompletedFlow){ levels, user ->
 

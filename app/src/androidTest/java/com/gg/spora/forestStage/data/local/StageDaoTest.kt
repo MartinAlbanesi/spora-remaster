@@ -7,6 +7,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.forestStage.data.local.models.LevelEntity
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
@@ -43,22 +45,22 @@ class StageDaoTest{
 
         stageDao.insertLevels(expectedLevels)
 
-        val actualLevels = stageDao.getLevels("FOREST")
+        val actualLevels = stageDao.getLevelsByStageType("FOREST")
 
         assertEquals(expectedLevels, actualLevels)
     }
 
     @Test
-    fun getLevels_WhenDBIsEmpty_ReturnEmptyList() {
+    fun getLevels_ByStageType_WhenDBIsEmpty_ReturnEmptyList() = runTest {
 
-        val actualLevels = stageDao.getLevels("FOREST")
+        val actualLevels = stageDao.getLevelsByStageType("FOREST")
 
         assertEquals(emptyList<LevelEntity>(), actualLevels)
-        assertNotEquals(3, actualLevels.size)
+        assertNotEquals(3, actualLevels.first().size)
     }
 
     @Test
-    fun getLevelsCount_WhenDBIsEmpty_ReturnZero() {
+    fun getLevelsByStageTypeCount_WhenDBIsEmpty_ReturnZero() {
 
         val actualLevelsCount = stageDao.getLevelsCount()
 
@@ -66,7 +68,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun getLevelsCount_WhenDBIsNotEmpty_ReturnCount() {
+    fun getLevelsByStageTypeCount_WhenDBIsNotEmpty_ReturnCount() {
 
         val expectedLevels = FakeStageModels.fakeLevelsEntity
 

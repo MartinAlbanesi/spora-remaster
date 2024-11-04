@@ -23,7 +23,7 @@ class GetLevelsUseCaseTest {
     private lateinit var getLevelsUseCase: GetLevelsUseCase
 
     @RelaxedMockK
-    private lateinit var stageRepositoryNetwork: IStageRepositoryNetwork
+    private lateinit var stageRepositoryLocal: IStageRepositoryLocal
 
     @RelaxedMockK
     private lateinit var getUserLocalUseCase: GetUserLocalUseCase
@@ -32,7 +32,7 @@ class GetLevelsUseCaseTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        getLevelsUseCase = GetLevelsUseCase(stageRepositoryNetwork, getUserLocalUseCase)
+        getLevelsUseCase = GetLevelsUseCase(stageRepositoryLocal, getUserLocalUseCase)
     }
 
     @DisplayName("Cuando se invoca al caso de uso, " +
@@ -46,7 +46,7 @@ class GetLevelsUseCaseTest {
         val userLevelsCompleted = flowOf(FakeUserModels.fakeUsers.first())
 
         coEvery { getUserLocalUseCase() } returns userLevelsCompleted
-        coEvery { stageRepositoryNetwork.getLevelsByStageType(any()) } returns levelsFlow
+        coEvery { stageRepositoryLocal.getLevelsByStageType(any()) } returns levelsFlow
 
         // When
         val result = getLevelsUseCase(StageType.FOREST).first()

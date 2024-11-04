@@ -4,6 +4,7 @@ import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
+import kotlinx.coroutines.flow.Flow
 
 interface IStageRepositoryLocal {
 
@@ -16,8 +17,7 @@ interface IStageRepositoryLocal {
 
     fun getStageLevelCount(): Int
 
-    fun getStage(stageType: StageType): StageLevel
-//    fun getLevels(typeStage: TypeStage): List<Level>
+    fun getStageByStageType(stageType: StageType): StageLevel
 
-//    fun updateLevel(levelId: String, starStageLevel: StarState)
+    fun getLevelsByStageType(stageType: StageType): Flow<List<Level>>
 }

@@ -2,18 +2,20 @@ package com.gg.spora.forestStage.data.local
 
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.domain.IStageRepositoryLocal
+import com.gg.spora.forestStage.domain.mappers.toLevel
 import com.gg.spora.forestStage.domain.mappers.toLevelEntity
+import com.gg.spora.forestStage.domain.mappers.toLevelList
+import com.gg.spora.forestStage.domain.mappers.toStageLevel
 import com.gg.spora.forestStage.domain.mappers.toStageLevelEntity
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class StageRepositoryLocal @Inject constructor(
     private val stageDao: StageDao
-) : IStageRepositoryLocal{
-    override fun getStage(stageType: StageType): StageLevel {
-        TODO("Not yet implemented")
-    }
+) : IStageRepositoryLocal {
 
     override fun setNewLevels(levels: List<Level>) {
         stageDao.insertLevels(levels.map { it.toLevelEntity() })
@@ -29,5 +31,14 @@ class StageRepositoryLocal @Inject constructor(
 
     override fun getStageLevelCount(): Int {
         return stageDao.getStagesCount()
+    }
+
+    override fun getStageByStageType(stageType: StageType): StageLevel {
+        return stageDao.getStagesByStageType(stageType.name)!!.toStageLevel()
+    }
+
+    override fun getLevelsByStageType(stageType: StageType): Flow<List<Level>> {
+        return stageDao.getLevelsByStageType(stageType.name)
+            .map { it.toLevelList() }
     }
 }

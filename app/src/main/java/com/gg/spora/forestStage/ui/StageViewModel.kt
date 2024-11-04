@@ -50,7 +50,7 @@ class StageViewModel @Inject constructor(
     }
 
     private fun getStage(){
-        _stage.value = stageRepository.getStage(getStageTypeByName(stageRoute.stageType))
+//        _stage.value = stageRepository.getStage(getStageTypeByName(stageRoute.stageType))
     }
 
     private fun getCurrentLevel() {

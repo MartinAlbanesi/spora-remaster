@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.gg.spora.forestStage.data.local.models.LevelEntity
 import com.gg.spora.forestStage.data.local.models.StageLevelEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StageDao {
@@ -17,7 +18,7 @@ interface StageDao {
     fun getLevelsCount(): Int
 
     @Query("SELECT * FROM level_entity where stageType = :stageType")
-    fun getLevels(stageType: String): List<LevelEntity>
+    fun getLevelsByStageType(stageType: String): Flow<List<LevelEntity>>
 
     // --- STAGE ---
     @Insert

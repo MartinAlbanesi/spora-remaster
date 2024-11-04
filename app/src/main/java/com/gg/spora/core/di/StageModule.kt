@@ -42,10 +42,10 @@ class StageModule {
     @Singleton
     @Provides
     fun provideGetLevelsUseCase(
-        stageRepositoryNetwork: IStageRepositoryNetwork,
+        stageRepositoryLocal: IStageRepositoryLocal,
         getUserLocalUseCase: GetUserLocalUseCase
     ): GetLevelsUseCase {
-        return GetLevelsUseCase(stageRepositoryNetwork,getUserLocalUseCase)
+        return GetLevelsUseCase(stageRepositoryLocal,getUserLocalUseCase)
     }
 
 }
