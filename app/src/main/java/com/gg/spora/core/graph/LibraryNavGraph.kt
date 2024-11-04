@@ -1,5 +1,6 @@
 package com.gg.spora.core.graph
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,39 +33,45 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
         composable<NavigationRoutes.LibraryForestInfo> {
 
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            libraryViewModel.getInfoCardListByCategory(StageType.FOREST)
+
+            LaunchedEffect(true) {
+                libraryViewModel.getInfoCardListByCategory(StageType.FOREST)
+            }
+
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
                 cardList = cardList.map { it.toInfoCardEntity() },
                 category = StageType.FOREST,
-                unlockCard = {},
                 onBackClick = { navController.popBackStack() }
             )
+
         }
 
         composable<NavigationRoutes.LibraryRiverInfo> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            libraryViewModel.getInfoCardListByCategory(StageType.RIVER)
+            LaunchedEffect(true){
+                libraryViewModel.getInfoCardListByCategory(StageType.RIVER)
+            }
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
                 cardList = cardList.map { it.toInfoCardEntity() },
                 category = StageType.RIVER,
-                unlockCard = {},
                 onBackClick = { navController.popBackStack() }
             )
         }
 
         composable<NavigationRoutes.LibraryDesertInfo> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            libraryViewModel.getInfoCardListByCategory(StageType.DESERT)
+            LaunchedEffect(true) {
+                libraryViewModel.getInfoCardListByCategory(StageType.DESERT)
+            }
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
                 cardList = cardList.map { it.toInfoCardEntity() },
                 category = StageType.DESERT,
-                unlockCard = {},
                 onBackClick = { navController.popBackStack() }
             )
         }

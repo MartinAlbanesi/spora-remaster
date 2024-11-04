@@ -1,15 +1,12 @@
 package com.gg.spora.library.ui
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -36,18 +33,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 import com.gg.spora.core.utils.enums.StageType
-import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
 import com.gg.spora.library.data.local.entity.InfoCardEntity
+import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
+import com.gg.spora.library.domain.mappers.toInfoCard
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun LibraryCardBook(
     cardList: List<InfoCardEntity>,
     category: StageType,
-    unlockCard: () -> Unit,
     onBackClick: () -> Unit = {}
 ) {
 
@@ -78,9 +76,12 @@ fun LibraryCardBook(
                 title = category.label
             )
 
-            ListInfoCard(
-                cardList = cardList,
-                unlockCard = unlockCard
+            /*ListInfoCard(
+                cardList = cardList
+            )*/
+
+            LibraryCarouselInfoCard(
+                cardList = cardList.map { it.toInfoCard() }
             )
         }
 
@@ -88,7 +89,7 @@ fun LibraryCardBook(
 }
 
 @Composable
-fun ListInfoCard(cardList: List<InfoCardEntity>, unlockCard: () -> Unit) {
+fun ListInfoCard(cardList: List<InfoCardEntity>) {
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Adaptive(150.dp),
@@ -97,18 +98,84 @@ fun ListInfoCard(cardList: List<InfoCardEntity>, unlockCard: () -> Unit) {
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
     ) {
         items(cardList.size) {
-            InfoCard(cardList[it], cardList[it].isUnlocked, unlockCard)
+            InfoCard(cardList[it], cardList[it].isUnlocked)
         }
     }
 
 }
 
+@Composable
+fun MiniInfoCard(
+    card: InfoCardEntity,
+    isUnlocked: Boolean = false
+) {
+
+}
+
+@Composable
+fun GiantInfoCard(
+    card: InfoCardEntity,
+    isUnlocked: Boolean = false
+) {
+    if (isUnlocked) {
+
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            ),
+            modifier = Modifier
+                .width(250.dp)
+                .height(400.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 5.dp
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = card.title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 2,
+                    modifier = Modifier.padding(top = 5.dp)
+                )
+
+                Image(
+                    painter = painterResource(id = card.image),
+                    contentDescription = "library card image",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(160.dp)
+                        .padding(top = 2.dp, end = 5.dp, start = 5.dp)
+                        .clip(shape = RoundedCornerShape(5.dp))
+                )
+
+                Text(
+                    text = card.info,
+                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.bodyLarge,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(5.dp),
+                    textAlign = TextAlign.Center
+                )
+
+            }
+        }
+    }
+}
 
 @Composable
 fun InfoCard(
     card: InfoCardEntity,
     isUnlocked: Boolean = false,
-    unlockCard: () -> Unit = {}
 ) {
 
     if (isUnlocked) {
@@ -118,25 +185,15 @@ fun InfoCard(
             ),
             modifier = Modifier
                 .width(200.dp)
-                .height(300.dp)
-                .animateContentSize(
-                    animationSpec = tween(
-                        durationMillis = 300,
-                        easing = LinearOutSlowInEasing
-                    )
-                ),
+                .height(300.dp),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 5.dp
             )
         ) {
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(2.dp)
-                    .clickable{
-                        unlockCard()
-                    },
+                    .padding(2.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -218,11 +275,34 @@ fun InfoCard(
 fun PreviewCard() {
 
     SporaTheme {
-        LibraryCardBook(
-            cardList = FakeRepositoryInfoCard().getAllInfoCards(),
-            unlockCard = {},
-            category = StageType.FOREST
-        )
+
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.library_background_v3),
+                contentDescription = "library background image",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .matchParentSize()
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(5.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                GiantInfoCard(
+                    card = FakeRepositoryInfoCard().getAllInfoCards()[0],
+                    isUnlocked = true
+                )
+
+                Spacer(modifier = Modifier.height(120.dp))
+            }
+
+        }
     }
 
 }
+

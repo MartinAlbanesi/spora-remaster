@@ -19,6 +19,9 @@
       <SelectionState runConfigName="getInfoCardListByCategory_WhenSearchByCategory_ThenReturnInfoCardListByCategory()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="insertInfoCard_WhenUnlockInfoCard_ThenReturnUnlockedInfoCard()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
