@@ -73,7 +73,7 @@ fun StepObjectDetail(
                 ValidateImageStep(stepObjectDetail.numberStep)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = stepObjectDetail.nameObjectDetail!!,
+                    text = stepObjectDetail.titleStep!!,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -120,7 +120,8 @@ fun ValidateImageStep(numberStep : Int){
         2 -> R.drawable.step_two
         3 -> R.drawable.step_three
         4 -> R.drawable.step_four
-        else -> R.drawable.camera_icon
+        5 -> R.drawable.step_five
+        else -> R.drawable.step_not_found
     }
 
     Image(

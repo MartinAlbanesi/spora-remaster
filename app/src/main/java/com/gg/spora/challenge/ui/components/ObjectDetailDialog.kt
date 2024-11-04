@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,6 +37,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.gg.spora.R
 import com.gg.spora.challenge.domain.model.ObjectDetail
+import com.gg.spora.core.ui.components.SporaPrimaryButton
 
 @Composable
 fun ObjectDetailDialog(
@@ -48,7 +50,7 @@ fun ObjectDetailDialog(
     var currentStep by remember { mutableIntStateOf(1) }
 
     val continueButtonColor = if (buttonContinueEnabled)  {
-        Color(0xFFFFA500)
+        MaterialTheme.colorScheme.primary
     } else {
         Color.Gray
     }
@@ -97,7 +99,7 @@ fun ObjectDetailDialog(
                     )
                     {
                         Text(
-                            text = "Detalle",
+                            text = stringResource(R.string.description),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -114,7 +116,7 @@ fun ObjectDetailDialog(
                         modifier = modifier.width(120.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        ImageObjectDetail(objectDetail.nameObjectDetail)
+                        ImageObjectDetail(objectDetail.nameObjectDetail!!)
                     }
                 }
 
@@ -165,7 +167,7 @@ fun ObjectDetailDialog(
                         Text(
                             text = stringResource(R.string.text_continue),
                             style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 18.sp,
+                                fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                             )
                         )
