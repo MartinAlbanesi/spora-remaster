@@ -67,6 +67,7 @@ import kotlinx.coroutines.delay
 fun CameraScreen(
     nameObject: String,
     onNavigateToChallengeScreen: () -> Unit,
+    onNavigateToBack: () -> Unit
 ) {
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.success))
     val isCapturing = remember { mutableStateOf(true) }
@@ -80,7 +81,7 @@ fun CameraScreen(
 
     BackHandler {
         isCapturing.value = false
-        onNavigateToChallengeScreen()
+        onNavigateToBack()
     }
 
     if (isScanComplete.value) {
@@ -165,7 +166,7 @@ fun setFunctionsOfCamera(
                         }
                     }
                 )
-                handler.postDelayed(this, 3000)
+                handler.postDelayed(this, 1700)
             }
         }
     }
