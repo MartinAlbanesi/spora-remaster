@@ -1,8 +1,9 @@
-package com.gg.spora.forestStage.data.network.models
+package com.gg.spora.forestStage.data.network
 
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.core.utils.enums.CollectionsDataBase
 import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.forestStage.data.network.models.LevelNetwork
 import com.gg.spora.forestStage.domain.IStageRepositoryNetwork
 import com.gg.spora.forestStage.domain.mappers.toLevel
 import com.gg.spora.forestStage.domain.model.Level

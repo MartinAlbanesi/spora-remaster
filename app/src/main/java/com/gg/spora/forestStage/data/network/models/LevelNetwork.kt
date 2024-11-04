@@ -3,6 +3,7 @@ package com.gg.spora.forestStage.data.network.models
 data class LevelNetwork(
     val id: String? = null,
     val levelName : String? = null,
+    val levelNumber: Byte? = null,
     val stageType: String? = null,
     val requiredOxygen: Int? = null,
     val rewardsOxygen: List<Int>? = null,

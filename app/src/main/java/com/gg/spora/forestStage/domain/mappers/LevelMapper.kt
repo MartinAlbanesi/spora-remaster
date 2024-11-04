@@ -18,6 +18,7 @@ fun LevelNetwork.toLevel() : Level{
         typeQuestion = getTypeQuestionByName(typeQuestion ?: ""),
         quizCount = quizCount ?: 0,
         imageCount = imageCount ?: 0,
-        relationsCount = relationsCount ?: 0
+        relationsCount = relationsCount ?: 0,
+        levelNumber = levelNumber ?: 0
     )
 }

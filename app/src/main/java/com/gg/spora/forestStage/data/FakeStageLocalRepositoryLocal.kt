@@ -7,11 +7,11 @@ import com.gg.spora.forestStage.domain.IStageRepositoryLocal
 import com.gg.spora.forestStage.domain.model.StageLevel
 import javax.inject.Inject
 
-class FakeStageLocalRepositoryLocal @Inject constructor() : IStageRepositoryLocal {
+class FakeStageLocalRepositoryLocal @Inject constructor()  {
 
     private var fakeStage = FakeStageModels.fakeStage
 
-    override fun getStage(stageType: StageType): StageLevel {
+    fun getStage(stageType: StageType): StageLevel {
         val currentStage = fakeStage.find { it.stageType == stageType }
         return currentStage!!
     }

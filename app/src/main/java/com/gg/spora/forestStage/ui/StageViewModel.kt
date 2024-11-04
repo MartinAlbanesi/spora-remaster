@@ -54,7 +54,7 @@ class StageViewModel @Inject constructor(
     }
 
     private fun getCurrentLevel() {
-        _currentLevel.value = _stage.value?.levels?.first()
+        _currentLevel.value = _levels.value.first()
     }
 
     fun onLevelSelected(level: Level) {

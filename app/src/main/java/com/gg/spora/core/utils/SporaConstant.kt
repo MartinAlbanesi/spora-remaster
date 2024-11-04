@@ -6,6 +6,8 @@ object SporaConstant {
     const val MAX_LIVES = 5
     const val MAX_STAR = 3
 
+    const val MAX_LEVELS = 3
+
     /**
      key = rotate, value = offset
      */

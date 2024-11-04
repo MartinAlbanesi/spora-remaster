@@ -2,11 +2,16 @@ package com.gg.spora.forestStage.domain
 
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
 
 interface IStageRepositoryLocal {
 
     fun getStage(stageType: StageType): StageLevel
+
+    fun setNewLevels(levels: List<Level>)
+
+    fun getLevelsCount(): Int
 
 //    fun getLevels(typeStage: TypeStage): List<Level>
 

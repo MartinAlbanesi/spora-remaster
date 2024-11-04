@@ -122,7 +122,7 @@ private fun StageScreenPreview() {
             StageScreen(
                 oxygen = 0,
                 title = "Titi",
-                levels = FakeStageModels.fakeStage[1].levels,
+                levels = FakeStageModels.fakeLevels,
                 backgroundImage = R.drawable.expo_proyecto_stage_background,
                 pathLadder = SporaConstant.PATH_LADDER_EXPO,
                 onNavigateToChallenge = {},

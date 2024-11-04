@@ -7,6 +7,7 @@ import com.gg.spora.core.utils.enums.TypeQuestion
 data class Level(
     val id: String,
     val levelName : String,
+    val levelNumber: Byte,
     val stageType: StageType,
     val requiredOxygen: Int,
     val rewardsOxygen: List<Int>,
