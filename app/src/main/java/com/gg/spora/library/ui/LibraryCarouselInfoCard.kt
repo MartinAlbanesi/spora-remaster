@@ -3,6 +3,8 @@ package com.gg.spora.library.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,8 +20,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -56,21 +60,28 @@ fun calculateCurrentOffsetForPage(page: Int, currentPage: Int, currentPageOffset
 @Composable
 fun LibraryCarouselInfoCard(cardList: List<InfoCard>) {
     val pagerState = rememberPagerState(
-        initialPage = 1,
+        initialPage = 0,
         pageCount = { cardList.size }
     )
 
     val scope = rememberCoroutineScope()
 
     Column(
-        Modifier.fillMaxSize(),
+        Modifier
+            .fillMaxSize()
+            .padding(bottom = 60.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        InfoCardCountCollection(
+            pager = pagerState,
+            listSize = cardList.size
+        )
+
         HorizontalPager(
             state = pagerState,
-            contentPadding = PaddingValues(horizontal = 75.dp),
-            modifier = Modifier.height(350.dp)
+            contentPadding = PaddingValues(horizontal = 65.dp),
+            modifier = Modifier.height(400.dp)
         ) { page ->
             InfoCardCarousel(
                 card = cardList[page],
@@ -82,7 +93,7 @@ fun LibraryCarouselInfoCard(cardList: List<InfoCard>) {
 
         Row(
             Modifier
-                .height(50.dp)
+                .height(100.dp)
                 .fillMaxWidth()
                 .padding(top = 20.dp),
             horizontalArrangement = Arrangement.Center,
@@ -121,8 +132,8 @@ fun InfoCardCarousel(
         ),
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
-            .width(250.dp)
-            .height(400.dp)
+            .width(300.dp)
+            .height(450.dp)
             .graphicsLayer {
                 val pageOffset =
                     calculateCurrentOffsetForPage(
@@ -148,24 +159,32 @@ fun InfoCardCarousel(
             defaultElevation = 5.dp
         )
     ) {
+
+        Text(
+            text = if (isUnlocked) card.title else "Bloqueado",
+            fontSize = 26.sp,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            modifier = Modifier
+                .padding(top = 10.dp, end = 5.dp, start = 5.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(2.dp),
+                .padding(2.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = if (isUnlocked) card.title else "Bloqueado",
-                fontSize = 26.sp,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 2,
-                modifier = Modifier.padding(top = 5.dp)
-            )
+
 
             if (isUnlocked) {
+
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Image(
                     painter = painterResource(id = card.image),
@@ -183,9 +202,15 @@ fun InfoCardCarousel(
                     fontSize = 22.sp,
                     style = MaterialTheme.typography.bodyLarge,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(5.dp),
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .scrollable(
+                            state = rememberScrollState(),
+                            orientation = Orientation.Vertical
+                        ),
                     textAlign = TextAlign.Center
                 )
+
             } else {
 
                 Spacer(modifier = Modifier.height(50.dp))
@@ -203,6 +228,29 @@ fun InfoCardCarousel(
     }
 }
 
+
+@Composable
+fun InfoCardCountCollection(pager: PagerState, listSize: Int) {
+
+    Row(
+        Modifier
+            .height(50.dp)
+            .fillMaxWidth()
+            .padding(top = 5.dp, bottom = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+
+        Text(
+            text = "${pager.currentPage + 1} / $listSize",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = Color.White
+        )
+    }
+
+}
 @Preview
 @Composable
 fun PreviewCarousel() {

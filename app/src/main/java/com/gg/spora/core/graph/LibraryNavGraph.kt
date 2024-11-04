@@ -1,6 +1,5 @@
 package com.gg.spora.core.graph
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,9 +33,7 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
 
-            LaunchedEffect(true) {
-                libraryViewModel.getInfoCardListByCategory(StageType.FOREST)
-            }
+            libraryViewModel.getInfoCardListByCategory(StageType.FOREST)
 
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
@@ -50,9 +47,9 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
         composable<NavigationRoutes.LibraryRiverInfo> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            LaunchedEffect(true){
-                libraryViewModel.getInfoCardListByCategory(StageType.RIVER)
-            }
+
+            libraryViewModel.getInfoCardListByCategory(StageType.RIVER)
+
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
@@ -64,9 +61,9 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
         composable<NavigationRoutes.LibraryDesertInfo> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            LaunchedEffect(true) {
-                libraryViewModel.getInfoCardListByCategory(StageType.DESERT)
-            }
+
+            libraryViewModel.getInfoCardListByCategory(StageType.DESERT)
+
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
