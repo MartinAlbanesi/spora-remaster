@@ -1,5 +1,6 @@
 package com.gg.spora.home.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -31,10 +32,20 @@ import com.gg.spora.ui.theme.SporaTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToRanking: () -> Unit,
 ) {
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
+
+        HomeIcon(
+            image = R.drawable.ranking_icon,
+            text = "Ranking",
+            onClick = {
+                Log.d("HomeScreen", "Ranking icon clicked")
+                onNavigateToRanking()
+            }
+        )
         /*
         HomeIcon(
             image = R.drawable.profile_icon,
@@ -42,34 +53,30 @@ fun HomeScreen(
             onClick = {}
         ),
         HomeIcon(
-            image = R.drawable.ranking_icon,
-            text = "Ranking",
-            onClick = {}
-        ),
-        HomeIcon(
             image = R.drawable.missions_icon,
             text = "Misiones",
             onClick = {}
         )
+        ),
          */
     )
 
     // Icons in the right
     val rightIcons = listOf<HomeIcon>(
+
         /*
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
-            onClick = {}
-        ),
-        HomeIcon(
-            image = R.drawable.grove_icon,
-            text = "Arboleda",
-            onClick = {}
-        )
-         */
-    )
 
+
+    HomeIcon(
+        image = R.drawable.grove_icon,
+        text = "Arboleda",
+        onClick = {}
+    )
+     */
+    )
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
@@ -163,8 +170,10 @@ private fun MiniGameScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             HomeScreen(
-                modifier = Modifier.fillMaxSize()
-            ) {}
+                modifier = Modifier.fillMaxSize(),
+                onNavigateToForestStage = {},
+                onNavigateToRanking = {}
+            )
         }
     }
 }

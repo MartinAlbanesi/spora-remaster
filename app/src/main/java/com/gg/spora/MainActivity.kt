@@ -41,6 +41,7 @@ import com.gg.spora.minigameQuizImage.ui.QuizImageViewModel
 import com.gg.spora.minigameRelations.ui.MinigameRelationsScreen
 import com.gg.spora.quiz.ui.QuizScreen
 import com.gg.spora.quiz.ui.QuizViewModel
+import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
@@ -85,6 +86,9 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 onNavigateToForestStage = {
                                     navController.navigate(NavigationRoutes.ForestStage)
+                                },
+                                onNavigateToRanking = {
+                                    navController.navigate(NavigationRoutes.Ranking)
                                 }
                             )
                         }
@@ -314,10 +318,14 @@ class MainActivity : ComponentActivity() {
                             )
 
                         }
+                        composable<NavigationRoutes.Ranking> {
+                            Ranking(
+                                onBackClick = { navController.popBackStack() }
+                            )
+                        }
                     }
                 }
             }
         }
     }
-
 }

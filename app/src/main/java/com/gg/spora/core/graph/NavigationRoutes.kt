@@ -22,6 +22,9 @@ object NavigationRoutes {
     object Grove
 
     @Serializable
+    object Ranking
+
+    @Serializable
     object Challenge
 
     @Serializable
