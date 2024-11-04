@@ -51,17 +51,10 @@ object NavigationRoutes {
         val oxygenRewards: List<Int>,
     )
 
+    // Library Graph ------------------------------------------------------
 
     @Serializable
-    data class Challenge(
-        val stageId: String,
-    )
-
-    @Serializable
-    object Camera {
-        const val route = "camera/{nameObject}"
-        fun createRoute(nameObject: String) = "camera/$nameObject"
-    }
+    object LibraryGraph
 
     @Serializable
     object Library
@@ -74,5 +67,18 @@ object NavigationRoutes {
 
     @Serializable
     object LibraryRiverInfo
+
+    // Challenge Graph ------------------------------------------------------
+
+    @Serializable
+    data class Challenge(
+        val stageId: String,
+    )
+
+    @Serializable
+    object Camera {
+        const val route = "camera/{nameObject}"
+        fun createRoute(nameObject: String) = "camera/$nameObject"
+    }
 
 }

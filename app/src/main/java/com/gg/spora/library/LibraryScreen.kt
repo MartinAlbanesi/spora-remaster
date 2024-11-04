@@ -64,7 +64,9 @@ fun LibraryScreen(
             contentScale = ContentScale.FillBounds
         )
 
-        TopAppBarOnlyBackArrow {
+        TopAppBarOnlyBackArrow(
+            title = ""
+        ) {
             onBackButtonClick()
         }
 

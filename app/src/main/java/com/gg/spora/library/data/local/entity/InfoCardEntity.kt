@@ -1,9 +1,9 @@
-package com.gg.spora.library.domain
+package com.gg.spora.library.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.enums.StageType
 
 /**
  * Data class for InfoCards used in LibraryScreen.kt
@@ -18,11 +18,11 @@ import com.gg.spora.core.utils.enums.TypeStage
 
 
 @Entity(tableName = "info_cards")
-data class InfoCard(
+data class InfoCardEntity(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "info") val info: String,
     @ColumnInfo(name = "image") val image: Int,
     @ColumnInfo(name = "isUnlocked") var isUnlocked: Boolean = false,
-    @ColumnInfo(name = "category") val category: TypeStage
+    @ColumnInfo(name = "category") val category: StageType
 )

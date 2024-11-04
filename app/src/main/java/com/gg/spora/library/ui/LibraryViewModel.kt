@@ -1,78 +1,75 @@
 package com.gg.spora.library.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.core.utils.enums.TypeStage
+import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
-import com.gg.spora.library.data.repository.InfoCardRepository
-import com.gg.spora.library.domain.InfoCard
+import com.gg.spora.library.data.repository.InfoCardRepositoryLocal
+import com.gg.spora.library.domain.mappers.toInfoCard
+import com.gg.spora.library.domain.model.InfoCard
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-    private val infoCardRepository: InfoCardRepository,
-    private val infoCardFakeRepository: FakeRepositoryInfoCard
+    private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
+    private val infoCardFakeRepository: FakeRepositoryInfoCard,
 ) : ViewModel() {
 
-    private val _infoCardList = MutableStateFlow<List<InfoCard>>(emptyList())
-    val infoCardList: StateFlow<List<InfoCard>> = _infoCardList
+    private val _infoCardEntityList = MutableStateFlow<List<InfoCard>>(emptyList())
+    val infoCardEntityList: StateFlow<List<InfoCard>> = _infoCardEntityList
 
     init {
         viewModelScope.launch {
-            if (infoCardRepository.getAllInfoCards().isEmpty()) {
-                infoCardFakeRepository.getAllInfoCards().forEach {
-                    infoCardRepository.insertInfoCard(it)
-                }
+            loadInfoCardList()
+        }
+    }
+
+    private suspend fun loadInfoCardList() {
+        val currentInfoCards = infoCardRepositoryLocal.getAllInfoCards().first() // Get initial data
+        _infoCardEntityList.value = currentInfoCards
+
+        if (currentInfoCards.isEmpty()) {
+            infoCardFakeRepository.getAllInfoCards().forEach {
+                infoCardRepositoryLocal.insertInfoCard(it.toInfoCard())
             }
-            _infoCardList.value = infoCardRepository.getAllInfoCards()
+            Log.d("LibraryViewModel", "Fake data inserted")
+            // Refresh the list after inserting fake data
+            _infoCardEntityList.value = infoCardRepositoryLocal.getAllInfoCards().first()
         }
     }
 
-    private fun deleteAllInfoCards() {
-        _infoCardList.value = emptyList()
-    }
-
-    private fun getInfoCardListByCategory(category: TypeStage): List<InfoCard> {
-        return _infoCardList.value.filter { it.category == category }
-    }
-
-    fun getForestInfoCards(): List<InfoCard> {
-        return getInfoCardListByCategory(TypeStage.FOREST)
-    }
-
-    fun getRiverInfoCards(): List<InfoCard> {
-        return getInfoCardListByCategory(TypeStage.RIVER)
-    }
-
-    fun getDesertInfoCards(): List<InfoCard> {
-        return getInfoCardListByCategory(TypeStage.DESERT)
-    }
-
-    fun getAllInfoCards(): List<InfoCard> {
-        return _infoCardList.value
-    }
-
-    fun UnlockInfoCard(infoCard: InfoCard) {
+    fun getInfoCardListByCategory(category: StageType) {
         viewModelScope.launch {
-            infoCardRepository.updateInfoCard(infoCard)
+            infoCardRepositoryLocal.getInfoCardListByCategory(category.name).collect {
+                _infoCardEntityList.value = it
+            }
         }
     }
 
-    private fun SearchInfoCardById(id: Int): InfoCard? {
-        var auxInfoCard: InfoCard? = null
+    fun unlockInfoCard(infoCardEntity: InfoCardEntity) {
+        viewModelScope.launch {
+            infoCardEntity.isUnlocked = true
+            infoCardRepositoryLocal.updateInfoCard(infoCardEntity.toInfoCard())
+        }
+    }
+
+    private fun searchInfoCardById(id: Int): InfoCard? {
+        var auxInfoCardEntity: InfoCard? = null
 
         try {
             viewModelScope.launch {
-                auxInfoCard = infoCardRepository.getInfoCardById(id)
+                auxInfoCardEntity = infoCardRepositoryLocal.getInfoCardById(id)
             }
         } catch (e: Exception) {
             e.printStackTrace()
-
         }
-        return auxInfoCard
+        return auxInfoCardEntity
     }
 }

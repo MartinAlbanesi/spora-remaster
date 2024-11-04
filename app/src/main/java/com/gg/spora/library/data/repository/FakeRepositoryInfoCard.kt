@@ -1,76 +1,60 @@
 package com.gg.spora.library.data.repository
 
 import com.gg.spora.R
-import com.gg.spora.core.utils.enums.TypeStage
-import com.gg.spora.library.domain.InfoCard
+import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.library.data.local.entity.InfoCardEntity
 import javax.inject.Inject
 
 class FakeRepositoryInfoCard @Inject constructor() {
 
-    val fakeInfoCardModels = listOf<InfoCard>(
+    val fakeInfoCardEntityModels = listOf<InfoCardEntity>(
 
-        InfoCard(
+        InfoCardEntity(
             title = "Deforestación",
             info = "Tala indiscriminada de arboles.",
             image = R.drawable.deforestation,
-            category = TypeStage.FOREST,
+            category = StageType.FOREST,
             isUnlocked = true
         ),
-        InfoCard(
+        InfoCardEntity(
+            title = "Composta",
+            info = "La composta es cuando juntamos restos de comida, hojas y plantas secas para que se descompongan y se conviertan en tierra rica, que ayuda a las plantas a crecer fuertes. Es una forma de reciclar los desechos naturales.",
+            image = R.drawable.composting,
+            category = StageType.FOREST,
+            isUnlocked = false
+        ),
+        InfoCardEntity(
             title = "Smog",
             info = "Humo contaminado, usualmente creado a partir de los desechos industriales.",
             image = R.drawable.smog,
-            category = TypeStage.FOREST
-        ),
-        InfoCard(
-            title = "Panel solar",
-            info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.solar_panel,
-            category = TypeStage.DESERT,
+            category = StageType.DESERT,
             isUnlocked = true
         ),
-        InfoCard(
+        InfoCardEntity(
             title = "Panel solar",
             info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
             image = R.drawable.solar_panel,
-            category = TypeStage.DESERT,
+            category = StageType.DESERT,
+            isUnlocked = false
+        ),
+        InfoCardEntity(
+            title = "Derrame de aceite",
+            info = "Un derrame de aceite en el océano crea una capa en el agua que afecta a los animales y plantas, porque impide que respiren bien y les hace daño. Limpiarlo es difícil, por eso es importante evitar estos accidentes.",
+            image = R.drawable.oil_spill,
+            category = StageType.RIVER,
             isUnlocked = true
         ),
-        InfoCard(
-            title = "Panel solar",
-            info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.solar_panel,
-            category = TypeStage.DESERT,
-            isUnlocked = true
+        InfoCardEntity(
+            title = "Derrame de aceite",
+            info = "Un derrame de aceite en el océano crea una capa en el agua que afecta a los animales y plantas, porque impide que respiren bien y les hace daño. Limpiarlo es difícil, por eso es importante evitar estos accidentes.",
+            image = R.drawable.oil_spill,
+            category = StageType.RIVER,
+            isUnlocked = false
         ),
-        InfoCard(
-            title = "Panel solar",
-            info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.solar_panel,
-            category = TypeStage.DESERT
-        ),
-        InfoCard(
-            title = "Panel solar",
-            info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.solar_panel,
-            category = TypeStage.DESERT
-        ),
-        InfoCard(
-            title = "Panel solar",
-            info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.solar_panel,
-            category = TypeStage.DESERT,
-            isUnlocked = true
-        ),
-        InfoCard(
-            title = "Panel solar",
-            info = "Utilizado en la energia renovable, aplica la energia del sol y la almacena para usos posteriores.",
-            image = R.drawable.solar_panel,
-            category = TypeStage.RIVER
-        ),
+
         )
 
-    fun getAllInfoCards(): List<InfoCard> {
-        return fakeInfoCardModels
+    fun getAllInfoCards(): List<InfoCardEntity> {
+        return fakeInfoCardEntityModels
     }
 }

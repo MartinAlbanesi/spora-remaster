@@ -1,21 +1,19 @@
 package com.gg.spora.library.data
 
-import android.content.Context
-import androidx.room.Room
-import com.gg.spora.library.data.database.InfoCardDatabase
-import com.gg.spora.library.data.repository.InfoCardRepository
+import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.library.data.local.InfoCardDAO
+import com.gg.spora.library.data.repository.IInfoCardRepositoryLocal
+import com.gg.spora.library.data.repository.InfoCardRepositoryLocal
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object LibraryModule {
 
-    @Provides
+    /*@Provides
     @Singleton
     fun provideInfoCardDatabase(@ApplicationContext context: Context): InfoCardDatabase {
         return Room.databaseBuilder(
@@ -23,16 +21,13 @@ object LibraryModule {
             InfoCardDatabase::class.java,
             "info_card_database"
         ).build()
-    }
+    }*/
 
     @Provides
-    fun provideInfoCardDao(database: InfoCardDatabase): InfoCardDAO {
-        return database.infoCardDao()
-    }
-
-    @Provides
-    fun provideInfoCardRepository(infoCardDao: InfoCardDAO): InfoCardRepository {
-        return InfoCardRepository(infoCardDao)
+    fun provideInfoCardRepositoryLocal(
+        infoCardDao: InfoCardDAO
+    ): IInfoCardRepositoryLocal {
+        return InfoCardRepositoryLocal(infoCardDao)
     }
 
 }
