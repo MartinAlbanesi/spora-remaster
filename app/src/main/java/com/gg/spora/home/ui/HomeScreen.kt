@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -86,6 +87,7 @@ fun HomeScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .blur(radius = 10.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.home_background),
@@ -95,7 +97,6 @@ fun HomeScreen(
                     .matchParentSize()
             )
         }
-
         // Screen Content
         Box(
             modifier = Modifier
