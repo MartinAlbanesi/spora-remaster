@@ -23,7 +23,9 @@ object ChallengeModule {
             context,
             SporaDatabase::class.java,
             "spora_database"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

@@ -12,10 +12,9 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
 
     //region ObjectDetailEntity
 
-    fun getAllObjectsDetail(): LiveData<List<ObjectDetail>> {
+    suspend fun getAllObjectsDetail(): List<ObjectDetail> {
         val objectDetailEntities = challengeDao.getAllObjectsDetail()
-        return objectDetailEntities.map { listObjects -> listObjects.map { it.toObjectDetail() } }
-        //return ObjectDetail.objectsDetailEntityToModels(objectDetailEntities)
+        return objectDetailEntities.map { it.toObjectDetail() }
     }
 
     suspend fun insertObjectDetail(objectDetail: ObjectDetail) {
@@ -42,6 +41,13 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
     suspend fun getAllStepsObjectDetail(): List<StepObjectDetail> {
         val stepObjectDetailEntities = challengeDao.getAllStepsObjectDetail()
         return StepObjectDetail.objectsDetailEntityToModels(stepObjectDetailEntities)
+    }
+
+    suspend fun insertStepsObjectDetail(listStepObjectDetail: List<StepObjectDetail>){
+        for(step in listStepObjectDetail){
+            if(challengeDao.validateIfExistsStepsObjectDetail(step.nameObjectDetail!!, step.numberStep) == 0)
+                challengeDao.insertStepObjetDetail(step.toStepObjectDetailEntity())
+        }
     }
 
     suspend fun insertStepObjectDetail(stepObjectDetail: StepObjectDetail) {
