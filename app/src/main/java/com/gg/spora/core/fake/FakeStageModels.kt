@@ -77,9 +77,9 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 10,
-            imageCount = 0,
-            relationsCount = 0
+            quizCount = 5,
+            imageCount = 3,
+            relationsCount = 2
 
         ),
         Level(
@@ -92,9 +92,9 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 0,
-            imageCount = 10,
-            relationsCount = 0
+            quizCount = 3,
+            imageCount = 5,
+            relationsCount = 2
         ),
         Level(
             id = "3",
@@ -106,9 +106,23 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 0,
-            imageCount = 0,
-            relationsCount = 10
+            quizCount = 2,
+            imageCount = 3,
+            relationsCount = 5
+        ),
+        Level(
+            id = "4",
+            levelNumber = 1,
+            levelName = "Expo",
+            stageType = StageType.EXPO,
+            requiredOxygen = 0,
+            rewardsOxygen = listOf(10, 20, 30),
+            starState = StarState.ZERO,
+            isComplete = true,
+            typeQuestion = TypeQuestion.RECYCLE,
+            quizCount = 2,
+            imageCount = 2,
+            relationsCount = 2
         ),
     )
 
@@ -137,14 +151,14 @@ object FakeStageModels {
             stageBackgroundImage = R.drawable.stage1_area_background,
             pathLadder = SporaConstant.PATH_LADDER
         ),
-//        StageLevel(
-//            id = "2",
-//            stageType = StageType.EXPO,
-////            levels = fakeExpoLevels,
-////            challenge = fakeChallenge,
-//            levelPreviewImage = R.drawable.expo_background,
-//            stageBackgroundImage = R.drawable.expo_proyecto_stage_background,
-//            pathLadder = SporaConstant.PATH_LADDER_EXPO
-//        ),
+        StageLevel(
+            id = "2",
+            stageType = StageType.EXPO,
+//            levels = fakeExpoLevels,
+//            challenge = fakeChallenge,
+            levelPreviewImage = R.drawable.expo_background,
+            stageBackgroundImage = R.drawable.expo_proyecto_stage_background,
+            pathLadder = SporaConstant.PATH_LADDER_EXPO
+        ),
     )
 }
