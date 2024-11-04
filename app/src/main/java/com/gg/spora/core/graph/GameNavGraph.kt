@@ -97,8 +97,6 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 challengeViewModel.selectObject(challengeRoute.nameObject)
                 challengeViewModel.setObjectInObjectsChallengeWithName(challengeRoute.nameObject)
             }
-            val objectChallenge by challengeViewModel.selectedObject.observeAsState("")
-
             if (!isLoading) {
                 MiniGameScreen(
                     modifier = Modifier.fillMaxSize(),
@@ -134,7 +132,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                 }
                             },
                             challengeObjects = objectsChallenge,
-                            continueDialogObjectDetail = { challengeViewModel.setEmptySelectedObject() },
+                            continueDialogObjectDetail = { challengeRoute.nameObject = "" },
                             selectedObject = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)
                         )
                     }
@@ -150,6 +148,9 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 nameObject = nameObject,
                 onNavigateToChallengeScreen = {
                     navController.navigate(NavigationRoutes.Challenge(stageId = cameraRoute.stageId, nameObject = nameObject))
+                },
+                onNavigateToBack = {
+                    navController.navigate(NavigationRoutes.Challenge(stageId = cameraRoute.stageId, nameObject = ""))
                 }
             )
         }
