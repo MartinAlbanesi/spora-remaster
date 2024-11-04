@@ -32,6 +32,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToForestStage: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
+    onNavigateToProfile: () -> Unit,
 ) {
 
     // Icons in the left
@@ -39,7 +40,7 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.profile_icon,
             text = "Perfil",
-            onClick = {}
+            onClick = onNavigateToProfile
         ),
         HomeIcon(
             image = R.drawable.ranking_icon,
@@ -110,7 +111,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = onClick),
                     )
                 }
             }
@@ -174,7 +175,8 @@ private fun MiniGameScreenPreview() {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
                 onNavigateToForestStage = {},
-                onNavigateToExpoStage = {}
+                onNavigateToExpoStage = {},
+                onNavigateToProfile = {}
             )
         }
     }

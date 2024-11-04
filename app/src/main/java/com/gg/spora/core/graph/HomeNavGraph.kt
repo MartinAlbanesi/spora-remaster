@@ -5,12 +5,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.gg.spora.home.ui.HomeScreen
+import com.gg.spora.profile.ui.ProfileScreen
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
     navigation<NavigationRoutes.HomeGraph>(startDestination = NavigationRoutes.Home) {
         composable<NavigationRoutes.Home> {
             HomeScreen(
+                onNavigateToProfile = {
+                    navController.navigate(NavigationRoutes.ProfileScreen)
+                },
                 onNavigateToForestStage = {
                     navController.navigate(NavigationRoutes.Stage("1"))
                 },
@@ -22,5 +26,13 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         composable<NavigationRoutes.Grove> {
 
         }
+        composable<NavigationRoutes.ProfileScreen> {
+            ProfileScreen(
+                onBackClick = { navController.popBackStack() },
+                onSettingsClick = { /* TODO */ }
+            )
+
+
     }
+}
 }

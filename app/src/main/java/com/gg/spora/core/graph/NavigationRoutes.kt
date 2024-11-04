@@ -29,6 +29,9 @@ object NavigationRoutes {
     @Serializable
     object Grove
 
+    @Serializable
+    object ProfileScreen
+
     // Game Graph ------------------------------------------------------
 
     @Serializable

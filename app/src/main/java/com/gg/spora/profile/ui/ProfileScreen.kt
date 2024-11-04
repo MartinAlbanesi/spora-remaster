@@ -1,18 +1,14 @@
+// ProfileScreen.kt
 package com.gg.spora.profile.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
@@ -29,8 +26,16 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun ProfileScreen(
     onBackClick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit,
+    viewModel: ProfileViewModel = viewModel()
 ) {
+    val currentIndex by viewModel.currentIndex.collectAsState()
+    val images = listOf(
+        R.drawable.logro_semilla,
+        R.drawable.plastic_bottle,
+        R.drawable.spora_logo_without_slogan
+    )
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -50,7 +55,7 @@ fun ProfileScreen(
                 showIcon = false,
                 showSettingsIcon = true
             )
-            // Top section for additional information
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,7 +69,7 @@ fun ProfileScreen(
                     Image(
                         painter = painterResource(id = R.drawable.user_image),
                         contentDescription = "User Image",
-                        modifier = Modifier.size(200.dp) 
+                        modifier = Modifier.size(200.dp)
                     )
                     Box(
                         modifier = Modifier
@@ -100,7 +105,7 @@ fun ProfileScreen(
                     }
                 }
             }
-            // Bottom section for achievements sign
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -126,7 +131,37 @@ fun ProfileScreen(
                             .align(Alignment.TopCenter)
                             .padding(top = 38.dp)
                     )
-                    // Add your text here
+                    Row(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(top = 80.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.left_arrow),
+                            contentDescription = "Left Arrow",
+                            modifier = Modifier
+                                .size(88.dp)
+                                .clickable {
+                                    viewModel.onLeftArrowClick()
+                                }
+                        )
+                        Image(
+                            painter = painterResource(id = images[currentIndex]),
+                            contentDescription = "Achievement Image",
+                            modifier = Modifier.size(180.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.right_arrow),
+                            contentDescription = "Right Arrow",
+                            modifier = Modifier
+                                .size(88.dp)
+                                .clickable {
+                                    viewModel.onRightArrowClick()
+                                }
+                        )
+                    }
                 }
             }
         }
