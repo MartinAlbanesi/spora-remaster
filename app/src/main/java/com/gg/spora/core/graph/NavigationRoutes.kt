@@ -54,7 +54,7 @@ object NavigationRoutes {
     @Serializable
     data class Challenge(
         val stageId: String,
-        val nameObject: String
+        var nameObject: String
     )
 
     @Serializable
