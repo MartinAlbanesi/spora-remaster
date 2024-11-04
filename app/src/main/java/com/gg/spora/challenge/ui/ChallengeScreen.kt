@@ -59,20 +59,13 @@ fun ChallengeScreen(
     if (!selectedObject.nameObjectDetail.isNullOrEmpty()) {
         showDialog = true
     }
-    /*LaunchedEffect(challengeViewModel.selectedObject) {
-        challengeViewModel.selectedObject.observe(lifecycleOwner) { selecteObject ->
-            if (!selecteObject.isNullOrEmpty()) {
-                objectChallengeName = selecteObject
-                showDialog = true
-            }
-        }
-    }*/
 
     if (showDialog) {
         ObjectDetailDialog(
             onContinueButton = {
                 showDialog = false
                 continueDialogObjectDetail()
+                selectedObject.nameObjectDetail = ""
             },
             objectDetail = selectedObject
         )
