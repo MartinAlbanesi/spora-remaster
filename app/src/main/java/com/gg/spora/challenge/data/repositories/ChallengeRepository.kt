@@ -1,8 +1,6 @@
 package com.gg.spora.challenge.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
-import com.gg.spora.challenge.data.dao.ChallengeDao
+import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.challenge.domain.entities.toObjectDetail
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.domain.model.StepObjectDetail

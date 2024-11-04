@@ -15,16 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import androidx.navigation.navArgument
 import androidx.navigation.toRoute
 import com.gg.spora.R
 import com.gg.spora.camera.ui.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
-import com.gg.spora.challenge.ui.components.ObjectDetailDialog
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
@@ -86,8 +83,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                     levels = levels,
                     backgroundImage = stage!!.stageBackgroundImage,
                     pathLadder = stage!!.pathLadder,
-                    onNavigateToChallenge = { title ->
-                        navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id))
+                    onNavigateToChallenge = {
+                        navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id, nameObject = ""))
                     },
                     popBackStack = {
                         navController.popBackStack()
