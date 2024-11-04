@@ -2,7 +2,6 @@ package com.gg.spora.forestStage.data.local.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gg.spora.core.utils.enums.TypeQuestion
 
 @Entity(tableName = "level_entity")
 data class LevelEntity(

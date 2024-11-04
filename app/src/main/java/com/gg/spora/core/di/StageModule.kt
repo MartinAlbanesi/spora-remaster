@@ -3,6 +3,7 @@ package com.gg.spora.core.di
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.forestStage.domain.IStageRepositoryNetwork
 import com.gg.spora.forestStage.data.FakeStageLocalRepositoryLocal
+import com.gg.spora.forestStage.data.local.StageDao
 import com.gg.spora.forestStage.data.local.StageRepositoryLocal
 import com.gg.spora.forestStage.data.network.StageRepositoryNetwork
 import com.gg.spora.forestStage.domain.GetLevelsUseCase
@@ -20,8 +21,8 @@ class StageModule {
 
     @Provides
     @Singleton
-    fun provideStageRepository() : IStageRepositoryLocal {
-        return StageRepositoryLocal()
+    fun provideStageRepository(stageDao: StageDao) : IStageRepositoryLocal {
+        return StageRepositoryLocal(stageDao)
     }
 
 //    @Singleton

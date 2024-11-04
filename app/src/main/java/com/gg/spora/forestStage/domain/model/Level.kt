@@ -9,14 +9,14 @@ data class Level(
     val levelName : String,
     val levelNumber: Byte,
     val stageType: StageType,
-    val requiredOxygen: Int,
-    val rewardsOxygen: List<Int>,
+    val requiredOxygen: Short,
+    val rewardsOxygen: List<Byte>,
     val starState: StarState = StarState.ZERO,
     val isComplete: Boolean,
     val typeQuestion: TypeQuestion,
-    val quizCount: Int,
-    val imageCount: Int,
-    val relationsCount: Int
+    val quizCount: Byte,
+    val imageCount: Byte,
+    val relationsCount: Byte
 )
 
 fun Level.getLevelWithStage(): String {

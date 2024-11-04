@@ -2,22 +2,23 @@ package com.gg.spora.forestStage.data.local
 
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.domain.IStageRepositoryLocal
+import com.gg.spora.forestStage.domain.mappers.toLevelEntity
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
 import javax.inject.Inject
 
 class StageRepositoryLocal @Inject constructor(
-
+    private val stageDao: StageDao
 ) : IStageRepositoryLocal{
     override fun getStage(stageType: StageType): StageLevel {
         TODO("Not yet implemented")
     }
 
     override fun setNewLevels(levels: List<Level>) {
-        TODO("Not yet implemented")
+        stageDao.insertLevels(levels.map { it.toLevelEntity() })
     }
 
     override fun getLevelsCount(): Int {
-        TODO("Not yet implemented")
+        return stageDao.getLevelsCount()
     }
 }

@@ -60,13 +60,13 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                         .navigate(
                             NavigationRoutes.QuizGame(
                                 title = currentLevel!!.getLevelWithStage(),
-                                quizCount = currentLevel!!.quizCount,
-                                imageCount = currentLevel!!.imageCount,
-                                relationsCount = currentLevel!!.relationsCount,
+                                quizCount = currentLevel!!.quizCount.toInt(),
+                                imageCount = currentLevel!!.imageCount.toInt(),
+                                relationsCount = currentLevel!!.relationsCount.toInt(),
                                 levelId = currentLevel!!.id,
                                 imageBackground = stage!!.levelPreviewImage,
                                 stageType = stage!!.stageType.name,
-                                oxygenRewards = currentLevel!!.rewardsOxygen
+                                oxygenRewards = currentLevel!!.rewardsOxygen.map { it.toInt() },
                             )
                         )
                 },

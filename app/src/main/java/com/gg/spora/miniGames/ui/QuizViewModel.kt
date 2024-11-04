@@ -74,19 +74,19 @@ class QuizViewModel @Inject constructor(
     private fun getRandomQuestions() {
 
         val quizGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.quizCount,
+            count = quizRoute.quizCount.toInt(),
             typeQuestion = listOf(TypeQuestion.MARTIN),
             typeGame = TypeGame.QUIZ
         )
 
         val imageGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.imageCount,
+            count = quizRoute.imageCount.toInt(),
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
         )
 
         val relationsGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.relationsCount,
+            count = quizRoute.relationsCount.toInt(),
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         )
@@ -197,7 +197,10 @@ class QuizViewModel @Inject constructor(
 
             val currentStarState = getRewardsStarState(livesLost = _livesLost.value)
             val currentLevelOxygenRewards = quizRoute.oxygenRewards
-            val currentOxygenReward = getTotalOxygenFromStars(currentStarState, currentLevelOxygenRewards)
+            val currentOxygenReward = getTotalOxygenFromStars(
+                currentStarState,
+                currentLevelOxygenRewards.map { it.toInt() }
+            )
             updateUserLevelsAndOxygenUseCase(
                 levelId = quizRoute.levelId,
                 starState = currentStarState,

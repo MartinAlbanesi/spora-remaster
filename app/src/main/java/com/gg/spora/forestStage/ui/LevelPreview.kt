@@ -43,7 +43,7 @@ fun LevelPreview(
         title = "${level.levelName} - ${level.stageType.label}",
         isVisible = isVisible,
         starsState = level.starState,
-        rewards = level.rewardsOxygen,
+        rewards = level.rewardsOxygen.map { it.toInt() },
         textPrimaryButton = "Jugar",
         textSecondaryButton = "Cancelar",
         onClickPrimaryButton = onClickPrimaryButton,
