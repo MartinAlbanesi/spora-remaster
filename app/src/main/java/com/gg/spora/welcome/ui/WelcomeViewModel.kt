@@ -1,27 +1,30 @@
 package com.gg.spora.welcome.ui
 
-import android.util.Log
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.forestStage.domain.SetNewLevelsUseCase
+import com.gg.spora.forestStage.domain.SetNewStagesLevelUseCase
 import com.gg.spora.user.domain.SetNewUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
 //    private val dataStore: DataStore<Preferences>
-    private val setNewUserUseCase: SetNewUserUseCase
+    private val setNewUserUseCase: SetNewUserUseCase,
+    private val setNewStagesLevelUseCase: SetNewStagesLevelUseCase,
+    private val setNewLevelsUseCase: SetNewLevelsUseCase
 ) : ViewModel() {
 
     private val _guestName = MutableStateFlow("")
+
+    init {
+        setNewDataInApp()
+    }
 
     fun setGuestName(name: String) {
         viewModelScope.launch {
@@ -32,6 +35,15 @@ class WelcomeViewModel @Inject constructor(
     fun setNewUser() {
         viewModelScope.launch {
             setNewUserUseCase(null, _guestName.value)
+        }
+    }
+
+    private fun setNewDataInApp() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val level = FakeStageModels.fakeLevels
+            val stageLevel = FakeStageModels.fakeStage
+            setNewStagesLevelUseCase(stageLevel)
+            setNewLevelsUseCase(level)
         }
     }
 

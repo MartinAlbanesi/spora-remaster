@@ -17,23 +17,23 @@ class StageRepositoryLocal @Inject constructor(
     private val stageDao: StageDao
 ) : IStageRepositoryLocal {
 
-    override fun setNewLevels(levels: List<Level>) {
+    override suspend fun setNewLevels(levels: List<Level>) {
         stageDao.insertLevels(levels.map { it.toLevelEntity() })
     }
 
-    override fun getLevelsCount(): Int {
+    override suspend fun getLevelsCount(): Int {
         return stageDao.getLevelsCount()
     }
 
-    override fun setNewStagesLevel(stageLevels: List<StageLevel>) {
+    override suspend fun setNewStagesLevel(stageLevels: List<StageLevel>) {
         stageDao.insertStages(stageLevels.map { it.toStageLevelEntity() })
     }
 
-    override fun getStageLevelCount(): Int {
+    override suspend fun getStageLevelCount(): Int {
         return stageDao.getStagesCount()
     }
 
-    override fun getStageByStageType(stageType: StageType): StageLevel {
+    override suspend fun getStageByStageType(stageType: StageType): StageLevel {
         return stageDao.getStagesByStageType(stageType.name)!!.toStageLevel()
     }
 

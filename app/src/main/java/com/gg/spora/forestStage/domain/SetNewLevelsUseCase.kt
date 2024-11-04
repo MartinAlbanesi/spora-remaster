@@ -7,7 +7,7 @@ import javax.inject.Inject
 class SetNewLevelsUseCase @Inject constructor(
     private val stageRepositoryLocal: IStageRepositoryLocal
 ) {
-    operator fun invoke(levels: List<Level>) {
+    suspend operator fun invoke(levels: List<Level>) {
 
         val levelsCount = stageRepositoryLocal.getLevelsCount()
 

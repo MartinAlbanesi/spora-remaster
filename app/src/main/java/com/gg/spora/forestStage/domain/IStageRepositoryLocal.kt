@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.Flow
 interface IStageRepositoryLocal {
 
 
-    fun setNewLevels(levels: List<Level>)
+    suspend fun setNewLevels(levels: List<Level>)
 
-    fun getLevelsCount(): Int
+    suspend fun getLevelsCount(): Int
 
-    fun setNewStagesLevel(stageLevels: List<StageLevel>)
+    suspend fun setNewStagesLevel(stageLevels: List<StageLevel>)
 
-    fun getStageLevelCount(): Int
+    suspend fun getStageLevelCount(): Int
 
-    fun getStageByStageType(stageType: StageType): StageLevel
+    suspend fun getStageByStageType(stageType: StageType): StageLevel
 
     fun getLevelsByStageType(stageType: StageType): Flow<List<Level>>
 }

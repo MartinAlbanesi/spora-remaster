@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetStageLevelByStageTypeUseCase @Inject constructor(
     private val stageRepositoryLocal: IStageRepositoryLocal
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         stageType: StageType
     ) : StageLevel {
         return stageRepositoryLocal.getStageByStageType(stageType)

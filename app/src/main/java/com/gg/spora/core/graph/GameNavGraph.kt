@@ -50,48 +50,52 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 mutableStateOf(false)
             }
 
-            LevelPreview(
-                isVisible = showLevelPreview,
-                backgroundImage = stage!!.levelPreviewImage,
-                level = currentLevel!!,
-                onClickPrimaryButton = {
-                    showLevelPreview = false
-                    navController
-                        .navigate(
-                            NavigationRoutes.QuizGame(
-                                title = currentLevel!!.getLevelWithStage(),
-                                quizCount = currentLevel!!.quizCount.toInt(),
-                                imageCount = currentLevel!!.imageCount.toInt(),
-                                relationsCount = currentLevel!!.relationsCount.toInt(),
-                                levelId = currentLevel!!.id,
-                                imageBackground = stage!!.levelPreviewImage,
-                                stageType = stage!!.stageType.name,
-                                oxygenRewards = currentLevel!!.rewardsOxygen.map { it.toInt() },
+            currentLevel?.let{
+                LevelPreview(
+                    isVisible = showLevelPreview,
+                    backgroundImage = stage!!.levelPreviewImage,
+                    level = currentLevel!!,
+                    onClickPrimaryButton = {
+                        showLevelPreview = false
+                        navController
+                            .navigate(
+                                NavigationRoutes.QuizGame(
+                                    title = currentLevel!!.getLevelWithStage(),
+                                    quizCount = currentLevel!!.quizCount.toInt(),
+                                    imageCount = currentLevel!!.imageCount.toInt(),
+                                    relationsCount = currentLevel!!.relationsCount.toInt(),
+                                    levelId = currentLevel!!.id,
+                                    imageBackground = stage!!.levelPreviewImage,
+                                    stageType = stage!!.stageType.name,
+                                    oxygenRewards = currentLevel!!.rewardsOxygen.map { it.toInt() },
+                                )
                             )
-                        )
-                },
-                onClickSecondaryButton = {
-                    showLevelPreview = false
-                },
-            )
+                    },
+                    onClickSecondaryButton = {
+                        showLevelPreview = false
+                    },
+                )
+            }
 
-            StageScreen(
-                oxygen = 75,
-                title = stage!!.stageType.label,
-                levels = levels,
-                backgroundImage = stage!!.stageBackgroundImage,
-                pathLadder = stage!!.pathLadder,
-                onNavigateToChallenge = { title ->
-                    navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id))
-                },
-                popBackStack = {
-                    navController.popBackStack()
-                },
-                onClickLevelItem = { level, showPreview ->
-                    stageViewModel.onLevelSelected(level)
-                    showLevelPreview = showPreview
-                }
-            )
+            stage?.let {
+                StageScreen(
+                    oxygen = 75,
+                    title = stage!!.stageType.label,
+                    levels = levels,
+                    backgroundImage = stage!!.stageBackgroundImage,
+                    pathLadder = stage!!.pathLadder,
+                    onNavigateToChallenge = { title ->
+                        navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id))
+                    },
+                    popBackStack = {
+                        navController.popBackStack()
+                    },
+                    onClickLevelItem = { level, showPreview ->
+                        stageViewModel.onLevelSelected(level)
+                        showLevelPreview = showPreview
+                    }
+                )
+            }
         }
 
         composable<NavigationRoutes.QuizGame> {

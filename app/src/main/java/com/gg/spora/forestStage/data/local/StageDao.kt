@@ -12,21 +12,21 @@ interface StageDao {
 
     // --- LEVEL ---
     @Insert
-    fun insertLevels(levels: List<LevelEntity>)
+    suspend fun insertLevels(levels: List<LevelEntity>)
 
     @Query("SELECT COUNT(*) FROM level_entity")
-    fun getLevelsCount(): Int
+    suspend fun getLevelsCount(): Int
 
     @Query("SELECT * FROM level_entity where stageType = :stageType")
     fun getLevelsByStageType(stageType: String): Flow<List<LevelEntity>>
 
     // --- STAGE ---
     @Insert
-    fun insertStages(stages: List<StageLevelEntity>)
+    suspend fun insertStages(stages: List<StageLevelEntity>)
 
     @Query("SELECT * FROM stage_level WHERE stageType = :stageType LIMIT 1")
-    fun getStagesByStageType(stageType: String): StageLevelEntity?
+    suspend fun getStagesByStageType(stageType: String): StageLevelEntity?
 
     @Query("SELECT COUNT(*) FROM stage_level")
-    fun getStagesCount(): Int
+    suspend fun getStagesCount(): Int
 }

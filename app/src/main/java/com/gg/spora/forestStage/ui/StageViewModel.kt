@@ -39,19 +39,21 @@ class StageViewModel @Inject constructor(
     init {
         getStage()
         getLevels()
-        getCurrentLevel()
     }
 
     private fun getLevels() {
         viewModelScope.launch(Dispatchers.IO) {
             getLevelsUseCase(getStageTypeByName(stageRoute.stageType)).collect {
                 _levels.value = it
+                _currentLevel.value = it.first()
             }
         }
     }
 
     private fun getStage(){
-        _stage.value = getStageLevelByStageTypeUseCase(getStageTypeByName(stageRoute.stageType))
+        viewModelScope.launch(Dispatchers.IO) {
+            _stage.value = getStageLevelByStageTypeUseCase(getStageTypeByName(stageRoute.stageType))
+        }
     }
 
     private fun getCurrentLevel() {
