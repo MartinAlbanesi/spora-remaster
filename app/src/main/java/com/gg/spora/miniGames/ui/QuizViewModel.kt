@@ -2,25 +2,30 @@ package com.gg.spora.miniGames.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.core.utils.functions.getStarState
-import com.gg.spora.forestStage.domain.UpdateLevelStateUseCase
+import com.gg.spora.core.utils.functions.getRewardsStarState
+import com.gg.spora.core.utils.functions.getStageTypeByName
+import com.gg.spora.core.utils.functions.getTotalOxygenFromStars
 import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
+import com.gg.spora.user.domain.UpdateUserLevelsAndOxygenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
-    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
+//    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
+    private val updateUserLevelsAndOxygenUseCase: UpdateUserLevelsAndOxygenUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -44,6 +49,9 @@ class QuizViewModel @Inject constructor(
     private val _lives = MutableStateFlow(MAX_LIVES)
     val lives = _lives.asStateFlow()
 
+    private val _livesLost = MutableStateFlow(0)
+    val livesLost = _livesLost.asStateFlow()
+
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
@@ -66,19 +74,19 @@ class QuizViewModel @Inject constructor(
     private fun getRandomQuestions() {
 
         val quizGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.quizCount,
+            count = quizRoute.quizCount.toInt(),
             typeQuestion = listOf(TypeQuestion.MARTIN),
             typeGame = TypeGame.QUIZ
         )
 
         val imageGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.imageCount,
+            count = quizRoute.imageCount.toInt(),
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
         )
 
         val relationsGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.relationsCount,
+            count = quizRoute.relationsCount.toInt(),
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         )
@@ -99,7 +107,7 @@ class QuizViewModel @Inject constructor(
                 // si la respuesta es incorrecta
                 else {
                     it.copy(
-                        isCorrect = if(it.id == _currentQuestion.value!!.answerId) true else null,
+                        isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
                     )
                 }
             }
@@ -107,6 +115,7 @@ class QuizViewModel @Inject constructor(
 
         if (_isCorrect.value == false) {
             _lives.value--
+            _livesLost.value++
         }
     }
 
@@ -131,6 +140,7 @@ class QuizViewModel @Inject constructor(
         } else {
             _isCorrect.value = false
             _lives.value--
+            _livesLost.value++
         }
 
         _relationsItems.value = emptyList()
@@ -154,10 +164,8 @@ class QuizViewModel @Inject constructor(
 
     fun nextQuestion() {
         if (_counterQuestion.value == _questions.value.size - 1) {
-            _isFinished.value = true
 
-            val currentStarState = getStarState(lives = _lives.value)
-            updateLevelStateUseCase(quizRoute.levelId, currentStarState)
+            finishGame()
 
             return
         }
@@ -174,11 +182,32 @@ class QuizViewModel @Inject constructor(
     fun resetGame() {
         _counterQuestion.value = 0
         _lives.value = MAX_LIVES
+        _livesLost.value = 0
         _isFinished.value = false
         _isCorrect.value = null
         getRandomQuestions()
         getCurrentQuestion()
         _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+    }
+
+    private fun finishGame() {
+        _isFinished.value = true
+
+        viewModelScope.launch {
+
+            val currentStarState = getRewardsStarState(livesLost = _livesLost.value)
+            val currentLevelOxygenRewards = quizRoute.oxygenRewards
+            val currentOxygenReward = getTotalOxygenFromStars(
+                currentStarState,
+                currentLevelOxygenRewards.map { it.toInt() }
+            )
+            updateUserLevelsAndOxygenUseCase(
+                levelId = quizRoute.levelId,
+                starState = currentStarState,
+                stageType = getStageTypeByName(quizRoute.stageType),
+                oxygen = currentOxygenReward
+            )
+        }
     }
 
 }

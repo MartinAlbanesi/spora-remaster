@@ -32,6 +32,7 @@ import com.gg.spora.login.component.NameField
 import com.gg.spora.login.component.PasswordField
 import com.gg.spora.login.component.loginText
 import com.gg.spora.login.component.separatorLogin
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -61,7 +62,7 @@ fun LoginScreen(
         Login(
             Modifier.align(Alignment.Center),
             viewModel
-        ){
+        ) {
 //            navController.navigate(NavigationRoutes.HomeGraph)
             onNavigationToHome()
         }
@@ -88,7 +89,6 @@ fun Login(
     val loginSuccess: Boolean by viewModel.loginSuccess.observeAsState(initial = false)
     val errorMessage: String? by viewModel.errorMessage.observeAsState()
 
-//    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
     if (isLoading) {
@@ -106,10 +106,11 @@ fun Login(
             PasswordField(password) { viewModel.onLoginChanged(name, email, it) }
             Spacer(modifier = Modifier.padding(16.dp))
             LoginButton(loginEnable) {
-//                coroutineScope.launch {
-                    viewModel.onLoginSelected { }
-//                }
-                onNavigationToHome()
+                viewModel.onLoginSelected {
+                    onNavigationToHome()
+                }
+
+
             }
             Spacer(modifier = Modifier.padding(8.dp))
             separatorLogin()

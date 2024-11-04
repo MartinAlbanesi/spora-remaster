@@ -18,15 +18,16 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
         composable<NavigationRoutes.Welcome> {
             val welcomeViewModel = hiltViewModel<WelcomeViewModel>()
             WelcomeScreen(
+                modifier = Modifier,
+                setGuestName = welcomeViewModel::setGuestName,
                 onNavigateToHome = {
                     navController.navigate(NavigationRoutes.Home) {
+                        welcomeViewModel.setNewUser()
                         popUpTo(NavigationRoutes.Welcome) {
                             inclusive = true
                         }
                     }
                 },
-                setGuestName = { welcomeViewModel.setGuestName(it) },
-                modifier = Modifier,
                 onNavigateToSignUp = {
                     navController.navigate(NavigationRoutes.SignUp)
                 }

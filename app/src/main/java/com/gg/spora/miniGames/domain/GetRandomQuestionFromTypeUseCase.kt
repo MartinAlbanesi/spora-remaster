@@ -9,7 +9,11 @@ import javax.inject.Inject
 class GetRandomQuestionFromTypeUseCase @Inject constructor(
     private val quizLocalRepository: IQuizLocalRepository
 ) {
-    operator fun invoke(count : Int, typeQuestion: List<TypeQuestion>, typeGame: TypeGame, ): List<Question> {
+    operator fun invoke(
+        count: Int,
+        typeQuestion: List<TypeQuestion>,
+        typeGame: TypeGame,
+    ): List<Question> {
 
 
 //        val questions : MutableSet<Question> = mutableSetOf()

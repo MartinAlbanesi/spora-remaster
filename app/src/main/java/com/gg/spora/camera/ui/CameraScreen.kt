@@ -16,39 +16,45 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionResult
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
+import com.gg.spora.camera.domain.ClassifyTf
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.ChallengeViewModel
-import com.gg.spora.challenge.ui.classes
-import com.gg.spora.ml.ModelObjects
+import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.delay
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 
 
 /**
@@ -61,117 +67,165 @@ import java.nio.ByteOrder
 fun CameraScreen(
     nameObject: String,
     onNavigateToChallengeScreen: () -> Unit,
-    challengeViewModel: ChallengeViewModel = hiltViewModel(),
+    onNavigateToBack: () -> Unit
 ) {
-
-    var isScanComplete by remember { mutableStateOf(false) }
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.success))
-
+    val isCapturing = remember { mutableStateOf(true) }
+    val isScanComplete = remember { mutableStateOf(false) }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val previewView = remember { PreviewView(context) }
     val imageCapture = remember { ImageCapture.Builder().build() }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-    var objectsChallenge by remember { mutableStateOf(listOf<ObjectDetail>()) }
-    var isCapturing by remember { mutableStateOf(true) }
+    var confidence by remember { mutableFloatStateOf(0f) }
 
-    LaunchedEffect(challengeViewModel.objectsChallenge) {
-        challengeViewModel.objectsChallenge.observe(lifecycleOwner) { objects ->
-            objectsChallenge = objects
-        }
-    }
     BackHandler {
-        isCapturing = false
-        onNavigateToChallengeScreen()
+        isCapturing.value = false
+        onNavigateToBack()
     }
 
-    if (isScanComplete) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-            contentAlignment = Alignment.Center,
-        ) {
-            Dialog(onDismissRequest = {}) {
-                LottieAnimation(
-                    composition = lottie.value,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Center),
-                )
-
-                LaunchedEffect(lottie.isComplete) {
-                    delay(1600)
-                    challengeViewModel.selectObject(nameObject)
-                    challengeViewModel.setObjectInObjectsChallengeWithName(nameObject)
-                    onNavigateToChallengeScreen()
-                }
-            }
-        }
+    if (isScanComplete.value) {
+        ShowDialogScanSuccess(onNavigateToChallengeScreen, lottie)
     }
 
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
     if (cameraPermissionState.hasPermission) {
-        AndroidView(
-            factory = { previewView },
-            modifier = Modifier.fillMaxSize()
-        )
+        Box(modifier = Modifier.fillMaxSize()) {
+            AndroidView(
+                factory = { previewView },
+                modifier = Modifier.fillMaxSize()
+            )
 
-        LaunchedEffect(Unit) {
-            cameraProviderFuture.addListener({
-                val cameraProvider = cameraProviderFuture.get()
-                val preview = androidx.camera.core.Preview.Builder().build().also {
-                    it.setSurfaceProvider(previewView.surfaceProvider)
-                }
-                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-                try {
-                    cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(
-                        lifecycleOwner,
-                        cameraSelector,
-                        preview,
-                        imageCapture
+            if (confidence > 0) {
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .border(2.dp, Color.Green)
+                        .background(Color(0x8000FF00))
+                        .align(Alignment.TopCenter)
+                ) {
+                    Text(
+                        text = "${nameObject}: ${confidence.toInt()}%",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
                     )
-                } catch (exc: Exception) {
-                    Log.e("CameraScreen", "Camera binding failed", exc)
                 }
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(vertical = 70.dp, horizontal = 30.dp)
+                        .fillMaxSize()
+                        .border(3.dp, Color.Green)
+                )
+            }
 
-                val handler = Handler(Looper.getMainLooper())
-                val runnable = object : Runnable {
-                    override fun run() {
-                        if (isCapturing) {
-                            imageCapture.takePicture(
-                                ContextCompat.getMainExecutor(context),
-                                object : ImageCapture.OnImageCapturedCallback() {
-                                    override fun onCaptureSuccess(imageProxy: ImageProxy) {
-                                        val bitmap = imageProxy.toBitmap()
-                                        classifyImage(context, bitmap, nameObject) { result ->
-                                            if (result) {
-                                                isCapturing = false
-                                                isScanComplete = true
-                                            }
-                                        }
-                                        imageProxy.close()
-                                    }
-                                    override fun onError(exception: ImageCaptureException) {
-                                        Log.e("CameraScreen", "Image capture failed", exception)
-                                    }
-                                }
-                            )
-                            handler.postDelayed(this, 3000)
-                        }
+            LaunchedEffect(Unit) {
+                cameraProviderFuture.addListener({
+                    prepareFunctionOfCamera(cameraProviderFuture, previewView, lifecycleOwner, imageCapture)
+                    setFunctionsOfCamera(isCapturing, imageCapture, context, nameObject, isScanComplete) { newConfidence ->
+                        confidence = newConfidence
                     }
-                }
-                handler.post(runnable)
-            }, ContextCompat.getMainExecutor(context))
+                }, ContextCompat.getMainExecutor(context))
+            }
         }
     } else {
         LaunchPermissionRequest(cameraPermissionState)
     }
 }
 
+fun setFunctionsOfCamera(
+    isCapturing: MutableState<Boolean>,
+    imageCapture: ImageCapture,
+    context: Context,
+    nameObject: String,
+    isScanComplete: MutableState<Boolean>,
+    onConfidenceUpdate: (Float) -> Unit
+) {
+    val handler = Handler(Looper.getMainLooper())
+    val runnable = object : Runnable {
+        override fun run() {
+            if (isCapturing.value) {
+                imageCapture.takePicture(
+                    ContextCompat.getMainExecutor(context),
+                    object : ImageCapture.OnImageCapturedCallback() {
+                        override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                            val bitmap = imageProxy.toBitmap()
+                            ClassifyTf(context).classifyImage(bitmap, nameObject) { result, confidence ->
+                                onConfidenceUpdate(confidence)
+                                if (result) {
+                                    isCapturing.value = false
+                                    isScanComplete.value = true
+                                }
+                            }
+                            imageProxy.close()
+                        }
+
+                        override fun onError(exception: ImageCaptureException) {
+                            Log.e("CameraScreen", "Image capture failed", exception)
+                        }
+                    }
+                )
+                handler.postDelayed(this, 1700)
+            }
+        }
+    }
+    handler.post(runnable)
+}
+
+@Composable
+fun ShowDialogScanSuccess(
+    onNavigateToChallengeScreen: () -> Unit,
+    lottie: LottieCompositionResult
+) {
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Dialog(onDismissRequest = {}) {
+            LottieAnimation(
+                composition = lottie.value,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.Center),
+            )
+
+            LaunchedEffect(lottie.isComplete) {
+                delay(1600)
+                onNavigateToChallengeScreen()
+            }
+        }
+    }
+}
+
+fun prepareFunctionOfCamera(
+    cameraProviderFuture: ListenableFuture<ProcessCameraProvider>,
+    previewView: PreviewView,
+    lifecycleOwner: LifecycleOwner,
+    imageCapture: ImageCapture
+) {
+
+    val cameraProvider = cameraProviderFuture.get()
+    val preview = androidx.camera.core.Preview.Builder().build().also {
+        it.setSurfaceProvider(previewView.surfaceProvider)
+    }
+    val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+    try {
+        cameraProvider.unbindAll()
+        cameraProvider.bindToLifecycle(
+            lifecycleOwner,
+            cameraSelector,
+            preview,
+            imageCapture
+        )
+    } catch (exc: Exception) {
+        Log.e("CameraScreen", "Camera binding failed", exc)
+    }
+}
 
 /**
  * Get the permission state
@@ -211,58 +265,6 @@ fun LaunchPermissionRequest(cameraPermissionState : PermissionState){
     LaunchedEffect(Unit) {
         cameraPermissionState.launchPermissionRequest()
     }
-}
-
-
-/**
- * Classifies with Tensor flow the image when the camera takes screen
- * @param context: Context
- * @param bitmap: Bitmap of the image
- * @param selectedObject: String of the object that the user wants scan
- */
-fun classifyImage(context : Context, bitmap: Bitmap, selectedObject: String, onResult: (Boolean) -> Unit) {
-    var resultScan = false
-
-    // Carga el modelo de TensorFlow Lite
-    val modelObj = ModelObjects.newInstance(context)
-
-    val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-
-    inputFeature0.loadBuffer(preprocessImage(bitmap))
-
-
-    val outputs = modelObj.process(inputFeature0)
-    val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-    val outputArray = outputFeature0.floatArray
-    val maxConfidenceIndex = outputArray.indices.maxByOrNull { outputArray[it] } ?: 0
-
-    if(selectedObject == classes[maxConfidenceIndex])
-        resultScan = true
-
-    onResult(resultScan)
-}
-
-/**
- * Converter bitmap of image to the format necessary
- * @param bitmap: Bitmap of the image
- */
-private fun preprocessImage(bitmap: Bitmap): ByteBuffer {
-    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-    val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
-    byteBuffer.order(ByteOrder.nativeOrder())
-
-    val intValue = IntArray(224 * 224)
-
-    resizedBitmap.getPixels(intValue, 0, resizedBitmap.width, 0, 0, resizedBitmap.width, resizedBitmap.height)
-
-    for (pixelValue in intValue) {
-        byteBuffer.putFloat((pixelValue shr 16 and 0xFF) * (1f / 255))
-        byteBuffer.putFloat((pixelValue shr 8 and 0xFF) * (1f / 255))
-        byteBuffer.putFloat((pixelValue and 0xFF) * (1f / 255))
-    }
-
-    return byteBuffer
 }
 
 /**

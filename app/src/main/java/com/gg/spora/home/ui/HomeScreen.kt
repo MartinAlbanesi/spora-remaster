@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,8 +31,10 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    oxygen: Int,
     onNavigateToForestStage: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
+    onNavigateToLibrary: () -> Unit
 ) {
 
     // Icons in the left
@@ -58,7 +61,10 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
-            onClick = {}
+            onClick =
+            {
+                onNavigateToLibrary()
+            }
         ),
         HomeIcon(
             image = R.drawable.grove_icon,
@@ -72,7 +78,7 @@ fun HomeScreen(
             TopAppBarWithDualIcon(
 //                firstLabel = "0",
 //                firstIcon = R.drawable.trees_icon,
-                secondLabel = "0",
+                secondLabel = oxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
@@ -94,7 +100,6 @@ fun HomeScreen(
                     .matchParentSize()
             )
         }
-
         // Screen Content
         Box(
             modifier = Modifier
@@ -123,7 +128,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = { onClick() }),
                     )
                 }
             }
@@ -173,8 +178,10 @@ private fun MiniGameScreenPreview() {
         ) {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
+                oxygen = 0,
                 onNavigateToForestStage = {},
-                onNavigateToExpoStage = {}
+                onNavigateToExpoStage = {},
+                onNavigateToLibrary = {}
             )
         }
     }

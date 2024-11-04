@@ -78,7 +78,7 @@ fun StageScreen(
                     key = { _, level -> level.id }
                 ) { index, level ->
                     LevelStageItem(
-                        itemNumber = level.id,
+                        itemNumber = index.toString(),
                         starsState = level.starState,
                         stage = level.stageType,
                         isBlocked = !levels.getIsCompleteFromPreviousLevel(index),
@@ -122,7 +122,7 @@ private fun StageScreenPreview() {
             StageScreen(
                 oxygen = 0,
                 title = "Titi",
-                levels = FakeStageModels.fakeStage[1].levels,
+                levels = FakeStageModels.fakeLevels,
                 backgroundImage = R.drawable.expo_proyecto_stage_background,
                 pathLadder = SporaConstant.PATH_LADDER_EXPO,
                 onNavigateToChallenge = {},

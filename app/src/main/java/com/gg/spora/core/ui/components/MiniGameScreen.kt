@@ -32,7 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.utils.functions.getStarState
+import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
@@ -48,6 +48,7 @@ fun MiniGameScreen(
     isCorrect: Boolean? = null,
     questionSize: Int,
     lives: Int,
+    livesLost: Int = 0,
     counterQuestion: Int,
     isFinished: Boolean = false,
     showIcon: Boolean = true,
@@ -72,7 +73,7 @@ fun MiniGameScreen(
         GameResultPopUp(
             isVisible = true,
             backgroundImage = R.drawable.minigame_background_crop,
-            starsState = getStarState(lives = lives),
+            starsState = getRewardsStarState(livesLost = livesLost),
             rewards = listOf(10, 20, 30),
             onBackStage = {
                 onBackForestStage()

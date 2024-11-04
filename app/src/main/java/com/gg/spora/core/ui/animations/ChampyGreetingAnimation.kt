@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import com.gg.spora.core.utils.enums.ChampyStates
 import kotlinx.coroutines.delay
 
 @Composable

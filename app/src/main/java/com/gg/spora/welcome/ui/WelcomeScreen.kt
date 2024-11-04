@@ -323,7 +323,8 @@ fun GuestEnterNameScreen(
                     modifier.size(width = 350.dp, height = 50.dp),
                     "Siguiente",
                     textSize = 30,
-                    onClick = onClick
+                    onClick = onClick,
+                    isEnable = guestName.length > 3
                 )
 
         }
