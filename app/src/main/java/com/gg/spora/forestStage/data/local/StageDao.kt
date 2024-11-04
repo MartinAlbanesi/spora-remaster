@@ -4,10 +4,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.gg.spora.forestStage.data.local.models.LevelEntity
+import com.gg.spora.forestStage.data.local.models.StageEntity
 
 @Dao
 interface StageDao {
 
+    // --- LEVEL ---
     @Insert
     fun insertLevels(levels: List<LevelEntity>)
 
@@ -16,4 +18,14 @@ interface StageDao {
 
     @Query("SELECT * FROM level_entity where stageType = :stageType")
     fun getLevels(stageType: String): List<LevelEntity>
+
+    // --- STAGE ---
+    @Insert
+    fun insertStages(stages: List<StageEntity>)
+
+    @Query("SELECT * FROM stage_level WHERE stageType = :stageType LIMIT 1")
+    fun getStagesByStageType(stageType: String): StageEntity?
+
+    @Query("SELECT COUNT(*) FROM stage_level")
+    fun getStagesCount(): Int
 }

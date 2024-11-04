@@ -6,6 +6,7 @@ import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.forestStage.data.local.models.LevelEntity
+import com.gg.spora.forestStage.data.local.models.StageEntity
 import com.gg.spora.forestStage.domain.model.Level
 import com.gg.spora.forestStage.domain.model.StageLevel
 import com.gg.spora.miniGames.domain.model.Challenge
@@ -108,6 +109,21 @@ object FakeStageModels {
             quizCount = 0,
             imageCount = 0,
             relationsCount = 10
+        ),
+    )
+
+    val fakeStageEntities = listOf(
+        StageEntity(
+            "1",
+            "FOREST",
+            R.drawable.minigame_background_crop,
+            R.drawable.stage1_area_background,
+        ),
+        StageEntity(
+            "2",
+            "EXPO",
+            R.drawable.expo_background,
+            R.drawable.expo_proyecto_stage_background,
         ),
     )
 

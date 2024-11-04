@@ -76,4 +76,46 @@ class StageDaoTest{
 
         assertEquals(expectedLevels.size, actualLevelsCount)
     }
+
+    @Test
+    fun insertStages_WhenInsertedValidatedStages_ReturnStagesInserted() {
+
+        val expectedStages = FakeStageModels.fakeStageEntities
+
+        stageDao.insertStages(expectedStages)
+
+        val actualStages = stageDao.getStagesByStageType("FOREST")
+
+        assertEquals(expectedStages.first(), actualStages)
+        assertNotEquals("EXPO", actualStages?.stageType)
+    }
+
+    @Test
+    fun getStagesByStageType_WhenDBIsEmpty_ReturnNull() {
+
+        val actualStages = stageDao.getStagesByStageType("FOREST")
+
+        assertEquals(null, actualStages)
+    }
+
+    @Test
+    fun getStagesCount_WhenDBIsEmpty_ReturnZero() {
+
+        val actualStagesCount = stageDao.getStagesCount()
+
+        assertEquals(0, actualStagesCount)
+    }
+
+    @Test
+    fun getStagesCount_WhenDBIsNotEmpty_ReturnCount() {
+
+        val expectedStages = FakeStageModels.fakeStageEntities
+
+        stageDao.insertStages(expectedStages)
+
+        val actualStagesCount = stageDao.getStagesCount()
+
+        assertEquals(expectedStages.size, actualStagesCount)
+    }
+
 }
