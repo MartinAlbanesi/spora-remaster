@@ -53,23 +53,23 @@ class LibraryViewModel @Inject constructor(
         }
     }
 
-    fun unlockInfoCard(infoCardEntity: InfoCardEntity) {
-        viewModelScope.launch {
-            infoCardEntity.isUnlocked = true
-            infoCardRepositoryLocal.updateInfoCard(infoCardEntity.toInfoCard())
-        }
-    }
-
-    private fun searchInfoCardById(id: Int): InfoCard? {
-        var auxInfoCardEntity: InfoCard? = null
-
-        try {
-            viewModelScope.launch {
-                auxInfoCardEntity = infoCardRepositoryLocal.getInfoCardById(id)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return auxInfoCardEntity
-    }
+//    fun unlockInfoCard(infoCardEntity: InfoCardEntity) {
+//        viewModelScope.launch {
+//            infoCardEntity.isUnlocked = true
+//            infoCardRepositoryLocal.updateInfoCard(infoCardEntity.toInfoCard())
+//        }
+//    }
+//
+//    private fun searchInfoCardById(id: Int): InfoCard? {
+//        var auxInfoCardEntity: InfoCard? = null
+//
+//        try {
+//            viewModelScope.launch {
+//                auxInfoCardEntity = infoCardRepositoryLocal.getInfoCardById(id)
+//            }
+//        } catch (e: Exception) {
+////            e.printStackTrace()
+//        }
+//        return auxInfoCardEntity
+//    }
 }

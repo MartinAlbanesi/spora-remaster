@@ -1,12 +1,12 @@
 package com.gg.spora.tutorials.data
 
 
-import com.gg.spora.core.ui.animations.ChampyStates
+import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.tutorials.model.Tutorial
 
 object TutorialModels {
 
-    val name = "Titi"
+    private const val NAME = "Titi"
 
     val initialTutorial = listOf<Tutorial>(
         Tutorial(
@@ -143,7 +143,7 @@ object TutorialModels {
             ChampyStates.SMILING
         ),
         Tutorial(
-            "¡Señor Mushy, él es $name y nos va a ayudar con el bosque!",
+            "¡Señor Mushy, él es $NAME y nos va a ayudar con el bosque!",
             ChampyStates.GREETING
         ),
         Tutorial(
@@ -163,7 +163,7 @@ object TutorialModels {
             ChampyStates.NORMAL
         ),
         Tutorial(
-            "Así que, Champy, tú y $name son libres de leer o consultarme lo que deseen.",
+            "Así que, Champy, tú y $NAME son libres de leer o consultarme lo que deseen.",
             ChampyStates.SMILING
         ),
         Tutorial(

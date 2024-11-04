@@ -5,9 +5,10 @@ import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.library.data.local.entity.InfoCardEntity
 import javax.inject.Inject
 
+@Suppress("MaxLineLength")
 class FakeRepositoryInfoCard @Inject constructor() {
 
-    val fakeInfoCardEntityModels = listOf<InfoCardEntity>(
+    private val fakeInfoCardEntityModels = listOf<InfoCardEntity>(
 
         InfoCardEntity(
             title = "Deforestación",

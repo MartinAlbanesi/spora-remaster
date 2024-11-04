@@ -39,7 +39,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun insertLevels_WhenInsertedValidatedLevels_ReturnLevelsInserted() {
+    fun insertLevels_WhenInsertedValidatedLevels_ReturnLevelsInserted() = runTest {
 
         val expectedLevels = FakeStageModels.fakeLevelsEntity
 
@@ -60,7 +60,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun getLevelsByStageTypeCount_WhenDBIsEmpty_ReturnZero() {
+    fun getLevelsByStageTypeCount_WhenDBIsEmpty_ReturnZero() = runTest {
 
         val actualLevelsCount = stageDao.getLevelsCount()
 
@@ -68,7 +68,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun getLevelsByStageTypeCount_WhenDBIsNotEmpty_ReturnCount() {
+    fun getLevelsByStageTypeCount_WhenDBIsNotEmpty_ReturnCount() = runTest {
 
         val expectedLevels = FakeStageModels.fakeLevelsEntity
 
@@ -80,7 +80,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun insertStages_WhenInsertedValidatedStages_ReturnStagesInserted() {
+    fun insertStages_WhenInsertedValidatedStages_ReturnStagesInserted() = runTest {
 
         val expectedStages = FakeStageModels.fakeStageEntities
 
@@ -93,7 +93,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun getStagesByStageType_WhenDBIsEmpty_ReturnNull() {
+    fun getStagesByStageType_WhenDBIsEmpty_ReturnNull() = runTest {
 
         val actualStages = stageDao.getStagesByStageType("FOREST")
 
@@ -101,7 +101,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun getStagesCount_WhenDBIsEmpty_ReturnZero() {
+    fun getStagesCount_WhenDBIsEmpty_ReturnZero() = runTest {
 
         val actualStagesCount = stageDao.getStagesCount()
 
@@ -109,7 +109,7 @@ class StageDaoTest{
     }
 
     @Test
-    fun getStagesCount_WhenDBIsNotEmpty_ReturnCount() {
+    fun getStagesCount_WhenDBIsNotEmpty_ReturnCount() = runTest {
 
         val expectedStages = FakeStageModels.fakeStageEntities
 

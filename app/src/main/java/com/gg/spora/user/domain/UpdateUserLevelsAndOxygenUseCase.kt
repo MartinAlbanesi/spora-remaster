@@ -8,6 +8,7 @@ import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
+@Suppress("ForbiddenComment")
 class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal,
     private val userRepositoryNetwork: IUserRepositoryNetwork,

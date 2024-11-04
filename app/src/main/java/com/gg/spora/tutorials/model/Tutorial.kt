@@ -1,7 +1,6 @@
 package com.gg.spora.tutorials.model
 
-import com.gg.spora.core.ui.animations.ChampyStates
-
+import com.gg.spora.core.utils.enums.ChampyStates
 
 data class Tutorial(
     val text: String,

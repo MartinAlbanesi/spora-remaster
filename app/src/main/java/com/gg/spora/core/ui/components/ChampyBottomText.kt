@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.core.ui.animations.ChampyStates
+import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.core.utils.enums.MushyStates
 import com.gg.spora.ui.theme.SporaTheme
 
