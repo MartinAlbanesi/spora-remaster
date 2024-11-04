@@ -39,14 +39,9 @@ fun GroveScreen(
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     plantForestTree: (ForestTree, Int) -> Unit,
     updateTree: (ForestTree) -> Unit,
-    onCooldownTriggered: (Int) -> Unit,
+    updateGrowthStage: (ForestTree) -> Unit,
     popBackStack: () -> Unit
 ) {
-    /*
-    val forestTree = groveViewModel.forestTree.collectAsState()
-    val currentTree = forestTree.value
-     */
-
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
@@ -92,8 +87,8 @@ fun GroveScreen(
                 for (seedTree in seedTrees) {
                     SeedTreeItem(
                         seedTree = seedTree,
-                        seedTreeCooldowns = seedTreeCooldowns,
-                        onSeedTreeButtonClicked = onSeedTreeButtonClicked,
+                        seedTreeCooldowns = seedTreeCooldowns[seedTree.id],
+                        onSeedTreeButtonClicked = {p1, p2 -> onSeedTreeButtonClicked(p1, p2)},
                         onPlantForestTree = { forestTree, seedTreeId ->
                             plantForestTree(forestTree, seedTreeId)
                         },
@@ -120,9 +115,11 @@ fun GroveScreen(
                     if (tree == null) {
                         PlantingPlaceholder() // Componente de plantacion vacia
                     } else {
-                        ForestTreeItem(tree) {
-                            updateTree(tree)
-                        }
+                        ForestTreeItem(
+                            tree = tree,
+                            onTreeUpdated = updateTree,
+                            onGrowthStageUpdated = updateGrowthStage
+                        )
                     }
                 }
             }

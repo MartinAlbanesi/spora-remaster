@@ -1,7 +1,8 @@
 package com.gg.spora.grove.domain.models
 
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
-import java.time.Duration
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 /**
  * Clase SeedTree que representa un árbol semillero del bosque, capaz de generar semillas a un tiempo determinado
@@ -12,23 +13,17 @@ import java.time.Duration
 data class SeedTree(
     override val id: Int = 0,
     override val type: TreeType,
-    val timeToGenerateForestTree: Duration,
+    val timeToGenerateForestTree: Long = 5000L,
+    val expectedTimeToGenerateForestTree: Long = ( LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + timeToGenerateForestTree),
     var amountOfForestTreesGenerated: Int = 0,
-    var nextForestTreeAvailableTime: Long = 0L
-) : Tree(id, type) {
-
-//    // Verifica si es posible generar una semilla
-//    fun isForestTreeAvailable(): Boolean {
-//        return System.currentTimeMillis() >= nextForestTreeAvailableTime
-//    }
-}
+//    var nextForestTreeAvailableTime: Long = 0L
+) : Tree(id, type)
 
 fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {
     return SeedTreeEntity(
         idSeedTree = id,
         treeType = type.name,
-        timeToGenerateForestTree = timeToGenerateForestTree.toMillis(),
+        timeToGenerateForestTree = timeToGenerateForestTree,
         amountOfForestTreesGenerated = amountOfForestTreesGenerated,
-        nextForestTreeAvailableTime = nextForestTreeAvailableTime
     )
 }

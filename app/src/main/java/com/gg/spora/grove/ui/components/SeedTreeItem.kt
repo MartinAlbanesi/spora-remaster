@@ -1,6 +1,7 @@
 package com.gg.spora.grove.ui.components
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -26,35 +27,17 @@ import com.gg.spora.grove.domain.models.SeedTree
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    seedTreeCooldowns: Map<Int, Long>,
+    seedTreeCooldowns: Long?,
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     onPlantForestTree: (ForestTree, Int) -> Unit,
-//    onCooldownTriggered: (Int) -> Unit
 ) {
-//    // Estado para el cooldown
-//    var isCooldownActive by remember { mutableStateOf(!seedTree.isForestTreeAvailable()) }
-//    var remainingCooldown by remember { mutableStateOf(0L) }
-
-//    // Efecto que actualiza el cooldown
-//    LaunchedEffect(key1 = seedTree, key2 = remainingCooldown) {
-//        if (isCooldownActive) {
-//            while (remainingCooldown > 0) {
-//                remainingCooldown =
-//                    seedTree.nextForestTreeAvailableTime - System.currentTimeMillis()
-//                delay(1000)
-//            }
-//            isCooldownActive = false
-//        }
-//    }
-
-    val cooldownRemaining = seedTreeCooldowns[seedTree.id] ?: 0L
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(id = seedTree.type.imageResource), // Access imageResource from seedTree.type
+            painter = painterResource(id = seedTree.type.imageResource),
             contentDescription = null,
             modifier = Modifier.size(64.dp)
         )
@@ -62,34 +45,19 @@ fun SeedTreeItem(
         Button(
             modifier = Modifier.width(100.dp),
             onClick = {
-                if (cooldownRemaining == 0L) {
-                    onSeedTreeButtonClicked(
-                        seedTree.id,
-                        seedTree.timeToGenerateForestTree.toMillis()
-                    )
-                    onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
-                }
-//                if (!isCooldownActive) { // Only generate if not on cooldown
-//                    val newForestTree = ForestTree(type = seedTree.type)
-//                    onForestTreeGenerated(newForestTree, seedTree.id)
-//                    Log.d("SeedTreeItem", "Forest Tree generated: $newForestTree")
-//
-//                    // Trigger cooldown update in ViewModel
-//                    onCooldownTriggered(seedTree.id)
-//
-//                    // Update UI state (optional, if you need immediate visual feedback)
-//                    isCooldownActive = true
-//                    remainingCooldown = seedTree.timeToGenerateForestTree.toMillis()
-//                }
+                onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
+                onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
             },
-            enabled = cooldownRemaining == 0L
-//            enabled = !isCooldownActive, // Deshabilita el botón si el cooldown está activo
+            enabled = seedTreeCooldowns == 0L, // Habilita el botón si el cooldown no se inició (está en 0)
         ) {
             // Muestra el texto correspondiente al cooldown
-            if (cooldownRemaining > 0) {
-                Text("${cooldownRemaining / 1000}s")
-            } else {
-                Text("Claim")
+            if (seedTreeCooldowns != null) {
+                if (seedTreeCooldowns != 0L) {
+                    Text("${seedTreeCooldowns.div(1000)}s")
+                } else {
+                    Log.i("GroveViewModel", "Button clicked $seedTreeCooldowns")
+                    Text("Claim")
+                }
             }
         }
     }

@@ -35,11 +35,6 @@ interface GroveDao {
     @Query("DELETE FROM forest_trees")
     fun deleteAllForestTrees()
 
-    /*
     @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
     suspend fun updateForestTreeGrowthStageById(id: Int, newStage: String)
-
-    @Query("UPDATE seed_trees SET amount_of_forest_trees_generated = :amount, next_forest_tree_available_time = :nextAvailableTime WHERE idSeedTree = :id")
-    suspend fun updateSeedTreeCooldown(id: Int, amount: Int, nextAvailableTime: Long)
-     */
 }

@@ -23,9 +23,7 @@ class GroveRepository @Inject constructor(
 
     // Carga los árboles semilleros desde la base de datos
     override suspend fun getSeedTreesFromDatabase(): Flow<List<SeedTree>> {
-        // return SeedTree.seedTreesEntitiesToModels(groveDao.getSeedTrees())
         return groveDao.getSeedTrees().map {
-//            SeedTree.seedTreesEntitiesToModels(it)
             it.map { seedTreeEntity -> seedTreeEntity.toSeedTree() }
         }
     }
@@ -33,12 +31,12 @@ class GroveRepository @Inject constructor(
     // Carga los árboles del bosque desde la base de datos
     override suspend fun getForestTreesFromDatabase(): Flow<List<ForestTree?>> {
         return groveDao.getForestTrees().map { forestTreeEntities ->
-            val forestTrees = MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
+            val forestTrees = MutableList<ForestTree?>(25) { null } // Inicializa con 25 espacios nulos
             forestTreeEntities.forEach { entity ->
                 forestTrees[entity.position] =
-                    entity.toForestTree() // Place loaded tree in correct position
+                    entity.toForestTree() // Coloca el árbol en su posición correspondiente
             }
-            forestTrees // Return the list with planted trees in their positions
+            forestTrees // Retorna la lista completa de árboles del bosque
         }
     }
 
@@ -70,13 +68,7 @@ class GroveRepository @Inject constructor(
         groveDao.insertForestTree(forestTreeEntity)
     }
 
-    /*
     override suspend fun updateForestTreeGrowthStage(forestTree: ForestTree) {
         groveDao.updateForestTreeGrowthStageById(forestTree.id, forestTree.currentStage.toString())
     }
-
-    override suspend fun updateSeedTreeCooldown(seedTree: SeedTree) {
-        groveDao.updateSeedTreeCooldown(seedTree.id, seedTree.amountOfForestTreesGenerated, seedTree.nextForestTreeAvailableTime)
-    }
-     */
 }

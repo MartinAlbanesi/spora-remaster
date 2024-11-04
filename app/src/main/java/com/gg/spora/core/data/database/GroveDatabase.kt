@@ -8,7 +8,7 @@ import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 
 @Database(
     entities = [ForestTreeEntity::class, SeedTreeEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class GroveDatabase : RoomDatabase() {
