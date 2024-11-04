@@ -15,10 +15,9 @@ import javax.inject.Inject
  */
 class GetLevelsUseCase @Inject constructor(
     private val stageRepositoryNetwork: IStageRepositoryNetwork,
-//    private val getUserNetworkUseCase: GetUserNetworkUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase
 ) {
-    suspend operator fun invoke(stageType: StageType) : Flow<List<Level>> {
+    operator fun invoke(stageType: StageType) : Flow<List<Level>> {
 
         val userLevelsCompletedFlow = getUserLocalUseCase()
         val levelsFlow = stageRepositoryNetwork.getLevelsByStageType(stageType)

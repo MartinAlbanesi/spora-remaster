@@ -10,13 +10,26 @@ class SetNewUserUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal
 ) {
-    suspend operator fun invoke(email: String, userName: String) {
+    suspend operator fun invoke(email: String?, userName: String) {
+
+        if (email == null) {
+            val user = User(
+                id = "1",
+                userName = userName,
+                email = "",
+                oxygen = 0,
+                levelsCompleted = emptyList()
+            )
+            userRepositoryLocal.setUserLocal(user)
+            return
+        }
 
         val userLocal = userRepositoryLocal.getUser().first()
 
-        if(userLocal != null) {
+        if (userLocal != null) {
             userRepositoryNetwork.setUser(userLocal)
-        }else{
+        } else {
+
             val user = User(
                 id = "",
                 userName = userName,
@@ -28,5 +41,6 @@ class SetNewUserUseCase @Inject constructor(
             userRepositoryLocal.setUserLocal(user)
             userRepositoryLocal.updateUserId(userId)
         }
+
     }
 }

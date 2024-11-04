@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.user.domain.SetNewUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,35 +16,35 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WelcomeViewModel @Inject constructor(private val dataStore: DataStore<Preferences>) :
-    ViewModel() {
+class WelcomeViewModel @Inject constructor(
+//    private val dataStore: DataStore<Preferences>
+    private val setNewUserUseCase: SetNewUserUseCase
+) : ViewModel() {
 
-    private val _guestName = MutableStateFlow<String>("")
-    val guestName: StateFlow<String> = _guestName
-
-
-    init {
-        getGuestName()
-    }
+    private val _guestName = MutableStateFlow("")
 
     fun setGuestName(name: String) {
         viewModelScope.launch {
-            dataStore.edit { pref ->
-                pref[stringPreferencesKey("username")] = name
-            }
+            _guestName.value = name
         }
     }
 
-    fun getGuestName() {
-
+    fun setNewUser() {
         viewModelScope.launch {
-            dataStore.data.map { pref ->
-                pref[stringPreferencesKey("username")] ?: ""
-            }.collect {
-                _guestName.value = it
-                Log.i("username", _guestName.value)
-            }
+            setNewUserUseCase(null, _guestName.value)
         }
     }
+
+//    fun getGuestName() {
+//
+//        viewModelScope.launch {
+//            dataStore.data.map { pref ->
+//                pref[stringPreferencesKey("username")] ?: ""
+//            }.collect {
+//                _guestName.value = it
+//                Log.i("username", _guestName.value)
+//            }
+//        }
+//    }
 
 }

@@ -44,7 +44,6 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
     fun `invoke - When set corrects params and CurrentUser is not null - Then Update User in local & remote`() = runTest {
 
         // Given
-        val userId = FakeUserModels.fakeUsers.first().id
         val levelId = "1"
         val stageType = StageType.FOREST
         val starState = StarState.TWO
@@ -69,7 +68,6 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
     fun `invoke - When set corrects params and CurrentUser is null - Then Update User in local`() = runTest {
 
         // Given
-        val userId = FakeUserModels.fakeUsers.first().id
         val levelId = "1"
         val stageType = StageType.FOREST
         val starState = StarState.TWO

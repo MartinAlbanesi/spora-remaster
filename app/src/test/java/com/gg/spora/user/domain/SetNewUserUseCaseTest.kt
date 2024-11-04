@@ -7,7 +7,6 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -65,5 +64,25 @@ class SetNewUserUseCaseTest{
         coVerify(exactly = 1) { userRepositoryLocal.getUser() }
         coVerify(exactly = 0) { userRepositoryLocal.setUserLocal(any()) }
         coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
+    }
+
+    @Test
+    fun `invoke - When Email is Null - Then Just Save User In Local`() = runTest {
+
+        // Given
+        val email = null
+        val userName = "titi"
+
+        coEvery { userRepositoryLocal.getUser() } returns flowOf(null)
+        coEvery { userRepositoryLocal.setUserLocal(any()) } returns Unit
+
+        // When
+        setNewUserUseCase(email, userName)
+
+        // Then
+        coVerify(exactly = 0) { userRepositoryLocal.getUser() }
+        coVerify(exactly = 1) { userRepositoryLocal.setUserLocal(any()) }
+        coVerify(exactly = 0) { userRepositoryNetwork.setUser(any()) }
+        coVerify(exactly = 0) { userRepositoryLocal.updateUserId(any()) }
     }
 }
