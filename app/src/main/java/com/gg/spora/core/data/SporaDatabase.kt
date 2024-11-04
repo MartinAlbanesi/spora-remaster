@@ -7,7 +7,7 @@ import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
 import com.gg.spora.forestStage.data.local.StageDao
 import com.gg.spora.forestStage.data.local.models.LevelEntity
-import com.gg.spora.forestStage.data.local.models.StageEntity
+import com.gg.spora.forestStage.data.local.models.StageLevelEntity
 import com.gg.spora.user.data.local.UserDao
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
@@ -19,7 +19,7 @@ import com.gg.spora.user.data.local.entities.UserEntity
         UserEntity::class,
         LevelCompletedEntity::class,
         LevelEntity::class,
-        StageEntity::class
+        StageLevelEntity::class
     ],
     version = 1,
     exportSchema = false

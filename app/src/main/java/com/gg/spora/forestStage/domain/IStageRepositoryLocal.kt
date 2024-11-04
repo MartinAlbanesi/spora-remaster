@@ -7,12 +7,16 @@ import com.gg.spora.forestStage.domain.model.StageLevel
 
 interface IStageRepositoryLocal {
 
-    fun getStage(stageType: StageType): StageLevel
 
     fun setNewLevels(levels: List<Level>)
 
     fun getLevelsCount(): Int
 
+    fun setNewStagesLevel(stageLevels: List<StageLevel>)
+
+    fun getStageLevelCount(): Int
+
+    fun getStage(stageType: StageType): StageLevel
 //    fun getLevels(typeStage: TypeStage): List<Level>
 
 //    fun updateLevel(levelId: String, starStageLevel: StarState)
