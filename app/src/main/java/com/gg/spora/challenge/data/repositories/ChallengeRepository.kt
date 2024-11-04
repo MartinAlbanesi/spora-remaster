@@ -1,6 +1,9 @@
 package com.gg.spora.challenge.data.repositories
 
-import com.gg.spora.challenge.data.local.ChallengeDao
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
+import com.gg.spora.challenge.data.dao.ChallengeDao
+import com.gg.spora.challenge.domain.entities.toObjectDetail
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.domain.model.StepObjectDetail
 import javax.inject.Inject
@@ -11,11 +14,17 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
 
     suspend fun getAllObjectsDetail(): List<ObjectDetail> {
         val objectDetailEntities = challengeDao.getAllObjectsDetail()
-        return ObjectDetail.objectsDetailEntityToModels(objectDetailEntities)
+        return objectDetailEntities.map { it.toObjectDetail() }
     }
 
     suspend fun insertObjectDetail(objectDetail: ObjectDetail) {
-        challengeDao.insertObjetDetail(objectDetail.toObjectDetailEntity())
+        if(challengeDao.validateIfExistsObjectDetail(objectDetail.nameObjectDetail!!) == 0)
+            challengeDao.insertObjetDetail(objectDetail.toObjectDetailEntity())
+    }
+
+
+    suspend fun getObjectDetailWithName(nameObjectDetail: String) :  ObjectDetail{
+        return challengeDao.getObjectDetailWithName(nameObjectDetail).toObjectDetail()
     }
 
     suspend fun deleteAllObjectsDetail() {
@@ -32,6 +41,13 @@ class ChallengeRepository  @Inject constructor(private val challengeDao: Challen
     suspend fun getAllStepsObjectDetail(): List<StepObjectDetail> {
         val stepObjectDetailEntities = challengeDao.getAllStepsObjectDetail()
         return StepObjectDetail.objectsDetailEntityToModels(stepObjectDetailEntities)
+    }
+
+    suspend fun insertStepsObjectDetail(listStepObjectDetail: List<StepObjectDetail>){
+        for(step in listStepObjectDetail){
+            if(challengeDao.validateIfExistsStepsObjectDetail(step.nameObjectDetail!!, step.numberStep) == 0)
+                challengeDao.insertStepObjetDetail(step.toStepObjectDetailEntity())
+        }
     }
 
     suspend fun insertStepObjectDetail(stepObjectDetail: StepObjectDetail) {

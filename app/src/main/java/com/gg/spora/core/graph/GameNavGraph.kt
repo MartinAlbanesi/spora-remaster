@@ -4,10 +4,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
@@ -21,6 +24,7 @@ import com.gg.spora.R
 import com.gg.spora.camera.ui.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
+import com.gg.spora.challenge.ui.components.ObjectDetailDialog
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
@@ -37,9 +41,7 @@ import com.gg.spora.miniGames.ui.RelationsScreen
 fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.GameGraph>(startDestination = NavigationRoutes.Stage("1")) {
         composable<NavigationRoutes.Stage> {
-
             val stageViewModel = hiltViewModel<StageViewModel>()
-
             val stage by stageViewModel.stage.collectAsState()
 
             val levels by stageViewModel.levels.collectAsState()
@@ -185,80 +187,72 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
         }
 
         composable<NavigationRoutes.Challenge> { backStackEntry ->
-
-            val challengeRoute =
-                backStackEntry.toRoute<NavigationRoutes.Challenge>()
-
             val challengeViewModel = hiltViewModel<ChallengeViewModel>()
+            val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
+            var isCorrect by remember { mutableStateOf(false) }
+            val isLoading by challengeViewModel.isLoading.observeAsState(true)
+            val challengeRoute = backStackEntry.toRoute<NavigationRoutes.Challenge>()
+            isCorrect = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
 
-            MiniGameScreen(
-                modifier = Modifier.fillMaxSize(),
-                imageBackground = R.drawable.expo_background,
-                title = "Desafío",
-                isCorrect = null,
-                questionSize = SporaConstant.MAX_QUESTIONS,
-                isFinished = false,
-                lives = 0,
-                counterQuestion = 0,
-                showIcon = false,
-                showButtonContinue = false,
-                showProgressBar = false,
-                onNextQuestion = {},
-                onResetGame = {},
-                onBackForestStage = {
-                    navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
-                        popUpTo<NavigationRoutes.Stage> {
-                            inclusive = true
+            if(challengeRoute.nameObject != ""){
+                challengeViewModel.selectObject(challengeRoute.nameObject)
+                challengeViewModel.setObjectInObjectsChallengeWithName(challengeRoute.nameObject)
+            }
+            if (!isLoading) {
+                MiniGameScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    imageBackground = R.drawable.minigame_background_crop,
+                    title = stringResource(R.string.title_challenge),
+                    isCorrect = null,
+                    questionSize = SporaConstant.MAX_QUESTIONS,
+                    isFinished = false,
+                    lives = 0,
+                    counterQuestion = 0,
+                    showIcon = false,
+                    showButtonContinue = false,
+                    showProgressBar = false,
+                    onNextQuestion = {},
+                    onResetGame = {},
+                    onBackForestStage = {
+                        navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
+                            popUpTo<NavigationRoutes.Stage> { inclusive = true }
                         }
-                    }
-                    challengeViewModel.setObjectsChallengeEmpty()
-
-                },
-                onNavigateNextLevel = {},
-                content = {
-                    ChallengeScreen(
-                        modifier = Modifier,
-                        onNavigateToCameraScreen = { nameObject ->
-                            navController.navigate(
-                                NavigationRoutes.Camera.createRoute(
-                                    nameObject.toString()
-                                )
-                            )
-                        },
-                        onNavigateToForestStage = {
-                            navController.navigate(
-                                NavigationRoutes.Stage(
-                                    challengeRoute.stageId
-                                )
-                            ) {
-                                popUpTo<NavigationRoutes.Stage> {
-                                    inclusive = true
+                        challengeViewModel.setObjectsChallengeEmpty()
+                    },
+                    onNavigateNextLevel = {},
+                    content = {
+                        ChallengeScreen(
+                            modifier = Modifier,
+                            onNavigateToCameraScreen = { nameObject ->
+                                navController.navigate(NavigationRoutes.Camera(stageId = challengeRoute.stageId,
+                                    nameObject = nameObject.toString()))
+                            },
+                            onNavigateToForestStage = {
+                                navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
+                                    popUpTo<NavigationRoutes.Stage> { inclusive = true }
                                 }
-                            }
-                        },
-                        challengeViewModel = challengeViewModel
-                    )
-                }
+                            },
+                            challengeObjects = objectsChallenge,
+                            continueDialogObjectDetail = { challengeRoute.nameObject = "" },
+                            selectedObject = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)
+                        )
+                    }
             )
+            }
         }
 
-        composable(
-            route = NavigationRoutes.Camera.route,
-            arguments = listOf(navArgument("nameObject") {
-                type = NavType.StringType
-            })
-        ) {
-
-            val challengeViewModel = hiltViewModel<ChallengeViewModel>()
-
-            val nameObject = it.arguments?.getString("nameObject") ?: ""
+        composable<NavigationRoutes.Camera> { backStackEntry ->
+            val cameraRoute = backStackEntry.toRoute<NavigationRoutes.Camera>()
+            val nameObject = cameraRoute.nameObject
 
             CameraScreen(
                 nameObject = nameObject,
                 onNavigateToChallengeScreen = {
-                    navController.popBackStack()
+                    navController.navigate(NavigationRoutes.Challenge(stageId = cameraRoute.stageId, nameObject = nameObject))
                 },
-                challengeViewModel = challengeViewModel
+                onNavigateToBack = {
+                    navController.navigate(NavigationRoutes.Challenge(stageId = cameraRoute.stageId, nameObject = ""))
+                }
             )
         }
     }

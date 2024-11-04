@@ -5,9 +5,10 @@ import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
 data class StepObjectDetail(
     val numberStep : Int,
     val nameObjectDetail : String?,
+    val titleStep : String?,
     val description : String?,
-    val isFirst : Boolean = false,
-    val isLast : Boolean = false
+    val isFirst : Boolean,
+    val isLast : Boolean
 ){
 
     companion object{
@@ -16,6 +17,9 @@ data class StepObjectDetail(
                 numberStep =  stepObjectDetailEntity.numberStep,
                 nameObjectDetail = stepObjectDetailEntity.nameObjectDetail,
                 description = stepObjectDetailEntity.description,
+                titleStep = stepObjectDetailEntity.titleStep,
+                isFirst =  stepObjectDetailEntity.isFirst,
+                isLast = stepObjectDetailEntity.isLast
             )
         }
 
@@ -36,6 +40,9 @@ data class StepObjectDetail(
             numberStep =  numberStep,
             nameObjectDetail = nameObjectDetail!!,
             description = description,
+            titleStep = titleStep,
+            isFirst = isFirst,
+            isLast = isLast
         )
     }
 

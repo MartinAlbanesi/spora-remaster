@@ -73,12 +73,13 @@ object NavigationRoutes {
     @Serializable
     data class Challenge(
         val stageId: String,
+        var nameObject: String
     )
 
     @Serializable
-    object Camera {
-        const val route = "camera/{nameObject}"
-        fun createRoute(nameObject: String) = "camera/$nameObject"
-    }
+    data class Camera (
+        val stageId: String,
+        val nameObject: String,
+    )
 
 }
