@@ -91,7 +91,6 @@ fun HomeScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .blur(radius = 10.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.home_background),

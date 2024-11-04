@@ -20,8 +20,7 @@ import com.gg.spora.user.data.local.entities.UserEntity
         StepObjectDetailEntity::class,
         UserEntity::class,
         LevelCompletedEntity::class,
-        InfoCardEntity::class
-        LevelCompletedEntity::class,
+        InfoCardEntity::class,
         LevelEntity::class,
         StageLevelEntity::class
     ],
