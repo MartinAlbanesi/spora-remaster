@@ -1,15 +1,19 @@
 package com.gg.spora.login.domain
 
+import com.gg.spora.user.data.local.UserRepositoryLocal
+import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
 class LogOutUseCase @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
+    private val userRepositoryLocal: IUserRepositoryLocal
 //    private val logOutWithGoogleUseCase: LogOutWithGoogleUseCase
 ) {
 
-    operator fun invoke() {
+    suspend operator fun invoke() {
         firebaseAuth.signOut()
+        userRepositoryLocal.deleteUser()
 //        logOutWithGoogleUseCase()
     }
 }

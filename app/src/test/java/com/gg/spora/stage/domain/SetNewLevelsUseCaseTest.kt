@@ -7,6 +7,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -30,7 +31,7 @@ class SetNewLevelsUseCaseTest {
         val levels = FakeStageModels.fakeLevels
 
         // When
-        coEvery { stageRepositoryLocal.getLevelsCount() } returns SporaConstant.MAX_STAGES_LEVEL
+        coEvery { stageRepositoryLocal.getLevelsCount() } returns SporaConstant.MAX_LEVELS
 
         setNewLevelsUseCase(levels)
 

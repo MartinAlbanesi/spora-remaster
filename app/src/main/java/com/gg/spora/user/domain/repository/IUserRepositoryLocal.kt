@@ -20,4 +20,6 @@ interface IUserRepositoryLocal {
     suspend fun updateUserOxygen(oxygen: Int)
 
     suspend fun updateLevelCompleted(levelCompleted: LevelCompletedEntity)
+
+    suspend fun deleteUser()
 }

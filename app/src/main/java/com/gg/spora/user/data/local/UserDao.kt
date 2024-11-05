@@ -1,6 +1,7 @@
 package com.gg.spora.user.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -33,8 +34,8 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLevelCompleted(levelsCompleted: LevelCompletedEntity)
 
-//    @Delete
-//    suspend fun deleteUser(user: UserEntity)
+    @Query("DELETE FROM user_entity")
+    suspend fun deleteUser()
 //
 //    @Query("DELETE FROM user_entity WHERE id = :userId")
 //    suspend fun deleteUserById(userId: String)
