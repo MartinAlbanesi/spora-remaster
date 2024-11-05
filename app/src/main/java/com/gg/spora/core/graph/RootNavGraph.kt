@@ -30,7 +30,7 @@ fun RootNavigationGraph(
 
         gameNavGraph(navController = navController)
 
-        profileNavGraph(navController = navController)
+        settingNavGraph(navController = navController)
 
     }
 }

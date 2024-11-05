@@ -72,7 +72,7 @@ object NavigationRoutes {
     // Profile Graph ------------------------------------------------------
 
     @Serializable
-    object ProfileGraph
+    object SettingGraph
 
     @Serializable
     object SettingScreen

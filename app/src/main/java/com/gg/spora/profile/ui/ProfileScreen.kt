@@ -22,14 +22,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
+import com.gg.spora.user.domain.models.User
 
 @Composable
 fun ProfileScreen(
     onBackClick: () -> Unit,
     onSettingsClick: () -> Unit,
-    viewModel: ProfileViewModel = viewModel()
+   //
+    currentIndex: Int = 0,
+    user: User,
+    onLeftArrowClick: () -> Unit,
+    onRightArrowClick: () -> Unit
 ) {
-    val currentIndex by viewModel.currentIndex.collectAsState()
+   // val currentIndex by viewModel.currentIndex.collectAsState()
     val images = listOf(
         R.drawable.logro_semilla,
         R.drawable.plastic_bottle,
@@ -90,13 +95,13 @@ fun ProfileScreen(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = "Username",
+                                text = user.userName,
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 24.sp
                             )
                             Text(
-                                text = "Email",
+                                text = user.email,
                                 color = Color.Black,
                                 fontSize = 16.sp,
                                 modifier = Modifier.padding(top = 8.dp)
@@ -144,7 +149,7 @@ fun ProfileScreen(
                             modifier = Modifier
                                 .size(88.dp)
                                 .clickable {
-                                    viewModel.onLeftArrowClick()
+                                    onLeftArrowClick()
                                 }
                         )
                         Image(
@@ -158,7 +163,7 @@ fun ProfileScreen(
                             modifier = Modifier
                                 .size(88.dp)
                                 .clickable {
-                                    viewModel.onRightArrowClick()
+                                   onRightArrowClick()
                                 }
                         )
                     }
@@ -177,7 +182,15 @@ private fun ProfileScreenPreview() {
         ) {
             ProfileScreen(
                 onBackClick = {},
-                onSettingsClick = {}
+                onSettingsClick = {},
+                user = User(
+                    userName = "User Name",
+                    email = "email",
+                    oxygen = 0,
+                    levelsCompleted = emptyList(),
+                    id = "id"),
+                onLeftArrowClick = {},
+                onRightArrowClick = {}
             )
         }
     }

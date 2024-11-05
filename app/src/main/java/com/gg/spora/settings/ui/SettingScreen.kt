@@ -26,7 +26,7 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
-    onSettingsClick: () -> Unit
+   // onSettingsClick: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -44,7 +44,6 @@ fun SettingsScreen(
             TopBarWithTitleExitAndIcon(
                 title = "Opciones",
                 onBackClick = onBackClick,
-                onSettingsClick = onSettingsClick,
                 showIcon = false,
                 showSettingsIcon = false
             )
@@ -193,8 +192,7 @@ private fun SettingsScreenPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             SettingsScreen(
-                onBackClick = {},
-                onSettingsClick = {}
+                onBackClick = {}
             )
         }
     }
