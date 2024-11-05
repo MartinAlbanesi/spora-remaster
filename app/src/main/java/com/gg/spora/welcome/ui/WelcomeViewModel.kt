@@ -3,8 +3,8 @@ package com.gg.spora.welcome.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.fake.FakeStageModels
-import com.gg.spora.forestStage.domain.SetNewLevelsUseCase
-import com.gg.spora.forestStage.domain.SetNewStagesLevelUseCase
+import com.gg.spora.stage.domain.SetNewLevelsUseCase
+import com.gg.spora.stage.domain.SetNewStagesLevelUseCase
 import com.gg.spora.user.domain.SetNewUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

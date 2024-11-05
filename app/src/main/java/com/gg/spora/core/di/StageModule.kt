@@ -1,13 +1,12 @@
 package com.gg.spora.core.di
 
 import com.gg.spora.core.firebase.FirestoreService
-import com.gg.spora.forestStage.domain.IStageRepositoryNetwork
-import com.gg.spora.forestStage.data.FakeStageLocalRepositoryLocal
-import com.gg.spora.forestStage.data.local.StageDao
-import com.gg.spora.forestStage.data.local.StageRepositoryLocal
-import com.gg.spora.forestStage.data.network.StageRepositoryNetwork
-import com.gg.spora.forestStage.domain.GetLevelsUseCase
-import com.gg.spora.forestStage.domain.IStageRepositoryLocal
+import com.gg.spora.stage.domain.IStageRepositoryNetwork
+import com.gg.spora.stage.data.local.StageDao
+import com.gg.spora.stage.data.local.StageRepositoryLocal
+import com.gg.spora.stage.data.network.StageRepositoryNetwork
+import com.gg.spora.stage.domain.GetLevelsUseCase
+import com.gg.spora.stage.domain.IStageRepositoryLocal
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import dagger.Module
 import dagger.Provides
