@@ -48,7 +48,7 @@ fun SettingsScreen(
                 onBackClick = onBackClick,
                 onSettingsClick = onSettingsClick,
                 showIcon = false,
-                showSettingsIcon = true
+                showSettingsIcon = false
             )
 
             Spacer(modifier = Modifier.weight(1f))
