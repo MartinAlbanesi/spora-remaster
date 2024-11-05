@@ -50,11 +50,11 @@ fun HomeScreen(
             text = "Ranking",
             onClick = onNavigateToRanking
         ),
-        HomeIcon(
-            image = R.drawable.missions_icon,
-            text = "Misiones",
-            onClick = {}
-        )
+//        HomeIcon(
+//            image = R.drawable.missions_icon,
+//            text = "Misiones",
+//            onClick = {}
+//        )
     )
 
     // Icons in the right

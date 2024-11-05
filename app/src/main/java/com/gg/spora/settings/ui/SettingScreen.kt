@@ -26,6 +26,7 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
+    onLogOut: () -> Unit
    // onSettingsClick: () -> Unit
 ) {
     Box(
@@ -174,7 +175,7 @@ fun SettingsScreen(
 
                 SporaPrimaryButton(
                     text = "Cerrar sesión",
-                    onClick = { /* TODO */ },
+                    onClick = onLogOut,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
@@ -192,7 +193,8 @@ private fun SettingsScreenPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             SettingsScreen(
-                onBackClick = {}
+                onBackClick = {},
+                onLogOut = {}
             )
         }
     }

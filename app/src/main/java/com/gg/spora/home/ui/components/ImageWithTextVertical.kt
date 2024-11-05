@@ -37,7 +37,7 @@ fun ImageWithTextVertical(
             painter = painterResource(image),
             contentDescription = null,
             alignment = Alignment.TopCenter,
-            colorFilter = ColorFilter.lighting(add = Color.Black, multiply = Color(0xFF444444)),
+//            colorFilter = ColorFilter.lighting(add = Color.Black, multiply = Color(0xFF444444)),
             modifier = Modifier
                 .size(64.dp)
                 /*
