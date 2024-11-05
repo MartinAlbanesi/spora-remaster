@@ -11,6 +11,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -20,6 +23,9 @@ import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
 import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ranking.ui.RankingViewModel
+import com.gg.spora.profile.ui.ProfileScreen
+import com.gg.spora.profile.ui.ProfileViewModel
+import com.gg.spora.user.domain.models.User
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
@@ -74,5 +80,22 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 currentUser = currentUser
             )
         }
+        composable<NavigationRoutes.ProfileScreen> {
+            val viewModel: ProfileViewModel = hiltViewModel()
+            val currentIndex by viewModel.currentIndex.collectAsState()
+            ProfileScreen(
+                onBackClick = { navController.popBackStack() },
+                onSettingsClick = { navController.navigate(NavigationRoutes.SettingGraph) },
+                        user = User(
+                        userName = "User Name",
+                email = "email",
+                oxygen = 0,
+                levelsCompleted = emptyList(),
+                id = "id"),
+            onLeftArrowClick = { viewModel.onLeftArrowClick() },
+            onRightArrowClick = { viewModel.onRightArrowClick() },
+                currentIndex = currentIndex
+            )
     }
+}
 }

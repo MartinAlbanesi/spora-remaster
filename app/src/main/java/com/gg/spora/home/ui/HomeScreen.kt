@@ -14,7 +14,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +34,8 @@ fun HomeScreen(
     onNavigateToForestStage: () -> Unit,
     onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
-    onNavigateToLibrary: () -> Unit
+    onNavigateToLibrary: () -> Unit,
+    onNavigateToProfile: () -> Unit,
 ) {
 
     // Icons in the left
@@ -43,7 +43,7 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.profile_icon,
             text = "Perfil",
-            onClick = {}
+            onClick = onNavigateToProfile
         ),
         HomeIcon(
             image = R.drawable.ranking_icon,
@@ -116,7 +116,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = onClick ),
+                        modifier = Modifier.clickable(onClick = onClick),
                     )
                 }
             }
@@ -184,6 +184,7 @@ private fun MiniGameScreenPreview() {
                 onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
+                onNavigateToProfile = {}
             )
         }
     }
