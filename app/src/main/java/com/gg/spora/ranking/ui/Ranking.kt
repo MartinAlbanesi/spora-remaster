@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gg.spora.R
+import com.gg.spora.core.fake.FakeUser
 import com.gg.spora.core.ui.components.OptionItemButton
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaWithCard
@@ -57,9 +58,10 @@ import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 fun Ranking(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
-    viewModel: RankingViewModel = hiltViewModel()
+//
+    userList: List<RankingItem> = emptyList()
 ) {
-    val rankingItems by viewModel.rankingItems.collectAsState()
+   // val rankingItems by viewModel.rankingItems.collectAsState()
 
     Image(
         painter = painterResource(id = R.drawable.ranking_background),
@@ -96,7 +98,7 @@ fun Ranking(
                 .padding(horizontal = 16.dp)
                 .height(400.dp)
         ) {
-            itemsIndexed(rankingItems) { index, item ->
+            itemsIndexed(userList) { index, item ->
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -208,7 +210,7 @@ fun Ranking(
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(34.dp))
 
         // Sección "Tu puntaje"
         Column(
@@ -333,6 +335,7 @@ fun Ranking(
 @Composable
 fun RankingPreview() {
     Ranking(
+        userList = FakeUser.items,
         onBackClick = {}
     )
 }

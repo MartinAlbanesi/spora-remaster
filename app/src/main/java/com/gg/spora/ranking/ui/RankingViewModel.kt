@@ -1,6 +1,7 @@
 // RankingViewModel.kt
 package com.gg.spora.ranking.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.R
@@ -36,7 +37,8 @@ class RankingViewModel : ViewModel() {
                 RankingItem("User6", R.drawable.user_image, 35, 90),
 
             )
-            _rankingItems.value = sortRankingItemsByO2Count(items)
+            _rankingItems.value = items.sortedByDescending { it.o2Count }
+            Log.i("RankingViewModel", "_rankingItems.value: ${_rankingItems.value}")
         }
     }
 
