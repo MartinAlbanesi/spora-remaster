@@ -30,7 +30,7 @@ fun ProfileScreen(
     onSettingsClick: () -> Unit,
    //
     currentIndex: Int = 0,
-    user: User,
+    user: User?,
     onLeftArrowClick: () -> Unit,
     onRightArrowClick: () -> Unit
 ) {
@@ -95,13 +95,13 @@ fun ProfileScreen(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = user.userName,
+                                text = user?.userName ?: "User Name",
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 24.sp
                             )
                             Text(
-                                text = user.email,
+                                text = user?.email ?: "email",
                                 color = Color.Black,
                                 fontSize = 16.sp,
                                 modifier = Modifier.padding(top = 8.dp)
@@ -188,7 +188,10 @@ private fun ProfileScreenPreview() {
                     email = "email",
                     oxygen = 0,
                     levelsCompleted = emptyList(),
-                    id = "id"),
+                    id = "id",
+                    treesCount = 0,
+                    userImage = R.drawable.spora_face_splash
+                ),
                 onLeftArrowClick = {},
                 onRightArrowClick = {}
             )
