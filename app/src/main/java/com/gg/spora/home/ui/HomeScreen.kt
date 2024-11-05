@@ -1,6 +1,5 @@
 package com.gg.spora.home.ui
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -33,6 +32,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToForestStage: () -> Unit,
     onNavigateToRanking: () -> Unit,
+    onNavigateToExpoStage: () -> Unit,
 ) {
 
     // Icons in the left
@@ -50,30 +50,33 @@ fun HomeScreen(
             onClick = {}
         ),
         HomeIcon(
+            image = R.drawable.ranking_icon,
+            text = "Ranking",
+            onClick = {}
+        ),
+        HomeIcon(
             image = R.drawable.missions_icon,
             text = "Misiones",
             onClick = {}
         )
-        ),
          */
     )
 
     // Icons in the right
     val rightIcons = listOf<HomeIcon>(
-
-        /*
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Diario",
+            onClick = {}
+        ),
+        HomeIcon(
+            image = R.drawable.grove_icon,
+            text = "Arboleda",
+            onClick = {}
+        )
 
+    )
 
-    HomeIcon(
-        image = R.drawable.grove_icon,
-        text = "Arboleda",
-        onClick = {}
-    )
-     */
-    )
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
@@ -109,26 +112,28 @@ fun HomeScreen(
                 .padding(top = paddingValue.calculateTopPadding(), start = 8.dp, end = 8.dp)
         ) {
             Column(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
+                modifier = Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally
+                    //.align(Alignment.TopStart)
             ) {
                 leftIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = onClick ),
                     )
                 }
             }
             Column(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
+                    .align(Alignment.TopEnd),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 rightIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        modifier = Modifier.clickable(onClick = { onClick }),
+                        // modifier = Modifier.clickable(onClick = { onClick }),
                     )
                 }
             }
@@ -142,6 +147,7 @@ fun HomeScreen(
                     modifier = Modifier
                         .size(140.dp)
                         .align(Alignment.Center)
+                        .offset(x = (-20).dp)
                 )
             }
 
@@ -154,6 +160,16 @@ fun HomeScreen(
                     .offset(y = (-40).dp, x = (-80).dp)
                     .clickable(onClick = onNavigateToForestStage)
             )
+
+          /*  SignButton(
+                image = R.drawable.expo_sign,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .size(140.dp)
+//                    .offset(y = (-40).dp, x = (-80).dp)
+                    .clickable(onClick = onNavigateToExpoStage)
+            )
+            */
         }
     }
 }
@@ -169,7 +185,8 @@ private fun MiniGameScreenPreview() {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
                 onNavigateToForestStage = {},
-                onNavigateToRanking = {}
+                onNavigateToRanking = {},
+                onNavigateToExpoStage = {}
             )
         }
     }

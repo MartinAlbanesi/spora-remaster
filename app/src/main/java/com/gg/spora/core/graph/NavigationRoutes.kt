@@ -4,32 +4,57 @@ import kotlinx.serialization.Serializable
 
 object NavigationRoutes {
 
-    @Serializable
-    object Home
+    // Auth Graph ------------------------------------------------------
 
     @Serializable
-    object ForestStage
-
-    @Serializable
-    data class QuizGame(
-        val title: String
-    )
+    object AuthGraph
 
     @Serializable
     object Welcome
 
     @Serializable
+    object SignUp
+
+    @Serializable
+    object RegisteredLogin
+
+    // Home Graph ------------------------------------------------------
+
+    @Serializable
+    object HomeGraph
+
+    @Serializable
+    object Home
+
+    @Serializable
     object Grove
 
-    @Serializable
-    object Ranking
+    // Game Graph ------------------------------------------------------
 
     @Serializable
-    object Challenge
+    object GameGraph
 
     @Serializable
-    data class QuizImage(
-        val title: String
+    data class Stage(
+        val stageId: String = "1",
+    )
+
+    @Serializable
+    data class QuizGame(
+        val title: String,
+        val quizCount: Int,
+        val imageCount: Int,
+        val relationsCount: Int,
+        val levelId: String,
+        val imageBackground: Int,
+        val stageId: String,
+    )
+
+
+
+    @Serializable
+    data class Challenge(
+        val stageId: String,
     )
 
     @Serializable
@@ -37,10 +62,5 @@ object NavigationRoutes {
         const val route = "camera/{nameObject}"
         fun createRoute(nameObject: String) = "camera/$nameObject"
     }
-
-    @Serializable
-    data class RelationsGame(
-        val title: String
-    )
 
 }

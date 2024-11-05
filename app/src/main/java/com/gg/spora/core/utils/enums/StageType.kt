@@ -1,8 +1,8 @@
 package com.gg.spora.core.utils.enums
 
 enum class StageType(val label: String) {
-    FOREST ("Bosque"),
+    FOREST ("Área del Bosque"),
     DESERT ("Desierto"),
     RIVER ("Río"),
-    CHALLENGE ("Desafío")
+    EXPO ("Proyecto 2024"),
 }

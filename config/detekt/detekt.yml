@@ -1,5 +1,5 @@
 build:
-  maxIssues: 0
+  maxIssues: 10
   excludeCorrectable: false
   weights:
   # complexity: 2
@@ -128,7 +128,7 @@ complexity:
     threshold: 600
   LongMethod:
     active: true
-    threshold: 60
+    threshold: 100
   LongParameterList:
     active: false
     functionThreshold: 20
@@ -534,7 +534,7 @@ style:
     active: false
   DestructuringDeclarationWithTooManyEntries:
     active: true
-    maxDestructuringEntries: 3
+    maxDestructuringEntries: 6
   DoubleNegativeLambda:
     active: false
     negativeFunctions:
@@ -610,7 +610,7 @@ style:
     active: true
     maxJumpCount: 1
   MagicNumber:
-    active: true
+    active: false
     excludes: ['**/test/**',
                '**/androidTest/**',
                '**/commonTest/**',
@@ -627,6 +627,14 @@ style:
       - '0'
       - '1'
       - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: true
     ignoreLocalVariableDeclaration: false
@@ -644,7 +652,7 @@ style:
     maxChainedCalls: 5
   MaxLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 160
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false

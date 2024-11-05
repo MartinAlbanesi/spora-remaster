@@ -13,7 +13,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,6 +59,7 @@ fun ChampyWithCard(
             painter = painterResource(champyImage),
             contentDescription = null,
             modifier = Modifier
+                .weight(1f)
                 .size(200.dp)
                 .offset{
                     if (isCorrect == true) {
@@ -76,6 +76,7 @@ fun ChampyWithCard(
             ),
             modifier = Modifier
                 .fillMaxSize()
+                .weight(3.5f)
         ) {
             content()
         }
@@ -84,6 +85,10 @@ fun ChampyWithCard(
 
 }
 
+@Preview(
+    heightDp = 640,
+    widthDp = 360,
+)
 @Preview
 //@PreviewLightDark
 //@PreviewFontScale
@@ -97,7 +102,7 @@ private fun SporaWithCardPreview() {
         ) {
             ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),
-                champyImage = R.drawable.champy_celebrando_brazoslevantados,
+                champyImage = R.drawable.champy_celebrating_raised_arms,
             ) {}
         }
     }

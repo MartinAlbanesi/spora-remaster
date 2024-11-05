@@ -1,5 +1,6 @@
 package com.gg.spora.core.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,11 +20,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -43,13 +47,20 @@ fun TopBarWithTitleExitAndIcon(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(title)
+            Text(
+                text = title,
+                color = Color.White
+            )
         },
         navigationIcon = {
             IconButton(
                 onClick = { onBackClick() }
             ) {
-                Icon(Icons.Default.Close, contentDescription = "Back")
+                Icon(
+                    Icons.Default.Close,
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
             }
         },
         actions = {
@@ -61,7 +72,7 @@ fun TopBarWithTitleExitAndIcon(
                     Icon(
                         Icons.Default.Favorite,
                         contentDescription = null,
-                        tint = Color(0xFFbc0000),
+                        tint = colorResource(id = R.color.error),
                         modifier = Modifier.size(44.dp)
                     )
                     Text(
@@ -76,6 +87,11 @@ fun TopBarWithTitleExitAndIcon(
             containerColor = Color.Transparent
         ),
         modifier = modifier
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color.Black, Color.Transparent)
+                )
+            )
     )
 }
 

@@ -59,7 +59,7 @@ private fun SporaWithCardPreview() {
         ) {
             SporaWithCard(
                 modifier = Modifier.fillMaxSize(),
-                sporaImage = R.drawable.champy_sonriente_idle,
+                sporaImage = R.drawable.champy_smiling_idle,
             ) {}
         }
     }

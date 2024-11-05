@@ -7,11 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -44,7 +41,8 @@ import kotlinx.coroutines.launch
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
     setGuestName: (String) -> Unit = {},
-    onNavigateToHome: () -> Unit = {}
+    onNavigateToHome: () -> Unit,
+    onNavigateToSignUp: () -> Unit
 ) {
     var name by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
@@ -57,54 +55,58 @@ fun WelcomeScreen(
             .fillMaxSize()
     ) {
 
-            HorizontalPager(
-                state = pagerState,
-                modifier = modifier,
-                userScrollEnabled = false
-            ) { page ->
+        HorizontalPager(
+            state = pagerState,
+            modifier = modifier,
+            userScrollEnabled = false
+        ) { page ->
 
-                when (page) {
-                    0 -> LogoScreen(modifier) {
+            when (page) {
+                0 -> LogoScreen(modifier) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(page + 1)
+                    }
+                }
+
+                1 -> ChampyTalkScreen(modifier) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(page + 1)
+                    }
+                }
+
+                2 -> TypeUserSelectionScreen(
+                    modifier = modifier,
+                    onClick = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(page + 1)
                         }
-                    }
+                    },
+                    onNavigateToSignUp = onNavigateToSignUp
+                )
 
-                    1 -> ChampyTalkScreen(modifier) {
+                3 -> GuestEnterNameScreen(
+                    modifier,
+                    guestName = name,
+                    onValueChange = { name = it }) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(page + 1)
+                    }
+                }
+
+                4 -> ChampyTalkGuestScreen(modifier, guestName = name) {
+                    setGuestName(name)
+                    onNavigateToHome()
+                }
+
+                else -> {
+                    LogoScreen(modifier) {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(page + 1)
-                        }
-                    }
-
-                    2 -> TypeUserSelectionScreen(modifier) {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(page + 1)
-                        }
-                    }
-
-                    3 -> GuestEnterNameScreen(
-                        modifier,
-                        guestName = name,
-                        onValueChange = { name = it }) {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(page + 1)
-                        }
-                    }
-
-                    4 -> ChampyTalkGuestScreen(modifier, guestName = name) {
-                        setGuestName(name)
-                        onNavigateToHome()
-                    }
-
-                    else -> {
-                        LogoScreen(modifier) {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(page + 1)
-                            }
                         }
                     }
                 }
             }
+        }
     }
 }
 
@@ -120,7 +122,7 @@ fun LogoScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -134,23 +136,23 @@ fun LogoScreen(
 //            horizontalAlignment = Alignment.CenterHorizontally
 //        ) {
 
-            LogoInitialAnimation(
-                image = R.drawable.logo_reborde_slogan,
-                modifier = modifier.align(Alignment.Center)
-            )
+        LogoInitialAnimation(
+            image = R.drawable.logo_with_border_slogan,
+            modifier = modifier.align(Alignment.Center)
+        )
 
-            SporaPrimaryButton(
+        SporaPrimaryButton(
 //                    .offset(y = 60.dp),
-                text = "Continuar",
-                textSize = 30,
-                onClick = onClick,
-                modifier = modifier
-                    .size(width = 350.dp, height = 50.dp)
-                    .align(Alignment.BottomCenter)
-                    .offset(y = -60.dp),
-            )
+            text = "Continuar",
+            textSize = 30,
+            onClick = onClick,
+            modifier = modifier
+                .size(width = 350.dp, height = 50.dp)
+                .align(Alignment.BottomCenter)
+                .offset(y = -60.dp),
+        )
 
-        }
+    }
 //    }
 }
 
@@ -167,7 +169,7 @@ fun ChampyTalkScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -178,23 +180,23 @@ fun ChampyTalkScreen(
 //            verticalArrangement = Arrangement.SpaceEvenly,
 //            horizontalAlignment = Alignment.CenterHorizontally
 //        ) {
-            ChampyWithTopDialogue(
-                champy = R.drawable.champy_sonriente_brazo_izquierdo_levantado,
-                dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi hogar.",
-                x = -(30).dp,
-                y = -(22).dp,
-                modifier = Modifier.align(Alignment.Center)
-            )
+        ChampyWithTopDialogue(
+            champy = R.drawable.champy_smiling_left_arm_raised,
+            dialogue = "¡Hola! Me llamo Champy y necesito tu ayuda para salvar mi bosque.",
+            x = -(30).dp,
+            y = -(22).dp,
+            modifier = Modifier.align(Alignment.Center)
+        )
 
-            SporaPrimaryButton(
-                text = "Continuar",
-                textSize = 30,
-                onClick = onClick,
-                modifier = modifier
-                    .size(width = 350.dp, height = 50.dp)
-                    .align(Alignment.BottomCenter)
-                    .offset(y = -60.dp),
-            )
+        SporaPrimaryButton(
+            text = "Continuar",
+            textSize = 30,
+            onClick = onClick,
+            modifier = modifier
+                .size(width = 350.dp, height = 50.dp)
+                .align(Alignment.BottomCenter)
+                .offset(y = -60.dp),
+        )
 //        }
     }
 }
@@ -203,7 +205,8 @@ fun ChampyTalkScreen(
 @Composable
 fun TypeUserSelectionScreen(
     modifier: Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onNavigateToSignUp: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -212,7 +215,7 @@ fun TypeUserSelectionScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -224,12 +227,12 @@ fun TypeUserSelectionScreen(
 //            horizontalAlignment = Alignment.CenterHorizontally
 //        ) {
 
-            ChampyWithTopDialogue(
-                champy = R.drawable.champy_curioso_brazos_al_cuerpo,
-                dialogue = "Pero primero, ¿me contás sobre vos?",
-                x = -(30).dp,
-                modifier = Modifier.align(Alignment.Center)
-            )
+        ChampyWithTopDialogue(
+            champy = R.drawable.champy_curious_arms_to_body,
+            dialogue = "Pero primero, ¿me contás sobre vos?",
+            x = -(30).dp,
+            modifier = Modifier.align(Alignment.Center)
+        )
 
 
 //            Column(
@@ -239,16 +242,33 @@ fun TypeUserSelectionScreen(
 //                    /*Nav to Sign Up screen*/
 //                }
 
-                SporaPrimaryInverseButton(
-                    text = "Jugar como invitado",
-                    textSize = 20,
-                    onClick = onClick,
-                    modifier = modifier
-                        .size(width = 350.dp, height = 50.dp)
-                        .align(Alignment.BottomCenter)
-                        .offset(y = -60.dp),
-                )
-            }
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .offset(y = (-60).dp),
+        ) {
+            SporaPrimaryInverseButton(
+                text = "Jugar como invitado",
+                textSize = 20,
+                onClick = onClick,
+                modifier = Modifier
+                    .size(width = 350.dp, height = 50.dp)
+//                    .align(Alignment.BottomCenter)
+//                    .offset(y = -60.dp),
+            )
+            SporaPrimaryButton(
+                text = "Crear cuenta",
+                textSize = 20,
+                onClick = {
+                    onNavigateToSignUp()
+                },
+                modifier = Modifier
+                    .size(width = 350.dp, height = 50.dp)
+//                    .offset(y = 10.dp),
+            )
+        }
+    }
 //        }
 //    }
 }
@@ -268,7 +288,7 @@ fun GuestEnterNameScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -281,31 +301,33 @@ fun GuestEnterNameScreen(
 //            horizontalAlignment = Alignment.CenterHorizontally
 //        ) {
 
-            ChampyWithTopDialogue(
-                champy = R.drawable.champy_curioso_brazo_izquierdo_en_la_mejilla,
-                dialogue = "Entonces... " +
-                        "\n¿Cómo te llamas?",
-                x = -(30).dp,
-                modifier = Modifier.align(Alignment.Center)
-            )
+        ChampyWithTopDialogue(
+            champy = R.drawable.champy_curious_left_arm_in_the_cheek,
+            dialogue = "Entonces... " +
+                "\n¿Cómo te llamás?",
+            x = -(30).dp,
+            modifier = Modifier.align(Alignment.Center)
+        )
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = modifier.align(Alignment.BottomCenter).offset(y = -60.dp),
-            ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = modifier
+                .align(Alignment.BottomCenter)
+                .offset(y = -60.dp),
+        ) {
 
-                SporaTextField(modifier = modifier, guestName, onValueChange)
+            SporaTextField(modifier = modifier, guestName, onValueChange)
 
                 SporaPrimaryButton(
                     modifier.size(width = 350.dp, height = 50.dp),
-                    "Siguente",
-                    textSize = 32,
+                    "Siguiente",
+                    textSize = 30,
                     onClick = onClick
                 )
 
-            }
         }
+    }
 //    }
 }
 
@@ -319,7 +341,7 @@ fun ChampyTalkGuestScreen(
     Box(modifier = modifier.fillMaxSize()) {
 
         Image(
-            painter = painterResource(id = R.drawable.fondo_introduccion),
+            painter = painterResource(id = R.drawable.welcome_background),
             contentDescription = "Area 1 background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
@@ -331,25 +353,25 @@ fun ChampyTalkGuestScreen(
 //            horizontalAlignment = Alignment.CenterHorizontally
 //        ) {
 
-            ChampyWithTopDialogue(
-                champy = R.drawable.champy_celebrando_brazoslevantados,
-                dialogue = "¡Genial, ${guestName}!\n vamos a mi hogar",
-                x = -(30).dp,
-                y = -(22).dp,
-                modifier = Modifier.align(Alignment.Center)
-            )
+        ChampyWithTopDialogue(
+            champy = R.drawable.champy_celebrating_raised_arms,
+            dialogue = "¡Genial, ${guestName}!\n Vamos a mi hogar",
+            x = -(30).dp,
+            y = -(22).dp,
+            modifier = Modifier.align(Alignment.Center)
+        )
 
-            SporaPrimaryButton(
-                text = "Comenzar",
-                textSize = 24,
-                modifier = modifier
-                    .size(width = 350.dp, height = 60.dp)
-                    .align(Alignment.BottomCenter)
-                    .offset(y = -60.dp),
-            ) {
-                onClick()
-            }
+        SporaPrimaryButton(
+            text = "Comenzar",
+            textSize = 24,
+            modifier = modifier
+                .size(width = 350.dp, height = 60.dp)
+                .align(Alignment.BottomCenter)
+                .offset(y = (-60).dp),
+        ) {
+            onClick()
         }
+    }
 //    }
 }
 
