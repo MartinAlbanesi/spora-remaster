@@ -25,10 +25,10 @@ import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
-import com.gg.spora.forestStage.domain.model.getLevelWithStage
-import com.gg.spora.forestStage.ui.LevelPreview
-import com.gg.spora.forestStage.ui.StageScreen
-import com.gg.spora.forestStage.ui.StageViewModel
+import com.gg.spora.stage.domain.model.getLevelWithStage
+import com.gg.spora.stage.ui.LevelPreview
+import com.gg.spora.stage.ui.StageScreen
+import com.gg.spora.stage.ui.StageViewModel
 import com.gg.spora.miniGames.ui.QuizImageScreen
 import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
@@ -44,6 +44,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             val levels by stageViewModel.levels.collectAsState()
 
             val currentLevel by stageViewModel.currentLevel.collectAsState()
+
+            val oxygen by stageViewModel.oxygen.collectAsState()
 
             var showLevelPreview by rememberSaveable {
                 mutableStateOf(false)
@@ -78,7 +80,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             stage?.let {
                 StageScreen(
-                    oxygen = 75,
+                    oxygen = oxygen,
                     title = stage!!.stageType.label,
                     levels = levels,
                     backgroundImage = stage!!.stageBackgroundImage,

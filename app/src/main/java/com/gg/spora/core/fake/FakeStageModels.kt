@@ -5,10 +5,10 @@ import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.enums.StageType
-import com.gg.spora.forestStage.data.local.models.LevelEntity
-import com.gg.spora.forestStage.data.local.models.StageLevelEntity
-import com.gg.spora.forestStage.domain.model.Level
-import com.gg.spora.forestStage.domain.model.StageLevel
+import com.gg.spora.stage.data.local.models.LevelEntity
+import com.gg.spora.stage.data.local.models.StageLevelEntity
+import com.gg.spora.stage.domain.model.Level
+import com.gg.spora.stage.domain.model.StageLevel
 import com.gg.spora.miniGames.domain.model.Challenge
 
 object FakeStageModels {
