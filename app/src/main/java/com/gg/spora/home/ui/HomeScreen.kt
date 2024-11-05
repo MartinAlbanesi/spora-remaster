@@ -48,7 +48,7 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.ranking_icon,
             text = "Ranking",
-            onClick = {}
+            onClick = onNavigateToRanking
         ),
         HomeIcon(
             image = R.drawable.missions_icon,

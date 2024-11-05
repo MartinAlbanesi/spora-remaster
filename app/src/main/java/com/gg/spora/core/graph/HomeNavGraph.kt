@@ -34,14 +34,14 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val isLoading by homeViewModel.isLoading.collectAsState()
 
-            if(!isLoading){
+            if (!isLoading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
-                ){
+                ) {
                     CircularProgressIndicator()
                 }
-            }else{
+            } else {
                 HomeScreen(
                     oxygen = userOxygen,
                     onNavigateToForestStage = {
@@ -52,6 +52,9 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     },
                     onNavigateToLibrary = {
                         navController.navigate(NavigationRoutes.LibraryGraph)
+                    },
+                    onNavigateToRanking = {
+                        navController.navigate(NavigationRoutes.Ranking)
                     }
                 )
             }
@@ -60,7 +63,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
         }
         composable<NavigationRoutes.Ranking> {
-           val viewModel: RankingViewModel = hiltViewModel()
+            val viewModel: RankingViewModel = hiltViewModel()
             val rankingItems by viewModel.rankingItems.collectAsState()
             Ranking(
                 onBackClick = { navController.popBackStack() },
