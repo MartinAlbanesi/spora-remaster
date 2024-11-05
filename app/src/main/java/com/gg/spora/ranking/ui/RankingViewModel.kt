@@ -26,7 +26,7 @@ class RankingViewModel : ViewModel() {
 
     private fun loadRankingData() {
         viewModelScope.launch {
-            // Simulate loading data from a repository or network
+
             val items = listOf(
                 RankingItem("User1", R.drawable.user_image, 42, 100),
                 RankingItem("User2", R.drawable.user_image, 35, 90),
@@ -34,7 +34,7 @@ class RankingViewModel : ViewModel() {
                 RankingItem("User4", R.drawable.user_image, 35, 90),
                 RankingItem("User5", R.drawable.user_image, 35, 90),
                 RankingItem("User6", R.drawable.user_image, 35, 90),
-                // Add more items as needed
+
             )
             _rankingItems.value = sortRankingItemsByO2Count(items)
         }

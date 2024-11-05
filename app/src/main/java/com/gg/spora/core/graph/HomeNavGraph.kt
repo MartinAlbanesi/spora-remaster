@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.gg.spora.home.ui.HomeScreen
+import com.gg.spora.ranking.ui.Ranking
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
@@ -16,11 +17,19 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 },
                 onNavigateToExpoStage = {
                     navController.navigate(NavigationRoutes.Stage("2"))
+                },
+                onNavigateToRanking = {
+                    navController.navigate(NavigationRoutes.Ranking)
                 }
             )
         }
         composable<NavigationRoutes.Grove> {
 
+        }
+        composable<NavigationRoutes.Ranking> {
+            Ranking(
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }

@@ -191,7 +191,7 @@ fun Ranking(
                             modifier = Modifier.align(Alignment.CenterVertically)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.o2_icon),
+                                painter = painterResource(id = R.drawable.oxygen_icon),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier.size(24.dp)
@@ -311,7 +311,7 @@ fun Ranking(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.o2_icon),
+                            painter = painterResource(id = R.drawable.oxygen_icon),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.size(24.dp)
