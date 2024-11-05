@@ -1,6 +1,7 @@
 package com.gg.spora.core.utils.functions
 
 import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.forestStage.domain.functions.updateOxygenReward
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

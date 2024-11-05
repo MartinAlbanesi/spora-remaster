@@ -49,6 +49,13 @@ object FakeUserModels {
             oxygen = 100,
             levelsCompleted = fakeLevelsCompleted
         ),
+        User(
+            id = "2",
+            userName = "titi",
+            email = "titi@gmail.com",
+            oxygen = 0,
+            levelsCompleted = emptyList()
+        ),
     )
 
 }
