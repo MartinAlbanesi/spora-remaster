@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.database.GroveDatabase
+import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
@@ -18,7 +19,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-import java.time.Duration
 
 @RunWith(AndroidJUnit4::class)
 class GroveDaoTest {
@@ -45,19 +45,19 @@ class GroveDaoTest {
         val seedTreeList = listOf(
             SeedTree(
                 type = TreeType.BAOBAB,
-                timeToGenerateForestTree = Duration.ofSeconds(5)
+                timeToGenerateForestTree = 5000L
             ),
             SeedTree(
                 type = TreeType.SECUOYA,
-                timeToGenerateForestTree = Duration.ofSeconds(5)
+                timeToGenerateForestTree = 5000L
             ),
             SeedTree(
                 type = TreeType.MANGROVE,
-                timeToGenerateForestTree = Duration.ofSeconds(5)
+                timeToGenerateForestTree = 5000L
             ),
             SeedTree(
                 type = TreeType.PINE,
-                timeToGenerateForestTree = Duration.ofSeconds(5)
+                timeToGenerateForestTree = 5000L
             )
         )
         groveDao.insertSeedTrees(seedTreeList.map { it.toSeedTreeEntity() })
@@ -69,26 +69,16 @@ class GroveDaoTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertForestTreesAndGetForestTrees() = runTest{
-        val forestTreeList = listOf(
-            ForestTree(
-                type = TreeType.BAOBAB,
-            ),
-            ForestTree(
-                type = TreeType.SECUOYA,
-            ),
-            ForestTree(
-                type = TreeType.MANGROVE,
-            ),
-            ForestTree(
-                type = TreeType.PINE,
-            )
-        )
-        groveDao.insertForestTrees(forestTreeList.map { it.toForestTreeEntity() })
+    fun insertForestTree() = runTest{
+        val forestTree = ForestTree(type = TreeType.SECUOYA)
 
-        val forestTrees = groveDao.getForestTrees().first()
+        groveDao.insertForestTree(forestTree.toForestTreeEntity())
 
-        Assert.assertEquals(4, forestTrees.size)
+        val forestTreeById = groveDao.getSeedTreeById(0).first()
+
+        println(forestTreeById)
+
+        Assert.assertEquals(forestTree, forestTreeById.toSeedTree())
     }
 
 }

@@ -20,14 +20,8 @@ interface GroveDao {
     @Query("SELECT * FROM seed_trees WHERE idSeedTree = :id")
     fun getSeedTreeById(id: Int): Flow<SeedTreeEntity>
 
-    @Query("SELECT * FROM forest_trees WHERE idForestTree = :id")
-    fun getForestTreeById(id: Int): Flow<ForestTreeEntity>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertForestTrees(forestTrees: List<ForestTreeEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertForestTree(forestTree: ForestTreeEntity)

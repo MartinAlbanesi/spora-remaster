@@ -40,11 +40,6 @@ class GroveRepository @Inject constructor(
         }
     }
 
-    // Carga un árbol del bosque por su ID desde la base de datos
-    override suspend fun getForestTreeById(id: Int): Flow<ForestTree?> {
-        return groveDao.getForestTreeById(id).map { it.toForestTree() }
-    }
-
     // Carga un árbol semillero por su ID desde la base de datos
     override suspend fun getSeedTreeById(id: Int): Flow<SeedTree?> {
         return groveDao.getSeedTreeById(id).map { it.toSeedTree() }
@@ -54,12 +49,6 @@ class GroveRepository @Inject constructor(
     override suspend fun insertAllSeedTrees(seedTrees: List<SeedTree>) {
         val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }
         groveDao.insertSeedTrees(seedTreeEntities)
-    }
-
-    // Guarda los árboles del bosque en la base de datos
-    override suspend fun insertAllForestTrees(forest: List<ForestTree?>) {
-        val forestTreeEntities = forest.filterNotNull().map { it.toForestTreeEntity() }
-        groveDao.insertForestTrees(forestTreeEntities)
     }
 
     // Inserta un árbol de bosque en la base de datos

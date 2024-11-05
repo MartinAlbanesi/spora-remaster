@@ -3,12 +3,10 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
 import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
-import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.domain.models.ForestTree
@@ -18,6 +16,7 @@ import com.gg.spora.grove.domain.models.TreeType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,15 +39,12 @@ class GroveViewModel @Inject constructor(
     private val loadSeedTreesUseCase: LoadSeedTreesUseCase,
     private val saveSeedTreesUseCase: SaveSeedTreesUseCase,
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
-    private val saveForestTreesUseCase: SaveForestTreesUseCase,
-    private val getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
     private val getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
     private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
-//    private val updateSeedCooldownUseCase: UpdateSeedCooldownUseCase,
 ) : ViewModel() {
 
-    // State para los árboles semilleros y los árboles del bosque
+    // State variables for
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
     val seedTrees: StateFlow<List<SeedTree>> = _seedTrees.asStateFlow()
 
@@ -57,6 +53,11 @@ class GroveViewModel @Inject constructor(
 
     private val _seedTreeCooldowns = MutableStateFlow<Map<Int, Long>>(emptyMap())
     val seedTreeCooldowns: StateFlow<Map<Int, Long>> = _seedTreeCooldowns.asStateFlow()
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("GroveViewModel", "onCleared called")
+    }
 
     // Inicialización de los casos de uso
     init {
@@ -92,9 +93,6 @@ class GroveViewModel @Inject constructor(
             if (_seedTreeCooldowns.value.isEmpty()) {
                 initCooldowns()
             }
-//            _seedTrees.value.forEach { seedTree ->
-//                _seedTreeCooldowns.value += seedTree.id to 0L
-//            }
             Log.i("GroveViewModel", "SeedTreeCooldowns initialized: ${_seedTreeCooldowns.value}")
         }
     }
@@ -103,6 +101,8 @@ class GroveViewModel @Inject constructor(
         _seedTrees.value.forEach { seedTree ->
             _seedTreeCooldowns.value += seedTree.id to 0L
         }
+        // Evitar que se dibuje la pantalla con un evento, escuchar el evento desde la UI
+        // Programacion reactiva
     }
 
     // Inicializa los árboles del bosque la primera vez que se abre la pantalla
@@ -115,13 +115,13 @@ class GroveViewModel @Inject constructor(
     }
 
     // Carga los árboles semilleros desde la base de datos
-    fun getSeedTrees(): List<SeedTree> {
+    fun getSeedTrees(): Flow<List<SeedTree>> {
         viewModelScope.launch(Dispatchers.IO) {
             loadSeedTreesUseCase().collect {
                 _seedTrees.value = it
             }
         }
-        return _seedTrees.value
+        return _seedTrees
     }
 
     // Carga los árboles del bosque desde la base de datos para Test
@@ -154,7 +154,7 @@ class GroveViewModel @Inject constructor(
 //            onCooldownTriggered(seedTreeId) // Trigger cooldown after planting
         }
     }
-
+// Guardar la fecha en la que se genero un arbol para luego compararla y asignarla a la variable del viewmodel
     fun onSeedTreeButtonClicked(seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             // Reset cooldown to initial value

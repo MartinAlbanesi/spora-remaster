@@ -7,12 +7,10 @@ import com.gg.spora.core.data.database.GroveDatabase
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
-import com.gg.spora.grove.domain.GetForestTreeByIdUseCase
 import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
-import com.gg.spora.grove.domain.SaveForestTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.ui.GroveViewModel
@@ -70,18 +68,6 @@ class GroveModule {
 
     @Provides
     @Singleton
-    fun provideSaveForestTreesUseCase(groveRepository: IGroveRepository): SaveForestTreesUseCase {
-        return SaveForestTreesUseCase(groveRepository)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGetForestTreeByIdUseCase(groveRepository: IGroveRepository): GetForestTreeByIdUseCase {
-        return GetForestTreeByIdUseCase(groveRepository)
-    }
-
-    @Provides
-    @Singleton
     fun provideInsertForestTreeUseCase(groveRepository: IGroveRepository): InsertForestTreeUseCase {
         return InsertForestTreeUseCase(groveRepository)
     }
@@ -105,8 +91,6 @@ class GroveModule {
         loadSeedTreesUseCase: LoadSeedTreesUseCase,
         saveSeedTreesUseCase: SaveSeedTreesUseCase,
         loadForestTreesUseCase: LoadForestTreesUseCase,
-        saveForestTreesUseCase: SaveForestTreesUseCase,
-        getForestTreeByIdUseCase: GetForestTreeByIdUseCase,
         insertForestTreeUseCase: InsertForestTreeUseCase,
         getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
         updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
@@ -115,8 +99,6 @@ class GroveModule {
             loadSeedTreesUseCase,
             saveSeedTreesUseCase,
             loadForestTreesUseCase,
-            saveForestTreesUseCase,
-            getForestTreeByIdUseCase,
             insertForestTreeUseCase,
             getSeedTreeByIdUseCase,
             updateForestTreeGrowthStageByIdUseCase,
