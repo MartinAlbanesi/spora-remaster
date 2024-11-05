@@ -8,6 +8,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -15,6 +18,8 @@ import androidx.navigation.navigation
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
+import com.gg.spora.ranking.ui.Ranking
+import com.gg.spora.ranking.ui.RankingViewModel
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
@@ -53,6 +58,14 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         }
         composable<NavigationRoutes.Grove> {
 
+        }
+        composable<NavigationRoutes.Ranking> {
+           val viewModel: RankingViewModel = hiltViewModel()
+            val rankingItems by viewModel.rankingItems.collectAsState()
+            Ranking(
+                onBackClick = { navController.popBackStack() },
+                userList = rankingItems
+            )
         }
     }
 }

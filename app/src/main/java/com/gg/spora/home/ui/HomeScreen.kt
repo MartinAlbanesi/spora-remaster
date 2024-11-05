@@ -33,6 +33,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
     onNavigateToLibrary: () -> Unit
 ) {
@@ -115,7 +116,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = onClick ),
                     )
                 }
             }
@@ -181,7 +182,8 @@ private fun MiniGameScreenPreview() {
                 oxygen = 0,
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {},
-                onNavigateToLibrary = {}
+                onNavigateToLibrary = {},
+                onNavigateToRanking = {},
             )
         }
     }
