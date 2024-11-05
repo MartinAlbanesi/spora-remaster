@@ -37,9 +37,6 @@ private const val INITIAL_COOLDOWN_DURATION = 5000L
  */
 @HiltViewModel
 class GroveViewModel @Inject constructor(
-    // private val getSeedTreesUseCase: GetSeedTreesUseCase,
-    // private val getForestTreesUseCase: GetForestTreesUseCase,
-    // private val plantSeedUseCase: PlantSeedUseCase,
     private val loadSeedTreesUseCase: LoadSeedTreesUseCase,
     private val saveSeedTreesUseCase: SaveSeedTreesUseCase,
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
@@ -60,9 +57,6 @@ class GroveViewModel @Inject constructor(
 
     private val _seedTreeCooldowns = MutableStateFlow<Map<Int, Long>>(emptyMap())
     val seedTreeCooldowns: StateFlow<Map<Int, Long>> = _seedTreeCooldowns.asStateFlow()
-
-//    private val _forestTree = MutableStateFlow<ForestTree?>(null)
-//    val forestTree = _forestTree.asStateFlow()
 
     // Inicialización de los casos de uso
     init {
@@ -95,7 +89,7 @@ class GroveViewModel @Inject constructor(
                 saveSeedTreesUseCase(initialSeedTrees)
             }
 
-            if(_seedTreeCooldowns.value.isEmpty()){
+            if (_seedTreeCooldowns.value.isEmpty()) {
                 initCooldowns()
             }
 //            _seedTrees.value.forEach { seedTree ->
@@ -106,23 +100,17 @@ class GroveViewModel @Inject constructor(
     }
 
     fun initCooldowns() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _seedTrees.value.forEach { seedTree ->
-                _seedTreeCooldowns.value += seedTree.id to 0L
-            }
+        _seedTrees.value.forEach { seedTree ->
+            _seedTreeCooldowns.value += seedTree.id to 0L
         }
     }
 
     // Inicializa los árboles del bosque la primera vez que se abre la pantalla
     fun initForestTrees() {
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(2000) // Optional delay
-
-            if (_forestTrees.value.isEmpty()) {
-                _forestTrees.value =
-                    MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
-                Log.i("GroveViewModel", "ForestTrees initialized: ${_forestTrees.value}")
-            }
+        if (_forestTrees.value.isEmpty()) {
+            _forestTrees.value =
+                MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
+            Log.i("GroveViewModel", "ForestTrees initialized: ${_forestTrees.value}")
         }
     }
 
@@ -145,11 +133,6 @@ class GroveViewModel @Inject constructor(
         }
         return _forestTrees.value
     }
-
-//    // Guarda los árboles semilleros en la variable de estado
-//    fun setSeedTrees(seedTrees: List<SeedTree>) {
-//        _seedTrees.value = seedTrees
-//    }
 
     fun plantForestTree(forestTree: ForestTree, seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -201,9 +184,9 @@ class GroveViewModel @Inject constructor(
                     forestTree?.let {
                         if (!it.hasReachedAdultStage) {
                             val updatedTree = it.copy().apply { updateGrowthStage(this) }
-                            updatedTree // Return the updated tree
+                            updatedTree // Retorna el árbol actualizado
                         } else {
-                            it // Return the original tree if it has reached adult stage
+                            it // Retorna el árbol sin actualizar si ya alcanzó la etapa adulta
                         }
                     }
                 }
@@ -214,23 +197,23 @@ class GroveViewModel @Inject constructor(
     }
 
     fun updateGrowthStage(forestTree: ForestTree) {
-        if (!forestTree.hasReachedAdultStage) {
-            var secondsGoneBy = Duration.between(forestTree.plantingDate, LocalDateTime.now()).toSeconds().toInt()
+        var secondsGoneBy =
+            Duration.between(forestTree.plantingDate, LocalDateTime.now()).toSeconds().toInt()
 
-            Log.d("ForestTree", "Seconds gone by: $secondsGoneBy")
+        Log.d("ForestTree", "Seconds gone by: $secondsGoneBy")
 
-            forestTree.currentStage = when {
-                secondsGoneBy < 5 -> GrowthStage.SPROUT // 5 seconds
-                secondsGoneBy in 5..10 -> GrowthStage.MEDIUM // 5-10 seconds
-                else -> {
-                    forestTree.hasReachedAdultStage = true // Set flag when reaching ADULT stage
-                    GrowthStage.ADULT // 10 seconds or more
-                }
+        forestTree.currentStage = when {
+            secondsGoneBy < 5 -> GrowthStage.SPROUT // 5 seconds
+            secondsGoneBy in 5..10 -> GrowthStage.MEDIUM // 5-10 seconds
+            else -> {
+                forestTree.hasReachedAdultStage =
+                    true // Setea el flag en true cuando el árbol llegue a la etapa adulta
+                GrowthStage.ADULT // 10 segundos o más
             }
+        }
 
-            if (forestTree.currentStage == GrowthStage.ADULT) {
-                forestTree.hasReachedAdultStage = true
-            }
+        if (forestTree.currentStage == GrowthStage.ADULT) {
+            forestTree.hasReachedAdultStage = true
         }
         Log.d("ForestTree", "Current stage: ${forestTree.currentStage}")
     }
@@ -240,7 +223,7 @@ class GroveViewModel @Inject constructor(
         val index = updatedForestTrees.indexOfFirst { it?.id == updatedTree.id }
         if (index != -1) {
             updatedForestTrees[index] = updatedTree
-            _forestTrees.value = updatedForestTrees // Update the StateFlow
+            _forestTrees.value = updatedForestTrees // Actualiza la variable StateFlow
         }
     }
 }
