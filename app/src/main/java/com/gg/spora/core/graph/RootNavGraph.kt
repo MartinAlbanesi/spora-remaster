@@ -29,5 +29,8 @@ fun RootNavigationGraph(
         homeNavGraph(navController = navController)
 
         gameNavGraph(navController = navController)
+
+        profileNavGraph(navController = navController)
+
     }
 }

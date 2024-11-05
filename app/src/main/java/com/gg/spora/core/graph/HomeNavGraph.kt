@@ -29,7 +29,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         composable<NavigationRoutes.ProfileScreen> {
             ProfileScreen(
                 onBackClick = { navController.popBackStack() },
-                onSettingsClick = { /* TODO */ }
+                onSettingsClick = { navController.navigate(NavigationRoutes.SettingScreen) }
             )
 
 

@@ -40,8 +40,6 @@ fun SettingsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
         ) {
             TopBarWithTitleExitAndIcon(
                 title = "Opciones",
@@ -51,127 +49,138 @@ fun SettingsScreen(
                 showSettingsIcon = false
             )
 
-            Spacer(modifier = Modifier.weight(1f))
-
-            Box(
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp)
-                    .height(200.dp)
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.rectangle_profile),
-                    contentDescription = "Rectangle Profile 1",
-                    contentScale = ContentScale.Crop,
+                Spacer(modifier = Modifier.weight(1f))
+
+                Box(
                     modifier = Modifier
-                        .matchParentSize()
-                        .clip(RoundedCornerShape(16.dp))
-                )
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .height(200.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
+                    Image(
+                        painter = painterResource(id = R.drawable.rectangle_profile),
+                        contentDescription = "Rectangle Profile 1",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(16.dp)
                     ) {
-                        Text(text = "Usuario",
+                        Row(
                             modifier = Modifier.weight(1f),
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold)
-                    }
-                    Divider(color = Color.Black, thickness = 1.dp)
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = "Editar Perfil", modifier = Modifier.weight(1f))
-                        Image(
-                            painter = painterResource(id = R.drawable.next_icon),
-                            contentDescription = "Next Icon",
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                    Divider(color = Color.Black, thickness = 1.dp)
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = "Notificaciones", modifier = Modifier.weight(1f))
-                        Image(
-                            painter = painterResource(id = R.drawable.next_icon),
-                            contentDescription = "Next Icon",
-                            modifier = Modifier.size(24.dp)
-                        )
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Usuario",
+                                modifier = Modifier.weight(1f),
+                                fontSize = 22.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Divider(color = Color.Black, thickness = 1.dp)
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "Editar Perfil", modifier = Modifier.weight(1f))
+                            Image(
+                                painter = painterResource(id = R.drawable.next_icon),
+                                contentDescription = "Next Icon",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        Divider(color = Color.Black, thickness = 1.dp)
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "Notificaciones", modifier = Modifier.weight(1f))
+                            Image(
+                                painter = painterResource(id = R.drawable.next_icon),
+                                contentDescription = "Next Icon",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
                     }
                 }
-            }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp)
-                    .height(200.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.rectangle_profile),
-                    contentDescription = "Rectangle Profile 2",
-                    contentScale = ContentScale.Crop,
+                Box(
                     modifier = Modifier
-                        .matchParentSize()
-                        .clip(RoundedCornerShape(16.dp))
-                )
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .height(200.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
+                    Image(
+                        painter = painterResource(id = R.drawable.rectangle_profile),
+                        contentDescription = "Rectangle Profile 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(16.dp)
                     ) {
-                        Text(text = "Información",
+                        Row(
                             modifier = Modifier.weight(1f),
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold)
-                    }
-                    Divider(color = Color.Black, thickness = 1.dp)
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = "Soporte", modifier = Modifier.weight(1f))
-                        Image(
-                            painter = painterResource(id = R.drawable.next_icon),
-                            contentDescription = "Next Icon",
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                    Divider(color = Color.Black, thickness = 1.dp)
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = "Sobre Nosotros", modifier = Modifier.weight(1f))
-                        Image(
-                            painter = painterResource(id = R.drawable.next_icon),
-                            contentDescription = "Next Icon",
-                            modifier = Modifier.size(24.dp)
-                        )
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Información",
+                                modifier = Modifier.weight(1f),
+                                fontSize = 22.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Divider(color = Color.Black, thickness = 1.dp)
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "Soporte", modifier = Modifier.weight(1f))
+                            Image(
+                                painter = painterResource(id = R.drawable.next_icon),
+                                contentDescription = "Next Icon",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        Divider(color = Color.Black, thickness = 1.dp)
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "Sobre Nosotros", modifier = Modifier.weight(1f))
+                            Image(
+                                painter = painterResource(id = R.drawable.next_icon),
+                                contentDescription = "Next Icon",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
                     }
                 }
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                SporaPrimaryButton(
+                    text = "Cerrar sesión",
+                    onClick = { /* TODO */ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 24.dp)
+                )
             }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            SporaPrimaryButton(
-                text = "Cerrar sesión",
-                onClick = { /* TODO */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 24.dp)
-            )
         }
     }
 }

@@ -32,6 +32,8 @@ object NavigationRoutes {
     @Serializable
     object ProfileScreen
 
+
+
     // Game Graph ------------------------------------------------------
 
     @Serializable
@@ -66,4 +68,12 @@ object NavigationRoutes {
         fun createRoute(nameObject: String) = "camera/$nameObject"
     }
 
+
+    // Profile Graph ------------------------------------------------------
+
+    @Serializable
+    object ProfileGraph
+
+    @Serializable
+    object SettingScreen
 }
