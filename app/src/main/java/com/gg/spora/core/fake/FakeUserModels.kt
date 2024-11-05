@@ -1,5 +1,6 @@
 package com.gg.spora.core.fake
 
+import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
@@ -10,7 +11,14 @@ import com.gg.spora.user.domain.models.User
 
 object FakeUserModels {
 
-    val fakeUserEntity = UserEntity("1", "test", "titi@gmail.com", 100)
+    val fakeUserEntity = UserEntity(
+        "1",
+        "test",
+        "titi@gmail.com",
+        100,
+        0,
+        R.drawable.spora_face_splash
+    )
 
     val fakeLevelsCompletedEntity = listOf(
         LevelCompletedEntity("1", "stage1", "ONE", "1"),
@@ -47,14 +55,18 @@ object FakeUserModels {
             userName = "test",
             email = "titi@gmail.com",
             oxygen = 100,
-            levelsCompleted = fakeLevelsCompleted
+            levelsCompleted = fakeLevelsCompleted,
+            treesCount = 0,
+            userImage = R.drawable.spora_face_splash
         ),
         User(
             id = "2",
             userName = "titi",
             email = "titi@gmail.com",
             oxygen = 0,
-            levelsCompleted = emptyList()
+            levelsCompleted = emptyList(),
+            treesCount = 0,
+            userImage = R.drawable.spora_face_splash
         ),
     )
 

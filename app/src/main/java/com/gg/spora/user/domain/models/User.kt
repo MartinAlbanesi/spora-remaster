@@ -5,5 +5,7 @@ data class User(
     val userName: String,
     val email: String,
     val oxygen: Int,
+    val treesCount: Int,
+    val userImage: Int,
     val levelsCompleted : List<LevelCompleted>
 )

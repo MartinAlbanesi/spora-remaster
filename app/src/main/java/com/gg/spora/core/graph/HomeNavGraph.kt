@@ -63,11 +63,15 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
         }
         composable<NavigationRoutes.Ranking> {
+
             val viewModel: RankingViewModel = hiltViewModel()
             val rankingItems by viewModel.rankingItems.collectAsState()
+            val currentUser by viewModel.currentUser.collectAsState()
+
             Ranking(
                 onBackClick = { navController.popBackStack() },
-                userList = rankingItems
+                userList = rankingItems,
+                currentUser = currentUser
             )
         }
     }
