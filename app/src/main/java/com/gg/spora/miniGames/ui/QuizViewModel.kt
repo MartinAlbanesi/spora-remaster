@@ -197,15 +197,12 @@ class QuizViewModel @Inject constructor(
 
             val currentStarState = getRewardsStarState(livesLost = _livesLost.value)
             val currentLevelOxygenRewards = quizRoute.oxygenRewards
-            val currentOxygenReward = getTotalOxygenFromStars(
-                currentStarState,
-                currentLevelOxygenRewards.map { it.toInt() }
-            )
+
             updateUserLevelsAndOxygenUseCase(
                 levelId = quizRoute.levelId,
                 starState = currentStarState,
                 stageType = getStageTypeByName(quizRoute.stageType),
-                oxygen = currentOxygenReward
+                oxygenRewards = currentLevelOxygenRewards
             )
         }
     }

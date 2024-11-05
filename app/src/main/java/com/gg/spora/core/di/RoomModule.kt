@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.library.data.local.InfoCardDAO
-import com.gg.spora.forestStage.data.local.StageDao
+import com.gg.spora.stage.data.local.StageDao
 import com.gg.spora.user.data.local.UserDao
 import dagger.Module
 import dagger.Provides

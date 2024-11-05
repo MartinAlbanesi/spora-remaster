@@ -2,13 +2,14 @@ package com.gg.spora.user.domain
 
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.core.utils.functions.getTotalOxygenFromStars
+import com.gg.spora.stage.domain.functions.updateOxygenReward
 import com.gg.spora.user.domain.models.LevelCompleted
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-@Suppress("ForbiddenComment")
 class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal,
     private val userRepositoryNetwork: IUserRepositoryNetwork,
@@ -18,9 +19,41 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
         levelId: String,
         starState: StarState,
         stageType: StageType,
-        oxygen: Int
+        oxygenRewards: List<Int>
     ) {
+
+        var totalOxygenList: List<Int> = emptyList()
+        var totalOxygen = 0
+
         val userLocal = userRepositoryLocal.getUser().first()!!
+
+        val currentUserLevelCompleted = userLocal.levelsCompleted.find { it.levelId == levelId }
+
+        currentUserLevelCompleted?.let {
+
+            if(currentUserLevelCompleted.starState.starCount >= starState.starCount) {
+                return
+            }
+            totalOxygenList = updateOxygenReward(currentUserLevelCompleted.starState, oxygenRewards)
+
+            println("totalOxygenList 1: $totalOxygenList")
+
+            totalOxygen = getTotalOxygenFromStars(starState, totalOxygenList)
+
+            println("totalOxygen 1: $totalOxygen")
+
+        }
+
+        println("totalOxygenList 2: $totalOxygenList")
+        println("totalOxygen 2: $totalOxygen")
+
+        if (totalOxygenList.isEmpty()) {
+            totalOxygenList = oxygenRewards
+            totalOxygen = getTotalOxygenFromStars(starState, totalOxygenList)
+        }
+
+        println("totalOxygenList 3: $totalOxygenList")
+        println("totalOxygen 3: $totalOxygen")
 
         val levelCompleted = LevelCompleted(
             levelId = levelId,
@@ -28,16 +61,20 @@ class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
             starState = starState
         )
 
-        val userLevelCompleted = userLocal.levelsCompleted.toMutableSet()
-        userLevelCompleted.add(levelCompleted)
+        val userLevelCompleted = userLocal.levelsCompleted.map{
+            if(it.levelId == levelCompleted.levelId) {
+                levelCompleted
+            } else {
+                it
+            }
+        }
 
         val userUpdated = userLocal.copy(
-            oxygen =+ oxygen,
-            levelsCompleted = userLevelCompleted.toList()
+            oxygen = userLocal.oxygen + totalOxygen,
+            levelsCompleted = userLevelCompleted
         )
 
         if(getUserAuthUseCase() != null) {
-            // TODO: Arreglar el problema que se guarda mal el StarState.
             userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
         }
 
