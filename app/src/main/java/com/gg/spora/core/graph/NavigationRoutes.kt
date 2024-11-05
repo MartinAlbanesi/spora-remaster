@@ -76,4 +76,7 @@ object NavigationRoutes {
 
     @Serializable
     object SettingScreen
+
+    @Serializable
+    object EditProfileScreen
 }

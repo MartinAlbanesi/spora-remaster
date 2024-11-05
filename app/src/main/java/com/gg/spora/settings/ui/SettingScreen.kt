@@ -2,6 +2,7 @@ package com.gg.spora.settings.ui
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
@@ -27,6 +28,7 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 fun SettingsScreen(
     onBackClick: () -> Unit,
    // onSettingsClick: () -> Unit
+    onNavigateToEditProfile: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -88,7 +90,10 @@ fun SettingsScreen(
                         }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                                .clickable { onNavigateToEditProfile() },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Editar Perfil", modifier = Modifier.weight(1f))
@@ -192,7 +197,8 @@ private fun SettingsScreenPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             SettingsScreen(
-                onBackClick = {}
+                onBackClick = {},
+                onNavigateToEditProfile = {}
             )
         }
     }
