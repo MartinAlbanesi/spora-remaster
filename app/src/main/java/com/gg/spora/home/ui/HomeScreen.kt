@@ -61,7 +61,7 @@ fun HomeScreen(
     val rightIcons = listOf<HomeIcon>(
         HomeIcon(
             image = R.drawable.eco_diary_icon,
-            text = "Diario",
+            text = "Biblioteca",
             onClick =
             {
                 onNavigateToLibrary()

@@ -78,7 +78,7 @@ fun StageScreen(
                     key = { _, level -> level.id }
                 ) { index, level ->
                     LevelStageItem(
-                        itemNumber = index.toString(),
+                        itemNumber = (index+1).toString(),
                         starsState = level.starState,
                         stage = level.stageType,
                         isBlocked = !levels.getIsCompleteFromPreviousLevel(index),
