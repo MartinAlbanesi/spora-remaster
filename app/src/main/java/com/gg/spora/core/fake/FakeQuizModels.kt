@@ -8,6 +8,7 @@ import com.gg.spora.miniGames.data.local.model.QuestionLocal
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
 
+@Suppress("LargeClass")
 object FakeQuizModels {
 
     val fakeLocalAnswers = listOf(

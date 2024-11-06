@@ -3,10 +3,10 @@ package com.gg.spora.challenge.domain.model
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 
 data class ObjectDetail(
-    val nameObjectDetail : String?,
+    var nameObjectDetail : String?,
     val description : String?,
     var isValidate : Boolean,
-    val stepsObjectDetail : MutableList<StepObjectDetail> = mutableListOf()
+    var stepsObjectDetail : List<StepObjectDetail> = mutableListOf()
 ){
     companion object{
         private fun entityToObjectDetailModel(objectDetailEntity: ObjectDetailEntity) : ObjectDetail {

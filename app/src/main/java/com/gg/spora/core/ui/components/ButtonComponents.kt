@@ -26,6 +26,7 @@ fun SporaPrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
     textSize: Int = 26,
+    isEnable: Boolean = true,
     onClick: () -> Unit
 ) {
 
@@ -33,7 +34,8 @@ fun SporaPrimaryButton(
         onClick = { onClick() },
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-        shape = ButtonDefaults.elevatedShape
+        shape = ButtonDefaults.elevatedShape,
+        enabled = isEnable
     ) {
         Text(text = text, fontSize = textSize.sp, fontWeight = FontWeight.Bold)
     }

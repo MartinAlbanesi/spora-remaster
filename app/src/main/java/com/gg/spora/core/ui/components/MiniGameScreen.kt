@@ -32,18 +32,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.utils.functions.getStarState
+import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
+import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
 import com.gg.spora.ui.theme.SporaTheme
 
-/**
- * Screen for mini games with Spora and progress bar
- * @param modifier: Modifier
- * @param imageBackground: Background image
- * @param onBackClick: Click listener for back button
- * @param content: Content of the screen in the champy card
- */
+
+@Suppress("LongMethod")
 @Composable
 fun MiniGameScreen(
     modifier: Modifier = Modifier,
@@ -52,6 +48,7 @@ fun MiniGameScreen(
     isCorrect: Boolean? = null,
     questionSize: Int,
     lives: Int,
+    livesLost: Int = 0,
     counterQuestion: Int,
     isFinished: Boolean = false,
     showIcon: Boolean = true,
@@ -63,11 +60,7 @@ fun MiniGameScreen(
     onNavigateNextLevel: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    val champyImage = when (isCorrect) {
-        true -> R.drawable.champy_celebrating_raised_arms_without_shadow
-        false -> R.drawable.champy_sad_arms_body
-        else -> R.drawable.champy_curious_left_arm_in_the_cheek
-    }
+    val champyImage = getChampyImageMiniGame(isCorrect)
 
     val progressIndicator by animateFloatAsState(
         targetValue = scalarNumber(valor = counterQuestion, maxOriginal = questionSize),
@@ -80,7 +73,7 @@ fun MiniGameScreen(
         GameResultPopUp(
             isVisible = true,
             backgroundImage = R.drawable.minigame_background_crop,
-            starsState = getStarState(lives = lives),
+            starsState = getRewardsStarState(livesLost = livesLost),
             rewards = listOf(10, 20, 30),
             onBackStage = {
                 onBackForestStage()
@@ -171,7 +164,6 @@ fun MiniGameScreen(
                     .align(Alignment.BottomCenter)
                     .padding(16.dp)
                     .heightIn(min = 48.dp, max = 60.dp)
-//                    .fillMaxHeight(0.07f)
             ) {
                 Text(
                     text = "Continuar",

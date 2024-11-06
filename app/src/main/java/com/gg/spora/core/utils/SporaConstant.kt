@@ -6,6 +6,9 @@ object SporaConstant {
     const val MAX_LIVES = 5
     const val MAX_STAR = 3
 
+    const val MAX_LEVELS = 4
+    const val MAX_STAGES_LEVEL = 2
+
     /**
      key = rotate, value = offset
      */
@@ -29,7 +32,7 @@ object SporaConstant {
         Pair(-40,0), Pair(-40,0), Pair(-10,0), Pair(50,0)
     )
 
-    val QUESTIONS_FILE_PATH = "src/main/res/raw/questions.json"
+    const val QUESTIONS_FILE_PATH = "src/main/res/raw/questions.json"
 
-    val ANSWERS_FILE_PATH = "src/main/res/raw/answers.json"
+    const val ANSWERS_FILE_PATH = "src/main/res/raw/answers.json"
 }

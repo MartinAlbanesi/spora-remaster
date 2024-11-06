@@ -36,8 +36,8 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun TopAppBarWithDualIcon(
     modifier: Modifier = Modifier,
-    firstLabel: String,
-    firstIcon: Int,
+//    firstLabel: String,
+//    firstIcon: Int,
     secondLabel: String,
     secondIcon: Int,
     showBackArrow: Boolean = false,
@@ -84,8 +84,8 @@ fun TopAppBarPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             TopAppBarWithDualIcon(
-                firstLabel = "0",
-                firstIcon = R.drawable.trees_icon,
+//                firstLabel = "0",
+//                firstIcon = R.drawable.trees_icon,
                 secondLabel = "0",
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
