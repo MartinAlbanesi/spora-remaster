@@ -14,7 +14,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,8 +32,10 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
-    onNavigateToLibrary: () -> Unit
+    onNavigateToLibrary: () -> Unit,
+    onNavigateToProfile: () -> Unit,
 ) {
 
     // Icons in the left
@@ -42,18 +43,18 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.profile_icon,
             text = "Perfil",
-            onClick = {}
+            onClick = onNavigateToProfile
         ),
         HomeIcon(
             image = R.drawable.ranking_icon,
             text = "Ranking",
-            onClick = {}
+            onClick = onNavigateToRanking
         ),
-        HomeIcon(
-            image = R.drawable.missions_icon,
-            text = "Misiones",
-            onClick = {}
-        )
+//        HomeIcon(
+//            image = R.drawable.missions_icon,
+//            text = "Misiones",
+//            onClick = {}
+//        )
     )
 
     // Icons in the right
@@ -66,11 +67,11 @@ fun HomeScreen(
                 onNavigateToLibrary()
             }
         ),
-        HomeIcon(
-            image = R.drawable.grove_icon,
-            text = "Arboleda",
-            onClick = {}
-        )
+//        HomeIcon(
+//            image = R.drawable.grove_icon,
+//            text = "Arboleda",
+//            onClick = {}
+//        )
     )
 
     Scaffold(
@@ -115,7 +116,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = onClick),
                     )
                 }
             }
@@ -181,7 +182,9 @@ private fun MiniGameScreenPreview() {
                 oxygen = 0,
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {},
-                onNavigateToLibrary = {}
+                onNavigateToLibrary = {},
+                onNavigateToRanking = {},
+                onNavigateToProfile = {}
             )
         }
     }

@@ -12,4 +12,6 @@ interface IUserRepositoryNetwork {
     suspend fun deleteUserById(id: String)
 
     fun getUserByEmailFlow(email: String): Flow<User>
+
+    fun getAllUser(): Flow<List<User>>
 }

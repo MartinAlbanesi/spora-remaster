@@ -6,6 +6,7 @@ import com.gg.spora.user.data.network.models.UserNetwork
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.gg.spora.user.domain.mappers.toUser
 import com.gg.spora.user.domain.models.User
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.snapshots
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -37,6 +38,19 @@ class UserRepositoryNetwork @Inject constructor(
                 it.toObjects(UserNetwork::class.java)
                     .first()
                     .toUser()
+            }
+    }
+
+    override fun getAllUser(): Flow<List<User>> {
+        return firestore
+            .collection(CollectionsDataBase.USERS)
+//            .whereGreaterThan("oxygen", 1)
+            .orderBy("oxygen", Query.Direction.DESCENDING)
+            .limit(15)
+            .snapshots()
+            .map { querySnapshot ->
+                querySnapshot.toObjects(UserNetwork::class.java)
+                    .map { userNetwork -> userNetwork.toUser() }
             }
     }
 }
