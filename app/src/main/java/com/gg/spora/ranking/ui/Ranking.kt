@@ -39,7 +39,6 @@ fun Ranking(
     onBackClick: () -> Unit,
 ) {
    // val rankingItems by viewModel.rankingItems.collectAsState()
-
     Image(
         painter = painterResource(id = R.drawable.ranking_background),
         contentDescription = null,
@@ -61,6 +60,7 @@ fun Ranking(
             text = "¡Competí por oxígeno para quedar entre los primeros y ganar un logro!",
             style = MaterialTheme.typography.titleLarge,
             color = Color.White,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(top = 8.dp)
@@ -70,19 +70,33 @@ fun Ranking(
         Spacer(modifier = Modifier.height(16.dp))
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(0.dp),
             modifier = Modifier
                 .padding(horizontal = 16.dp)
-                .height(400.dp)
+                .height(450.dp)
         ) {
             itemsIndexed(userList) { index, item ->
+                var numImage = 0
+                if(item.id != currentUser!!.id){
+                    numImage = index + 1
+                }
+
+                val imageRanking = when(numImage){
+                    0 -> R.drawable.ranking_user
+                    1 -> R.drawable.ranking_ore
+                    2 -> R.drawable.ranking_plate
+                    3 -> R.drawable.ranking_bronze
+                    else -> {
+                        R.drawable.ranking_sign
+                    }
+                }
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ranking_sign),
+                        painter = painterResource(id = imageRanking),
                         contentDescription = null,
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.matchParentSize()
@@ -103,17 +117,17 @@ fun Ranking(
                                 0 -> Image(
                                     painter = painterResource(id = R.drawable.medalladeoro),
                                     contentDescription = null,
-                                    modifier = Modifier.size(64.dp)
+                                    modifier = Modifier.size(66.dp)
                                 )
                                 1 -> Image(
                                     painter = painterResource(id = R.drawable.medalladeplata),
                                     contentDescription = null,
-                                    modifier = Modifier.size(64.dp)
+                                    modifier = Modifier.size(66.dp)
                                 )
                                 2 -> Image(
                                     painter = painterResource(id = R.drawable.medalladebronce),
                                     contentDescription = null,
-                                    modifier = Modifier.size(64.dp)
+                                    modifier = Modifier.size(66.dp)
                                 )
                                 else -> Text(
                                     text = (index + 1).toString(),
@@ -127,26 +141,29 @@ fun Ranking(
                             modifier = Modifier
                                 .width(2.dp)
                                 .height(65.dp)
+                                .padding(bottom = 5.dp)
                                 .background(Color.Black)
                         )
                         Image(
                             painter = painterResource(id = item.userImage),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.size(65.dp)
-                        )
+                            modifier = Modifier.size(63.dp)
+                                .padding(bottom = 5.dp, start = 5.dp)
+                        )/*
                         Column(
                             modifier = Modifier
                                 .padding(start = 8.dp)
                                 .align(Alignment.Top)
-                        ) {
+                        ) {*/
                             Text(
                                 text = item.userName,
-                                style = MaterialTheme.typography.titleMedium,
+                                style = MaterialTheme.typography.titleLarge,
                                 color = Color.Black,
                                 modifier = Modifier.padding(bottom = 2.dp)
+                                    .padding(start = 10.dp)
                             )
-                            Row(
+                            /*Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(top = 4.dp)
                             ) {
@@ -163,21 +180,22 @@ fun Ranking(
                                     modifier = Modifier.padding(start = 4.dp)
                                 )
                             }
-                        }
+                        }*/
                         Spacer(modifier = Modifier.weight(1f))
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.align(Alignment.CenterVertically)
+                                .padding(end = 15.dp)
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.oxygen_icon),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
-                                modifier = Modifier.size(24.dp)
+                                modifier = Modifier.size(30.dp)
                             )
                             Text(
                                 text = item.oxygen.toString(),
-                                style = MaterialTheme.typography.bodyLarge,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = Color.Black,
                                 modifier = Modifier.padding(start = 4.dp)
                             )
@@ -187,7 +205,7 @@ fun Ranking(
             }
         }
 
-        Spacer(modifier = Modifier.height(34.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         // Sección "Tu puntaje"
         Column(
@@ -219,7 +237,7 @@ fun Ranking(
                     .height(100.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ranking_sign),
+                    painter = painterResource(id = R.drawable.ranking_user),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.matchParentSize()
@@ -227,7 +245,8 @@ fun Ranking(
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(8.dp),
+                        .padding(8.dp)
+                        .padding(end = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
@@ -247,25 +266,31 @@ fun Ranking(
                         modifier = Modifier
                             .width(2.dp)
                             .height(65.dp)
+                            .padding(bottom = 5.dp)
                             .background(Color.Black)
                     )
                     Image(
                         painter = painterResource(id = currentUser?.userImage ?: R.drawable.spora_face_splash),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.size(65.dp)
+                        modifier = Modifier.size(63.dp)
+                            .padding(bottom = 5.dp, start = 5.dp)
                     )
+                    /*
                     Column(
                         modifier = Modifier
                             .padding(start = 8.dp)
                             .align(Alignment.Top) // Align to the top
                     ) {
+*/
                         Text(
                             text = currentUser?.userName ?: "Usuario",
-                            style = MaterialTheme.typography.titleMedium,
+                            style = MaterialTheme.typography.titleLarge,
                             color = Color.Black,
                             modifier = Modifier.padding(bottom = 4.dp)
+                                .padding(start = 10.dp)
                         )
+                    /*
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.padding(top = 4.dp)
@@ -284,6 +309,8 @@ fun Ranking(
                             )
                         }
                     }
+
+                     */
                     Spacer(modifier = Modifier.weight(1f))
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -293,11 +320,11 @@ fun Ranking(
                             painter = painterResource(id = R.drawable.oxygen_icon),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(30.dp)
                         )
                         Text(
                             text = currentUser?.oxygen.toString(),
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = MaterialTheme.typography.titleMedium,
                             color = Color.Black,
                             modifier = Modifier.padding(start = 4.dp)
                         )
