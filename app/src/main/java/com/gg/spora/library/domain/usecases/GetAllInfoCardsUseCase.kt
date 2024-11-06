@@ -57,6 +57,7 @@ class GetAllInfoCardsUseCase @Inject constructor(
 
         localRepository.deleteAllInfoCards()
         infoCardList.forEach {
+            Log.d("GetAllInfoCardsUseCase", "${it.isUnlocked}")
             localRepository.insertInfoCard(it)
         }
     }
