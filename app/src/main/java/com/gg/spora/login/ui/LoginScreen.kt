@@ -9,12 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,20 +19,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.gg.spora.R
-import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.login.component.EmailField
-import com.gg.spora.login.component.GoogleLoginButton
 import com.gg.spora.login.component.IconButtonArrowLogin
 import com.gg.spora.login.component.LoginButton
 import com.gg.spora.login.component.LoginQuestionLink
 import com.gg.spora.login.component.NameField
 import com.gg.spora.login.component.PasswordField
 import com.gg.spora.login.component.loginText
-import com.gg.spora.login.component.separatorLogin
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
@@ -71,10 +62,7 @@ fun LoginScreen(
             Login(
                 Modifier.align(Alignment.Center),
                 viewModel
-            ) {
-//            navController.navigate(NavigationRoutes.HomeGraph)
-                onNavigationToHome()
-            }
+            )
 
             LoginQuestionLink(
 //            navController = navController
@@ -87,8 +75,7 @@ fun LoginScreen(
 @Composable
 fun Login(
     modifier: Modifier,
-    viewModel: LoginViewModel,
-    onNavigationToHome: () -> Unit
+    viewModel: LoginViewModel
 ) {
     val name: String by viewModel.name.observeAsState(initial = "")
     val email: String by viewModel.email.observeAsState(initial = "")

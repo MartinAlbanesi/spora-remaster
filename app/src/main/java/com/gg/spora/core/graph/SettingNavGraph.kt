@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.gg.spora.profile.ui.ProfileScreen
 import com.gg.spora.settings.ui.EditProfileScreen
 import com.gg.spora.settings.ui.SettingViewModel
 import com.gg.spora.settings.ui.SettingsScreen

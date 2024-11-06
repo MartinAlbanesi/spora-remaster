@@ -53,7 +53,7 @@ import com.gg.spora.login.component.LoginTextField
 fun RegisteredLoginScreen(
     onBackClick: () -> Unit,
 //    onLoginClick: () -> Unit,
-    onGoogleLoginClick: () -> Unit,
+//    onGoogleLoginClick: () -> Unit,
 //    onRegisterClick: () -> Unit,
     navController: NavHostController
 ) {
@@ -227,10 +227,7 @@ fun RegisteredLoginScreen(
 @Composable
 fun RegisteredLoginScreenPreview() {
     RegisteredLoginScreen(
-        onBackClick = { /*TODO*/ },
-//        onLoginClick = { /*TODO*/ },
-        onGoogleLoginClick = { /*TODO*/ },
-//        onRegisterClick = { /*TODO*/ },
+        onBackClick = {  },
         navController = NavHostController(LocalContext.current)
     )
 }

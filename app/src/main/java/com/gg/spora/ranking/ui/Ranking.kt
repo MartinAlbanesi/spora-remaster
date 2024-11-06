@@ -32,6 +32,7 @@ import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.user.domain.models.User
 
 
+@Suppress("CyclomaticComplexMethod", "LongMethod")
 @Composable
 fun Ranking(
     modifier: Modifier = Modifier,

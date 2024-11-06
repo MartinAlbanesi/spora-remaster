@@ -34,17 +34,17 @@ fun ProfileScreen(
     onBackClick: () -> Unit,
     onSettingsClick: () -> Unit,
    //
-    currentIndex: Int = 0,
+//    currentIndex: Int = 0,
     user: User?,
-    onLeftArrowClick: () -> Unit,
-    onRightArrowClick: () -> Unit
+//    onLeftArrowClick: () -> Unit,
+//    onRightArrowClick: () -> Unit
 ) {
    // val currentIndex by viewModel.currentIndex.collectAsState()
-    val images = listOf(
-        R.drawable.logro_semilla,
-        R.drawable.plastic_bottle,
-        R.drawable.spora_logo_without_slogan
-    )
+//    val images = listOf(
+//        R.drawable.logro_semilla,
+//        R.drawable.plastic_bottle,
+//        R.drawable.spora_logo_without_slogan
+//    )
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -198,8 +198,8 @@ private fun ProfileScreenPreview() {
                     treesCount = 0,
                     userImage = R.drawable.spora_face_splash
                 ),
-                onLeftArrowClick = {},
-                onRightArrowClick = {}
+//                onLeftArrowClick = {},
+//                onRightArrowClick = {}
             )
         }
     }

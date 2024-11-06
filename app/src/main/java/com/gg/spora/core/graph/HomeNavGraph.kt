@@ -88,9 +88,9 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 onBackClick = { navController.popBackStack() },
                 onSettingsClick = { navController.navigate(NavigationRoutes.SettingGraph) },
                 user = user,
-                onLeftArrowClick = { viewModel.onLeftArrowClick() },
-                onRightArrowClick = { viewModel.onRightArrowClick() },
-                currentIndex = currentIndex
+//                onLeftArrowClick = { viewModel.onLeftArrowClick() },
+//                onRightArrowClick = { viewModel.onRightArrowClick() },
+//                currentIndex = currentIndex
             )
         }
     }
