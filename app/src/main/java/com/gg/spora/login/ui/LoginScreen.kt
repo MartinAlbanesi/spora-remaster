@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -38,42 +40,49 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel,
-//    navController: NavHostController,
+    //navController: NavHostController,
     onNavigationToHome: () -> Unit,
-    onNavigateToRegisteredLogin: () -> Unit
+    onNavigateToRegisteredLogin: () -> Unit,
 ) {
-    Box(
-        Modifier
-            .fillMaxSize()
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.welcome_background),
-            contentDescription = "Background",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.5f))
-        )
-        IconButtonArrowLogin()
+    val isLoading by viewModel.isLoading.observeAsState(initial = false)
 
-        Login(
-            Modifier.align(Alignment.Center),
-            viewModel
-        ) {
-//            navController.navigate(NavigationRoutes.HomeGraph)
-            onNavigationToHome()
+    if (isLoading) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
+    } else {
+        Box(
+            Modifier
+                .fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.welcome_background),
+                contentDescription = "Background",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.5f))
+            )
+            IconButtonArrowLogin()
 
-        LoginQuestionLink(
+            Login(
+                Modifier.align(Alignment.Center),
+                viewModel
+            ) {
+//            navController.navigate(NavigationRoutes.HomeGraph)
+                onNavigationToHome()
+            }
+
+            LoginQuestionLink(
 //            navController = navController
-            onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
-        )
+                onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
+            )
+        }
     }
 }
-
 
 @Composable
 fun Login(
@@ -107,17 +116,14 @@ fun Login(
             Spacer(modifier = Modifier.padding(16.dp))
             LoginButton(loginEnable) {
                 viewModel.onLoginSelected {
-                    onNavigationToHome()
+                    viewModel.setLoading(true)
                 }
-
-
             }
-            Spacer(modifier = Modifier.padding(8.dp))
-            separatorLogin()
-            Spacer(modifier = Modifier.padding(8.dp))
-            GoogleLoginButton()
+            //Spacer(modifier = Modifier.padding(8.dp))
+            //separatorLogin()
+            //Spacer(modifier = Modifier.padding(8.dp))
+            //GoogleLoginButton()
 
-            // Mostrar Toast según el estado de éxito o error
             if (loginSuccess) {
                 Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
             }
@@ -128,16 +134,3 @@ fun Login(
         }
     }
 }
-
-
-/*
-@Preview(showBackground = true, backgroundColor = 0xFF000000, showSystemUi = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(
-        onBackClick = { /*TODO*/ },
-        onLoginClick = { /*TODO*/ },
-        onGoogleLoginClick = { /*TODO*/ },
-        onRegisterClick = { /*TODO*/ }
-    )
-}*/

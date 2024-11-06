@@ -45,9 +45,6 @@ class LoginViewModel @Inject constructor(
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
-//    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-//    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-
     fun onLoginChanged(name: String, email: String, password: String) {
         _name.value = name
         _email.value = email
@@ -56,23 +53,24 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun isValidPassword(password: String): Boolean = password.length > 6
-    public fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+     fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
 
     fun onLoginSelected(onNavigationToHome: () -> Unit) {
-        _isLoading.value = true
-        try {
-            viewModelScope.launch {
+        _isLoading.value = true // Show the CircularProgressIndicator
+        viewModelScope.launch {
+            try {
                 registerWithEmail(
                     email.value.orEmpty(),
                     password.value.orEmpty(),
                     name.value.orEmpty(),
                     onNavigationToHome
                 )
+            } catch (e: Exception) {
+                _errorMessage.value = "Error: ${e.localizedMessage}"
+            } finally {
+                _isLoading.value = false // Hide the CircularProgressIndicator
             }
-        } catch (e: Exception) {
-            _errorMessage.value = "Error: ${e.localizedMessage}"
-        } finally {
-            _isLoading.value = false
         }
     }
 
@@ -105,6 +103,7 @@ class LoginViewModel @Inject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 setNewUserUseCase(email, name)
                 withContext(Dispatchers.Main) {
+                    delay(1500)
                     onNavigationToHome()
                 }
 
@@ -125,6 +124,9 @@ class LoginViewModel @Inject constructor(
 //            .addOnFailureListener {
 //                _errorMessage.value = "Error al guardar usuario: ${it.localizedMessage}"
 //            }
+    }
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.value = isLoading
     }
 
 }

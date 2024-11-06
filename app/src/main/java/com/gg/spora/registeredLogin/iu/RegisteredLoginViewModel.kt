@@ -3,14 +3,19 @@ package com.gg.spora.registeredLogin.iu
 import android.content.Context
 import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.result.launch
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.semantics.password
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.gg.spora.core.graph.NavigationRoutes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class RegisteredLoginViewModel : ViewModel() {
 
@@ -28,6 +33,9 @@ class RegisteredLoginViewModel : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun onEmailChanged(newEmail: String) {
         _email.value = newEmail
         _isAccountValid.value = isValidEmail(newEmail)
@@ -41,20 +49,24 @@ class RegisteredLoginViewModel : ViewModel() {
         _password.value = newPassword
     }
 
+   fun onLoginClick(context: Context, navController: NavHostController) {
+       _isLoading.value = true
+       viewModelScope.launch {
+           delay(1500)
+           val email = email.value.toString().trim()
+           val password = password.value.toString().trim()
 
-    fun onLoginClick(context: Context, navController: NavHostController) {
-        val email = email.value.toString().trim()
-        val password = password.value.toString().trim()
-
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    //Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                    navController.navigate(NavigationRoutes.Home)
-                } else {
-                    Toast.makeText(context, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
+           auth.signInWithEmailAndPassword(email, password)
+               .addOnCompleteListener { task ->
+                   if (task.isSuccessful) {
+                       _isLoading.value = false
+                       navController.navigate(NavigationRoutes.Home)
+                   } else {
+                       _isLoading.value = false
+                       Toast.makeText(context, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                   }
+               }
+       }
+   }
 
 }
