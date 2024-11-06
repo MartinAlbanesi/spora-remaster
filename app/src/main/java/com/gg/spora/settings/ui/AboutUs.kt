@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
@@ -55,7 +56,7 @@ fun InfoRow(
         Spacer(modifier = Modifier.width(8.dp))
         Column {
             Text(text = name, fontWeight = FontWeight.Bold)
-            Text(text = email, style = MaterialTheme.typography.labelSmall)
+            Text(text = email, style = MaterialTheme.typography.labelLarge)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = "Redes:", fontWeight = FontWeight.Bold)
             Row {
@@ -85,14 +86,19 @@ fun InfoRow(
 fun AboutUs(
     onDismiss: () -> Unit,
 ) {
-    AlertDialog(
+    Dialog(
         onDismissRequest = onDismiss,
-        confirmButton = {},
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(500.dp),
-        properties = DialogProperties(),
-        text = {
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
+        Surface(
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(450.dp)
+                .padding(16.dp)
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -126,7 +132,8 @@ fun AboutUs(
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .verticalScroll(rememberScrollState())
+                        .verticalScroll(rememberScrollState()) // Enable scrolling
+                        .padding(horizontal = 16.dp)
                 ) {
                     InfoRow(
                         imageRes = R.drawable.user_image,
@@ -188,7 +195,7 @@ fun AboutUs(
                 }
             }
         }
-    )
+    }
 }
 
 @Preview(showBackground = true)
