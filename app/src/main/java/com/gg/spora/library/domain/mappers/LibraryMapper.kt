@@ -10,7 +10,7 @@ fun InfoCardNetwork.toInfoCard() = InfoCard(
     title = title ?: "",
     info = info ?: "",
     image = image ?: 0,
-    isUnlocked = isUnlocked == true,
+    isUnlocked = isUnlocked,
     category = getStageTypeByName(category ?: "")
 )
 
