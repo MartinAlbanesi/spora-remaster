@@ -127,6 +127,7 @@ fun MushyAndTable(modifier: Modifier) {
             .padding(bottom = 40.dp, end = 140.dp),
         contentAlignment = Alignment.BottomCenter
     ) {
+
         MushyBlinkAnimation(
             modifier
                 .size(260.dp)
