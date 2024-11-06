@@ -22,8 +22,7 @@ fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
                     settingViewModel.logout {
                         navController.navigate(NavigationRoutes.AuthGraph)
                     }
-                }
-                onBackClick = { navController.popBackStack() },
+                },
                 onNavigateToEditProfile = { navController.navigate(NavigationRoutes.EditProfileScreen) }
             )
         }

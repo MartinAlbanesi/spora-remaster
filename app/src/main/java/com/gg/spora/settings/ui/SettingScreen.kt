@@ -3,7 +3,6 @@ package com.gg.spora.settings.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +40,7 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
-    onLogOut: () -> Unit
+    onLogOut: () -> Unit,
    // onSettingsClick: () -> Unit
     onNavigateToEditProfile: () -> Unit
 ) {

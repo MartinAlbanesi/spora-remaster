@@ -88,10 +88,13 @@ fun AboutUs(
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {},
+        containerColor = Color.Transparent,
         modifier = Modifier
             .fillMaxWidth()
             .height(500.dp),
-        properties = DialogProperties(),
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false,
+        ),
         text = {
             Column(
                 modifier = Modifier
