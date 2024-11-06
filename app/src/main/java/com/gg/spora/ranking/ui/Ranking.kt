@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,6 +62,7 @@ fun Ranking(
             text = "¡Competí por oxígeno para quedar entre los primeros y ganar un logro!",
             style = MaterialTheme.typography.titleLarge,
             color = Color.White,
+            fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -161,7 +163,7 @@ fun Ranking(
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.size(63.dp)
-                                .padding(bottom = 5.dp, start = 5.dp)
+                                .padding(bottom = 5.dp, start = 8.dp)
                         )
 
                         /*
@@ -172,7 +174,13 @@ fun Ranking(
                         ) {*/
                             Text(
                                 text = item.userName,
-                                style = MaterialTheme.typography.titleLarge,
+                                style = if(item.userName.count() > 12){
+                                    MaterialTheme.typography.titleSmall
+                                }
+                                else{
+                                    MaterialTheme.typography.titleMedium
+                                },
+                                fontWeight = FontWeight.SemiBold,
                                 color = Color.Black,
                                 modifier = Modifier.padding(bottom = 2.dp)
                                     .padding(start = 10.dp)
@@ -200,6 +208,7 @@ fun Ranking(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.align(Alignment.CenterVertically)
                                 .padding(end = 15.dp)
+                                .width(75.dp)
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.oxygen_icon),
@@ -210,6 +219,7 @@ fun Ranking(
                             Text(
                                 text = item.oxygen.toString(),
                                 style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold,
                                 color = Color.Black,
                                 modifier = Modifier.padding(start = 4.dp)
                             )
@@ -322,7 +332,7 @@ fun Ranking(
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.size(63.dp)
-                            .padding(bottom = 5.dp, start = 5.dp)
+                            .padding(bottom = 5.dp, start = 8.dp)
                     )
                     /*
                     Column(
@@ -331,11 +341,21 @@ fun Ranking(
                             .align(Alignment.Top) // Align to the top
                     ) {
 */
+                    var userName = "Usuario"
+                    if(currentUser?.userName != null){
+                        userName = currentUser.userName
+                    }
                         Text(
-                            text = currentUser?.userName ?: "Usuario",
-                            style = MaterialTheme.typography.titleLarge,
+                            text = userName,
+                            style = if(userName.count() > 12){
+                                MaterialTheme.typography.titleSmall
+                            }
+                            else{
+                                MaterialTheme.typography.titleMedium
+                            },
+                            fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
-                            modifier = Modifier.padding(bottom = 4.dp)
+                            modifier = Modifier.padding(bottom = 5.dp)
                                 .padding(start = 10.dp)
                         )
                     /*
@@ -363,6 +383,7 @@ fun Ranking(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.align(Alignment.CenterVertically)
+                            .width(75.dp)
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.oxygen_icon),
@@ -373,6 +394,7 @@ fun Ranking(
                         Text(
                             text = currentUser?.oxygen.toString(),
                             style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
                             modifier = Modifier.padding(start = 4.dp)
                         )
