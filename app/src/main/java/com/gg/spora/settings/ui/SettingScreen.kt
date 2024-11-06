@@ -9,6 +9,10 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,9 +31,10 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
-   // onSettingsClick: () -> Unit
     onNavigateToEditProfile: () -> Unit
 ) {
+    var showAboutUs by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -162,7 +167,10 @@ fun SettingsScreen(
                         }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                                .clickable { showAboutUs = true },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Sobre Nosotros", modifier = Modifier.weight(1f))
@@ -179,12 +187,18 @@ fun SettingsScreen(
 
                 SporaPrimaryButton(
                     text = "Cerrar sesión",
-                    onClick = { /* TODO */ },
+                    onClick = {  },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
                 )
             }
+        }
+
+        if (showAboutUs) {
+            AboutUs(
+                onDismiss = { showAboutUs = false }
+            )
         }
     }
 }

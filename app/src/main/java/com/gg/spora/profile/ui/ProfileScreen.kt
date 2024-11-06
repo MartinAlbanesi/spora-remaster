@@ -128,14 +128,16 @@ fun ProfileScreen(
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = "LOGROS",
+                        text = "PRÓXIMAMENTE",
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 36.sp,
+                        fontSize = 22.sp,
                         modifier = Modifier
                             .align(Alignment.TopCenter)
-                            .padding(top = 38.dp)
+                            .padding(top = 45.dp)
                     )
+                    // descomentar para habilitar la funcionalidad de los botones de cambio de logro
+                    /*
                     Row(
                         modifier = Modifier
                             .align(Alignment.Center)
@@ -165,13 +167,12 @@ fun ProfileScreen(
                                 .clickable {
                                    onRightArrowClick()
                                 }
-                        )
+                        )*/
                     }
                 }
             }
         }
     }
-}
 
 @Preview(showBackground = true)
 @Composable
