@@ -81,7 +81,7 @@ fun EditProfileScreen(
                         .clip(RoundedCornerShape(16.dp))
                 )
 
-                TextField(
+               /* TextField(
                     value = email,
                     onValueChange = { email = it },
                     label = { Text("Correo Electrónico Nuevo") },
@@ -89,7 +89,7 @@ fun EditProfileScreen(
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
-                )
+                )*/
 
                 Spacer(modifier = Modifier.weight(1f))
 

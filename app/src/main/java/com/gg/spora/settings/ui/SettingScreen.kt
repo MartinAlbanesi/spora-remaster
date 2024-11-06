@@ -67,7 +67,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(200.dp)
+                        .height(150.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -107,7 +107,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }
+                        }/*
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
                             modifier = Modifier.weight(1f),
@@ -119,7 +119,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }
+                        }*/ // Notificaciones
                     }
                 }
 
@@ -127,7 +127,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(200.dp)
+                        .height(150.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -152,7 +152,7 @@ fun SettingsScreen(
                                 fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold
                             )
-                        }
+                        }/*
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
                             modifier = Modifier.weight(1f),
@@ -164,7 +164,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }
+                        }*/
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
                             modifier = Modifier
