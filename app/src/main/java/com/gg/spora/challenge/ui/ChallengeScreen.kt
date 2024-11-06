@@ -75,11 +75,14 @@ fun ChallengeScreen(
         modifier = modifier.padding(15.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+
         Text(
             text = stringResource(R.string.label_challenge),
+            style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(10.dp)
+            fontWeight = FontWeight.SemiBold,
+            color = Color.Black,
+            modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp)
         )
 
         ObjectsChallengeList(challengeObjects, onNavigateToCameraScreen)
