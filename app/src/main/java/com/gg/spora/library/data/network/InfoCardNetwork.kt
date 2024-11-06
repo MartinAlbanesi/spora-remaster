@@ -1,7 +1,7 @@
 package com.gg.spora.library.data.network
 
 data class InfoCardNetwork(
-    val id: Int? = null,
+    val id: String? = null,
     val title: String? = null,
     val info: String? = null,
     val image: Int? = null,

@@ -41,20 +41,20 @@ class InfoCardDaoTest {
     }
 
     @Test
-    fun insertInfoCard_WhenInsertedOneValidInfoCard_ReturnInfoCardInserted() = runTest {
+    fun insertInfoCard_WhenInsertedOneValidInfoCard_ThenReturnInfoCardInserted() = runTest {
 
         //GIVEN
         val expectedInfoCard =
-            InfoCardEntity(1, "test", "test", 1, true, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1, true, category = StageType.FOREST)
 
-        val actualInfoCardEmpty = infoCardDao.getInfoCardById(1)
+        val actualInfoCardEmpty = infoCardDao.getInfoCardById("1")
         Assert.assertNull(actualInfoCardEmpty)
 
         //WHEN
         infoCardDao.insertInfoCard(expectedInfoCard)
 
         //THEN
-        val actualInfoCard = infoCardDao.getInfoCardById(1)
+        val actualInfoCard = infoCardDao.getInfoCardById("1")
         assertEquals(expectedInfoCard, actualInfoCard)
     }
 
@@ -64,22 +64,22 @@ class InfoCardDaoTest {
 
             //GIVEN
             val expectedInfoCardList = listOf<InfoCard>(
-                InfoCard(1, "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard(2, "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard(3, "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("1", "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("2", "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("3", "test", "test", 1, true, category = StageType.FOREST),
             ).map {
                 it.toInfoCardEntity()
             }
             val completeInfoCardList = listOf<InfoCard>(
-                InfoCard(1, "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard(2, "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard(3, "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard(4, "test", "test", 1, true, category = StageType.RIVER),
-                InfoCard(5, "test", "test", 1, true, category = StageType.RIVER),
-                InfoCard(6, "test", "test", 1, true, category = StageType.DESERT),
-                InfoCard(7, "test", "test", 1, true, category = StageType.DESERT),
-                InfoCard(8, "test", "test", 1, true, category = StageType.DESERT),
-                InfoCard(9, "test", "test", 1, true, category = StageType.DESERT),
+                InfoCard("1", "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("2", "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("3", "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("4", "test", "test", 1, true, category = StageType.RIVER),
+                InfoCard("5", "test", "test", 1, true, category = StageType.RIVER),
+                InfoCard("6", "test", "test", 1, true, category = StageType.DESERT),
+                InfoCard("7", "test", "test", 1, true, category = StageType.DESERT),
+                InfoCard("8", "test", "test", 1, true, category = StageType.DESERT),
+                InfoCard("9", "test", "test", 1, true, category = StageType.DESERT),
             )
 
             //WHEN
@@ -100,7 +100,7 @@ class InfoCardDaoTest {
 
         // Given
         val expectedInfoCard =
-            InfoCardEntity(1, "test", "test", 1, true, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1, true, category = StageType.FOREST)
 
         infoCardDao.insertInfoCard(expectedInfoCard)
 
@@ -108,7 +108,7 @@ class InfoCardDaoTest {
         infoCardDao.deleteInfoCard(expectedInfoCard)
 
         // Then
-        val actualInfoCard = infoCardDao.getInfoCardById(1)
+        val actualInfoCard = infoCardDao.getInfoCardById("1")
         Assert.assertNull(actualInfoCard)
 
     }
@@ -119,20 +119,20 @@ class InfoCardDaoTest {
 
         //GIVEN
         val expectedInfoCard =
-            InfoCardEntity(1, "test", "test", 1, true, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1, true, category = StageType.FOREST)
 
         var actualInfoCard =
-            InfoCardEntity(1, "test", "test", 1, false, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1, false, category = StageType.FOREST)
 
         infoCardDao.insertInfoCard(actualInfoCard)
 
         //WHEN
-        actualInfoCard = infoCardDao.getInfoCardById(1)!!
+        actualInfoCard = infoCardDao.getInfoCardById("1")!!
         actualInfoCard.isUnlocked = true
         infoCardDao.updateInfoCard(actualInfoCard)
 
         //THEN
-        actualInfoCard = infoCardDao.getInfoCardById(1)!!
+        actualInfoCard = infoCardDao.getInfoCardById("1")!!
         assertEquals(expectedInfoCard.isUnlocked, actualInfoCard.isUnlocked)
 
     }

@@ -25,7 +25,7 @@ class InfoCardRepositoryNetwork @Inject constructor(
             }
     }
 
-    override suspend fun getInfoCardById(id: Int): Flow<InfoCard?> {
+    override suspend fun getInfoCardById(id: String): Flow<InfoCard?> {
         return firestore.collection(CollectionsDataBase.INFO_CARDS)
             .whereEqualTo("id", id)
             .snapshots()

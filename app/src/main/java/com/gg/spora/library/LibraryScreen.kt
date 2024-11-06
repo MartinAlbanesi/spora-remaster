@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
@@ -88,18 +87,25 @@ fun TorchFire(modifier: Modifier) {
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.fire))
     Box(
         modifier = modifier
-            .fillMaxHeight()
-            .padding(bottom = 300.dp, end = 5.dp),
+            .padding(end = 5.dp),
         contentAlignment = Alignment.CenterStart
     ) {
 
-        LottieAnimation(
-            composition = lottie.value,
-            iterations = LottieConstants.IterateForever,
-            speed = 0.7f,
-            modifier = Modifier.size(55.dp)
-        )
+        Column(
+            modifier = Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+        ) {
+            LottieAnimation(
+                composition = lottie.value,
+                iterations = LottieConstants.IterateForever,
+                speed = 0.7f,
+                modifier = Modifier.size(55.dp)
+            )
 
+            Spacer(
+                modifier = Modifier.width(10.dp).height(358.dp)
+            )
+        }
     }
 
 }
@@ -139,7 +145,7 @@ fun BookcaseScreenClicker(
         Column(
             modifier
                 .fillMaxHeight()
-                .padding(end = 15.dp, bottom = 150.dp),
+                .padding(end = 15.dp, bottom = 165.dp),
             verticalArrangement = Arrangement.Center,
         ) {
 
