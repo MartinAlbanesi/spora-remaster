@@ -40,6 +40,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.gg.spora.R
@@ -56,7 +57,7 @@ fun RegisteredLoginScreen(
     navController: NavHostController
 ) {
 
-    val registeredLoginViewModel = viewModel<RegisteredLoginViewModel>()
+    val registeredLoginViewModel = hiltViewModel<RegisteredLoginViewModel>()
     val email by registeredLoginViewModel.email.observeAsState("")
     val password by registeredLoginViewModel.password.observeAsState("")
     val isAccountValid by registeredLoginViewModel.isAccountValid.observeAsState(false)

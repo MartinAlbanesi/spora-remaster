@@ -1,5 +1,6 @@
 package com.gg.spora.user.domain
 
+import com.gg.spora.R
 import com.gg.spora.user.domain.models.User
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
@@ -18,7 +19,9 @@ class SetNewUserUseCase @Inject constructor(
                 userName = userName,
                 email = "",
                 oxygen = 0,
-                levelsCompleted = emptyList()
+                levelsCompleted = emptyList(),
+                treesCount = 0,
+                userImage = R.drawable.spora_face_splash
             )
             userRepositoryLocal.setUserLocal(user)
             return
@@ -35,7 +38,9 @@ class SetNewUserUseCase @Inject constructor(
                 userName = userName,
                 email = email,
                 oxygen = 0,
-                levelsCompleted = emptyList()
+                levelsCompleted = emptyList(),
+                treesCount = 0,
+                userImage = R.drawable.spora_face_splash
             )
             val userId = userRepositoryNetwork.setUser(user)
             userRepositoryLocal.setUserLocal(user)

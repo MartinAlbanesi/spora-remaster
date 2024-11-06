@@ -1,6 +1,7 @@
 package com.gg.spora.user.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,9 +19,6 @@ interface UserDao {
     @Query("SELECT * FROM user_entity LIMIT 1")
     fun getUsersWithLevelsCompleted(): Flow<UserWithLevelsCompletedEntity?>
 
-//    @Query("SELECT * FROM user_entity LIMIT 1")
-//    fun getUser(): Flow<UserEntity>
-
     @Query("SELECT oxygen FROM user_entity")
     fun getUserOxygen(): Flow<Int>
 
@@ -33,14 +31,14 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLevelCompleted(levelsCompleted: LevelCompletedEntity)
 
-//    @Delete
-//    suspend fun deleteUser(user: UserEntity)
-//
-//    @Query("DELETE FROM user_entity WHERE id = :userId")
-//    suspend fun deleteUserById(userId: String)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLevelsCompleted(levelsCompleted: List<LevelCompletedEntity>)
 
-//    @Delete
-//    suspend fun deleteLevelCompleted(levelsCompleted: LevelCompletedEntity)
+    @Query("DELETE FROM user_entity")
+    suspend fun deleteUser()
+
+    @Query("DELETE FROM level_completed_entity")
+    suspend fun deleteLevelsCompleted()
 
     @Update
     suspend fun updateUser(user: UserEntity)

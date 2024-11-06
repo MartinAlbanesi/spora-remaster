@@ -31,5 +31,8 @@ fun RootNavigationGraph(
         gameNavGraph(navController = navController)
 
         libraryNavGraph(navController = navController)
+
+        settingNavGraph(navController = navController)
+
     }
 }

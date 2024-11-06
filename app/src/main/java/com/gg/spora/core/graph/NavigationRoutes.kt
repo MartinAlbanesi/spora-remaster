@@ -29,6 +29,14 @@ object NavigationRoutes {
     @Serializable
     object Grove
 
+    @Serializable
+    object Ranking
+
+    @Serializable
+    object ProfileScreen
+
+
+
     // Game Graph ------------------------------------------------------
 
     @Serializable
@@ -82,4 +90,12 @@ object NavigationRoutes {
         val nameObject: String,
     )
 
+
+    // Profile Graph ------------------------------------------------------
+
+    @Serializable
+    object SettingGraph
+
+    @Serializable
+    object SettingScreen
 }

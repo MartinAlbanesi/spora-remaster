@@ -9,6 +9,8 @@ interface IUserRepositoryLocal {
 
     suspend fun setUserLocal(user: User)
 
+    suspend fun setLevelsCompleted(levelsCompleted: List<LevelCompletedEntity>)
+
     suspend fun updateUserWithLevelCompleted(user: User, levelCompleted: LevelCompleted)
 
     suspend fun updateUserId(userId: String)
@@ -20,4 +22,8 @@ interface IUserRepositoryLocal {
     suspend fun updateUserOxygen(oxygen: Int)
 
     suspend fun updateLevelCompleted(levelCompleted: LevelCompletedEntity)
+
+    suspend fun deleteUser()
+
+    suspend fun deleteLevelsCompleted()
 }
