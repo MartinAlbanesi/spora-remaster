@@ -19,9 +19,6 @@ interface UserDao {
     @Query("SELECT * FROM user_entity LIMIT 1")
     fun getUsersWithLevelsCompleted(): Flow<UserWithLevelsCompletedEntity?>
 
-//    @Query("SELECT * FROM user_entity LIMIT 1")
-//    fun getUser(): Flow<UserEntity>
-
     @Query("SELECT oxygen FROM user_entity")
     fun getUserOxygen(): Flow<Int>
 
@@ -34,14 +31,14 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLevelCompleted(levelsCompleted: LevelCompletedEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLevelsCompleted(levelsCompleted: List<LevelCompletedEntity>)
+
     @Query("DELETE FROM user_entity")
     suspend fun deleteUser()
-//
-//    @Query("DELETE FROM user_entity WHERE id = :userId")
-//    suspend fun deleteUserById(userId: String)
 
-//    @Delete
-//    suspend fun deleteLevelCompleted(levelsCompleted: LevelCompletedEntity)
+    @Query("DELETE FROM level_completed_entity")
+    suspend fun deleteLevelsCompleted()
 
     @Update
     suspend fun updateUser(user: UserEntity)

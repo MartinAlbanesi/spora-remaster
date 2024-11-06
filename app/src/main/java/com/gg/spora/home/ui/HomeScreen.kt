@@ -67,11 +67,11 @@ fun HomeScreen(
                 onNavigateToLibrary()
             }
         ),
-        HomeIcon(
-            image = R.drawable.grove_icon,
-            text = "Arboleda",
-            onClick = {}
-        )
+//        HomeIcon(
+//            image = R.drawable.grove_icon,
+//            text = "Arboleda",
+//            onClick = {}
+//        )
     )
 
     Scaffold(

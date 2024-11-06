@@ -20,6 +20,10 @@ class UserRepositoryLocal @Inject constructor(
         userDao.insertUser(user.toUserEntity())
     }
 
+    override suspend fun setLevelsCompleted(levelsCompleted: List<LevelCompletedEntity>) {
+        userDao.insertLevelsCompleted(levelsCompleted)
+    }
+
     override suspend fun updateUserWithLevelCompleted(user: User, levelCompleted: LevelCompleted) {
 
         userDao.updateUser(user.toUserEntity())
@@ -61,6 +65,10 @@ class UserRepositoryLocal @Inject constructor(
 
     override suspend fun deleteUser() {
         userDao.deleteUser()
+    }
+
+    override suspend fun deleteLevelsCompleted() {
+        userDao.deleteLevelsCompleted()
     }
 
 //    override suspend fun getCurrentUserFlow(): List<User> {

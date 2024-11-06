@@ -14,6 +14,7 @@ class LogOutUseCase @Inject constructor(
     suspend operator fun invoke() {
         firebaseAuth.signOut()
         userRepositoryLocal.deleteUser()
+        userRepositoryLocal.deleteLevelsCompleted()
 //        logOutWithGoogleUseCase()
     }
 }
