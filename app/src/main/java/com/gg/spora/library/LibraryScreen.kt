@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -57,7 +56,7 @@ fun LibraryScreen(
 
 
         Image(
-            painter = painterResource(R.drawable.library_background_v3),
+            painter = painterResource(R.drawable.library_background_xxl),
             contentDescription = "Library background",
             modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.FillBounds
@@ -87,23 +86,30 @@ fun TorchFire(modifier: Modifier) {
     val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.fire))
     Box(
         modifier = modifier
-            .padding(end = 5.dp),
+            .fillMaxHeight()
+            .padding(bottom = 300.dp, end = 5.dp),
         contentAlignment = Alignment.CenterStart
     ) {
 
         Column(
             modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(
+                (-7).dp,
+                alignment = Alignment.CenterVertically
+            ),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LottieAnimation(
                 composition = lottie.value,
                 iterations = LottieConstants.IterateForever,
                 speed = 0.7f,
-                modifier = Modifier.size(55.dp)
+                modifier = Modifier.size(65.dp)
             )
 
-            Spacer(
-                modifier = Modifier.width(10.dp).height(358.dp)
+            Image(
+                painter = painterResource(R.drawable.torch_base),
+                contentDescription = "Torch base for lottie animation",
+                modifier = Modifier.size(50.dp)
             )
         }
     }
@@ -116,18 +122,20 @@ fun MushyAndTable(modifier: Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(bottom = 80.dp, end = 180.dp),
+            .padding(bottom = 40.dp, end = 140.dp),
         contentAlignment = Alignment.BottomCenter
     ) {
+
         MushyBlinkAnimation(
             modifier
-                .size(220.dp)
+                .size(260.dp)
                 .offset(y = -(20).dp, x = 5.dp)
         )
 
         Image(
             painter = painterResource(R.drawable.library_table),
             contentDescription = "Table",
+            modifier.size(230.dp).offset(y = 70.dp)
         )
     }
 }
@@ -145,25 +153,25 @@ fun BookcaseScreenClicker(
         Column(
             modifier
                 .fillMaxHeight()
-                .padding(end = 15.dp, bottom = 165.dp),
+                .padding(end = 15.dp, bottom = 180.dp),
             verticalArrangement = Arrangement.Center,
         ) {
 
             Box(
                 modifier = Modifier
                     .width(170.dp)
-                    .height(70.dp)
+                    .height(90.dp)
                     .background(color = Color.Transparent)
                     .clickable(onClick = {
                         //Nav to forest area info
                         onClickFirst()
                     }),
-        )
+            )
 
             Box(
                 modifier = Modifier
                     .width(170.dp)
-                    .height(70.dp)
+                    .height(90.dp)
                     .background(color = Color.Transparent)
                     .clickable(onClick = {
                         //Nav to river area info
@@ -174,7 +182,7 @@ fun BookcaseScreenClicker(
             Box(
                 modifier = Modifier
                     .width(170.dp)
-                    .height(70.dp)
+                    .height(90.dp)
                     .background(color = Color.Transparent)
                     .clickable(onClick = {
                         //Nav to desert area info
@@ -185,9 +193,6 @@ fun BookcaseScreenClicker(
         }
 
     }
-
-
-
 
 
 }
