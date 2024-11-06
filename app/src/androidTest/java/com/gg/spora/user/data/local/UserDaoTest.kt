@@ -56,7 +56,11 @@ class UserDaoTest {
         runTest {
 
             // Given
-            val expectedUser = UserEntity("1", "test", "titi@gmail.com", 100)
+            val expectedUser = UserEntity(
+                "1", "test", "titi@gmail.com", 100,
+                treesCount = TODO(),
+                userImage = TODO()
+            )
             val expectedLevelsCompleted = listOf(
                 LevelCompletedEntity("1", "stage1", "star1", "1"),
                 LevelCompletedEntity("2", "stage2", "star2", "1"),

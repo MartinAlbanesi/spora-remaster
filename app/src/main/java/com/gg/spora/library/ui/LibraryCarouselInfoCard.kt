@@ -187,7 +187,7 @@ fun InfoCardCarousel(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Image(
-                    painter = painterResource(id = card.image),
+                    painter = painterResource(id = card.image.toInt()),
                     contentDescription = "library card image",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier

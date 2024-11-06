@@ -16,6 +16,7 @@ import javax.inject.Inject
  * @param networkRepository network repository for operations
  * @param networkInfo network connectivity checker
  */
+
 class GetAllInfoCardsUseCase @Inject constructor(
     private val localRepository: IInfoCardRepositoryLocal,
     private val networkRepository: IInfoCardRepositoryNetwork,
