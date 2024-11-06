@@ -38,6 +38,7 @@ fun Ranking(
     currentUser: User?,
     onBackClick: () -> Unit,
 ) {
+    var imageRanking = R.drawable.ranking_sign
    // val rankingItems by viewModel.rankingItems.collectAsState()
     Image(
         painter = painterResource(id = R.drawable.ranking_background),
@@ -81,7 +82,7 @@ fun Ranking(
                     numImage = index + 1
                 }
 
-                val imageRanking = when(numImage){
+                imageRanking = when(numImage){
                     0 -> R.drawable.ranking_user
                     1 -> R.drawable.ranking_ore
                     2 -> R.drawable.ranking_plate
@@ -113,28 +114,38 @@ fun Ranking(
                                 .padding(16.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            when (index) {
-                                0 -> Image(
-                                    painter = painterResource(id = R.drawable.medalladeoro),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(66.dp)
-                                )
-                                1 -> Image(
-                                    painter = painterResource(id = R.drawable.medalladeplata),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(66.dp)
-                                )
-                                2 -> Image(
-                                    painter = painterResource(id = R.drawable.medalladebronce),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(66.dp)
-                                )
-                                else -> Text(
-                                    text = (index + 1).toString(),
-                                    style = MaterialTheme.typography.headlineLarge,
-                                    color = Color.Black,
-                                    textAlign = TextAlign.Center
-                                )
+                            if(item.oxygen == 0){
+                                Text(
+                                text = "",
+                                style = MaterialTheme.typography.headlineLarge,
+                                color = Color.Black,
+                                textAlign = TextAlign.Center
+                            )
+                            }
+                            else{
+                                when (index) {
+                                    0 -> Image(
+                                        painter = painterResource(id = R.drawable.medalladeoro),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(66.dp)
+                                    )
+                                    1 -> Image(
+                                        painter = painterResource(id = R.drawable.medalladeplata),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(66.dp)
+                                    )
+                                    2 -> Image(
+                                        painter = painterResource(id = R.drawable.medalladebronce),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(66.dp)
+                                    )
+                                    else -> Text(
+                                        text = (index + 1).toString(),
+                                        style = MaterialTheme.typography.headlineLarge,
+                                        color = Color.Black,
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
                             }
                         }
                         Spacer(
@@ -144,13 +155,16 @@ fun Ranking(
                                 .padding(bottom = 5.dp)
                                 .background(Color.Black)
                         )
+
                         Image(
                             painter = painterResource(id = item.userImage),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.size(63.dp)
                                 .padding(bottom = 5.dp, start = 5.dp)
-                        )/*
+                        )
+
+                        /*
                         Column(
                             modifier = Modifier
                                 .padding(start = 8.dp)
@@ -255,12 +269,46 @@ fun Ranking(
                             .padding(16.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            text = "1",
-                            style = MaterialTheme.typography.headlineLarge,
-                            color = Color.Black,
-                            textAlign = TextAlign.Center
-                        )
+
+                        if(currentUser?.oxygen == 0){
+                            Text(
+                                text = "",
+                                style = MaterialTheme.typography.headlineLarge,
+                                color = Color.Black,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                        else{
+                            var index = -1
+                            userList.forEachIndexed { i, user ->
+                                if (currentUser?.id == user.id) {
+                                    index = i
+                                }
+                            }
+                            when (index) {
+                                0 -> Image(
+                                    painter = painterResource(id = R.drawable.medalladeoro),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(66.dp)
+                                )
+                                1 -> Image(
+                                    painter = painterResource(id = R.drawable.medalladeplata),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(66.dp)
+                                )
+                                2 -> Image(
+                                    painter = painterResource(id = R.drawable.medalladebronce),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(66.dp)
+                                )
+                                else -> Text(
+                                    text = (index + 1).toString(),
+                                    style = MaterialTheme.typography.headlineLarge,
+                                    color = Color.Black,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
                     }
                     Spacer(
                         modifier = Modifier
