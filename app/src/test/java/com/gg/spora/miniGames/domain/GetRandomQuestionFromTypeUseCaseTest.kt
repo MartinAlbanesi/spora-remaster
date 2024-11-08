@@ -11,7 +11,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import org.junit.jupiter.api.DisplayName
 
 
 class GetRandomQuestionFromTypeUseCaseTest {
@@ -27,11 +26,8 @@ class GetRandomQuestionFromTypeUseCaseTest {
         getRandomQuestionFromTypeUseCase = GetRandomQuestionFromTypeUseCase(quizLocalRepository)
     }
 
-    @DisplayName("invoke" +
-        "Cuando se ingrese un tipo de juego RELATIONS, " +
-        "Entonces se deberia retornar una lista con preguntas aleatorias con 6 respuestas")
     @Test
-    fun invoke_RELATIONS_GAME_Test() {
+    fun invoke_WhenInsertAGameTypeRELATIONS_ThenReturnRandomListWith6Answer() {
         // Given
         val count = 5
         val typeQuestion = listOf(TypeQuestion.RELATIONS_QUESTION)
@@ -47,12 +43,9 @@ class GetRandomQuestionFromTypeUseCaseTest {
         assertEquals(count, actual.size)
     }
 
-    @Ignore
-    @DisplayName("invoke" +
-        "Cuando se ingrese un tipo de juego QUIZ, " +
-        "Entonces se deberia retornar una lista con preguntas del tipo QUIZ aleatorias con 4 respuestas cada una")
+    @Ignore("This test is failing because the function is not implemented")
     @Test
-    fun invoke_QUIZ_GAME_Test() {
+    fun invoke_WhenInsertAQuizGameType_ThenReturnRandomQuestionList() {
         // Given
         val count = 4
         val typeQuestion = listOf(TypeQuestion.MARTIN, TypeQuestion.RECYCLE)

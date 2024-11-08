@@ -38,6 +38,8 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -92,10 +94,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.runtime.livedata)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
     testImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -103,9 +102,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    //esto agrego para ver si funcionan los test de aca para abajo borrar si no funciona
-    testImplementation ("org.robolectric:robolectric:4.8")
 
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
@@ -140,9 +136,6 @@ dependencies {
     implementation(libs.tensorflow.android)
     implementation(libs.tensorflow.metadata)
 
-    //DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
@@ -174,6 +167,6 @@ dependencies {
     implementation (libs.converter.gson)
 
     // Material extend icons
-    implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.androidx.material.icons.extended)
 
 }

@@ -13,7 +13,6 @@ import com.gg.spora.library.domain.mappers.toInfoCardEntity
 import com.gg.spora.library.ui.LibraryCardBook
 import com.gg.spora.library.ui.LibraryViewModel
 
-@Suppress("LongMethod")
 fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.LibraryGraph>(startDestination = NavigationRoutes.Library) {
 

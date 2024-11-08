@@ -1,7 +1,5 @@
 package com.gg.spora.welcome.ui
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,8 +33,6 @@ import com.gg.spora.welcome.ui.components.SporaTextField
 import kotlinx.coroutines.launch
 
 
-@SuppressLint("SuspiciousIndentation")
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
