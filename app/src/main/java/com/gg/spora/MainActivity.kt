@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.gg.spora.core.graph.RootNavigationGraph
 import com.gg.spora.ui.theme.SporaTheme
-import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

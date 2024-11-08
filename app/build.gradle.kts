@@ -17,6 +17,9 @@ plugins {
     alias(libs.plugins.googleServices)
 
     id("com.google.firebase.crashlytics")
+
+    // Kover
+    alias(libs.plugins.kover)
 }
 
 android {
@@ -75,11 +78,33 @@ android {
             resources.excludes.add("META-INF/LICENSE-notice.md")
         }
     }
-//    testOptions{
-//        unitTests{
-//            isIncludeAndroidResources = true
-//        }
-//    }
+    kover {
+        reports {
+            filters {
+                excludes {
+                    annotatedBy(
+                        "androidx.compose.runtime.Composable",
+                        "dagger.internal.DaggerGenerated",
+                        "dagger.hilt.android.AndroidEntryPoint",
+                        "javax.annotation.processing.Generated"
+                    )
+                    classes(
+                        "dagger.hilt.internal.aggregatedroot.codegen.*",
+                        "hilt_aggregated_deps.*",
+                        "*ComposableSingletons*",
+                        "*_HiltModules*",
+                        "*_Impl*",
+                        "*Hilt_*",
+                        "*BuildConfig",
+                        ".*_Factory.*",
+                    )
+                    packages(
+                        "com.gg.spora.core"
+                    )
+                }
+            }
+        }
+    }
 }
 
 dependencies {

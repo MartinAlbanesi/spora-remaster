@@ -65,6 +65,9 @@ converterGson = "2.9.0"
 # Hilt Android Testing
 hiltAndroidTesting = "2.44"
 
+# Kover
+kover = "0.8.3"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -163,3 +166,6 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 # Google Services
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleService" }
+
+# Kover
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
