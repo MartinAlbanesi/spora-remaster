@@ -108,7 +108,8 @@ fun CameraScreen(
                     Text(
                         text = "${nameObject}: ${confidence.toInt()}%",
                         color = Color.White,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(5.dp)
                     )
                 }
                 Box(

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -93,23 +94,28 @@ fun ObjectDetailDialog(
                         .padding(10.dp)
                 )
                 {
-                    Column(
-                        modifier = modifier.width(220.dp),
+
+                    LazyColumn(
+                        modifier = modifier.width(200.dp),
                         verticalArrangement = Arrangement.Top
                     )
                     {
-                        Text(
-                            text = stringResource(R.string.description),
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                        Text(
-                            modifier = modifier.padding(top = 5.dp),
-                            text = objectDetail.description!!,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
+                        item{
+                            Text(
+                                text = stringResource(R.string.description),
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                        item{
+                            Text(
+                                modifier = modifier.padding(top = 5.dp),
+                                text = objectDetail.description!!,
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
                     }
 
                     Column(

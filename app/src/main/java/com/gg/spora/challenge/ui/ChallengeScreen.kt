@@ -44,7 +44,7 @@ import com.gg.spora.core.utils.enums.StarState
 
 
 /**
- * Screen for mini games with Spora and progress bar
+ * Screen for challenge
  * @param modifier: Modifier
  * @param onNavigateToCameraScreen: Click listener for back button
  * @param onNavigateToCameraScreen: Action for navigate to Camera Screen
