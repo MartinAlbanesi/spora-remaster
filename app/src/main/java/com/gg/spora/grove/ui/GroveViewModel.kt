@@ -158,8 +158,7 @@ class GroveViewModel @Inject constructor(
     fun onSeedTreeButtonClicked(seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             // Reset cooldown to initial value
-            _seedTreeCooldowns.value =
-                _seedTreeCooldowns.value + (seedTreeId to INITIAL_COOLDOWN_DURATION)
+            _seedTreeCooldowns.value = _seedTreeCooldowns.value + (seedTreeId to INITIAL_COOLDOWN_DURATION)
             Log.i("GroveViewModel", "Cooldown reset for seedTreeId: ${_seedTreeCooldowns.value}")
 
             // Decrement cooldown until it reaches 0
@@ -171,8 +170,6 @@ class GroveViewModel @Inject constructor(
                 Log.i("GroveViewModel", "Remaining time for seedTreeId: $remainingTime")
             }
 
-            // Cooldown finished, reset to initial value (optional)
-            _seedTreeCooldowns.value = _seedTreeCooldowns.value + (seedTreeId to 0L)
             Log.i("GroveViewModel", "Cooldown finished for seedTreeId: ${_seedTreeCooldowns.value}")
         }
     }
@@ -206,14 +203,9 @@ class GroveViewModel @Inject constructor(
             secondsGoneBy < 5 -> GrowthStage.SPROUT // 5 seconds
             secondsGoneBy in 5..10 -> GrowthStage.MEDIUM // 5-10 seconds
             else -> {
-                forestTree.hasReachedAdultStage =
-                    true // Setea el flag en true cuando el árbol llegue a la etapa adulta
+                forestTree.hasReachedAdultStage = true // Setea el flag en true cuando el árbol llegue a la etapa adulta
                 GrowthStage.ADULT // 10 segundos o más
             }
-        }
-
-        if (forestTree.currentStage == GrowthStage.ADULT) {
-            forestTree.hasReachedAdultStage = true
         }
         Log.d("ForestTree", "Current stage: ${forestTree.currentStage}")
     }

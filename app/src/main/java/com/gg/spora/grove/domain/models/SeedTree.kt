@@ -16,7 +16,6 @@ data class SeedTree(
     val timeToGenerateForestTree: Long = 5000L,
     val expectedTimeToGenerateForestTree: Long = ( LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + timeToGenerateForestTree),
     var amountOfForestTreesGenerated: Int = 0,
-//    var nextForestTreeAvailableTime: Long = 0L
 ) : Tree(id, type)
 
 fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {
