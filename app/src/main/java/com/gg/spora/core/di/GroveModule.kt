@@ -1,9 +1,6 @@
 package com.gg.spora.core.di
 
 import android.annotation.SuppressLint
-import android.content.Context
-import androidx.room.Room
-import com.gg.spora.core.data.database.GroveDatabase
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
@@ -17,29 +14,12 @@ import com.gg.spora.grove.ui.GroveViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class GroveModule {
-
-    @Provides
-    @Singleton
-    fun provideGroveDatabase(@ApplicationContext appContext: Context): GroveDatabase {
-        return Room.databaseBuilder(
-            appContext,
-            GroveDatabase::class.java,
-            "grove_database"
-        ).fallbackToDestructiveMigration().build()
-    }
-
-    @Singleton
-    @Provides
-    fun groveDaoProvide(groveDatabase: GroveDatabase): GroveDao {
-        return groveDatabase.groveDao()
-    }
 
     @SuppressLint("NewApi")
     @Provides

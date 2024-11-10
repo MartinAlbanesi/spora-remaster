@@ -85,7 +85,7 @@ fun GroveScreen(
                 for (seedTree in seedTrees) {
                     SeedTreeItem(
                         seedTree = seedTree,
-                        seedTreeCooldowns = seedTreeCooldowns[seedTree.id],
+                        seedTreeCooldown = seedTreeCooldowns[seedTree.id],
                         onSeedTreeButtonClicked = {p1, p2 -> onSeedTreeButtonClicked(p1, p2)},
                         onPlantForestTree = { forestTree, seedTreeId ->
                             plantForestTree(forestTree, seedTreeId)

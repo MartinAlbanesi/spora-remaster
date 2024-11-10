@@ -64,8 +64,7 @@ class GroveViewModel @Inject constructor(
         getSeedTrees()
         getForestTrees()
         initSeedTrees()
-        initForestTrees()
-        updateForestTreeGrowthStages()
+//        initForestTrees()
     }
 
     // Inicializa los árboles semilleros la primera vez que se abre la pantalla
@@ -105,14 +104,14 @@ class GroveViewModel @Inject constructor(
         // Programacion reactiva
     }
 
-    // Inicializa los árboles del bosque la primera vez que se abre la pantalla
-    fun initForestTrees() {
-        if (_forestTrees.value.isEmpty()) {
-            _forestTrees.value =
-                MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
-            Log.i("GroveViewModel", "ForestTrees initialized: ${_forestTrees.value}")
-        }
-    }
+//    // Inicializa los árboles del bosque la primera vez que se abre la pantalla
+//    fun initForestTrees() {
+//        if (_forestTrees.value.isEmpty()) {
+//            _forestTrees.value =
+//                MutableList<ForestTree?>(25) { null } // Initialize with 25 nulls
+//            Log.i("GroveViewModel", "ForestTrees initialized: ${_forestTrees.value}")
+//        }
+//    }
 
     // Carga los árboles semilleros desde la base de datos
     fun getSeedTrees(): Flow<List<SeedTree>> {
@@ -142,18 +141,15 @@ class GroveViewModel @Inject constructor(
             }
             forestTree.position = position // Update tree's position
 
-//            // Update growth stage
-//            forestTree.updateGrowthStage()
-
             // Directly update the element at the desired position
             val updatedForest = _forestTrees.value.toMutableList()
             updatedForest[position] = forestTree
             _forestTrees.value = updatedForest
 
             insertForestTreeUseCase(forestTree) // Save only the planted tree
-//            onCooldownTriggered(seedTreeId) // Trigger cooldown after planting
         }
     }
+
 // Guardar la fecha en la que se genero un arbol para luego compararla y asignarla a la variable del viewmodel
     fun onSeedTreeButtonClicked(seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -174,24 +170,24 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-    private fun updateForestTreeGrowthStages() {
-        viewModelScope.launch(Dispatchers.IO) {
-            while (true) {
-                val updatedForestTrees = _forestTrees.value.map { forestTree ->
-                    forestTree?.let {
-                        if (!it.hasReachedAdultStage) {
-                            val updatedTree = it.copy().apply { updateGrowthStage(this) }
-                            updatedTree // Retorna el árbol actualizado
-                        } else {
-                            it // Retorna el árbol sin actualizar si ya alcanzó la etapa adulta
-                        }
-                    }
-                }
-                _forestTrees.value = updatedForestTrees
-                delay(1000) // Update every 1 second
-            }
-        }
-    }
+//    private fun updateForestTreeGrowthStages() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            while (true) {
+//                val updatedForestTrees = _forestTrees.value.map { forestTree ->
+//                    forestTree?.let {
+//                        if (!it.hasReachedAdultStage) {
+//                            val updatedTree = it.copy().apply { updateGrowthStage(this) }
+//                            updatedTree // Retorna el árbol actualizado
+//                        } else {
+//                            it // Retorna el árbol sin actualizar si ya alcanzó la etapa adulta
+//                        }
+//                    }
+//                }
+//                _forestTrees.value = updatedForestTrees
+//                delay(1000) // Update every 1 second
+//            }
+//        }
+//    }
 
     fun updateGrowthStage(forestTree: ForestTree) {
         var secondsGoneBy =

@@ -27,7 +27,7 @@ import com.gg.spora.grove.domain.models.SeedTree
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    seedTreeCooldowns: Long?,
+    seedTreeCooldown: Long?,
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     onPlantForestTree: (ForestTree, Int) -> Unit,
 ) {
@@ -48,14 +48,14 @@ fun SeedTreeItem(
                 onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
                 onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
             },
-            enabled = seedTreeCooldowns == 0L, // Habilita el botón si el cooldown no se inició (está en 0)
+            enabled = seedTreeCooldown == 0L, // Habilita el botón si el cooldown no se inició (está en 0)
         ) {
             // Muestra el texto correspondiente al cooldown
-            if (seedTreeCooldowns != null) {
-                if (seedTreeCooldowns != 0L) {
-                    Text("${seedTreeCooldowns.div(1000)}s")
+            if (seedTreeCooldown != null) {
+                if (seedTreeCooldown != 0L) {
+                    Text("${seedTreeCooldown.div(1000)}s")
                 } else {
-                    Log.i("GroveViewModel", "Button clicked $seedTreeCooldowns")
+                    Log.i("GroveViewModel", "Button clicked $seedTreeCooldown")
                     Text("Claim")
                 }
             }

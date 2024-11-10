@@ -5,6 +5,9 @@ import androidx.room.RoomDatabase
 import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
+import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.database.entities.ForestTreeEntity
+import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.stage.data.local.StageDao
@@ -22,7 +25,9 @@ import com.gg.spora.user.data.local.entities.UserEntity
         LevelCompletedEntity::class,
         InfoCardEntity::class,
         LevelEntity::class,
-        StageLevelEntity::class
+        StageLevelEntity::class,
+        ForestTreeEntity::class,
+        SeedTreeEntity::class,
     ],
     version = 1,
     exportSchema = false
@@ -36,4 +41,6 @@ abstract class SporaDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     abstract fun stageDao(): StageDao
+
+    abstract fun groveDao(): GroveDao
 }
