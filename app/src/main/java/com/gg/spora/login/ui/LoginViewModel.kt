@@ -4,14 +4,25 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.gg.spora.user.domain.SetNewUserUseCase
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val auth: FirebaseAuth,
+    private val setNewUserUseCase: SetNewUserUseCase
+) : ViewModel() {
 
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
@@ -34,9 +45,6 @@ class LoginViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-
     fun onLoginChanged(name: String, email: String, password: String) {
         _name.value = name
         _email.value = email
@@ -45,24 +53,37 @@ class LoginViewModel : ViewModel() {
     }
 
     private fun isValidPassword(password: String): Boolean = password.length > 6
-    private fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+     fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    suspend fun onLoginSelected() {
-        _isLoading.value = true
-        try {
-            registerWithEmail(email.value.orEmpty(), password.value.orEmpty(), name.value.orEmpty())
-        } catch (e: Exception) {
-            _errorMessage.value = "Error: ${e.localizedMessage}"
-        } finally {
-            _isLoading.value = false
+
+    fun onLoginSelected(onNavigationToHome: () -> Unit) {
+        _isLoading.value = true // Show the CircularProgressIndicator
+        viewModelScope.launch {
+            try {
+                registerWithEmail(
+                    email.value.orEmpty(),
+                    password.value.orEmpty(),
+                    name.value.orEmpty(),
+                    onNavigationToHome
+                )
+            } catch (e: Exception) {
+                _errorMessage.value = "Error: ${e.localizedMessage}"
+            } finally {
+                _isLoading.value = false // Hide the CircularProgressIndicator
+            }
         }
     }
 
-    private fun registerWithEmail(email: String, password: String, name: String) {
+    private fun registerWithEmail(
+        email: String,
+        password: String,
+        name: String,
+        onNavigationToHome: () -> Unit
+    ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    saveUserToFirestore(name, email)
+                    saveUserToFirestore(name, email,onNavigationToHome)
                 } else {
                     if (task.exception is FirebaseAuthUserCollisionException) {
                         _errorMessage.value = "Usuario ya registrado"
@@ -73,20 +94,39 @@ class LoginViewModel : ViewModel() {
             }
     }
 
-    private fun saveUserToFirestore(name: String, email: String) {
-        val user = hashMapOf(
-            "name" to name,
-            "email" to email
-        )
-        firestore.collection("users")
-            .add(user)
-            .addOnSuccessListener {
-                _loginSuccess.value = true
-                _errorMessage.value = null
+    private fun saveUserToFirestore(
+        name: String,
+        email: String,
+        onNavigationToHome: () -> Unit
+    ) {
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                setNewUserUseCase(email, name)
+                withContext(Dispatchers.Main) {
+                    delay(1500)
+                    onNavigationToHome()
+                }
+
             }
-            .addOnFailureListener {
-                _errorMessage.value = "Error al guardar usuario: ${it.localizedMessage}"
-            }
+        }catch (e:Exception){
+            _errorMessage.value = "Error al guardar usuario: ${e.localizedMessage}"
+        }
+//        val user = hashMapOf(
+//            "name" to name,
+//            "email" to email
+//        )
+//        firestore.collection("users")
+//            .add(user)
+//            .addOnSuccessListener {
+//                _loginSuccess.value = true
+//                _errorMessage.value = null
+//            }
+//            .addOnFailureListener {
+//                _errorMessage.value = "Error al guardar usuario: ${it.localizedMessage}"
+//            }
+    }
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.value = isLoading
     }
 
 }

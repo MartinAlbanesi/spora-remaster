@@ -7,16 +7,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.gg.spora.core.ui.screenFadeWithSlideInToLeft
-import com.gg.spora.core.ui.screenFadeWithSlideOutToRight
+import com.gg.spora.core.ui.animations.screenFadeWithSlideInToLeft
+import com.gg.spora.core.ui.animations.screenFadeWithSlideOutToRight
 
 @Composable
 fun RootNavigationGraph(
     navController: NavHostController = rememberNavController(),
+    isUserLoggedIn: Boolean,
 ){
     NavHost(
         navController = navController,
-        startDestination = NavigationRoutes.AuthGraph,
+        startDestination = if(!isUserLoggedIn) NavigationRoutes.AuthGraph else NavigationRoutes.HomeGraph,
         enterTransition = ::screenFadeWithSlideInToLeft,
         exitTransition = ::screenFadeWithSlideOutToRight,
         popEnterTransition = ::screenFadeWithSlideInToLeft,
@@ -28,5 +29,10 @@ fun RootNavigationGraph(
         homeNavGraph(navController = navController)
 
         gameNavGraph(navController = navController)
+
+        libraryNavGraph(navController = navController)
+
+        settingNavGraph(navController = navController)
+
     }
 }

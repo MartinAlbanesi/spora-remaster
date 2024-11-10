@@ -1,7 +1,5 @@
 package com.gg.spora.welcome.ui
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,8 +33,6 @@ import com.gg.spora.welcome.ui.components.SporaTextField
 import kotlinx.coroutines.launch
 
 
-@SuppressLint("SuspiciousIndentation")
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
@@ -80,7 +76,8 @@ fun WelcomeScreen(
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(page + 1)
                         }
-                    }
+                    },
+                    onNavigateToSignUp = onNavigateToSignUp
                 )
 
                 3 -> GuestEnterNameScreen(
@@ -204,7 +201,8 @@ fun ChampyTalkScreen(
 @Composable
 fun TypeUserSelectionScreen(
     modifier: Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onNavigateToSignUp: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -255,7 +253,6 @@ fun TypeUserSelectionScreen(
 //                    .align(Alignment.BottomCenter)
 //                    .offset(y = -60.dp),
             )
-/*
             SporaPrimaryButton(
                 text = "Crear cuenta",
                 textSize = 20,
@@ -266,7 +263,6 @@ fun TypeUserSelectionScreen(
                     .size(width = 350.dp, height = 50.dp)
 //                    .offset(y = 10.dp),
             )
- */
         }
     }
 //        }
@@ -323,7 +319,8 @@ fun GuestEnterNameScreen(
                     modifier.size(width = 350.dp, height = 50.dp),
                     "Siguiente",
                     textSize = 30,
-                    onClick = onClick
+                    onClick = onClick,
+                    isEnable = guestName.length > 3
                 )
 
         }
