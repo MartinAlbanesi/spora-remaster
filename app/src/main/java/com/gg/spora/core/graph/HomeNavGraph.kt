@@ -8,17 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import android.annotation.SuppressLint
-import android.util.Log
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.gg.spora.R
-import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.grove.ui.GroveScreen
 import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.home.ui.HomeScreen
@@ -27,7 +20,6 @@ import com.gg.spora.profile.ui.ProfileScreen
 import com.gg.spora.profile.ui.ProfileViewModel
 import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ranking.ui.RankingViewModel
-import com.gg.spora.user.domain.models.User
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
@@ -60,7 +52,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     },
                     onNavigateToExpoStage = {
                         navController.navigate(NavigationRoutes.Stage("2"))
-                    }
+                    },
                     onNavigateToLibrary = {
                         navController.navigate(NavigationRoutes.LibraryGraph)
                     },

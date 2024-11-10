@@ -46,8 +46,6 @@ fun GroveScreen(
         topBar = {
             TopAppBarWithDualIcon(
                 modifier = ModifierStyle.brush,
-                firstLabel = "12",
-                firstIcon = R.drawable.trees_icon,
                 secondLabel = "465",
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = true,

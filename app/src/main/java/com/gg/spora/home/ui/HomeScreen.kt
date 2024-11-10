@@ -183,7 +183,7 @@ private fun HomePreview() {
                 oxygen = 0,
                 onNavigateToForestStage = {},
                 onNavigateToGrove = {},
-                onNavigateToExpoStage = {}
+                onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
                 onNavigateToProfile = {}
