@@ -33,9 +33,11 @@ import com.gg.spora.grove.ui.components.SeedTreeItem
 @Composable
 fun GroveScreen(
     modifier: Modifier = Modifier,
-    seedTrees: List<SeedTree>,
-    forestTrees: List<ForestTree?>,
-    seedTreeCooldowns: Map<Int, Long>,
+//    seedTrees: List<SeedTree>,
+//    forestTrees: List<ForestTree?>,
+//    seedTreeCooldowns: Map<Int, Long>,
+    uiState: Triple<List<SeedTree>, List<ForestTree?>, Map<Int, Long>>,
+    isLoading: Boolean,
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     plantForestTree: (ForestTree, Int) -> Unit,
     updateTree: (ForestTree) -> Unit,
@@ -82,10 +84,11 @@ fun GroveScreen(
                     .align(Alignment.Center)
             ) {
                 // Componente para cada árbol semillero
-                for (seedTree in seedTrees) {
+                for (seedTree in uiState.first) {
                     SeedTreeItem(
                         seedTree = seedTree,
-                        seedTreeCooldown = seedTreeCooldowns[seedTree.id],
+                        seedTreeCooldown = uiState.third[seedTree.id],
+                        isLoading = isLoading,
                         onSeedTreeButtonClicked = {p1, p2 -> onSeedTreeButtonClicked(p1, p2)},
                         onPlantForestTree = { forestTree, seedTreeId ->
                             plantForestTree(forestTree, seedTreeId)
@@ -109,7 +112,7 @@ fun GroveScreen(
                     .padding(16.dp)
                     .offset(y = (-50).dp)
             ) {
-                itemsIndexed(forestTrees) { index, tree -> // Use itemsIndexed here
+                itemsIndexed(uiState.second) { index, tree -> // Use itemsIndexed here
                     if (tree == null) {
                         PlantingPlaceholder() // Componente de plantacion vacia
                     } else {

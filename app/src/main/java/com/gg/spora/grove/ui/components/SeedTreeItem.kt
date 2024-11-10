@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.ui.INITIAL_COOLDOWN_DURATION
 
 /**
  * Composable que representa un árbol semillero en la interfaz de usuario.
@@ -28,37 +30,42 @@ fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
     seedTreeCooldown: Long?,
+    isLoading: Boolean,
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     onPlantForestTree: (ForestTree, Int) -> Unit,
 ) {
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-    ) {
-        Image(
-            painter = painterResource(id = seedTree.type.imageResource),
-            contentDescription = null,
-            modifier = Modifier.size(64.dp)
-        )
-
-        Button(
-            modifier = Modifier.width(100.dp),
-            onClick = {
-                onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
-                onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
-            },
-            enabled = seedTreeCooldown == 0L, // Habilita el botón si el cooldown no se inició (está en 0)
+    if (!isLoading) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
         ) {
-            // Muestra el texto correspondiente al cooldown
-            if (seedTreeCooldown != null) {
+            Image(
+                painter = painterResource(id = seedTree.type.imageResource),
+                contentDescription = null,
+                modifier = Modifier.size(64.dp)
+            )
+
+            Button(
+                modifier = Modifier.width(100.dp),
+                onClick = {
+                    onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
+                    onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
+                },
+                enabled = (seedTreeCooldown
+                    ?: INITIAL_COOLDOWN_DURATION) == 0L, // Habilita el botón si el cooldown no se inició (está en 0)
+            ) {
+                // Muestra el texto correspondiente al cooldown
                 if (seedTreeCooldown != 0L) {
-                    Text("${seedTreeCooldown.div(1000)}s")
+                    Text("${seedTreeCooldown?.div(1000)}s")
+                    Log.i("GroveViewModel", "Inicializo el cooldown")
                 } else {
                     Log.i("GroveViewModel", "Button clicked $seedTreeCooldown")
                     Text("Claim")
                 }
             }
         }
+    } else {
+        CircularProgressIndicator()
     }
 }

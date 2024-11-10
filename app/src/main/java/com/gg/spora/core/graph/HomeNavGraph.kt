@@ -68,14 +68,15 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
         composable<NavigationRoutes.Grove> {
             val groveViewModel = hiltViewModel<GroveViewModel>()
-            val seedTrees by groveViewModel.seedTrees.collectAsState()
-            val forestTrees by groveViewModel.forestTrees.collectAsState()
-            val seedTreeCooldowns by groveViewModel.seedTreeCooldowns.collectAsState()
+//            val seedTrees by groveViewModel.seedTrees.collectAsState()
+//            val forestTrees by groveViewModel.forestTrees.collectAsState()
+//            val seedTreeCooldowns by groveViewModel.seedTreeCooldowns.collectAsState()
+            val uiState by groveViewModel.uiState.collectAsState()
+            val isLoading by groveViewModel.isLoading.collectAsState()
 
             GroveScreen(
-                seedTrees = seedTrees,
-                forestTrees = forestTrees,
-                seedTreeCooldowns = seedTreeCooldowns,
+                uiState = uiState,
+                isLoading = isLoading,
                 onSeedTreeButtonClicked = { seedTreeId, timeToGenerateForestTree ->
                     groveViewModel.onSeedTreeButtonClicked(seedTreeId)
                 },
