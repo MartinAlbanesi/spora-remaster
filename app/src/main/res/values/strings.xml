@@ -5,4 +5,7 @@
     <string name="text_continue">Continuar</string>
     <string name="question_recycle">¿Cómo se recicla?</string>
     <string name="description">Descripción</string>
+    <string name="rewards">Recompensas</string>
+    <string name="next">Siguiente</string>
+    <string name="back">Volver</string>
 </resources>
