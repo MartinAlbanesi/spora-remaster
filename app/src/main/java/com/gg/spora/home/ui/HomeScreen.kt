@@ -31,6 +31,7 @@ import com.gg.spora.ui.theme.SporaTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
+    showTutorial: Boolean = true,
     onNavigateToForestStage: () -> Unit,
     onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
@@ -139,12 +140,14 @@ fun HomeScreen(
                     .align(Alignment.Center)
                     .fillMaxSize()
             ) {
-                ChampyBlinkAnimation(
-                    modifier = Modifier
-                        .size(140.dp)
-                        .align(Alignment.Center)
-                        .offset(x = (-20).dp)
-                )
+                if(!showTutorial){
+                    ChampyBlinkAnimation(
+                        modifier = Modifier
+                            .size(140.dp)
+                            .align(Alignment.Center)
+                            .offset(x = (-20).dp)
+                    )
+                }
             }
 
             // Forest Sign Button

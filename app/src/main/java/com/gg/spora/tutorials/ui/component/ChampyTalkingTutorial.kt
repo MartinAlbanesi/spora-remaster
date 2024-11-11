@@ -1,6 +1,7 @@
 package com.gg.spora.tutorials.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -40,6 +41,7 @@ fun ChampyTalkingTutorial(
     text: String,
     focusPosition: Offset? = null,
     onClickSkip: () -> Unit,
+    onNextItem: () -> Unit,
 ) {
 
     var pointerOffset by remember {
@@ -48,6 +50,9 @@ fun ChampyTalkingTutorial(
 
     ConstraintLayout(
         modifier = modifier
+            .clickable {
+                onNextItem()
+            }
             .onSizeChanged { size ->
                 pointerOffset = Offset(
                     size.width.toFloat() * (focusPosition?.x ?: 0.3f),
@@ -165,7 +170,8 @@ private fun ChampyTalkingPreview() {
                 isChampyTalking = true,
                 isSecondaryTalking = true,
                 focusPosition = Offset(0.6f, 0.05f),
-                onClickSkip = {  }
+                onClickSkip = { },
+                onNextItem = { }
             )
         }
     }

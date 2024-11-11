@@ -30,7 +30,8 @@ fun TutorialScreen(
         secondaryImage = R.drawable.mushy_idle,
         isChampyTalking = true,
         isSecondaryTalking = false,
-        onClickSkip = {  }
+        onClickSkip = {  },
+        onNextItem = {  }
     )
 }
 

@@ -2,6 +2,8 @@ package com.gg.spora.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.tutorials.data.TutorialModels
+import com.gg.spora.tutorials.model.TutorialItem
 import com.gg.spora.user.domain.GetUserNetworkUseCase
 import com.gg.spora.user.domain.GetUserOxygenUseCase
 import com.gg.spora.user.domain.models.User
@@ -26,9 +28,42 @@ class HomeViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 
+    private val _showTutorial = MutableStateFlow(true)
+    val showTutorial = _showTutorial.asStateFlow()
+
+    private val _homeTutorial = MutableStateFlow<List<TutorialItem>>(emptyList())
+    val homeTutorial = _homeTutorial.asStateFlow()
+
+    private val _currentTutorialIndex = MutableStateFlow(0)
+    val currentTutorialIndex = _currentTutorialIndex.asStateFlow()
+
+    private val _currentTutorialItem = MutableStateFlow<TutorialItem?>(null)
+    val currentTutorialItem = _currentTutorialItem.asStateFlow()
+
     init {
 //        getUser()
+        getHomeTutorial()
         getOxygen()
+    }
+
+    private fun getHomeTutorial(){
+        _homeTutorial.value = TutorialModels.homeTutorials
+
+        _currentTutorialItem.value = _homeTutorial.value.first()
+    }
+
+    fun nextTutorialItem(){
+        val nextIndex = _currentTutorialIndex.value + 1
+        if(nextIndex < _homeTutorial.value.size -1){
+            _currentTutorialIndex.value = nextIndex
+            _currentTutorialItem.value = _homeTutorial.value[nextIndex]
+        }else{
+            _showTutorial.value = false
+        }
+    }
+
+    fun skipTutorial(){
+        _showTutorial.value = false
     }
 
     private fun getOxygen(){

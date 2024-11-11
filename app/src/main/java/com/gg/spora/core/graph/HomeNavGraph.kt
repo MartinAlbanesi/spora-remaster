@@ -20,6 +20,7 @@ import com.gg.spora.profile.ui.ProfileScreen
 import com.gg.spora.profile.ui.ProfileViewModel
 import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ranking.ui.RankingViewModel
+import com.gg.spora.tutorials.ui.component.ChampyTalkingTutorial
 import com.gg.spora.user.domain.models.User
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
@@ -35,6 +36,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val isLoading by homeViewModel.isLoading.collectAsState()
 
+            val currentTutorialItem by homeViewModel.currentTutorialItem.collectAsState()
+
+            val showTutorial by homeViewModel.showTutorial.collectAsState()
+
             if (!isLoading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -45,6 +50,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             } else {
                 HomeScreen(
                     oxygen = userOxygen,
+                    showTutorial = showTutorial,
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },
@@ -62,6 +68,22 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     }
                 )
             }
+            if(showTutorial){
+                currentTutorialItem?.let { item ->
+                    ChampyTalkingTutorial(
+                        modifier = Modifier.fillMaxSize(),
+                        champyImage = item.champyImageState,
+                        isChampyTalking = item.isChampyTalking,
+                        secondaryImage = item.secondaryImage,
+                        isSecondaryTalking = item.isSecondaryTalking,
+                        text = item.text,
+                        focusPosition = item.focusItem,
+                        onClickSkip = homeViewModel::skipTutorial,
+                        onNextItem = homeViewModel::nextTutorialItem
+                    )
+                }
+            }
+
         }
         composable<NavigationRoutes.Grove> {
 

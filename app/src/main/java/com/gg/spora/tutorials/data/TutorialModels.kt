@@ -43,12 +43,12 @@ object TutorialModels {
         TutorialItem(
             "El oxígeno nos ayudará a entender cuánto hemos avanzado.",
             ChampyStates.SMILING.image,
-            focusItem = Offset(0.6f, 0.05f)
+            focusItem = Offset(0.7f, 0.05f)
         ),
         TutorialItem(
             "Al principio, tendremos poquito pero cuanto más ayudemos al bosque y juguemos...",
             ChampyStates.NORMAL.image,
-            focusItem = Offset(0.6f, 0.05f)
+            focusItem = Offset(0.7f, 0.05f)
         ),
         TutorialItem(
             "¡Más vamos a tener!",
