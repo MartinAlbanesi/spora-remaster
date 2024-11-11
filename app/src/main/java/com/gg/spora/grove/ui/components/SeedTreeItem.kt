@@ -17,7 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.ui.INITIAL_COOLDOWN_DURATION
 
 /**
  * Composable que representa un árbol semillero en la interfaz de usuario.
@@ -29,7 +28,7 @@ import com.gg.spora.grove.ui.INITIAL_COOLDOWN_DURATION
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    seedTreeCooldown: Long?,
+    uiState: Triple<List<SeedTree>, List<ForestTree?>, Map<Int, Long>>,
     isLoading: Boolean,
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     onPlantForestTree: (ForestTree, Int) -> Unit,
@@ -52,15 +51,15 @@ fun SeedTreeItem(
                     onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
                     onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
                 },
-                enabled = (seedTreeCooldown
-                    ?: INITIAL_COOLDOWN_DURATION) == 0L, // Habilita el botón si el cooldown no se inició (está en 0)
+//                enabled = (uiState.third[seedTree.id] ?: INITIAL_COOLDOWN_DURATION) == 5000L, // Habilita el botón si el cooldown no se inició (está en 0)
+                enabled = (uiState.third[seedTree.id] ?: 0L) == 0L,
             ) {
                 // Muestra el texto correspondiente al cooldown
-                if (seedTreeCooldown != 0L) {
-                    Text("${seedTreeCooldown?.div(1000)}s")
+                if (uiState.third[seedTree.id]!! >= 1000 && uiState.third[seedTree.id]!! <= 5000L) {
+                    Text("${uiState.third[seedTree.id]?.div(1000)}s")
                     Log.i("GroveViewModel", "Inicializo el cooldown")
-                } else {
-                    Log.i("GroveViewModel", "Button clicked $seedTreeCooldown")
+                } else if (uiState.third[seedTree.id] == 0L) {
+                    Log.i("GroveViewModel", "Button clicked ${uiState.third[seedTree.id]}")
                     Text("Claim")
                 }
             }

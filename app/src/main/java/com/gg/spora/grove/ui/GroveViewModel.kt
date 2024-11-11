@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
@@ -82,13 +83,15 @@ class GroveViewModel @Inject constructor(
             combine(loadSeedTreesUseCase(), loadForestTreesUseCase(), seedTreeCooldowns) { seedTrees, forestTrees, seedTreeCooldowns ->
                 Triple(seedTrees, forestTrees, seedTreeCooldowns)
             }.collect { (seedTrees, forestTrees, _) ->
-                _seedTrees.value = seedTrees
-                _forestTrees.value = forestTrees
-                _seedTreeCooldowns.value = seedTrees.associate { it.id to 0L }
+                _seedTrees.update { seedTrees }
+                _forestTrees.update { forestTrees }
 
-                Log.i("GroveViewModel", "SeedTrees: ${_seedTrees.value}")
-                Log.i("GroveViewModel", "ForestTrees: ${_forestTrees.value}")
-                Log.i("GroveViewModel", "SeedTreeCooldowns: ${_seedTreeCooldowns.value}")
+                // Initialize _seedTreeCooldowns with INITIAL_COOLDOWN_DURATION
+                _seedTreeCooldowns.update { currentCooldowns ->
+                    seedTrees.associate { seedTree ->
+                        seedTree.id to (currentCooldowns[seedTree.id] ?: 0L)
+                    }
+                }
 
                 initSeedTrees()
                 _isLoading.value = false
@@ -145,7 +148,7 @@ class GroveViewModel @Inject constructor(
             // Directly update the element at the desired position
             val updatedForest = _forestTrees.value.toMutableList()
             updatedForest[position] = forestTree
-            _forestTrees.value = updatedForest
+            _forestTrees.update { updatedForest }
 
             insertForestTreeUseCase(forestTree) // Save only the planted tree
         }
@@ -155,7 +158,10 @@ class GroveViewModel @Inject constructor(
     fun onSeedTreeButtonClicked(seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             // Reset cooldown to initial value
-            _seedTreeCooldowns.value = _seedTreeCooldowns.value + (seedTreeId to INITIAL_COOLDOWN_DURATION)
+            _seedTreeCooldowns.update { currentCooldowns ->
+                currentCooldowns + (seedTreeId to INITIAL_COOLDOWN_DURATION)
+            }
+
             Log.i("GroveViewModel", "Cooldown reset for seedTreeId: ${_seedTreeCooldowns.value}")
 
             // Decrement cooldown until it reaches 0
@@ -163,11 +169,16 @@ class GroveViewModel @Inject constructor(
             while (remainingTime > 0) {
                 delay(1000)
                 remainingTime -= 1000
-                _seedTreeCooldowns.value = _seedTreeCooldowns.value + (seedTreeId to remainingTime)
-                Log.i("GroveViewModel", "Remaining time for seedTreeId: $remainingTime")
+                _seedTreeCooldowns.update { currentCooldowns ->
+                    currentCooldowns + (seedTreeId to remainingTime)
+                }
+                Log.i("GroveViewModel", "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}")
             }
 
-            _seedTreeCooldowns.value = _seedTreeCooldowns.value + (seedTreeId to 0L)
+            // Reset cooldown to 0 when finished
+            _seedTreeCooldowns.update { currentCooldowns ->
+                currentCooldowns + (seedTreeId to 0L)
+            }
             Log.i("GroveViewModel", "Cooldown finished for seedTreeId: ${_seedTreeCooldowns.value}")
         }
     }
@@ -214,7 +225,7 @@ class GroveViewModel @Inject constructor(
         val index = updatedForestTrees.indexOfFirst { it?.id == updatedTree.id }
         if (index != -1) {
             updatedForestTrees[index] = updatedTree
-            _forestTrees.value = updatedForestTrees // Actualiza la variable StateFlow
+            _forestTrees.update { updatedForestTrees } // Actualiza la variable StateFlow
         }
     }
 }
