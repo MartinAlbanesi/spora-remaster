@@ -1,201 +1,213 @@
 package com.gg.spora.tutorials.data
 
 
+import androidx.compose.ui.geometry.Offset
 import com.gg.spora.core.utils.enums.ChampyStates
-import com.gg.spora.tutorials.model.Tutorial
+import com.gg.spora.tutorials.model.TutorialItem
 
 object TutorialModels {
 
     private const val NAME = "Titi"
 
-    val initialTutorial = listOf<Tutorial>(
-        Tutorial(
-            "Este es mi hogar, el Árbol Madre. Acá vive mi familia “Pestalotiopsis microspora”",
-            ChampyStates.SMILING
+    val homeTutorials = listOf(
+        TutorialItem(
+            text = "Este es mi hogar, el Árbol Madre. Acá vive mi familia “Pestalotiopsis microspora”",
+            champyImageState = ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Nos encargamos de limpiar los residuos del bosque y cuidar a los árboles que nos rodean.",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image
         ),
-        Tutorial(
+        TutorialItem(
             "Pero últimamente, estamos agotados debido a la contaminación que causan los humanos que viven fuera del bosque.",
-            ChampyStates.ANGRY
+            ChampyStates.ANGRY.image
         ),
-        Tutorial(
+        TutorialItem(
             "¡Es por eso que necesitamos de tu ayuda! Para que el bosque sobreviva, debemos aprender a cuidar el medioambiente.",
-            ChampyStates.GREETING
-        )
-
-    )
-    val homeTutorials = listOf<Tutorial>(
-        Tutorial(
+            ChampyStates.GREETING.image
+        ),
+        TutorialItem(
+            "Vamos a empezar viendo lo básico, ¿te parece?",
+            ChampyStates.BLINK.image
+        ),
+        TutorialItem(
             "Acá vas a poder ver la cantidad de árboles que están bajo nuestro cuidado.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            focusItem = Offset(0.3f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "Estos árboles nos darán un poco de su oxígeno todos los días.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            focusItem = Offset(0.3f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "El oxígeno nos ayudará a entender cuánto hemos avanzado.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            focusItem = Offset(0.6f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "Al principio, tendremos poquito pero cuanto más ayudemos al bosque y juguemos...",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image,
+            focusItem = Offset(0.6f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "¡Más vamos a tener!",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
-        Tutorial(
-            "Oh, ¿tenés curiosidad por la Arboleda?",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "Es un poco triste, los árboles que vivían ahí, ya no están.",
-            ChampyStates.SAD
-        ),
-        Tutorial(
-            "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
-            ChampyStates.NORMAL
-        ),
-        Tutorial(
-            "¡Volverán!",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
-            "¿Me ayudás a cuidarlos?",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "¡Que bueno! Entonces, vamos que te muestro.",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
-            "Ese es el diario ecológico, el Señor Mushy es quien lo escribe y revisa.",
-            ChampyStates.SMILING
-        ),
-        Tutorial(
-            "¿Quién es el Señor Mushy?",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "Es el hongo más sabio y viejo de la comunidad.",
-            ChampyStates.NORMAL
-        ),
-        Tutorial(
-            "Se encarga de muchas cosas, pero la más importante es escribir el diario ecológico.",
-            ChampyStates.NORMAL
-        ),
-        Tutorial(
-            "Te lo voy a presentar, ¡vamos!",
-            ChampyStates.SMILING
-        )
+//        TutorialItem(
+//            "Oh, ¿tenés curiosidad por la Arboleda?",
+//            ChampyStates.CURIOUS.image
+//        ),
+//        TutorialItem(
+//            "Es un poco triste, los árboles que vivían ahí, ya no están.",
+//            ChampyStates.SAD.image
+//        ),
+//        TutorialItem(
+//            "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
+//            ChampyStates.NORMAL.image
+//        ),
+//        TutorialItem(
+//            "¡Volverán!",
+//            ChampyStates.GREETING.image
+//        ),
+//        TutorialItem(
+//            "¿Me ayudás a cuidarlos?",
+//            ChampyStates.CURIOUS.image
+//        ),
+//        TutorialItem(
+//            "¡Que bueno! Entonces, vamos que te muestro.",
+//            ChampyStates.GREETING.image
+//        ),
+//        TutorialItem(
+//            "Ese es el diario ecológico, el Señor Mushy es quien lo escribe y revisa.",
+//            ChampyStates.SMILING.image
+//        ),
+//        TutorialItem(
+//            "¿Quién es el Señor Mushy?",
+//            ChampyStates.CURIOUS.image
+//        ),
+//        TutorialItem(
+//            "Es el hongo más sabio y viejo de la comunidad.",
+//            ChampyStates.NORMAL.image
+//        ),
+//        TutorialItem(
+//            "Se encarga de muchas cosas, pero la más importante es escribir el diario ecológico.",
+//            ChampyStates.NORMAL.image
+//        ),
+//        TutorialItem(
+//            "Te lo voy a presentar, ¡vamos!",
+//            ChampyStates.SMILING.image
+//        )
     )
 
-    val groveTutorials = listOf<Tutorial>(
-        Tutorial(
+    val groveTutorials = listOf(
+        TutorialItem(
             "¡Llegamos! Esta es la Arboleda.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "O lo era...",
-            ChampyStates.SAD
+            ChampyStates.SAD.image
         ),
-        Tutorial(
+        TutorialItem(
             "Bueno... voy a explicarte cómo funciona, es bastante simple.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "El Árbol Madre nos va a dar cada cierto tiempo una semilla, que vamos a poder plantar.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Esa semilla, si la cuidamos muy bien, crecerá lentamente hasta ser un saludable árbol.",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
-        Tutorial(
+        TutorialItem(
             "El árbol nos dará un poco de su oxígeno diariamente como agradecimiento.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Pero esa no es la única manera de conseguir oxígeno, según el Señor Mushy.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "Habrá que preguntarle más tarde.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         )
     )
 
-    val ecodiarioTutorial = listOf<Tutorial>(
-        Tutorial(
+    val ecodiarioTutorial = listOf(
+        TutorialItem(
             "¿Dónde andará el Señor Mushy?",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "¡Ahí está!",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Oh... Champy y un amigo. ¿Qué los trae por aquí?",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            false,
         ),
-        Tutorial(
+        TutorialItem(
             "¡Señor Mushy, él es $NAME y nos va a ayudar con el bosque!",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Por eso, quería que nos contara sobre el diario y su información.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "De acuerdo... veamos",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image,
+            false,
         ),
-        Tutorial(
+        TutorialItem(
             "El diario es un antiguo libro que contiene aprendizajes heredados de anteriores generaciones.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image,
+            false,
         ),
-        Tutorial(
+        TutorialItem(
             "Desde reciclaje, hasta energías renovables, todo se encuentra aquí.",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image,
+            false,
         ),
-        Tutorial(
+        TutorialItem(
             "Así que, Champy, tú y $NAME son libres de leer o consultarme lo que deseen.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            false,
         ),
-        Tutorial(
+        TutorialItem(
             "¡Gracias, señor Mushy! La próxima vez, vamos a preguntarle muchas cosas.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Nos vemos, señor Mushy.",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Oh... Es bueno ver a las nuevas generaciones interesadas en aprender.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            false,
         )
     )
 
-    val bottleChallengeTutorial = listOf<Tutorial>(
-        Tutorial(
+    val bottleChallengeTutorial = listOf(
+        TutorialItem(
             "¡Wow! Encontraste una botella, voy a contarte un poco sobre ella.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Las botellas de plástico se pueden encontrar en muchos lugares y son fáciles de reciclar",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Al ser de una importancia ecológica alta, es necesario aprender a reciclarlas.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "Así que, aprendamos juntos sobre cómo reciclar este tipo de objetos.",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
     )
 }

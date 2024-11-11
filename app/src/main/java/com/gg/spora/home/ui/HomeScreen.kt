@@ -67,18 +67,18 @@ fun HomeScreen(
                 onNavigateToLibrary()
             }
         ),
-//        HomeIcon(
-//            image = R.drawable.grove_icon,
-//            text = "Arboleda",
-//            onClick = {}
-//        )
+        HomeIcon(
+            image = R.drawable.grove_icon,
+            text = "Arboleda",
+            onClick = {}
+        )
     )
 
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
-//                firstLabel = "0",
-//                firstIcon = R.drawable.trees_icon,
+                firstLabel = "0",
+                firstIcon = R.drawable.trees_icon,
                 secondLabel = oxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
