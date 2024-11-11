@@ -1,15 +1,11 @@
 package com.gg.spora.core.utils.enums
 
+import androidx.annotation.DrawableRes
 import com.gg.spora.R
 
-enum class MushyStates {
-
-    IDLE,
-    SERIOUS;
-
-    val image: Int
-        get() = when (this) {
-            IDLE -> R.drawable.mushy_idle
-            SERIOUS -> R.drawable.mushy_serio
-        }
+enum class MushyStates(
+    @DrawableRes val image: Int,
+) {
+    IDLE(R.drawable.mushy_idle),
+    SERIOUS(R.drawable.mushy_serio);
 }

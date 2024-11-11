@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
@@ -121,6 +123,7 @@ fun ChampyTalkingTutorial(
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth(0.95f)
+                .height(100.dp)
                 .constrainAs(textBackground) {
 //                    top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom, margin = 16.dp)
@@ -143,9 +146,9 @@ fun ChampyTalkingTutorial(
 }
 
 //@PreviewLightDark
-@Preview
+//@Preview
 //@PreviewFontScale
-//@PreviewScreenSizes
+@PreviewScreenSizes
 @Composable
 private fun ChampyTalkingPreview() {
     SporaTheme {

@@ -18,7 +18,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun StarWithOxygenGroup(
     modifier: Modifier = Modifier,
-    rewards: Map<Int, Int>, // oxygenAmount to starImage
+    rewards: Map<Int, Int?>, // oxygenAmount to starImage
     rotateItems: Map<Float, Int>,
 ) {
     Row(

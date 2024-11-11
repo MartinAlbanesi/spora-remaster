@@ -42,8 +42,7 @@ fun GameResultPopUp(
 
     val champyImage = when (starsState) {
         StarState.ZERO -> R.drawable.champy_defeated_arms_body
-        StarState.ONE -> R.drawable.champy_serious_idle
-        StarState.TWO -> R.drawable.champy_smiling_idle
+        StarState.ONE, StarState.TWO -> R.drawable.champy_serious_idle
         StarState.THREE -> R.drawable.champy_celebrating_raised_arms
     }
 

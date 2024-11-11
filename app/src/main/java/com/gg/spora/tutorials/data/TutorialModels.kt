@@ -3,6 +3,7 @@ package com.gg.spora.tutorials.data
 
 import androidx.compose.ui.geometry.Offset
 import com.gg.spora.core.utils.enums.ChampyStates
+import com.gg.spora.core.utils.enums.MushyStates
 import com.gg.spora.tutorials.model.TutorialItem
 
 object TutorialModels {
@@ -135,32 +136,44 @@ object TutorialModels {
         )
     )
 
-    val ecodiarioTutorial = listOf(
+    val libraryTutorial = listOf(
         TutorialItem(
             "¿Dónde andará el Señor Mushy?",
             ChampyStates.CURIOUS.image
         ),
         TutorialItem(
             "¡Ahí está!",
-            ChampyStates.GREETING.image
+            ChampyStates.GREETING.image,
+            secondaryImage = MushyStates.IDLE.image,
+            isSecondaryTalking = false,
         ),
         TutorialItem(
             "Oh... Champy y un amigo. ¿Qué los trae por aquí?",
             ChampyStates.SMILING.image,
-            false,
+            isChampyTalking = false,
+            secondaryImage = MushyStates.IDLE.image,
+            isSecondaryTalking = true,
         ),
         TutorialItem(
             "¡Señor Mushy, él es $NAME y nos va a ayudar con el bosque!",
-            ChampyStates.GREETING.image
+            ChampyStates.GREETING.image,
+            isChampyTalking = true,
+            secondaryImage = MushyStates.IDLE.image,
+            isSecondaryTalking = true,
         ),
         TutorialItem(
             "Por eso, quería que nos contara sobre el diario y su información.",
-            ChampyStates.CURIOUS.image
+            ChampyStates.CURIOUS.image,
+            isChampyTalking = true,
+            secondaryImage = MushyStates.IDLE.image,
+            isSecondaryTalking = true,
         ),
         TutorialItem(
             "De acuerdo... veamos",
             ChampyStates.CURIOUS.image,
-            false,
+            isChampyTalking = false,
+            secondaryImage = MushyStates.SERIOUS.image,
+            isSecondaryTalking = true,
         ),
         TutorialItem(
             "El diario es un antiguo libro que contiene aprendizajes heredados de anteriores generaciones.",

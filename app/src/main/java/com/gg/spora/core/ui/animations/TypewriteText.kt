@@ -32,7 +32,7 @@ fun TypewriteText(
     text: String,
     modifier: Modifier = Modifier,
     isVisible: Boolean = true,
-    spec: AnimationSpec<Int> = tween(1000, easing = LinearEasing),
+    spec: AnimationSpec<Int> = tween(text.length * 25, easing = LinearEasing),
     style: TextStyle = LocalTextStyle.current,
     preoccupySpace: Boolean = true
 ){
@@ -76,7 +76,7 @@ fun TypewriteText(
             Text(
                 text = text,
                 style = style,
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Left,
                 modifier = Modifier.alpha(0f)
             )
         }
@@ -85,7 +85,7 @@ fun TypewriteText(
         Text(
             text = textToAnimate.substring(0, index.value),
             style = style,
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Left,
         )
     }
 }
