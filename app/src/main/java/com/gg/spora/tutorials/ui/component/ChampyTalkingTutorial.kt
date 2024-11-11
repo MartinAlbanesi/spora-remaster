@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,11 +22,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
+import com.gg.spora.core.ui.animations.TypewriteText
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -44,15 +43,11 @@ fun ChampyTalkingTutorial(
     onNextItem: () -> Unit,
 ) {
 
-    var pointerOffset by remember {
-        mutableStateOf(Offset(0f, 0f))
-    }
+    var pointerOffset by remember { mutableStateOf(Offset(0f, 0f)) }
 
     ConstraintLayout(
         modifier = modifier
-            .clickable {
-                onNextItem()
-            }
+            .clickable { onNextItem() }
             .onSizeChanged { size ->
                 pointerOffset = Offset(
                     size.width.toFloat() * (focusPosition?.x ?: 0.3f),
@@ -75,9 +70,7 @@ fun ChampyTalkingTutorial(
                 )
             }
     ) {
-        val (
-            champyImg, textBackground, body, skipButton, secondaryImg
-        ) = createRefs()
+        val (champyImg, textBackground, body, skipButton, secondaryImg) = createRefs()
 
         SporaPrimaryButton(
             modifier = Modifier
@@ -135,10 +128,8 @@ fun ChampyTalkingTutorial(
                     end.linkTo(parent.end)
                 }
         )
-
-        Text(
+        TypewriteText(
             text = text,
-            textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .constrainAs(body) {
