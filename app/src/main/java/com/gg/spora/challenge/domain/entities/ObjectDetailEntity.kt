@@ -12,5 +12,3 @@ data class ObjectDetailEntity(
     @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "is_validate") val isValidate : Boolean
 )
-
-fun ObjectDetailEntity.toObjectDetail() = ObjectDetail(nameObjectDetail, description, isValidate)

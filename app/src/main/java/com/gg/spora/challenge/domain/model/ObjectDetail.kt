@@ -29,11 +29,4 @@ data class ObjectDetail(
         }
     }
 
-    fun toObjectDetailEntity(): ObjectDetailEntity {
-        return ObjectDetailEntity(
-            nameObjectDetail =  nameObjectDetail!!,
-            description = description,
-            isValidate = isValidate
-        )
-    }
 }
