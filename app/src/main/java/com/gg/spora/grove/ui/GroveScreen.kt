@@ -24,7 +24,7 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.grove.domain.models.ForestTree
-import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.ui.components.ForestTreeItem
 import com.gg.spora.grove.ui.components.PlantingPlaceholder
 import com.gg.spora.grove.ui.components.SeedTreeItem
@@ -33,16 +33,13 @@ import com.gg.spora.grove.ui.components.SeedTreeItem
 @Composable
 fun GroveScreen(
     modifier: Modifier = Modifier,
-//    seedTrees: List<SeedTree>,
-//    forestTrees: List<ForestTree?>,
-//    seedTreeCooldowns: Map<Int, Long>,
-    uiState: Triple<List<SeedTree>, List<ForestTree?>, Map<Int, Long>>,
+    uiState: GroveUiState,
     isLoading: Boolean,
     onSeedTreeButtonClicked: (Int, Long) -> Unit,
     plantForestTree: (ForestTree, Int) -> Unit,
-    updateTree: (ForestTree) -> Unit,
-    updateGrowthStage: (ForestTree) -> Unit,
     popBackStack: () -> Unit
+//    updateTree: (ForestTree) -> Unit,
+//    updateGrowthStage: (ForestTree) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -84,16 +81,15 @@ fun GroveScreen(
                     .align(Alignment.Center)
             ) {
                 // Componente para cada árbol semillero
-                for (seedTree in uiState.first) {
+                for (seedTree in uiState.seedTrees) {
                     SeedTreeItem(
                         seedTree = seedTree,
                         uiState = uiState,
                         isLoading = isLoading,
-                        onSeedTreeButtonClicked = {p1, p2 -> onSeedTreeButtonClicked(p1, p2)},
+//                        onSeedTreeButtonClicked = {p1, p2 -> onSeedTreeButtonClicked(p1, p2)},
                         onPlantForestTree = { forestTree, seedTreeId ->
                             plantForestTree(forestTree, seedTreeId)
                         },
-//                        onCooldownTriggered = onCooldownTriggered
                     )
                 }
             }
@@ -112,14 +108,15 @@ fun GroveScreen(
                     .padding(16.dp)
                     .offset(y = (-50).dp)
             ) {
-                itemsIndexed(uiState.second) { index, tree -> // Use itemsIndexed here
+                itemsIndexed(uiState.forestTrees) { index, tree -> // Use itemsIndexed here
                     if (tree == null) {
                         PlantingPlaceholder() // Componente de plantacion vacia
                     } else {
                         ForestTreeItem(
                             tree = tree,
-                            onTreeUpdated = updateTree,
-                            onGrowthStageUpdated = updateGrowthStage
+                            uiState = uiState,
+//                            onTreeUpdated = updateTree,
+//                            onGrowthStageUpdated = updateGrowthStage
                         )
                     }
                 }

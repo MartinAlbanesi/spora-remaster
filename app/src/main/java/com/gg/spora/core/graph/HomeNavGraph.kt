@@ -78,13 +78,13 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 uiState = uiState,
                 isLoading = isLoading,
                 onSeedTreeButtonClicked = { seedTreeId, timeToGenerateForestTree ->
-                    groveViewModel.onSeedTreeButtonClicked(seedTreeId)
+                    groveViewModel.triggerSeedTreeCooldown(seedTreeId)
                 },
                 plantForestTree = { forestTree, seedTreeId ->
                     groveViewModel.plantForestTree(forestTree, seedTreeId)
                 },
-                updateTree = { tree -> groveViewModel.updateForestTree(tree) },
-                updateGrowthStage = { tree -> groveViewModel.updateGrowthStage(tree) },
+//                updateTree = { tree -> groveViewModel.updateForestTree(tree) },
+//                updateGrowthStage = { tree -> groveViewModel.updateGrowthStage(tree) },
                 popBackStack = {
                     navController.popBackStack()
                 },

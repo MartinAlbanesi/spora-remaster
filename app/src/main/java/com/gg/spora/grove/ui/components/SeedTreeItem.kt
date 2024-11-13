@@ -1,7 +1,6 @@
 package com.gg.spora.grove.ui.components
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -16,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.SeedTree
 
 /**
@@ -28,9 +28,9 @@ import com.gg.spora.grove.domain.models.SeedTree
 fun SeedTreeItem(
     modifier: Modifier = Modifier,
     seedTree: SeedTree,
-    uiState: Triple<List<SeedTree>, List<ForestTree?>, Map<Int, Long>>,
+    uiState: GroveUiState,
     isLoading: Boolean,
-    onSeedTreeButtonClicked: (Int, Long) -> Unit,
+//    onSeedTreeButtonClicked: (Int, Long) -> Unit,
     onPlantForestTree: (ForestTree, Int) -> Unit,
 ) {
 
@@ -48,18 +48,15 @@ fun SeedTreeItem(
             Button(
                 modifier = Modifier.width(100.dp),
                 onClick = {
-                    onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
+//                    onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
                     onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
                 },
-//                enabled = (uiState.third[seedTree.id] ?: INITIAL_COOLDOWN_DURATION) == 5000L, // Habilita el botón si el cooldown no se inició (está en 0)
-                enabled = (uiState.third[seedTree.id] ?: 0L) == 0L,
+                enabled = (uiState.seedTreeCooldowns[seedTree.id] ?: 0L) == 0L,
             ) {
                 // Muestra el texto correspondiente al cooldown
-                if (uiState.third[seedTree.id]!! >= 1000 && uiState.third[seedTree.id]!! <= 5000L) {
-                    Text("${uiState.third[seedTree.id]?.div(1000)}s")
-                    Log.i("GroveViewModel", "Inicializo el cooldown")
-                } else if (uiState.third[seedTree.id] == 0L) {
-                    Log.i("GroveViewModel", "Button clicked ${uiState.third[seedTree.id]}")
+                if (uiState.seedTreeCooldowns[seedTree.id]!! >= 1000 && uiState.seedTreeCooldowns[seedTree.id]!! <= 5000L) {
+                    Text("${uiState.seedTreeCooldowns[seedTree.id]?.div(1000)}s")
+                } else if (uiState.seedTreeCooldowns[seedTree.id] == 0L) {
                     Text("Claim")
                 }
             }

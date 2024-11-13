@@ -10,11 +10,13 @@ import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -63,24 +65,39 @@ class GroveViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true) // Loading state
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    private val _forestTreeGrowthTimes = MutableStateFlow<Map<Int, Long>>(emptyMap())
+    val forestTreeGrowthTimes: StateFlow<Map<Int, Long>> = _forestTreeGrowthTimes.asStateFlow()
+
+    private val growthTimerJobs = mutableMapOf<Int, Job>() // Store timer jobs
+
     // Combined flow for seedTrees and forestTrees
-    val uiState: StateFlow<Triple<List<SeedTree>, List<ForestTree?>, Map<Int, Long>>> =
-        combine(
-            seedTrees,
-            forestTrees,
-            seedTreeCooldowns
-        ) { seedTrees, forestTrees, seedTreeCooldowns ->
-            Triple(seedTrees, forestTrees, seedTreeCooldowns)
-        }.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Triple(emptyList(), emptyList(), emptyMap())
-        )
+    val uiState: StateFlow<GroveUiState> = combine(
+        seedTrees,
+        forestTrees,
+        seedTreeCooldowns,
+        forestTreeGrowthTimes
+    ) { seedTrees, forestTrees, seedTreeCooldowns, forestTreeGrowthTimes ->
+        GroveUiState(seedTrees, forestTrees, seedTreeCooldowns, forestTreeGrowthTimes)
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap())
+    )
+
+    override fun onCleared() {
+        super.onCleared()
+        // Cancel all growth timer jobs
+        growthTimerJobs.values.forEach { it.cancel() }
+    }
 
     // Inicialización de los casos de uso
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            combine(loadSeedTreesUseCase(), loadForestTreesUseCase(), seedTreeCooldowns) { seedTrees, forestTrees, seedTreeCooldowns ->
+            combine(
+                loadSeedTreesUseCase(),
+                loadForestTreesUseCase(),
+                seedTreeCooldowns
+            ) { seedTrees, forestTrees, seedTreeCooldowns ->
                 Triple(seedTrees, forestTrees, seedTreeCooldowns)
             }.collect { (seedTrees, forestTrees, _) ->
                 _seedTrees.update { seedTrees }
@@ -90,6 +107,22 @@ class GroveViewModel @Inject constructor(
                 _seedTreeCooldowns.update { currentCooldowns ->
                     seedTrees.associate { seedTree ->
                         seedTree.id to (currentCooldowns[seedTree.id] ?: 0L)
+                    }
+                }
+
+                // Initialize _forestTreeGrowthTimes with existing growth times
+                _forestTreeGrowthTimes.update { currentGrowthTimes ->
+                    forestTrees.associate { forestTree ->
+                        val treeId = forestTree?.id ?: 0
+                        treeId to (currentGrowthTimes[treeId] ?: 0L)
+                    }
+                }
+
+                _forestTrees.value.forEach { forestTree ->
+                    forestTree?.let { tree ->
+                        if (!tree.hasReachedAdultStage) {
+                            startGrowthTimer(tree.id)
+                        }
                     }
                 }
 
@@ -110,32 +143,13 @@ class GroveViewModel @Inject constructor(
                 )
 
                 saveSeedTreesUseCase(initialSeedTrees)
-                Log.i("GroveViewModel", "SeedTreeCooldowns initialized: ${_seedTreeCooldowns.value}")
+                Log.i(
+                    "GroveViewModel",
+                    "SeedTreeCooldowns initialized: ${_seedTreeCooldowns.value}"
+                )
             }
         }
     }
-
-//    // Carga los árboles semilleros desde la base de datos
-//    fun getSeedTrees(): Flow<List<SeedTree>> {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            var seedTrees: List<SeedTree>
-//            loadSeedTreesUseCase().collect {
-//                seedTrees = it
-//            }
-//        }
-//        return seedTrees
-//    }
-//
-//    // Carga los árboles del bosque desde la base de datos para Test
-//    fun getForestTrees(): Flow<List<ForestTree?>> {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            var forestTrees: List<ForestTree?>
-//            loadForestTreesUseCase().collect {
-//                forestTrees = it
-//            }
-//        }
-//        return forestTrees
-//    }
 
     fun plantForestTree(forestTree: ForestTree, seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -151,11 +165,36 @@ class GroveViewModel @Inject constructor(
             _forestTrees.update { updatedForest }
 
             insertForestTreeUseCase(forestTree) // Save only the planted tree
+
+            val totalSeconds = Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds
+
+            // Initialize growth time for the inserted tree
+            _forestTreeGrowthTimes.update { timers -> timers + (forestTree.id to totalSeconds) }
+            Log.i("GroveViewModel", "Growth time initialized: ${_forestTreeGrowthTimes.value}")
+
+            // Update only the specific tree in the list
+            val updatedForestTrees = _forestTrees.value.toMutableList()
+            val index = updatedForestTrees.indexOfFirst { it?.id == forestTree.id }
+            if (index != -1) {
+                updatedForestTrees[index] = forestTree.copy() // Use copy to create a new object
+            } else {
+                // If the tree is not found (newly planted), add it to the list
+                updatedForestTrees.add(forestTree.copy())
+            }
+            _forestTrees.value = updatedForestTrees // Update _forestTrees with the modified list
+
+            // Trigger cooldown separately (if needed)
+            triggerSeedTreeCooldown(seedTreeId)
+
+            // Start growth timer for the newly planted tree
+            if(!forestTree.hasReachedAdultStage){
+                startGrowthTimer(forestTree.id)
+            }
         }
     }
 
-    // Guardar la fecha en la que se genero un arbol para luego compararla y asignarla a la variable del viewmodel
-    fun onSeedTreeButtonClicked(seedTreeId: Int) {
+    // Separate function to trigger cooldown
+    fun triggerSeedTreeCooldown(seedTreeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             // Reset cooldown to initial value
             _seedTreeCooldowns.update { currentCooldowns ->
@@ -172,7 +211,10 @@ class GroveViewModel @Inject constructor(
                 _seedTreeCooldowns.update { currentCooldowns ->
                     currentCooldowns + (seedTreeId to remainingTime)
                 }
-                Log.i("GroveViewModel", "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}")
+                Log.i(
+                    "GroveViewModel",
+                    "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}"
+                )
             }
 
             // Reset cooldown to 0 when finished
@@ -183,49 +225,63 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-//    private fun updateForestTreeGrowthStages() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            while (true) {
-//                val updatedForestTrees = _forestTrees.value.map { forestTree ->
-//                    forestTree?.let {
-//                        if (!it.hasReachedAdultStage) {
-//                            val updatedTree = it.copy().apply { updateGrowthStage(this) }
-//                            updatedTree // Retorna el árbol actualizado
-//                        } else {
-//                            it // Retorna el árbol sin actualizar si ya alcanzó la etapa adulta
-//                        }
-//                    }
-//                }
-//                _forestTrees.value = updatedForestTrees
-//                delay(1000) // Update every 1 second
-//            }
-//        }
-//    }
+    private fun startGrowthTimer(treeId: Int) {
+        // Cancel any existing timer job for this specific tree
+        growthTimerJobs[treeId]?.cancel()
 
-    fun updateGrowthStage(forestTree: ForestTree) {
-        var secondsGoneBy =
-            Duration.between(forestTree.plantingDate, LocalDateTime.now()).toSeconds().toInt()
-
-        Log.d("ForestTree", "Seconds gone by: $secondsGoneBy")
-
-        forestTree.currentStage = when {
-            secondsGoneBy < 5 -> GrowthStage.SPROUT // 5 seconds
-            secondsGoneBy in 5..10 -> GrowthStage.MEDIUM // 5-10 seconds
-            else -> {
-                forestTree.hasReachedAdultStage =
-                    true // Setea el flag en true cuando el árbol llegue a la etapa adulta
-                GrowthStage.ADULT // 10 segundos o más
+        growthTimerJobs[treeId] = viewModelScope.launch(Dispatchers.IO) {
+            var forestTree = _forestTrees.value.find { it?.id == treeId }
+            while (forestTree != null && !forestTree.hasReachedAdultStage) {
+                delay(1000)
+                updateForestTreeGrowthTime(treeId)
+                // Re-fetch the forest tree to get updated values
+                forestTree = _forestTrees.value.find { it?.id == treeId }
             }
         }
-        Log.d("ForestTree", "Current stage: ${forestTree.currentStage}")
     }
 
-    fun updateForestTree(updatedTree: ForestTree) {
+    private fun updateForestTreeGrowthTime(forestTreeId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val forestTree = _forestTrees.value.find { it?.id == forestTreeId }
+            forestTree?.let {
+                if (!it.hasReachedAdultStage) {
+                    // Increment growth time by 1 second
+                    _forestTreeGrowthTimes.update { currentGrowthTimes ->
+                        val currentGrowthTime = currentGrowthTimes[forestTreeId] ?: 0L
+                        currentGrowthTimes + (forestTreeId to (currentGrowthTime + 1))
+                    }
+
+                    // Update growth stage
+                    updateGrowthStage(it)
+                    // Update the ForestTree in the list
+                    updateForestTree(it.copy())
+                }
+            }
+        }
+    }
+
+    fun updateGrowthStage(forestTree: ForestTree) {
+        val totalSeconds = Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds
+
+        Log.d("GroveViewModel", "Total seconds: $totalSeconds")
+
+        forestTree.currentStage = when {
+            totalSeconds < 5 -> GrowthStage.SPROUT
+            totalSeconds in 5..10 -> GrowthStage.MEDIUM
+            else -> {
+                forestTree.hasReachedAdultStage = true
+                GrowthStage.ADULT
+            }
+        }
+        Log.d("GroveViewModel", "Current stage: ${forestTree.currentStage}")
+    }
+
+    private fun updateForestTree(updatedTree: ForestTree) {
         val updatedForestTrees = _forestTrees.value.toMutableList()
         val index = updatedForestTrees.indexOfFirst { it?.id == updatedTree.id }
         if (index != -1) {
             updatedForestTrees[index] = updatedTree
-            _forestTrees.update { updatedForestTrees } // Actualiza la variable StateFlow
+            _forestTrees.value = updatedForestTrees
         }
     }
 }
