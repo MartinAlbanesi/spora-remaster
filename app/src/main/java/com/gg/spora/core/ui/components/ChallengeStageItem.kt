@@ -36,7 +36,7 @@ fun ChallengeStageItem(
             contentDescription = "Level Item",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .size(120.dp)
+                .size(100.dp)
         )
         if (!isBlocked) {
             Image(

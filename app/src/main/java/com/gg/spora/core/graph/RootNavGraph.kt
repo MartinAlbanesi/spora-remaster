@@ -17,7 +17,7 @@ fun RootNavigationGraph(
 ){
     NavHost(
         navController = navController,
-        startDestination = if(!isUserLoggedIn) NavigationRoutes.AuthGraph else NavigationRoutes.HomeGraph,
+        startDestination = if(!isUserLoggedIn) NavigationRoutes.AuthGraph else NavigationRoutes.GameGraph,
         enterTransition = ::screenFadeWithSlideInToLeft,
         exitTransition = ::screenFadeWithSlideOutToRight,
         popEnterTransition = ::screenFadeWithSlideInToLeft,

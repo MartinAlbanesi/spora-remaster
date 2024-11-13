@@ -3,15 +3,18 @@ package com.gg.spora.miniGames.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,7 +40,8 @@ fun QuizScreen(
     answerOptions: List<Answer>,
     onAnswerSelected: (String) -> Unit,
 ) {
-    Box(
+
+    Column(
         modifier = modifier,
     ) {
         Text(
@@ -47,37 +51,42 @@ fun QuizScreen(
             fontSize = 20.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .align(alignment = Alignment.TopCenter)
+                .wrapContentHeight(align = Alignment.CenterVertically)
+                .weight(1f)
         )
-        Column (
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
-                .align(alignment = Alignment.Center)
-        ){
-            answerOptions.forEach { answer ->
-                OptionItemButton(
-                    textItem = answer.answer,
-                    isCorrect = answer.isCorrect,
-                    enabled = isCorrect == null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(MaterialTheme.shapes.large)
-                        .fillMaxWidth(0.4f)
-                        .heightIn(min = 54.dp)
-                        .fillMaxHeight(0.1f),
-                ){
-                    onAnswerSelected(answer.id)
+                .weight(4f)
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                answerOptions.forEach { answer ->
+                    OptionItemButton(
+                        textItem = answer.answer,
+                        isCorrect = answer.isCorrect,
+                        enabled = isCorrect == null,
+                        hasIcon = false,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(MaterialTheme.shapes.large)
+                            .fillMaxWidth(0.4f)
+                            .heightIn(min = 54.dp)
+                            .fillMaxHeight(0.1f),
+                    ) {
+                        onAnswerSelected(answer.id)
+                    }
                 }
             }
         }
+
+        Spacer(modifier = Modifier.weight(1f))
     }
 }
 
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
 @Preview
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 //@PreviewLightDark
 //@PreviewFontScale
 //@PreviewScreenSizes
@@ -104,7 +113,9 @@ private fun MinigameQuizScreenPreview() {
                 onNavigateNextLevel = { },
                 content = {
                     QuizScreen(
-                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                         questionTitle = "¿Cuál es la capital de España?",
                         answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
                         onAnswerSelected =  {},

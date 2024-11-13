@@ -11,5 +11,6 @@ data class Question(
     val answerId: String,
     val typeGame: TypeGame,
     val typeQuestion: List<TypeQuestion>,
-    val image: Int? = null
+    val image: Int? = null,
+    val champyHelping: String? = null,
 )

@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeStageModels
@@ -71,7 +72,7 @@ fun StageScreen(
                     .fillMaxSize()
                     .padding(paddingValue),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(40.dp),
+                verticalArrangement = Arrangement.SpaceEvenly,
             ) {
                 itemsIndexed(
                     levels,
@@ -112,6 +113,8 @@ fun StageScreen(
 }
 
 @Preview
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
+//@PreviewScreenSizes
 @Composable
 private fun StageScreenPreview() {
     SporaTheme {
@@ -123,8 +126,8 @@ private fun StageScreenPreview() {
                 oxygen = 0,
                 title = "Titi",
                 levels = FakeStageModels.fakeLevels,
-                backgroundImage = R.drawable.expo_proyecto_stage_background,
-                pathLadder = SporaConstant.PATH_LADDER_EXPO,
+                backgroundImage = R.drawable.stage1_area_background,
+                pathLadder = SporaConstant.PATH_LADDER,
                 onNavigateToChallenge = {},
                 popBackStack = {},
                 onClickLevelItem = { _, _ -> }

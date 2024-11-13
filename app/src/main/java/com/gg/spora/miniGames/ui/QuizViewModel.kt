@@ -1,5 +1,6 @@
 package com.gg.spora.miniGames.ui
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +17,8 @@ import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
 import com.gg.spora.user.domain.UpdateUserLevelsAndOxygenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -60,6 +63,9 @@ class QuizViewModel @Inject constructor(
 
     private val _relationsItems = MutableStateFlow<List<String>>(emptyList())
     val relationsItems = _relationsItems.asStateFlow()
+
+    private val _showChampyHelp = MutableStateFlow(false)
+    val showChampyHelp = _showChampyHelp.asStateFlow()
 
     init {
         getRandomQuestions()
@@ -173,6 +179,7 @@ class QuizViewModel @Inject constructor(
             _isFinished.value = true
             return
         }
+        _showChampyHelp.value = false
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
         _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
@@ -204,6 +211,13 @@ class QuizViewModel @Inject constructor(
                 stageType = getStageTypeByName(quizRoute.stageType),
                 oxygenRewards = currentLevelOxygenRewards
             )
+        }
+    }
+
+    fun onShowChampyHelp() {
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(3000)
+            _showChampyHelp.value = true
         }
     }
 

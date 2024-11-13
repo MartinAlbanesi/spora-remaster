@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -133,13 +136,17 @@ fun QuizImageScreen(
                     textItem = answer.answer,
                     isCorrect = answer.isCorrect,
                     enabled = isCorrect == null,
+                    hasIcon = false,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
                         .clip(MaterialTheme.shapes.large)
-                        .fillMaxWidth(0.4f)
-//                        .heightIn(max = 60.dp),
-                        .fillMaxHeight(0.1f)
+//                        .fillMaxWidth(0.4f)
+//                        .heightIn(min = 40.dp)
+                        .fillMaxHeight()
+//                        .heightIn(max =200.dp)
+//                        .requiredHeightIn(40.dp, 60.dp)
+//                        .weight(1f)
                         .clickable {
                             isAnswerSelected = true
                         }
@@ -171,10 +178,7 @@ fun QuizImageScreen(
 
 }
 
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 @Composable
 private fun QuizImageScreenPreview() {
@@ -200,9 +204,9 @@ private fun QuizImageScreenPreview() {
                 content = {
                     QuizImageScreen(
                         modifier = Modifier,
-                        questionTitle = "Titi",
+                        questionTitle = FakeQuizModels.fakeQuizQuestions.first{ it.image != null }.question,
                         answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
-                        currentImageResIdState = FakeQuizModels.fakeQuizQuestions.random().image!!,
+                        currentImageResIdState = FakeQuizModels.fakeQuizQuestions.first{ it.image != null }.image!!,
                         onAnswerSelected = {},
                     )
                 }

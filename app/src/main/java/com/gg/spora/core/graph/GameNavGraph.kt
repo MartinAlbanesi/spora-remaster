@@ -2,6 +2,7 @@ package com.gg.spora.core.graph
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -123,6 +124,12 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val questions by quizViewModel.questions.collectAsState()
 
+            val showChampyHelp by quizViewModel.showChampyHelp.collectAsState()
+
+            LaunchedEffect(currentQuestion){
+                quizViewModel.onShowChampyHelp()
+            }
+
             MiniGameScreen(
                 modifier = Modifier.fillMaxSize(),
                 title = quizGameRoute.title,
@@ -134,6 +141,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 livesLost = livesLost,
                 counterQuestion = counterQuestion,
                 showButtonContinue = isCorrect != null,
+                showChampyHelp = showChampyHelp,
                 onNextQuestion = quizViewModel::nextQuestion,
                 onResetGame = quizViewModel::resetGame,
                 onBackForestStage = { navController.popBackStack() },

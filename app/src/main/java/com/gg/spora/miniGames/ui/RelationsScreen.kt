@@ -157,10 +157,7 @@ fun RelationsScreen(
 }
 
 //@PreviewLightDark
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 //@PreviewFontScale
 //@PreviewScreenSizes

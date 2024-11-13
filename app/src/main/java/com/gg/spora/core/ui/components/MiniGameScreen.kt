@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -54,12 +55,14 @@ fun MiniGameScreen(
     showIcon: Boolean = true,
     showButtonContinue: Boolean = true,
     showProgressBar: Boolean = true,
+    showChampyHelp: Boolean = false,
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
     onNavigateNextLevel: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
     val champyImage = getChampyImageMiniGame(isCorrect)
 
     val progressIndicator by animateFloatAsState(
@@ -142,9 +145,12 @@ fun MiniGameScreen(
                 )
             }
             ChampyWithCard(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 16.dp),
                 champyImage = champyImage,
                 isCorrect = isCorrect,
+                showChampyHelp = showChampyHelp
             ) {
                 content()
             }
@@ -174,10 +180,7 @@ fun MiniGameScreen(
     }
 }
 
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 //@PreviewLightDark
 //@PreviewFontScale
