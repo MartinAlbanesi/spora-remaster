@@ -40,4 +40,31 @@ object SporaConstant {
         "¡Genial!",
         "¡Fantástico!",
     )
+
+    val CHAMPY_RANDOM_QUOTE = listOf(
+        "Acortá las duchas para ahorrar agua",
+        "Apagá los electrodomésticos que no uses en el momento",
+        "Apagá las luces cuando no las estés usando",
+        "Cerrá bien la canilla luego de usarla para no desperdiciar agua",
+        "Caminá o usa una bici para reducir la contaminación",
+        "Aprovechá a hacer compost para ayudar a cuidar el suelo",
+        "Reutilizá los objetos de plástico que no uses para hacer manualidades",
+        "Revisá que los paquetes tengan el símbolo de reciclaje antes de reciclarlos",
+        "No tires basura al suelo, depositala en el contenedor adecuado",
+        "Reciclar una lata ahorra energía para 3 horas de TV",
+        "Un árbol absorbe 22 kg de dióxido de carbono al año",
+        "Los bosques son hogar del 80% de las especies terrestres",
+        "Las abejas polinizan el 70% de lo que comemos",
+        "Aprender del ambiente te hace un héroe",
+        "Los bosques enfrían el aire como 10 aires acondicionados",
+        "Las bolsas de plástico tardan 700 años en descomponerse",
+        "Los paneles solares usan energía del sol",
+        "Los molinos de viento usan la fuerza del viento para crear energía",
+        "Las aves, como los loros, siembran árboles con semillas",
+        "Se tira un camión de plástico al mar cada minuto",
+        "Comprar frutas locales cuida el planeta",
+        "Las flores atraen insectos buenos como abejas",
+        "Las hormigas limpian el bosque",
+        "Jugar afuera ahorra electricidad y es divertido",
+    )
 }

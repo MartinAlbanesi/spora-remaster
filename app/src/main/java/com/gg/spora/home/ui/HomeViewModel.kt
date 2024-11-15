@@ -2,6 +2,7 @@ package com.gg.spora.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.tutorials.model.TutorialItem
@@ -34,9 +35,9 @@ class HomeViewModel @Inject constructor(
     private val _showTutorial = MutableStateFlow(false)
     val showTutorial = _showTutorial.asStateFlow()
 
-    private val _homeTutorial = MutableStateFlow<List<TutorialItem>>(emptyList())
+    private var _homeTutorial : List<TutorialItem> = emptyList()
 
-    private val _currentTutorialIndex = MutableStateFlow(0)
+    private var _currentTutorialIndex = (0)
 
     private val _currentTutorialItem = MutableStateFlow<TutorialItem?>(null)
     val currentTutorialItem = _currentTutorialItem.asStateFlow()
@@ -44,7 +45,9 @@ class HomeViewModel @Inject constructor(
     private val _champyQuote = MutableStateFlow<String?>(null)
     val champyQuote = _champyQuote.asStateFlow()
 
-    private val _userName = MutableStateFlow("")
+    private var _userName = ("")
+
+    private var hasShowWelcomeMessage = false
 
     init {
 //        getUser()
@@ -56,22 +59,22 @@ class HomeViewModel @Inject constructor(
     private fun getUserName(){
         viewModelScope.launch {
             getUserLocalUseCase().collect{
-                _userName.value = it?.userName ?: ""
+                _userName = it?.userName ?: ""
             }
         }
     }
 
     private fun getHomeTutorial(){
-        _homeTutorial.value = TutorialModels.homeTutorials
+        _homeTutorial = TutorialModels.homeTutorials
 
-        _currentTutorialItem.value = _homeTutorial.value.first()
+        _currentTutorialItem.value = _homeTutorial.first()
     }
 
     fun nextTutorialItem(){
-        val nextIndex = _currentTutorialIndex.value + 1
-        if(nextIndex < _homeTutorial.value.size -1){
-            _currentTutorialIndex.value = nextIndex
-            _currentTutorialItem.value = _homeTutorial.value[nextIndex]
+        val nextIndex = _currentTutorialIndex + 1
+        if(nextIndex < _homeTutorial.size -1){
+            _currentTutorialIndex = nextIndex
+            _currentTutorialItem.value = _homeTutorial[nextIndex]
         }else{
             _showTutorial.value = false
         }
@@ -93,22 +96,17 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             while (true){
                 delay(Random.nextLong(3000, 5000))
-                _champyQuote.value = getChampyHomeQuote(_userName.value)
+                _champyQuote.value = if(!hasShowWelcomeMessage){
+                    hasShowWelcomeMessage = true
+                    getChampyHomeQuote(_userName)
+                }else {
+                    SporaConstant.CHAMPY_RANDOM_QUOTE.random()
+                }
 
                 delay(5000)
                 _champyQuote.value = null
             }
         }
     }
-
-//    private fun getUser(){
-//        viewModelScope.launch {
-//            _isLoading.value = true
-//            getUserNetworkUseCase().collect{
-//                _user.value = it
-//            }
-//            _isLoading.value = false
-//        }
-//    }
 
 }
