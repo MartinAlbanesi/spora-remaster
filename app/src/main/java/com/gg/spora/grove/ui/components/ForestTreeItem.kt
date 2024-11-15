@@ -1,7 +1,6 @@
 package com.gg.spora.grove.ui.components
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -27,21 +26,16 @@ import com.gg.spora.grove.domain.models.GrowthStage
 fun ForestTreeItem(
     tree: ForestTree,
     uiState: GroveUiState,
-//    onTreeUpdated: (ForestTree) -> Unit,
-//    onGrowthStageUpdated: (ForestTree) -> Unit
 ) {
     val currentStage by remember(tree, uiState.forestTreeGrowthTimes) {
-        derivedStateOf { tree.currentStage } // Observe currentStage reactively
+        derivedStateOf { tree.currentStage }
     }
 
-    val imageResource = when (currentStage) { // Update imageResource based on derived state
+    val imageResource = when (currentStage) {
         GrowthStage.SPROUT -> R.drawable.sprout_tree
         GrowthStage.MEDIUM -> R.drawable.medium_tree
         GrowthStage.ADULT -> tree.type.imageResource
     }
-
-    Log.i("ForestTreeItem", "Tree: $tree")
-    Log.i("ForestTreeItem", "Image resource: $imageResource")
 
     Image(
         painter = painterResource(id = imageResource),

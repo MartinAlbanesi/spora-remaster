@@ -11,7 +11,7 @@ import java.time.ZoneOffset
 
 @Entity(tableName = "forest_trees")
 data class ForestTreeEntity(
-    @PrimaryKey(autoGenerate = true) val idForestTree: Int = 0,
+    @PrimaryKey(autoGenerate = false) val idForestTree: String,
     @ColumnInfo(name = "tree_type") val treeType: String,
     @ColumnInfo(name = "current_stage") val currentStage: String,
     @ColumnInfo(name = "planting_date") val plantingDate : Long,

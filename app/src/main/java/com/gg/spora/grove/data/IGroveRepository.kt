@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface IGroveRepository {
     suspend fun getSeedTreesFromDatabase(): Flow<List<SeedTree>>
     suspend fun getForestTreesFromDatabase(): Flow<List<ForestTree?>>
-    suspend fun getSeedTreeById(id: Int): Flow<SeedTree?>
+    suspend fun getSeedTreeById(id: String): Flow<SeedTree?>
     suspend fun insertAllSeedTrees(seedTrees: List<SeedTree>)
     suspend fun insertForestTree(forestTree: ForestTree)
     suspend fun updateForestTreeGrowthStage(forestTree: ForestTree)

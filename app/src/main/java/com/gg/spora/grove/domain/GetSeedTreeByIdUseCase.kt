@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetSeedTreeByIdUseCase @Inject constructor(private val groveRepository: IGroveRepository) {
-    suspend operator fun invoke(id: Int): Flow<SeedTree?> {
+    suspend operator fun invoke(id: String): Flow<SeedTree?> {
         return groveRepository.getSeedTreeById(id = id)
     }
 }

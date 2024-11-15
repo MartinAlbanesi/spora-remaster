@@ -8,7 +8,7 @@ import com.gg.spora.grove.domain.models.TreeType
 
 @Entity(tableName = "seed_trees")
 data class SeedTreeEntity(
-    @PrimaryKey(autoGenerate = true) val idSeedTree: Int = 0,
+    @PrimaryKey(autoGenerate = false) val idSeedTree: String,
     @ColumnInfo(name = "tree_type") val treeType: String,
     @ColumnInfo(name = "time_to_generate_forest_tree") val timeToGenerateForestTree: Long,
     @ColumnInfo(name = "amount_of_forest_trees_generated") var amountOfForestTreesGenerated: Int = 0,

@@ -3,6 +3,7 @@ package com.gg.spora.grove.domain.models
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.util.UUID
 
 /**
  * Clase ForestTree que gestiona el crecimiento y la generación de oxígeno en un árbol del bosque
@@ -12,7 +13,7 @@ import java.time.ZoneOffset
  */
 
 data class ForestTree(
-    override val id: Int = 0,
+    override val id: String = UUID.randomUUID().toString(),
     override val type: TreeType,
     var currentStage: GrowthStage = GrowthStage.SPROUT,
     val plantingDate: LocalDateTime = LocalDateTime.now(),

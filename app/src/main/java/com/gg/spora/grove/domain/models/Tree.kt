@@ -6,6 +6,6 @@ package com.gg.spora.grove.domain.models
  * @param type Tipo de árbol
  */
 open class Tree(
-    open val id: Int,
+    open val id: String,
     open val type: TreeType
 )

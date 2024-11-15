@@ -35,11 +35,8 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     uiState: GroveUiState,
     isLoading: Boolean,
-    onSeedTreeButtonClicked: (Int, Long) -> Unit,
-    plantForestTree: (ForestTree, Int) -> Unit,
+    plantForestTree: (ForestTree, String) -> Unit,
     popBackStack: () -> Unit
-//    updateTree: (ForestTree) -> Unit,
-//    updateGrowthStage: (ForestTree) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -86,7 +83,6 @@ fun GroveScreen(
                         seedTree = seedTree,
                         uiState = uiState,
                         isLoading = isLoading,
-//                        onSeedTreeButtonClicked = {p1, p2 -> onSeedTreeButtonClicked(p1, p2)},
                         onPlantForestTree = { forestTree, seedTreeId ->
                             plantForestTree(forestTree, seedTreeId)
                         },
@@ -115,8 +111,6 @@ fun GroveScreen(
                         ForestTreeItem(
                             tree = tree,
                             uiState = uiState,
-//                            onTreeUpdated = updateTree,
-//                            onGrowthStageUpdated = updateGrowthStage
                         )
                     }
                 }

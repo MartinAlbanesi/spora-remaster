@@ -30,8 +30,7 @@ fun SeedTreeItem(
     seedTree: SeedTree,
     uiState: GroveUiState,
     isLoading: Boolean,
-//    onSeedTreeButtonClicked: (Int, Long) -> Unit,
-    onPlantForestTree: (ForestTree, Int) -> Unit,
+    onPlantForestTree: (ForestTree, String) -> Unit,
 ) {
 
     if (!isLoading) {

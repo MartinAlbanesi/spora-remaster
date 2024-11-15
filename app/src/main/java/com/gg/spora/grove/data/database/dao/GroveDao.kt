@@ -18,7 +18,7 @@ interface GroveDao {
     fun getForestTrees(): Flow<List<ForestTreeEntity>>
 
     @Query("SELECT * FROM seed_trees WHERE idSeedTree = :id")
-    fun getSeedTreeById(id: Int): Flow<SeedTreeEntity>
+    fun getSeedTreeById(id: String): Flow<SeedTreeEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSeedTrees(seedTrees: List<SeedTreeEntity>)
@@ -30,5 +30,5 @@ interface GroveDao {
     fun deleteAllForestTrees()
 
     @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
-    suspend fun updateForestTreeGrowthStageById(id: Int, newStage: String)
+    suspend fun updateForestTreeGrowthStageById(id: String, newStage: String)
 }
