@@ -1,10 +1,12 @@
 package com.gg.spora.home.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,12 +16,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
+import com.gg.spora.core.ui.animations.TypewriteText
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
@@ -32,6 +37,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     showTutorial: Boolean = true,
+    champyQuote: String?,
     onNavigateToForestStage: () -> Unit,
     onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
@@ -135,21 +141,6 @@ fun HomeScreen(
                 }
             }
 
-            Box(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .fillMaxSize()
-            ) {
-                if(!showTutorial){
-                    ChampyBlinkAnimation(
-                        modifier = Modifier
-                            .size(140.dp)
-                            .align(Alignment.Center)
-                            .offset(x = (-20).dp)
-                    )
-                }
-            }
-
             // Forest Sign Button
             SignButton(
                 image = R.drawable.forest_sign,
@@ -168,6 +159,34 @@ fun HomeScreen(
 //                    .offset(y = (-40).dp, x = (-80).dp)
                     .clickable(onClick = onNavigateToExpoStage)
             )
+
+            Box(
+                modifier = Modifier
+                    .align(Alignment.Center)
+//                    .fillMaxSize()
+            ) {
+                if(!showTutorial){
+                    ChampyBlinkAnimation(
+                        modifier = Modifier
+                            .size(140.dp)
+                            .align(Alignment.Center)
+                            .offset(x = (-20).dp)
+                    )
+                }
+                champyQuote?.let {
+                    TypewriteText(
+                        text = it,
+                        preoccupySpace = false,
+                        modifier = Modifier
+                            .offset(x = (-20).dp, y = (100).dp)
+                            .clip(MaterialTheme.shapes.medium)
+                            .align(Alignment.Center)
+                            .background(colorResource(R.color.cream))
+                            .fillMaxWidth(0.6f)
+                            .padding(16.dp)
+                    )
+                }
+            }
         }
     }
 }
@@ -183,6 +202,8 @@ private fun MiniGameScreenPreview() {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
                 oxygen = 0,
+                showTutorial = false,
+                champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},

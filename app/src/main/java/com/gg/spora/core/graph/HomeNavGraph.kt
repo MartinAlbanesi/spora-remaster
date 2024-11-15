@@ -3,6 +3,7 @@ package com.gg.spora.core.graph
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -40,6 +41,12 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val showTutorial by homeViewModel.showTutorial.collectAsState()
 
+            val champyQuote by homeViewModel.champyQuote.collectAsState()
+
+            LaunchedEffect(showTutorial) {
+                homeViewModel.getChampyQuote()
+            }
+
             if (!isLoading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -51,6 +58,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 HomeScreen(
                     oxygen = userOxygen,
                     showTutorial = showTutorial,
+                    champyQuote = champyQuote,
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },
