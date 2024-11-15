@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _showTutorial = MutableStateFlow(true)
+    private val _showTutorial = MutableStateFlow(false)
     val showTutorial = _showTutorial.asStateFlow()
 
     private val _homeTutorial = MutableStateFlow<List<TutorialItem>>(emptyList())

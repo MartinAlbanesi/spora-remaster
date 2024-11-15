@@ -1,5 +1,15 @@
 package com.gg.spora.core.graph
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.LaunchedEffect
@@ -12,6 +22,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
@@ -26,19 +37,35 @@ import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.ui.components.MiniGameScreen
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
-import com.gg.spora.stage.domain.model.getLevelWithStage
-import com.gg.spora.stage.ui.LevelPreview
-import com.gg.spora.stage.ui.StageScreen
-import com.gg.spora.stage.ui.StageViewModel
 import com.gg.spora.miniGames.ui.QuizImageScreen
 import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
 import com.gg.spora.miniGames.ui.RelationsScreen
+import com.gg.spora.stage.domain.model.getLevelWithStage
+import com.gg.spora.stage.ui.LevelPreview
+import com.gg.spora.stage.ui.StageScreen
+import com.gg.spora.stage.ui.StageViewModel
 
 @Suppress("LongMethod")
 fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.GameGraph>(startDestination = NavigationRoutes.Stage("1")) {
-        composable<NavigationRoutes.Stage> {
+        composable<NavigationRoutes.Stage>(
+            enterTransition = {
+                slideInVertically(
+                    animationSpec = tween(
+                        durationMillis = 500,
+                    ),
+                )
+            },
+            exitTransition = {
+                slideOutVertically(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                    ),
+                    targetOffsetY = { -it },
+                )
+            }
+        ) {
             val stageViewModel = hiltViewModel<StageViewModel>()
             val stage by stageViewModel.stage.collectAsState()
 
@@ -100,7 +127,22 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             }
         }
 
-        composable<NavigationRoutes.QuizGame> {
+        composable<NavigationRoutes.QuizGame>(
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 500,
+                    ),
+                )
+            },
+            exitTransition = {
+                fadeOut(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                    ),
+                )
+            }
+        ) {
 
             val quizGameRoute = it.toRoute<NavigationRoutes.QuizGame>()
 
@@ -128,7 +170,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val champyHelpingText by quizViewModel.champyHelpingText.collectAsState()
 
-            LaunchedEffect(currentQuestion){
+            LaunchedEffect(counterQuestion){
                 quizViewModel.onShowChampyHelp()
             }
 

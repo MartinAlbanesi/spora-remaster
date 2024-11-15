@@ -1,18 +1,17 @@
 package com.gg.spora.miniGames.ui
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.getStageTypeByName
-import com.gg.spora.core.utils.functions.getTotalOxygenFromStars
 import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
 import com.gg.spora.user.domain.UpdateUserLevelsAndOxygenUseCase
@@ -36,9 +35,6 @@ class QuizViewModel @Inject constructor(
 
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
     val questions = _questions.asStateFlow()
-
-//    private val _currentQuestionIndex = MutableStateFlow(0)
-//    val currentQuestionIndex = _currentQuestionIndex.asStateFlow()
 
     private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
@@ -67,7 +63,7 @@ class QuizViewModel @Inject constructor(
     private val _showChampyHelp = MutableStateFlow(false)
     val showChampyHelp = _showChampyHelp.asStateFlow()
 
-    private val _champyHelpingText = MutableStateFlow("")
+    private val _champyHelpingText = MutableStateFlow("Ingresar texto de ayuda de la Question")
     val champyHelpingText = _champyHelpingText.asStateFlow()
 
     init {
@@ -83,19 +79,19 @@ class QuizViewModel @Inject constructor(
     private fun getRandomQuestions() {
 
         val quizGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.quizCount.toInt(),
+            count = quizRoute.quizCount,
             typeQuestion = listOf(TypeQuestion.MARTIN),
             typeGame = TypeGame.QUIZ
         )
 
         val imageGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.imageCount.toInt(),
+            count = quizRoute.imageCount,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
         )
 
         val relationsGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.relationsCount.toInt(),
+            count = quizRoute.relationsCount,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         )
@@ -107,13 +103,16 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
-                // si la respuesta es la correcta
+                // si la respuesta es la Correcta
                 if (it.id == answerId) {
+
+                    _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+
                     it.copy(
                         isCorrect = _isCorrect.value,
                     )
                 }
-                // si la respuesta es incorrecta
+                // si la respuesta es Incorrecta
                 else {
                     it.copy(
                         isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
@@ -123,20 +122,9 @@ class QuizViewModel @Inject constructor(
         )
 
         if (_isCorrect.value == false) {
+            _champyHelpingText.value = "La respuesta era: Japon"
             _lives.value--
             _livesLost.value++
-        }
-    }
-
-    fun onSelectedItem(answerId: String) {
-
-        if (_relationsItems.value.contains(answerId)) {
-            _relationsItems.value -= answerId
-            return
-        }
-
-        if (_relationsItems.value.size < 3) {
-            _relationsItems.value += answerId
         }
     }
 
@@ -145,8 +133,13 @@ class QuizViewModel @Inject constructor(
         val selectedAnswers = _relationsItems.value.map { it.toInt() }.toSet()
 
         if (correctAnswer == selectedAnswers) {
+            _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+
             _isCorrect.value = true
         } else {
+
+            _champyHelpingText.value = "La respuesta era: Japon"
+
             _isCorrect.value = false
             _lives.value--
             _livesLost.value++
@@ -171,6 +164,18 @@ class QuizViewModel @Inject constructor(
         )
     }
 
+    fun onSelectedItem(answerId: String) {
+
+        if (_relationsItems.value.contains(answerId)) {
+            _relationsItems.value -= answerId
+            return
+        }
+
+        if (_relationsItems.value.size < 3) {
+            _relationsItems.value += answerId
+        }
+    }
+
     fun nextQuestion() {
         if (_counterQuestion.value == _questions.value.size - 1) {
 
@@ -183,6 +188,7 @@ class QuizViewModel @Inject constructor(
             return
         }
         _showChampyHelp.value = false
+        _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
         _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
@@ -190,6 +196,10 @@ class QuizViewModel @Inject constructor(
     }
 
     fun resetGame() {
+
+        _showChampyHelp.value = false
+        _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
+
         _counterQuestion.value = 0
         _lives.value = MAX_LIVES
         _livesLost.value = 0
@@ -219,7 +229,7 @@ class QuizViewModel @Inject constructor(
 
     fun onShowChampyHelp() {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(3000)
+            delay(4000)
             _showChampyHelp.value = true
         }
     }
