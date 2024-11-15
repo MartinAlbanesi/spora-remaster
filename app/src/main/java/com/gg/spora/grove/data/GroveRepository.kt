@@ -40,11 +40,6 @@ class GroveRepository @Inject constructor(
         }
     }
 
-    // Carga un árbol semillero por su ID desde la base de datos
-    override suspend fun getSeedTreeById(id: String): Flow<SeedTree?> {
-        return groveDao.getSeedTreeById(id).map { it.toSeedTree() }
-    }
-
     // Guarda los árboles semilleros en la base de datos
     override suspend fun insertAllSeedTrees(seedTrees: List<SeedTree>) {
         val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
-import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
@@ -52,13 +51,6 @@ class GroveModule {
         return InsertForestTreeUseCase(groveRepository)
     }
 
-
-    @Provides
-    @Singleton
-    fun provideGetSeedTreeByIdUseCase(groveRepository: IGroveRepository): GetSeedTreeByIdUseCase {
-        return GetSeedTreeByIdUseCase(groveRepository)
-    }
-
     @Provides
     @Singleton
     fun provideUpdateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
@@ -72,7 +64,6 @@ class GroveModule {
         saveSeedTreesUseCase: SaveSeedTreesUseCase,
         loadForestTreesUseCase: LoadForestTreesUseCase,
         insertForestTreeUseCase: InsertForestTreeUseCase,
-        getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
         updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
     ): GroveViewModel {
         return GroveViewModel(
@@ -80,7 +71,6 @@ class GroveModule {
             saveSeedTreesUseCase,
             loadForestTreesUseCase,
             insertForestTreeUseCase,
-            getSeedTreeByIdUseCase,
             updateForestTreeGrowthStageByIdUseCase,
         )
     }

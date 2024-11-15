@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
@@ -22,12 +23,12 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class GroveDaoTest {
     private lateinit var groveDao: GroveDao
-    private lateinit var db : GroveDatabase
+    private lateinit var db : SporaDatabase
 
     @Before
     fun createDb(){
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context,GroveDatabase::class.java)
+        db = Room.inMemoryDatabaseBuilder(context,SporaDatabase::class.java)
             .build()
         groveDao = db.groveDao()
     }
@@ -73,11 +74,10 @@ class GroveDaoTest {
 
         groveDao.insertForestTree(forestTree.toForestTreeEntity())
 
-        val forestTreeById = groveDao.getSeedTreeById(0).first()
+        val forestTreeById = groveDao.getSeedTreeById(forestTree.id).first()
 
         println(forestTreeById)
 
         Assert.assertEquals(forestTree, forestTreeById.toSeedTree())
     }
-
 }

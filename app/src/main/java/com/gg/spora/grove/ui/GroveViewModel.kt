@@ -3,7 +3,6 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.grove.domain.GetSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
@@ -47,7 +46,6 @@ class GroveViewModel @Inject constructor(
     private val saveSeedTreesUseCase: SaveSeedTreesUseCase,
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
-    private val getSeedTreeByIdUseCase: GetSeedTreeByIdUseCase,
     private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
 ) : ViewModel() {
 
