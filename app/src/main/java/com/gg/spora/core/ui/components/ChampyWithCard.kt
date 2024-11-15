@@ -34,6 +34,7 @@ fun ChampyWithCard(
     champyImage: Int,
     isCorrect: Boolean? = null,
     showChampyHelp: Boolean,
+    champyHelpingText: String,
     content: @Composable () -> Unit
 ) {
 
@@ -62,6 +63,7 @@ fun ChampyWithCard(
             }else{
                 IntOffset(0, 40)
             },
+            champyHelpingText = champyHelpingText,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -99,7 +101,8 @@ private fun SporaWithCardPreview() {
             ChampyWithCard(
                 modifier = Modifier.fillMaxSize(),
                 champyImage = R.drawable.champy_celebrating_raised_arms,
-                showChampyHelp = false
+                showChampyHelp = true,
+                champyHelpingText = "This is a test",
             ) {}
         }
     }

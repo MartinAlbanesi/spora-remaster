@@ -56,6 +56,7 @@ fun MiniGameScreen(
     showButtonContinue: Boolean = true,
     showProgressBar: Boolean = true,
     showChampyHelp: Boolean = false,
+    champyHelpingText: String = "",
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
@@ -150,7 +151,8 @@ fun MiniGameScreen(
                     .padding(top = 16.dp),
                 champyImage = champyImage,
                 isCorrect = isCorrect,
-                showChampyHelp = showChampyHelp
+                showChampyHelp = showChampyHelp,
+                champyHelpingText = champyHelpingText,
             ) {
                 content()
             }
@@ -198,6 +200,7 @@ private fun MiniGameScreenPreview() {
                 questionSize = 5,
                 lives = 5,
                 counterQuestion = 0,
+                champyHelpingText = "This is a test",
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = {},

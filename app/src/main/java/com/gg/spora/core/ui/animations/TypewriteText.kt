@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.gg.spora.ui.theme.SporaTheme
+import kotlinx.coroutines.delay
 
 @Composable
 fun TypewriteText(
@@ -35,7 +36,8 @@ fun TypewriteText(
     textAlign: TextAlign = TextAlign.Left,
     spec: AnimationSpec<Int> = tween(text.length * 25, easing = LinearEasing),
     style: TextStyle = LocalTextStyle.current,
-    preoccupySpace: Boolean = true
+    preoccupySpace: Boolean = true,
+    textDelay: Long = 0
 ){
     // State that keeps the text that is currently animated
     var textToAnimate by remember { mutableStateOf("") }
@@ -47,6 +49,7 @@ fun TypewriteText(
 
     // Effect to handle animation when visibility changes
     LaunchedEffect(isVisible) {
+        delay(textDelay)
         if (isVisible) {
             // Start animation if visible
             textToAnimate = text
@@ -59,6 +62,7 @@ fun TypewriteText(
 
     // Effect to handle animation when text content changes
     LaunchedEffect(text) {
+        delay(textDelay)
         if (isVisible) {
             // Reset animation and update text if visible
             index.snapTo(0)

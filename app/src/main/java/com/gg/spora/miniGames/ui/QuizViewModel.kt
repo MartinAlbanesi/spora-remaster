@@ -67,6 +67,9 @@ class QuizViewModel @Inject constructor(
     private val _showChampyHelp = MutableStateFlow(false)
     val showChampyHelp = _showChampyHelp.asStateFlow()
 
+    private val _champyHelpingText = MutableStateFlow("")
+    val champyHelpingText = _champyHelpingText.asStateFlow()
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
