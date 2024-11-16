@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 
 @Composable
@@ -45,15 +46,23 @@ fun ButtonWithIcon(
             painter = painterResource(id = icon),
             contentDescription = "Image for the button",
             modifier = Modifier
-                .size(35.dp)
+                .size(32.dp)
         )
 
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         if (cooldownValue != null) {
             if (cooldownValue >= 1000L && cooldownValue <= cooldownType) {
-                Text("${cooldownValue.div(1000L)}s")
+                Text(
+                    text = "${cooldownValue.div(1000L)}s",
+                    fontSize = 20.sp,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                )
             } else if (cooldownValue == 0L) {
-                Text(text)
+                Text(
+                    text = text,
+                    fontSize = 20.sp,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                )
             }
         }
     }
