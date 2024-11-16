@@ -5,15 +5,16 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -64,8 +65,7 @@ fun GroveScreen(
                 contentDescription = "Grove Background",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .matchParentSize()
-                    .align(Alignment.BottomCenter)
+                    .matchParentSize(),
             )
         }
         Box(
@@ -75,15 +75,19 @@ fun GroveScreen(
                 .offset(y = (-100).dp)
         ) {
             // Fila de árboles semilleros
-            Row(
+            LazyRow(
                 horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.Bottom,
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.Center)
+                    .padding(bottom = 30.dp)
             ) {
                 // Componente para cada árbol semillero
-                for (seedTree in uiState.seedTrees) {
+                itemsIndexed(uiState.seedTrees) { _, seedTree ->
                     SeedTreeItem(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter),
                         seedTree = seedTree,
                         uiState = uiState,
                         isLoading = isLoading,
@@ -105,10 +109,10 @@ fun GroveScreen(
                 columns = GridCells.Fixed(5),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp, vertical = 24.dp)
                     .offset(y = (-50).dp)
             ) {
-                itemsIndexed(uiState.forestTrees) { index, tree -> // Use itemsIndexed here
+                itemsIndexed(uiState.forestTrees) { index, tree ->
                     if (tree == null) {
                         PlantingPlaceholder() // Componente de plantacion vacia
                     } else {
@@ -126,6 +130,7 @@ fun GroveScreen(
                 .fillMaxSize()
                 .padding(paddingValue)
                 .width(150.dp)
+                .padding(16.dp)
         ) {
             ButtonWithIcon(
                 modifier = Modifier
