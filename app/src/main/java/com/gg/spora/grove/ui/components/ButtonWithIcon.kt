@@ -38,10 +38,6 @@ fun ButtonWithIcon(
             end = ButtonDefaults.ContentPadding.calculateEndPadding(LocalLayoutDirection.current),
             bottom = 1.dp
         )
-//        colors = ButtonDefaults.buttonColors(
-//            containerColor = Color.Transparent, // Set container color to transparent
-//            contentColor = Color.Black // Set content color (e.g., text and icon color)
-//        )
     ) {
         Image(
             painter = painterResource(id = icon),

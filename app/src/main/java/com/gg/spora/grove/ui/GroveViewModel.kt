@@ -35,9 +35,9 @@ import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlin.collections.associate
 
-const val INITIAL_COOLDOWN_DURATION = 86400000L
-const val OXYGEN_COOLDOWN_DURATION = 21600000L
-const val GROWTH_TIME_DURATION = 3600000L
+const val INITIAL_COOLDOWN_DURATION = /*86400000L*/ 60000L
+const val OXYGEN_COOLDOWN_DURATION = /*21600000L*/120000L
+const val GROWTH_TIME_DURATION = /*3600000L*/30000L
 
 // Evitar que se dibuje la pantalla con un evento, escuchar el evento desde la UI
 // Programacion reactiva
@@ -235,10 +235,12 @@ class GroveViewModel @Inject constructor(
 
     private fun updateForestTreeGrowthTime(forestTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            var elapsedTime = Duration.between(forestTree.plantingDate, LocalDateTime.now()).toMillis()
+            var elapsedTime = (Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds) * 1000
+
+            Log.d("GroveViewModel", "elapsed time: $elapsedTime")
             while (!forestTree.hasReachedAdultStage) {
                 delay(1000) // Delay for 1 second
-                elapsedTime++ // Increment elapsed time by 1 second
+                elapsedTime += 1000 // Increment elapsed time by 1 second
                 // Update growth time in the map
                 _forestTreeGrowthTimes.update { currentGrowthTimes ->
                     currentGrowthTimes + (forestTree.id to elapsedTime)
@@ -255,8 +257,8 @@ class GroveViewModel @Inject constructor(
 
     suspend fun updateGrowthStage(forestTree: ForestTree) {
         forestTree.currentStage = when {
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) < GROWTH_TIME_DURATION/2 -> GrowthStage.SPROUT
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) in GROWTH_TIME_DURATION/2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
+            _forestTreeGrowthTimes.value.getValue(forestTree.id) < (GROWTH_TIME_DURATION)/2 -> GrowthStage.SPROUT
+            _forestTreeGrowthTimes.value.getValue(forestTree.id) in (GROWTH_TIME_DURATION)/2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
             else -> {
                 forestTree.hasReachedAdultStage = true
                 GrowthStage.ADULT
