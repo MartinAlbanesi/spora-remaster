@@ -66,4 +66,12 @@ class GroveRepository @Inject constructor(
     override suspend fun insertCooldownData(cooldownData: CooldownData) {
         groveDao.insertCooldownData(cooldownData.toCooldownDataEntity())
     }
+
+    override suspend fun deleteSeedTreeById(treeId: String) {
+        groveDao.deleteSeedTreeById(treeId)
+    }
+
+    override suspend fun deleteForestTreeById(treeId: String) {
+        groveDao.deleteForestTreeById(treeId)
+    }
 }

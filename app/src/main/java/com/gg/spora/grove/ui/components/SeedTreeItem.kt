@@ -53,7 +53,7 @@ fun SeedTreeItem(
             )
 
             ButtonWithIcon(
-                modifier = Modifier.width(120.dp),
+                modifier = Modifier.width(160.dp),
                 icon = R.drawable.seed_reward,
                 cooldownValue = uiState.seedTreeCooldowns[seedTree.id],
                 cooldownType = INITIAL_COOLDOWN_DURATION,

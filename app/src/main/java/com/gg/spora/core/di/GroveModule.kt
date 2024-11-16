@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
+import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
 import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
@@ -75,6 +77,18 @@ class GroveModule {
 
     @Provides
     @Singleton
+    fun provideDeleteSeedTreeByIdUseCase(groveRepository: IGroveRepository): DeleteSeedTreeByIdUseCase {
+        return DeleteSeedTreeByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteForestTreeByIdUseCase(groveRepository: IGroveRepository): DeleteForestTreeByIdUseCase {
+        return DeleteForestTreeByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
     fun provideGroveViewModel(
         loadSeedTreesUseCase: LoadSeedTreesUseCase,
         saveSeedTreesUseCase: SaveSeedTreesUseCase,
@@ -85,6 +99,8 @@ class GroveModule {
         insertCooldownDataUseCase: InsertCooldownDataUseCase,
         updateUserOxygenUseCase: UpdateUserOxygenUseCase,
         getUserOxygenUseCase: GetUserOxygenUseCase,
+        deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
+        deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
     ): GroveViewModel {
         return GroveViewModel(
             loadSeedTreesUseCase,
@@ -95,7 +111,9 @@ class GroveModule {
             getCooldownDataByIdUseCase,
             insertCooldownDataUseCase,
             updateUserOxygenUseCase,
-            getUserOxygenUseCase
+            getUserOxygenUseCase,
+            deleteSeedTreeByIdUseCase,
+            deleteForestTreeByIdUseCase
         )
     }
 }

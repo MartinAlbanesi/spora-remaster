@@ -13,4 +13,6 @@ interface IGroveRepository {
     suspend fun updateForestTreeGrowthStage(forestTree: ForestTree)
     suspend fun insertCooldownData(cooldownData: CooldownData)
     suspend fun getCooldownData(treeId: String): Flow<CooldownData>
+    suspend fun deleteSeedTreeById(treeId: String)
+    suspend fun deleteForestTreeById(treeId: String)
 }

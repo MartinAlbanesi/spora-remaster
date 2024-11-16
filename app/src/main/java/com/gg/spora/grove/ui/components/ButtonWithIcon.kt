@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
+import com.gg.spora.grove.utils.functions.formatTime
 
 @Composable
 fun ButtonWithIcon(
@@ -53,14 +54,14 @@ fun ButtonWithIcon(
         if (cooldownValue != null) {
             if (cooldownValue >= 1000L && cooldownValue <= cooldownType) {
                 Text(
-                    text = "${cooldownValue.div(1000L)}s",
-                    fontSize = 20.sp,
+                    text = formatTime(cooldownValue),
+                    fontSize = 16.sp,
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                 )
             } else if (cooldownValue == 0L) {
                 Text(
                     text = text,
-                    fontSize = 20.sp,
+                    fontSize = 16.sp,
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                 )
             }

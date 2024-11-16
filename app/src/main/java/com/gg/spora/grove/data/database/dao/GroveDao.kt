@@ -38,4 +38,10 @@ interface GroveDao {
 
     @Query("SELECT * FROM cooldown_data WHERE treeId = :treeId")
     fun getCooldownData(treeId: String): Flow<CooldownDataEntity?>
+
+    @Query("DELETE FROM seed_trees WHERE idSeedTree = :treeId")
+    suspend fun deleteSeedTreeById(treeId: String)
+
+    @Query("DELETE FROM forest_trees WHERE idForestTree = :treeId")
+    suspend fun deleteForestTreeById(treeId: String)
 }

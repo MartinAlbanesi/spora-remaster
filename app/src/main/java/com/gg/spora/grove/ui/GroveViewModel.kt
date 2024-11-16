@@ -3,6 +3,8 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
+import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
 import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
@@ -33,8 +35,9 @@ import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlin.collections.associate
 
-const val INITIAL_COOLDOWN_DURATION = 5000L
-const val OXYGEN_COOLDOWN_DURATION = 10000L
+const val INITIAL_COOLDOWN_DURATION = 86400000L
+const val OXYGEN_COOLDOWN_DURATION = 21600000L
+const val GROWTH_TIME_DURATION = 3600000L
 
 // Evitar que se dibuje la pantalla con un evento, escuchar el evento desde la UI
 // Programacion reactiva
@@ -56,6 +59,8 @@ class GroveViewModel @Inject constructor(
     private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
     private val updateUserOxygenUseCase: UpdateUserOxygenUseCase,
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
+    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
+    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
 ) : ViewModel() {
 
     // State variables for
@@ -164,19 +169,6 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-//    override fun onCleared() {
-//        viewModelScope.launch {
-//            seedTreeCooldowns.value.forEach { (treeId, _) ->
-//                Log.i("GroveViewModel", "onCleared: $treeId")
-//                insertCooldownDataUseCase(CooldownData(treeId))
-//            }
-//            forestTreeGrowthTimes.value.forEach { (treeId, _) ->
-//                insertCooldownDataUseCase(CooldownData(treeId.toString()))
-//            }
-//        }
-//        super.onCleared()
-//    }
-
     // Inicializa los árboles semilleros la primera vez que se abre la pantalla
     fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -243,7 +235,7 @@ class GroveViewModel @Inject constructor(
 
     private fun updateForestTreeGrowthTime(forestTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            var elapsedTime = Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds
+            var elapsedTime = Duration.between(forestTree.plantingDate, LocalDateTime.now()).toMillis()
             while (!forestTree.hasReachedAdultStage) {
                 delay(1000) // Delay for 1 second
                 elapsedTime++ // Increment elapsed time by 1 second
@@ -263,8 +255,8 @@ class GroveViewModel @Inject constructor(
 
     suspend fun updateGrowthStage(forestTree: ForestTree) {
         forestTree.currentStage = when {
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) < 5 -> GrowthStage.SPROUT
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) in 5..10 -> GrowthStage.MEDIUM
+            _forestTreeGrowthTimes.value.getValue(forestTree.id) < GROWTH_TIME_DURATION/2 -> GrowthStage.SPROUT
+            _forestTreeGrowthTimes.value.getValue(forestTree.id) in GROWTH_TIME_DURATION/2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
             else -> {
                 forestTree.hasReachedAdultStage = true
                 GrowthStage.ADULT

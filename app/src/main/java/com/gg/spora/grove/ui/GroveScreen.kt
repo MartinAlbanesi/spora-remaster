@@ -135,7 +135,7 @@ fun GroveScreen(
             ButtonWithIcon(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .width(150.dp),
+                    .width(160.dp),
                 text = "${uiState.accumulatedOxygen}",
                 icon = R.drawable.oxygen_icon,
                 cooldownValue = uiState.oxygenCooldown,
