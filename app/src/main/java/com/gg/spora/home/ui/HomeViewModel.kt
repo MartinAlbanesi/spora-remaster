@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.tutorials.data.TutorialModels
-import com.gg.spora.tutorials.model.TutorialItem
+import com.gg.spora.tutorials.domain.model.TutorialItem
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.GetUserNetworkUseCase
 import com.gg.spora.user.domain.GetUserOxygenUseCase

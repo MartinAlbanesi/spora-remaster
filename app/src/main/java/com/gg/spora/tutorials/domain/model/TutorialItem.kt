@@ -1,4 +1,4 @@
-package com.gg.spora.tutorials.model
+package com.gg.spora.tutorials.domain.model
 
 import androidx.compose.ui.geometry.Offset
 

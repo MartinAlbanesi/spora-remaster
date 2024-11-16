@@ -4,7 +4,7 @@ package com.gg.spora.tutorials.data
 import androidx.compose.ui.geometry.Offset
 import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.core.utils.enums.MushyStates
-import com.gg.spora.tutorials.model.TutorialItem
+import com.gg.spora.tutorials.domain.model.TutorialItem
 
 object TutorialModels {
 
@@ -205,22 +205,22 @@ object TutorialModels {
         )
     )
 
-    val bottleChallengeTutorial = listOf(
-        TutorialItem(
-            "¡Wow! Encontraste una botella, voy a contarte un poco sobre ella.",
-            ChampyStates.SMILING.image
-        ),
-        TutorialItem(
-            "Las botellas de plástico se pueden encontrar en muchos lugares y son fáciles de reciclar",
-            ChampyStates.SMILING.image
-        ),
-        TutorialItem(
-            "Al ser de una importancia ecológica alta, es necesario aprender a reciclarlas.",
-            ChampyStates.CURIOUS.image
-        ),
-        TutorialItem(
-            "Así que, aprendamos juntos sobre cómo reciclar este tipo de objetos.",
-            ChampyStates.GREETING.image
-        ),
-    )
+//    val bottleChallengeTutorial = listOf(
+//        TutorialItem(
+//            "¡Wow! Encontraste una botella, voy a contarte un poco sobre ella.",
+//            ChampyStates.SMILING.image
+//        ),
+//        TutorialItem(
+//            "Las botellas de plástico se pueden encontrar en muchos lugares y son fáciles de reciclar",
+//            ChampyStates.SMILING.image
+//        ),
+//        TutorialItem(
+//            "Al ser de una importancia ecológica alta, es necesario aprender a reciclarlas.",
+//            ChampyStates.CURIOUS.image
+//        ),
+//        TutorialItem(
+//            "Así que, aprendamos juntos sobre cómo reciclar este tipo de objetos.",
+//            ChampyStates.GREETING.image
+//        ),
+//    )
 }

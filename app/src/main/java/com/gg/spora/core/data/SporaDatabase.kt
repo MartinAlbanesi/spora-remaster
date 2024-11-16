@@ -10,6 +10,8 @@ import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.stage.data.local.StageDao
 import com.gg.spora.stage.data.local.models.LevelEntity
 import com.gg.spora.stage.data.local.models.StageLevelEntity
+import com.gg.spora.tutorials.data.local.TutorialCompletedDao
+import com.gg.spora.tutorials.data.local.TutorialCompletedEntity
 import com.gg.spora.user.data.local.UserDao
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
@@ -22,7 +24,8 @@ import com.gg.spora.user.data.local.entities.UserEntity
         LevelCompletedEntity::class,
         InfoCardEntity::class,
         LevelEntity::class,
-        StageLevelEntity::class
+        StageLevelEntity::class,
+        TutorialCompletedEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -36,4 +39,6 @@ abstract class SporaDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     abstract fun stageDao(): StageDao
+
+    abstract fun tutorialCompletedDao(): TutorialCompletedDao
 }
