@@ -70,13 +70,16 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val groveViewModel = hiltViewModel<GroveViewModel>()
             val uiState by groveViewModel.uiState.collectAsState()
             val isLoading by groveViewModel.isLoading.collectAsState()
+            val userOxygen by groveViewModel.userOxygen.collectAsState()
 
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
+                userOxygen = userOxygen,
                 plantForestTree = { forestTree, seedTreeId ->
                     groveViewModel.plantForestTree(forestTree, seedTreeId)
                 },
+                claimOxygen = { groveViewModel.claimOxygen() },
                 popBackStack = {
                     navController.popBackStack()
                 },

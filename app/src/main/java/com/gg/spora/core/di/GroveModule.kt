@@ -12,6 +12,8 @@ import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.ui.GroveViewModel
+import com.gg.spora.user.domain.GetUserOxygenUseCase
+import com.gg.spora.user.domain.UpdateUserOxygenUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -80,7 +82,9 @@ class GroveModule {
         insertForestTreeUseCase: InsertForestTreeUseCase,
         updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
         getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
-        insertCooldownDataUseCase: InsertCooldownDataUseCase
+        insertCooldownDataUseCase: InsertCooldownDataUseCase,
+        updateUserOxygenUseCase: UpdateUserOxygenUseCase,
+        getUserOxygenUseCase: GetUserOxygenUseCase,
     ): GroveViewModel {
         return GroveViewModel(
             loadSeedTreesUseCase,
@@ -89,7 +93,9 @@ class GroveModule {
             insertForestTreeUseCase,
             updateForestTreeGrowthStageByIdUseCase,
             getCooldownDataByIdUseCase,
-            insertCooldownDataUseCase
+            insertCooldownDataUseCase,
+            updateUserOxygenUseCase,
+            getUserOxygenUseCase
         )
     }
 }

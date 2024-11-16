@@ -31,7 +31,7 @@ import com.gg.spora.user.data.local.entities.UserEntity
         SeedTreeEntity::class,
         CooldownDataEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class SporaDatabase : RoomDatabase() {

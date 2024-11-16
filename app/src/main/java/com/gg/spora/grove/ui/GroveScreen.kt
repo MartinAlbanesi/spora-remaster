@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,14 +37,16 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     uiState: GroveUiState,
     isLoading: Boolean,
+    userOxygen: Int,
     plantForestTree: (ForestTree, String) -> Unit,
+    claimOxygen: () -> Unit,
     popBackStack: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(
                 modifier = ModifierStyle.brush,
-                secondLabel = "465",
+                secondLabel = userOxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = true,
                 onBackClick = popBackStack
@@ -116,6 +120,24 @@ fun GroveScreen(
                 }
             }
         }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValue)
+        ){
+            Button(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter),
+                onClick = {
+                    claimOxygen()
+                }
+            ) {
+                Text(text = "Reclamar ${uiState.accumulatedOxygen}")
+            }
+        }
+
+
     }
 }
 

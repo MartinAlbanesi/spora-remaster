@@ -4,9 +4,9 @@ import com.gg.spora.R
 
 /**
  * Enum TreeType que representa los diferentes tipos de árboles del bosque
- * @param oxygenPerDay Cantidad de oxígeno generado por cada árbol del tipo en un día
+ * @param oxygenAmount Cantidad de oxígeno generado por cada árbol del tipo en un día
  */
-enum class TreeType(val oxygenPerDay: Int) {
+enum class TreeType(val oxygenAmount: Int) {
     SECUOYA(3),
     PINE(5),
     MANGROVE(10),
