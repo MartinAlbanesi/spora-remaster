@@ -47,15 +47,15 @@ fun SeedTreeItem(
             Button(
                 modifier = Modifier.width(100.dp),
                 onClick = {
-//                    onSeedTreeButtonClicked(seedTree.id, seedTree.timeToGenerateForestTree)
                     onPlantForestTree(ForestTree(type = seedTree.type), seedTree.id)
                 },
                 enabled = (uiState.seedTreeCooldowns[seedTree.id] ?: 0L) == 0L,
             ) {
                 // Muestra el texto correspondiente al cooldown
-                if (uiState.seedTreeCooldowns[seedTree.id]!! >= 1000 && uiState.seedTreeCooldowns[seedTree.id]!! <= 5000L) {
-                    Text("${uiState.seedTreeCooldowns[seedTree.id]?.div(1000)}s")
-                } else if (uiState.seedTreeCooldowns[seedTree.id] == 0L) {
+                val cooldown = uiState.seedTreeCooldowns[seedTree.id]
+                if (cooldown?.let { it >= 1000L && it <= 5000L } == true) {
+                    Text("${cooldown.div(1000L)}s")
+                } else if (cooldown == 0L) {
                     Text("Claim")
                 }
             }

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.gg.spora.grove.data.database.entities.CooldownDataEntity
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 import kotlinx.coroutines.flow.Flow
@@ -31,4 +32,10 @@ interface GroveDao {
 
     @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
     suspend fun updateForestTreeGrowthStageById(id: String, newStage: String)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCooldownData(cooldownData: CooldownDataEntity)
+
+    @Query("SELECT * FROM cooldown_data WHERE treeId = :treeId")
+    fun getCooldownData(treeId: String): Flow<CooldownDataEntity?>
 }

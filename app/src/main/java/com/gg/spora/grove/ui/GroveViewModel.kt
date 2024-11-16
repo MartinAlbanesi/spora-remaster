@@ -3,6 +3,8 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
+import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
@@ -47,6 +49,8 @@ class GroveViewModel @Inject constructor(
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
     private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
+    private val getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
+    private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
 ) : ViewModel() {
 
     // State variables for
@@ -127,9 +131,18 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+//    override fun onCleared() {
+//        viewModelScope.launch {
+//            seedTreeCooldowns.value.forEach { (treeId, _) ->
+//                Log.i("GroveViewModel", "onCleared: $treeId")
+//                insertCooldownDataUseCase(CooldownData(treeId))
+//            }
+//            forestTreeGrowthTimes.value.forEach { (treeId, _) ->
+//                insertCooldownDataUseCase(CooldownData(treeId.toString()))
+//            }
+//        }
+//        super.onCleared()
+//    }
 
     // Inicializa los árboles semilleros la primera vez que se abre la pantalla
     fun initSeedTrees() {

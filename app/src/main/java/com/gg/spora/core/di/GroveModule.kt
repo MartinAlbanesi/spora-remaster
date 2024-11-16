@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
+import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
@@ -59,12 +61,26 @@ class GroveModule {
 
     @Provides
     @Singleton
+    fun provideGetCooldownDataByIdUseCase(groveRepository: IGroveRepository): GetCooldownDataByIdUseCase {
+        return GetCooldownDataByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInsertCooldownDataUseCase(groveRepository: IGroveRepository): InsertCooldownDataUseCase {
+        return InsertCooldownDataUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
     fun provideGroveViewModel(
         loadSeedTreesUseCase: LoadSeedTreesUseCase,
         saveSeedTreesUseCase: SaveSeedTreesUseCase,
         loadForestTreesUseCase: LoadForestTreesUseCase,
         insertForestTreeUseCase: InsertForestTreeUseCase,
         updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
+        getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
+        insertCooldownDataUseCase: InsertCooldownDataUseCase
     ): GroveViewModel {
         return GroveViewModel(
             loadSeedTreesUseCase,
@@ -72,6 +88,8 @@ class GroveModule {
             loadForestTreesUseCase,
             insertForestTreeUseCase,
             updateForestTreeGrowthStageByIdUseCase,
+            getCooldownDataByIdUseCase,
+            insertCooldownDataUseCase
         )
     }
 }

@@ -18,7 +18,8 @@ data class ForestTree(
     var currentStage: GrowthStage = GrowthStage.SPROUT,
     val plantingDate: LocalDateTime = LocalDateTime.now(),
     var position: Int = 0,
-    var hasReachedAdultStage: Boolean = false
+    var hasReachedAdultStage: Boolean = false,
+    var timesOxygenClaimed: Int = 0,
 ) : Tree(id, type)
 
 fun ForestTree.toForestTreeEntity(): ForestTreeEntity {

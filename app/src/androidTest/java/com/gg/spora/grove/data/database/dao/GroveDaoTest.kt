@@ -5,10 +5,13 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.grove.data.database.entities.toCooldownData
 import com.gg.spora.grove.data.database.entities.toSeedTree
+import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.grove.domain.models.toCooldownDataEntity
 import com.gg.spora.grove.domain.models.toForestTreeEntity
 import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import kotlinx.coroutines.flow.first
@@ -19,6 +22,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import java.time.LocalDateTime
 
 @RunWith(AndroidJUnit4::class)
 class GroveDaoTest {
@@ -79,5 +83,20 @@ class GroveDaoTest {
         println(forestTreeById)
 
         Assert.assertEquals(forestTree, forestTreeById.toSeedTree())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertCooldownDataAndGetCooldownData() = runTest{
+        val cooldownData = CooldownData(
+            treeId = "1",
+            lastUpdateDate = LocalDateTime.now()
+        )
+
+        groveDao.insertCooldownData(cooldownData.toCooldownDataEntity())
+
+        val cooldownDataById = groveDao.getCooldownData(cooldownData.treeId).first()
+
+        Assert.assertEquals(cooldownData, cooldownDataById?.toCooldownData())
     }
 }

@@ -3,10 +3,13 @@ package com.gg.spora.grove.data
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.database.entities.toCooldownData
 import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
+import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.toCooldownDataEntity
 import com.gg.spora.grove.domain.models.toForestTreeEntity
 import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import kotlinx.coroutines.flow.Flow
@@ -54,5 +57,13 @@ class GroveRepository @Inject constructor(
 
     override suspend fun updateForestTreeGrowthStage(forestTree: ForestTree) {
         groveDao.updateForestTreeGrowthStageById(forestTree.id, forestTree.currentStage.toString())
+    }
+
+    override suspend fun getCooldownData(treeId: String): Flow<CooldownData> {
+        return groveDao.getCooldownData(treeId).map { it?.toCooldownData() ?: CooldownData(treeId) }
+    }
+
+    override suspend fun insertCooldownData(cooldownData: CooldownData) {
+        groveDao.insertCooldownData(cooldownData.toCooldownDataEntity())
     }
 }
