@@ -10,12 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +26,7 @@ import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
+import com.gg.spora.grove.ui.components.ButtonWithIcon
 import com.gg.spora.grove.ui.components.ForestTreeItem
 import com.gg.spora.grove.ui.components.PlantingPlaceholder
 import com.gg.spora.grove.ui.components.SeedTreeItem
@@ -37,7 +37,6 @@ fun GroveScreen(
     modifier: Modifier = Modifier,
     uiState: GroveUiState,
     isLoading: Boolean,
-    userOxygen: Int,
     plantForestTree: (ForestTree, String) -> Unit,
     claimOxygen: () -> Unit,
     popBackStack: () -> Unit
@@ -46,7 +45,7 @@ fun GroveScreen(
         topBar = {
             TopAppBarWithDualIcon(
                 modifier = ModifierStyle.brush,
-                secondLabel = userOxygen.toString(),
+                secondLabel = uiState.userOxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = true,
                 onBackClick = popBackStack
@@ -66,6 +65,7 @@ fun GroveScreen(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .matchParentSize()
+                    .align(Alignment.BottomCenter)
             )
         }
         Box(
@@ -125,19 +125,19 @@ fun GroveScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValue)
-        ){
-            Button(
+                .width(150.dp)
+        ) {
+            ButtonWithIcon(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter),
-                onClick = {
-                    claimOxygen()
-                }
-            ) {
-                Text(text = "Reclamar ${uiState.accumulatedOxygen}")
-            }
+                    .align(Alignment.BottomCenter)
+                    .width(150.dp),
+                text = "${uiState.accumulatedOxygen}",
+                icon = R.drawable.oxygen_icon,
+                cooldownValue = uiState.oxygenCooldown,
+                cooldownType = OXYGEN_COOLDOWN_DURATION,
+                onClick = { claimOxygen() }
+            )
         }
-
-
     }
 }
 

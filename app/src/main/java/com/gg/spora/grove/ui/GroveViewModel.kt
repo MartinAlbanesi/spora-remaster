@@ -15,6 +15,7 @@ import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.grove.utils.functions.combine
 import com.gg.spora.user.domain.GetUserOxygenUseCase
 import com.gg.spora.user.domain.UpdateUserOxygenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -34,6 +34,7 @@ import javax.inject.Inject
 import kotlin.collections.associate
 
 const val INITIAL_COOLDOWN_DURATION = 5000L
+const val OXYGEN_COOLDOWN_DURATION = 10000L
 
 // Evitar que se dibuje la pantalla con un evento, escuchar el evento desde la UI
 // Programacion reactiva
@@ -79,25 +80,32 @@ class GroveViewModel @Inject constructor(
     private val _userOxygen = MutableStateFlow(0)
     val userOxygen: StateFlow<Int> = _userOxygen.asStateFlow()
 
+    private val _oxygenCooldown = MutableStateFlow(0L)
+    val oxygenCooldown: StateFlow<Long> = _oxygenCooldown.asStateFlow()
+
     // Combined flow for seedTrees and forestTrees
     val uiState: StateFlow<GroveUiState> = combine(
         seedTrees,
         forestTrees,
         seedTreeCooldowns,
         forestTreeGrowthTimes,
-        accumulatedOxygen
-    ) { seedTrees, forestTrees, seedTreeCooldowns, forestTreeGrowthTimes, accumulatedOxygen ->
+        accumulatedOxygen,
+        userOxygen,
+        oxygenCooldown
+    ) { seedTrees, forestTrees, seedTreeCooldowns, forestTreeGrowthTimes, accumulatedOxygen, userOxygen, oxygenCooldown ->
         GroveUiState(
             seedTrees,
             forestTrees,
             seedTreeCooldowns,
             forestTreeGrowthTimes,
             accumulatedOxygen,
+            userOxygen,
+            oxygenCooldown,
         )
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(),
-        GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap(), 0)
+        GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap(), 0, 0, 0L)
     )
 
     // Inicialización de los casos de uso
@@ -135,7 +143,7 @@ class GroveViewModel @Inject constructor(
 
             Log.i("GroveViewModel", "accumulatedOxygen: ${accumulatedOxygen.value}")
 
-            combine(
+            kotlinx.coroutines.flow.combine(
                 loadSeedTreesUseCase(),
                 loadForestTreesUseCase(),
                 getUserOxygenUseCase(),
@@ -281,7 +289,28 @@ class GroveViewModel @Inject constructor(
     fun claimOxygen() {
         viewModelScope.launch(Dispatchers.IO) {
             updateUserOxygenUseCase(userOxygen.value + accumulatedOxygen.value)
+
+            triggerOxygenCooldown()
         }
+    }
+
+    private suspend fun triggerOxygenCooldown() {
+        viewModelScope.launch {
+            _oxygenCooldown.value = OXYGEN_COOLDOWN_DURATION // Set initial cooldown time
+            delay(OXYGEN_COOLDOWN_DURATION) // Wait for the cooldown duration
+            _oxygenCooldown.value = 0L // Reset cooldown time
+        }
+
+        _oxygenCooldown.update { OXYGEN_COOLDOWN_DURATION }
+
+        var remainingTime = OXYGEN_COOLDOWN_DURATION
+        while (remainingTime > 0) {
+            delay(1000)
+            remainingTime -= 1000
+            _oxygenCooldown.update { remainingTime }
+        }
+
+        _oxygenCooldown.update { 0L }
     }
 }
 

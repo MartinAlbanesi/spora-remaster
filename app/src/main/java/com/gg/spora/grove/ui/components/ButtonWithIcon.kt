@@ -1,0 +1,72 @@
+package com.gg.spora.grove.ui.components
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.gg.spora.R
+
+@Composable
+fun ButtonWithIcon(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    icon: Int,
+    cooldownValue: Long?,
+    cooldownType: Long,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = cooldownValue == 0L,
+        contentPadding = PaddingValues(
+            start = ButtonDefaults.ContentPadding.calculateStartPadding(LocalLayoutDirection.current),
+            top = 1.dp,
+            end = ButtonDefaults.ContentPadding.calculateEndPadding(LocalLayoutDirection.current),
+            bottom = 1.dp
+        )
+//        colors = ButtonDefaults.buttonColors(
+//            containerColor = Color.Transparent, // Set container color to transparent
+//            contentColor = Color.Black // Set content color (e.g., text and icon color)
+//        )
+    ) {
+        Image(
+            painter = painterResource(id = icon),
+            contentDescription = "Image for the button",
+            modifier = Modifier
+                .size(35.dp)
+        )
+
+        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+        if (cooldownValue != null) {
+            if (cooldownValue >= 1000L && cooldownValue <= cooldownType) {
+                Text("${cooldownValue.div(1000L)}s")
+            } else if (cooldownValue == 0L) {
+                Text(text)
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonWithIconPreview() {
+    ButtonWithIcon(
+        text = "Reclamar",
+        icon = R.drawable.seed_reward,
+        cooldownValue = 0L,
+        cooldownType = 5000L,
+        onClick = {}
+    )
+}

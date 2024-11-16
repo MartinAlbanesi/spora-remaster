@@ -6,4 +6,6 @@ data class GroveUiState (
     val seedTreeCooldowns: Map<String, Long>,
     val forestTreeGrowthTimes: Map<String, Long>,
     val accumulatedOxygen: Int,
+    val userOxygen: Int,
+    val oxygenCooldown: Long,
 )
