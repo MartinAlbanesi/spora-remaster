@@ -8,7 +8,7 @@ interface IChallengeRepositoryLocal {
 
     suspend fun getAllObjectsDetail(): List<ObjectDetail>
 
-    suspend fun insertObjectDetail(objectDetail: ObjectDetail)
+    suspend fun setObjectDetail(objectDetail: ObjectDetail)
 
     suspend fun getObjectDetailWithName(nameObjectDetail: String) : ObjectDetail
 

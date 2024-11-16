@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
+import com.gg.spora.challenge.domain.model.ObjectDetail
 
 @Dao
 interface ChallengeDao {
@@ -33,6 +35,8 @@ interface ChallengeDao {
             "WHERE name_object_detail = :nameObjectDetail")
     suspend fun getObjectDetailWithName(nameObjectDetail : String) : ObjectDetailEntity
 
+    @Update
+    suspend fun updateObjectDetail(objectDetail : ObjectDetail)
     //endregion
 
     //region StepObjectDetailEntity

@@ -17,25 +17,11 @@ class ChallengeViewModel @Inject constructor(private val challengeRepositoryLoca
     private val _objectsChallenge = MutableLiveData<List<ObjectDetail>>(mutableListOf())
     val objectsChallenge: LiveData<List<ObjectDetail>> = _objectsChallenge
 
-    private val _selectedObject = MutableLiveData<String>()
-    val selectedObject: LiveData<String> = _selectedObject
-
-    private val _objectDetail = MutableLiveData<ObjectDetail>()
-    val objectDetail: LiveData<ObjectDetail> get() = _objectDetail
-
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     init {
         insertObjectsDetailInDatabase()
-    }
-
-    fun selectObject(objectName: String) {
-        _selectedObject.postValue(objectName)
-    }
-
-    fun setEmptySelectedObject(){
-        _selectedObject.postValue("")
     }
 
     fun setObjectsChallengeEmpty(){
@@ -71,7 +57,7 @@ class ChallengeViewModel @Inject constructor(private val challengeRepositoryLoca
                 }
                 _objectsChallenge.postValue(currentList)
             }
-            _isLoading.value = false
+            setLoading(false)
         }
     }
 
@@ -95,12 +81,16 @@ class ChallengeViewModel @Inject constructor(private val challengeRepositoryLoca
             val listObjects = FakeChallengeModels.fakeObjectDetails
 
             for(objectDetail in listObjects){
-                challengeRepositoryLocal.insertObjectDetail(objectDetail)
+                challengeRepositoryLocal.setObjectDetail(objectDetail)
                 challengeRepositoryLocal.insertStepsObjectDetail(objectDetail.stepsObjectDetail)
             }
             getObjectsInDatabase()
 
         }
 
+    }
+
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.value = isLoading
     }
 }

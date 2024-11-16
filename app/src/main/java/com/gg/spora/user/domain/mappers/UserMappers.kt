@@ -1,6 +1,7 @@
 package com.gg.spora.user.domain.mappers
 
 import com.gg.spora.R
+import com.gg.spora.challenge.domain.mappers.toObjectDetail
 import com.gg.spora.user.data.local.entities.UserEntity
 import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
 import com.gg.spora.user.data.network.models.UserNetwork
@@ -12,6 +13,7 @@ fun UserNetwork.toUser() = User(
     email = email ?: "",
     oxygen = oxygen ?: 0,
     levelsCompleted = levelsCompleted?.map { it.toLevelCompleted() } ?: emptyList(),
+    objectsScanned = objectsScanned?.map { it.toObjectDetail() } ?: emptyList(),
     treesCount = treesCount ?: 0,
     userImage = userImage ?: R.drawable.spora_face_splash
 )
@@ -22,7 +24,8 @@ fun User.toUserEntity() = UserEntity(
     email = email,
     oxygen = oxygen,
     treesCount = treesCount,
-    userImage = userImage
+    userImage = userImage,
+    objectsScanned = objectsScanned
 )
 
 fun UserWithLevelsCompletedEntity.toUser() = User(
@@ -31,6 +34,7 @@ fun UserWithLevelsCompletedEntity.toUser() = User(
     email = user.email,
     oxygen = user.oxygen,
     levelsCompleted = levelsCompleted.map { it.toLevelCompleted() },
+    objectsScanned = user.objectsScanned,
     treesCount = user.treesCount,
     userImage = user.userImage
 )

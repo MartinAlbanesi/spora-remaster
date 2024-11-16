@@ -2,6 +2,7 @@ package com.gg.spora.user.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.user.domain.models.LevelCompleted
 
 @Entity(tableName = "user_entity")
@@ -11,6 +12,7 @@ data class UserEntity(
     val email: String,
     val oxygen: Int,
     val treesCount: Int,
-    val userImage: Int
+    val userImage: Int,
+    val objectsScanned: List<ObjectDetail>
 //    val levelsCompleted : List<LevelCompleted>
 )

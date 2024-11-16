@@ -17,9 +17,8 @@ constructor(private val challengeDao: ChallengeDao) : IChallengeRepositoryLocal{
         return objectDetailEntities.map { it.toObjectDetail() }
     }
 
-    override suspend fun insertObjectDetail(objectDetail: ObjectDetail) {
-        if(challengeDao.validateIfExistsObjectDetail(objectDetail.nameObjectDetail!!) == 0)
-            challengeDao.insertObjetDetail(objectDetail.toObjectDetailEntity())
+    override suspend fun setObjectDetail(objectDetail: ObjectDetail) {
+      challengeDao.insertObjetDetail(objectDetail.toObjectDetailEntity())
     }
 
 
