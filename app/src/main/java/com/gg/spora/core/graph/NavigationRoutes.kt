@@ -30,6 +30,9 @@ object NavigationRoutes {
     object Grove
 
     @Serializable
+    object Ranking
+
+    @Serializable
     object ProfileScreen
 
 
@@ -41,7 +44,7 @@ object NavigationRoutes {
 
     @Serializable
     data class Stage(
-        val stageId: String = "1",
+        val stageType: String = "FOREST",
     )
 
     @Serializable
@@ -52,21 +55,40 @@ object NavigationRoutes {
         val relationsCount: Int,
         val levelId: String,
         val imageBackground: Int,
-        val stageId: String,
+        val stageType: String,
+        val oxygenRewards: List<Int>,
     )
 
+    // Library Graph ------------------------------------------------------
 
+    @Serializable
+    object LibraryGraph
+
+    @Serializable
+    object Library
+
+    @Serializable
+    object LibraryForestInfo
+
+    @Serializable
+    object LibraryDesertInfo
+
+    @Serializable
+    object LibraryRiverInfo
+
+    // Challenge Graph ------------------------------------------------------
 
     @Serializable
     data class Challenge(
         val stageId: String,
+        var nameObject: String
     )
 
     @Serializable
-    object Camera {
-        const val route = "camera/{nameObject}"
-        fun createRoute(nameObject: String) = "camera/$nameObject"
-    }
+    data class Camera (
+        val stageId: String,
+        val nameObject: String,
+    )
 
 
     // Profile Graph ------------------------------------------------------

@@ -3,12 +3,18 @@ package com.gg.spora.profile.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +24,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
@@ -29,17 +34,17 @@ fun ProfileScreen(
     onBackClick: () -> Unit,
     onSettingsClick: () -> Unit,
    //
-    currentIndex: Int = 0,
-    user: User,
-    onLeftArrowClick: () -> Unit,
-    onRightArrowClick: () -> Unit
+//    currentIndex: Int = 0,
+    user: User?,
+//    onLeftArrowClick: () -> Unit,
+//    onRightArrowClick: () -> Unit
 ) {
    // val currentIndex by viewModel.currentIndex.collectAsState()
-    val images = listOf(
-        R.drawable.logro_semilla,
-        R.drawable.plastic_bottle,
-        R.drawable.spora_logo_without_slogan
-    )
+//    val images = listOf(
+//        R.drawable.logro_semilla,
+//        R.drawable.plastic_bottle,
+//        R.drawable.spora_logo_without_slogan
+//    )
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -95,13 +100,13 @@ fun ProfileScreen(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = user.userName,
+                                text = user?.userName ?: "User Name",
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 24.sp
                             )
                             Text(
-                                text = user.email,
+                                text = user?.email ?: "email",
                                 color = Color.Black,
                                 fontSize = 16.sp,
                                 modifier = Modifier.padding(top = 8.dp)
@@ -189,9 +194,12 @@ private fun ProfileScreenPreview() {
                     email = "email",
                     oxygen = 0,
                     levelsCompleted = emptyList(),
-                    id = "id"),
-                onLeftArrowClick = {},
-                onRightArrowClick = {}
+                    id = "id",
+                    treesCount = 0,
+                    userImage = R.drawable.spora_face_splash
+                ),
+//                onLeftArrowClick = {},
+//                onRightArrowClick = {}
             )
         }
     }

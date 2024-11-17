@@ -1,10 +1,13 @@
 package com.gg.spora.core.di
 
 import com.gg.spora.core.firebase.FirestoreService
+import com.gg.spora.user.data.local.UserDao
+import com.gg.spora.user.data.local.UserRepositoryLocal
 import com.gg.spora.user.data.network.UserRepositoryNetwork
-import com.gg.spora.user.domain.GetCurrentUserUseCase
-import com.gg.spora.user.domain.IUserRepositoryNetwork
+import com.gg.spora.user.domain.GetUserAuthUseCase
+import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.gg.spora.user.domain.SetNewUserUseCase
+import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -24,17 +27,28 @@ class UserModule {
         return UserRepositoryNetwork(firestoreService)
     }
 
-    @Singleton
     @Provides
-    fun provideGetCurrentUserUseCase(
-        firebaseAuth: FirebaseAuth,
-    ): GetCurrentUserUseCase {
-        return GetCurrentUserUseCase(firebaseAuth)
+    @Singleton
+    fun provideUserRepositoryLocal(
+        userDao: UserDao
+    ) : IUserRepositoryLocal {
+        return UserRepositoryLocal(userDao)
     }
 
     @Singleton
     @Provides
-    fun provideSetNewUserUseCase(userRepositoryNetwork: UserRepositoryNetwork) : SetNewUserUseCase{
-        return SetNewUserUseCase(userRepositoryNetwork)
+    fun provideGetCurrentUserUseCase(
+        firebaseAuth: FirebaseAuth,
+    ): GetUserAuthUseCase {
+        return GetUserAuthUseCase(firebaseAuth)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSetNewUserUseCase(
+        userRepositoryNetwork: UserRepositoryNetwork,
+        userRepositoryLocal: UserRepositoryLocal
+    ) : SetNewUserUseCase{
+        return SetNewUserUseCase(userRepositoryNetwork, userRepositoryLocal)
     }
 }

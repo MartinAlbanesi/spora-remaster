@@ -59,10 +59,16 @@ kotlinCoroutinesTest = "1.8.0"
 # Constraint Layout compose
 constraintLayoutCompose = "1.0.1"
 
+# Retrofit
 converterGson = "2.9.0"
+
+# Junit
 junitJupiter = "5.8.1"
-hiltAndroidTesting = "2.44"
 junitKtx = "1.2.1"
+
+# Hilt Android Testing
+hiltAndroidTesting = "2.44"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

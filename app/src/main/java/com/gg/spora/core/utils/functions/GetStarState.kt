@@ -2,12 +2,12 @@ package com.gg.spora.core.utils.functions
 
 import com.gg.spora.core.utils.enums.StarState
 
-fun getStarState(lives: Int): StarState {
-    return when (lives) {
-        0 -> StarState.ZERO
-        1,2 -> StarState.ONE
-        3,4 -> StarState.TWO
-        5 -> StarState.THREE
+fun getRewardsStarState(livesLost: Int): StarState {
+    return when (livesLost) {
+        5 -> StarState.ZERO
+        3,4 -> StarState.ONE
+        1,2 -> StarState.TWO
+        0 -> StarState.THREE
         else -> StarState.ZERO
     }
 }

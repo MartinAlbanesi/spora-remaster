@@ -9,51 +9,51 @@ class GetStarStateTest{
 
 
     @Test
-    fun `this - When lives is five - Return StarState-Three`(){
+    fun `this - When livesLost is five - Return StarState-ZERO`(){
         // Given
-        val lives = 5
+        val livesLost = 5
 
         // When
-        val result = getStarState(lives)
+        val result = getRewardsStarState(livesLost)
 
         // Then
-        assertEquals(StarState.THREE, result)
+        assertEquals(StarState.ZERO, result)
     }
 
     @Test
-    fun `this - When lives is four - Return StarState-Two`(){
+    fun `this - When lives is four or Three - Return StarState-ONE`(){
         // Given
-        val lives = 4
+        val livesLost = 4
 
         // When
-        val result = getStarState(lives)
-
-        // Then
-        assertEquals(StarState.TWO, result)
-    }
-
-    @Test
-    fun `this - When lives is One - Return StarState-One`(){
-        // Given
-        val lives = 1
-
-        // When
-        val result = getStarState(lives)
+        val result = getRewardsStarState(livesLost)
 
         // Then
         assertEquals(StarState.ONE, result)
     }
 
     @Test
-    fun `this - When lives is Zero - Return StarState-Zero`(){
+    fun `this - When livesLost is One or Two - Return StarState-TWO`(){
         // Given
-        val lives = 0
+        val lives = 1
 
         // When
-        val result = getStarState(lives)
+        val result = getRewardsStarState(lives)
 
         // Then
-        assertEquals(StarState.ZERO, result)
+        assertEquals(StarState.TWO, result)
+    }
+
+    @Test
+    fun `this - When lives is Zero - Return StarState-THREE`(){
+        // Given
+        val livesLost = 0
+
+        // When
+        val result = getRewardsStarState(livesLost)
+
+        // Then
+        assertEquals(StarState.THREE, result)
     }
 
 }

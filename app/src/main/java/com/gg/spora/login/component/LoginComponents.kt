@@ -1,5 +1,6 @@
 package com.gg.spora.login.component
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,11 +14,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +30,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,6 +42,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -83,7 +94,48 @@ fun NameField(name: String, onNameChanged: (String) -> Unit) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
+fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
+    val shape = RoundedCornerShape(20.dp)
+    var passwordVisible by remember { mutableStateOf(false) } // State to control password visibility
+
+    TextField(
+        value = password,
+        onValueChange = { onTextFieldChanged(it) },
+        placeholder = { Text(text = "Contraseña") },
+        modifier = Modifier.fillMaxWidth(),
+        shape = shape,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        singleLine = true,
+        maxLines = 1,
+        textStyle = MaterialTheme.typography.labelLarge,
+        colors = TextFieldDefaults.colors(
+            unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+            focusedTextColor = MaterialTheme.colorScheme.onSurface,
+            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            cursorColor = MaterialTheme.colorScheme.primary,
+            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface
+        ),
+        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(), // Apply visual transformation
+        trailingIcon = {
+            val image = if (passwordVisible)
+                Icons.Filled.Visibility
+            else Icons.Filled.VisibilityOff
+            // Please provide localized description for accessibility
+            val description = if (passwordVisible) "Hide password" else "Show password"
+
+            IconButton(onClick = {passwordVisible = !passwordVisible}){
+                Icon(imageVector  = image, contentDescription = description)
+            }
+        }
+    )
+}
+
+/*@Composable
 fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
     val shape = RoundedCornerShape(20.dp)
     TextField(
@@ -107,7 +159,7 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
 
         )
     )
-}
+}*/
 
 @Composable
 fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
@@ -231,11 +283,12 @@ fun LoginQuestionLink(
 
 @Composable
 fun IconButtonArrowLogin() {
+    val backPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         IconButton(
-            onClick = {  },
+            onClick = { backPressedDispatcher?.onBackPressed() },
             modifier = Modifier
                 .align(Alignment.TopStart)
                 .padding(16.dp)
@@ -249,4 +302,5 @@ fun IconButtonArrowLogin() {
         }
     }
 }
+
 

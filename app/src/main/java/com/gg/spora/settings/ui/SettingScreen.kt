@@ -3,7 +3,16 @@ package com.gg.spora.settings.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
@@ -28,9 +37,12 @@ import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 
+@Suppress("LongMethod")
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
+    onLogOut: () -> Unit,
+   // onSettingsClick: () -> Unit
     onNavigateToEditProfile: () -> Unit
 ) {
     var showAboutUs by remember { mutableStateOf(false) }
@@ -44,7 +56,7 @@ fun SettingsScreen(
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
         )
-        Column(
+        Column (
             modifier = Modifier
                 .fillMaxSize()
         ) {
@@ -187,7 +199,7 @@ fun SettingsScreen(
 
                 SporaPrimaryButton(
                     text = "Cerrar sesión",
-                    onClick = {  },
+                    onClick = onLogOut,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
@@ -212,6 +224,7 @@ private fun SettingsScreenPreview() {
         ) {
             SettingsScreen(
                 onBackClick = {},
+                onLogOut = {},
                 onNavigateToEditProfile = {}
             )
         }

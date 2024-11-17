@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,7 +55,7 @@ fun TopAppBarWithO2Icon(
                     colors = listOf(Color.Black, Color.Transparent)
                 )
             )
-            .height(100.dp)
+//            .height(100.dp)
     ) {
         CenterAlignedTopAppBar(
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -72,12 +73,17 @@ fun TopAppBarWithO2Icon(
                         fontSize = 26.sp,
                         color = MaterialTheme.colorScheme.background,
                         fontStyle = MaterialTheme.typography.titleLarge.fontStyle,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .weight(2f)
+                            .align(Alignment.CenterVertically)
                     )
 
                     if (showIcon){
                         ImageWithTextHorizontal(
                             imageResource = firstIcon,
-                            text = firstLabel
+                            text = firstLabel,
+                            modifier = Modifier.weight(1f),
                         )
                     }
 

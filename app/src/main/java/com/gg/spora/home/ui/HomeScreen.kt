@@ -30,8 +30,11 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    oxygen: Int,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
+    onNavigateToLibrary: () -> Unit,
     onNavigateToProfile: () -> Unit,
 ) {
 
@@ -45,27 +48,30 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.ranking_icon,
             text = "Ranking",
-            onClick = {}
+            onClick = onNavigateToRanking
         ),
-        HomeIcon(
-            image = R.drawable.missions_icon,
-            text = "Misiones",
-            onClick = {}
-        )
+//        HomeIcon(
+//            image = R.drawable.missions_icon,
+//            text = "Misiones",
+//            onClick = {}
+//        )
     )
 
     // Icons in the right
     val rightIcons = listOf<HomeIcon>(
         HomeIcon(
             image = R.drawable.eco_diary_icon,
-            text = "Diario",
-            onClick = {}
+            text = "Biblioteca",
+            onClick =
+            {
+                onNavigateToLibrary()
+            }
         ),
-        HomeIcon(
-            image = R.drawable.grove_icon,
-            text = "Arboleda",
-            onClick = {}
-        )
+//        HomeIcon(
+//            image = R.drawable.grove_icon,
+//            text = "Arboleda",
+//            onClick = {}
+//        )
     )
 
     Scaffold(
@@ -73,7 +79,7 @@ fun HomeScreen(
             TopAppBarWithDualIcon(
 //                firstLabel = "0",
 //                firstIcon = R.drawable.trees_icon,
-                secondLabel = "0",
+                secondLabel = oxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
                 modifier = ModifierStyle.brush
@@ -95,7 +101,6 @@ fun HomeScreen(
                     .matchParentSize()
             )
         }
-
         // Screen Content
         Box(
             modifier = Modifier
@@ -124,7 +129,7 @@ fun HomeScreen(
                     ImageWithTextVertical(
                         image = image,
                         text = text,
-                        // modifier = Modifier.clickable(onClick = { onClick }),
+                        modifier = Modifier.clickable(onClick = { onClick() }),
                     )
                 }
             }
@@ -174,8 +179,11 @@ private fun MiniGameScreenPreview() {
         ) {
             HomeScreen(
                 modifier = Modifier.fillMaxSize(),
+                oxygen = 0,
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {},
+                onNavigateToLibrary = {},
+                onNavigateToRanking = {},
                 onNavigateToProfile = {}
             )
         }

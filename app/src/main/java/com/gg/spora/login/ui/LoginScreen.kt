@@ -12,7 +12,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,65 +19,63 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.gg.spora.R
-import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.login.component.EmailField
-import com.gg.spora.login.component.GoogleLoginButton
 import com.gg.spora.login.component.IconButtonArrowLogin
 import com.gg.spora.login.component.LoginButton
 import com.gg.spora.login.component.LoginQuestionLink
 import com.gg.spora.login.component.NameField
 import com.gg.spora.login.component.PasswordField
 import com.gg.spora.login.component.loginText
-import com.gg.spora.login.component.separatorLogin
-import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel,
-//    navController: NavHostController,
+    //navController: NavHostController,
     onNavigationToHome: () -> Unit,
-    onNavigateToRegisteredLogin: () -> Unit
+    onNavigateToRegisteredLogin: () -> Unit,
 ) {
-    Box(
-        Modifier
-            .fillMaxSize()
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.welcome_background),
-            contentDescription = "Background",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.5f))
-        )
-        IconButtonArrowLogin()
+    val isLoading by viewModel.isLoading.observeAsState(initial = false)
 
-        Login(
-            Modifier.align(Alignment.Center),
-            viewModel
-        ){
-//            navController.navigate(NavigationRoutes.HomeGraph)
-            onNavigationToHome()
+    if (isLoading) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
+    } else {
+        Box(
+            Modifier
+                .fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.welcome_background),
+                contentDescription = "Background",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.5f))
+            )
+            IconButtonArrowLogin()
 
-        LoginQuestionLink(
+            Login(
+                Modifier.align(Alignment.Center),
+                viewModel
+            )
+
+            LoginQuestionLink(
 //            navController = navController
-            onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
-        )
+                onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
+            )
+        }
     }
 }
-
 
 @Composable
 fun Login(
     modifier: Modifier,
-    viewModel: LoginViewModel,
-    onNavigationToHome: () -> Unit
+    viewModel: LoginViewModel
 ) {
     val name: String by viewModel.name.observeAsState(initial = "")
     val email: String by viewModel.email.observeAsState(initial = "")
@@ -88,7 +85,6 @@ fun Login(
     val loginSuccess: Boolean by viewModel.loginSuccess.observeAsState(initial = false)
     val errorMessage: String? by viewModel.errorMessage.observeAsState()
 
-//    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
     if (isLoading) {
@@ -106,17 +102,15 @@ fun Login(
             PasswordField(password) { viewModel.onLoginChanged(name, email, it) }
             Spacer(modifier = Modifier.padding(16.dp))
             LoginButton(loginEnable) {
-//                coroutineScope.launch {
-                    viewModel.onLoginSelected { }
-//                }
-                onNavigationToHome()
+                viewModel.onLoginSelected {
+                    viewModel.setLoading(true)
+                }
             }
-            Spacer(modifier = Modifier.padding(8.dp))
-            separatorLogin()
-            Spacer(modifier = Modifier.padding(8.dp))
-            GoogleLoginButton()
+            //Spacer(modifier = Modifier.padding(8.dp))
+            //separatorLogin()
+            //Spacer(modifier = Modifier.padding(8.dp))
+            //GoogleLoginButton()
 
-            // Mostrar Toast según el estado de éxito o error
             if (loginSuccess) {
                 Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
             }
@@ -127,16 +121,3 @@ fun Login(
         }
     }
 }
-
-
-/*
-@Preview(showBackground = true, backgroundColor = 0xFF000000, showSystemUi = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(
-        onBackClick = { /*TODO*/ },
-        onLoginClick = { /*TODO*/ },
-        onGoogleLoginClick = { /*TODO*/ },
-        onRegisterClick = { /*TODO*/ }
-    )
-}*/
