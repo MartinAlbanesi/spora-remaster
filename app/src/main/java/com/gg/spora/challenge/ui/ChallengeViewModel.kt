@@ -7,12 +7,18 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.challenge.data.local.ChallengeRepositoryLocal
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.core.fake.FakeChallengeModels
+import com.gg.spora.user.domain.GetAllObjectsDetailForUserLocalUseCase
+import com.gg.spora.user.domain.UpdateObjectDetailChallengeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChallengeViewModel @Inject constructor(private val challengeRepositoryLocal: ChallengeRepositoryLocal) : ViewModel () {
+class ChallengeViewModel @Inject constructor(
+    private val challengeRepositoryLocal: ChallengeRepositoryLocal,
+    private val updateObjectDetailChallengeUseCase : UpdateObjectDetailChallengeUseCase,
+    private val getAllObjectsDetailForUserLocalUseCase : GetAllObjectsDetailForUserLocalUseCase
+) : ViewModel () {
 
     private val _objectsChallenge = MutableLiveData<List<ObjectDetail>>(mutableListOf())
     val objectsChallenge: LiveData<List<ObjectDetail>> = _objectsChallenge
@@ -46,24 +52,24 @@ class ChallengeViewModel @Inject constructor(private val challengeRepositoryLoca
         return objectDetail
     }
 
-    private fun getObjectsInDatabase() {
+    private fun setObjectsFromUser() {
         viewModelScope.launch {
+            val currentList = getAllObjectsDetailForUserLocalUseCase()
 
-            val currentList = challengeRepositoryLocal.getAllObjectsDetail()
-
-            if(currentList.isNotEmpty()){
-                for(objectChallenge in currentList){
-                    objectChallenge.stepsObjectDetail = challengeRepositoryLocal.getAllStepsObjectDetailWithName(objectChallenge.nameObjectDetail!!)
+            _objectsChallenge.value?.forEach { localItem ->
+                val matchingObject = currentList.find { it.nameObjectDetail ==  localItem.nameObjectDetail}
+                if(matchingObject != null){
+                    localItem.isValidate = true
                 }
-                _objectsChallenge.postValue(currentList)
             }
+
             setLoading(false)
         }
     }
 
     fun setObjectInObjectsChallengeWithName(nameObjectDetail: String) {
         viewModelScope.launch {
-            challengeRepositoryLocal.setValidObjectDetailInDatabase(nameObjectDetail)
+            updateObjectDetailChallengeUseCase(nameObjectDetail)
 
             val currentList = _objectsChallenge.value ?: mutableListOf()
             val objectToModify = currentList.find { it.nameObjectDetail == nameObjectDetail }
@@ -84,7 +90,9 @@ class ChallengeViewModel @Inject constructor(private val challengeRepositoryLoca
                 challengeRepositoryLocal.setObjectDetail(objectDetail)
                 challengeRepositoryLocal.insertStepsObjectDetail(objectDetail.stepsObjectDetail)
             }
-            getObjectsInDatabase()
+
+            _objectsChallenge.postValue(listObjects)
+            setObjectsFromUser()
 
         }
 

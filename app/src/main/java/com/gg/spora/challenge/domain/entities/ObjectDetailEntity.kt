@@ -9,6 +9,6 @@ import com.gg.spora.challenge.domain.model.ObjectDetail
 data class ObjectDetailEntity(
     @PrimaryKey
     @ColumnInfo(name = "name_object_detail") val nameObjectDetail: String,
-    @ColumnInfo(name = "description") val description: String?,
+    @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "is_validate") val isValidate : Boolean
 )

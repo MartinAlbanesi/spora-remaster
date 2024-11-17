@@ -3,8 +3,8 @@ package com.gg.spora.challenge.domain.model
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 
 data class ObjectDetail(
-    var nameObjectDetail : String?,
-    val description : String?,
+    var nameObjectDetail : String,
+    val description : String,
     var isValidate : Boolean,
     var stepsObjectDetail : List<StepObjectDetail> = mutableListOf()
 ){

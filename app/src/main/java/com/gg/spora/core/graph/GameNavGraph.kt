@@ -194,7 +194,6 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             isCorrect = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
 
             if(challengeRoute.nameObject != ""){
-                challengeViewModel.selectObject(challengeRoute.nameObject)
                 challengeViewModel.setObjectInObjectsChallengeWithName(challengeRoute.nameObject)
             }
             if (!isLoading) {

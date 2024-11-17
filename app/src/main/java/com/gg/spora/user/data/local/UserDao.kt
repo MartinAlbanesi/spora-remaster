@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
 import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
@@ -34,8 +35,15 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLevelsCompleted(levelsCompleted: List<LevelCompletedEntity>)
 
+    @Query("UPDATE object_detail SET is_validate = 1 " +
+            "WHERE name_object_detail = :nameObjectDetail")
+    suspend fun setValidObjectDetailInDatabase(nameObjectDetail : String)
+
     @Query("DELETE FROM user_entity")
     suspend fun deleteUser()
+
+    @Query("SELECT * FROM object_detail WHERE is_validate = 1")
+    suspend fun getAllObjectsDetailsValidate() : List<ObjectDetail>
 
     @Query("DELETE FROM level_completed_entity")
     suspend fun deleteLevelsCompleted()

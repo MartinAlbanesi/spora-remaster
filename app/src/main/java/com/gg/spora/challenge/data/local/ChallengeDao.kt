@@ -22,11 +22,6 @@ interface ChallengeDao {
     @Query("DELETE FROM object_detail")
     suspend fun deleteAllObjectsDetail()
 
-    @Query(
-        "UPDATE object_detail SET is_validate = 1 " +
-            "WHERE name_object_detail = :nameObjectDetail")
-    suspend fun setValidObjectDetailInDatabase(nameObjectDetail : String)
-
     @Query("SELECT COUNT(*) FROM object_detail " +
             "WHERE name_object_detail = :nameObjectDetail")
     suspend fun validateIfExistsObjectDetail(nameObjectDetail : String) : Int
@@ -35,8 +30,6 @@ interface ChallengeDao {
             "WHERE name_object_detail = :nameObjectDetail")
     suspend fun getObjectDetailWithName(nameObjectDetail : String) : ObjectDetailEntity
 
-    @Update
-    suspend fun updateObjectDetail(objectDetail : ObjectDetail)
     //endregion
 
     //region StepObjectDetailEntity

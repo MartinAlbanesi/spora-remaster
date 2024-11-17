@@ -14,5 +14,4 @@ data class UserEntity(
     val treesCount: Int,
     val userImage: Int,
     val objectsScanned: List<ObjectDetail>
-//    val levelsCompleted : List<LevelCompleted>
 )
