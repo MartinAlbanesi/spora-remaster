@@ -125,7 +125,7 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
             val image = if (passwordVisible)
                 Icons.Filled.Visibility
             else Icons.Filled.VisibilityOff
-            // Please provide localized description for accessibility
+
             val description = if (passwordVisible) "Hide password" else "Show password"
 
             IconButton(onClick = {passwordVisible = !passwordVisible}){
@@ -171,7 +171,7 @@ fun LoginButton(
         modifier = Modifier.fillMaxWidth(),
         //colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFF69C2C) // modificar para usar material
+            containerColor = Color(0xFFF69C2C)
         ), enabled = loginEnable,
         shape = ButtonDefaults.elevatedShape
     ) {

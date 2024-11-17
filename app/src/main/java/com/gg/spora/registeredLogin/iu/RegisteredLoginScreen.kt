@@ -76,7 +76,7 @@ fun RegisteredLoginScreen(
         }
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
-            // Imagen de fondo
+            // Background
             Image(
                 painter = painterResource(id = R.drawable.welcome_background),
                 contentDescription = null,
@@ -90,7 +90,8 @@ fun RegisteredLoginScreen(
                 )
             )
 
-            // Contenido principal
+            //
+            //Main content
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -108,7 +109,7 @@ fun RegisteredLoginScreen(
                     )
                 )
 
-                // Campos de entrada
+                // Input fields
                 LoginTextField(
                     placeholder = "Correo",
                     value = email,
@@ -135,7 +136,7 @@ fun RegisteredLoginScreen(
                     style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.Underline) // Subrayado
                 )
 
-                // Botón de confirmar
+                // Confirm button
                 val context = LocalContext.current
                 val isLoginEnabled = isAccountValid && password.length >=7
                 SporaPrimaryButton(
@@ -146,7 +147,7 @@ fun RegisteredLoginScreen(
                     isEnable = isLoginEnabled
                 )
 
-                // Separador
+                // Separator
                 /* Row(verticalAlignment = Alignment.CenterVertically) {
                      Divider(modifier = Modifier.weight(1f))
                      Text(
@@ -157,7 +158,7 @@ fun RegisteredLoginScreen(
                      Divider(modifier = Modifier.weight(1f))
                  }
 
-                 // Botón de login con Google
+                 // GoogleButton
                  Button(
                      onClick = ( /*TODO*/ ),
                      modifier = Modifier.fillMaxWidth(),
@@ -189,7 +190,7 @@ fun RegisteredLoginScreen(
                  }*/
             }
 
-            // Flecha en la parte superior izquierda
+            // Arrow at top left
             IconButton(
                 onClick = onBackClick,
                 modifier = Modifier
@@ -204,7 +205,7 @@ fun RegisteredLoginScreen(
                 )
             }
 
-            // Texto de "¿No tienes una cuenta?"
+            // Text of "Don't have an account?"
             Text(
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(color = Color.White)) {
