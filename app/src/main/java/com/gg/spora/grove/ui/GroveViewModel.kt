@@ -10,6 +10,7 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.GrowthStage
@@ -164,18 +165,22 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-//    override fun onCleared() {
-//        viewModelScope.launch {
-//            seedTreeCooldowns.value.forEach { (treeId, _) ->
-//                Log.i("GroveViewModel", "onCleared: $treeId")
-//                insertCooldownDataUseCase(CooldownData(treeId))
-//            }
-//            forestTreeGrowthTimes.value.forEach { (treeId, _) ->
-//                insertCooldownDataUseCase(CooldownData(treeId.toString()))
-//            }
-//        }
-//        super.onCleared()
-//    }
+    fun saveTreeCooldowns(){
+        viewModelScope.launch {
+            seedTreeCooldowns.value.forEach { (treeId, _) ->
+                Log.i("GroveViewModel", "saveThreeCooldowns: $treeId")
+                insertCooldownDataUseCase(CooldownData(treeId))
+            }
+            forestTreeGrowthTimes.value.forEach { (treeId, _) ->
+                insertCooldownDataUseCase(CooldownData(treeId))
+            }
+        }
+    }
+
+    override fun onCleared() {
+        saveTreeCooldowns()
+        super.onCleared()
+    }
 
     // Inicializa los árboles semilleros la primera vez que se abre la pantalla
     fun initSeedTrees() {
