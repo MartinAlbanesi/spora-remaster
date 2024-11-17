@@ -21,12 +21,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.login.component.EmailField
+import com.gg.spora.login.component.GoogleLoginButton
 import com.gg.spora.login.component.IconButtonArrowLogin
 import com.gg.spora.login.component.LoginButton
 import com.gg.spora.login.component.LoginQuestionLink
 import com.gg.spora.login.component.NameField
 import com.gg.spora.login.component.PasswordField
 import com.gg.spora.login.component.loginText
+import com.gg.spora.login.component.separatorLogin
 
 @Composable
 fun LoginScreen(
@@ -106,10 +108,10 @@ fun Login(
                     viewModel.setLoading(true)
                 }
             }
-            //Spacer(modifier = Modifier.padding(8.dp))
-            //separatorLogin()
-            //Spacer(modifier = Modifier.padding(8.dp))
-            //GoogleLoginButton()
+            Spacer(modifier = Modifier.padding(8.dp))
+            separatorLogin()
+            Spacer(modifier = Modifier.padding(8.dp))
+            GoogleLoginButton()
 
             if (loginSuccess) {
                 Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()

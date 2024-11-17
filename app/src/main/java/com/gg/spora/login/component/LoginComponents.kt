@@ -135,32 +135,6 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
     )
 }
 
-/*@Composable
-fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
-    val shape = RoundedCornerShape(20.dp)
-    TextField(
-        value = password, onValueChange = { onTextFieldChanged(it) },
-        placeholder = { Text(text = "Contraseña") },
-        modifier = Modifier.fillMaxWidth(),
-        shape = shape,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        singleLine = true,
-        maxLines = 1,
-        textStyle = MaterialTheme.typography.labelLarge,
-        colors = TextFieldDefaults.colors(
-            unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colorScheme.primary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface
-
-        )
-    )
-}*/
-
 @Composable
 fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
     val shape = RoundedCornerShape(20.dp)
@@ -217,6 +191,7 @@ fun separatorLogin(){
         Divider(modifier = Modifier.weight(1f))
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun GoogleLoginButton() {

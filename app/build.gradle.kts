@@ -176,4 +176,8 @@ dependencies {
     // Material extend icons
     implementation("androidx.compose.material:material-icons-extended")
 
+    //Google auth
+    //implementation(libs.google.auth)
+    implementation("com.google.android.gms:play-services-auth:20.6.0")
+
 }

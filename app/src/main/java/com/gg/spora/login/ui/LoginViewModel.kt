@@ -6,11 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.user.domain.SetNewUserUseCase
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -111,19 +108,7 @@ class LoginViewModel @Inject constructor(
         }catch (e:Exception){
             _errorMessage.value = "Error al guardar usuario: ${e.localizedMessage}"
         }
-//        val user = hashMapOf(
-//            "name" to name,
-//            "email" to email
-//        )
-//        firestore.collection("users")
-//            .add(user)
-//            .addOnSuccessListener {
-//                _loginSuccess.value = true
-//                _errorMessage.value = null
-//            }
-//            .addOnFailureListener {
-//                _errorMessage.value = "Error al guardar usuario: ${it.localizedMessage}"
-//            }
+
     }
     fun setLoading(isLoading: Boolean) {
         _isLoading.value = isLoading
