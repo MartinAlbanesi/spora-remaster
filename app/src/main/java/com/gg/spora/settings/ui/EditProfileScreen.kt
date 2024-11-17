@@ -92,16 +92,36 @@ fun EditProfileScreen(
                         .padding(vertical = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
                 )
-
-               /* TextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = { Text("Correo Electrónico Nuevo") },
+                TextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text("Contraseña nueva") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
-                )*/
+                )
+
+                TextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text("Confirmar contraseña nueva") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                )
+
+
+                /* TextField(
+                     value = email,
+                     onValueChange = { email = it },
+                     label = { Text("Correo Electrónico Nuevo") },
+                     modifier = Modifier
+                         .fillMaxWidth()
+                         .padding(vertical = 16.dp)
+                         .clip(RoundedCornerShape(16.dp))
+                 )*/
 
                 Spacer(modifier = Modifier.weight(1f))
 
