@@ -6,6 +6,7 @@ import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.stage.data.local.StageDao
+import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
 import com.gg.spora.user.data.local.UserDao
 import dagger.Module
 import dagger.Provides
@@ -49,5 +50,11 @@ class RoomModule {
     @Provides
     fun provideInfoCardDao(database: SporaDatabase): InfoCardDAO {
         return database.infoCardDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideTutorialCompletedDao(database: SporaDatabase): TutorialCompletedDao {
+        return database.tutorialCompletedDao()
     }
 }

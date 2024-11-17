@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.stage.domain.SetNewLevelsUseCase
 import com.gg.spora.stage.domain.SetNewStagesLevelUseCase
+import com.gg.spora.tutorials.data.TutorialModels
+import com.gg.spora.tutorials.domain.SetTutorialsLocalUseCase
 import com.gg.spora.user.domain.SetNewUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +19,8 @@ class WelcomeViewModel @Inject constructor(
 //    private val dataStore: DataStore<Preferences>
     private val setNewUserUseCase: SetNewUserUseCase,
     private val setNewStagesLevelUseCase: SetNewStagesLevelUseCase,
-    private val setNewLevelsUseCase: SetNewLevelsUseCase
+    private val setNewLevelsUseCase: SetNewLevelsUseCase,
+    private val setTutorialsLocalUseCase: SetTutorialsLocalUseCase
 ) : ViewModel() {
 
     private val _guestName = MutableStateFlow("")
@@ -44,6 +47,7 @@ class WelcomeViewModel @Inject constructor(
             val stageLevel = FakeStageModels.fakeStage
             setNewStagesLevelUseCase(stageLevel)
             setNewLevelsUseCase(level)
+            setTutorialsLocalUseCase(TutorialModels.tutorialsCompleted)
         }
     }
 

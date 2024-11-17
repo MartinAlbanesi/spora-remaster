@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals

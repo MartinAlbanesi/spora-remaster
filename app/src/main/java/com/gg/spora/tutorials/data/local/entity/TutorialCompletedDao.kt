@@ -1,9 +1,10 @@
-package com.gg.spora.tutorials.data.local
+package com.gg.spora.tutorials.data.local.entity
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.gg.spora.tutorials.data.local.TutorialCompletedEntity
 
 @Dao
 interface TutorialCompletedDao {

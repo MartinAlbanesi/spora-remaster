@@ -4,9 +4,17 @@ package com.gg.spora.tutorials.data
 import androidx.compose.ui.geometry.Offset
 import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.core.utils.enums.MushyStates
+import com.gg.spora.core.utils.enums.Tutorials
+import com.gg.spora.tutorials.domain.model.TutorialCompleted
 import com.gg.spora.tutorials.domain.model.TutorialItem
 
 object TutorialModels {
+
+    val tutorialsCompleted = listOf(
+        TutorialCompleted(Tutorials.HOME_TUTORIAL.index, false, "home"),
+        TutorialCompleted(Tutorials.GROVE_TUTORIAL.index, false, "grove"),
+        TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.index, false, "library"),
+    )
 
     private const val NAME = "Titi"
 
