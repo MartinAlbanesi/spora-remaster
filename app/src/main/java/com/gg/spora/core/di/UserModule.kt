@@ -1,6 +1,7 @@
 package com.gg.spora.core.di
 
 import com.gg.spora.core.firebase.FirestoreService
+import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
 import com.gg.spora.user.data.local.UserDao
 import com.gg.spora.user.data.local.UserRepositoryLocal
 import com.gg.spora.user.data.network.UserRepositoryNetwork
@@ -30,9 +31,10 @@ class UserModule {
     @Provides
     @Singleton
     fun provideUserRepositoryLocal(
-        userDao: UserDao
+        userDao: UserDao,
+        tutorialCompletedDao: TutorialCompletedDao
     ) : IUserRepositoryLocal {
-        return UserRepositoryLocal(userDao)
+        return UserRepositoryLocal(userDao,tutorialCompletedDao)
     }
 
     @Singleton

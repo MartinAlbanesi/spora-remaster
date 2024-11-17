@@ -1,5 +1,7 @@
 package com.gg.spora.user.data.local
 
+import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
+import com.gg.spora.tutorials.domain.mapper.toTutorialCompleted
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.mappers.toLevelCompletedEntity
@@ -13,7 +15,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class UserRepositoryLocal @Inject constructor(
-    private val userDao: UserDao
+    private val userDao: UserDao,
+    private val tutorialCompletedDao: TutorialCompletedDao
 ) : IUserRepositoryLocal {
 
     override suspend fun setUserLocal(user: User) {
@@ -48,7 +51,11 @@ class UserRepositoryLocal @Inject constructor(
 //    }
 
     override fun getUser(): Flow<User?> {
-        return userDao.getUsersWithLevelsCompleted().map { it?.toUser() }
+        return userDao.getUsersWithLevelsCompleted().map {
+            it?.toUser(tutorialCompletedDao.getAllTutorialsCompleted().map { tutorialCompleted ->
+                tutorialCompleted.toTutorialCompleted()
+            })
+        }
     }
 
     override suspend fun getUserOxygen(): Flow<Int> {

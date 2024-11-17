@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
+import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.models.User
 
@@ -196,7 +197,8 @@ private fun ProfileScreenPreview() {
                     levelsCompleted = emptyList(),
                     id = "id",
                     treesCount = 0,
-                    userImage = R.drawable.spora_face_splash
+                    userImage = R.drawable.spora_face_splash,
+                    tutorialsCompleted = TutorialModels.tutorialsCompleted
                 ),
 //                onLeftArrowClick = {},
 //                onRightArrowClick = {}
