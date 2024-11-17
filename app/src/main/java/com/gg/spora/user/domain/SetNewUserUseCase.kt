@@ -8,6 +8,15 @@ import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
+
+/**
+ * Use case that creates a new user locally and remotely.
+ * If the email is null, it is created only locally.
+ * If the email is not null, it is created locally and remotely. And the id of the
+ * local user is changed to that of the remote one.
+ * @param email? email del usuario
+ * @param userName nombre del usuario
+ */
 class SetNewUserUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal

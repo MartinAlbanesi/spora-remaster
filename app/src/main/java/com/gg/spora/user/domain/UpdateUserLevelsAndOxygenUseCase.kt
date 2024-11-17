@@ -10,6 +10,13 @@ import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
+/**
+ * Use case to update the user's levels and oxygen
+ * @param levelId: String
+ * @param starState: StarState
+ * @param stageType: StageType
+ * @param oxygenRewards: List<Int>
+ */
 class UpdateUserLevelsAndOxygenUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal,
     private val userRepositoryNetwork: IUserRepositoryNetwork,
