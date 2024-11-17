@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.challenge.data.local.ChallengeRepositoryLocal
 import com.gg.spora.challenge.domain.PutObjectDetailLocalUseCase
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.core.fake.FakeChallengeModels

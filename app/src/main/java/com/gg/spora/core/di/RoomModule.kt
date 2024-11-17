@@ -25,7 +25,8 @@ class RoomModule {
             appContext,
             SporaDatabase::class.java,
             "spora_database"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
     @Singleton
