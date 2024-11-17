@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.challenge.data.local.ChallengeRepositoryLocal
+import com.gg.spora.challenge.domain.PutObjectDetailLocalUseCase
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.core.fake.FakeChallengeModels
 import com.gg.spora.user.domain.GetAllObjectsDetailForUserLocalUseCase
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChallengeViewModel @Inject constructor(
-    private val challengeRepositoryLocal: ChallengeRepositoryLocal,
+    private val putObjectDetailLocalUseCase: PutObjectDetailLocalUseCase,
     private val updateObjectDetailChallengeUseCase : UpdateObjectDetailChallengeUseCase,
     private val getAllObjectsDetailForUserLocalUseCase : GetAllObjectsDetailForUserLocalUseCase
 ) : ViewModel () {
@@ -87,8 +88,7 @@ class ChallengeViewModel @Inject constructor(
             val listObjects = FakeChallengeModels.fakeObjectDetails
 
             for(objectDetail in listObjects){
-                challengeRepositoryLocal.setObjectDetail(objectDetail)
-                challengeRepositoryLocal.insertStepsObjectDetail(objectDetail.stepsObjectDetail)
+                putObjectDetailLocalUseCase(objectDetail)
             }
 
             _objectsChallenge.postValue(listObjects)
