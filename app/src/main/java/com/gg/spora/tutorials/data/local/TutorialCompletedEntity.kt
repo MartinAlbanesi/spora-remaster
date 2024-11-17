@@ -10,5 +10,5 @@ data class TutorialCompletedEntity(
     @PrimaryKey
     val tutorialId: Int,
     @ColumnInfo(name = "is_completed") val isCompleted: Boolean,
-    @ColumnInfo(name = "user_id") val userId: String
+    @ColumnInfo(name = "tutorial_name") val tutorialName: String
 )

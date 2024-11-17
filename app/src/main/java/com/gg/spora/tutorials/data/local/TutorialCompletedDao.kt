@@ -2,8 +2,8 @@ package com.gg.spora.tutorials.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface TutorialCompletedDao {
@@ -14,12 +14,12 @@ interface TutorialCompletedDao {
     @Query("SELECT * FROM tutorial_completed WHERE tutorial_id = :tutorialId")
     suspend fun getTutorialById(tutorialId: Int): TutorialCompletedEntity
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTutorialCompleted(tutorialCompletedEntity: TutorialCompletedEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllTutorialsCompleted(tutorialCompletedEntity: List<TutorialCompletedEntity>)
 
-    @Update
-    suspend fun updateTutorialCompleted(tutorialCompletedEntity: TutorialCompletedEntity)
+    @Query("UPDATE tutorial_completed SET is_completed = :isCompleted WHERE tutorial_id = :tutorialId")
+    suspend fun updateTutorialCompleted(tutorialId: Int, isCompleted: Boolean)
 }

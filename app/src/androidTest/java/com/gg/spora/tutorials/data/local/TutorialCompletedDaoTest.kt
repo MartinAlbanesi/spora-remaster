@@ -26,7 +26,7 @@ class TutorialCompletedDaoTest{
             .build()
         tutorialCompletedDao = db.tutorialCompletedDao()
 
-        tutorialCompletedEntity = TutorialCompletedEntity(1, true, "1")
+        tutorialCompletedEntity = TutorialCompletedEntity(1, true, "Home")
     }
 
     @After
@@ -62,9 +62,9 @@ class TutorialCompletedDaoTest{
 
         // Given
         val tutorialCompletedEntityListExpected = listOf(
-            TutorialCompletedEntity(1, true, "1"),
-            TutorialCompletedEntity(2, true, "1"),
-            TutorialCompletedEntity(3, true, "1")
+            TutorialCompletedEntity(1, true, "Home"),
+            TutorialCompletedEntity(2, true, "Home"),
+            TutorialCompletedEntity(3, true, "Home")
         )
 
         // When
@@ -80,16 +80,24 @@ class TutorialCompletedDaoTest{
     fun updateTutorialCompleted_WhenUpdateIsCompleted_ThenGetEntityWithUpdate() = runTest {
 
         // Given
-        val tutorialCompletedEntity = TutorialCompletedEntity(1, true, "1")
+        val tutorialCompletedEntity = TutorialCompletedEntity(1, true, "Home")
         tutorialCompletedDao.insertTutorialCompleted(tutorialCompletedEntity)
 
         // When
-        val tutorialCompletedEntityExpected = TutorialCompletedEntity(1, false, "1")
-        tutorialCompletedDao.updateTutorialCompleted(tutorialCompletedEntityExpected)
+        tutorialCompletedDao.updateTutorialCompleted(tutorialId = 1, isCompleted = false)
         val tutorialCompletedEntityActual = tutorialCompletedDao.getTutorialById(1)
 
         // Then
-        assertEquals(tutorialCompletedEntityActual, tutorialCompletedEntityExpected)
         assertEquals(tutorialCompletedEntityActual.isCompleted, false)
+    }
+
+    @Test
+    fun getTutorialById_WhenIdIsIncorrect_ThenReturnNull() = runTest {
+
+        // When
+        val tutorialCompletedEntity = tutorialCompletedDao.getTutorialById(1)
+
+        // Then
+        assertEquals(tutorialCompletedEntity, null)
     }
 }
