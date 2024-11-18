@@ -45,7 +45,8 @@ class GroveDaoTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertSeedTreesAndGetSeedTrees() = runTest{
+    fun insertSeedTreesListAndGetSeedTreesListListList() = runTest{
+        // Given
         val seedTreeList = listOf(
             SeedTree(
                 type = TreeType.BAOBAB,
@@ -64,23 +65,23 @@ class GroveDaoTest {
                 timeToGenerateForestTree = 5000L
             )
         )
-        groveDao.insertSeedTrees(seedTreeList.map { it.toSeedTreeEntity() })
 
-        val seedTrees = groveDao.getSeedTrees().first()
+        // When
+        groveDao.insertSeedTreesList(seedTreeList.map { it.toSeedTreeEntity() })
+        val seedTrees = groveDao.getSeedTreesList().first()
 
+        // Then
         Assert.assertEquals(4, seedTrees.size)
     }
 
     @Test
     @Throws(Exception::class)
-    fun insertForestTree() = runTest{
+    fun insertForestTreeAndGetForestTreeById() = runTest{
         val forestTree = ForestTree(type = TreeType.SECUOYA)
 
         groveDao.insertForestTree(forestTree.toForestTreeEntity())
 
         val forestTreeById = groveDao.getSeedTreeById(forestTree.id).first()
-
-        println(forestTreeById)
 
         Assert.assertEquals(forestTree, forestTreeById.toSeedTree())
     }

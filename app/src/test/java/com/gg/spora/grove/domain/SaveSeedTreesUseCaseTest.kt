@@ -33,12 +33,12 @@ class SaveSeedTreesUseCaseTest {
             SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
             SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(10))
         )
-        coEvery { groveRepository.insertAllSeedTrees(seedTrees) } just runs
+        coEvery { groveRepository.insertSeedTreesList(seedTrees) } just runs
 
         // When
         saveSeedTreesUseCase(seedTrees)
 
         // Then
-        coVerify { groveRepository.insertAllSeedTrees(seedTrees) }
+        coVerify { groveRepository.insertSeedTreesList(seedTrees) }
     }
 }

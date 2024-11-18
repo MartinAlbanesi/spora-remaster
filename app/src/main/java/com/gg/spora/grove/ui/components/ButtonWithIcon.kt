@@ -19,6 +19,14 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.grove.utils.functions.formatTime
 
+/**
+ * Composable function for a button with an icon and a cooldown text.
+ * @param text Text to display on the button.
+ * @param icon Resource ID for the icon to display.
+ * @param cooldownValue Current cooldown value in milliseconds.
+ * @param cooldownType Maximum cooldown value in milliseconds.
+ * @param onClick Action to perform when the button is clicked.
+ */
 @Composable
 fun ButtonWithIcon(
     modifier: Modifier = Modifier,

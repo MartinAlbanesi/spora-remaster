@@ -3,6 +3,9 @@ package com.gg.spora.grove.utils.functions
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combineTransform
 
+/**
+ * Combines multiple flows into a single flow.
+ */
 fun <T1, T2, T3, T4, T5, T6, T7, R> combine(
     flow1: Flow<T1>,
     flow2: Flow<T2>,

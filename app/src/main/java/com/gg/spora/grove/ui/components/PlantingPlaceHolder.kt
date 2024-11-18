@@ -9,7 +9,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 
-// Muestra una imagen de plantacion vacia
+/**
+ * Composable function for displaying a planting placeholder.
+ * @param isLoading Whether the content is being loaded.
+ */
 @Composable
 fun PlantingPlaceholder(
     modifier: Modifier = Modifier,

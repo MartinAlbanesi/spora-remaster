@@ -41,10 +41,10 @@ class GroveRepositoryTest{
     @Test
     fun `when SeedTrees is empty then return empty list`() = runTest {
         // Given
-        coEvery { groveDao.getSeedTrees() } returns flowOf(emptyList<SeedTreeEntity>())
+        coEvery { groveDao.getSeedTreesList() } returns flowOf(emptyList<SeedTreeEntity>())
 
         // When
-        val result = groveRepository.getSeedTreesFromDatabase().first()
+        val result = groveRepository.getSeedTreesListFromDatabase().first()
 
         // Then
         Assert.assertEquals(emptyList<SeedTree>(), result)
@@ -55,10 +55,10 @@ class GroveRepositoryTest{
         // Given
         val seedTreeEntity = SeedTreeEntity(treeType = TreeType.SECUOYA.name, timeToGenerateForestTree = Duration.ofSeconds(5).toMillis())
         val expectedSeedTree = seedTreeEntity.toSeedTree()
-        coEvery { groveDao.getSeedTrees() } returns flowOf(listOf(seedTreeEntity))
+        coEvery { groveDao.getSeedTreesList() } returns flowOf(listOf(seedTreeEntity))
 
         // When
-        val result = groveRepository.getSeedTreesFromDatabase().first()
+        val result = groveRepository.getSeedTreesListFromDatabase().first()
 
         // Then
         Assert.assertEquals(listOf(expectedSeedTree), result)
@@ -68,10 +68,10 @@ class GroveRepositoryTest{
     @Test
     fun `when ForestTree is empty then return empty list`() = runTest {
         // Given
-        coEvery { groveDao.getForestTrees() } returns flowOf(emptyList<ForestTreeEntity>())
+        coEvery { groveDao.getForestTreesList() } returns flowOf(emptyList<ForestTreeEntity>())
 
         // When
-        val result = groveRepository.getForestTreesFromDatabase().first()
+        val result = groveRepository.getForestTreesListFromDatabase().first()
 
         // Then
         val expectedList = MutableList<ForestTree?>(25) { null }
@@ -89,10 +89,10 @@ class GroveRepositoryTest{
             position = 0
         )
         val expectedForestTree = forestTreeEntity.toForestTree()
-        coEvery { groveDao.getForestTrees() } returns flowOf(listOf(forestTreeEntity))
+        coEvery { groveDao.getForestTreesList() } returns flowOf(listOf(forestTreeEntity))
 
         // When
-        val result = groveRepository.getForestTreesFromDatabase().first()
+        val result = groveRepository.getForestTreesListFromDatabase().first()
 
         // Then
         val expectedList = MutableList<ForestTree?>(25) { null }

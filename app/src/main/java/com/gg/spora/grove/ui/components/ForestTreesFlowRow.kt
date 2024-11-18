@@ -3,12 +3,17 @@ package com.gg.spora.grove.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.gg.spora.grove.domain.models.GroveUiState
 
+/**
+ * Composable function for displaying a flow row of forest trees.
+ * @param uiState The current UI state.
+ * @param isLoading Whether the content is being loaded.
+ * @param forestTreesColumnCount The number of columns for the flow row.
+ */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ForestTreesFlowRow(

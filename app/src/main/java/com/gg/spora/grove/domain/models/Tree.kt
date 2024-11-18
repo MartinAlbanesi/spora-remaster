@@ -1,9 +1,12 @@
 package com.gg.spora.grove.domain.models
 
 /**
- * Clase Tree que representa un árbol del bosque
- * @param id Identificador único del árbol
- * @param type Tipo de árbol
+ * Data class representing a tree.
+ * @param id The ID of the tree.
+ * @param type The type of the tree.
+ * @see TreeType
+ * @see ForestTree
+ * @see SeedTree
  */
 open class Tree(
     open val id: String,

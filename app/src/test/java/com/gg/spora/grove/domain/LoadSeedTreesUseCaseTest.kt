@@ -32,7 +32,7 @@ class LoadSeedTreesUseCaseTest {
             SeedTree(type = TreeType.SECUOYA, timeToGenerateForestTree = Duration.ofSeconds(5)),
             SeedTree(type = TreeType.BAOBAB, timeToGenerateForestTree = Duration.ofSeconds(10))
         )
-        coEvery { groveRepository.getSeedTreesFromDatabase() } returns flowOf(expectedSeedTrees)
+        coEvery { groveRepository.getSeedTreesListFromDatabase() } returns flowOf(expectedSeedTrees)
 
         // When
         val result = loadSeedTreesUseCase().first()

@@ -3,10 +3,6 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
-import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
-import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
-import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
@@ -39,14 +35,19 @@ const val INITIAL_COOLDOWN_DURATION = /*86400000L*/ 60000L
 const val OXYGEN_COOLDOWN_DURATION = /*21600000L*/120000L
 const val GROWTH_TIME_DURATION = /*3600000L*/30000L
 
-// Evitar que se dibuje la pantalla con un evento, escuchar el evento desde la UI
-// Programacion reactiva
 /**
- * ViewModel para la pantalla del grove.
- * @param getSeedTreesUseCase Caso de uso para obtener los árboles semilleros.
- * @param getForestTreesUseCase Caso de uso para obtener los árboles del bosque.
- * @param plantSeedUseCase Caso de uso para plantar una semilla.
- * @param collectOxygenUseCase Caso de uso para recolectar oxígeno.
+ * View model for the Grove screen.
+ * @param loadSeedTreesUseCase Use case to load seed trees.
+ * @param saveSeedTreesUseCase Use case to save seed trees.
+ * @param loadForestTreesUseCase Use case to load forest trees.
+ * @param insertForestTreeUseCase Use case to insert a forest tree.
+ * @param updateForestTreeGrowthStageByIdUseCase Use case to update a forest tree's growth stage.
+ * @param getCooldownDataByIdUseCase Use case to get cooldown data by ID.
+ * @param insertCooldownDataUseCase Use case to insert cooldown data.
+ * @param updateUserOxygenUseCase Use case to update user oxygen.
+ * @param getUserOxygenUseCase Use case to get user oxygen.
+ * @param deleteSeedTreeByIdUseCase Use case to delete a seed tree by ID.
+ * @param deleteForestTreeByIdUseCase Use case to delete a forest tree by ID.
  */
 @HiltViewModel
 class GroveViewModel @Inject constructor(
@@ -55,15 +56,14 @@ class GroveViewModel @Inject constructor(
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
     private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
-    private val getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
-    private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
+//    private val getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
+//    private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
     private val updateUserOxygenUseCase: UpdateUserOxygenUseCase,
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
-    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
-    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
+//    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
+//    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
 ) : ViewModel() {
 
-    // State variables for
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
     val seedTrees: StateFlow<List<SeedTree>> = _seedTrees.asStateFlow()
 
@@ -72,9 +72,6 @@ class GroveViewModel @Inject constructor(
 
     private val _seedTreeCooldowns = MutableStateFlow<Map<String, Long>>(emptyMap())
     val seedTreeCooldowns: StateFlow<Map<String, Long>> = _seedTreeCooldowns.asStateFlow()
-
-    private val _isLoading = MutableStateFlow(true) // Loading state
-    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     private val _forestTreeGrowthTimes = MutableStateFlow<Map<String, Long>>(emptyMap())
     val forestTreeGrowthTimes: StateFlow<Map<String, Long>> = _forestTreeGrowthTimes.asStateFlow()
@@ -88,7 +85,10 @@ class GroveViewModel @Inject constructor(
     private val _oxygenCooldown = MutableStateFlow(0L)
     val oxygenCooldown: StateFlow<Long> = _oxygenCooldown.asStateFlow()
 
-    // Combined flow for seedTrees and forestTrees
+    private val _isLoading = MutableStateFlow(true) // Loading state
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    // Data flow for the UI state, combining all data sources
     val uiState: StateFlow<GroveUiState> = combine(
         seedTrees,
         forestTrees,
@@ -110,14 +110,13 @@ class GroveViewModel @Inject constructor(
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(),
-        GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap(), 0, 0, 0L)
+        GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap(), 0, 0, 0L) // Initial value
     )
 
-    // Inicialización de los casos de uso
     init {
         viewModelScope.launch(Dispatchers.IO) {
 
-            // Separate launch block for seedTreeCooldowns updates
+            // Associated seedTreeId with its cooldown
             launch {
                 loadSeedTreesUseCase().collect { seedTrees ->
                     _seedTreeCooldowns.update { currentCooldowns ->
@@ -128,12 +127,12 @@ class GroveViewModel @Inject constructor(
                 }
             }
 
-            // Separate launch block for forestTreeGrowthTimes updates
+            // Associated forestTreeId with its growth time
             launch {
                 loadForestTreesUseCase().collect { forestTrees ->
                     _forestTreeGrowthTimes.update { currentGrowthTimes ->
                         forestTrees.associate { forestTree ->
-                            val treeId = forestTree?.id?.toString() ?: "0" // Cast to String
+                            val treeId = forestTree?.id?.toString() ?: "0"
                             treeId to (currentGrowthTimes.getOrDefault(
                                 treeId,
                                 Duration.between(
@@ -146,8 +145,7 @@ class GroveViewModel @Inject constructor(
                 }
             }
 
-            Log.i("GroveViewModel", "accumulatedOxygen: ${accumulatedOxygen.value}")
-
+            // Combine all data sources into the UI state
             kotlinx.coroutines.flow.combine(
                 loadSeedTreesUseCase(),
                 loadForestTreesUseCase(),
@@ -155,21 +153,24 @@ class GroveViewModel @Inject constructor(
             ) { seedTrees, forestTrees, userOxygen ->
                 Triple(seedTrees, forestTrees, userOxygen)
             }.collect { (seedTrees, forestTrees, userOxygen) ->
+                // Update UI state with the collected data
                 _seedTrees.update { seedTrees }
                 _forestTrees.update { forestTrees }
                 _userOxygen.update { userOxygen }
 
+                // Initialize seed trees if they are empty
                 initSeedTrees()
 
+                // Calculate accumulated oxygen
                 calculateAccumulatedOxygen()
-                Log.i("GroveViewModel", "accumulatedOxygen: ${accumulatedOxygen.value}")
 
+                // Set loading state to false
                 _isLoading.update { false }
             }
         }
     }
 
-    // Inicializa los árboles semilleros la primera vez que se abre la pantalla
+    // Initialize seed trees if they are empty
     fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
             if (_seedTrees.value.isEmpty()) {
@@ -184,13 +185,15 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    // Plants a new forest tree in a random position when seed tree button is clicked
     fun plantForestTree(forestTree: ForestTree, seedTreeId: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
             // Generate a random position until an empty position is found
             var position = forestTree.position
             while (_forestTrees.value.getOrNull(position) != null) { // Check if position is occupied
-                position = (0..(_forestTrees.value.size)-1).random() // Generate new random position
+                position =
+                    (0..(_forestTrees.value.size) - 1).random() // Generate new random position
             }
             forestTree.position = position // Update tree's position
 
@@ -200,11 +203,12 @@ class GroveViewModel @Inject constructor(
             triggerSeedTreeCooldown(seedTreeId)
             // Start growth timer only for the newly planted tree
             updateForestTreeGrowthTime(forestTree)
+            // Calculate accumulated oxygen for when the tree is adult
             calculateAccumulatedOxygen()
         }
     }
 
-    // Separate function to trigger cooldown
+    // Trigger seed tree cooldown when seed tree button is clicked
     fun triggerSeedTreeCooldown(seedTreeId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             // Reset cooldown to initial value
@@ -220,10 +224,9 @@ class GroveViewModel @Inject constructor(
                 _seedTreeCooldowns.update { currentCooldowns ->
                     currentCooldowns + (seedTreeId to remainingTime)
                 }
-                Log.i(
-                    "GroveViewModel",
-                    "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}"
-                )
+
+                Log.i("GroveViewModel", "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}")
+
             }
 
             // Reset cooldown to 0 when finished
@@ -233,11 +236,13 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    // Updates the growth stage timer for a forest tree
     private fun updateForestTreeGrowthTime(forestTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            var elapsedTime = (Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds) * 1000
+            var elapsedTime = (Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds) * 1000 // Time in milliseconds
 
             Log.d("GroveViewModel", "elapsed time: $elapsedTime")
+
             while (!forestTree.hasReachedAdultStage) {
                 delay(1000) // Delay for 1 second
                 elapsedTime += 1000 // Increment elapsed time by 1 second
@@ -255,39 +260,50 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    // Updates the growth stage of a forest tree
     suspend fun updateGrowthStage(forestTree: ForestTree) {
+        // Assigns the growth stage based on elapsed time
         forestTree.currentStage = when {
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) < (GROWTH_TIME_DURATION)/2 -> GrowthStage.SPROUT
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) in (GROWTH_TIME_DURATION)/2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
+            _forestTreeGrowthTimes.value.getValue(forestTree.id) < (GROWTH_TIME_DURATION) / 2 -> GrowthStage.SPROUT
+            _forestTreeGrowthTimes.value.getValue(forestTree.id) in (GROWTH_TIME_DURATION) / 2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
             else -> {
                 forestTree.hasReachedAdultStage = true
                 GrowthStage.ADULT
             }
         }
+
+        // Updates the new growth stage into database
         updateForestTreeGrowthStageByIdUseCase(forestTree)
     }
 
+    // Calculates the oxygen accumulated by all adult trees planted
     private fun calculateAccumulatedOxygen() {
         var totalOxygen: Int = 0
         _forestTrees.value.forEach { forestTree ->
             if (forestTree?.currentStage == GrowthStage.ADULT) {
                 totalOxygen += forestTree.type.oxygenAmount
+
                 Log.i("GroveViewModel", "Oxygen amount: ${forestTree.type.oxygenAmount}")
+
             } else {
                 0
             }
         }
-        _accumulatedOxygen.update { totalOxygen }
+        _accumulatedOxygen.update { totalOxygen } // Updates the accumulated oxygen value
     }
 
+    // Logic for when the user press the claim daily oxygen button
     fun claimOxygen() {
         viewModelScope.launch(Dispatchers.IO) {
+            // Updates the user's oxygen by the accumulated oxygen
             updateUserOxygenUseCase(userOxygen.value + accumulatedOxygen.value)
 
+            // Triggers the cooldown for the button
             triggerOxygenCooldown()
         }
     }
 
+    // Triggers the claim oxygen cooldown when the button is clicked
     private suspend fun triggerOxygenCooldown() {
         viewModelScope.launch {
             _oxygenCooldown.value = OXYGEN_COOLDOWN_DURATION // Set initial cooldown time
@@ -295,8 +311,9 @@ class GroveViewModel @Inject constructor(
             _oxygenCooldown.value = 0L // Reset cooldown time
         }
 
-        _oxygenCooldown.update { OXYGEN_COOLDOWN_DURATION }
+        _oxygenCooldown.update { OXYGEN_COOLDOWN_DURATION } // Updates the oxygen cooldown value
 
+        // Decrement cooldown until it reaches 0
         var remainingTime = OXYGEN_COOLDOWN_DURATION
         while (remainingTime > 0) {
             delay(1000)
@@ -304,6 +321,7 @@ class GroveViewModel @Inject constructor(
             _oxygenCooldown.update { remainingTime }
         }
 
+        // Reset cooldown to 0 when finished
         _oxygenCooldown.update { 0L }
     }
 }

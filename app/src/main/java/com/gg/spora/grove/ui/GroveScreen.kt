@@ -36,6 +36,17 @@ import com.gg.spora.grove.ui.components.ForestTreesFlowRow
 import com.gg.spora.grove.ui.components.SeedTreesRow
 import com.gg.spora.ui.theme.SporaTheme
 
+/**
+ * Composable function for displaying the Grove screen.
+ * @param modifier The modifier for styling.
+ * @param uiState The current UI state.
+ * @param isLoading Whether the content is being loaded.
+ * @param forestTreesColumnCount The number of columns for the forest trees grid.
+ * @param scrollState The scroll state for horizontal scrolling.
+ * @param plantForestTree The action to perform when a forest tree is planted.
+ * @param claimOxygen The action to perform when the oxygen button is clicked.
+ * @param popBackStack The action to perform when the back button is clicked.
+ */
 @OptIn(ExperimentalLayoutApi::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

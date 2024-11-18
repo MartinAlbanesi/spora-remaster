@@ -2,6 +2,9 @@ package com.gg.spora.grove.utils.functions
 
 import java.util.concurrent.TimeUnit
 
+/**
+ * Formats a time in milliseconds to a string in the format "HH:MM:SS".
+ */
 fun formatTime(timeInMillis: Long): String {
     val hours = TimeUnit.MILLISECONDS.toHours(timeInMillis)
     val minutes = TimeUnit.MILLISECONDS.toMinutes(timeInMillis) - TimeUnit.HOURS.toMinutes(hours)

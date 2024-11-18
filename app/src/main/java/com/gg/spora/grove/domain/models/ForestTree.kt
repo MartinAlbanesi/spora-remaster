@@ -6,12 +6,19 @@ import java.time.ZoneOffset
 import java.util.UUID
 
 /**
- * Clase ForestTree que gestiona el crecimiento y la generación de oxígeno en un árbol del bosque
- * @param id Identificador único del árbol
- * @param type Tipo de árbol
- * @param plantingDate Fecha de plantación del árbol
+ * Data class representing a forest tree.
+ * @param id The ID of the tree.
+ * @param type The type of the tree.
+ * @param currentStage The current growth stage of the tree.
+ * @param plantingDate The date the tree was planted.
+ * @param position The position of the tree on the forest.
+ * @param hasReachedAdultStage Whether the tree has reached the adult stage.
+ * @param timesOxygenClaimed The number of times the tree has claimed oxygen.
+ * @see Tree
+ * @see ForestTreeEntity
+ * @see GrowthStage
+ * @see TreeType
  */
-
 data class ForestTree(
     override val id: String = UUID.randomUUID().toString(),
     override val type: TreeType,

@@ -5,10 +5,14 @@ import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Interface for the Grove repository.
+ * @see GroveRepository
+ */
 interface IGroveRepository {
-    suspend fun getSeedTreesFromDatabase(): Flow<List<SeedTree>>
-    suspend fun getForestTreesFromDatabase(): Flow<List<ForestTree?>>
-    suspend fun insertAllSeedTrees(seedTrees: List<SeedTree>)
+    suspend fun getSeedTreesListFromDatabase(): Flow<List<SeedTree>>
+    suspend fun getForestTreesListFromDatabase(): Flow<List<ForestTree?>>
+    suspend fun insertSeedTreesList(seedTrees: List<SeedTree>)
     suspend fun insertForestTree(forestTree: ForestTree)
     suspend fun updateForestTreeGrowthStage(forestTree: ForestTree)
     suspend fun insertCooldownData(cooldownData: CooldownData)

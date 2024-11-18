@@ -18,9 +18,10 @@ import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.GrowthStage
 
 /**
- * Composable que representa un árbol del bosque en la interfaz de usuario.
- * @param tree El árbol del bosque a representar.
- * @param onTreeUpdated Una función lambda que se llama cuando se actualiza el estado del árbol.
+ * Composable function for displaying a forest tree item.
+ * @param tree The forest tree to display.
+ * @param uiState The current UI state.
+ * @param isLoading Whether the content is being loaded.
  */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -39,7 +40,7 @@ fun ForestTreeItem(
         GrowthStage.ADULT -> tree.type.imageResource
     }
 
-    if(!isLoading) {
+    if (!isLoading) {
         Image(
             painter = painterResource(id = imageResource),
             contentDescription = "Tree in ${currentStage.name} stage",

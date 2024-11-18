@@ -6,6 +6,13 @@ import androidx.room.PrimaryKey
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 
+/**
+ * Entity for seed trees.
+ * @param idSeedTree The ID of the seed tree.
+ * @param treeType The type of the seed tree.
+ * @param timeToGenerateForestTree The time to generate forest trees.
+ * @param amountOfForestTreesGenerated The amount of forest trees generated.
+ */
 @Entity(tableName = "seed_trees")
 data class SeedTreeEntity(
     @PrimaryKey(autoGenerate = false) val idSeedTree: String,
@@ -14,6 +21,7 @@ data class SeedTreeEntity(
     @ColumnInfo(name = "amount_of_forest_trees_generated") var amountOfForestTreesGenerated: Int = 0,
 )
 
+// Extension function mapper to convert SeedTreeEntity to SeedTree
 fun SeedTreeEntity.toSeedTree(): SeedTree {
     return SeedTree(
         id = idSeedTree,

@@ -3,8 +3,8 @@ package com.gg.spora.grove.domain.models
 import com.gg.spora.R
 
 /**
- * Enum TreeType que representa los diferentes tipos de árboles del bosque
- * @param oxygenAmount Cantidad de oxígeno generado por cada árbol del tipo en un día
+ * Enum representing the types of trees.
+ * @param oxygenAmount The amount of oxygen given by the tree.
  */
 enum class TreeType(val oxygenAmount: Int) {
     SECUOYA(3),
@@ -12,9 +12,7 @@ enum class TreeType(val oxygenAmount: Int) {
     MANGROVE(10),
     BAOBAB(15);
 
-    /**
-     * Retorna la imagen correspondiente al tipo de árbol
-     */
+    // Extension property to get the image resource for the tree type
     val imageResource: Int
         get() = when (this) {
             MANGROVE -> R.drawable.mangrove_tree

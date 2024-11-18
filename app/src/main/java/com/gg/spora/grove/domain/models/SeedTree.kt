@@ -6,10 +6,15 @@ import java.time.ZoneOffset
 import java.util.UUID
 
 /**
- * Clase SeedTree que representa un árbol semillero del bosque, capaz de generar semillas a un tiempo determinado
- * @param id Identificador único del árbol semillero
- * @param type Tipo de árbol
- * @param timeToGenerateForestTree Tiempo en milisegundos para generar un árbol del bosque
+ * Data class representing a seed tree.
+ * @param id The ID of the tree.
+ * @param type The type of the tree.
+ * @param timeToGenerateForestTree The time to generate forest trees.
+ * @param expectedTimeToGenerateForestTree The expected time to generate forest trees.
+ * @param amountOfForestTreesGenerated The amount of forest trees generated.
+ * @see Tree
+ * @see TreeType
+ * @see SeedTreeEntity
  */
 data class SeedTree(
     override val id: String = UUID.randomUUID().toString(),
@@ -19,6 +24,7 @@ data class SeedTree(
     var amountOfForestTreesGenerated: Int = 0,
 ) : Tree(id, type)
 
+// Extension function mapper to convert SeedTree to SeedTreeEntity
 fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {
     return SeedTreeEntity(
         idSeedTree = id,

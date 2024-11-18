@@ -20,9 +20,11 @@ import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.ui.INITIAL_COOLDOWN_DURATION
 
 /**
- * Composable que representa un árbol semillero en la interfaz de usuario.
- * @param seedTree El árbol semillero a representar.
- * @param onForestTreeGenerated Una función lambda que se llama cuando se genera una semilla.
+ * Composable function for displaying a seed tree item.
+ * @param seedTree The seed tree to display.
+ * @param uiState The current UI state.
+ * @param isLoading Whether the content is being loaded.
+ * @param onPlantForestTree The action to perform when the forest tree is planted.
  */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -40,11 +42,6 @@ fun SeedTreeItem(
             verticalArrangement = Arrangement.Bottom,
             modifier = modifier
         ) {
-//            val imageSize = if (seedTree.type == TreeType.SECUOYA) {
-//                150.dp // Larger size for SECUOYA
-//            } else {
-//                120.dp // Default size for other trees
-//            }
 
             Image(
                 painter = painterResource(id = seedTree.type.imageResource),
