@@ -17,7 +17,8 @@ object FakeUserModels {
         "titi@gmail.com",
         100,
         0,
-        R.drawable.spora_face_splash
+        R.drawable.spora_face_splash,
+        100
     )
 
     val fakeLevelsCompletedEntity = listOf(
@@ -57,7 +58,8 @@ object FakeUserModels {
             oxygen = 100,
             levelsCompleted = fakeLevelsCompleted,
             treesCount = 0,
-            userImage = R.drawable.spora_face_splash
+            userImage = R.drawable.spora_face_splash,
+            weeklyOxygen = 100
         ),
         User(
             id = "2",
@@ -66,7 +68,8 @@ object FakeUserModels {
             oxygen = 0,
             levelsCompleted = emptyList(),
             treesCount = 0,
-            userImage = R.drawable.spora_face_splash
+            userImage = R.drawable.spora_face_splash,
+            weeklyOxygen = 0
         ),
     )
 

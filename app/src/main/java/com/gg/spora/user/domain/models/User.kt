@@ -7,5 +7,6 @@ data class User(
     val oxygen: Int,
     val treesCount: Int,
     val userImage: Int,
-    val levelsCompleted : List<LevelCompleted>
+    val levelsCompleted : List<LevelCompleted>,
+    val weeklyOxygen: Int
 )

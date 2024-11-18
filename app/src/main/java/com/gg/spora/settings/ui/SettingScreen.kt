@@ -42,7 +42,6 @@ import com.gg.spora.core.ui.components.SporaPrimaryButton
 fun SettingsScreen(
     onBackClick: () -> Unit,
     onLogOut: () -> Unit,
-   // onSettingsClick: () -> Unit
     onNavigateToEditProfile: () -> Unit
 ) {
     var showAboutUs by remember { mutableStateOf(false) }
@@ -56,9 +55,8 @@ fun SettingsScreen(
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
         )
-        Column (
-            modifier = Modifier
-                .fillMaxSize()
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
             TopBarWithTitleExitAndIcon(
                 title = "Opciones",
@@ -79,7 +77,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(150.dp)
+                        .height(180.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -92,7 +90,7 @@ fun SettingsScreen(
                     Column(
                         modifier = Modifier
                             .align(Alignment.Center)
-                            .padding(16.dp)
+                            .padding(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.weight(1f),
@@ -131,7 +129,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        } // Notificaciones
+                        }
                     }
                 }
 
@@ -139,7 +137,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(150.dp)
+                        .height(180.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -152,7 +150,7 @@ fun SettingsScreen(
                     Column(
                         modifier = Modifier
                             .align(Alignment.Center)
-                            .padding(16.dp)
+                            .padding(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.weight(1f),
@@ -167,7 +165,10 @@ fun SettingsScreen(
                         }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                                .clickable { /*navigate to support*/ },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Soporte", modifier = Modifier.weight(1f))

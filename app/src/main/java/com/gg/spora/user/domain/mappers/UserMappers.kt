@@ -13,7 +13,8 @@ fun UserNetwork.toUser() = User(
     oxygen = oxygen ?: 0,
     levelsCompleted = levelsCompleted?.map { it.toLevelCompleted() } ?: emptyList(),
     treesCount = treesCount ?: 0,
-    userImage = userImage ?: R.drawable.spora_face_splash
+    userImage = userImage ?: R.drawable.spora_face_splash,
+    weeklyOxygen = weeklyOxygen ?: 0
 )
 
 fun User.toUserEntity() = UserEntity(
@@ -22,7 +23,8 @@ fun User.toUserEntity() = UserEntity(
     email = email,
     oxygen = oxygen,
     treesCount = treesCount,
-    userImage = userImage
+    userImage = userImage,
+    weeklyOxygen = weeklyOxygen
 )
 
 fun UserWithLevelsCompletedEntity.toUser() = User(
@@ -32,5 +34,6 @@ fun UserWithLevelsCompletedEntity.toUser() = User(
     oxygen = user.oxygen,
     levelsCompleted = levelsCompleted.map { it.toLevelCompleted() },
     treesCount = user.treesCount,
-    userImage = user.userImage
+    userImage = user.userImage,
+    weeklyOxygen = user.weeklyOxygen
 )

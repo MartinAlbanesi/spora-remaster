@@ -21,7 +21,8 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList(),
                 treesCount = 0,
-                userImage = R.drawable.spora_face_splash
+                userImage = R.drawable.spora_face_splash,
+                weeklyOxygen = 0
             )
             userRepositoryLocal.setUserLocal(user)
             return
@@ -40,7 +41,8 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList(),
                 treesCount = 0,
-                userImage = R.drawable.spora_face_splash
+                userImage = R.drawable.spora_face_splash,
+                weeklyOxygen = 0
             )
             val userId = userRepositoryNetwork.setUser(user)
             userRepositoryLocal.setUserLocal(user)

@@ -7,5 +7,6 @@ data class UserNetwork(
     val oxygen: Int? = null,
     val levelsCompleted : List<LevelCompletedNetwork>? = null,
     val treesCount: Int? = null,
-    val userImage: Int? = null
+    val userImage: Int? = null,
+    val weeklyOxygen: Int? = null
 )
