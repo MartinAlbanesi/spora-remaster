@@ -12,9 +12,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.gg.spora.core.graph.RootNavigationGraph
-import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +23,6 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var getUserLocalUseCase: GetUserLocalUseCase
-    private lateinit var groveViewModel: GroveViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -33,7 +30,6 @@ class MainActivity : ComponentActivity() {
             var isUserLoggedIn : Boolean? by rememberSaveable {
                 mutableStateOf(null)
             }
-            groveViewModel = hiltViewModel<GroveViewModel>()
 
             LaunchedEffect(true) {
                 getUserLocalUseCase().collect{
@@ -56,15 +52,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    override fun onPause() {
-        groveViewModel.saveTreeCooldowns()
-        super.onPause()
-    }
-
-    override fun onStop() {
-        groveViewModel.saveTreeCooldowns()
-        super.onStop()
     }
 }
