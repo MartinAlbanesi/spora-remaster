@@ -3,6 +3,10 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
+import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
+import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
+import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
@@ -56,12 +60,12 @@ class GroveViewModel @Inject constructor(
     private val loadForestTreesUseCase: LoadForestTreesUseCase,
     private val insertForestTreeUseCase: InsertForestTreeUseCase,
     private val updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
-//    private val getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
-//    private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
+    private val getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
+    private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
     private val updateUserOxygenUseCase: UpdateUserOxygenUseCase,
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
-//    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
-//    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
+    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
+    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
 ) : ViewModel() {
 
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
