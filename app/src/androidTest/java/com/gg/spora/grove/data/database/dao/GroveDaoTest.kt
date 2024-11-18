@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.grove.data.database.entities.toCooldownData
+import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
@@ -22,7 +23,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-import java.time.LocalDateTime
 
 @RunWith(AndroidJUnit4::class)
 class GroveDaoTest {
@@ -43,26 +43,24 @@ class GroveDaoTest {
         db.close()
     }
 
+    // Seed Trees Tests
+
     @Test
     @Throws(Exception::class)
-    fun insertSeedTreesListAndGetSeedTreesListListList() = runTest{
+    fun insertSeedTreesListAndGetSeedTreesList() = runTest{
         // Given
         val seedTreeList = listOf(
             SeedTree(
                 type = TreeType.BAOBAB,
-                timeToGenerateForestTree = 5000L
             ),
             SeedTree(
                 type = TreeType.SECUOYA,
-                timeToGenerateForestTree = 5000L
             ),
             SeedTree(
                 type = TreeType.MANGROVE,
-                timeToGenerateForestTree = 5000L
             ),
             SeedTree(
                 type = TreeType.PINE,
-                timeToGenerateForestTree = 5000L
             )
         )
 
@@ -76,28 +74,116 @@ class GroveDaoTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertForestTreeAndGetForestTreeById() = runTest{
-        val forestTree = ForestTree(type = TreeType.SECUOYA)
+    fun insertSeedTreeAndGetSeedTreeById() = runTest{
+        // Given
+        val seedTree = SeedTree(
+            type = TreeType.BAOBAB,
+        )
 
-        groveDao.insertForestTree(forestTree.toForestTreeEntity())
+        // When
+        groveDao.insertSeedTree(seedTree.toSeedTreeEntity())
+        val seedTreeById = groveDao.getSeedTreeById(seedTree.id).first()
 
-        val forestTreeById = groveDao.getSeedTreeById(forestTree.id).first()
-
-        Assert.assertEquals(forestTree, forestTreeById.toSeedTree())
+        // Then
+        Assert.assertEquals(seedTree, seedTreeById.toSeedTree())
     }
 
     @Test
     @Throws(Exception::class)
-    fun insertCooldownDataAndGetCooldownData() = runTest{
-        val cooldownData = CooldownData(
-            treeId = "1",
-            lastUpdateDate = LocalDateTime.now()
+    fun insertSeedTreeAndDeleteSeedTreeById() = runTest{
+        // Given
+        val seedTree = SeedTree(
+            type = TreeType.BAOBAB,
         )
 
-        groveDao.insertCooldownData(cooldownData.toCooldownDataEntity())
+        // When
+        groveDao.insertSeedTree(seedTree.toSeedTreeEntity())
+        groveDao.deleteSeedTreeById(seedTree.id)
+        val seedTrees = groveDao.getSeedTreesList().first()
 
+        // Then
+        Assert.assertEquals(0, seedTrees.size)
+    }
+
+    // Forest Tree Tests
+
+    @Test
+    @Throws(Exception::class)
+    fun insertForestTreesListAndGetForestTreesList() = runTest{
+        // Given
+        val forestTreeList = List(10) {
+            ForestTree(type = TreeType.SECUOYA)
+        }
+
+        // When
+        groveDao.insertForestTreesList(forestTreeList.map { it.toForestTreeEntity() })
+        val forestTrees = groveDao.getForestTreesList().first()
+
+        // Then
+        Assert.assertEquals(10, forestTrees.size)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertForestTreeAndGetForestTreeById() = runTest{
+        // Given
+        val forestTree = ForestTree(type = TreeType.SECUOYA)
+
+        // When
+        groveDao.insertForestTree(forestTree.toForestTreeEntity())
+        val forestTreeById = groveDao.getForestTreeById(forestTree.id).first()
+
+        // Then
+        Assert.assertEquals(forestTree, forestTreeById.toForestTree())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertForestTreeAndDeleteForestTreeById() = runTest{
+        // Given
+        val forestTree = ForestTree(type = TreeType.SECUOYA)
+
+        // When
+        groveDao.insertForestTree(forestTree.toForestTreeEntity())
+        groveDao.deleteForestTreeById(forestTree.id)
+        val forestTrees = groveDao.getForestTreesList().first()
+
+        // Then
+        Assert.assertEquals(0, forestTrees.size)
+    }
+
+    // Growth Stage Test
+
+    @Test
+    @Throws(Exception::class)
+    fun updateForestTreeGrowthStageById() = runTest{
+        // Given
+        val forestTree = ForestTree(type = TreeType.SECUOYA)
+
+        // When
+        groveDao.insertForestTree(forestTree.toForestTreeEntity())
+        groveDao.updateForestTreeGrowthStageById(forestTree.id, "STAGE_TWO")
+        val forestTreeById = groveDao.getForestTreeById(forestTree.id).first()
+
+        // Then
+        Assert.assertEquals("STAGE_TWO", forestTreeById.currentStage)
+    }
+
+    // Cooldown Data Test
+
+    @Test
+    @Throws(Exception::class)
+    fun insertCooldownDataAndGetCooldownData() = runTest{
+        // Given
+        val cooldownData = CooldownData(
+            treeId = "1",
+        )
+
+        // When
+        groveDao.insertCooldownData(cooldownData.toCooldownDataEntity())
         val cooldownDataById = groveDao.getCooldownData(cooldownData.treeId).first()
 
+        // Then
         Assert.assertEquals(cooldownData, cooldownDataById?.toCooldownData())
     }
 }

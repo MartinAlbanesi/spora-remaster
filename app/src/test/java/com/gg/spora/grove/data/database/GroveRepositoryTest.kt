@@ -3,16 +3,20 @@ package com.gg.spora.grove.data.database
 import com.gg.spora.grove.data.GroveRepository
 import com.gg.spora.grove.data.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.database.entities.CooldownDataEntity
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
-import com.gg.spora.grove.data.database.entities.toForestTree
-import com.gg.spora.grove.data.database.entities.toSeedTree
+import com.gg.spora.grove.data.database.entities.toCooldownData
+import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
-import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.grove.domain.models.toCooldownDataEntity
+import com.gg.spora.grove.domain.models.toForestTreeEntity
+import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -20,9 +24,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import java.time.Duration
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 class GroveRepositoryTest{
 
@@ -38,6 +39,7 @@ class GroveRepositoryTest{
     }
 
     // Seed Trees Tests
+
     @Test
     fun `when SeedTrees is empty then return empty list`() = runTest {
         // Given
@@ -51,22 +53,34 @@ class GroveRepositoryTest{
     }
 
     @Test
-    fun `when SeedTrees is not empty then return list`() = runTest {
+    fun `when inserting SeedTrees then insert into database`() = runTest {
         // Given
-        val seedTreeEntity = SeedTreeEntity(treeType = TreeType.SECUOYA.name, timeToGenerateForestTree = Duration.ofSeconds(5).toMillis())
-        val expectedSeedTree = seedTreeEntity.toSeedTree()
-        coEvery { groveDao.getSeedTreesList() } returns flowOf(listOf(seedTreeEntity))
+        val seedTrees = listOf(SeedTree(id = 1.toString(), type = TreeType.SECUOYA))
+        val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }
 
         // When
-        val result = groveRepository.getSeedTreesListFromDatabase().first()
+        groveRepository.insertSeedTreesList(seedTrees)
 
         // Then
-        Assert.assertEquals(listOf(expectedSeedTree), result)
+        coVerify { groveDao.insertSeedTreesList(seedTreeEntities) }
     }
 
-    // Forest Trees Tests
     @Test
-    fun `when ForestTree is empty then return empty list`() = runTest {
+    fun `when deleting SeedTree then delete from database`() = runTest {
+        // Given
+        val treeId = "1"
+
+        // When
+        groveRepository.deleteSeedTreeById(treeId)
+
+        // Then
+        coVerify { groveDao.deleteSeedTreeById(treeId) }
+    }
+
+    // Forest Trees
+
+    @Test
+    fun `when ForestTrees is empty then return list with nulls`() = runTest {
         // Given
         coEvery { groveDao.getForestTreesList() } returns flowOf(emptyList<ForestTreeEntity>())
 
@@ -74,29 +88,85 @@ class GroveRepositoryTest{
         val result = groveRepository.getForestTreesListFromDatabase().first()
 
         // Then
-        val expectedList = MutableList<ForestTree?>(25) { null }
-        Assert.assertEquals(expectedList, result)
+        Assert.assertEquals(List(50) { null }, result)
     }
 
     @Test
-    fun `when ForestTree is not empty then return list`() = runTest {
+    fun `when inserting ForestTree then insert into database`() = runTest {
         // Given
-        val forestTreeEntity = ForestTreeEntity(
-            idForestTree = 1,
-            treeType = TreeType.SECUOYA.name,
-            currentStage = GrowthStage.SPROUT.toString(),
-            plantingDate = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
-            position = 0
-        )
-        val expectedForestTree = forestTreeEntity.toForestTree()
-        coEvery { groveDao.getForestTreesList() } returns flowOf(listOf(forestTreeEntity))
+        val forestTree = ForestTree(id = 1.toString(), type = TreeType.SECUOYA)
+        val forestTreeEntity = forestTree.toForestTreeEntity()
 
         // When
-        val result = groveRepository.getForestTreesListFromDatabase().first()
+        groveRepository.insertForestTree(forestTree)
 
         // Then
-        val expectedList = MutableList<ForestTree?>(25) { null }
-        expectedList[forestTreeEntity.position] = expectedForestTree
-        Assert.assertEquals(expectedList, result)
+        coVerify { groveDao.insertForestTree(forestTreeEntity) }
+    }
+
+    @Test
+    fun `when deleting ForestTree then delete from database`() = runTest {
+        // Given
+        val treeId = "1"
+
+        // When
+        groveRepository.deleteForestTreeById(treeId)
+
+        // Then
+        coVerify { groveDao.deleteForestTreeById(treeId) }
+    }
+
+    @Test
+    fun `when updating ForestTree growth stage then update in database`() = runTest {
+        // Given
+        val forestTree = ForestTree(id = 1.toString(), type = TreeType.SECUOYA)
+
+        // When
+        groveRepository.updateForestTreeGrowthStage(forestTree)
+
+        // Then
+        coVerify { groveDao.updateForestTreeGrowthStageById(forestTree.id, forestTree.currentStage.toString()) }
+    }
+
+    // Cooldown Data
+
+    @Test
+    fun `when inserting CooldownData then insert into database`() = runTest {
+        // Given
+        val cooldownData = CooldownData("1")
+        val cooldownDataEntity = cooldownData.toCooldownDataEntity()
+
+        // When
+        groveRepository.insertCooldownData(cooldownData)
+
+        // Then
+        coVerify { groveDao.insertCooldownData(cooldownDataEntity) }
+    }
+
+    @Test
+    fun `when getting CooldownData and it exists then return CooldownData`() = runTest {
+        // Given
+        val treeId = "1"
+        val cooldownDataEntity = CooldownDataEntity(treeId, 1000L)
+        coEvery { groveDao.getCooldownData(treeId) } returns flowOf(cooldownDataEntity)
+
+        // When
+        val result = groveRepository.getCooldownData(treeId).first()
+
+        // Then
+        Assert.assertEquals(cooldownDataEntity.toCooldownData(), result)
+    }
+
+    @Test
+    fun `when getting CooldownData and it does not exist then return default CooldownData`() = runTest {
+        // Given
+        val treeId = "1"
+        coEvery { groveDao.getCooldownData(treeId) } returns flowOf(null)
+
+        // When
+        val result = groveRepository.getCooldownData(treeId).first()
+
+        // Then
+        Assert.assertEquals(CooldownData(treeId), result)
     }
 }

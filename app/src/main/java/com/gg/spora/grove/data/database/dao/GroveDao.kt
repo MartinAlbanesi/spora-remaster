@@ -16,6 +16,9 @@ interface GroveDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSeedTreesList(seedTrees: List<SeedTreeEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSeedTree(seedTree: SeedTreeEntity)
+
     @Query("SELECT * FROM seed_trees")
     fun getSeedTreesList(): Flow<List<SeedTreeEntity>>
 
@@ -27,10 +30,16 @@ interface GroveDao {
 
     // Forest Trees
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertForestTreesList(forestTrees: List<ForestTreeEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertForestTree(forestTree: ForestTreeEntity)
 
     @Query("SELECT * FROM forest_trees")
     fun getForestTreesList(): Flow<List<ForestTreeEntity>>
+
+    @Query("SELECT * FROM forest_trees WHERE idForestTree = :id")
+    fun getForestTreeById(id: String): Flow<ForestTreeEntity>
 
     @Query("DELETE FROM forest_trees WHERE idForestTree = :treeId")
     suspend fun deleteForestTreeById(treeId: String)
