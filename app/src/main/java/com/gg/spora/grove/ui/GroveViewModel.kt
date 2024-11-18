@@ -177,12 +177,7 @@ class GroveViewModel @Inject constructor(
                     SeedTree(type = TreeType.PINE),
                     SeedTree(type = TreeType.SECUOYA),
                     SeedTree(type = TreeType.MANGROVE),
-                    SeedTree(type = TreeType.PINE),
                     SeedTree(type = TreeType.BAOBAB),
-                    SeedTree(type = TreeType.MANGROVE),
-                    SeedTree(type = TreeType.PINE),
-                    SeedTree(type = TreeType.BAOBAB),
-                    SeedTree(type = TreeType.MANGROVE)
                 )
                 saveSeedTreesUseCase(initialSeedTrees)
             }

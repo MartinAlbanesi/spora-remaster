@@ -37,7 +37,7 @@ class GroveRepository @Inject constructor(
 //            it.map { forestTreeEntity -> forestTreeEntity.toForestTree() }
 //        }
         return groveDao.getForestTrees().map { forestTreeEntities ->
-            val forestTrees = MutableList<ForestTree?>(85) { null }
+            val forestTrees = MutableList<ForestTree?>(50) { null }
             forestTreeEntities.forEach { entity ->
                 forestTrees[entity.position] =
                     entity.toForestTree() // Coloca el árbol en su posición correspondiente
