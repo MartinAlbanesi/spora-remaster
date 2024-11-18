@@ -1,6 +1,7 @@
 package com.gg.spora.grove.ui
 
 import android.os.Build
+import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
@@ -60,6 +61,9 @@ fun GroveScreen(
     claimOxygen: () -> Unit,
     popBackStack: () -> Unit
 ) {
+    BackHandler{
+        popBackStack()
+    }
     Scaffold(
         topBar = {
             TopAppBarWithDualIcon(

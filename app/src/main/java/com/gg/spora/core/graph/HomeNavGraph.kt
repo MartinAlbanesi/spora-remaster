@@ -80,6 +80,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 },
                 claimOxygen = { groveViewModel.claimOxygen() },
                 popBackStack = {
+                    groveViewModel.saveTreeCooldowns()
                     navController.popBackStack()
                 },
             )
@@ -98,7 +99,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         }
         composable<NavigationRoutes.ProfileScreen> {
             val viewModel: ProfileViewModel = hiltViewModel()
-            val currentIndex by viewModel.currentIndex.collectAsState()
+            //val currentIndex by viewModel.currentIndex.collectAsState()
 
             val user by viewModel.user.collectAsState()
 
