@@ -1,5 +1,11 @@
 package com.gg.spora.tutorials.ui.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +30,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
@@ -85,38 +90,72 @@ fun ChampyTalkingTutorial(
             onClick = onClickSkip
         )
 
-        secondaryImage?.let {
-            Image(
-                painter = painterResource(secondaryImage),
-                contentDescription = null,
-                colorFilter = if(!isSecondaryTalking) {
-                    ColorFilter.lighting(Color.Gray, add = Color.Transparent)
-                } else null,
-                modifier = Modifier
-                    .offset(x = 0.dp, y = 12.dp)
-                    .size(200.dp)
-                    .constrainAs(secondaryImg) {
-                        end.linkTo(parent.end)
-                        bottom.linkTo(textBackground.top)
-                    }
-            )
+        AnimatedVisibility(
+            secondaryImage != null,
+            label = "Secondary Image",
+            enter = slideInHorizontally(){
+                it / 2
+            },
+            exit = slideOutHorizontally(
+                animationSpec = tween(durationMillis = 500)
+            ){
+                it / 2
+            },
+            modifier = Modifier
+                .offset(x = 0.dp, y = 12.dp)
+                .size(200.dp)
+                .constrainAs(secondaryImg) {
+                    end.linkTo(parent.end)
+                    bottom.linkTo(textBackground.top)
+                }
+        ) {
+            secondaryImage?.let {
+                Image(
+                    painter = painterResource(secondaryImage),
+                    contentDescription = null,
+                    colorFilter = if(!isSecondaryTalking) {
+                        ColorFilter.lighting(Color.Gray, add = Color.Transparent)
+                    } else null,
+//                modifier = Modifier
+//                    .offset(x = 0.dp, y = 12.dp)
+//                    .size(200.dp)
+//                    .constrainAs(secondaryImg) {
+//                        end.linkTo(parent.end)
+//                        bottom.linkTo(textBackground.top)
+//                    }
+                )
+            }
         }
 
-        champyImage?.let {
-            Image(
-                painter = painterResource(champyImage),
-                contentDescription = null,
-                colorFilter = if(!isChampyTalking) {
-                    ColorFilter.lighting(Color.Gray, add = Color.Transparent)
-                } else null,
-                modifier = Modifier
-                    .offset(x = 0.dp, y = 12.dp)
-                    .size(200.dp)
-                    .constrainAs(champyImg) {
-                        start.linkTo(parent.start)
-                        bottom.linkTo(textBackground.top)
-                    }
-            )
+        AnimatedVisibility(
+            champyImage != null,
+            label = "Champy Image",
+            enter = slideInHorizontally(),
+            exit = slideOutHorizontally(),
+            modifier = Modifier
+                .offset(x = 0.dp, y = 12.dp)
+                .size(200.dp)
+                .constrainAs(champyImg) {
+                    start.linkTo(parent.start)
+                    bottom.linkTo(textBackground.top)
+                }
+        ) {
+            champyImage?.let {
+                Image(
+                    painter = painterResource(champyImage),
+                    contentDescription = null,
+                    colorFilter = if(!isChampyTalking) {
+                        ColorFilter.lighting(Color.Gray, add = Color.Transparent)
+                    } else null,
+//                    modifier = Modifier
+//                        .offset(x = 0.dp, y = 12.dp)
+//                        .size(200.dp)
+//                        .constrainAs(champyImg) {
+//                            start.linkTo(parent.start)
+//                            bottom.linkTo(textBackground.top)
+//                        }
+                )
+            }
         }
 
         Image(
