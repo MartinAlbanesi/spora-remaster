@@ -1,6 +1,6 @@
 package com.gg.spora.grove.domain
 
-import com.gg.spora.grove.data.GroveRepository
+import com.gg.spora.grove.data.local.GroveRepository
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.TreeType
 import io.mockk.coEvery

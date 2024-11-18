@@ -1,8 +1,8 @@
 package com.gg.spora.core.di
 
 import android.annotation.SuppressLint
-import com.gg.spora.grove.data.GroveRepository
-import com.gg.spora.grove.data.IGroveRepository
+import com.gg.spora.grove.data.local.GroveRepository
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
 import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase

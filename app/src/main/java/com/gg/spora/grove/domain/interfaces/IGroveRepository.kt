@@ -1,4 +1,4 @@
-package com.gg.spora.grove.data
+package com.gg.spora.grove.domain.interfaces
 
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
