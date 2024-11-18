@@ -38,8 +38,7 @@ class FirestoreService @Inject constructor(
      * Obtiene todos los documentos de una colección
      * @param collection Nombre de la colección
      * @param document Clase del documento a obtener
-     * @id Id del documento a obtener
-     * @return Una lista de documentos de la colección
+     * @id Id del documento
      */
     suspend fun updateDocument(collection: String, document: Any, id: String) {
         val reference = firestore.collection(collection).document(id)
@@ -54,6 +53,11 @@ class FirestoreService @Inject constructor(
     suspend fun deleteDocumentById(collection: String, id: String) {
         val reference = firestore.collection(collection).document(id)
         reference.delete().await()
+    }
+
+    suspend fun updateFieldInDocument(collection: String, id: String, field: String, value: Any) {
+        val reference = firestore.collection(collection).document(id)
+        reference.update(field, value).await()
     }
 
     fun getFirestore() : FirebaseFirestore {

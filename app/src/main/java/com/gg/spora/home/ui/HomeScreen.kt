@@ -172,19 +172,19 @@ fun HomeScreen(
                             .align(Alignment.Center)
                             .offset(x = (-20).dp)
                     )
-                }
-                champyQuote?.let {
-                    TypewriteText(
-                        text = it,
-                        preoccupySpace = false,
-                        modifier = Modifier
-                            .offset(x = (-20).dp, y = (100).dp)
-                            .clip(MaterialTheme.shapes.medium)
-                            .align(Alignment.Center)
-                            .background(colorResource(R.color.cream))
-                            .fillMaxWidth(0.6f)
-                            .padding(16.dp)
-                    )
+                    champyQuote?.let {
+                        TypewriteText(
+                            text = it,
+                            preoccupySpace = false,
+                            modifier = Modifier
+                                .offset(x = (-20).dp, y = (100).dp)
+                                .clip(MaterialTheme.shapes.medium)
+                                .align(Alignment.Center)
+                                .background(colorResource(R.color.cream))
+                                .fillMaxWidth(0.6f)
+                                .padding(16.dp)
+                        )
+                    }
                 }
             }
         }

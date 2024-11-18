@@ -1,20 +1,23 @@
 package com.gg.spora.home.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.tutorials.data.TutorialModels
+import com.gg.spora.tutorials.data.local.TutorialRepositoryLocal
+import com.gg.spora.tutorials.domain.UpdateTutorialCompletedUseCase
 import com.gg.spora.tutorials.domain.model.TutorialItem
 import com.gg.spora.user.domain.GetUserLocalUseCase
-import com.gg.spora.user.domain.GetUserNetworkUseCase
 import com.gg.spora.user.domain.GetUserOxygenUseCase
-import com.gg.spora.user.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
@@ -23,8 +26,10 @@ import kotlin.random.Random
 class HomeViewModel @Inject constructor(
 //    private val getUserNetworkUseCase: GetUserNetworkUseCase
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
-    private val getUserLocalUseCase: GetUserLocalUseCase
-) : ViewModel(){
+    private val getUserLocalUseCase: GetUserLocalUseCase,
+    private val tutorialRepositoryLocal: TutorialRepositoryLocal,
+    private val updateTutorialCompletedUseCase: UpdateTutorialCompletedUseCase
+) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
     val oxygen = _oxygen.asStateFlow()
@@ -32,10 +37,10 @@ class HomeViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _showTutorial = MutableStateFlow(false)
+    private val _showTutorial = MutableStateFlow(true)
     val showTutorial = _showTutorial.asStateFlow()
 
-    private var _homeTutorial : List<TutorialItem> = emptyList()
+    private var _homeTutorial: List<TutorialItem> = emptyList()
 
     private var _currentTutorialIndex = (0)
 
@@ -56,50 +61,71 @@ class HomeViewModel @Inject constructor(
         getOxygen()
     }
 
-    private fun getUserName(){
+    private fun getUserName() {
         viewModelScope.launch {
-            getUserLocalUseCase().collect{
+            getUserLocalUseCase().collect {
                 _userName = it?.userName ?: ""
             }
         }
     }
 
-    private fun getHomeTutorial(){
-        _homeTutorial = TutorialModels.homeTutorials
+    private fun getHomeTutorial() {
 
-        _currentTutorialItem.value = _homeTutorial.first()
-    }
+        viewModelScope.launch {
+            val isTutorialCompleted =
+                tutorialRepositoryLocal.getTutorialById(Tutorials.HOME_TUTORIAL.id)
 
-    fun nextTutorialItem(){
-        val nextIndex = _currentTutorialIndex + 1
-        if(nextIndex < _homeTutorial.size -1){
-            _currentTutorialIndex = nextIndex
-            _currentTutorialItem.value = _homeTutorial[nextIndex]
-        }else{
-            _showTutorial.value = false
+            if (isTutorialCompleted.isCompleted) {
+                _showTutorial.value = false
+                return@launch
+            }
+
+            _homeTutorial = TutorialModels.homeTutorials
+
+            _currentTutorialItem.value = _homeTutorial.first()
         }
     }
 
-    fun skipTutorial(){
-        _showTutorial.value = false
+    fun nextTutorialItem() {
+        val nextIndex = _currentTutorialIndex + 1
+        if (nextIndex < _homeTutorial.size - 1) {
+            _currentTutorialIndex = nextIndex
+            _currentTutorialItem.value = _homeTutorial[nextIndex]
+        } else {
+            viewModelScope.launch {
+                _showTutorial.value = false
+
+                val userId = getUserLocalUseCase().first()?.id ?: ""
+                updateTutorialCompletedUseCase(userId, Tutorials.HOME_TUTORIAL.id, true)
+            }
+        }
     }
 
-    private fun getOxygen(){
+    fun skipTutorial() {
         viewModelScope.launch {
-            getUserLocalUseCase().collect{
+            _showTutorial.value = false
+
+            val userId = getUserLocalUseCase().first()?.id ?: ""
+            updateTutorialCompletedUseCase(userId, Tutorials.HOME_TUTORIAL.id, true)
+        }
+    }
+
+    private fun getOxygen() {
+        viewModelScope.launch {
+            getUserLocalUseCase().collect {
                 _oxygen.value = it?.oxygen ?: 0
             }
         }
     }
 
-    fun getChampyQuote(){
+    fun getChampyQuote() {
         viewModelScope.launch(Dispatchers.IO) {
-            while (true){
+            while (true) {
                 delay(Random.nextLong(3000, 5000))
-                _champyQuote.value = if(!hasShowWelcomeMessage){
+                _champyQuote.value = if (!hasShowWelcomeMessage) {
                     hasShowWelcomeMessage = true
                     getChampyHomeQuote(_userName)
-                }else {
+                } else {
                     SporaConstant.CHAMPY_RANDOM_QUOTE.random()
                 }
 

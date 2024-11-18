@@ -11,9 +11,9 @@ import com.gg.spora.tutorials.domain.model.TutorialItem
 object TutorialModels {
 
     val tutorialsCompleted = listOf(
-        TutorialCompleted(Tutorials.HOME_TUTORIAL.index, false, "home"),
-        TutorialCompleted(Tutorials.GROVE_TUTORIAL.index, false, "grove"),
-        TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.index, false, "library"),
+        TutorialCompleted(Tutorials.HOME_TUTORIAL.id, false, "home"),
+        TutorialCompleted(Tutorials.GROVE_TUTORIAL.id, false, "grove"),
+        TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.id, false, "library"),
     )
 
     private const val NAME = "Titi"

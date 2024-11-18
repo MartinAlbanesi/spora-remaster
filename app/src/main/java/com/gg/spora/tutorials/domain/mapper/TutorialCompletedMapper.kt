@@ -23,7 +23,7 @@ fun TutorialCompletedEntity.toTutorialCompleted() : TutorialCompleted{
 
 fun TutorialCompletedNetwork.toTutorialCompleted() : TutorialCompleted{
     return TutorialCompleted(
-        tutorialId = tutorialId ?: Tutorials.HOME_TUTORIAL.index,
+        tutorialId = tutorialId ?: Tutorials.HOME_TUTORIAL.id,
         isCompleted = isCompleted ?: false,
         tutorialName = tutorialName ?: Tutorials.HOME_TUTORIAL.tutorialName
     )

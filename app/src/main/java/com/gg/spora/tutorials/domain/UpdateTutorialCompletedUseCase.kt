@@ -24,7 +24,10 @@ class UpdateTutorialCompletedUseCase @Inject constructor(
         tutorialRepositoryLocal.updateTutorialCompleted(tutorialId, isCompleted)
 
         getUserAuthUseCase()?.let {
-            tutorialRepositoryNetwork.updateTutorialCompleted(userId, tutorialId, isCompleted)
+
+            val tutorialsCompleted = tutorialRepositoryLocal.getAllTutorialsCompleted()
+
+            tutorialRepositoryNetwork.updateTutorialCompleted(userId, tutorialsCompleted)
         }
     }
 }
