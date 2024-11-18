@@ -1,7 +1,8 @@
-package com.gg.spora.grove.data
+package com.gg.spora.grove.data.local
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.toCooldownData
 import com.gg.spora.grove.data.database.entities.toForestTree

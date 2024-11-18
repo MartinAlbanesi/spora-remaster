@@ -1,6 +1,6 @@
 package com.gg.spora.grove.domain
 
-import com.gg.spora.grove.data.IGroveRepository
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.domain.models.SeedTree
 import javax.inject.Inject
 

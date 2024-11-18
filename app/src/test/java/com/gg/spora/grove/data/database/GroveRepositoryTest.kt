@@ -1,7 +1,7 @@
 package com.gg.spora.grove.data.database
 
-import com.gg.spora.grove.data.GroveRepository
-import com.gg.spora.grove.data.IGroveRepository
+import com.gg.spora.grove.data.local.GroveRepository
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.CooldownDataEntity
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
