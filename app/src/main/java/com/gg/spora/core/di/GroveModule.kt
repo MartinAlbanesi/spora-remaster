@@ -13,9 +13,6 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
-import com.gg.spora.grove.ui.GroveViewModel
-import com.gg.spora.user.domain.GetUserOxygenUseCase
-import com.gg.spora.user.domain.UpdateUserOxygenUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -85,35 +82,5 @@ class GroveModule {
     @Singleton
     fun provideDeleteForestTreeByIdUseCase(groveRepository: IGroveRepository): DeleteForestTreeByIdUseCase {
         return DeleteForestTreeByIdUseCase(groveRepository)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGroveViewModel(
-        loadSeedTreesUseCase: LoadSeedTreesUseCase,
-        saveSeedTreesUseCase: SaveSeedTreesUseCase,
-        loadForestTreesUseCase: LoadForestTreesUseCase,
-        insertForestTreeUseCase: InsertForestTreeUseCase,
-        updateForestTreeGrowthStageByIdUseCase: UpdateForestTreeGrowthStageByIdUseCase,
-        getCooldownDataByIdUseCase: GetCooldownDataByIdUseCase,
-        insertCooldownDataUseCase: InsertCooldownDataUseCase,
-        updateUserOxygenUseCase: UpdateUserOxygenUseCase,
-        getUserOxygenUseCase: GetUserOxygenUseCase,
-        deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
-        deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
-    ): GroveViewModel {
-        return GroveViewModel(
-            loadSeedTreesUseCase,
-            saveSeedTreesUseCase,
-            loadForestTreesUseCase,
-            insertForestTreeUseCase,
-            updateForestTreeGrowthStageByIdUseCase,
-            getCooldownDataByIdUseCase,
-            insertCooldownDataUseCase,
-            updateUserOxygenUseCase,
-            getUserOxygenUseCase,
-            deleteSeedTreeByIdUseCase,
-            deleteForestTreeByIdUseCase
-        )
     }
 }
