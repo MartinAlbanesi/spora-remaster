@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -26,6 +27,7 @@ import com.gg.spora.grove.domain.models.GrowthStage
 fun ForestTreeItem(
     tree: ForestTree,
     uiState: GroveUiState,
+    isLoading: Boolean,
 ) {
     val currentStage by remember(tree, uiState.forestTreeGrowthTimes) {
         derivedStateOf { tree.currentStage }
@@ -37,9 +39,13 @@ fun ForestTreeItem(
         GrowthStage.ADULT -> tree.type.imageResource
     }
 
-    Image(
-        painter = painterResource(id = imageResource),
-        contentDescription = "Tree in ${currentStage.name} stage",
-        modifier = Modifier.size(64.dp)
-    )
+    if(!isLoading) {
+        Image(
+            painter = painterResource(id = imageResource),
+            contentDescription = "Tree in ${currentStage.name} stage",
+            modifier = Modifier.size(64.dp)
+        )
+    } else {
+        CircularProgressIndicator()
+    }
 }

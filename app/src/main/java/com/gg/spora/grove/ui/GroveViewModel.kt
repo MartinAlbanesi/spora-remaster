@@ -164,7 +164,7 @@ class GroveViewModel @Inject constructor(
                 calculateAccumulatedOxygen()
                 Log.i("GroveViewModel", "accumulatedOxygen: ${accumulatedOxygen.value}")
 
-                _isLoading.value = false
+                _isLoading.update { false }
             }
         }
     }
@@ -176,9 +176,14 @@ class GroveViewModel @Inject constructor(
                 val initialSeedTrees = listOf(
                     SeedTree(type = TreeType.PINE),
                     SeedTree(type = TreeType.SECUOYA),
+                    SeedTree(type = TreeType.MANGROVE),
+                    SeedTree(type = TreeType.PINE),
+                    SeedTree(type = TreeType.BAOBAB),
+                    SeedTree(type = TreeType.MANGROVE),
+                    SeedTree(type = TreeType.PINE),
+                    SeedTree(type = TreeType.BAOBAB),
                     SeedTree(type = TreeType.MANGROVE)
                 )
-
                 saveSeedTreesUseCase(initialSeedTrees)
             }
         }
@@ -190,7 +195,7 @@ class GroveViewModel @Inject constructor(
             // Generate a random position until an empty position is found
             var position = forestTree.position
             while (_forestTrees.value.getOrNull(position) != null) { // Check if position is occupied
-                position = (0..24).random() // Generate new random position
+                position = (0..(_forestTrees.value.size)-1).random() // Generate new random position
             }
             forestTree.position = position // Update tree's position
 

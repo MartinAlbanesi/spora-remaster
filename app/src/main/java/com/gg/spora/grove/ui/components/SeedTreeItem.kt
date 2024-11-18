@@ -3,6 +3,7 @@ package com.gg.spora.grove.ui.components
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -16,7 +17,6 @@ import com.gg.spora.R
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.ui.INITIAL_COOLDOWN_DURATION
 
 /**
@@ -37,23 +37,27 @@ fun SeedTreeItem(
     if (!isLoading) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom,
             modifier = modifier
         ) {
-            val imageSize = if (seedTree.type == TreeType.SECUOYA) {
-                150.dp // Larger size for SECUOYA
-            } else {
-                120.dp // Default size for other trees
-            }
+//            val imageSize = if (seedTree.type == TreeType.SECUOYA) {
+//                150.dp // Larger size for SECUOYA
+//            } else {
+//                120.dp // Default size for other trees
+//            }
 
             Image(
                 painter = painterResource(id = seedTree.type.imageResource),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(imageSize),
+                    .weight(0.8f)
+                    .size(120.dp)
             )
 
             ButtonWithIcon(
-                modifier = Modifier.width(160.dp),
+                modifier = Modifier
+                    .weight(0.2f)
+                    .width(134.dp),
                 icon = R.drawable.seed_reward,
                 cooldownValue = uiState.seedTreeCooldowns[seedTree.id],
                 cooldownType = INITIAL_COOLDOWN_DURATION,

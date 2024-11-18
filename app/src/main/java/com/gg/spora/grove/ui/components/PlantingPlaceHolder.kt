@@ -2,6 +2,7 @@ package com.gg.spora.grove.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -12,11 +13,16 @@ import com.gg.spora.R
 @Composable
 fun PlantingPlaceholder(
     modifier: Modifier = Modifier,
+    isLoading: Boolean,
 ) {
-    Image(
-        painter = painterResource(id = R.drawable.empty_tree_spot),
-        contentDescription = "Planting Placeholder",
-        modifier = modifier
-            .size(64.dp)
-    )
+    if(!isLoading) {
+        Image(
+            painter = painterResource(id = R.drawable.empty_tree_spot),
+            contentDescription = "Planting Placeholder",
+            modifier = modifier
+                .size(64.dp)
+        )
+    } else {
+        CircularProgressIndicator()
+    }
 }

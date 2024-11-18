@@ -33,8 +33,11 @@ class GroveRepository @Inject constructor(
 
     // Carga los árboles del bosque desde la base de datos
     override suspend fun getForestTreesFromDatabase(): Flow<List<ForestTree?>> {
+//        return groveDao.getForestTrees().map {
+//            it.map { forestTreeEntity -> forestTreeEntity.toForestTree() }
+//        }
         return groveDao.getForestTrees().map { forestTreeEntities ->
-            val forestTrees = MutableList<ForestTree?>(25) { null } // Inicializa con 25 espacios nulos
+            val forestTrees = MutableList<ForestTree?>(85) { null }
             forestTreeEntities.forEach { entity ->
                 forestTrees[entity.position] =
                     entity.toForestTree() // Coloca el árbol en su posición correspondiente

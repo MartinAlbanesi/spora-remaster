@@ -74,6 +74,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
+                forestTreesColumnCount = 16,
                 plantForestTree = { forestTree, seedTreeId ->
                     groveViewModel.plantForestTree(forestTree, seedTreeId)
                 },
