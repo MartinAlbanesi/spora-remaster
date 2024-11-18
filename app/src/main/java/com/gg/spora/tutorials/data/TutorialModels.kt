@@ -16,7 +16,7 @@ object TutorialModels {
         TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.id, false, "library"),
     )
 
-    private const val NAME = "Titi"
+//    private const val NAME = "Titi"
 
     val homeTutorials = listOf(
         TutorialItem(
@@ -144,74 +144,93 @@ object TutorialModels {
         )
     )
 
-    val libraryTutorial = listOf(
-        TutorialItem(
-            "¿Dónde andará el Señor Mushy?",
-            ChampyStates.CURIOUS.image
-        ),
-        TutorialItem(
-            "¡Ahí está!",
-            ChampyStates.GREETING.image,
-            secondaryImage = MushyStates.IDLE.image,
-            isSecondaryTalking = false,
-        ),
-        TutorialItem(
-            "Oh... Champy y un amigo. ¿Qué los trae por aquí?",
-            ChampyStates.SMILING.image,
-            isChampyTalking = false,
-            secondaryImage = MushyStates.IDLE.image,
-            isSecondaryTalking = true,
-        ),
-        TutorialItem(
-            "¡Señor Mushy, él es $NAME y nos va a ayudar con el bosque!",
-            ChampyStates.GREETING.image,
-            isChampyTalking = true,
-            secondaryImage = MushyStates.IDLE.image,
-            isSecondaryTalking = true,
-        ),
-        TutorialItem(
-            "Por eso, quería que nos contara sobre el diario y su información.",
-            ChampyStates.CURIOUS.image,
-            isChampyTalking = true,
-            secondaryImage = MushyStates.IDLE.image,
-            isSecondaryTalking = true,
-        ),
-        TutorialItem(
-            "De acuerdo... veamos",
-            ChampyStates.CURIOUS.image,
-            isChampyTalking = false,
-            secondaryImage = MushyStates.SERIOUS.image,
-            isSecondaryTalking = true,
-        ),
-        TutorialItem(
-            "El diario es un antiguo libro que contiene aprendizajes heredados de anteriores generaciones.",
-            ChampyStates.CURIOUS.image,
-            false,
-        ),
-        TutorialItem(
-            "Desde reciclaje, hasta energías renovables, todo se encuentra aquí.",
-            ChampyStates.NORMAL.image,
-            false,
-        ),
-        TutorialItem(
-            "Así que, Champy, tú y $NAME son libres de leer o consultarme lo que deseen.",
-            ChampyStates.SMILING.image,
-            false,
-        ),
-        TutorialItem(
-            "¡Gracias, señor Mushy! La próxima vez, vamos a preguntarle muchas cosas.",
-            ChampyStates.SMILING.image
-        ),
-        TutorialItem(
-            "Nos vemos, señor Mushy.",
-            ChampyStates.GREETING.image
-        ),
-        TutorialItem(
-            "Oh... Es bueno ver a las nuevas generaciones interesadas en aprender.",
-            ChampyStates.SMILING.image,
-            false,
+    fun getLibraryTutorial(userName: String): List<TutorialItem>{
+        val libraryTutorial = listOf(
+            TutorialItem(
+                "¿Dónde andará el Señor Mushy?",
+                ChampyStates.CURIOUS.image
+            ),
+            TutorialItem(
+                "¡Ahí está!",
+                ChampyStates.GREETING.image,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = false,
+            ),
+            TutorialItem(
+                "Oh... Champy y un amigo. ¿Qué los trae por acá?",
+                ChampyStates.SMILING.image,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "¡Señor Mushy, él es $userName y nos va a ayudar con el bosque!",
+                ChampyStates.GREETING.image,
+                isChampyTalking = true,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = false,
+            ),
+            TutorialItem(
+                "Por eso, quería que nos contara sobre el diario y su información.",
+                ChampyStates.CURIOUS.image,
+                isChampyTalking = true,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = false,
+            ),
+            TutorialItem(
+                "De acuerdo... veamos",
+                ChampyStates.CURIOUS.image,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.SERIOUS.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "En la biblioteca encontrarás libros \n" +
+                    "que contienen cartas heredadas \n" +
+                    "de anteriores generaciones.",
+                ChampyStates.CURIOUS.image,
+                false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "Con mucha información \n" +
+                    "desde reciclaje, hasta energías\n" +
+                    " renovables, todo se encuentra aquí.",
+                ChampyStates.NORMAL.image,
+                false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "Así que, Champy, tú y $userName son libres de leer o consultarme lo que deseen.",
+                ChampyStates.SMILING.image,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "¡Gracias, señor Mushy!\n" +
+                    "¡Vamos $userName aprendamos de todo!",
+                ChampyStates.SMILING.image,
+                secondaryImage = MushyStates.IDLE.image,
+            ),
+            TutorialItem(
+                "Nos vemos",
+                ChampyStates.GREETING.image,
+                secondaryImage = MushyStates.IDLE.image,
+            ),
+            TutorialItem(
+                "Oh... Es bueno ver a las nuevas generaciones interesadas en aprender.",
+                null,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            )
         )
-    )
+        return libraryTutorial
+    }
+
 
 //    val bottleChallengeTutorial = listOf(
 //        TutorialItem(

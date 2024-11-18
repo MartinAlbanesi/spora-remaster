@@ -42,11 +42,14 @@ import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 @Preview(showBackground = true)
 @Composable
 fun PreviewLibrary() {
-    LibraryScreen()
+    LibraryScreen(
+        false
+    )
 }
 
 @Composable
 fun LibraryScreen(
+    showTutorial: Boolean,
     onBackButtonClick: () -> Unit = {},
     onClickFirst: () -> Unit = {},
     onClickSecond: () -> Unit = {},
@@ -79,7 +82,10 @@ fun LibraryScreen(
             onClickThird = onClickThird
         )
 
-        MushyAndTable(modifier = Modifier)
+        MushyAndTable(
+            modifier = Modifier,
+            showTutorial = showTutorial
+        )
     }
 }
 
@@ -119,7 +125,10 @@ fun TorchFire(modifier: Modifier) {
 }
 
 @Composable
-fun MushyAndTable(modifier: Modifier) {
+fun MushyAndTable(
+    modifier: Modifier,
+    showTutorial: Boolean
+) {
 
     Box(
         modifier = modifier
@@ -127,11 +136,13 @@ fun MushyAndTable(modifier: Modifier) {
             .padding(bottom = 40.dp, end = 140.dp),
         contentAlignment = Alignment.BottomCenter
     ) {
-        MushyBlinkAnimation(
-            modifier
-                .size(260.dp)
-                .offset(y = -(20).dp, x = 5.dp)
-        )
+        if(!showTutorial){
+            MushyBlinkAnimation(
+                modifier
+                    .size(260.dp)
+                    .offset(y = -(20).dp, x = 5.dp)
+            )
+        }
 
         Image(
             painter = painterResource(R.drawable.library_table),

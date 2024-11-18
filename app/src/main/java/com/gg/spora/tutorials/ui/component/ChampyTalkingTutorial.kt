@@ -35,7 +35,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun ChampyTalkingTutorial(
     modifier: Modifier = Modifier,
-    champyImage: Int,
+    champyImage: Int?,
     isChampyTalking: Boolean,
     secondaryImage: Int? = null,
     isSecondaryTalking: Boolean,
@@ -102,20 +102,22 @@ fun ChampyTalkingTutorial(
             )
         }
 
-        Image(
-            painter = painterResource(champyImage),
-            contentDescription = null,
-            colorFilter = if(!isChampyTalking) {
-                ColorFilter.lighting(Color.Gray, add = Color.Transparent)
-            } else null,
-            modifier = Modifier
-                .offset(x = 0.dp, y = 12.dp)
-                .size(200.dp)
-                .constrainAs(champyImg) {
-                    start.linkTo(parent.start)
-                    bottom.linkTo(textBackground.top)
-                }
-        )
+        champyImage?.let {
+            Image(
+                painter = painterResource(champyImage),
+                contentDescription = null,
+                colorFilter = if(!isChampyTalking) {
+                    ColorFilter.lighting(Color.Gray, add = Color.Transparent)
+                } else null,
+                modifier = Modifier
+                    .offset(x = 0.dp, y = 12.dp)
+                    .size(200.dp)
+                    .constrainAs(champyImg) {
+                        start.linkTo(parent.start)
+                        bottom.linkTo(textBackground.top)
+                    }
+            )
+        }
 
         Image(
             painter = painterResource(id = R.drawable.text_bottom),

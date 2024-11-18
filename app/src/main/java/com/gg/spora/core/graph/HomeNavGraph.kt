@@ -43,9 +43,9 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val champyQuote by homeViewModel.champyQuote.collectAsState()
 
-            LaunchedEffect(showTutorial) {
-                homeViewModel.getChampyQuote()
-            }
+//            LaunchedEffect(!showTutorial) {
+//                homeViewModel.getChampyQuote()
+//            }
 
             if (!isLoading) {
                 Box(

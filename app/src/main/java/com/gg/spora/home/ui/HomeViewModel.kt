@@ -1,17 +1,17 @@
 package com.gg.spora.home.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.tutorials.data.TutorialModels
-import com.gg.spora.tutorials.data.local.TutorialRepositoryLocal
 import com.gg.spora.tutorials.domain.UpdateTutorialCompletedUseCase
 import com.gg.spora.tutorials.domain.model.TutorialItem
+import com.gg.spora.tutorials.domain.repository.ITutorialRepositoryLocal
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.GetUserOxygenUseCase
+import com.gg.spora.user.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
 //    private val getUserNetworkUseCase: GetUserNetworkUseCase
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase,
-    private val tutorialRepositoryLocal: TutorialRepositoryLocal,
+    private val tutorialRepositoryLocal: ITutorialRepositoryLocal,
     private val updateTutorialCompletedUseCase: UpdateTutorialCompletedUseCase
 ) : ViewModel() {
 
@@ -50,7 +50,8 @@ class HomeViewModel @Inject constructor(
     private val _champyQuote = MutableStateFlow<String?>(null)
     val champyQuote = _champyQuote.asStateFlow()
 
-    private var _userName = ("")
+    private var _user = MutableStateFlow<User?>(null)
+    val user = _user.asStateFlow()
 
     private var hasShowWelcomeMessage = false
 
@@ -59,12 +60,13 @@ class HomeViewModel @Inject constructor(
         getUserName()
         getHomeTutorial()
         getOxygen()
+        getChampyQuote()
     }
 
     private fun getUserName() {
         viewModelScope.launch {
             getUserLocalUseCase().collect {
-                _userName = it?.userName ?: ""
+                _user.value = it
             }
         }
     }
@@ -118,13 +120,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getChampyQuote() {
+    private fun getChampyQuote() {
         viewModelScope.launch(Dispatchers.IO) {
             while (true) {
                 delay(Random.nextLong(3000, 5000))
                 _champyQuote.value = if (!hasShowWelcomeMessage) {
                     hasShowWelcomeMessage = true
-                    getChampyHomeQuote(_userName)
+                    getChampyHomeQuote(_user.value?.userName ?: "")
                 } else {
                     SporaConstant.CHAMPY_RANDOM_QUOTE.random()
                 }
