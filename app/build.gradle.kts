@@ -104,8 +104,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // testing setting
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test.v152)
+    testImplementation(libs.androidx.core.testing)
+
+
     //esto agrego para ver si funcionan los test de aca para abajo borrar si no funciona
     testImplementation ("org.robolectric:robolectric:4.8")
+
+
 
     //Dagger Hilt
     ksp(libs.hilt.android.compiler)
