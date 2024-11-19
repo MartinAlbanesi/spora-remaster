@@ -7,6 +7,7 @@ import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.tutorials.domain.TutorialSelected
+import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.GetUserOxygenUseCase
 import com.gg.spora.user.domain.models.User
@@ -24,6 +25,7 @@ class HomeViewModel @Inject constructor(
 //    private val getUserNetworkUseCase: GetUserNetworkUseCase
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase,
+    private val getUserAuthUseCase: GetUserAuthUseCase,
     val tutorialSelected: TutorialSelected
 ) : ViewModel() {
 
@@ -41,6 +43,9 @@ class HomeViewModel @Inject constructor(
 
     private var hasShowWelcomeMessage = false
 
+    private val _isUserLoggedIn = MutableStateFlow(false)
+    val isUserLoggedIn = _isUserLoggedIn.asStateFlow()
+
     init {
 //        getUser()
         getUserName()
@@ -55,6 +60,8 @@ class HomeViewModel @Inject constructor(
             getUserLocalUseCase().collect {
                 _user.value = it
             }
+
+            _isUserLoggedIn.value = getUserAuthUseCase() != null
         }
     }
 

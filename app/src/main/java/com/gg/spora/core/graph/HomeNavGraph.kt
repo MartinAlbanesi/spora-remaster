@@ -6,6 +6,9 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -16,6 +19,7 @@ import androidx.navigation.navigation
 import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.Tutorials
+import com.gg.spora.home.ui.CreateProfileScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
 import com.gg.spora.profile.ui.ProfileScreen
@@ -32,8 +36,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val homeViewModel: HomeViewModel = hiltViewModel()
 
-//            val user by homeViewModel.user.collectAsState()
-
             val userOxygen by homeViewModel.oxygen.collectAsState()
 
             val isLoading by homeViewModel.isLoading.collectAsState()
@@ -43,6 +45,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val showTutorial by homeViewModel.tutorialSelected.showTutorial.collectAsState()
 
             val champyQuote by homeViewModel.champyQuote.collectAsState()
+
+            val isUserLoggedIn by homeViewModel.isUserLoggedIn.collectAsState()
 
             if (!isLoading) {
                 Box(
@@ -70,10 +74,18 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         }
                     },
                     onNavigateToRanking = {
-                        navController.navigate(NavigationRoutes.Ranking)
+                        if (isUserLoggedIn) {
+                            navController.navigate(NavigationRoutes.Ranking)
+                        } else {
+                            navController.navigate(NavigationRoutes.CreateProfileScreen)
+                        }
                     },
                     onNavigateToProfile = {
-                        navController.navigate(NavigationRoutes.ProfileScreen)
+                        if (isUserLoggedIn) {
+                            navController.navigate(NavigationRoutes.ProfileScreen)
+                        } else {
+                            navController.navigate(NavigationRoutes.CreateProfileScreen)
+                        }
                     },
                     onNavigateToGrove = {
                         homeViewModel.getTutorial(
@@ -85,7 +97,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 )
             }
             if (showTutorial) {
-//                currentTutorialItem?.let { item ->
                 ChampyTalkingTutorial(
                     modifier = Modifier.fillMaxSize(),
                     champyImage = currentTutorialItem!!.champyImageState,
@@ -97,9 +108,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     onClickSkip = homeViewModel.tutorialSelected::skipTutorial,
                     onNextItem = homeViewModel.tutorialSelected::nextTutorialItem
                 )
-//                }
             }
-
         }
         composable<NavigationRoutes.Grove> {
 
@@ -129,6 +138,18 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 //                onLeftArrowClick = { viewModel.onLeftArrowClick() },
 //                onRightArrowClick = { viewModel.onRightArrowClick() },
 //                currentIndex = currentIndex
+            )
+        }
+
+        composable<NavigationRoutes.CreateProfileScreen> {
+            CreateProfileScreen(
+                modifier = Modifier.fillMaxSize(),
+                onSkip = {
+                    navController.popBackStack()
+                },
+                onConfirm = {
+                    navController.navigate(NavigationRoutes.SignUp)
+                }
             )
         }
     }

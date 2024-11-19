@@ -31,83 +31,69 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun CreateProfileScreen(
     modifier: Modifier = Modifier,
-    showDialog: Boolean,
     onConfirm: () -> Unit,
     onSkip: () -> Unit,
 ) {
-    if (showDialog) {
-        Dialog(
-            onDismissRequest = {},
-            properties = DialogProperties(
-                dismissOnBackPress = false,
-                dismissOnClickOutside = false,
-                decorFitsSystemWindows = false,
-                usePlatformDefaultWidth = false,
-            )
+    Box(
+        modifier = modifier,
+    ) {
+
+        Image(
+            painter = painterResource(id = R.drawable.welcome_background),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillBounds
+        )
+
+        Column(
+            modifier = Modifier.align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(32.dp),
         ) {
-            Box(
-                modifier = modifier,
+            Image(
+                painter = painterResource(id = R.drawable.champy_celebrating_raised_arms),
+                contentDescription = null,
+                modifier = Modifier.size(200.dp),
+            )
+
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-
-                Image(
-                    painter = painterResource(id = R.drawable.welcome_background),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.FillBounds
+                Text(
+                    text = "¡Es Hora de crear tu perfil!",
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = Color.White,
+                    modifier = Modifier.fillMaxWidth()
                 )
-
-                Column(
-                    modifier = Modifier.align(Alignment.Center),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(32.dp),
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.champy_celebrating_raised_arms),
-                        contentDescription = null,
-                        modifier = Modifier.size(200.dp),
-                    )
-
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
-                    ) {
-                        Text(
-                            text = "¡Es Hora de crear tu perfil!",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 24.sp,
-                            color = Color.White,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                        Text(
-                            text = "Guarda tu progreso y sigue aprendiendo sobre como cuidar el planeta.",
-                            textAlign = TextAlign.Center,
-                            color = Color.White,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
-                    ) {
-                        SporaPrimaryButton(
-                            text = "Crear Perfil",
-                            modifier = Modifier.fillMaxWidth(),
-                            onClick = onConfirm
-                        )
-                        SporaPrimaryInverseButton(
-                            text = "Saltar",
-                            modifier = Modifier.fillMaxWidth(),
-                            onClick = onSkip
-                        )
-                    }
-                }
-
-
+                Text(
+                    text = "Guarda tu progreso y sigue aprendiendo sobre como cuidar el planeta.",
+                    textAlign = TextAlign.Center,
+                    color = Color.White,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
 
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                SporaPrimaryButton(
+                    text = "Crear Perfil",
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onConfirm
+                )
+                SporaPrimaryInverseButton(
+                    text = "Saltar",
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onSkip
+                )
+            }
         }
+
+
     }
 
 }
@@ -125,7 +111,6 @@ private fun CreatedProfileScreenPreview() {
         ) {
             CreateProfileScreen(
                 modifier = Modifier.fillMaxSize(),
-                showDialog = true,
                 onSkip = {},
                 onConfirm = {}
             )

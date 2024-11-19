@@ -35,6 +35,9 @@ object NavigationRoutes {
     @Serializable
     object ProfileScreen
 
+    @Serializable
+    object CreateProfileScreen
+
 
 
     // Game Graph ------------------------------------------------------
