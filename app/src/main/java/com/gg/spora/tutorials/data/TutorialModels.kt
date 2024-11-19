@@ -2,6 +2,7 @@ package com.gg.spora.tutorials.data
 
 
 import androidx.compose.ui.geometry.Offset
+import com.gg.spora.R
 import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.core.utils.enums.MushyStates
 import com.gg.spora.core.utils.enums.Tutorials
@@ -11,12 +12,12 @@ import com.gg.spora.tutorials.domain.model.TutorialItem
 object TutorialModels {
 
     val tutorialsCompleted = listOf(
-        TutorialCompleted(Tutorials.HOME_TUTORIAL.id, false, "home"),
-        TutorialCompleted(Tutorials.GROVE_TUTORIAL.id, false, "grove"),
-        TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.id, false, "library"),
+        TutorialCompleted(Tutorials.HOME_TUTORIAL.id, false, Tutorials.HOME_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.GROVE_TUTORIAL.id, false, Tutorials.GROVE_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.id, false, Tutorials.LIBRARY_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.LIBRARY_ICON_TUTORIAL.id, false, Tutorials.LIBRARY_ICON_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.GROVE_ICON_TUTORIAL.id, false, Tutorials.GROVE_ICON_TUTORIAL.tutorialName),
     )
-
-//    private const val NAME = "Titi"
 
     val homeTutorials = listOf(
         TutorialItem(
@@ -63,50 +64,56 @@ object TutorialModels {
             "¡Más vamos a tener!",
             ChampyStates.GREETING.image
         ),
-//        TutorialItem(
-//            "Oh, ¿tenés curiosidad por la Arboleda?",
-//            ChampyStates.CURIOUS.image
-//        ),
-//        TutorialItem(
-//            "Es un poco triste, los árboles que vivían ahí, ya no están.",
-//            ChampyStates.SAD.image
-//        ),
-//        TutorialItem(
-//            "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
-//            ChampyStates.NORMAL.image
-//        ),
-//        TutorialItem(
-//            "¡Volverán!",
-//            ChampyStates.GREETING.image
-//        ),
-//        TutorialItem(
-//            "¿Me ayudás a cuidarlos?",
-//            ChampyStates.CURIOUS.image
-//        ),
-//        TutorialItem(
-//            "¡Que bueno! Entonces, vamos que te muestro.",
-//            ChampyStates.GREETING.image
-//        ),
-//        TutorialItem(
-//            "Ese es el diario ecológico, el Señor Mushy es quien lo escribe y revisa.",
-//            ChampyStates.SMILING.image
-//        ),
-//        TutorialItem(
-//            "¿Quién es el Señor Mushy?",
-//            ChampyStates.CURIOUS.image
-//        ),
-//        TutorialItem(
-//            "Es el hongo más sabio y viejo de la comunidad.",
-//            ChampyStates.NORMAL.image
-//        ),
-//        TutorialItem(
-//            "Se encarga de muchas cosas, pero la más importante es escribir el diario ecológico.",
-//            ChampyStates.NORMAL.image
-//        ),
-//        TutorialItem(
-//            "Te lo voy a presentar, ¡vamos!",
-//            ChampyStates.SMILING.image
-//        )
+    )
+
+    val libraryIconTutorials = listOf(
+        TutorialItem(
+            "Ese es el diario ecológico, el Señor Mushy es quien lo escribe y revisa.",
+            ChampyStates.SMILING.image
+        ),
+        TutorialItem(
+            "¿Quién es el Señor Mushy?",
+            ChampyStates.CURIOUS.image
+        ),
+        TutorialItem(
+            "Es el hongo más sabio y viejo de la comunidad.",
+            ChampyStates.NORMAL.image
+        ),
+        TutorialItem(
+            "Se encarga de muchas cosas, pero la más importante es escribir el diario ecológico.",
+            ChampyStates.NORMAL.image
+        ),
+        TutorialItem(
+            "Te lo voy a presentar, ¡vamos!",
+            ChampyStates.SMILING.image
+        )
+    )
+
+    val groveIconTutorials = listOf(
+        TutorialItem(
+            "Oh, ¿tenés curiosidad por la Arboleda?",
+            ChampyStates.CURIOUS.image
+        ),
+        TutorialItem(
+            "Es un poco triste, los árboles que vivían ahí, ya no están.",
+            ChampyStates.SAD.image
+        ),
+        TutorialItem(
+            "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
+            ChampyStates.NORMAL.image
+        ),
+        TutorialItem(
+            "¡Volverán!",
+            ChampyStates.GREETING.image
+        ),
+        TutorialItem(
+            "¿Me ayudás a cuidarlos?",
+            ChampyStates.CURIOUS.image
+        ),
+        TutorialItem(
+            "¡Que bueno! Entonces, vamos que te muestro.",
+            ChampyStates.GREETING.image
+        ),
     )
 
     val groveTutorials = listOf(
@@ -124,11 +131,15 @@ object TutorialModels {
         ),
         TutorialItem(
             "El Árbol Madre nos va a dar cada cierto tiempo una semilla, que vamos a poder plantar.",
-            ChampyStates.SMILING.image
+            ChampyStates.SMILING.image,
+            secondaryImage = R.drawable.tutorial_seed,
+            isSecondaryTalking = true
         ),
         TutorialItem(
             "Esa semilla, si la cuidamos muy bien, crecerá lentamente hasta ser un saludable árbol.",
-            ChampyStates.GREETING.image
+            ChampyStates.GREETING.image,
+            secondaryImage = R.drawable.tutorial_tree,
+            isSecondaryTalking = true
         ),
         TutorialItem(
             "El árbol nos dará un poco de su oxígeno diariamente como agradecimiento.",
@@ -230,24 +241,4 @@ object TutorialModels {
         )
         return libraryTutorial
     }
-
-
-//    val bottleChallengeTutorial = listOf(
-//        TutorialItem(
-//            "¡Wow! Encontraste una botella, voy a contarte un poco sobre ella.",
-//            ChampyStates.SMILING.image
-//        ),
-//        TutorialItem(
-//            "Las botellas de plástico se pueden encontrar en muchos lugares y son fáciles de reciclar",
-//            ChampyStates.SMILING.image
-//        ),
-//        TutorialItem(
-//            "Al ser de una importancia ecológica alta, es necesario aprender a reciclarlas.",
-//            ChampyStates.CURIOUS.image
-//        ),
-//        TutorialItem(
-//            "Así que, aprendamos juntos sobre cómo reciclar este tipo de objetos.",
-//            ChampyStates.GREETING.image
-//        ),
-//    )
 }
