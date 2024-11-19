@@ -74,22 +74,29 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     },
                     onNavigateToProfile = {
                         navController.navigate(NavigationRoutes.ProfileScreen)
-                    }
+                    },
+                    onNavigateToGrove = {
+                        homeViewModel.getTutorial(
+                            Tutorials.GROVE_ICON_TUTORIAL,
+                        ) {
+//                            navController.navigate(NavigationRoutes.Grove)
+                        }
+                    },
                 )
             }
             if (showTutorial) {
 //                currentTutorialItem?.let { item ->
-                    ChampyTalkingTutorial(
-                        modifier = Modifier.fillMaxSize(),
-                        champyImage = currentTutorialItem!!.champyImageState,
-                        isChampyTalking = currentTutorialItem!!.isChampyTalking,
-                        secondaryImage = currentTutorialItem!!.secondaryImage,
-                        isSecondaryTalking = currentTutorialItem!!.isSecondaryTalking,
-                        text = currentTutorialItem!!.text,
-                        focusPosition = currentTutorialItem!!.focusItem,
-                        onClickSkip = homeViewModel.tutorialSelected::skipTutorial,
-                        onNextItem = homeViewModel.tutorialSelected::nextTutorialItem
-                    )
+                ChampyTalkingTutorial(
+                    modifier = Modifier.fillMaxSize(),
+                    champyImage = currentTutorialItem!!.champyImageState,
+                    isChampyTalking = currentTutorialItem!!.isChampyTalking,
+                    secondaryImage = currentTutorialItem!!.secondaryImage,
+                    isSecondaryTalking = currentTutorialItem!!.isSecondaryTalking,
+                    text = currentTutorialItem!!.text,
+                    focusPosition = currentTutorialItem!!.focusItem,
+                    onClickSkip = homeViewModel.tutorialSelected::skipTutorial,
+                    onNextItem = homeViewModel.tutorialSelected::nextTutorialItem
+                )
 //                }
             }
 

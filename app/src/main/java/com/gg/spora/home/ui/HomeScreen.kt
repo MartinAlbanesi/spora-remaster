@@ -43,6 +43,7 @@ fun HomeScreen(
     onNavigateToExpoStage: () -> Unit,
     onNavigateToLibrary: () -> Unit,
     onNavigateToProfile: () -> Unit,
+    onNavigateToGrove: () -> Unit
 ) {
 
     // Icons in the left
@@ -69,15 +70,12 @@ fun HomeScreen(
         HomeIcon(
             image = R.drawable.eco_diary_icon,
             text = "Biblioteca",
-            onClick =
-            {
-                onNavigateToLibrary()
-            }
+            onClick = onNavigateToLibrary
         ),
         HomeIcon(
             image = R.drawable.grove_icon,
             text = "Arboleda",
-            onClick = {}
+            onClick = onNavigateToGrove
         )
     )
 
@@ -208,7 +206,8 @@ private fun MiniGameScreenPreview() {
                 onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
-                onNavigateToProfile = {}
+                onNavigateToProfile = {},
+                onNavigateToGrove = {}
             )
         }
     }

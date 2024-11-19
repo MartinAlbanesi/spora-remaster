@@ -38,15 +38,18 @@ class TutorialSelected @Inject constructor(
 
     fun getTutorial(tutorial: Tutorials, secondaryAction: () -> Unit = {}) {
         scope.launch(Dispatchers.Main) {
+
+            _secondaryAction = secondaryAction
+
             val isTutorialCompleted =
                 tutorialRepositoryLocal.getTutorialById(tutorial.id)
 
             if (isTutorialCompleted.isCompleted) {
                 _showTutorial.value = false
+                _secondaryAction()
                 return@launch
             }
 
-            _secondaryAction = secondaryAction
 
             tutorialType = tutorial
 
