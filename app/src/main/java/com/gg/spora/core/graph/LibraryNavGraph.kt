@@ -22,9 +22,9 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
-            val showTutorial by libraryViewModel.showTutorial.collectAsState()
+            val showTutorial by libraryViewModel.tutorialSelected.showTutorial.collectAsState()
 
-            val currentTutorialItem by libraryViewModel.currentTutorialItem.collectAsState()
+            val currentTutorialItem by libraryViewModel.tutorialSelected.currentTutorialItem.collectAsState()
 
             LibraryScreen(
                 showTutorial = showTutorial,
@@ -44,8 +44,8 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
                         isSecondaryTalking = item.isSecondaryTalking,
                         text = item.text,
                         focusPosition = item.focusItem,
-                        onClickSkip = libraryViewModel::skipTutorial,
-                        onNextItem = libraryViewModel::nextTutorialItem
+                        onClickSkip = libraryViewModel.tutorialSelected::skipTutorial,
+                        onNextItem = libraryViewModel.tutorialSelected::nextTutorialItem
                     )
                 }
             }

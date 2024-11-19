@@ -64,13 +64,7 @@ fun ChampyTalkingTutorial(
             .drawBehind {
                 drawRect(
                     Brush.radialGradient(
-                        listOf(
-                            Color.Transparent,
-                            Color.Transparent,
-                            Color.Transparent,
-                            Color(0x00000000),
-                            Color(0xCC000000)
-                        ),
+                        listOf(Color.Transparent, Color.Transparent,Color.Transparent,Color(0x00000000),Color(0xCC000000)),
                         center = pointerOffset,
                         radius = if(focusPosition != null) 160f else 0.1f,
                     ),
@@ -93,12 +87,8 @@ fun ChampyTalkingTutorial(
         AnimatedVisibility(
             secondaryImage != null,
             label = "Secondary Image",
-            enter = slideInHorizontally(){
-                it / 2
-            },
-            exit = slideOutHorizontally(
-                animationSpec = tween(durationMillis = 500)
-            ){
+            enter = slideInHorizontally{ it / 2 },
+            exit = slideOutHorizontally(animationSpec = tween(durationMillis = 500)){
                 it / 2
             },
             modifier = Modifier
@@ -116,13 +106,6 @@ fun ChampyTalkingTutorial(
                     colorFilter = if(!isSecondaryTalking) {
                         ColorFilter.lighting(Color.Gray, add = Color.Transparent)
                     } else null,
-//                modifier = Modifier
-//                    .offset(x = 0.dp, y = 12.dp)
-//                    .size(200.dp)
-//                    .constrainAs(secondaryImg) {
-//                        end.linkTo(parent.end)
-//                        bottom.linkTo(textBackground.top)
-//                    }
                 )
             }
         }
@@ -147,13 +130,6 @@ fun ChampyTalkingTutorial(
                     colorFilter = if(!isChampyTalking) {
                         ColorFilter.lighting(Color.Gray, add = Color.Transparent)
                     } else null,
-//                    modifier = Modifier
-//                        .offset(x = 0.dp, y = 12.dp)
-//                        .size(200.dp)
-//                        .constrainAs(champyImg) {
-//                            start.linkTo(parent.start)
-//                            bottom.linkTo(textBackground.top)
-//                        }
                 )
             }
         }
@@ -166,7 +142,6 @@ fun ChampyTalkingTutorial(
                 .fillMaxWidth(0.95f)
                 .height(100.dp)
                 .constrainAs(textBackground) {
-//                    top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom, margin = 16.dp)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)

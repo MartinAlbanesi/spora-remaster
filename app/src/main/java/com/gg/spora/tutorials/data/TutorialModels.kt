@@ -241,4 +241,14 @@ object TutorialModels {
         )
         return libraryTutorial
     }
+
+    fun getTutorial(tutorial: Tutorials, userName: String): List<TutorialItem> {
+        return when(tutorial){
+            Tutorials.HOME_TUTORIAL -> homeTutorials
+            Tutorials.GROVE_TUTORIAL -> groveTutorials
+            Tutorials.LIBRARY_TUTORIAL -> getLibraryTutorial(userName)
+            Tutorials.LIBRARY_ICON_TUTORIAL -> libraryIconTutorials
+            Tutorials.GROVE_ICON_TUTORIAL -> groveIconTutorials
+        }
+    }
 }
