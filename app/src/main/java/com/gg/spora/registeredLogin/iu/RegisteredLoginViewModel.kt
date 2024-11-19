@@ -1,24 +1,17 @@
 package com.gg.spora.registeredLogin.iu
 
-import android.content.Context
+import android.util.Log
 import android.util.Patterns
-import android.widget.Toast
-import androidx.activity.result.launch
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.semantics.password
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.user.domain.UpdateUserLocalDataFromNetworkUseCase
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,7 +57,7 @@ class RegisteredLoginViewModel @Inject constructor(
         _password.value = newPassword
     }
 
-    fun onLoginClick(context: Context, navController: NavHostController) {
+    fun onLoginClick(navController: NavHostController) {
         val email = email.value.toString().trim()
         val password = password.value.toString().trim()
 
@@ -80,11 +73,34 @@ class RegisteredLoginViewModel @Inject constructor(
                 } else {
                     _showError.value = true // Mostrar Toast si la autenticación falla
                 }
+            } catch (e: FirebaseAuthInvalidUserException) {
+                _showError.value = true // Usuario no registrado
+                Log.e("RegisteredLogin", "Usuario no encontrado: ${e.message}", e)
+            } catch (e: FirebaseAuthInvalidCredentialsException) {
+                _showError.value = true // Credenciales inválidas
+                Log.e("RegisteredLogin", "Credenciales inválidas: ${e.message}", e)
+            } catch (e: Exception) {
+                _showError.value = true // Error genérico
+                Log.e("RegisteredLogin", "Error inesperado: ${e.message}", e)
+            } finally {
+                _isLoading.value = false
+            }
+
+
+            /*try {
+                val wea = auth.signInWithEmailAndPassword(email, password).await()
+
+                if (wea.user != null) {
+                    updateUserLocalDataFromNetworkUseCase(email)
+                    navController.navigate(NavigationRoutes.Home)
+                } else {
+                    _showError.value = true // Mostrar Toast si la autenticación falla
+                }
             } catch (e: Exception) {
                 _showError.value = true // Mostrar Toast si hay una excepción
             } finally {
                 _isLoading.value = false
-            }
+            }*/
         }
     }
     fun showErrorConsumed() {

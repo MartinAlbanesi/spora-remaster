@@ -6,19 +6,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -44,7 +38,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
@@ -124,7 +117,7 @@ fun RegisteredLoginScreen(
                     onValueChange = registeredLoginViewModel::onPasswordChanged,
                     modifier = Modifier.fillMaxWidth()
                 )
-                Text(
+              /*  Text(
                     text = "¿Olvidaste tu contraseña?",
                     color = Color.Cyan,
                     modifier = Modifier
@@ -134,7 +127,7 @@ fun RegisteredLoginScreen(
                             /*TODO*/
                         },
                     style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.Underline) // Subrayado
-                )
+                )*/
 
                 // Confirm button
                 val context = LocalContext.current
@@ -142,7 +135,7 @@ fun RegisteredLoginScreen(
                 SporaPrimaryButton(
                     text = "Confirmar",
                     textSize = 24,
-                    onClick = { registeredLoginViewModel.onLoginClick(context, navController) },
+                    onClick = { registeredLoginViewModel.onLoginClick(navController) },
                     modifier = Modifier.fillMaxWidth(),
                     isEnable = isLoginEnabled
                 )
