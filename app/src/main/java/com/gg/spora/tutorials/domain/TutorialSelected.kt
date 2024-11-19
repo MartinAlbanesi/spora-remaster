@@ -1,5 +1,6 @@
 package com.gg.spora.tutorials.domain
 
+import android.util.Log
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.tutorials.domain.model.TutorialItem
@@ -28,12 +29,15 @@ class TutorialSelected @Inject constructor(
     private val _currentTutorialItem = MutableStateFlow<TutorialItem?>(null)
     val currentTutorialItem = _currentTutorialItem.asStateFlow()
 
-    private val _showTutorial = MutableStateFlow(true)
+    private val _showTutorial = MutableStateFlow(false)
     val showTutorial = _showTutorial.asStateFlow()
 
-    fun getTutorial(tutorial: Tutorials) {
+    private var tutorialType: Tutorials? = null
 
-        scope.launch {
+    private var _secondaryAction: () -> Unit = {}
+
+    fun getTutorial(tutorial: Tutorials, secondaryAction: () -> Unit = {}) {
+        scope.launch(Dispatchers.Main) {
             val isTutorialCompleted =
                 tutorialRepositoryLocal.getTutorialById(tutorial.id)
 
@@ -42,12 +46,19 @@ class TutorialSelected @Inject constructor(
                 return@launch
             }
 
+            _secondaryAction = secondaryAction
+
+            tutorialType = tutorial
+
             val userName = getUserLocalUseCase().first()?.userName ?: ""
 
-//            _tutorialsItems = getLibraryTutorial(userName)
             _tutorialsItems = TutorialModels.getTutorial(tutorial, userName)
 
             _currentTutorialItem.value = _tutorialsItems.first()
+
+            _showTutorial.value = true
+
+            Log.i("titi", _currentTutorialItem.value.toString())
         }
     }
 
@@ -62,17 +73,19 @@ class TutorialSelected @Inject constructor(
                 _showTutorial.value = false
 
                 val userId = getUserLocalUseCase().first()?.id ?: ""
-                updateTutorialCompletedUseCase(userId, Tutorials.LIBRARY_TUTORIAL.id, true)
+                updateTutorialCompletedUseCase(userId, tutorialType!!.id, true)
+                _secondaryAction()
             }
         }
     }
 
     fun skipTutorial() {
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             _showTutorial.value = false
 
             val userId = getUserLocalUseCase().first()?.id ?: ""
-            updateTutorialCompletedUseCase(userId, Tutorials.LIBRARY_TUTORIAL.id, true)
+            updateTutorialCompletedUseCase(userId, tutorialType!!.id, true)
+            _secondaryAction()
         }
     }
 

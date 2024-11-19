@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
 import com.gg.spora.profile.ui.ProfileScreen
@@ -62,7 +63,11 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         navController.navigate(NavigationRoutes.Stage(StageType.EXPO.name))
                     },
                     onNavigateToLibrary = {
-                        navController.navigate(NavigationRoutes.LibraryGraph)
+                        homeViewModel.getTutorial(
+                            Tutorials.LIBRARY_ICON_TUTORIAL,
+                        ) {
+                            navController.navigate(NavigationRoutes.LibraryGraph)
+                        }
                     },
                     onNavigateToRanking = {
                         navController.navigate(NavigationRoutes.Ranking)
@@ -72,20 +77,20 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     }
                 )
             }
-            if(showTutorial){
-                currentTutorialItem?.let { item ->
+            if (showTutorial) {
+//                currentTutorialItem?.let { item ->
                     ChampyTalkingTutorial(
                         modifier = Modifier.fillMaxSize(),
-                        champyImage = item.champyImageState,
-                        isChampyTalking = item.isChampyTalking,
-                        secondaryImage = item.secondaryImage,
-                        isSecondaryTalking = item.isSecondaryTalking,
-                        text = item.text,
-                        focusPosition = item.focusItem,
+                        champyImage = currentTutorialItem!!.champyImageState,
+                        isChampyTalking = currentTutorialItem!!.isChampyTalking,
+                        secondaryImage = currentTutorialItem!!.secondaryImage,
+                        isSecondaryTalking = currentTutorialItem!!.isSecondaryTalking,
+                        text = currentTutorialItem!!.text,
+                        focusPosition = currentTutorialItem!!.focusItem,
                         onClickSkip = homeViewModel.tutorialSelected::skipTutorial,
                         onNextItem = homeViewModel.tutorialSelected::nextTutorialItem
                     )
-                }
+//                }
             }
 
         }

@@ -1,15 +1,12 @@
 package com.gg.spora.home.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
-import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.tutorials.domain.TutorialSelected
-import com.gg.spora.tutorials.domain.UpdateTutorialCompletedUseCase
-import com.gg.spora.tutorials.domain.model.TutorialItem
-import com.gg.spora.tutorials.domain.repository.ITutorialRepositoryLocal
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.GetUserOxygenUseCase
 import com.gg.spora.user.domain.models.User
@@ -18,7 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
@@ -48,7 +44,8 @@ class HomeViewModel @Inject constructor(
     init {
 //        getUser()
         getUserName()
-        getHomeTutorial()
+//        getTutorial(Tutorials.HOME_TUTORIAL)
+        tutorialSelected.getTutorial(Tutorials.HOME_TUTORIAL)
         getOxygen()
         getChampyQuote()
     }
@@ -61,8 +58,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getHomeTutorial() {
-        tutorialSelected.getTutorial(Tutorials.HOME_TUTORIAL)
+    fun getTutorial(tutorials: Tutorials, secondaryAction: () -> Unit) {
+        viewModelScope.launch {
+            tutorialSelected.getTutorial(tutorials, secondaryAction)
+        }
     }
 
 
