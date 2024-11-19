@@ -42,7 +42,11 @@ import androidx.navigation.NavHostController
 import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.ui.components.SporaPrimaryButton
+import com.gg.spora.login.component.IconButtonArrowLogin
 import com.gg.spora.login.component.LoginTextField
+import com.gg.spora.registeredLogin.component.InputField
+import com.gg.spora.registeredLogin.component.LoadingIndicator
+import com.gg.spora.registeredLogin.component.SignUpText
 
 
 @Composable
@@ -64,9 +68,7 @@ fun RegisteredLoginScreen(
     val context = LocalContext.current
 
     if (isLoading) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
+        LoadingIndicator()
     } else {
         Box(modifier = Modifier.fillMaxSize()) {
             // Background
@@ -103,35 +105,21 @@ fun RegisteredLoginScreen(
                 )
 
                 // Input fields
-                LoginTextField(
-                    placeholder = "Correo",
+                InputField(
                     value = email,
                     onValueChange = registeredLoginViewModel::onEmailChanged,
-                    modifier = Modifier.fillMaxWidth()
+                    placeholder = "Correo"
                 )
-
-                LoginTextField(
-                    placeholder = "Contraseña",
-                    isPassword = true,
+                InputField(
                     value = password,
                     onValueChange = registeredLoginViewModel::onPasswordChanged,
-                    modifier = Modifier.fillMaxWidth()
+                    placeholder = "Contraseña",
+                    isPassword = true
                 )
-              /*  Text(
-                    text = "¿Olvidaste tu contraseña?",
-                    color = Color.Cyan,
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(bottom = 8.dp)
-                        .clickable {
-                            /*TODO*/
-                        },
-                    style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.Underline) // Subrayado
-                )*/
 
                 // Confirm button
                 val context = LocalContext.current
-                val isLoginEnabled = isAccountValid && password.length >=7
+                val isLoginEnabled = isAccountValid && password.length >= 7
                 SporaPrimaryButton(
                     text = "Confirmar",
                     textSize = 24,
@@ -184,43 +172,17 @@ fun RegisteredLoginScreen(
             }
 
             // Arrow at top left
-            IconButton(
-                onClick = onBackClick,
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(16.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                    contentDescription = "Volver",
-                    tint = Color.White,
-                    modifier = Modifier.size(32.dp)
-                )
-            }
+            IconButtonArrowLogin()
 
             // Text of "Don't have an account?"
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = Color.White)) {
-                        append("¿No tienes una cuenta? ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color.Cyan,
-                            textDecoration = TextDecoration.Underline
-                        )
-                    ) {
-                        append("Regístrate")
-                    }
-                },
+            SignUpText(
+                onClick = { navController.navigate(NavigationRoutes.SignUp) },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(16.dp)
-                    .clickable {
-                        navController.navigate(NavigationRoutes.SignUp) // Navegar a LoginScreen
-                    }
             )
         }
+
         if (showError) {
             LaunchedEffect(key1 = showError) {
                 Toast.makeText(
@@ -229,13 +191,4 @@ fun RegisteredLoginScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFF000000)
-@Composable
-fun RegisteredLoginScreenPreview() {
-    RegisteredLoginScreen(
-        onBackClick = {  },
-        navController = NavHostController(LocalContext.current)
-    )
 }

@@ -34,7 +34,7 @@ import com.gg.spora.login.component.separatorLogin
 fun LoginScreen(
     viewModel: LoginViewModel,
     //navController: NavHostController,
-    onNavigationToHome: () -> Unit,
+    //onNavigationToHome: () -> Unit,
     onNavigateToRegisteredLogin: () -> Unit,
 ) {
     val isLoading by viewModel.isLoading.observeAsState(initial = false)
@@ -108,10 +108,10 @@ fun Login(
                     viewModel.setLoading(true)
                 }
             }
-            Spacer(modifier = Modifier.padding(8.dp))
-            separatorLogin()
-            Spacer(modifier = Modifier.padding(8.dp))
-            GoogleLoginButton()
+            //Spacer(modifier = Modifier.padding(8.dp))
+            //separatorLogin()
+            //Spacer(modifier = Modifier.padding(8.dp))
+            //GoogleLoginButton()
 
             if (loginSuccess) {
                 Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()

@@ -71,36 +71,18 @@ class RegisteredLoginViewModel @Inject constructor(
                     updateUserLocalDataFromNetworkUseCase(email)
                     navController.navigate(NavigationRoutes.Home)
                 } else {
-                    _showError.value = true // Mostrar Toast si la autenticación falla
+                    _showError.value = true
                 }
             } catch (e: FirebaseAuthInvalidUserException) {
-                _showError.value = true // Usuario no registrado
+                _showError.value = true
                 Log.e("RegisteredLogin", "Usuario no encontrado: ${e.message}", e)
             } catch (e: FirebaseAuthInvalidCredentialsException) {
-                _showError.value = true // Credenciales inválidas
+                _showError.value = true
                 Log.e("RegisteredLogin", "Credenciales inválidas: ${e.message}", e)
-            } catch (e: Exception) {
-                _showError.value = true // Error genérico
-                Log.e("RegisteredLogin", "Error inesperado: ${e.message}", e)
             } finally {
                 _isLoading.value = false
             }
 
-
-            /*try {
-                val wea = auth.signInWithEmailAndPassword(email, password).await()
-
-                if (wea.user != null) {
-                    updateUserLocalDataFromNetworkUseCase(email)
-                    navController.navigate(NavigationRoutes.Home)
-                } else {
-                    _showError.value = true // Mostrar Toast si la autenticación falla
-                }
-            } catch (e: Exception) {
-                _showError.value = true // Mostrar Toast si hay una excepción
-            } finally {
-                _isLoading.value = false
-            }*/
         }
     }
     fun showErrorConsumed() {
