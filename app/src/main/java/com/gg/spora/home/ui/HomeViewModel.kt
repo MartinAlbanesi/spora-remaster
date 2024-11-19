@@ -6,6 +6,7 @@ import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.tutorials.data.TutorialModels
+import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.tutorials.domain.UpdateTutorialCompletedUseCase
 import com.gg.spora.tutorials.domain.model.TutorialItem
 import com.gg.spora.tutorials.domain.repository.ITutorialRepositoryLocal
@@ -27,8 +28,7 @@ class HomeViewModel @Inject constructor(
 //    private val getUserNetworkUseCase: GetUserNetworkUseCase
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase,
-    private val tutorialRepositoryLocal: ITutorialRepositoryLocal,
-    private val updateTutorialCompletedUseCase: UpdateTutorialCompletedUseCase
+    val tutorialSelected: TutorialSelected
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -36,16 +36,6 @@ class HomeViewModel @Inject constructor(
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
-
-    private val _showTutorial = MutableStateFlow(true)
-    val showTutorial = _showTutorial.asStateFlow()
-
-    private var _homeTutorial: List<TutorialItem> = emptyList()
-
-    private var _currentTutorialIndex = (0)
-
-    private val _currentTutorialItem = MutableStateFlow<TutorialItem?>(null)
-    val currentTutorialItem = _currentTutorialItem.asStateFlow()
 
     private val _champyQuote = MutableStateFlow<String?>(null)
     val champyQuote = _champyQuote.asStateFlow()
@@ -72,45 +62,9 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getHomeTutorial() {
-
-        viewModelScope.launch {
-            val isTutorialCompleted =
-                tutorialRepositoryLocal.getTutorialById(Tutorials.HOME_TUTORIAL.id)
-
-            if (isTutorialCompleted.isCompleted) {
-                _showTutorial.value = false
-                return@launch
-            }
-
-            _homeTutorial = TutorialModels.homeTutorials
-
-            _currentTutorialItem.value = _homeTutorial.first()
-        }
+        tutorialSelected.getTutorial(Tutorials.HOME_TUTORIAL)
     }
 
-    fun nextTutorialItem() {
-        val nextIndex = _currentTutorialIndex + 1
-        if (nextIndex < _homeTutorial.size - 1) {
-            _currentTutorialIndex = nextIndex
-            _currentTutorialItem.value = _homeTutorial[nextIndex]
-        } else {
-            viewModelScope.launch {
-                _showTutorial.value = false
-
-                val userId = getUserLocalUseCase().first()?.id ?: ""
-                updateTutorialCompletedUseCase(userId, Tutorials.HOME_TUTORIAL.id, true)
-            }
-        }
-    }
-
-    fun skipTutorial() {
-        viewModelScope.launch {
-            _showTutorial.value = false
-
-            val userId = getUserLocalUseCase().first()?.id ?: ""
-            updateTutorialCompletedUseCase(userId, Tutorials.HOME_TUTORIAL.id, true)
-        }
-    }
 
     private fun getOxygen() {
         viewModelScope.launch {
@@ -121,7 +75,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getChampyQuote() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             while (true) {
                 delay(Random.nextLong(3000, 5000))
                 _champyQuote.value = if (!hasShowWelcomeMessage) {
@@ -131,7 +85,7 @@ class HomeViewModel @Inject constructor(
                     SporaConstant.CHAMPY_RANDOM_QUOTE.random()
                 }
 
-                delay(5000)
+                delay(7000)
                 _champyQuote.value = null
             }
         }

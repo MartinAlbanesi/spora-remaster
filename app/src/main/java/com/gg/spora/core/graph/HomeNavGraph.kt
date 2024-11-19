@@ -37,15 +37,11 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val isLoading by homeViewModel.isLoading.collectAsState()
 
-            val currentTutorialItem by homeViewModel.currentTutorialItem.collectAsState()
+            val currentTutorialItem by homeViewModel.tutorialSelected.currentTutorialItem.collectAsState()
 
-            val showTutorial by homeViewModel.showTutorial.collectAsState()
+            val showTutorial by homeViewModel.tutorialSelected.showTutorial.collectAsState()
 
             val champyQuote by homeViewModel.champyQuote.collectAsState()
-
-//            LaunchedEffect(!showTutorial) {
-//                homeViewModel.getChampyQuote()
-//            }
 
             if (!isLoading) {
                 Box(
@@ -86,8 +82,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         isSecondaryTalking = item.isSecondaryTalking,
                         text = item.text,
                         focusPosition = item.focusItem,
-                        onClickSkip = homeViewModel::skipTutorial,
-                        onNextItem = homeViewModel::nextTutorialItem
+                        onClickSkip = homeViewModel.tutorialSelected::skipTutorial,
+                        onNextItem = homeViewModel.tutorialSelected::nextTutorialItem
                     )
                 }
             }
