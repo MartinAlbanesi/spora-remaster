@@ -30,7 +30,8 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
                 },
                 onNavigateToSignUp = {
                     navController.navigate(NavigationRoutes.SignUp)
-                }
+                },
+                filterNames = welcomeViewModel::filterBannedWords
             )
         }
 
