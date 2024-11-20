@@ -30,7 +30,8 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
                 },
                 onNavigateToSignUp = {
                     navController.navigate(NavigationRoutes.SignUp)
-                }
+                },
+                filterNames = welcomeViewModel::filterBannedWords
             )
         }
 
@@ -40,13 +41,13 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
             LoginScreen(
                 viewModel = loginViewModel,
-                onNavigationToHome = {
+                /*onNavigationToHome = {
                     navController.navigate(NavigationRoutes.HomeGraph) {
                         popUpTo(NavigationRoutes.SignUp) {
                             inclusive = true
                         }
                     }
-                },
+                },*/
                 onNavigateToRegisteredLogin = {
                     navController.navigate(NavigationRoutes.RegisteredLogin)
                 }
@@ -58,7 +59,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
             RegisteredLoginScreen(
                 onBackClick = { navController.popBackStack() },
-                onGoogleLoginClick = { },
+//                onGoogleLoginClick = { },
 //                onLoginClick = { },
 //                onRegisterClick = { },
                 navController = navController

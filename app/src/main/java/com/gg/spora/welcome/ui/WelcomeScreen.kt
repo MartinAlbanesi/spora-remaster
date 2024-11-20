@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
+import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.welcome.ui.animations.LogoInitialAnimation
 import com.gg.spora.welcome.ui.components.ChampyWithTopDialogue
@@ -42,7 +43,8 @@ fun WelcomeScreen(
     modifier: Modifier = Modifier,
     setGuestName: (String) -> Unit = {},
     onNavigateToHome: () -> Unit,
-    onNavigateToSignUp: () -> Unit
+    onNavigateToSignUp: () -> Unit,
+    filterNames: (String) -> String = { "" },
 ) {
     var name by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
@@ -87,12 +89,20 @@ fun WelcomeScreen(
                 3 -> GuestEnterNameScreen(
                     modifier,
                     guestName = name,
-                    onValueChange = { name = it }) {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(page + 1)
-                    }
-                }
-
+                    onValueChange = { name = it },
+                    onNavigateBack = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(page - 1)
+                            name = ""
+                        }
+                    },
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(page + 1)
+                        }
+                    },
+                    filterNames = filterNames,
+                )
                 4 -> ChampyTalkGuestScreen(modifier, guestName = name) {
                     setGuestName(name)
                     onNavigateToHome()
@@ -278,8 +288,11 @@ fun GuestEnterNameScreen(
     modifier: Modifier,
     guestName: String,
     onValueChange: (String) -> Unit,
+    onNavigateBack: () -> Unit,
+    filterNames: (String) -> String = { "" },
     onClick: () -> Unit
 ) {
+    var isBannedWord by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -294,12 +307,12 @@ fun GuestEnterNameScreen(
             modifier = Modifier.matchParentSize()
         )
 
-//        Column(
-//            modifier = Modifier
-//                .fillMaxHeight(),
-//            verticalArrangement = Arrangement.SpaceEvenly,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
+
+        TopAppBarOnlyBackArrow(
+            onBackClick = onNavigateBack,
+            modifier = modifier,
+            title = ""
+        )
 
         ChampyWithTopDialogue(
             champy = R.drawable.champy_curious_left_arm_in_the_cheek,
@@ -314,22 +327,26 @@ fun GuestEnterNameScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier
                 .align(Alignment.BottomCenter)
-                .offset(y = -60.dp),
+                .offset(y = (-60).dp),
         ) {
 
-            SporaTextField(modifier = modifier, guestName, onValueChange)
+            SporaTextField(
+                modifier = modifier,
+                guestName,
+                onValueChange,
+                filterNames = filterNames,
+                isAllowedName = {isBannedWord = it}
+            )
 
                 SporaPrimaryButton(
                     modifier.size(width = 350.dp, height = 50.dp),
                     "Siguiente",
                     textSize = 30,
                     onClick = onClick,
-                    isEnable = guestName.length > 3
+                    isEnable = guestName.isNotBlank() && !isBannedWord
                 )
-
         }
     }
-//    }
 }
 
 @Composable
@@ -380,6 +397,12 @@ fun ChampyTalkGuestScreen(
 @Composable
 fun IntroductionScreenPreview() {
     SporaTheme {
-        ChampyTalkGuestScreen(modifier = Modifier, guestName = "Hola", onClick = {})
+        GuestEnterNameScreen(
+            modifier = Modifier,
+            guestName = "Ga",
+            onValueChange = {},
+            onNavigateBack = {},
+            onClick = {},
+        )
     }
 }

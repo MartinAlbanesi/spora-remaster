@@ -35,7 +35,7 @@ import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.core.utils.enums.MushyStates
 import com.gg.spora.ui.theme.SporaTheme
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun Preview() {
 

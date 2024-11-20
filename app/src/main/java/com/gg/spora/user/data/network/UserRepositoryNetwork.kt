@@ -44,7 +44,7 @@ class UserRepositoryNetwork @Inject constructor(
     override fun getAllUser(): Flow<List<User>> {
         return firestore
             .collection(CollectionsDataBase.USERS)
-//            .whereGreaterThan("oxygen", 1)
+            .whereGreaterThan("oxygen", 1)
             .orderBy("oxygen", Query.Direction.DESCENDING)
             .limit(15)
             .snapshots()
