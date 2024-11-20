@@ -1,6 +1,7 @@
 package com.gg.spora.grove.ui
 
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -19,11 +20,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,6 +47,7 @@ import com.gg.spora.grove.ui.components.ButtonWithIcon
 import com.gg.spora.grove.ui.components.ForestTreesFlowRow
 import com.gg.spora.grove.ui.components.SeedTreesRow
 import com.gg.spora.ui.theme.SporaTheme
+import kotlinx.coroutines.launch
 
 /**
  * Composable function for displaying the Grove screen.
@@ -61,8 +71,23 @@ fun GroveScreen(
     scrollState: ScrollState = rememberScrollState(),
     plantForestTree: (ForestTree, String) -> Unit,
     claimOxygen: () -> Unit,
-    popBackStack: () -> Unit
+    popBackStack: () -> Unit,
+    errorState: String?
 ) {
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(errorState) {
+        errorState?.let { errorMessage ->
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = errorMessage,
+                    actionLabel = "OK"
+                )
+            }
+        }
+    }
+
     BackHandler{
         popBackStack()
     }
@@ -186,7 +211,8 @@ fun GrovePreview() {
                 forestTreesColumnCount = 10,
                 plantForestTree = { _, _ -> },
                 claimOxygen = {},
-                popBackStack = {}
+                popBackStack = {},
+                errorState = ""
             )
         }
     }

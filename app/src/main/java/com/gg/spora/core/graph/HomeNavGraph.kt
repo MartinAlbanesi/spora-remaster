@@ -69,6 +69,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val groveViewModel : GroveViewModel = hiltViewModel()
             val uiState by groveViewModel.uiState.collectAsState()
             val isLoading by groveViewModel.isLoading.collectAsState()
+            val errorState by groveViewModel.errorState.collectAsState()
 
             DisposableEffect(Unit) {
                 onDispose {
@@ -87,7 +88,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 popBackStack = {
                     groveViewModel.saveTreeCooldowns()
                     navController.popBackStack()
-                }
+                },
+                errorState = errorState
             )
         }
         composable<NavigationRoutes.Ranking> {

@@ -31,6 +31,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 import java.time.Duration
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -93,6 +94,9 @@ class GroveViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true) // Loading state
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    private val _errorState = MutableStateFlow<String?>(null)
+    val errorState: StateFlow<String?> = _errorState.asStateFlow()
+
     // Data flow for the UI state, combining all data sources
     val uiState: StateFlow<GroveUiState> = combine(
         seedTrees,
@@ -120,71 +124,87 @@ class GroveViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-
+            try {
             // Associated seedTreeId with its cooldown
-            launch {
-                loadSeedTreesUseCase().collect { seedTrees ->
-                    _seedTreeCooldowns.update { currentCooldowns ->
-                        seedTrees.associate { seedTree ->
-                            seedTree.id to (currentCooldowns[seedTree.id] ?: 0L)
+                launch {
+                    loadSeedTreesUseCase().collect { seedTrees ->
+                        _seedTreeCooldowns.update { currentCooldowns ->
+                            seedTrees.associate { seedTree ->
+                                seedTree.id to (currentCooldowns[seedTree.id] ?: 0L)
+                            }
                         }
                     }
                 }
-            }
 
-            // Associated forestTreeId with its growth time
-            launch {
-                loadForestTreesUseCase().collect { forestTrees ->
-                    _forestTreeGrowthTimes.update { currentGrowthTimes ->
-                        forestTrees.associate { forestTree ->
-                            val treeId = forestTree?.id?.toString() ?: "0"
-                            treeId to (currentGrowthTimes.getOrDefault(
-                                treeId,
-                                Duration.between(
-                                    forestTree?.plantingDate ?: LocalDateTime.now(),
-                                    LocalDateTime.now()
-                                ).seconds
-                            ))
+                // Associated forestTreeId with its growth time
+                launch {
+                    loadForestTreesUseCase().collect { forestTrees ->
+                        _forestTreeGrowthTimes.update { currentGrowthTimes ->
+                            forestTrees.associate { forestTree ->
+                                val treeId = forestTree?.id?.toString() ?: "0"
+                                treeId to (currentGrowthTimes.getOrDefault(
+                                    treeId,
+                                    Duration.between(
+                                        forestTree?.plantingDate ?: LocalDateTime.now(),
+                                        LocalDateTime.now()
+                                    ).seconds
+                                ))
+                            }
                         }
                     }
                 }
-            }
 
-            // Combine all data sources into the UI state
-            kotlinx.coroutines.flow.combine(
-                loadSeedTreesUseCase(),
-                loadForestTreesUseCase(),
-                getUserOxygenUseCase(),
-            ) { seedTrees, forestTrees, userOxygen ->
-                Triple(seedTrees, forestTrees, userOxygen)
-            }.collect { (seedTrees, forestTrees, userOxygen) ->
-                // Update UI state with the collected data
-                _seedTrees.update { seedTrees }
-                _forestTrees.update { forestTrees }
-                _userOxygen.update { userOxygen }
+                // Combine all data sources into the UI state
+                kotlinx.coroutines.flow.combine(
+                    loadSeedTreesUseCase(),
+                    loadForestTreesUseCase(),
+                    getUserOxygenUseCase(),
+                ) { seedTrees, forestTrees, userOxygen ->
+                    Triple(seedTrees, forestTrees, userOxygen)
+                }.collect { (seedTrees, forestTrees, userOxygen) ->
+                    // Update UI state with the collected data
+                    _seedTrees.update { seedTrees }
+                    _forestTrees.update { forestTrees }
+                    _userOxygen.update { userOxygen }
 
-                // Initialize seed trees if they are empty
-                initSeedTrees()
+                    // Initialize seed trees if they are empty
+                    initSeedTrees()
 
-                // Calculate accumulated oxygen
-                calculateAccumulatedOxygen()
+                    // Calculate accumulated oxygen
+                    calculateAccumulatedOxygen()
 
-                // Set loading state to false
-                _isLoading.update { false }
+                    // Set loading state to false
+                    _isLoading.update { false }
+                }
+            } catch (e: UnknownHostException) {
+                _errorState.update { "No internet connection. Please check your connection and try again." }
+            } catch (e: Exception) {
+                _errorState.update { "An unexpected error occurred. Please try again later." }
             }
         }
+
     }
 
     fun saveTreeCooldowns(){
         viewModelScope.launch {
-            seedTreeCooldowns.value.forEach { (treeId, _) ->
-                Log.i("GroveViewModel", "saveThreeCooldowns: $treeId")
-                insertCooldownDataUseCase(CooldownData(treeId))
-            }
-            forestTreeGrowthTimes.value.forEach { (treeId, _) ->
-                insertCooldownDataUseCase(CooldownData(treeId))
+            try {
+                seedTreeCooldowns.value.forEach { (treeId, _) ->
+                    Log.i("GroveViewModel", "saveThreeCooldowns: $treeId")
+                    insertCooldownDataUseCase(CooldownData(treeId))
+                }
+                forestTreeGrowthTimes.value.forEach { (treeId, _) ->
+                    insertCooldownDataUseCase(CooldownData(treeId))
+                }
+            } catch (e: UnknownHostException) {
+                handleException("No internet connection. Please check your connection and try again.")
+            } catch (e: Exception) {
+                handleException("An unexpected error occurred. Please try again later." )
             }
         }
+    }
+
+    private fun handleException(message: String) {
+        _errorState.update { message }
     }
 
     override fun onCleared() {
@@ -192,7 +212,6 @@ class GroveViewModel @Inject constructor(
         super.onCleared()
     }
 
-    // Inicializa los árboles semilleros la primera vez que se abre la pantalla
     // Initialize seed trees if they are empty
     fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -212,22 +231,28 @@ class GroveViewModel @Inject constructor(
     fun plantForestTree(forestTree: ForestTree, seedTreeId: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            // Generate a random position until an empty position is found
-            var position = forestTree.position
-            while (_forestTrees.value.getOrNull(position) != null) { // Check if position is occupied
-                position =
-                    (0..(_forestTrees.value.size) - 1).random() // Generate new random position
-            }
-            forestTree.position = position // Update tree's position
+            try {
+                // Generate a random position until an empty position is found
+                var position = forestTree.position
+                while (_forestTrees.value.getOrNull(position) != null) { // Check if position is occupied
+                    position =
+                        (0..(_forestTrees.value.size) - 1).random() // Generate new random position
+                }
+                forestTree.position = position // Update tree's position
 
-            // Save the planted tree to the database
-            insertForestTreeUseCase(forestTree)
-            // Trigger cooldown for SeedTrees
-            triggerSeedTreeCooldown(seedTreeId)
-            // Start growth timer only for the newly planted tree
-            updateForestTreeGrowthTime(forestTree)
-            // Calculate accumulated oxygen for when the tree is adult
-            calculateAccumulatedOxygen()
+                // Save the planted tree to the database
+                insertForestTreeUseCase(forestTree)
+                // Trigger cooldown for SeedTrees
+                triggerSeedTreeCooldown(seedTreeId)
+                // Start growth timer only for the newly planted tree
+                updateForestTreeGrowthTime(forestTree)
+                // Calculate accumulated oxygen for when the tree is adult
+                calculateAccumulatedOxygen()
+            } catch (e: UnknownHostException) {
+                handleException("No internet connection. Please check your connection and try again.")
+            } catch (e: Exception) {
+                handleException("An unexpected error occurred. Please try again later." )
+            }
         }
     }
 
@@ -262,41 +287,54 @@ class GroveViewModel @Inject constructor(
     // Updates the growth stage timer for a forest tree
     private fun updateForestTreeGrowthTime(forestTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            var elapsedTime = (Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds) * 1000 // Time in milliseconds
+            try{
+                var elapsedTime = (Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds) * 1000 // Time in milliseconds
 
-            Log.d("GroveViewModel", "elapsed time: $elapsedTime")
+                Log.d("GroveViewModel", "elapsed time: $elapsedTime")
 
-            while (!forestTree.hasReachedAdultStage) {
-                delay(1000) // Delay for 1 second
-                elapsedTime += 1000 // Increment elapsed time by 1 second
-                // Update growth time in the map
-                _forestTreeGrowthTimes.update { currentGrowthTimes ->
-                    currentGrowthTimes + (forestTree.id to elapsedTime)
+                while (!forestTree.hasReachedAdultStage) {
+                    delay(1000) // Delay for 1 second
+                    elapsedTime += 1000 // Increment elapsed time by 1 second
+                    // Update growth time in the map
+                    _forestTreeGrowthTimes.update { currentGrowthTimes ->
+                        currentGrowthTimes + (forestTree.id to elapsedTime)
+                    }
+
+                    Log.d("GroveViewModel", "Growth Times: ${_forestTreeGrowthTimes.value}")
+                    Log.d("GroveViewModel", "Growth Time passed: $elapsedTime")
+
+                    // Update growth stage
+                    updateGrowthStage(forestTree) // Pass elapsedTime to updateGrowthStage
+
                 }
-
-                Log.d("GroveViewModel", "Growth Times: ${_forestTreeGrowthTimes.value}")
-                Log.d("GroveViewModel", "Growth Time passed: $elapsedTime")
-
-                // Update growth stage
-                updateGrowthStage(forestTree) // Pass elapsedTime to updateGrowthStage
+            } catch (e: UnknownHostException) {
+                handleException("No internet connection. Please check your connection and try again.")
+            } catch (e: Exception) {
+                handleException("An unexpected error occurred. Please try again later." )
             }
         }
     }
 
     // Updates the growth stage of a forest tree
     suspend fun updateGrowthStage(forestTree: ForestTree) {
-        // Assigns the growth stage based on elapsed time
-        forestTree.currentStage = when {
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) < (GROWTH_TIME_DURATION) / 2 -> GrowthStage.SPROUT
-            _forestTreeGrowthTimes.value.getValue(forestTree.id) in (GROWTH_TIME_DURATION) / 2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
-            else -> {
-                forestTree.hasReachedAdultStage = true
-                GrowthStage.ADULT
+        try{
+            // Assigns the growth stage based on elapsed time
+            forestTree.currentStage = when {
+                _forestTreeGrowthTimes.value.getValue(forestTree.id) < (GROWTH_TIME_DURATION) / 2 -> GrowthStage.SPROUT
+                _forestTreeGrowthTimes.value.getValue(forestTree.id) in (GROWTH_TIME_DURATION) / 2..GROWTH_TIME_DURATION -> GrowthStage.MEDIUM
+                else -> {
+                    forestTree.hasReachedAdultStage = true
+                    GrowthStage.ADULT
+                }
             }
-        }
 
-        // Updates the new growth stage into database
-        updateForestTreeGrowthStageByIdUseCase(forestTree)
+            // Updates the new growth stage into database
+            updateForestTreeGrowthStageByIdUseCase(forestTree)
+        } catch (e: UnknownHostException) {
+            handleException("No internet connection. Please check your connection and try again.")
+        } catch (e: Exception) {
+            handleException("An unexpected error occurred. Please try again later." )
+        }
     }
 
     // Calculates the oxygen accumulated by all adult trees planted
@@ -318,11 +356,18 @@ class GroveViewModel @Inject constructor(
     // Logic for when the user press the claim daily oxygen button
     fun claimOxygen() {
         viewModelScope.launch(Dispatchers.IO) {
+            try{
             // Updates the user's oxygen by the accumulated oxygen
             updateUserOxygenUseCase(userOxygen.value + accumulatedOxygen.value)
 
             // Triggers the cooldown for the button
             triggerOxygenCooldown()
+
+            } catch (e: UnknownHostException) {
+                handleException("No internet connection. Please check your connection and try again.")
+            } catch (e: Exception) {
+                handleException("An unexpected error occurred. Please try again later." )
+            }
         }
     }
 
