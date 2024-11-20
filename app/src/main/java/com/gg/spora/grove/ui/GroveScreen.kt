@@ -9,6 +9,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -158,7 +160,7 @@ fun GroveScreen(
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
-private fun GrovePreview() {
+fun GrovePreview() {
     SporaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -179,7 +181,7 @@ private fun GrovePreview() {
                     accumulatedOxygen = 0,
                     userOxygen = 0,
                     oxygenCooldown = 0L,
-                    ),
+                ),
                 isLoading = false,
                 forestTreesColumnCount = 10,
                 plantForestTree = { _, _ -> },
