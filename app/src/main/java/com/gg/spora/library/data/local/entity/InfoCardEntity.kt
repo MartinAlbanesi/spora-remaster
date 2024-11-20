@@ -22,7 +22,7 @@ data class InfoCardEntity(
     @PrimaryKey() var id: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "info") val info: String,
-    @ColumnInfo(name = "image") val image: Int,
+    @ColumnInfo(name = "image") val image: String,
     @ColumnInfo(name = "isUnlocked") var isUnlocked: Boolean = false,
     @ColumnInfo(name = "category") val category: StageType
 )

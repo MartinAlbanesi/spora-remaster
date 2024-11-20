@@ -21,7 +21,7 @@ fun ChallengeStageItem(
     val challengeImage = when (stage) {
         StageType.FOREST -> R.drawable.challenge_icon
         StageType.DESERT -> 1
-        StageType.RIVER -> 2
+        StageType.LAKE -> 2
         StageType.EXPO -> R.drawable.challenge_icon
     }
 

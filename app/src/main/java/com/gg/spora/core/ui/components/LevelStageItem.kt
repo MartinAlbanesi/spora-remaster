@@ -34,7 +34,7 @@ fun LevelStageItem(
     val stageImage = when (stage) {
         StageType.FOREST -> R.drawable.stage_forest_minigames
         StageType.DESERT -> 1
-        StageType.RIVER -> 2
+        StageType.LAKE -> 2
         StageType.EXPO -> R.drawable.stage_forest_minigames
     }
 

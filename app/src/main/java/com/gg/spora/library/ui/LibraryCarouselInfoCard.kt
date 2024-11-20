@@ -192,8 +192,8 @@ fun InfoCardCarousel(
                     model =
                     ImageRequest.Builder(LocalContext.current)
                         .data(card.image)
-                        .placeholder(R.drawable.solar_panel)
-                        .error(R.drawable.solar_panel)
+                        .placeholder(R.drawable.spora_face_splash)
+                        .error(R.drawable.champy_defeated_arms_body)
                         .build(),
                     contentDescription = "library card image",
                     contentScale = ContentScale.FillBounds,
@@ -203,16 +203,6 @@ fun InfoCardCarousel(
                         .padding(top = 2.dp, end = 5.dp, start = 5.dp)
                         .clip(shape = RoundedCornerShape(5.dp))
                 )
-                /*Image(
-                    *//*painter = painterResource(id = card.image)*//* painter = painterResource(id = R.drawable.solar_panel),
-                    contentDescription = "library card image",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(140.dp)
-                        .padding(top = 2.dp, end = 5.dp, start = 5.dp)
-                        .clip(shape = RoundedCornerShape(5.dp))
-                )*/
 
                 Text(
                     text = card.info,

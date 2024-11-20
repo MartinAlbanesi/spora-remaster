@@ -1,4 +1,4 @@
-package com.gg.spora.library
+package com.gg.spora.library.data.local
 
 import android.content.Context
 import androidx.room.Room
@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.core.utils.enums.StageType
-import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.library.domain.mappers.toInfoCardEntity
 import com.gg.spora.library.domain.model.InfoCard
@@ -45,7 +44,7 @@ class InfoCardDaoTest {
 
         //GIVEN
         val expectedInfoCard =
-            InfoCardEntity("1", "test", "test", 1, true, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1.toString(), true, category = StageType.FOREST)
 
         val actualInfoCardEmpty = infoCardDao.getInfoCardById("1")
         Assert.assertNull(actualInfoCardEmpty)
@@ -64,22 +63,22 @@ class InfoCardDaoTest {
 
             //GIVEN
             val expectedInfoCardList = listOf<InfoCard>(
-                InfoCard("1", "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard("2", "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard("3", "test", "test", 1, true, category = StageType.FOREST),
+                InfoCard("1", "test", "test", 1.toString(), true, category = StageType.FOREST),
+                InfoCard("2", "test", "test", 1.toString(), true, category = StageType.FOREST),
+                InfoCard("3", "test", "test", 1.toString(), true, category = StageType.FOREST),
             ).map {
                 it.toInfoCardEntity()
             }
             val completeInfoCardList = listOf<InfoCard>(
-                InfoCard("1", "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard("2", "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard("3", "test", "test", 1, true, category = StageType.FOREST),
-                InfoCard("4", "test", "test", 1, true, category = StageType.RIVER),
-                InfoCard("5", "test", "test", 1, true, category = StageType.RIVER),
-                InfoCard("6", "test", "test", 1, true, category = StageType.DESERT),
-                InfoCard("7", "test", "test", 1, true, category = StageType.DESERT),
-                InfoCard("8", "test", "test", 1, true, category = StageType.DESERT),
-                InfoCard("9", "test", "test", 1, true, category = StageType.DESERT),
+                InfoCard("1", "test", "test", 1.toString(), true, category = StageType.FOREST),
+                InfoCard("2", "test", "test", 1.toString(), true, category = StageType.FOREST),
+                InfoCard("3", "test", "test", 1.toString(), true, category = StageType.FOREST),
+                InfoCard("4", "test", "test", 1.toString(), true, category = StageType.LAKE),
+                InfoCard("5", "test", "test", 1.toString(), true, category = StageType.LAKE),
+                InfoCard("6", "test", "test", 1.toString(), true, category = StageType.DESERT),
+                InfoCard("7", "test", "test", 1.toString(), true, category = StageType.DESERT),
+                InfoCard("8", "test", "test", 1.toString(), true, category = StageType.DESERT),
+                InfoCard("9", "test", "test", 1.toString(), true, category = StageType.DESERT),
             )
 
             //WHEN
@@ -100,7 +99,7 @@ class InfoCardDaoTest {
 
         // Given
         val expectedInfoCard =
-            InfoCardEntity("1", "test", "test", 1, true, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1.toString(), true, category = StageType.FOREST)
 
         infoCardDao.insertInfoCard(expectedInfoCard)
 
@@ -119,10 +118,10 @@ class InfoCardDaoTest {
 
         //GIVEN
         val expectedInfoCard =
-            InfoCardEntity("1", "test", "test", 1, true, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1.toString(), true, category = StageType.FOREST)
 
         var actualInfoCard =
-            InfoCardEntity("1", "test", "test", 1, false, category = StageType.FOREST)
+            InfoCardEntity("1", "test", "test", 1.toString(), false, category = StageType.FOREST)
 
         infoCardDao.insertInfoCard(actualInfoCard)
 

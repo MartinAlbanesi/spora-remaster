@@ -1,41 +1,73 @@
 package com.gg.spora.library
 
+import com.gg.spora.core.data.INetworkConnectivityChecker
+import com.gg.spora.library.data.network.IInfoCardRepositoryNetwork
+import com.gg.spora.library.data.repository.IInfoCardRepositoryLocal
+import com.gg.spora.library.domain.usecases.GetAllInfoCardsUseCase
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.RelaxedMockK
+import org.junit.Before
+import org.junit.Test
+
 class GetAllInfoCardsUseCaseTest {
-/*
+
     private lateinit var getAllInfoCardsUseCase: GetAllInfoCardsUseCase
 
     @RelaxedMockK
-    lateinit var infoCardsRepositoryLocal: IInfoCardRepositoryLocal
+    lateinit var infoCardLocalRepository: IInfoCardRepositoryLocal
 
     @RelaxedMockK
-    lateinit var infoCardsRepositoryNetwork: IInfoCardRepositoryNetwork
+    lateinit var infoCardNetworkRepository: IInfoCardRepositoryNetwork
 
     @RelaxedMockK
-    lateinit var networkInfo: INetworkConnectivityChecker
+    lateinit var networkChecker: INetworkConnectivityChecker
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        getAllInfoCardsUseCase =
-            GetAllInfoCardsUseCase(
-                infoCardsRepositoryLocal,
-                infoCardsRepositoryNetwork,
-                networkInfo
-            )
+        getAllInfoCardsUseCase = GetAllInfoCardsUseCase(
+            localRepository = infoCardLocalRepository,
+            networkRepository = infoCardNetworkRepository,
+            networkInfo = networkChecker
+        )
+
     }
 
     @Test
-    fun `invoke - When ListOf InfoCards Not Exist In Network or Local DB - Then Return Null`() = runTest {
-        // Given
-        coEvery { infoCardsRepositoryLocal.getAllInfoCards() } returns flowOf(emptyList())
-        coEvery { infoCardsRepositoryNetwork.getAllInfoCards() } returns flowOf(emptyList())
+    fun `invoke - When DB is empty - Then Return Nothing`() {
 
-        // When
-        val result = getAllInfoCardsUseCase.invoke().first()
+        //Given
 
-        // Then
-        assertNull(result)
+
+        //When
+
+
+        //Then
 
     }
-*/
+
+    @Test
+    fun `invoke - When DB contains infoCards - Then Return InfoCards`() {
+
+        //Given
+
+
+        //When
+
+
+        //Then
+    }
+
+    @Test
+    fun `invoke - When Network connection is unavailable - Then Return InfoCards from Local`() {
+
+        //Given
+
+
+        //When
+
+
+        //Then
+    }
+
 }

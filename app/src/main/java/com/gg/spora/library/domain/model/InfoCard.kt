@@ -6,7 +6,7 @@ data class InfoCard(
     val id: String,
     val title: String,
     val info: String,
-    val image: Int,
+    val image: String,
     var isUnlocked: Boolean = false,
     val category: StageType
 )
