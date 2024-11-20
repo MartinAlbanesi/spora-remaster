@@ -61,7 +61,9 @@ fun ProfileScreen(
         ) {
             TopAppBarOnlyBackArrow(
                 title = "Perfil",
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                showSettingsIcon = true,
+                onSettingsClick = onSettingsClick
             )
 
             Box(
