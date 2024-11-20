@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -44,6 +45,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
 import com.gg.spora.library.domain.mappers.toInfoCard
@@ -185,8 +188,13 @@ fun InfoCardCarousel(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Image(
-                    /*painter = painterResource(id = card.image)*/ painter = painterResource(id = R.drawable.solar_panel),
+                AsyncImage(
+                    model =
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(card.image)
+                        .placeholder(R.drawable.solar_panel)
+                        .error(R.drawable.solar_panel)
+                        .build(),
                     contentDescription = "library card image",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
@@ -195,6 +203,16 @@ fun InfoCardCarousel(
                         .padding(top = 2.dp, end = 5.dp, start = 5.dp)
                         .clip(shape = RoundedCornerShape(5.dp))
                 )
+                /*Image(
+                    *//*painter = painterResource(id = card.image)*//* painter = painterResource(id = R.drawable.solar_panel),
+                    contentDescription = "library card image",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(140.dp)
+                        .padding(top = 2.dp, end = 5.dp, start = 5.dp)
+                        .clip(shape = RoundedCornerShape(5.dp))
+                )*/
 
                 Text(
                     text = card.info,
