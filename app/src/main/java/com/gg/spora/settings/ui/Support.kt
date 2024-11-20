@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
+import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
 
 @Composable
@@ -48,11 +48,9 @@ fun SupportScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            TopBarWithTitleExitAndIcon(
+            TopAppBarOnlyBackArrow(
                 title = "Soporte",
-                onBackClick = onBackClick,
-                showIcon = false,
-                showSettingsIcon = false
+                onBackClick = onBackClick
             )
 
             Spacer(modifier = Modifier.height(16.dp))

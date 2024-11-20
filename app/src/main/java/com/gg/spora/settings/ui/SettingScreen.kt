@@ -33,9 +33,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.core.ui.components.SporaPrimaryButton
+import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
 @Suppress("LongMethod")
 @Composable
@@ -58,11 +58,9 @@ fun SettingsScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            TopBarWithTitleExitAndIcon(
+            TopAppBarOnlyBackArrow(
                 title = "Opciones",
-                onBackClick = onBackClick,
-                showIcon = false,
-                showSettingsIcon = false
+                onBackClick = onBackClick
             )
 
             Column(

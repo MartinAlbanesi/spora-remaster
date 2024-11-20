@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
+import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
@@ -55,11 +55,9 @@ fun EditProfileScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            TopBarWithTitleExitAndIcon(
-                title = "Editar perfil",
-                onBackClick = onBackClick,
-                showIcon = false,
-                showSettingsIcon = false
+            TopAppBarOnlyBackArrow(
+                title = "Editar Perfil",
+                onBackClick = onBackClick
             )
 
             Column(

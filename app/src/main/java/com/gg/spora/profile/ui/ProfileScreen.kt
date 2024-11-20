@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
+import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.models.User
@@ -58,12 +59,9 @@ fun ProfileScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            TopBarWithTitleExitAndIcon(
+            TopAppBarOnlyBackArrow(
                 title = "Perfil",
-                onBackClick = onBackClick,
-                onSettingsClick = onSettingsClick,
-                showIcon = false,
-                showSettingsIcon = true
+                onBackClick = onBackClick
             )
 
             Box(
