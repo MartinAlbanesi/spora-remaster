@@ -8,9 +8,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,29 +35,36 @@ fun LevelStageItem(
 ) {
 
     val stageImage = when (stage) {
-        StageType.FOREST -> R.drawable.stage_forest_minigames
+        StageType.FOREST -> R.drawable.sunflower
         StageType.DESERT -> 1
         StageType.LAKE -> 2
         StageType.EXPO -> R.drawable.stage_forest_minigames
     }
 
-    val currentImage = if (isBlocked) R.drawable.locked_level else stageImage
+    val colorMatrix = remember { ColorMatrix() }
+
+    if (isBlocked) {
+        colorMatrix.setToSaturation(0f) // Set saturation to 0 for grayscale
+    } else {
+        colorMatrix.setToSaturation(1f)
+    }
 
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(currentImage),
+            painter = painterResource(stageImage),
             contentDescription = "Level Item",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .size(100.dp)
+                .size(100.dp),
+            colorFilter = ColorFilter.colorMatrix(colorMatrix)
         )
         if (!isBlocked) {
             Text(
                 text = itemNumber,
-                color = Color.Black,
+                color = Color.White,
                 fontWeight = FontWeight.Black,
                 fontSize = 44.sp,
             )
