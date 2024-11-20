@@ -23,7 +23,8 @@ fun User.toUserEntity() = UserEntity(
     email = email,
     oxygen = oxygen,
     treesCount = treesCount,
-    userImage = userImage
+    userImage = userImage,
+    weeklyOxygen = weeklyOxygen
 )
 
 fun UserWithLevelsCompletedEntity.toUser() = User(

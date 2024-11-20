@@ -17,7 +17,8 @@ object FakeUserModels {
         "titi@gmail.com",
         100,
         0,
-        R.drawable.spora_face_splash
+        R.drawable.spora_face_splash,
+        100
     )
 
     val fakeLevelsCompletedEntity = listOf(
