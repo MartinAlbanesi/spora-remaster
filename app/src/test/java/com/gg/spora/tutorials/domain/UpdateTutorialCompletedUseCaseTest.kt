@@ -53,7 +53,7 @@ class UpdateTutorialCompletedUseCaseTest{
 
         // Then
         coVerify(exactly = 1) { tutorialRepositoryLocal.updateTutorialCompleted(tutorialId, isCompleted) }
-        coVerify(exactly = 0) { tutorialRepositoryNetwork.updateTutorialCompleted(userId, tutorialId, isCompleted) }
+        coVerify(exactly = 0) { tutorialRepositoryNetwork.updateTutorialCompleted(userId, any()) }
     }
 
     @Test
@@ -73,6 +73,6 @@ class UpdateTutorialCompletedUseCaseTest{
 
         // Then
         coVerify(exactly = 1) { tutorialRepositoryLocal.updateTutorialCompleted(tutorialId, isCompleted) }
-        coVerify(exactly = 1) { tutorialRepositoryNetwork.updateTutorialCompleted(userId, tutorialId, isCompleted) }
+        coVerify(exactly = 1) { tutorialRepositoryNetwork.updateTutorialCompleted(userId, any()) }
     }
 }

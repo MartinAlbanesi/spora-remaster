@@ -164,6 +164,10 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val champyHelpingText by quizViewModel.champyHelpingText.collectAsState()
 
+            val currentTotalRewards by quizViewModel.currentTotalRewards.collectAsState()
+
+            val currentRewards by quizViewModel.currentRewards.collectAsState()
+
             LaunchedEffect(counterQuestion){
                 quizViewModel.onShowChampyHelp()
             }
@@ -181,6 +185,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 showButtonContinue = isCorrect != null,
                 showChampyHelp = showChampyHelp,
                 champyHelpingText = champyHelpingText,
+                totalOxygen = currentTotalRewards,
+                rewards = currentRewards,
                 onNextQuestion = quizViewModel::nextQuestion,
                 onResetGame = quizViewModel::resetGame,
                 onBackForestStage = { navController.popBackStack() },
@@ -259,6 +265,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                     showIcon = false,
                     showButtonContinue = false,
                     showProgressBar = false,
+                    totalOxygen = 0,
                     onNextQuestion = {},
                     onResetGame = {},
                     onBackForestStage = {

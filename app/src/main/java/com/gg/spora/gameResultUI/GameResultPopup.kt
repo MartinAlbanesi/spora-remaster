@@ -31,6 +31,7 @@ fun GameResultPopUp(
     backgroundImage: Int,
     starsState: StarState,
     rewards: List<Int>,
+    totalOxygen: Int = 0,
     onBackStage: () -> Unit,
     onResetGame: () -> Unit,
     onNavigateNextLevel: () -> Unit,
@@ -38,7 +39,7 @@ fun GameResultPopUp(
 
 //    val (localRewards, totalOxygen) = getStarsRewards(starsState, rewards)
 
-    val totalOxygen = getTotalOxygenFromStars(starsState, rewards)
+//    val totalOxygen = getTotalOxygenFromStars(starsState, rewards)
 
     val champyImage = when (starsState) {
         StarState.ZERO -> R.drawable.champy_defeated_arms_body
@@ -94,7 +95,7 @@ fun GameResultPopupPreview() {
                 isVisible = true,
                 backgroundImage = R.drawable.minigame_background_crop,
                 starsState = StarState.ZERO,
-                rewards = listOf(10, 20, 60),
+                rewards = listOf(0, 0, 0),
                 onBackStage = {},
                 onResetGame = {},
                 onNavigateNextLevel = {},

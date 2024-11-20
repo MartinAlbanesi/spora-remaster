@@ -37,9 +37,9 @@ fun StarWithOxygen(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        if (starImage != null) {
+        if (starImage == null) {
             Image(
-                painter = painterResource(id = starImage),
+                painter = painterResource(id = R.drawable.gray_star),
                 contentDescription = "Estrella",
                 modifier = Modifier.size(96.dp)
             )
@@ -77,8 +77,8 @@ private fun StarWithOxygenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             StarWithOxygen(
-                oxygenAmount = 10,
-                starImage = R.drawable.star,
+                oxygenAmount = 0,
+                starImage = null,
                 modifier = Modifier.offset(y = (-16).dp)
             )
         }

@@ -200,6 +200,7 @@ private fun QuizImageScreenPreview() {
                 lives = 5,
                 showButtonContinue = true,
                 counterQuestion = 0,
+                totalOxygen = 0,
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = { },

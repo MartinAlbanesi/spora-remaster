@@ -148,7 +148,7 @@ private fun ChampyDialogConfirmPreview() {
                 title = "Titi",
                 isVisible = true,
                 starsState = StarState.ZERO,
-                rewards = listOf(10,20,30),
+                rewards = listOf(0,0,0),
                 textPrimaryButton = "Jugar",
                 textSecondaryButton = "Cancelar",
                 onClickPrimaryButton = {},

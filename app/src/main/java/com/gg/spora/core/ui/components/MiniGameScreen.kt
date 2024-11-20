@@ -19,7 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -39,6 +38,7 @@ import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
 import com.gg.spora.ui.theme.SporaTheme
+import kotlinx.serialization.json.JsonNull.content
 
 
 @Suppress("LongMethod")
@@ -52,11 +52,13 @@ fun MiniGameScreen(
     lives: Int,
     livesLost: Int = 0,
     counterQuestion: Int,
+    totalOxygen: Int,
     isFinished: Boolean = false,
     showIcon: Boolean = true,
     showButtonContinue: Boolean = true,
     showProgressBar: Boolean = true,
     showChampyHelp: Boolean = false,
+    rewards: List<Int> = emptyList(),
     champyHelpingText: String = "",
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
@@ -96,7 +98,8 @@ fun MiniGameScreen(
             isVisible = true,
             backgroundImage = R.drawable.minigame_background_crop,
             starsState = getRewardsStarState(livesLost = livesLost),
-            rewards = listOf(10, 20, 30),
+            rewards = rewards,
+            totalOxygen = totalOxygen,
             onBackStage = {
                 onBackForestStage()
             },
@@ -220,6 +223,9 @@ private fun MiniGameScreenPreview() {
                 counterQuestion = 0,
                 champyHelpingText = "This is a test",
                 isCorrect = true,
+                isFinished = true,
+                totalOxygen = 0,
+                rewards = listOf(12, 22, 33),
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = {},

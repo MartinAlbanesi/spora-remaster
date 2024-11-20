@@ -16,6 +16,7 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -63,13 +64,16 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         coEvery { getTotalOxygenFromStars(any(), any()) } returns 50
 
         // When
-        updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, oxygen)
+        val actual = updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, oxygen)
 
         // Then
+
+        assertEquals(50, actual.first)
+
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
         coVerify(exactly = 1) { userRepositoryNetwork.updateUserById(any(), any()) }
         coVerify(exactly = 1) { updateOxygenReward(any(), any()) }
-        coVerify(exactly = 1) { getTotalOxygenFromStars(any(), any()) }
+        coVerify(exactly = 0) { getTotalOxygenFromStars(any(), any()) }
     }
 
     @Test
@@ -98,7 +102,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
         coVerify(exactly = 0) { userRepositoryNetwork.updateUserById(any(), any()) }
         coVerify(exactly = 1) { updateOxygenReward(any(), any()) }
-        coVerify(exactly = 1) { getTotalOxygenFromStars(any(), any()) }
+        coVerify(exactly = 0) { getTotalOxygenFromStars(any(), any()) }
     }
 
     @Test
@@ -120,9 +124,11 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         coEvery { getTotalOxygenFromStars(any(), any()) } returns 20
 
         // When
-        updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, oxygen)
+        val actual = updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, oxygen)
 
         // Then
+        assertEquals(0, actual.first)
+
         coVerify(exactly = 0) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
         coVerify(exactly = 0) { userRepositoryNetwork.updateUserById(any(), any()) }
         coVerify(exactly = 0) { updateOxygenReward(any(), any()) }
@@ -133,7 +139,7 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
     fun `invoke - When user do not have levels completed - Then Save new level with starState & Oxygen won`() = runTest {
 
         // Given
-        val userWithinoutLevels = FakeUserModels.fakeUsers.last()
+        val userWithoutLevels = FakeUserModels.fakeUsers.last()
         val levelId = "1"
         val stageType = StageType.FOREST
         val starState = StarState.TWO
@@ -142,17 +148,18 @@ class UpdateUserLevelsAndOxygenUseCaseTest {
         mockkStatic(::getTotalOxygenFromStars)
         mockkStatic(::updateOxygenReward)
 
-        coEvery { userRepositoryLocal.getUser() } returns flowOf(userWithinoutLevels)
+        coEvery { userRepositoryLocal.getUser() } returns flowOf(userWithoutLevels)
         coEvery { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) } returns Unit
         coEvery { getUserAuthUseCase() } returns currentUser
         coEvery { userRepositoryNetwork.updateUserById(any(), any()) } returns Unit
         coEvery { updateOxygenReward(any(), any()) } returns oxygen
-        coEvery { getTotalOxygenFromStars(any(), any()) } returns 20
+//        coEvery { getTotalOxygenFromStars(any(), any()) } returns 20
 
         // When
-        updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, oxygen)
+        val actual = updateUserLevelsAndOxygenUseCase(levelId, starState, stageType, oxygen)
 
         // Then
+        assertEquals(30, actual.first)
         coVerify(exactly = 1) { userRepositoryLocal.updateUserWithLevelCompleted(any(), any()) }
         coVerify(exactly = 0) { userRepositoryNetwork.updateUserById(any(), any()) }
         coVerify(exactly = 0) { updateOxygenReward(any(), any()) }

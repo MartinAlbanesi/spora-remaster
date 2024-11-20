@@ -1,6 +1,5 @@
 package com.gg.spora.miniGames.ui
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -66,6 +65,12 @@ class QuizViewModel @Inject constructor(
 
     private val _champyHelpingText = MutableStateFlow("Ingresar texto de ayuda de la Question")
     val champyHelpingText = _champyHelpingText.asStateFlow()
+
+    private val _currentTotalRewards = MutableStateFlow(0)
+    val currentTotalRewards = _currentTotalRewards.asStateFlow()
+
+    private val _currentRewards = MutableStateFlow(listOf(0,0,0))
+    val currentRewards = _currentRewards.asStateFlow()
 
     init {
         getRandomQuestions()
@@ -237,12 +242,20 @@ class QuizViewModel @Inject constructor(
             val currentStarState = getRewardsStarState(livesLost = _livesLost.value)
             val currentLevelOxygenRewards = quizRoute.oxygenRewards
 
+//            _currentRewards.value = updateOxygenReward(
+//                starState = currentStarState,
+//                oxygenRewards = currentLevelOxygenRewards
+//            )
+
             updateUserLevelsAndOxygenUseCase(
                 levelId = quizRoute.levelId,
                 starState = currentStarState,
                 stageType = getStageTypeByName(quizRoute.stageType),
                 oxygenRewards = currentLevelOxygenRewards
-            )
+            ).apply {
+                _currentTotalRewards.value = this.first
+                _currentRewards.value = this.second
+            }
         }
     }
 
