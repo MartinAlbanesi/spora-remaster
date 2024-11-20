@@ -1,4 +1,6 @@
 package com.gg.spora.ranking.ui
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,6 +36,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import java.time.Duration
+
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Suppress("CyclomaticComplexMethod", "LongMethod")
 
 
@@ -78,14 +83,16 @@ fun Ranking(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = "Tiempo hasta el reinicio: ${timeUntilReset.toHours()}h ${timeUntilReset.toMinutesPart()}m ${timeUntilReset.toSecondsPart()}s",
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.White,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(horizontal = 16.dp)
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Text(
+                text = "Tiempo hasta el reinicio: ${timeUntilReset.toHours()}h ${timeUntilReset.toMinutesPart()}m ${timeUntilReset.toSecondsPart()}s",
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.White,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp)
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -181,19 +188,31 @@ fun Ranking(
                                 .padding(bottom = 5.dp, start = 8.dp)
                         )
 
-                        Text(
-                            text = item.userName,
-                            style = if (item.userName.count() > 12) {
-                                MaterialTheme.typography.titleSmall
-                            } else {
-                                MaterialTheme.typography.titleMedium
-                            },
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
+                        Column(
                             modifier = Modifier
-                                .padding(bottom = 2.dp)
                                 .padding(start = 10.dp)
-                        )
+                        ) {
+                            Text(
+                                text = item.userName,
+                                style = if (item.userName.count() > 12) {
+                                    MaterialTheme.typography.titleSmall
+                                } else {
+                                    MaterialTheme.typography.titleMedium
+                                },
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .padding(bottom = 2.dp)
+                            )
+                            Text(
+                                text = item.email,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .padding(bottom = 2.dp)
+                            )
+                        }
+
                         Spacer(modifier = Modifier.weight(1f))
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -331,19 +350,31 @@ fun Ranking(
                     if (currentUser?.userName != null) {
                         userName = currentUser.userName
                     }
-                    Text(
-                        text = userName,
-                        style = if (userName.count() > 12) {
-                            MaterialTheme.typography.titleSmall
-                        } else {
-                            MaterialTheme.typography.titleMedium
-                        },
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.Black,
+                    Column(
                         modifier = Modifier
-                            .padding(bottom = 5.dp)
                             .padding(start = 10.dp)
-                    )
+                    ) {
+                        Text(
+                            text = userName,
+                            style = if (userName.count() > 12) {
+                                MaterialTheme.typography.titleSmall
+                            } else {
+                                MaterialTheme.typography.titleMedium
+                            },
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .padding(bottom = 5.dp)
+                        )
+                        Text(
+                            text = currentUser?.email ?: "",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Gray,
+                            modifier = Modifier
+                                .padding(bottom = 2.dp)
+                        )
+                    }
+
                     Spacer(modifier = Modifier.weight(1f))
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -371,12 +402,15 @@ fun Ranking(
     }
 }
 
+
 @Preview
 @Composable
 fun RankingPreview() {
-    Ranking(
-        userList = FakeUserModels.fakeUsers,
-        onBackClick = {},
-        currentUser = null
-    )
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        Ranking(
+            userList = FakeUserModels.fakeUsers,
+            onBackClick = {},
+            currentUser = null,
+        )
+    }
 }

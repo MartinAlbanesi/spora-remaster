@@ -1,5 +1,7 @@
 package com.gg.spora.ranking.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.user.domain.GetAllUserNetworkUseCase
@@ -14,6 +16,7 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class RankingViewModel @Inject constructor(
     private val getAllUserNetworkUseCase: GetAllUserNetworkUseCase,
@@ -51,6 +54,7 @@ class RankingViewModel @Inject constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun startCountdownTimer() {
         viewModelScope.launch {
             while (true) {
