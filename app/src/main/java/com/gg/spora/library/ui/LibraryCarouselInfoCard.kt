@@ -56,7 +56,6 @@ fun calculateCurrentOffsetForPage(page: Int, currentPage: Int, currentPageOffset
     return (currentPage - page) + currentPageOffset
 }
 
-
 @Composable
 fun LibraryCarouselInfoCard(cardList: List<InfoCard>) {
     val pagerState = rememberPagerState(
@@ -187,7 +186,7 @@ fun InfoCardCarousel(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Image(
-                    painter = painterResource(id = card.image.toInt()),
+                    /*painter = painterResource(id = card.image)*/ painter = painterResource(id = R.drawable.solar_panel),
                     contentDescription = "library card image",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier

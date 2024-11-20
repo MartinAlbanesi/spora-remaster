@@ -31,9 +31,6 @@ import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
 /**
  * @param modifier Modifier
- * @param onClickFirst Lambda function to navigate to forest screen
- * @param onClickSecond Lambda function to navigate to river screen
- * @param onClickThird Lambda function to navigate to desert screen
  * @param onBackButtonClick Lambda function to navigate to previous screen
  */
 

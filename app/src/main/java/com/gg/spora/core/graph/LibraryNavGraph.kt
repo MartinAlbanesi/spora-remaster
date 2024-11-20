@@ -21,6 +21,7 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
+
             LibraryScreen(
                 onBackButtonClick = { navController.navigate(NavigationRoutes.Home) },
                 onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
