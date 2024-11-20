@@ -169,7 +169,7 @@ class QuizViewModel @Inject constructor(
             _livesLost.value++
         }
 
-        _relationsItems.value = emptyList()
+//        _relationsItems.value = emptyList()
 
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!
@@ -217,6 +217,7 @@ class QuizViewModel @Inject constructor(
         _currentQuestion.value = _questions.value[_counterQuestion.value]
         _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
         _isCorrect.value = null
+        _relationsItems.value = emptyList()
     }
 
     fun resetGame() {

@@ -69,7 +69,8 @@ fun RelationItemSelected(
             selectedContainerColor = colorResource(R.color.primary),
             selectedLeadingIconColor = Color.Black,
             disabledContainerColor = backgroundColor,
-            disabledLabelColor = textColor
+            disabledLabelColor = textColor,
+            disabledSelectedContainerColor = colorResource(R.color.primary),
         ),
         selected = isSelected,
         shape = MaterialTheme.shapes.large,
@@ -104,7 +105,7 @@ private fun RelationItemSelectedPreview() {
                         .height(60.dp),
                     answer = "Enable",
                     isCorrect = null,
-                    isSelected = false,
+                    isSelected = true,
                     isEnabled = true,
                     onSelected = { }
                 )

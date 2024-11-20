@@ -232,7 +232,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                 selectedItems = selectedItems,
                                 isCorrect = isCorrect,
                                 onSelectedItem = quizViewModel::onSelectedItem,
-                                onConfirmSelecteds = quizViewModel::relationsAnswerSelected,
+                                onConfirmSelects = quizViewModel::relationsAnswerSelected,
                             )
                         }
                     }

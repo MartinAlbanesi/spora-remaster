@@ -47,15 +47,11 @@ fun RelationsScreen(
     selectedItems: List<String>,
     isCorrect: Boolean?,
     onSelectedItem: (answerId: String) -> Unit,
-    onConfirmSelecteds: () -> Unit
+    onConfirmSelects: () -> Unit
 ) {
-
-
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
-
-
         ConstraintLayout(
             modifier = modifier
         ) {
@@ -136,7 +132,7 @@ fun RelationsScreen(
         }
         if (selectedItems.size == 3 && isCorrect == null) {
             Button(
-                onClick = onConfirmSelecteds,
+                onClick = onConfirmSelects,
                 modifier = Modifier
                     .padding(16.dp)
                     .heightIn(min = 48.dp, max = 60.dp)
@@ -197,7 +193,7 @@ private fun RelationsScreenPreview() {
                         selectedItems = listOf("55", "56", "57"),
                         isCorrect = isCorrect,
                         onSelectedItem = { },
-                        onConfirmSelecteds = {},
+                        onConfirmSelects = {},
                     )
                 }
             )
