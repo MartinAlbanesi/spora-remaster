@@ -101,4 +101,7 @@ object NavigationRoutes {
 
     @Serializable
     object EditProfileScreen
+
+    @Serializable
+    object SupportScreen
 }

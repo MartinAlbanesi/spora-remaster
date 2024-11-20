@@ -8,6 +8,7 @@ import androidx.navigation.navigation
 import com.gg.spora.settings.ui.EditProfileScreen
 import com.gg.spora.settings.ui.SettingViewModel
 import com.gg.spora.settings.ui.SettingsScreen
+import com.gg.spora.settings.ui.SupportScreen
 
 fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.SettingGraph>(startDestination = NavigationRoutes.SettingScreen) {
@@ -22,7 +23,8 @@ fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
                         navController.navigate(NavigationRoutes.AuthGraph)
                     }
                 },
-                onNavigateToEditProfile = { navController.navigate(NavigationRoutes.EditProfileScreen) }
+                onNavigateToEditProfile = { navController.navigate(NavigationRoutes.EditProfileScreen) },
+                onNavigateToSupport = { navController.navigate(NavigationRoutes.SupportScreen) }
             )
         }
         composable<NavigationRoutes.EditProfileScreen> {
@@ -31,6 +33,11 @@ fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
             )
 
     }
+        composable<NavigationRoutes.SupportScreen> {
+            SupportScreen(
+                onBackClick = { navController.popBackStack() },
+                onSendClick = { subject, description -> /* handle send */ })
+        }
 
 }
 }

@@ -42,7 +42,8 @@ import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 fun SettingsScreen(
     onBackClick: () -> Unit,
     onLogOut: () -> Unit,
-    onNavigateToEditProfile: () -> Unit
+    onNavigateToEditProfile: () -> Unit,
+    onNavigateToSupport: () -> Unit
 ) {
     var showAboutUs by remember { mutableStateOf(false) }
 
@@ -166,7 +167,7 @@ fun SettingsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 16.dp)
-                                .clickable { /*navigate to support*/ },
+                                .clickable { onNavigateToSupport() },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Soporte", modifier = Modifier.weight(1f))
@@ -224,7 +225,8 @@ private fun SettingsScreenPreview() {
             SettingsScreen(
                 onBackClick = {},
                 onLogOut = {},
-                onNavigateToEditProfile = {}
+                onNavigateToEditProfile = {},
+                onNavigateToSupport = {}
             )
         }
     }

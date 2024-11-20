@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,9 +33,10 @@ import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 @Composable
 fun SupportScreen(
     onBackClick: () -> Unit,
-    onSendClick: () -> Unit
+    onSendClick: (String, String) -> Unit
 ) {
     var description by remember { mutableStateOf("") }
+    var selectedSubject by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -99,13 +101,15 @@ fun SupportScreen(
                             .verticalScroll(rememberScrollState())
                             .padding(16.dp)
                     ) {
-                        ClickableRow("Opción 1") { /* Acción al hacer clic */ }
-                        Divider(color = Color.Black, thickness = 1.dp)
-                        ClickableRow("Opción 2") { /* Acción al hacer clic */ }
-                        Divider(color = Color.Black, thickness = 1.dp)
-                        ClickableRow("Opción 3") { /* Acción al hacer clic */ }
-                        Divider(color = Color.Black, thickness = 1.dp)
-                        ClickableRow("Opción 4") { /* Acción al hacer clic */ }
+                        ClickableRow("Cuenta y perfil") { selectedSubject = "Cuenta y perfil" }
+                        HorizontalDivider(thickness = 1.dp, color = Color.Black)
+                        ClickableRow("Errores y problemas técnicos") { selectedSubject = "Errores y problemas técnicos" }
+                        HorizontalDivider(thickness = 1.dp, color = Color.Black)
+                        ClickableRow("Accesibilidad") { selectedSubject = "Accesibilidad" }
+                        HorizontalDivider(thickness = 1.dp, color = Color.Black)
+                        ClickableRow("Sugerencias") { selectedSubject = "Sugerencias" }
+                        HorizontalDivider(thickness = 1.dp, color = Color.Black)
+                        ClickableRow("Otro") { selectedSubject = "Otro" }
                     }
                 }
             }
@@ -143,7 +147,7 @@ fun SupportScreen(
 
             SporaPrimaryButton(
                 text = "Enviar",
-                onClick = onSendClick,
+                onClick = { onSendClick(selectedSubject, description) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
@@ -151,7 +155,6 @@ fun SupportScreen(
         }
     }
 }
-
 
 @Composable
 fun ClickableRow(text: String, onClick: () -> Unit) {
@@ -176,6 +179,6 @@ fun ClickableRow(text: String, onClick: () -> Unit) {
 fun SupportScreenPreview() {
     SupportScreen(
         onBackClick = {},
-        onSendClick = {},
+        onSendClick = { subject, description -> }
     )
 }
