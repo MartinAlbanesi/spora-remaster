@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,17 +35,20 @@ fun OptionItemButton(
 
     val textColor by animateColorAsState(
         when (isCorrect) {
-            true -> Color.White
-            false -> Color.White
+//            true -> Color.White
+//            false -> Color.White
             null -> colorResource(R.color.primary_10)
-        }, label = "textColor"
+            else -> Color.Black
+        },
+        label = "textColor"
     )
 
     val backgroundColor by animateColorAsState(
         when (isCorrect) {
-            true -> colorResource(R.color.secondary)
-            false -> colorResource(R.color.error)
+//            true -> colorResource(R.color.secondary)
+//            false -> colorResource(R.color.error)
             null -> colorResource(R.color.cream)
+            else -> MaterialTheme.colorScheme.primary
         },
         label = "backgroundColor"
     )

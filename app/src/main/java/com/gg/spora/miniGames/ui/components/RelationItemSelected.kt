@@ -31,7 +31,7 @@ import com.gg.spora.ui.theme.SporaTheme
 fun RelationItemSelected(
     modifier: Modifier = Modifier,
     answer: String,
-    isCorrect: Boolean?,
+    isCorrect: Boolean? = null,
     isSelected: Boolean,
     isEnabled: Boolean,
     onSelected: () -> Unit

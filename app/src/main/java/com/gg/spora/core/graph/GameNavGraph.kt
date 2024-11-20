@@ -1,14 +1,9 @@
 package com.gg.spora.core.graph
 
-import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOut
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,7 +17,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
@@ -204,6 +198,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                 questionTitle = currentQuestion!!.question,
                                 answerOptions = currentQuestion!!.answers,
                                 onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                onConfirmAnswer = quizViewModel::onConfirmAnswer,
                             )
                         }
 
@@ -217,6 +212,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                 currentImageResIdState = currentImage,
                                 isCorrect = isCorrect,
                                 onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                onConfirmAnswer = quizViewModel::onConfirmAnswer,
                             )
                         }
 

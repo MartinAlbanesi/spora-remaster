@@ -124,7 +124,7 @@ fun RelationsScreen(
                             .fillMaxHeight(0.1f),
 //                        .heightIn(max = 60.dp),
                         answer = answer.answer,
-                        isCorrect = answer.isCorrect,
+//                        isCorrect = answer.isCorrect,
                         isEnabled = isCorrect == null,
                         isSelected = selectedItems.contains(answer.id),
                         onSelected = { onSelectedItem(answer.id) }

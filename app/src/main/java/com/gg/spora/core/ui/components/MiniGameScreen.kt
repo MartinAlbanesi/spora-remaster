@@ -1,6 +1,7 @@
 package com.gg.spora.core.ui.components
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -63,6 +64,23 @@ fun MiniGameScreen(
     onNavigateNextLevel: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
+    val textColor by animateColorAsState(
+        when (isCorrect) {
+            true -> Color.White
+            false -> Color.White
+            null -> colorResource(R.color.primary_10)
+        }, label = "textColor"
+    )
+
+    val backgroundColor by animateColorAsState(
+        when (isCorrect) {
+            true -> colorResource(R.color.secondary)
+            false -> colorResource(R.color.error)
+            null -> colorResource(R.color.cream)
+        },
+        label = "backgroundColor"
+    )
 
     val champyImage = getChampyImageMiniGame(isCorrect)
 
@@ -164,8 +182,8 @@ fun MiniGameScreen(
                     onNextQuestion()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White,
-                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = textColor,
+                    containerColor = backgroundColor,
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -201,6 +219,7 @@ private fun MiniGameScreenPreview() {
                 lives = 5,
                 counterQuestion = 0,
                 champyHelpingText = "This is a test",
+                isCorrect = true,
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = {},

@@ -1,5 +1,6 @@
 package com.gg.spora.miniGames.ui
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -100,31 +101,49 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
+//        _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
+
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 // si la respuesta es la Correcta
                 if (it.id == answerId) {
 
-                    _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+//                    _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
 
                     it.copy(
-                        isCorrect = _isCorrect.value,
+//                        isCorrect = correctAnswer,
+                        isCorrect = true
                     )
                 }
                 // si la respuesta es Incorrecta
                 else {
                     it.copy(
-                        isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
+//                        isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
+                        isCorrect = null,
                     )
                 }
             }
         )
 
+//        if (_isCorrect.value == false) {
+//            _champyHelpingText.value = "La respuesta era: Japon"
+//            _lives.value--
+//            _livesLost.value++
+//        }
+    }
+
+    fun onConfirmAnswer(answerId: String) {
+        val correctAnswer = _currentQuestion.value!!.answerId
+        _isCorrect.value = correctAnswer == answerId
+
+        _showChampyHelp.value = true
+
         if (_isCorrect.value == false) {
-            _champyHelpingText.value = "La respuesta era: Japon"
+            _champyHelpingText.value = "La respuesta era: ${_currentQuestion.value!!.answers.first { it.id == correctAnswer }.answer}"
             _lives.value--
             _livesLost.value++
+        }else{
+            _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
         }
     }
 
