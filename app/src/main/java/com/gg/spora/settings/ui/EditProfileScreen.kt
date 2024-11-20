@@ -1,6 +1,7 @@
 package com.gg.spora.settings.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +40,7 @@ fun EditProfileScreen(
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var showSnackbar by remember { mutableStateOf(false) }
+    var showPopup by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -80,6 +82,7 @@ fun EditProfileScreen(
                         modifier = Modifier
                             .size(200.dp)
                             .clip(RoundedCornerShape(16.dp))
+                            .clickable { showPopup = true }
                     )
                 }
 
@@ -112,17 +115,6 @@ fun EditProfileScreen(
                         .clip(RoundedCornerShape(16.dp))
                 )
 
-
-                /* TextField(
-                     value = email,
-                     onValueChange = { email = it },
-                     label = { Text("Correo Electrónico Nuevo") },
-                     modifier = Modifier
-                         .fillMaxWidth()
-                         .padding(vertical = 16.dp)
-                         .clip(RoundedCornerShape(16.dp))
-                 )*/
-
                 Spacer(modifier = Modifier.weight(1f))
 
                 SporaPrimaryButton(
@@ -146,6 +138,10 @@ fun EditProfileScreen(
             ) {
                 Text("Datos actualizados")
             }
+        }
+
+        if (showPopup) {
+            ImagePopup(onDismiss = { showPopup = false })
         }
     }
 }
