@@ -17,7 +17,7 @@ fun AnswerLocal.toAnswer() = Answer(
     typeQuestion = getTypeQuestionEnum(typeQuestion)
 )
 
-fun QuestionLocal.toQuestion(context: Context) = Question(
+/*fun QuestionLocal.toQuestion(context: Context) = Question(
     id = id,
     question = question,
     answerId = answerId,
@@ -25,7 +25,7 @@ fun QuestionLocal.toQuestion(context: Context) = Question(
     typeGame = getTypeGameEnum(typeGame),
     typeQuestion = getTypeQuestionEnum(typeQuestion),
     image = getResourceImageFromString(context = context, resourcesString = image ?: "0")
-)
+)*/
 
 //fun AnswerApi.toAnswer() = Answer(
 //    id = id ?: "",
