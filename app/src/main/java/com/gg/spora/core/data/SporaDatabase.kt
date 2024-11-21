@@ -7,6 +7,8 @@ import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
 import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.library.data.local.entity.InfoCardEntity
+import com.gg.spora.missions.data.local.MissionDao
+import com.gg.spora.missions.data.local.MissionEntity
 import com.gg.spora.stage.data.local.StageDao
 import com.gg.spora.stage.data.local.models.LevelEntity
 import com.gg.spora.stage.data.local.models.StageLevelEntity
@@ -25,7 +27,8 @@ import com.gg.spora.user.data.local.entities.UserEntity
         InfoCardEntity::class,
         LevelEntity::class,
         StageLevelEntity::class,
-        TutorialCompletedEntity::class
+        TutorialCompletedEntity::class,
+        MissionEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -41,4 +44,6 @@ abstract class SporaDatabase : RoomDatabase() {
     abstract fun stageDao(): StageDao
 
     abstract fun tutorialCompletedDao(): TutorialCompletedDao
+
+    abstract fun missionDao(): MissionDao
 }
