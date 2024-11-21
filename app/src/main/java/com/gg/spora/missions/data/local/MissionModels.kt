@@ -21,4 +21,21 @@ object MissionModels {
             counter = 0,
         ),
     )
+
+    val fakeMissions = listOf(
+        Mission(
+            id = 1,
+            text = "Visitar a Mushy",
+            oxygenReward = 10,
+            objective = 1,
+            counter = 0,
+        ),
+        Mission(
+            id = 2,
+            text = "Completar un nivel",
+            oxygenReward = 20,
+            objective = 1,
+            counter = 0,
+        ),
+    )
 }
