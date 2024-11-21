@@ -29,7 +29,6 @@ class UpdateInfoCardUseCase @Inject constructor(
             Log.d("UpdateInfoCardUseCase", "Network InfoCard updated successfully")
 
         }catch (e: NoInternetConnectionException){
-            e.printStackTrace()
             Log.e("UpdateInfoCardUseCase", e.message.toString())
         }
         infoCardRepositoryLocal.updateInfoCard(infoCard)

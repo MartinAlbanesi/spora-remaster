@@ -32,7 +32,6 @@ class InsertNewInfoCardUseCase @Inject constructor(
             Log.d("InsertNewInfoCardUseCase", "InfoCard added successfully to Network")
 
         }catch (e: NoInternetConnectionException) {
-            e.printStackTrace()
             Log.d("InsertNewInfoCardUseCase", e.message.toString())
         }
         infoCardRepositoryLocal.insertInfoCard(infoCard)

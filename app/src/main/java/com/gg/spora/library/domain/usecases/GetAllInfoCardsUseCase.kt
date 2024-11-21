@@ -31,7 +31,6 @@ class GetAllInfoCardsUseCase @Inject constructor(
             networkInfo.performNetworkConnectivityCheck()
             Log.d("GetAllInfoCardsUseCase", "Internet connection available")
 
-
             updateLocalData(networkRepository.getAllInfoCards().first())
             Log.d("GetAllInfoCardsUseCase", "Local data updated")
 
@@ -40,7 +39,6 @@ class GetAllInfoCardsUseCase @Inject constructor(
 
         } catch (e: NoInternetConnectionException) {
 
-            e.printStackTrace()
             Log.d("GetAllInfoCardsUseCase", e.message.toString())
 
             if (localRepository.getAllInfoCards().first().isNotEmpty()) {
