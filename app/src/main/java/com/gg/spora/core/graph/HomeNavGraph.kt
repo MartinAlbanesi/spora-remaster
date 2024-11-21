@@ -48,6 +48,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val isUserLoggedIn by homeViewModel.isUserLoggedIn.collectAsState()
 
+            val missions by homeViewModel.missions.collectAsState()
+
             if (!isLoading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -60,6 +62,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     oxygen = userOxygen,
                     showTutorial = showTutorial,
                     champyQuote = champyQuote,
+                    missions = missions,
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },

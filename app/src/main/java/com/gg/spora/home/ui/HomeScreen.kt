@@ -1,5 +1,10 @@
 package com.gg.spora.home.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,6 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,6 +31,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
@@ -29,7 +39,9 @@ import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
+import com.gg.spora.home.ui.components.MissionScreen
 import com.gg.spora.home.ui.components.SignButton
+import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
@@ -38,6 +50,7 @@ fun HomeScreen(
     oxygen: Int,
     showTutorial: Boolean = true,
     champyQuote: String?,
+    missions: List<Mission>,
     onNavigateToForestStage: () -> Unit,
     onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
@@ -45,6 +58,8 @@ fun HomeScreen(
     onNavigateToProfile: () -> Unit,
     onNavigateToGrove: () -> Unit
 ) {
+
+    var showMission by rememberSaveable { mutableStateOf(true) }
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
@@ -58,11 +73,13 @@ fun HomeScreen(
             text = "Ranking",
             onClick = onNavigateToRanking
         ),
-//        HomeIcon(
-//            image = R.drawable.missions_icon,
-//            text = "Misiones",
-//            onClick = {}
-//        )
+        HomeIcon(
+            image = R.drawable.missions_icon,
+            text = "Misiones",
+            onClick = {
+                showMission = !showMission
+            }
+        )
     )
 
     // Icons in the right
@@ -115,7 +132,7 @@ fun HomeScreen(
             Column(
                 modifier = Modifier,
                 horizontalAlignment = Alignment.CenterHorizontally
-                    //.align(Alignment.TopStart)
+                //.align(Alignment.TopStart)
             ) {
                 leftIcons.forEach { (image, text, onClick) ->
                     ImageWithTextVertical(
@@ -163,7 +180,7 @@ fun HomeScreen(
                     .align(Alignment.Center)
 //                    .fillMaxSize()
             ) {
-                if(!showTutorial){
+                if (!showTutorial) {
                     ChampyBlinkAnimation(
                         modifier = Modifier
                             .size(140.dp)
@@ -187,6 +204,25 @@ fun HomeScreen(
             }
         }
     }
+
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        AnimatedVisibility(
+            showMission,
+            enter = expandHorizontally(),
+            exit = shrinkHorizontally(),
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+        ) {
+            MissionScreen(
+                missions = missions,
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+            ) { }
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -201,6 +237,7 @@ private fun MiniGameScreenPreview() {
                 modifier = Modifier.fillMaxSize(),
                 oxygen = 0,
                 showTutorial = false,
+                missions = emptyList(),
                 champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {},

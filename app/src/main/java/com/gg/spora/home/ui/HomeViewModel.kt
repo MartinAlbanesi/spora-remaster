@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
+import com.gg.spora.missions.domain.GetMissionsUseCase
+import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.GetUserLocalUseCase
@@ -26,7 +28,8 @@ class HomeViewModel @Inject constructor(
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase,
     private val getUserAuthUseCase: GetUserAuthUseCase,
-    val tutorialSelected: TutorialSelected
+    val tutorialSelected: TutorialSelected,
+    private val getMissionsUseCase: GetMissionsUseCase
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -46,6 +49,12 @@ class HomeViewModel @Inject constructor(
     private val _isUserLoggedIn = MutableStateFlow(false)
     val isUserLoggedIn = _isUserLoggedIn.asStateFlow()
 
+    private val _missions = MutableStateFlow(emptyList<Mission>())
+    val missions = _missions.asStateFlow()
+
+    private val _showMission = MutableStateFlow(false)
+    val showMission = _showMission.asStateFlow()
+
     init {
 //        getUser()
         getUserName()
@@ -53,6 +62,15 @@ class HomeViewModel @Inject constructor(
         tutorialSelected.getTutorial(Tutorials.HOME_TUTORIAL)
         getOxygen()
         getChampyQuote()
+        getMissions()
+    }
+
+    private fun getMissions() {
+        viewModelScope.launch {
+            getMissionsUseCase().collect {
+                _missions.value = it
+            }
+        }
     }
 
     private fun getUserName() {

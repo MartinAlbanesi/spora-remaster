@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
@@ -50,6 +51,7 @@ fun MissionScreen(
     ) {
         Column(
             modifier = Modifier
+                .clip(RoundedCornerShape(14.dp, 14.dp, 0.dp, 0.dp))
                 .height(48.dp)
                 .background(color = colorResource(id = R.color.primary))
                 .fillMaxWidth()
@@ -67,7 +69,9 @@ fun MissionScreen(
 //            Text(text = "12:00:00")
         }
         missions.forEach { mission ->
-            MissionCard(mission = mission)
+            MissionCard(
+                mission = mission
+            )
         }
     }
 }
@@ -93,7 +97,7 @@ fun MissionCard(
         colors = ListItemDefaults.colors(
             containerColor = colorResource(id = R.color.cream),
         ),
-        modifier = Modifier.clip(MaterialTheme.shapes.medium),
+        modifier = modifier.clip(MaterialTheme.shapes.medium),
         overlineContent = {
             Text(
                 text = mission.text,
