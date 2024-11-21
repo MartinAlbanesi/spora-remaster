@@ -83,7 +83,7 @@ class TutorialSelected @Inject constructor(
     }
 
     fun skipTutorial() {
-        scope.launch(Dispatchers.IO) {
+        scope.launch(Dispatchers.Main) {
             _showTutorial.value = false
 
             val userId = getUserLocalUseCase().first()?.id ?: ""

@@ -1,5 +1,6 @@
 package com.gg.spora.core.graph
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -7,6 +8,9 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,6 +44,7 @@ import com.gg.spora.stage.ui.LevelPreview
 import com.gg.spora.stage.ui.StageScreen
 import com.gg.spora.stage.ui.StageViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Suppress("LongMethod")
 fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.GameGraph>(startDestination = NavigationRoutes.Stage("1")) {
@@ -172,72 +177,91 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 quizViewModel.onShowChampyHelp()
             }
 
-            MiniGameScreen(
-                modifier = Modifier.fillMaxSize(),
-                title = quizGameRoute.title,
-                imageBackground = quizGameRoute.imageBackground,
-                isCorrect = isCorrect,
-                questionSize = questions.size - 1,
-                isFinished = isFinished,
-                lives = lives,
-                livesLost = livesLost,
-                counterQuestion = counterQuestion,
-                showButtonContinue = isCorrect != null,
-                showChampyHelp = showChampyHelp,
-                champyHelpingText = champyHelpingText,
-                totalOxygen = currentTotalRewards,
-                rewards = currentRewards,
-                onNextQuestion = quizViewModel::nextQuestion,
-                onResetGame = quizViewModel::resetGame,
-                onBackForestStage = { navController.popBackStack() },
-                onNavigateNextLevel = {
-                    navController.popBackStack()
+            val missionCompleted by quizViewModel.missionCompleted.collectAsState()
+
+            val snackBarHostState = remember { SnackbarHostState() }
+
+            LaunchedEffect(missionCompleted != null) {
+                missionCompleted?.let {
+                    snackBarHostState.showSnackbar(
+                        message = "La Misión: '${missionCompleted!!.text}' ha sido completada",
+                    )
+                }
+            }
+
+            Scaffold(
+                snackbarHost = {
+                    SnackbarHost(hostState = snackBarHostState)
                 },
-                content = {
-                    when (currentQuestion!!.typeGame) {
-                        TypeGame.QUIZ -> {
-                            QuizScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(16.dp),
-                                isCorrect = isCorrect,
-                                questionTitle = currentQuestion!!.question,
-                                answerOptions = currentQuestion!!.answers,
-                                onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                onConfirmAnswer = quizViewModel::onConfirmAnswer,
-                            )
-                        }
+            ){
+                MiniGameScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    title = quizGameRoute.title,
+                    imageBackground = quizGameRoute.imageBackground,
+                    isCorrect = isCorrect,
+                    questionSize = questions.size - 1,
+                    isFinished = isFinished,
+                    lives = lives,
+                    livesLost = livesLost,
+                    counterQuestion = counterQuestion,
+                    showButtonContinue = isCorrect != null,
+                    showChampyHelp = showChampyHelp,
+                    champyHelpingText = champyHelpingText,
+                    totalOxygen = currentTotalRewards,
+                    rewards = currentRewards,
+                    onNextQuestion = quizViewModel::nextQuestion,
+                    onResetGame = quizViewModel::resetGame,
+                    onBackForestStage = { navController.popBackStack() },
+                    onNavigateNextLevel = {
+                        navController.popBackStack()
+                    },
+                    content = {
+                        when (currentQuestion!!.typeGame) {
+                            TypeGame.QUIZ -> {
+                                QuizScreen(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(16.dp),
+                                    isCorrect = isCorrect,
+                                    questionTitle = currentQuestion!!.question,
+                                    answerOptions = currentQuestion!!.answers,
+                                    onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                    onConfirmAnswer = quizViewModel::onConfirmAnswer,
+                                )
+                            }
 
-                        TypeGame.QUIZ_IMAGE -> {
-                            QuizImageScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(horizontal = 8.dp),
-                                questionTitle = currentQuestion!!.question,
-                                answerOptions = currentQuestion!!.answers,
-                                currentImageResIdState = currentImage,
-                                isCorrect = isCorrect,
-                                onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                onConfirmAnswer = quizViewModel::onConfirmAnswer,
-                            )
-                        }
+                            TypeGame.QUIZ_IMAGE -> {
+                                QuizImageScreen(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(horizontal = 8.dp),
+                                    questionTitle = currentQuestion!!.question,
+                                    answerOptions = currentQuestion!!.answers,
+                                    currentImageResIdState = currentImage,
+                                    isCorrect = isCorrect,
+                                    onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                    onConfirmAnswer = quizViewModel::onConfirmAnswer,
+                                )
+                            }
 
-                        TypeGame.RELATIONS -> {
-                            RelationsScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(vertical = 0.dp),
-                                objectName = currentQuestion!!.question,
-                                answers = currentQuestion!!.answers,
-                                selectedItems = selectedItems,
-                                isCorrect = isCorrect,
-                                onSelectedItem = quizViewModel::onSelectedItem,
-                                onConfirmSelects = quizViewModel::relationsAnswerSelected,
-                            )
+                            TypeGame.RELATIONS -> {
+                                RelationsScreen(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(vertical = 0.dp),
+                                    objectName = currentQuestion!!.question,
+                                    answers = currentQuestion!!.answers,
+                                    selectedItems = selectedItems,
+                                    isCorrect = isCorrect,
+                                    onSelectedItem = quizViewModel::onSelectedItem,
+                                    onConfirmSelects = quizViewModel::relationsAnswerSelected,
+                                )
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
+
         }
 
         composable<NavigationRoutes.Challenge> { backStackEntry ->
