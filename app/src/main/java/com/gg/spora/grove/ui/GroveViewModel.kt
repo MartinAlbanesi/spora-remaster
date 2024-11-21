@@ -132,7 +132,21 @@ class GroveViewModel @Inject constructor(
                     loadSeedTreesUseCase().collect { seedTrees ->
                         _seedTreeCooldowns.update { currentCooldowns ->
                             seedTrees.associate { seedTree ->
-                                val cooldowDatabase = getCooldownDataByIdUseCase(seedTree.id)
+                                var seedTreeColdown = Duration.between(getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
+                                if(currentCooldowns[seedTree.id] != null){
+                                    seedTreeColdown =currentCooldowns[seedTree.id]!!
+                                }
+                                else if(!isNegative(INITIAL_COOLDOWN_DURATION - seedTreeColdown)){
+                                    seedTreeColdown = INITIAL_COOLDOWN_DURATION - seedTreeColdown
+                                    triggerSeedTreeCooldown(seedTree.id, seedTreeColdown)
+                                }
+                                else{
+                                    seedTreeColdown = 0L
+                                }
+
+                                Log.i("viewModelScope", "seedTreeColdown: $seedTreeColdown")
+                                seedTree.id to (seedTreeColdown)
+                                /*val cooldowDatabase = getCooldownDataByIdUseCase(seedTree.id)
                                 var seedTreeColdown = 0L
                                 if(currentCooldowns[seedTree.id] != null){
                                     seedTreeColdown =currentCooldowns[seedTree.id]!!
@@ -142,9 +156,7 @@ class GroveViewModel @Inject constructor(
                                     seedTreeColdown = INITIAL_COOLDOWN_DURATION - Duration.between(cooldowDatabase.first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
                                     triggerSeedTreeCooldown(seedTree.id, seedTreeColdown)
                                 }
-
-                                Log.i("viewModelScope", "seedTreeColdown: $seedTreeColdown")
-                                seedTree.id to (seedTreeColdown)
+*/
                             }
                         }
                     }
