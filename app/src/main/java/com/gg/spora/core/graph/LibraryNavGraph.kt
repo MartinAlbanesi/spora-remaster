@@ -1,8 +1,14 @@
 package com.gg.spora.core.graph
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
@@ -16,23 +22,44 @@ import com.gg.spora.library.ui.LibraryCardBook
 import com.gg.spora.library.ui.LibraryViewModel
 import com.gg.spora.tutorials.ui.component.ChampyTalkingTutorial
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.LibraryGraph>(startDestination = NavigationRoutes.Library) {
         composable<NavigationRoutes.Library> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
-            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
+//            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             val showTutorial by libraryViewModel.tutorialSelected.showTutorial.collectAsState()
 
             val currentTutorialItem by libraryViewModel.tutorialSelected.currentTutorialItem.collectAsState()
 
-            LibraryScreen(
-                showTutorial = showTutorial,
-                onBackButtonClick = { navController.navigate(NavigationRoutes.Home) },
-                onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
-                onClickSecond = { navController.navigate(NavigationRoutes.LibraryRiverInfo) },
-                onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
-            )
+            val missionCompleted by libraryViewModel.missionCompleted.collectAsState()
+
+            val snackBarHostState = remember { SnackbarHostState() }
+
+            LaunchedEffect(missionCompleted != null) {
+                missionCompleted?.let {
+                    snackBarHostState.showSnackbar(
+                        message = "La Misión: '${missionCompleted!!.text}' ha sido completada",
+                    )
+                }
+            }
+
+            Scaffold(
+                snackbarHost = {
+                    SnackbarHost(hostState = snackBarHostState)
+                },
+            ){
+                LibraryScreen(
+                    showTutorial = showTutorial,
+                    onBackButtonClick = { navController.navigate(NavigationRoutes.Home) },
+                    onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
+                    onClickSecond = { navController.navigate(NavigationRoutes.LibraryRiverInfo) },
+                    onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
+                )
+            }
+
+
 
             if (showTutorial) {
                 currentTutorialItem?.let { item ->

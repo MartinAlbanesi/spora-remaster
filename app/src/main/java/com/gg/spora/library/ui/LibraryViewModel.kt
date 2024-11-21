@@ -11,6 +11,7 @@ import com.gg.spora.library.domain.mappers.toInfoCard
 import com.gg.spora.library.domain.model.InfoCard
 import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
 import com.gg.spora.missions.domain.enums.MissionType
+import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.tutorials.data.TutorialModels.getLibraryTutorial
 import com.gg.spora.tutorials.domain.TutorialSelected
@@ -39,6 +40,9 @@ class LibraryViewModel @Inject constructor(
 
     private val _infoCardEntityList = MutableStateFlow<List<InfoCard>>(emptyList())
     val infoCardEntityList: StateFlow<List<InfoCard>> = _infoCardEntityList
+
+    private val _missionCompleted = MutableStateFlow<Mission?>(null)
+    val missionCompleted: StateFlow<Mission?> = _missionCompleted
 
     init {
         getLibraryTutorial()
@@ -78,7 +82,7 @@ class LibraryViewModel @Inject constructor(
 
     private fun updateMission(){
         viewModelScope.launch {
-            updateMissionByIdUseCase(MissionType.LIBRARY_MISSION.missionId)
+            _missionCompleted.value = updateMissionByIdUseCase(MissionType.LIBRARY_MISSION.missionId)
         }
     }
 

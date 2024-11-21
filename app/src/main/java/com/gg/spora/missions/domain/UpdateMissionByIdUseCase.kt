@@ -15,9 +15,10 @@ class UpdateMissionByIdUseCase @Inject constructor(
         val missionLocal = missionRepositoryLocal.getMissionById(missionId)
 
         missionLocal?.let {
-            if (!missionLocal.isCompleted) {
-                missionRepositoryLocal.updateCounterMission(missionId)
+            if (missionLocal.isCompleted) {
+                return null
             }
+            missionRepositoryLocal.updateCounterMission(missionId)
         }
 
         val missionLocalUpdated = missionRepositoryLocal.getMissionById(missionId)
