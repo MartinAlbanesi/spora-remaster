@@ -5,7 +5,6 @@ import com.gg.spora.core.utils.functions.getTypeGameEnum
 import com.gg.spora.core.utils.functions.getTypeQuestionEnum
 import com.gg.spora.miniGames.data.local.model.AnswerLocal
 import com.gg.spora.miniGames.data.local.model.QuestionLocal
-import com.gg.spora.miniGames.data.network.models.AnswerApi
 import com.gg.spora.miniGames.domain.functions.getResourceImageFromString
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question

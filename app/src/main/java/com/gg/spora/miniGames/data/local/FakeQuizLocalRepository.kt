@@ -12,7 +12,7 @@ class FakeQuizLocalRepository @Inject constructor(
 
 ) : IQuizLocalRepository {
 
-    private val fakeModelsQuiz = FakeQuizModels.fakeQuizQuestions
+    private val fakeModelsQuiz = FakeQuizModels.newFakeQuizQuestions
 
     override fun getRandomQuestions(
         count: Int,
@@ -35,7 +35,7 @@ class FakeQuizLocalRepository @Inject constructor(
     }
 
     override fun getAnswerById(id: String): Answer {
-        val randomAnswers = FakeQuizModels.fakeAnswers.first { it.id == id }
+        val randomAnswers = FakeQuizModels.newFakeAnswers.first { it.id == id }
         return randomAnswers
     }
 }

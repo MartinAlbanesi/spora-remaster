@@ -4,6 +4,7 @@ import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
+import kotlin.collections.listOf
 
 @Suppress("LargeClass")
 object FakeQuizModels {
@@ -1341,7 +1342,7 @@ object FakeQuizModels {
 
     // ----------------------- NEW QUIZ -----------------------
 
-    val fakeAnswersID1 = listOf(
+    val newFakeAnswers = listOf(
         Answer(
             "1", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
@@ -1354,8 +1355,6 @@ object FakeQuizModels {
         Answer(
             "4", "Ropa usada", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-    val fakeAnswersID2 = listOf(
         Answer(
             "5", "Usar más el auto", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
@@ -1368,435 +1367,690 @@ object FakeQuizModels {
         Answer(
             "8", "Comprar más cosas nuevas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-    val fakeAnswersID3 = listOf(
         Answer(
-            "1", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "9", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "9", "Vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "10", "Vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "10", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "11", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "11", "Aluminio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-    val fakeAnswersID4 = listOf(
-        Answer(
-            "12", "Oxígeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "12", "Aluminio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "13", "Nitrógeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "13", "Oxígeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "14", "Dióxido de carbono", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "14", "Nitrógeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "15", "Helio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-    val fakeAnswersID5 = listOf(
-        Answer(
-            "1", "Lavar el auto todos los dias", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "15", "Dióxido de carbono", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2",
+            "16", "Helio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "17", "Lavar el auto todos los dias", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "18",
             "Cerrar la canilla al cepillarse los dientes",
             true,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "3", "Usar más agua en la ducha", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "19", "Usar más agua en la ducha", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Lavar la ropa a mano", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-
-    val fakeAnswersID6 = listOf(
-        Answer(
-            "1", "Frutas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "20", "Lavar la ropa a mano", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "21", "Frutas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Bolsas de plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "22", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Flores", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-
-    val fakeAnswersID7 = listOf(
-        Answer(
-            "1", "Gatos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "23", "Bolsas de plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Perros", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "24", "Flores", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Peces", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "25", "Gatos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Conejos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-
-    val fakeAnswersID8 = listOf(
-        Answer(
-            "1", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "26", "Perros", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "27", "Peces", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Energía solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "28", "Conejos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-
-    val fakeAnswersID9 = listOf(
-        Answer(
-            "1", "Tirarla a la basura", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "29", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Donarla o reciclarla", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "30", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "31", "Energía solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Guardarla sin usar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-
-    val fakeAnswersID10 = listOf(
-        Answer(
-            "1", "Usar bolsas de tela", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "32", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2",
+            "33", "Tirarla a la basura", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "34", "Donarla o reciclarla", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "35", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "36", "Guardarla sin usar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "37", "Usar bolsas de tela", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "38",
             "Comprar productos empaquetados",
             false,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "3", "Elegir envases de un solo uso", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "39",
+            "Elegir envases de un solo uso",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ
         ),
         Answer(
-            "4", "Comer con platos desechables", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "40", "Comer con platos desechables", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID11 = listOf(
         Answer(
-            "1", "Electricidad", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "41", "Electricidad", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "42", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "43", "Agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Carbono", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "44", "Carbono", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID12 = listOf(
         Answer(
-            "1", "Aumenta la humedad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "45", "Aumenta la humedad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Genera más oxígeno", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "46", "Genera más oxígeno", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Elimina la contaminación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "47", "Elimina la contaminación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Reduce el calor del invierno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "48", "Reduce el calor del invierno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID13 = listOf(
         Answer(
-            "1", "Aumento de lluvias", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "49", "Aumento de lluvias", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Sequias", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "50", "Sequias", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Aumento del alimento", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "51", "Aumento del alimento", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Disminución del nivel del mar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "52",
+            "Disminución del nivel del mar",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID14 = listOf(
         Answer(
-            "1", "Energía solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "53", "Energía solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "54", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Gasolina", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "55", "Gasolina", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Biocombustible", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "56", "Biocombustible", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID15 = listOf(
         Answer(
-            "1", "Panda", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "57", "Panda", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Oso polar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "58", "Oso polar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Elefante", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "59", "Elefante", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Águila", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "60", "Águila", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID16 = listOf(
         Answer(
-            "1", "Reutilizar/Manualidades", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "61", "Reutilizar/Manualidades", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Desecharla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "62", "Desecharla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "63", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Enterrarlo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "64", "Enterrarlo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID17 = listOf(
         Answer(
-            "1", "Reciclarla", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "65", "Reciclarla", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Romperla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "66", "Romperla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Enterrarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "67", "Enterrarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "68", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID18 = listOf(
         Answer(
-            "1", "Aumenta la erosión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "69", "Aumenta la erosión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Disminuye la calidad del aire", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "70",
+            "Disminuye la calidad del aire",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ
         ),
         Answer(
-            "3", "Más sombra/oxígeno", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "71", "Más sombra/oxígeno", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Reduce el espacio de juego", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "72", "Reduce el espacio de juego", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID19 = listOf(
         Answer(
-            "1", "De vidrio reutilizable", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "73", "De vidrio reutilizable", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "De plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "74", "De plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Bolsa de plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "75", "Bolsa de plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Bolsa de papel", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "76", "Bolsa de papel", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID20 = listOf(
         Answer(
-            "1", "Cáscara de banana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "77", "Cáscara de banana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Bolsa de plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "78", "Bolsa de plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Papel de oficina", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "79", "Papel de oficina", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Tela de algodón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "80", "Tela de algodón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID21 = listOf(
         Answer(
-            "1", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "81", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "82", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Agua", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "83", "Agua", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Electricidad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "84", "Electricidad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID22 = listOf(
         Answer(
-            "1", "Emisiones de CO2", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "85", "Emisiones de CO2", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Descomposición de alimentos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "86", "Descomposición de alimentos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Cosecha de plantas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "87", "Cosecha de plantas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Construcción de casas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "88", "Construcción de casas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID23 = listOf(
         Answer(
-            "1", "Evitar tirar basura", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "89", "Evitar tirar basura", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Usar detergentes fuertes", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "90", "Usar detergentes fuertes", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Lavar ropa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "91", "Lavar ropa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Quemar desechos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "92", "Quemar desechos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID24 = listOf(
         Answer(
-            "1", "Reciclarlos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "93", "Reciclarlos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Desecharlos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "94", "Desecharlos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Guardarlos y no usarlos", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "95", "Guardarlos y no usarlos", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Tirarlos en la calle", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "96", "Tirarlos en la calle", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID25 = listOf(
         Answer(
-            "1", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "97", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "98", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Papel usado", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "99", "Papel usado", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Cáscaras de frutas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "100", "Cáscaras de frutas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID26 = listOf(
         Answer(
-            "1", "Energía eólica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "101", "Energía eólica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "102", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Carbón", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "103", "Carbón", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "104", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID27 = listOf(
         Answer(
-            "1", "Plantar arboles", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "105", "Plantar arboles", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Usar cárbon al cocinar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "106", "Usar cárbon al cocinar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Encender más luces", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "107", "Encender más luces", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Usar más plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "108", "Usar más plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID28 = listOf(
         Answer(
-            "1", "Usar bombillas LED", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "109", "Usar bombillas LED", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Usar más plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "110", "Usar más plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Comprar electrodomésticos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "111", "Comprar electrodomésticos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Cocinar con carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "112", "Cocinar con carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
-    )
-
-    val fakeAnswersID29 = listOf(
         Answer(
-            "1", "Mejora la calidad del agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "113", "Mejora la calidad del agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Afectan a los seres vivos", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "114", "Afectan a los seres vivos", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3",
+            "115",
             "Aumentan la cantidad de plantas",
             false,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "4", "Crean más oxígeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
-        ),
-    )
-
-    val fakeAnswersID30 = listOf(
-        Answer(
-            "1", "Disminuye la contaminación", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "116", "Crean más oxígeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Aumenta la contaminación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "117", "Disminuye la contaminación", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Reduce el uso de agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "118", "Aumenta la contaminación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Se pierde energía", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "119", "Reduce el uso de agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
+        Answer(
+            "120", "Se pierde energía", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+        ),
+        Answer(
+            "121", "Huracán", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "122", "Tormenta de nieve", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "123",
+            "Deshielo de un glaciar",
+            true,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "124", "Volcán en erupción", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "125", "Panel solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "126", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "127", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "128", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "129",
+            "Usar transporte público",
+            true,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "130", "Viajar en avión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "131", "Conducir un coche", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "132", "Comprar ropa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "133", "Papel reciclado", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "134", "Basura orgánica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "135", "Latas de aluminio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "136", "Contenedor de vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "137", "Paneles solares", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "138", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "139", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "140", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "141",
+            "Usar aspersores de jardín",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "142", "Lavar el auto", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "143",
+            "Recolectar agua de lluvia",
+            true,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "144", "Regar el cesped", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "145",
+            "Contaminación en el aire",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "146",
+            "Contaminación lumínica",
+            true,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "147",
+            "Contaminación del agua",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "148",
+            "Contaminación acústica",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "149", "Selva tropical", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "150", "Desierto árido", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "151", "Tundra", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "152", "Sabana africana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "153", "Oso polar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "154", "Tigre de bengala", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "155", "Elefante africano", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "156", "Lobo gris", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "157", "Deshechar plásticos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "158",
+            "Recolección de basura plástica",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "159", "Pesca industrial", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "160",
+            "Instalación de rompeolas",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "161",
+            "Agricultura de monocultivo",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "162", "Agricultura vertical", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "163", "Uso de pesticidas", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "164",
+            "Agricultura de tala y quema",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "165", "Incendios forestales", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "166",
+            "Huracanes más intensos",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "167", "Erosión del suelo", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "168", "Desertificación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "169", "Selva amazónica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "170", "Desierto del Sahara", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "171", "Tundra ártica", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "172", "Sabana africana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "173", "Bosques", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "174", "Ríos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "175", "Petróleo", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "176", "Minerales", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "177", "Riego por aspersión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "178", "Riego por goteo", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "179",
+            "Uso de agua reciclada",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "180",
+            "Limpieza de pozos de agua",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "181", "Oso gris", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "182", "Ballena azul", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "183", "Rinoceronte negro", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "184", "Tucan", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "185", "Parque en la ciudad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "186",
+            "Rascacielos de oficinas",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "187", "Estación de metro", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "188",
+            "Calle con tráfico pesado",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "189", "Energía eólica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "190", "Energía de biomasa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "191", "Energía nuclear", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "192", "Energía hidráulica", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "193",
+            "Construcción de represas",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "194", "Pesca industrial", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "195",
+            "Extracción de petróleo",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "196",
+            "Construcción de viviendas",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "197", "Inundación", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "198", "Erupción volcánica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "199",
+            "Deslizamiento de tierra",
+            false,
+            listOf(TypeQuestion.RECYCLE),
+            TypeGame.QUIZ_IMAGE,
+        ),
+        Answer(
+            "200", "Tormenta de nieve", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+        )
     )
 
 
@@ -1804,40 +2058,40 @@ object FakeQuizModels {
         Question(
             id = "1",
             question = "¿Cuál de estos materiales es reciclable?",
-            answers = fakeAnswersID1,
-            correctAnswer = fakeAnswersID1[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[1],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "2",
             question = "¿Qué debemos hacer para reducir nuestra huella de carbono?",
-            answers = fakeAnswersID2,
-            correctAnswer = fakeAnswersID2[7],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[7],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "3",
             question = "¿Cuál de estos materiales es biodegradable?",
-            answers = fakeAnswersID3,
-            correctAnswer = fakeAnswersID3[10],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[10],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "4",
             question = "¿Qué gas atrapa el calor en la atmósfera y contribuye al cambio climático?",
-            answers = fakeAnswersID4,
-            correctAnswer = fakeAnswersID4[14],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[14],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "5",
             question = "¿Cuál es una buena práctica para ahorrar agua?",
-            answers = fakeAnswersID5,
-            correctAnswer = fakeAnswersID5[2],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[16],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1845,8 +2099,8 @@ object FakeQuizModels {
         Question(
             id = "6",
             question = "¿Cuál de estos objetos no debería tirarse en el suelo?",
-            answers = fakeAnswersID6,
-            correctAnswer = fakeAnswersID6[3],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[24],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1854,16 +2108,16 @@ object FakeQuizModels {
         Question(
             id = "7",
             question = "¿Qué animal se ve afectado por la contaminación del océano?",
-            answers = fakeAnswersID7,
-            correctAnswer = fakeAnswersID6[3],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[27],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "8",
             question = "¿Cuál es una fuente de energía renovable",
-            answers = fakeAnswersID8,
-            correctAnswer = fakeAnswersID8[3],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[31],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1871,8 +2125,8 @@ object FakeQuizModels {
         Question(
             id = "9",
             question = "¿Qué podemos hacer con la ropa que ya no usamos?",
-            answers = fakeAnswersID9,
-            correctAnswer = fakeAnswersID9[2],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[34],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1880,8 +2134,8 @@ object FakeQuizModels {
         Question(
             id = "10",
             question = "¿Qué podemos hacer para reducir el uso de plástico?",
-            answers = fakeAnswersID10,
-            correctAnswer = fakeAnswersID10[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[37],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1889,8 +2143,8 @@ object FakeQuizModels {
         Question(
             id = "11",
             question = "¿Qué recurso natural ahorramos al apagar las luces cuando no son necesarias?",
-            answers = fakeAnswersID11,
-            correctAnswer = fakeAnswersID11[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[41],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1898,24 +2152,24 @@ object FakeQuizModels {
         Question(
             id = "12",
             question = "¿Cuál es un beneficio de plantar árboles en las ciudades?",
-            answers = fakeAnswersID12,
-            correctAnswer = fakeAnswersID12[2],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[46],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "13",
             question = "¿Cuál de estos es un problema causado por el cambio climático?",
-            answers = fakeAnswersID13,
-            correctAnswer = fakeAnswersID13[2],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[50],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "14",
             question = "¿Qué tipo de energía no contamina el aire cuando se usa?",
-            answers = fakeAnswersID14,
-            correctAnswer = fakeAnswersID14[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[53],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1923,8 +2177,8 @@ object FakeQuizModels {
         Question(
             id = "15",
             question = "¿Cuál de estos animales está en peligro debido a la deforestación de los bosques tropicales?",
-            answers = fakeAnswersID15,
-            correctAnswer = fakeAnswersID15[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[57],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1932,8 +2186,8 @@ object FakeQuizModels {
         Question(
             id = "16",
             question = "¿Qué podemos hacer con una botella de plástico vacía en casa para ayudar al medio ambiente?",
-            answers = fakeAnswersID16,
-            correctAnswer = fakeAnswersID16[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[61],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1941,8 +2195,8 @@ object FakeQuizModels {
         Question(
             id = "17",
             question = "¿Qué debemos hacer con una botella de vidrio usada en lugar de tirarla a la basura?",
-            answers = fakeAnswersID17,
-            correctAnswer = fakeAnswersID17[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[65],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1950,8 +2204,8 @@ object FakeQuizModels {
         Question(
             id = "18",
             question = "¿Qué efecto tiene plantar más árboles en las ciudades?",
-            answers = fakeAnswersID18,
-            correctAnswer = fakeAnswersID18[3],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[71],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1959,8 +2213,8 @@ object FakeQuizModels {
         Question(
             id = "19",
             question = "¿Qué tipo de envases es mejor para el medio ambiente al hacer compras?",
-            answers = fakeAnswersID19,
-            correctAnswer = fakeAnswersID19[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[73],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -1968,90 +2222,271 @@ object FakeQuizModels {
         Question(
             id = "20",
             question = "¿Cuál de estos productos tarda más en descomponerse si se deja en la naturaleza?",
-            answers = fakeAnswersID20,
-            correctAnswer = fakeAnswersID20[2],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[75],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "21",
             question = "¿Qué recurso natural podemos ayudar a conservar al reparar fugas de agua en casa rápidamente?",
-            answers = fakeAnswersID21,
-            correctAnswer = fakeAnswersID21[3],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[83],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "22",
             question = "¿Cuál es una de las principales fuentes de contaminación del aire?",
-            answers = fakeAnswersID22,
-            correctAnswer = fakeAnswersID22[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[85],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "23",
             question = "¿Qué acción ayuda a reducir la contaminación del agua?",
-            answers = fakeAnswersID23,
-            correctAnswer = fakeAnswersID23[4],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[89],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "24",
             question = "¿Qué debemos hacer con los residuos electrónicos, como celulares viejos?",
-            answers = fakeAnswersID24,
-            correctAnswer = fakeAnswersID24[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[93],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "25",
             question = "¿Cuál de estos productos causa mayor contaminación si se quema al aire libre?",
-            answers = fakeAnswersID25,
-            correctAnswer = fakeAnswersID25[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[97],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "26",
             question = "¿Cuál es una forma de energía que no emite gases contaminantes?",
-            answers = fakeAnswersID26,
-            correctAnswer = fakeAnswersID26[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[101],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "27",
             question = "¿Qué acción contribuye a reducir la contaminación del aire en las ciudades?",
-            answers = fakeAnswersID27,
-            correctAnswer = fakeAnswersID27[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[105],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "28",
             question = "¿Cuál es una forma de reducir la huella de carbono en los hogares?",
-            answers = fakeAnswersID28,
-            correctAnswer = fakeAnswersID28[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[109],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "29",
             question = "¿Qué efecto tienen los productos químicos en el ecosistema de un lago?",
-            answers = fakeAnswersID29,
-            correctAnswer = fakeAnswersID29[2],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[114],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
         Question(
             id = "30",
             question = "¿Qué se logra al reducir el consumo de electricidad en los hogares?",
-            answers = fakeAnswersID30,
-            correctAnswer = fakeAnswersID30[1],
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[117],
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
+        Question(
+            id = "111",
+            question = "¿Qué está representado en esta imagen como ejemplo de cambio climático?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[123],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F1_quiz_image.png?alt=media&token=2189b80d-2532-46ba-8720-f9a4fbf6d09d"
+        ),
+        Question(
+            id = "112",
+            question = "¿Cuál de estos es un ejemplo de energía renovable en la imagen?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[125],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F2_quiz_image.png?alt=media&token=453fbd0e-cb79-4399-9dfa-eb10063e5d75"
+        ),
+        Question(
+            id = "113",
+            question = "¿Qué acción está representada en la imagen para reducir la huella de carbono?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[129],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F3_quiz_image.png?alt=media&token=eddcba94-0c69-4972-aea9-fb932bb5ada9"
+        ),
+        Question(
+            id = "114",
+            question = "¿Qué está representado en esta imagen como ejemplo de reciclaje?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[133],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F4_quiz_image.png?alt=media&token=8a0cd511-61b2-49be-8e60-0ed0e9fb07e5"
+        ),
+        Question(
+            id = "115",
+            question = "¿Qué está representado en esta imagen como ejemplo de energía renovable?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[137],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F5_quiz_image.png?alt=media&token=4488cb59-d06b-4498-915c-81c05c8baada"
+        ),
+        Question(
+            id = "116",
+            question = "¿Qué práctica se ilustra en la imagen como una forma de ahorro de agua?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[143],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F6_quiz_image.png?alt=media&token=236709ad-e6e7-48ed-b659-8ca39c22b86f"
+        ),
+        Question(
+            id = "117",
+            question = "¿Qué tipo de contaminación está ilustrado en esta imagen?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[148],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F7_quiz_image.png?alt=media&token=8fdcb32e-866a-43fe-8e45-8a2948a509b7"
+        ),
+        Question(
+            id = "118",
+            question = "¿Qué ecosistema está representado en esta imagen y que es crucial para la biodiversidad?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[149],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F8_quiz_image.png?alt=media&token=2b1e4980-dde7-4c7a-ab98-a1ec7b395ffc"
+        ),
+        Question(
+            id = "119",
+            question = "¿Qué animal en extinción vive en este ambiente?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[153],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F9_quiz_image.png?alt=media&token=a4084616-01e7-488e-9391-fed7844cdd96"
+        ),
+        Question(
+            id = "1110",
+            question = "¿Qué acción representa esta imagen en la lucha contra la contaminación de los océanos?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[158],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F10_quiz_image.png?alt=media&token=652021df-ae3c-4d4c-a551-7d8fc0aa7567"
+        ),
+        Question(
+            id = "1111",
+            question = "¿Qué método agrícola está representado en la imagen para reducir el impacto ambiental?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[162],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F11_quiz_image.png?alt=media&token=e23d9e0e-bdb3-4709-8718-29b5073c82c1"
+        ),
+        Question(
+            id = "1112",
+            question = "¿Qué fenómeno ambiental está ilustrado en esta imagen como un impacto del cambio climático?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[166],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F12_quiz_image.png?alt=media&token=a8ffbbf7-9a23-406a-96f0-fc6ff53bc861"
+        ),
+        Question(
+            id = "1113",
+            question = "¿Qué ecosistema se muestra en la imagen y es crucial para el equilibrio climático global?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[171],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F13_quiz_image.png?alt=media&token=cadd73f2-c3ce-42d4-ba6c-2812bc77a5e7"
+        ),
+        Question(
+            id = "1114",
+            question = "¿Qué recurso natural está en riesgo, según lo ilustrado en esta imagen?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[172],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F14_quiz_image.png?alt=media&token=fe98c17f-1acf-4d91-a262-e589d4d849e8"
+        ),
+        Question(
+            id = "1115",
+            question = "¿Qué medida de conservación de agua está representada en esta imagen?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[178],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F15_quiz_image.png?alt=media&token=18f6f299-f9c0-44bb-a27e-84af05468c1e"
+        ),
+        Question(
+            id = "1116",
+            question = "¿Qué animal vive en esta zona del África y está en peligro de extinción?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[183],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F16_quiz_image.png?alt=media&token=3101ed4f-91a4-495f-8b6d-8097a8c57cfb"
+        ),
+        Question(
+            id = "1117",
+            question = "¿Qué tipo de paisaje urbano está representado en la imagen como ejemplo de infraestructura verde?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[185],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F17_quiz_image.png?alt=media&token=e0e30775-6cde-40e8-9192-31cce05dd8ea"
+        ),
+        Question(
+            id = "1118",
+            question = "¿Qué tipo de energía renovable se muestra en esta imagen como alternativa a los combustibles fósiles?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[192],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F18_quiz_image.png?alt=media&token=e77a97b7-a26d-4390-960a-048f20503537"
+        ),
+        Question(
+            id = "1119",
+            question = "¿Qué actividad humana que afecta los ecosistemas costeros está representada en la imagen?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[194],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F19_quiz_image.png?alt=media&token=f4c523bd-4600-4f4f-926d-6453fff0950d"
+        ),
+        Question(
+            id = "1120",
+            question = "¿Qué evento extremo relacionado con el cambio climático se muestra en la imagen, afectando cada vez más regiones?",
+            answers = newFakeAnswers,
+            correctAnswer = newFakeAnswers[197],
+            typeGame = TypeGame.QUIZ_IMAGE,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F20_quiz_image.png?alt=media&token=52cddaaf-c18f-4d87-ae89-68c1bdc76999"
+        ),
     )
+
 }
