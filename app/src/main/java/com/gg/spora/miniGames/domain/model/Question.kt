@@ -8,7 +8,7 @@ data class Question(
     val id: String,
     val question: String,
     val answers: List<Answer>,
-    val answerId: String,
+    val correctAnswer: Answer,
     val typeGame: TypeGame,
     val typeQuestion: List<TypeQuestion>,
     val image: Int? = null,
