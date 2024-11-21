@@ -1,5 +1,6 @@
 package com.gg.spora.missions.domain
 
+import android.util.Log
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.missions.domain.repository.IMissionRepositoryLocal
 import javax.inject.Inject
@@ -13,8 +14,10 @@ class UpdateMissionByIdUseCase @Inject constructor(
 
         val missionLocal = missionRepositoryLocal.getMissionById(missionId)
 
+        Log.i("titi", "missionLocal: $missionLocal")
+
         missionLocal?.let {
-            if (missionLocal.isCompleted) {
+            if (!missionLocal.isCompleted) {
                 missionRepositoryLocal.updateCounterMission(missionId)
             }
         }

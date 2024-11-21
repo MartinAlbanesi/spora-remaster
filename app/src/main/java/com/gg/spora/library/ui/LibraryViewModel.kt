@@ -9,6 +9,8 @@ import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
 import com.gg.spora.library.data.repository.InfoCardRepositoryLocal
 import com.gg.spora.library.domain.mappers.toInfoCard
 import com.gg.spora.library.domain.model.InfoCard
+import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
+import com.gg.spora.missions.domain.enums.MissionType
 import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.tutorials.data.TutorialModels.getLibraryTutorial
 import com.gg.spora.tutorials.domain.TutorialSelected
@@ -31,6 +33,7 @@ import javax.inject.Inject
 class LibraryViewModel @Inject constructor(
     private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
     private val infoCardFakeRepository: FakeRepositoryInfoCard,
+    private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
     val tutorialSelected: TutorialSelected
 ) : ViewModel() {
 
@@ -40,6 +43,7 @@ class LibraryViewModel @Inject constructor(
     init {
         getLibraryTutorial()
         loadInfoCardList()
+        updateMission()
     }
 
     private fun getLibraryTutorial(){
@@ -69,6 +73,12 @@ class LibraryViewModel @Inject constructor(
             infoCardRepositoryLocal.getInfoCardListByCategory(category.name).collect {
                 _infoCardEntityList.value = it
             }
+        }
+    }
+
+    private fun updateMission(){
+        viewModelScope.launch {
+            updateMissionByIdUseCase(MissionType.LIBRARY_MISSION.missionId)
         }
     }
 

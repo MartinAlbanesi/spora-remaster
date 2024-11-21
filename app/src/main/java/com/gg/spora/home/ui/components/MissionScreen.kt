@@ -97,7 +97,7 @@ fun MissionCard(
         colors = ListItemDefaults.colors(
             containerColor = colorResource(id = R.color.cream),
         ),
-        modifier = modifier.clip(MaterialTheme.shapes.medium),
+        modifier = modifier,
         overlineContent = {
             Text(
                 text = mission.text,
