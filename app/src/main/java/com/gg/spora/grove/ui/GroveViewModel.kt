@@ -38,10 +38,12 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 import kotlin.collections.associate
+import kotlin.collections.getOrDefault
+import kotlin.toString
 
 const val INITIAL_COOLDOWN_DURATION = /*43200000L*/ 10000L
 const val OXYGEN_COOLDOWN_DURATION = /*86400000L*/ 10000L
-const val GROWTH_TIME_DURATION = /*3600000L*/ 3000L
+const val GROWTH_TIME_DURATION = /*3600000L*/ 6000L
 
 /**
  * View model for the Grove screen.
@@ -98,6 +100,9 @@ class GroveViewModel @Inject constructor(
 
     private val _errorState = MutableStateFlow<String?>(null)
     val errorState: StateFlow<String?> = _errorState.asStateFlow()
+
+    // Flag to track if initial forest trees have been loaded
+    private var _initialForestTreesLoaded = false
 
     // Data flow for the UI state, combining all data sources
     val uiState: StateFlow<GroveUiState> = combine(
@@ -173,17 +178,13 @@ class GroveViewModel @Inject constructor(
                         _forestTreeGrowthTimes.update { currentGrowthTimes ->
                             forestTrees.associate { forestTree ->
                                 val treeId = forestTree?.id?.toString() ?: "0"
-                                /*
-                                var forestTreeCooldown : Long = 0L
-                                if(getCooldownDataByIdUseCase(treeId).first().lastUpdateDate != null){
-                                    forestTreeCooldown = Duration.between(getCooldownDataByIdUseCase(treeId).first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
 
-                                    Log.i("viewModelScope", "seedTreeColdown 1 : $forestTreeCooldown")
-                                }
-                                */
-
-                                if (forestTree != null) {
-                                    updateForestTreeGrowthTime(forestTree)
+                                // Move updateForestTreeGrowthTime() outside the collect
+                                // and trigger it only for the initial list of trees
+                                if (!_initialForestTreesLoaded) {
+                                    if (forestTree != null) {
+                                        updateForestTreeGrowthTime(forestTree)
+                                    }
                                 }
 
                                 treeId to (currentGrowthTimes.getOrDefault(
@@ -195,6 +196,9 @@ class GroveViewModel @Inject constructor(
                                 ))
                             }
                         }
+
+                        // Set initialForestTreesLoaded to true after the first emission
+                        _initialForestTreesLoaded = true
                     }
                 }
 
@@ -217,6 +221,8 @@ class GroveViewModel @Inject constructor(
                     // Calculate accumulated oxygen
                     calculateAccumulatedOxygen()
 
+                    Log.i("GroveViewModel", "Se repite el combine en init")
+
                     // Set loading state to false
                     _isLoading.update { false }
                 }
@@ -226,7 +232,6 @@ class GroveViewModel @Inject constructor(
                 _errorState.update { "An unexpected error occurred. Please try again later." }
             }
         }
-
     }
 
     fun isNegative(number: Long): Boolean {
@@ -351,6 +356,8 @@ class GroveViewModel @Inject constructor(
                 Log.d("GroveViewModel", "elapsed time: $elapsedTime")
 
                 while (!forestTree.hasReachedAdultStage) {
+
+                    Log.i("GroveViewModel", "hasReachedAdultStage: ${forestTree.hasReachedAdultStage}")
                     delay(1000) // Delay for 1 second
                     elapsedTime += 1000 // Increment elapsed time by 1 second
                     // Update growth time in the map
