@@ -3,6 +3,8 @@ package com.gg.spora.welcome.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.missions.data.local.MissionModels
+import com.gg.spora.missions.domain.SetMissionsUseCase
 import com.gg.spora.stage.domain.SetNewLevelsUseCase
 import com.gg.spora.stage.domain.SetNewStagesLevelUseCase
 import com.gg.spora.tutorials.data.TutorialModels
@@ -20,7 +22,8 @@ class WelcomeViewModel @Inject constructor(
     private val setNewUserUseCase: SetNewUserUseCase,
     private val setNewStagesLevelUseCase: SetNewStagesLevelUseCase,
     private val setNewLevelsUseCase: SetNewLevelsUseCase,
-    private val setTutorialsLocalUseCase: SetTutorialsLocalUseCase
+    private val setTutorialsLocalUseCase: SetTutorialsLocalUseCase,
+    private val setMissionsUseCase: SetMissionsUseCase
 ) : ViewModel() {
 
     private val _guestName = MutableStateFlow("")
@@ -48,6 +51,7 @@ class WelcomeViewModel @Inject constructor(
             setNewStagesLevelUseCase(stageLevel)
             setNewLevelsUseCase(level)
             setTutorialsLocalUseCase(TutorialModels.tutorialsCompleted)
+            setMissionsUseCase(MissionModels.missions)
         }
     }
 
