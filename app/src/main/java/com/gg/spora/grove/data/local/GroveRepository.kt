@@ -88,6 +88,6 @@ class GroveRepository @Inject constructor(
 
     // Gets cooldown data for a tree
     override suspend fun getCooldownData(treeId: String): Flow<CooldownData> {
-        return groveDao.getCooldownData(treeId).map { it?.toCooldownData() ?: CooldownData(treeId) }
+        return groveDao.getCooldownData(treeId).map { it?.toCooldownData() ?: CooldownData(treeId, null) }
     }
 }

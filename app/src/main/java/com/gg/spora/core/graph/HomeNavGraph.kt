@@ -70,13 +70,13 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val uiState by groveViewModel.uiState.collectAsState()
             val isLoading by groveViewModel.isLoading.collectAsState()
             val errorState by groveViewModel.errorState.collectAsState()
-
+/*
             DisposableEffect(Unit) {
                 onDispose {
                     groveViewModel.saveTreeCooldowns()
                 }
             }
-
+*/
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
@@ -86,7 +86,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 },
                 claimOxygen = { groveViewModel.claimOxygen() },
                 popBackStack = {
-                    groveViewModel.saveTreeCooldowns()
+                    //groveViewModel.saveTreeCooldowns()
                     navController.popBackStack()
                 },
                 errorState = errorState
