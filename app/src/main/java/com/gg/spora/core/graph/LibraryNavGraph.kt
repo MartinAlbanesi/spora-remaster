@@ -21,10 +21,11 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
+
             LibraryScreen(
                 onBackButtonClick = { navController.navigate(NavigationRoutes.Home) },
                 onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
-                onClickSecond = { navController.navigate(NavigationRoutes.LibraryRiverInfo) },
+                onClickSecond = { navController.navigate(NavigationRoutes.LibraryLakeInfo) },
                 onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) }
             )
         }
@@ -45,16 +46,16 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
         }
 
-        composable<NavigationRoutes.LibraryRiverInfo> {
+        composable<NavigationRoutes.LibraryLakeInfo> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
 
-            libraryViewModel.getInfoCardListByCategory(StageType.RIVER)
+            libraryViewModel.getInfoCardListByCategory(StageType.LAKE)
 
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
                 cardList = cardList.map { it.toInfoCardEntity() },
-                category = StageType.RIVER,
+                category = StageType.LAKE,
                 onBackClick = { navController.popBackStack() }
             )
         }

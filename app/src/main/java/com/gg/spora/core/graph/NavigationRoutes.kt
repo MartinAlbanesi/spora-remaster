@@ -74,7 +74,7 @@ object NavigationRoutes {
     object LibraryDesertInfo
 
     @Serializable
-    object LibraryRiverInfo
+    object LibraryLakeInfo
 
     // Challenge Graph ------------------------------------------------------
 

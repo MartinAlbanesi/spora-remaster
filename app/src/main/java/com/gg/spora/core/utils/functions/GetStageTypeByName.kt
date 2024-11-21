@@ -6,7 +6,7 @@ fun getStageTypeByName(name: String): StageType {
     return when (name) {
         "FOREST" -> StageType.FOREST
         "DESERT" -> StageType.DESERT
-        "RIVER" -> StageType.RIVER
+        "LAKE" -> StageType.LAKE
         "EXPO" -> StageType.EXPO
         else -> StageType.FOREST
     }

@@ -29,6 +29,7 @@ import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.functions.getIsCompleteFromPreviousLevel
 import com.gg.spora.stage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
+import com.google.common.collect.Multimaps.index
 
 @Composable
 fun StageScreen(
@@ -87,7 +88,7 @@ fun StageScreen(
                                 x = pathLadder[index].first.dp,
                                 y = pathLadder[index].second.dp
                             )
-                            .clickable {
+                            .clickable(enabled = levels.getIsCompleteFromPreviousLevel(index)) {
                                 if(levels.getIsCompleteFromPreviousLevel(index)) onClickLevelItem(level, true)
                             }
                     )

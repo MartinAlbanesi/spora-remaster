@@ -29,7 +29,7 @@ object SporaConstant {
     )
 
     val PATH_LADDER = listOf(
-        Pair(-40,0), Pair(-40,0), Pair(-10,0), Pair(50,0)
+        Pair(-40,0), Pair(-30,0), Pair(30,0), Pair(50,0)
     )
 
     const val QUESTIONS_FILE_PATH = "src/main/res/raw/questions.json"

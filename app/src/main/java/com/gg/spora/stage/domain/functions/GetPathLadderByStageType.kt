@@ -7,7 +7,7 @@ fun getPathLadderByStageType(stageType: StageType): List<Pair<Int, Int>> {
     return when (stageType) {
         StageType.FOREST -> SporaConstant.PATH_LADDER
         StageType.DESERT -> TODO()
-        StageType.RIVER -> TODO()
+        StageType.LAKE -> TODO()
         StageType.EXPO -> SporaConstant.PATH_LADDER_EXPO
     }
 }
