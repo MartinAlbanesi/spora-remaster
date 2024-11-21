@@ -6,5 +6,6 @@ data class Mission(
     val oxygenReward: Byte,
     val objective: Byte,
     val counter: Byte,
-    val isCompleted: Boolean = false
+    val isCompleted: Boolean = false,
+    val isClaimed: Boolean = false
 )

@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
@@ -88,6 +90,10 @@ fun MissionCard(
         else -> R.drawable.tutorial_seed
     }
 
+    val textColor = if(mission.isCompleted) colorResource(id = R.color.white) else colorResource(id = R.color.primary_10)
+
+    val backgroundColor = if(!mission.isCompleted) colorResource(id = R.color.cream) else colorResource(id = R.color.secondary_30)
+
     val progressIndicator by animateFloatAsState(
         targetValue = scalarNumber(valor = mission.counter.toInt(), maxOriginal = mission.objective.toInt()),
         label = "progressIndicator",
@@ -95,35 +101,55 @@ fun MissionCard(
 
     ListItem(
         colors = ListItemDefaults.colors(
-            containerColor = colorResource(id = R.color.cream),
+            containerColor = backgroundColor,
         ),
         modifier = modifier,
         overlineContent = {
             Text(
                 text = mission.text,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = textColor,
             )
         },
         headlineContent = {
-            LinearProgressIndicator(
-                progress = { progressIndicator },
-                gapSize = 0.dp,
-                strokeCap = StrokeCap.Butt,
-                color = colorResource(R.color.secondary),
-                trackColor = colorResource(R.color.primary),
-                modifier = Modifier
-                    .height(24.dp)
+            if(mission.isCompleted){
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = textColor,
+                        containerColor = colorResource(R.color.secondary)
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Reclamar",
+                        color = colorResource(R.color.white),
+                        fontSize = 16.sp
+                    )
+                }
+            }else{
+                LinearProgressIndicator(
+                    progress = { progressIndicator },
+                    gapSize = 0.dp,
+                    strokeCap = StrokeCap.Butt,
+                    color = colorResource(R.color.secondary),
+                    trackColor = colorResource(R.color.primary),
+                    modifier = Modifier
+                        .height(24.dp)
 //                    .align(Alignment.CenterHorizontally)
-                    .clip(MaterialTheme.shapes.large)
-            )
+                        .clip(MaterialTheme.shapes.large)
+                )
+            }
         },
         supportingContent = {
-            Text(
-                text = "${mission.counter}/${mission.objective}",
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (!mission.isCompleted) {
+                Text(
+                    text = "${mission.counter}/${mission.objective}",
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         leadingContent = {
             Image(
@@ -143,6 +169,7 @@ fun MissionCard(
                     text = "x${mission.oxygenReward}",
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
+                    color = textColor,
                 )
             }
         }
