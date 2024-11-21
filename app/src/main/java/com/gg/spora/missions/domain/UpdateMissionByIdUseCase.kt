@@ -14,8 +14,6 @@ class UpdateMissionByIdUseCase @Inject constructor(
 
         val missionLocal = missionRepositoryLocal.getMissionById(missionId)
 
-        Log.i("titi", "missionLocal: $missionLocal")
-
         missionLocal?.let {
             if (!missionLocal.isCompleted) {
                 missionRepositoryLocal.updateCounterMission(missionId)

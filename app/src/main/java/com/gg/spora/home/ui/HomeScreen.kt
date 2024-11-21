@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -142,28 +143,28 @@ fun HomeScreen(
                 //.align(Alignment.TopStart)
             ) {
                 leftIcons.forEach { (image, text, onClick) ->
-                    BadgedBox(
-                        badge = {
-                            if(text == "Misiones" && missions.isNotEmpty()) {
-                                Badge(
-                                    containerColor = colorResource(R.color.primary),
-                                    contentColor = colorResource(R.color.white),
-                                    modifier = Modifier
-                                        .size(32.dp)
-                                ) {
-                                    Text(
-                                        text = missions.size.toString(),
-                                        fontSize = 24.sp
-                                    )
-                                }
-                            }
-                        }
-                    ) {
+                    Box() {
                         ImageWithTextVertical(
                             image = image,
                             text = text,
                             modifier = Modifier.clickable(onClick = onClick),
                         )
+
+                        if (text == "Misiones" && missions.isNotEmpty()) {
+                            Badge(
+                                containerColor = colorResource(R.color.primary),
+                                contentColor = colorResource(R.color.white),
+                                modifier = Modifier
+                                    .size(32.dp)
+                                    .align(Alignment.BottomEnd)
+                                    .offset(x = (-8).dp, y = (-20).dp)
+                            ) {
+                                Text(
+                                    text = missions.size.toString(),
+                                    fontSize = 24.sp
+                                )
+                            }
+                        }
                     }
                 }
             }
