@@ -14,6 +14,8 @@ import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.getStageTypeByName
 import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
+import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
+import com.gg.spora.missions.domain.enums.MissionType
 import com.gg.spora.user.domain.UpdateUserLevelsAndOxygenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +30,7 @@ class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
 //    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
     private val updateUserLevelsAndOxygenUseCase: UpdateUserLevelsAndOxygenUseCase,
+    private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -243,11 +246,6 @@ class QuizViewModel @Inject constructor(
             val currentStarState = getRewardsStarState(livesLost = _livesLost.value)
             val currentLevelOxygenRewards = quizRoute.oxygenRewards
 
-//            _currentRewards.value = updateOxygenReward(
-//                starState = currentStarState,
-//                oxygenRewards = currentLevelOxygenRewards
-//            )
-
             updateUserLevelsAndOxygenUseCase(
                 levelId = quizRoute.levelId,
                 starState = currentStarState,
@@ -257,6 +255,8 @@ class QuizViewModel @Inject constructor(
                 _currentTotalRewards.value = this.first
                 _currentRewards.value = this.second
             }
+
+            updateMission()
         }
     }
 
@@ -264,6 +264,12 @@ class QuizViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             delay(4000)
             _showChampyHelp.value = true
+        }
+    }
+
+    private fun updateMission(){
+        viewModelScope.launch {
+            updateMissionByIdUseCase(MissionType.MINI_GAME_MISSION.missionId)
         }
     }
 
