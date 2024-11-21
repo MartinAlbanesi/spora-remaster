@@ -9,15 +9,21 @@ class UpdateMissionByIdUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         missionId: Byte,
-    ):Mission? {
-
-        missionRepositoryLocal.updateCounterMission(missionId)
+    ): Mission? {
 
         val missionLocal = missionRepositoryLocal.getMissionById(missionId)
 
         missionLocal?.let {
-            if(missionLocal.counter == missionLocal.objective){
-                return missionLocal
+            if (missionLocal.isCompleted) {
+                missionRepositoryLocal.updateCounterMission(missionId)
+            }
+        }
+
+        val missionLocalUpdated = missionRepositoryLocal.getMissionById(missionId)
+
+        missionLocalUpdated?.let {
+            if (missionLocalUpdated.isCompleted) {
+                return missionLocalUpdated
             }
         }
 

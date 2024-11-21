@@ -9,6 +9,7 @@ fun MissionEntity.toMission() = Mission(
     oxygenReward = oxygenReward,
     objective = objective,
     counter = counter,
+    isCompleted = counter == objective
 )
 
 fun Mission.toMissionEntity() = MissionEntity(

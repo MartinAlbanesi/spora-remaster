@@ -15,9 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +36,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
@@ -41,6 +47,7 @@ import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
 import com.gg.spora.home.ui.components.MissionScreen
 import com.gg.spora.home.ui.components.SignButton
+import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -59,7 +66,7 @@ fun HomeScreen(
     onNavigateToGrove: () -> Unit
 ) {
 
-    var showMission by rememberSaveable { mutableStateOf(true) }
+    var showMission by rememberSaveable { mutableStateOf(false) }
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
@@ -135,11 +142,29 @@ fun HomeScreen(
                 //.align(Alignment.TopStart)
             ) {
                 leftIcons.forEach { (image, text, onClick) ->
-                    ImageWithTextVertical(
-                        image = image,
-                        text = text,
-                        modifier = Modifier.clickable(onClick = onClick),
-                    )
+                    BadgedBox(
+                        badge = {
+                            if(text == "Misiones" && missions.isNotEmpty()) {
+                                Badge(
+                                    containerColor = colorResource(R.color.primary),
+                                    contentColor = colorResource(R.color.white),
+                                    modifier = Modifier
+                                        .size(32.dp)
+                                ) {
+                                    Text(
+                                        text = missions.size.toString(),
+                                        fontSize = 24.sp
+                                    )
+                                }
+                            }
+                        }
+                    ) {
+                        ImageWithTextVertical(
+                            image = image,
+                            text = text,
+                            modifier = Modifier.clickable(onClick = onClick),
+                        )
+                    }
                 }
             }
             Column(
@@ -237,14 +262,14 @@ private fun MiniGameScreenPreview() {
                 modifier = Modifier.fillMaxSize(),
                 oxygen = 0,
                 showTutorial = false,
-                missions = emptyList(),
+                missions = MissionModels.fakeMissions,
                 champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
                 onNavigateToForestStage = {},
                 onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
                 onNavigateToProfile = {},
-                onNavigateToGrove = {}
+                onNavigateToGrove = {},
             )
         }
     }

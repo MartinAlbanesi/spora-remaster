@@ -4,7 +4,6 @@ import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.missions.domain.repository.IMissionRepositoryLocal
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
