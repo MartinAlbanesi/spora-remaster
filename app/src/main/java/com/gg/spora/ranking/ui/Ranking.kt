@@ -83,7 +83,7 @@ fun Ranking(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Text(
                 text = "Tiempo hasta el reinicio: ${timeUntilReset.toHours()}h ${timeUntilReset.toMinutesPart()}m ${timeUntilReset.toSecondsPart()}s",
                 style = MaterialTheme.typography.bodyLarge,
@@ -202,14 +202,14 @@ fun Ranking(
                                 fontWeight = FontWeight.SemiBold,
                                 color = Color.Black,
                                 modifier = Modifier
-                                    .padding(bottom = 2.dp)
+                                    .padding(bottom = 15.dp)
                             )
                             Text(
                                 text = item.email,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = Color.Black,
                                 modifier = Modifier
-                                    .padding(bottom = 2.dp)
+                                    .padding(bottom = 15.dp)
                             )
                         }
 
@@ -364,14 +364,14 @@ fun Ranking(
                             fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
                             modifier = Modifier
-                                .padding(bottom = 5.dp)
+                                .padding(bottom = 16.dp)
                         )
                         Text(
                             text = currentUser?.email ?: "",
                             style = MaterialTheme.typography.bodySmall,
                             color = Color.Gray,
                             modifier = Modifier
-                                .padding(bottom = 2.dp)
+                                .padding(bottom = 16.dp)
                         )
                     }
 
