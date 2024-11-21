@@ -51,6 +51,10 @@ interface GroveDao {
     @Query("UPDATE forest_trees SET current_stage = :newStage WHERE idForestTree = :id")
     suspend fun updateForestTreeGrowthStageById(id: String, newStage: String)
 
+    // Forest Tree Oxygen Claimed
+    @Query("UPDATE forest_trees SET times_oxygen_claimed = :newTimesOxygenClaimed WHERE idForestTree = :id")
+    suspend fun updateTimesOxygenClaimed(id: String, newTimesOxygenClaimed: Int)
+
     // Cooldown Data
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCooldownData(cooldownData: CooldownDataEntity)

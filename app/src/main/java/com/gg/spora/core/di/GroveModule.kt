@@ -1,9 +1,8 @@
 package com.gg.spora.core.di
 
 import android.annotation.SuppressLint
-import com.gg.spora.grove.data.local.GroveRepository
-import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
+import com.gg.spora.grove.data.local.GroveRepository
 import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
 import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
@@ -13,6 +12,8 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.UpdateTimesOxygenClaimedUseCase
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -82,5 +83,11 @@ class GroveModule {
     @Singleton
     fun provideDeleteForestTreeByIdUseCase(groveRepository: IGroveRepository): DeleteForestTreeByIdUseCase {
         return DeleteForestTreeByIdUseCase(groveRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdateTimesOxygenClaimedUseCase(groveRepository: IGroveRepository): UpdateTimesOxygenClaimedUseCase {
+        return UpdateTimesOxygenClaimedUseCase(groveRepository)
     }
 }

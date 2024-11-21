@@ -2,11 +2,11 @@ package com.gg.spora.grove.data.local
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.toCooldownData
 import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
@@ -89,5 +89,9 @@ class GroveRepository @Inject constructor(
     // Gets cooldown data for a tree
     override suspend fun getCooldownData(treeId: String): Flow<CooldownData> {
         return groveDao.getCooldownData(treeId).map { it?.toCooldownData() ?: CooldownData(treeId, null) }
+    }
+
+    override suspend fun updateTimesOxygenClaimed(forestTree: ForestTree) {
+        groveDao.updateTimesOxygenClaimed(forestTree.id, forestTree.timesOxygenClaimed)
     }
 }

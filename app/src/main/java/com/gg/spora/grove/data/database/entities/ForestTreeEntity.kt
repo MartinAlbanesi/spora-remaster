@@ -23,7 +23,8 @@ data class ForestTreeEntity(
     @ColumnInfo(name = "tree_type") val treeType: String,
     @ColumnInfo(name = "current_stage") val currentStage: String,
     @ColumnInfo(name = "planting_date") val plantingDate: Long,
-    @ColumnInfo(name = "position") val position: Int
+    @ColumnInfo(name = "position") val position: Int,
+    @ColumnInfo(name = "times_oxygen_claimed") val timesOxygenClaimed: Int
 )
 
 // Extension function mapper to convert ForestTreeEntity to ForestTree
@@ -33,6 +34,7 @@ fun ForestTreeEntity.toForestTree(): ForestTree {
         type = TreeType.valueOf(treeType),
         currentStage = GrowthStage.valueOf(currentStage),
         plantingDate = LocalDateTime.ofEpochSecond(plantingDate, 0, ZoneOffset.UTC),
-        position = position
+        position = position,
+        timesOxygenClaimed = timesOxygenClaimed
     )
 }

@@ -36,6 +36,7 @@ fun ForestTree.toForestTreeEntity(): ForestTreeEntity {
         treeType = type.name,
         currentStage = currentStage.toString(),
         plantingDate = plantingDate.toEpochSecond(ZoneOffset.UTC),
-        position = position
+        position = position,
+        timesOxygenClaimed = timesOxygenClaimed
     )
 }

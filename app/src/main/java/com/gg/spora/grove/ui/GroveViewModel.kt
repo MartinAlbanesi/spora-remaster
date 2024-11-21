@@ -12,6 +12,7 @@ import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.UpdateTimesOxygenClaimedUseCase
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
@@ -38,12 +39,11 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 import kotlin.collections.associate
-import kotlin.collections.getOrDefault
-import kotlin.toString
 
 const val INITIAL_COOLDOWN_DURATION = /*43200000L*/ 10000L
 const val OXYGEN_COOLDOWN_DURATION = /*86400000L*/ 10000L
 const val GROWTH_TIME_DURATION = /*3600000L*/ 6000L
+const val MAX_TIMES_TO_CLAIM_OXYGEN = 5
 
 /**
  * View model for the Grove screen.
@@ -71,7 +71,8 @@ class GroveViewModel @Inject constructor(
     private val updateUserOxygenUseCase: UpdateUserOxygenUseCase,
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
-    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase
+    private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase,
+    private val updateTimesOxygenClaimed: UpdateTimesOxygenClaimedUseCase,
 ) : ViewModel() {
 
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
@@ -132,41 +133,34 @@ class GroveViewModel @Inject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-            // Associated seedTreeId with its cooldown
+                // Associated seedTreeId with its cooldown
                 launch {
                     loadSeedTreesUseCase().collect { seedTrees ->
                         _seedTreeCooldowns.update { currentCooldowns ->
                             seedTrees.associate { seedTree ->
-                                var seedTreeCooldown : Long = 0L
-                                if(getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate != null){
-                                    seedTreeCooldown = Duration.between(getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
+                                var seedTreeCooldown: Long = 0L
+                                if (getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate != null) {
+                                    seedTreeCooldown = Duration.between(
+                                        getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate,
+                                        LocalDateTime.now()
+                                    ).seconds * 1000L
 
                                     Log.i("viewModelScope", "seedTreeColdown 1 : $seedTreeCooldown")
                                 }
-                                if(currentCooldowns[seedTree.id] != null){
-                                    seedTreeCooldown =currentCooldowns[seedTree.id]!!
-                                }
-                                else if(seedTreeCooldown > 0L && !isNegative(INITIAL_COOLDOWN_DURATION - seedTreeCooldown)){
+                                if (currentCooldowns[seedTree.id] != null) {
+                                    seedTreeCooldown = currentCooldowns[seedTree.id]!!
+                                } else if (seedTreeCooldown > 0L && !isNegative(
+                                        INITIAL_COOLDOWN_DURATION - seedTreeCooldown
+                                    )
+                                ) {
                                     seedTreeCooldown = INITIAL_COOLDOWN_DURATION - seedTreeCooldown
                                     triggerSeedTreeCooldown(seedTree.id, seedTreeCooldown)
-                                }
-                                else{
+                                } else {
                                     seedTreeCooldown = 0L
                                 }
 
                                 Log.i("viewModelScope", "seedTreeColdown 2: $seedTreeCooldown")
                                 seedTree.id to (seedTreeCooldown)
-                                /*val cooldowDatabase = getCooldownDataByIdUseCase(seedTree.id)
-                                var seedTreeColdown = 0L
-                                if(currentCooldowns[seedTree.id] != null){
-                                    seedTreeColdown =currentCooldowns[seedTree.id]!!
-                                }
-                                else if(cooldowDatabase.count() > 0
-                                    && !isNegative(INITIAL_COOLDOWN_DURATION - Duration.between(cooldowDatabase.first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L)){
-                                    seedTreeColdown = INITIAL_COOLDOWN_DURATION - Duration.between(cooldowDatabase.first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
-                                    triggerSeedTreeCooldown(seedTree.id, seedTreeColdown)
-                                }
-*/
                             }
                         }
                     }
@@ -238,22 +232,33 @@ class GroveViewModel @Inject constructor(
         return number < 0L
     }
 
-    fun saveTreeCooldowns(){
+    fun saveTreeCooldowns() {
         viewModelScope.launch {
             try {
                 seedTreeCooldowns.value.forEach { (treeId, _) ->
                     Log.i("GroveViewModel", "saveThreeCooldowns: $treeId")
-                    val cooldownData = CooldownData(treeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
+                    val cooldownData =
+                        CooldownData(treeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
                     Log.i("GroveViewModel", "saveThreeCooldowns: $cooldownData")
-                    insertCooldownDataUseCase(CooldownData(treeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)))
+                    insertCooldownDataUseCase(
+                        CooldownData(
+                            treeId,
+                            LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)
+                        )
+                    )
                 }
                 forestTreeGrowthTimes.value.forEach { (treeId, _) ->
-                    insertCooldownDataUseCase(CooldownData(treeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)))
+                    insertCooldownDataUseCase(
+                        CooldownData(
+                            treeId,
+                            LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)
+                        )
+                    )
                 }
             } catch (e: UnknownHostException) {
                 handleException("No internet connection. Please check your connection and try again.")
             } catch (e: Exception) {
-                handleException("An unexpected error occurred. Please try again later." )
+                handleException("An unexpected error occurred. Please try again later.")
             }
         }
     }
@@ -261,7 +266,8 @@ class GroveViewModel @Inject constructor(
     private fun handleException(message: String) {
         _errorState.update { message }
     }
-/*
+
+    /*
     override fun onCleared() {
         saveTreeCooldowns()
         super.onCleared()
@@ -306,23 +312,27 @@ class GroveViewModel @Inject constructor(
             } catch (e: UnknownHostException) {
                 handleException("No internet connection. Please check your connection and try again.")
             } catch (e: Exception) {
-                handleException("An unexpected error occurred. Please try again later." )
+                handleException("An unexpected error occurred. Please try again later.")
             }
         }
     }
 
     // Trigger seed tree cooldown when seed tree button is clicked
-    fun triggerSeedTreeCooldown(seedTreeId: String, coolDown : Long = 0L) {
+    fun triggerSeedTreeCooldown(seedTreeId: String, coolDown: Long = 0L) {
         viewModelScope.launch(Dispatchers.IO) {
             var remainingTime: Long
             // Reset cooldown to initial value
-            if(coolDown != 0L){
+            if (coolDown != 0L) {
                 // Decrement cooldown until it reaches 0
                 remainingTime = coolDown
-            }
-            else{
-                insertCooldownDataUseCase(CooldownData(seedTreeId, LocalDateTime.now().truncatedTo(
-                    ChronoUnit.SECONDS)))
+            } else {
+                insertCooldownDataUseCase(
+                    CooldownData(
+                        seedTreeId, LocalDateTime.now().truncatedTo(
+                            ChronoUnit.SECONDS
+                        )
+                    )
+                )
                 _seedTreeCooldowns.update { currentCooldowns ->
                     currentCooldowns + (seedTreeId to INITIAL_COOLDOWN_DURATION)
                 }
@@ -336,7 +346,10 @@ class GroveViewModel @Inject constructor(
                     currentCooldowns + (seedTreeId to remainingTime)
                 }
 
-                Log.i("GroveViewModel", "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}")
+                Log.i(
+                    "GroveViewModel",
+                    "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}"
+                )
 
             }
 
@@ -350,14 +363,15 @@ class GroveViewModel @Inject constructor(
     // Updates the growth stage timer for a forest tree
     private fun updateForestTreeGrowthTime(forestTree: ForestTree) {
         viewModelScope.launch(Dispatchers.IO) {
-            try{
-                var elapsedTime = (Duration.between(forestTree.plantingDate, LocalDateTime.now()).seconds) * 1000 // Time in milliseconds
+            try {
+                var elapsedTime = (Duration.between(
+                    forestTree.plantingDate,
+                    LocalDateTime.now()
+                ).seconds) * 1000 // Time in milliseconds
 
                 Log.d("GroveViewModel", "elapsed time: $elapsedTime")
 
                 while (!forestTree.hasReachedAdultStage) {
-
-                    Log.i("GroveViewModel", "hasReachedAdultStage: ${forestTree.hasReachedAdultStage}")
                     delay(1000) // Delay for 1 second
                     elapsedTime += 1000 // Increment elapsed time by 1 second
                     // Update growth time in the map
@@ -375,14 +389,14 @@ class GroveViewModel @Inject constructor(
             } catch (e: UnknownHostException) {
                 handleException("No internet connection. Please check your connection and try again.")
             } catch (e: Exception) {
-                handleException("An unexpected error occurred. Please try again later." )
+                handleException("An unexpected error occurred. Please try again later.")
             }
         }
     }
 
     // Updates the growth stage of a forest tree
     suspend fun updateGrowthStage(forestTree: ForestTree) {
-        try{
+        try {
             // Assigns the growth stage based on elapsed time
             forestTree.currentStage = when {
                 _forestTreeGrowthTimes.value.getValue(forestTree.id) < (GROWTH_TIME_DURATION) / 2 -> GrowthStage.SPROUT
@@ -398,7 +412,7 @@ class GroveViewModel @Inject constructor(
         } catch (e: UnknownHostException) {
             handleException("No internet connection. Please check your connection and try again.")
         } catch (e: Exception) {
-            handleException("An unexpected error occurred. Please try again later." )
+            handleException("An unexpected error occurred. Please try again later.")
         }
     }
 
@@ -409,7 +423,7 @@ class GroveViewModel @Inject constructor(
             if (forestTree?.currentStage == GrowthStage.ADULT) {
                 totalOxygen += forestTree.type.oxygenAmount
 
-                Log.i("GroveViewModel", "Oxygen amount: ${forestTree.type.oxygenAmount}")
+//                Log.i("GroveViewModel", "Oxygen amount: ${forestTree.type.oxygenAmount}")
 
             } else {
                 0
@@ -421,24 +435,26 @@ class GroveViewModel @Inject constructor(
     // Logic for when the user press the claim daily oxygen button
     fun claimOxygen() {
         viewModelScope.launch(Dispatchers.IO) {
-            try{
-            // Updates the user's oxygen by the accumulated oxygen
-            updateUserOxygenUseCase(userOxygen.value + accumulatedOxygen.value)
+            try {
+                // Updates the user's oxygen by the accumulated oxygen
+                updateUserOxygenUseCase(userOxygen.value + accumulatedOxygen.value)
 
-            // Triggers the cooldown for the button
-            triggerOxygenCooldown()
+                // Checks the amount of times a tree has given oxygen, if it exceeds the limit, it gets deleted
+                checkTreesLifetime()
 
+                // Triggers the cooldown for the button
+                triggerOxygenCooldown()
             } catch (e: UnknownHostException) {
                 handleException("No internet connection. Please check your connection and try again.")
             } catch (e: Exception) {
-                handleException("An unexpected error occurred. Please try again later." )
+                handleException("An unexpected error occurred. Please try again later.")
             }
         }
     }
 
     // Triggers the claim oxygen cooldown when the button is clicked
     private suspend fun triggerOxygenCooldown() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _oxygenCooldown.value = OXYGEN_COOLDOWN_DURATION // Set initial cooldown time
             delay(OXYGEN_COOLDOWN_DURATION) // Wait for the cooldown duration
             _oxygenCooldown.value = 0L // Reset cooldown time
@@ -456,6 +472,24 @@ class GroveViewModel @Inject constructor(
 
         // Reset cooldown to 0 when finished
         _oxygenCooldown.update { 0L }
+    }
+
+    private fun checkTreesLifetime() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _forestTrees.value.filterNotNull().forEach { forestTree ->
+                if(forestTree.currentStage == GrowthStage.ADULT){
+                    forestTree.timesOxygenClaimed++
+                    updateTimesOxygenClaimed(forestTree)
+                }
+
+                forestTree.timesOxygenClaimed.let {
+                    if (it >= MAX_TIMES_TO_CLAIM_OXYGEN) {
+                        Log.i("GroveViewModel", "Oxygen claimed: ${forestTree.timesOxygenClaimed}")
+                        deleteForestTreeByIdUseCase(forestTree.id)
+                    }
+                }
+            }
+        }
     }
 }
 
