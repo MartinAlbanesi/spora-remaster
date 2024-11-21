@@ -173,6 +173,19 @@ class GroveViewModel @Inject constructor(
                         _forestTreeGrowthTimes.update { currentGrowthTimes ->
                             forestTrees.associate { forestTree ->
                                 val treeId = forestTree?.id?.toString() ?: "0"
+                                /*
+                                var forestTreeCooldown : Long = 0L
+                                if(getCooldownDataByIdUseCase(treeId).first().lastUpdateDate != null){
+                                    forestTreeCooldown = Duration.between(getCooldownDataByIdUseCase(treeId).first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
+
+                                    Log.i("viewModelScope", "seedTreeColdown 1 : $forestTreeCooldown")
+                                }
+                                */
+
+                                if (forestTree != null) {
+                                    updateForestTreeGrowthTime(forestTree)
+                                }
+
                                 treeId to (currentGrowthTimes.getOrDefault(
                                     treeId,
                                     Duration.between(
