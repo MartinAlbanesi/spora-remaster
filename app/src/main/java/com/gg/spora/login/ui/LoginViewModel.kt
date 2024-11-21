@@ -1,16 +1,15 @@
 package com.gg.spora.login.ui
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.user.domain.SetNewUserUseCase
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -56,8 +55,9 @@ class LoginViewModel @Inject constructor(
      fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
 
-    fun onLoginSelected(onNavigationToHome: () -> Unit) {
-        _isLoading.value = true // Show the CircularProgressIndicator
+
+  /*  fun onLoginSelected(onNavigationToHome: () -> Unit) {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
                 registerWithEmail(
@@ -66,13 +66,43 @@ class LoginViewModel @Inject constructor(
                     name.value.orEmpty(),
                     onNavigationToHome
                 )
-            } catch (e: Exception) {
-                _errorMessage.value = "Error: ${e.localizedMessage}"
+            } catch (e: FirebaseAuthInvalidCredentialsException) {
+                _errorMessage.value = "Credenciales inválidas: ${e.localizedMessage}"
+            } catch (e: FirebaseAuthUserCollisionException) {
+                _errorMessage.value = "El usuario ya está registrado"
             } finally {
-                _isLoading.value = false // Hide the CircularProgressIndicator
+                _isLoading.value = false
+            }
+        }
+    }*/
+
+    fun onLoginSelected(onNavigationToHome: () -> Unit) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            try {
+                registerWithEmail(
+                    email.value.orEmpty(),
+                    password.value.orEmpty(),
+                    name.value.orEmpty(),
+                    onNavigationToHome
+                )
+            } catch (e: FirebaseAuthInvalidCredentialsException) {
+                _errorMessage.value = "Credenciales inválidas: ${e.localizedMessage}"
+            } catch (e: FirebaseAuthUserCollisionException) {
+                _errorMessage.value = "El usuario ya está registrado"
+            } catch (e: IllegalArgumentException) {
+                _errorMessage.value = "Parámetros inválidos: ${e.localizedMessage}"
+            } catch (e: Exception) {
+                Log.e("LoginViewModel", "Error inesperado: ${e.message}", e)
+                _errorMessage.value = "Error desconocido: ${e.localizedMessage}"
+                throw e // Opcional: re-lanza para no ocultar el error
+            } finally {
+                _isLoading.value = false
             }
         }
     }
+
+
 
     private fun registerWithEmail(
         email: String,
@@ -99,32 +129,46 @@ class LoginViewModel @Inject constructor(
         email: String,
         onNavigationToHome: () -> Unit
     ) {
-        try {
-            viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
                 setNewUserUseCase(email, name)
                 withContext(Dispatchers.Main) {
                     delay(1500)
                     onNavigationToHome()
                 }
-
+            } catch (e: IllegalStateException) {
+                _errorMessage.value = "Estado inesperado: ${e.localizedMessage}"
+            } catch (e: IllegalArgumentException) {
+                _errorMessage.value = "Datos inválidos: ${e.localizedMessage}"
+            } catch (e: Exception) {
+                Log.e("LoginViewModel", "Error al guardar usuario: ${e.message}", e)
+                _errorMessage.value = "Error al guardar usuario: ${e.localizedMessage}"
+                throw e // Opcional
             }
-        }catch (e:Exception){
-            _errorMessage.value = "Error al guardar usuario: ${e.localizedMessage}"
         }
-//        val user = hashMapOf(
-//            "name" to name,
-//            "email" to email
-//        )
-//        firestore.collection("users")
-//            .add(user)
-//            .addOnSuccessListener {
-//                _loginSuccess.value = true
-//                _errorMessage.value = null
-//            }
-//            .addOnFailureListener {
-//                _errorMessage.value = "Error al guardar usuario: ${it.localizedMessage}"
-//            }
     }
+
+
+    /*private fun saveUserToFirestore(
+        name: String,
+        email: String,
+        onNavigationToHome: () -> Unit
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                setNewUserUseCase(email, name)
+                withContext(Dispatchers.Main) {
+                    delay(1500)
+                    onNavigationToHome()
+                }
+            } catch (e: IllegalStateException) {
+                _errorMessage.value = "Estado inesperado: ${e.localizedMessage}"
+            } catch (e: Exception) {
+                _errorMessage.value = "Error al guardar usuario: ${e.localizedMessage}"
+            }
+        }
+    }*/
+
     fun setLoading(isLoading: Boolean) {
         _isLoading.value = isLoading
     }

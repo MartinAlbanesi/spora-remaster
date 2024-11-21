@@ -41,13 +41,13 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
             LoginScreen(
                 viewModel = loginViewModel,
-                onNavigationToHome = {
+                /*onNavigationToHome = {
                     navController.navigate(NavigationRoutes.HomeGraph) {
                         popUpTo(NavigationRoutes.SignUp) {
                             inclusive = true
                         }
                     }
-                },
+                },*/
                 onNavigateToRegisteredLogin = {
                     navController.navigate(NavigationRoutes.RegisteredLogin)
                 }

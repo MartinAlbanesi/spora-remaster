@@ -125,7 +125,7 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
             val image = if (passwordVisible)
                 Icons.Filled.Visibility
             else Icons.Filled.VisibilityOff
-            // Please provide localized description for accessibility
+
             val description = if (passwordVisible) "Hide password" else "Show password"
 
             IconButton(onClick = {passwordVisible = !passwordVisible}){
@@ -134,32 +134,6 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
         }
     )
 }
-
-/*@Composable
-fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
-    val shape = RoundedCornerShape(20.dp)
-    TextField(
-        value = password, onValueChange = { onTextFieldChanged(it) },
-        placeholder = { Text(text = "Contraseña") },
-        modifier = Modifier.fillMaxWidth(),
-        shape = shape,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        singleLine = true,
-        maxLines = 1,
-        textStyle = MaterialTheme.typography.labelLarge,
-        colors = TextFieldDefaults.colors(
-            unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colorScheme.primary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface
-
-        )
-    )
-}*/
 
 @Composable
 fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
@@ -197,7 +171,7 @@ fun LoginButton(
         modifier = Modifier.fillMaxWidth(),
         //colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFF69C2C) // modificar para usar material
+            containerColor = Color(0xFFF69C2C)
         ), enabled = loginEnable,
         shape = ButtonDefaults.elevatedShape
     ) {
@@ -217,6 +191,7 @@ fun separatorLogin(){
         Divider(modifier = Modifier.weight(1f))
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun GoogleLoginButton() {
