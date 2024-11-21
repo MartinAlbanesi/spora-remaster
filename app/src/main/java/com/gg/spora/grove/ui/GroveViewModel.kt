@@ -28,6 +28,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -130,7 +132,19 @@ class GroveViewModel @Inject constructor(
                     loadSeedTreesUseCase().collect { seedTrees ->
                         _seedTreeCooldowns.update { currentCooldowns ->
                             seedTrees.associate { seedTree ->
-                                seedTree.id to (currentCooldowns[seedTree.id] ?: 0L)
+                                val cooldowDatabase = getCooldownDataByIdUseCase(seedTree.id)
+                                var seedTreeColdown = 0L
+                                if(currentCooldowns[seedTree.id] != null){
+                                    seedTreeColdown =currentCooldowns[seedTree.id]!!
+                                }
+                                else if(cooldowDatabase.count() > 0
+                                    && !isNegative(INITIAL_COOLDOWN_DURATION - Duration.between(cooldowDatabase.first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L)){
+                                    seedTreeColdown = INITIAL_COOLDOWN_DURATION - Duration.between(cooldowDatabase.first().lastUpdateDate, LocalDateTime.now()).seconds * 1000L
+                                    triggerSeedTreeCooldown(seedTree.id, seedTreeColdown)
+                                }
+
+                                Log.i("viewModelScope", "seedTreeColdown: $seedTreeColdown")
+                                seedTree.id to (seedTreeColdown)
                             }
                         }
                     }
@@ -185,11 +199,17 @@ class GroveViewModel @Inject constructor(
 
     }
 
+    fun isNegative(number: Long): Boolean {
+        return number < 0L
+    }
+
     fun saveTreeCooldowns(){
         viewModelScope.launch {
             try {
                 seedTreeCooldowns.value.forEach { (treeId, _) ->
                     Log.i("GroveViewModel", "saveThreeCooldowns: $treeId")
+                    val cooldownData = CooldownData(treeId)
+                    Log.i("GroveViewModel", "saveThreeCooldowns: $cooldownData")
                     insertCooldownDataUseCase(CooldownData(treeId))
                 }
                 forestTreeGrowthTimes.value.forEach { (treeId, _) ->
@@ -257,15 +277,22 @@ class GroveViewModel @Inject constructor(
     }
 
     // Trigger seed tree cooldown when seed tree button is clicked
-    fun triggerSeedTreeCooldown(seedTreeId: String) {
+    fun triggerSeedTreeCooldown(seedTreeId: String, coolDown : Long = 0L) {
         viewModelScope.launch(Dispatchers.IO) {
+            var remainingTime = 0L
+            //insertCooldownDataUseCase(CooldownData(seedTreeId))
             // Reset cooldown to initial value
-            _seedTreeCooldowns.update { currentCooldowns ->
-                currentCooldowns + (seedTreeId to INITIAL_COOLDOWN_DURATION)
+            if(coolDown != 0L){
+                // Decrement cooldown until it reaches 0
+                remainingTime = coolDown
             }
-
-            // Decrement cooldown until it reaches 0
-            var remainingTime = INITIAL_COOLDOWN_DURATION
+            else{
+                _seedTreeCooldowns.update { currentCooldowns ->
+                    currentCooldowns + (seedTreeId to INITIAL_COOLDOWN_DURATION)
+                }
+                // Decrement cooldown until it reaches 0
+                remainingTime = INITIAL_COOLDOWN_DURATION
+            }
             while (remainingTime > 0) {
                 delay(1000)
                 remainingTime -= 1000
