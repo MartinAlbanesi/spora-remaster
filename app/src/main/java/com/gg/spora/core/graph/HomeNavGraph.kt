@@ -97,6 +97,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 //                            navController.navigate(NavigationRoutes.Grove)
                         }
                     },
+                    onClaimMission = homeViewModel::claimMission
                 )
             }
             if (showTutorial) {

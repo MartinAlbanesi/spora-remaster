@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
+import com.gg.spora.missions.domain.ClaimMissionUseCase
 import com.gg.spora.missions.domain.GetMissionsUseCase
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.tutorials.domain.TutorialSelected
@@ -29,7 +30,8 @@ class HomeViewModel @Inject constructor(
     private val getUserLocalUseCase: GetUserLocalUseCase,
     private val getUserAuthUseCase: GetUserAuthUseCase,
     val tutorialSelected: TutorialSelected,
-    private val getMissionsUseCase: GetMissionsUseCase
+    private val getMissionsUseCase: GetMissionsUseCase,
+    private val claimMissionUseCase: ClaimMissionUseCase
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -112,6 +114,12 @@ class HomeViewModel @Inject constructor(
                 delay(7000)
                 _champyQuote.value = null
             }
+        }
+    }
+
+    fun claimMission(missionId: Byte, oxygenReward: Byte) {
+        viewModelScope.launch {
+            claimMissionUseCase(missionId, oxygenReward.toInt())
         }
     }
 

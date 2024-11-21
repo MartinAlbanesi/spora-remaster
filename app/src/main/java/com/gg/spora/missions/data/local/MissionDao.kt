@@ -27,4 +27,7 @@ interface MissionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMissions(missions: List<MissionEntity>)
+
+    @Query("UPDATE missions SET is_claimed = 1 WHERE id = :id")
+    suspend fun claimMission(id: Byte)
 }

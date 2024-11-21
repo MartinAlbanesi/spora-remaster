@@ -27,7 +27,14 @@ class MissionDaoTest{
             .build()
         missionDao = db.missionDao()
 
-        missionEntity = MissionEntity(1, "Pasar un nivel", 15, 1, 0)
+        missionEntity = MissionEntity(
+            1,
+            "Pasar un nivel",
+            15,
+            1,
+            0,
+            false
+        )
     }
 
     @After
@@ -69,6 +76,22 @@ class MissionDaoTest{
         val updatedMission = missionDao.getMissionById(1)
 
         assertEquals(updatedMission?.counter, 1.toByte())
+
+    }
+
+    @Test
+    fun claimMission_WhenSetACorrectMission_ClaimMission() = runTest {
+
+        // Given
+        missionDao.insertMission(missionEntity)
+
+        // When
+        missionDao.claimMission(1)
+
+        // Then
+        val updatedMission = missionDao.getMissionById(1)
+
+        assertEquals(updatedMission?.isClaimed, true)
 
     }
 }

@@ -32,4 +32,8 @@ class MissionRepositoryLocal @Inject constructor(
     override suspend fun insertMissions(missions: List<Mission>) {
         missionDao.insertMissions(missions.map { it.toMissionEntity() })
     }
+
+    override suspend fun claimMission(id: Byte) {
+        missionDao.claimMission(id)
+    }
 }

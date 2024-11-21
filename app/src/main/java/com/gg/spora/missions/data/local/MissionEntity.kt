@@ -12,4 +12,5 @@ data class MissionEntity(
     @ColumnInfo(name = "oxygen_reward") val oxygenReward: Byte,
     val objective: Byte,
     var counter: Byte,
+    @ColumnInfo(name = "is_claimed") val isClaimed: Boolean
 )

@@ -24,18 +24,28 @@ object MissionModels {
 
     val fakeMissions = listOf(
         Mission(
-            id = 1,
-            text = "Visitar a Mushy",
+            id = MissionType.LIBRARY_MISSION.missionId,
+            text = MissionType.LIBRARY_MISSION.text,
             oxygenReward = 10,
             objective = 1,
             counter = 0,
+            isCompleted = true,
+            isClaimed = true
+        ),
+        Mission(
+            id = MissionType.MINI_GAME_MISSION.missionId,
+            text = MissionType.MINI_GAME_MISSION.text,
+            oxygenReward = 10,
+            objective = 1,
+            counter = 0,
+            isCompleted = true
         ),
         Mission(
             id = 2,
-            text = "Completar un nivel",
-            oxygenReward = 20,
+            text = "Tutorial",
+            oxygenReward = 10,
             objective = 1,
             counter = 0,
-        ),
+        )
     )
 }

@@ -3,8 +3,6 @@ package com.gg.spora.home.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.shrinkHorizontally
-import androidx.compose.animation.slideIn
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,10 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -31,14 +26,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
@@ -64,10 +57,13 @@ fun HomeScreen(
     onNavigateToExpoStage: () -> Unit,
     onNavigateToLibrary: () -> Unit,
     onNavigateToProfile: () -> Unit,
-    onNavigateToGrove: () -> Unit
+    onNavigateToGrove: () -> Unit,
+    onClaimMission: (Byte, Byte) -> Unit
 ) {
 
     var showMission by rememberSaveable { mutableStateOf(false) }
+
+    var missionNotClaimed = missions.filter { !it.isClaimed }.size
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(
@@ -150,7 +146,7 @@ fun HomeScreen(
                             modifier = Modifier.clickable(onClick = onClick),
                         )
 
-                        if (text == "Misiones" && missions.isNotEmpty()) {
+                        if (text == "Misiones" && missionNotClaimed > 0) {
                             Badge(
                                 containerColor = colorResource(R.color.primary),
                                 contentColor = colorResource(R.color.white),
@@ -160,7 +156,7 @@ fun HomeScreen(
                                     .offset(x = (-8).dp, y = (-20).dp)
                             ) {
                                 Text(
-                                    text = missions.size.toString(),
+                                    text = missionNotClaimed.toString(),
                                     fontSize = 24.sp
                                 )
                             }
@@ -243,10 +239,14 @@ fun HomeScreen(
                 .align(Alignment.CenterStart)
         ) {
             MissionScreen(
-                missions = missions,
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-            ) { }
+                    .fillMaxWidth(0.8f),
+                missions = missions,
+                onBack = {
+                    showMission = false
+                },
+                onClaimMission = onClaimMission,
+            )
         }
     }
 }
@@ -271,6 +271,7 @@ private fun MiniGameScreenPreview() {
                 onNavigateToRanking = {},
                 onNavigateToProfile = {},
                 onNavigateToGrove = {},
+                onClaimMission = { _, _ -> }
             )
         }
     }

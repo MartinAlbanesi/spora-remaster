@@ -14,4 +14,6 @@ interface IMissionRepositoryLocal {
     suspend fun updateCounterMission(id: Byte)
 
     suspend fun insertMissions(missions: List<Mission>)
+
+    suspend fun claimMission(id: Byte)
 }
