@@ -77,11 +77,11 @@ class HomeViewModel @Inject constructor(
 
     private fun getUserName() {
         viewModelScope.launch {
+            _isUserLoggedIn.value = getUserAuthUseCase() != null
             getUserLocalUseCase().collect {
                 _user.value = it
             }
 
-            _isUserLoggedIn.value = getUserAuthUseCase() != null
         }
     }
 

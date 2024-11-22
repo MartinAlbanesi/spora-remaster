@@ -188,17 +188,6 @@ fun HomeScreen(
                     .clickable(onClick = onNavigateToForestStage)
             )
 
-            /*SignButton(
-                image = R.drawable.expo_sign,
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .size(140.dp)
-                    .offset(
-                        y = (-30).dp
-                    )
-                    .clickable(onClick = onNavigateToExpoStage)
-            )
-
             Box(
                 modifier = Modifier
                     .align(Alignment.Center)

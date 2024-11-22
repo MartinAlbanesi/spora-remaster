@@ -38,7 +38,7 @@ class LibraryViewModel @Inject constructor(
     private val getAllInfoCardsUseCase: GetAllInfoCardsUseCase,
     private val insertInfoCardUseCase: InsertNewInfoCardUseCase,
     private val updateInfoCardUseCase: UpdateInfoCardUseCase,
-    private val getInfoCardListByCategoryUseCase: GetInfoCardListByCategoryUseCase
+    private val getInfoCardListByCategoryUseCase: GetInfoCardListByCategoryUseCase,
     private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
     private val infoCardFakeRepository: FakeRepositoryInfoCard,
     private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
@@ -57,14 +57,16 @@ class LibraryViewModel @Inject constructor(
         updateMission()
     }
 
-    private fun getLibraryTutorial(){
+    private fun getLibraryTutorial() {
         tutorialSelected.getTutorial(Tutorials.LIBRARY_TUTORIAL)
     }
 
-    private suspend fun loadInfoCardList() {
+    private fun loadInfoCardList() {
 
-        val currentInfoCards = getAllInfoCardsUseCase.invoke().first()
-        _infoCardEntityList.value = currentInfoCards
+        viewModelScope.launch {
+            val currentInfoCards = getAllInfoCardsUseCase.invoke().first()
+            _infoCardEntityList.value = currentInfoCards
+        }
 
     }
 
@@ -75,18 +77,25 @@ class LibraryViewModel @Inject constructor(
         }
     }
 
-fun insertNewInfoCard(infoCard: InfoCard) {
-    viewModelScope.launch {
-        insertInfoCardUseCase.invoke(infoCard)
-        loadInfoCardList()
+    fun insertNewInfoCard(infoCard: InfoCard) {
+        viewModelScope.launch {
+            insertInfoCardUseCase.invoke(infoCard)
+            loadInfoCardList()
+        }
     }
-}
 
-fun updateInfoCard(infoCard: InfoCard) {
-    viewModelScope.launch {
-        updateInfoCardUseCase.invoke(infoCard)
-        loadInfoCardList()
+    fun updateInfoCard(infoCard: InfoCard) {
+        viewModelScope.launch {
+            updateInfoCardUseCase.invoke(infoCard)
+            loadInfoCardList()
+        }
     }
-}
+
+    private fun updateMission() {
+        viewModelScope.launch {
+            _missionCompleted.value =
+                updateMissionByIdUseCase(MissionType.LIBRARY_MISSION.missionId)
+        }
+    }
 
 }

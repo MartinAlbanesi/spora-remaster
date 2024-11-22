@@ -129,7 +129,7 @@ class LoginViewModel @Inject constructor(
         email: String,
         onNavigationToHome: () -> Unit
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 setNewUserUseCase(email, name)
                 withContext(Dispatchers.Main) {

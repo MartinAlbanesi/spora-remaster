@@ -54,7 +54,7 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
                     showTutorial = showTutorial,
                     onBackButtonClick = { navController.navigate(NavigationRoutes.Home) },
                     onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
-                    onClickSecond = { navController.navigate(NavigationRoutes.LibraryRiverInfo) },
+                    onClickSecond = { navController.navigate(NavigationRoutes.LibraryLakeInfo) },
                     onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
                 )
             }
