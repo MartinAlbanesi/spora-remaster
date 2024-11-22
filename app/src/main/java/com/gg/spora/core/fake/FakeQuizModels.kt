@@ -1069,8 +1069,8 @@ object FakeQuizModels {
         Question(
             id = "2",
             question = "¿Qué debemos hacer para reducir nuestra huella de carbono?",
-            answers = listOf(newFakeAnswers[4], newFakeAnswers[6], newFakeAnswers[7]),
-            correctAnswer = newFakeAnswers[5].id,
+            answers = listOf(newFakeAnswers[4], newFakeAnswers[5], newFakeAnswers[7]),
+            correctAnswer = newFakeAnswers[6].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             champyHelping = "La huella de carbono es la cantidad de gases malos para el planeta, que las personas, cosas o actividades producen."
@@ -1251,7 +1251,7 @@ object FakeQuizModels {
         ),
         Question(
             id = "21",
-            question = "¿Qué recurso natural podemos ayudar a conservar al reparar fugas de agua en casa rápidamente?",
+            question = "¿Qué recurso conservamos al reparar fugas de agua en casa?",
             answers = listOf(newFakeAnswers[80], newFakeAnswers[81], newFakeAnswers[83]),
             correctAnswer = newFakeAnswers[82].id,
             typeGame = TypeGame.QUIZ,
