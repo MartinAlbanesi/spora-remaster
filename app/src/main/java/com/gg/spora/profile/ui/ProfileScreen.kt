@@ -46,6 +46,7 @@ fun ProfileScreen(
    //
 //    currentIndex: Int = 0,
     user: User?,
+    userPosition: Int
 //    onLeftArrowClick: () -> Unit,
 //    onRightArrowClick: () -> Unit
 ) {
@@ -180,7 +181,7 @@ fun ProfileScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "arreglar",
+                                    text = userPosition.toString(),
                                     color = Color.White,
                                     fontSize = 24.sp,
                                     fontWeight = FontWeight.Bold
@@ -290,8 +291,10 @@ private fun ProfileScreenPreview() {
                     userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                     weeklyOxygen = 0
                 ),
+                userPosition = 0
 //                onLeftArrowClick = {},
 //                onRightArrowClick = {}
+
             )
         }
     }

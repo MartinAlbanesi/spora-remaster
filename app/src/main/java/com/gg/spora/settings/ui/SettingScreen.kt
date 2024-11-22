@@ -77,7 +77,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(180.dp)
+                        .height(140.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -117,7 +117,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }
+                        }/*
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
                             modifier = Modifier
@@ -132,7 +132,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }
+                        }*/
                     }
                 }
 

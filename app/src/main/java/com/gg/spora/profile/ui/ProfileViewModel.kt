@@ -20,11 +20,27 @@ class ProfileViewModel @Inject constructor(
     private val _currentIndex = MutableStateFlow(0)
     val currentIndex: StateFlow<Int> = _currentIndex
 
+    private val _userPosition = MutableStateFlow(0)
+    val userPosition: StateFlow<Int> = _userPosition
+
     private val _user = MutableStateFlow<User?>(null)
     val user = _user.asStateFlow()
 
+    private val userList = listOf<User>()
+
     init {
         getUserLocal()
+    }
+
+    fun fetchUserData(currentUser: User) {
+        viewModelScope.launch {
+            _user.value = currentUser
+            _userPosition.value = calculateUserPosition(currentUser)
+        }
+    }
+
+    private fun calculateUserPosition(currentUser: User): Int {
+        return userList.indexOfFirst { it.id == currentUser.id } + 1
     }
 
     private fun getUserLocal() {
