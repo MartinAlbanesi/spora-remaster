@@ -61,11 +61,11 @@ fun GroveScreen(
     uiState: GroveUiState,
     isLoading: Boolean,
     forestTreesColumnCount: Int,
+    errorState: String?,
     scrollState: ScrollState = rememberScrollState(),
     plantForestTree: (ForestTree, String) -> Unit,
     claimOxygen: () -> Unit,
     popBackStack: () -> Unit,
-    errorState: String?
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }

@@ -42,8 +42,8 @@ import kotlin.collections.associate
 
 const val INITIAL_COOLDOWN_DURATION = /*43200000L*/ 10000L
 const val OXYGEN_COOLDOWN_DURATION = /*86400000L*/ 10000L
-const val GROWTH_TIME_DURATION = /*3600000L*/ 6000L
-const val MAX_TIMES_TO_CLAIM_OXYGEN = 5
+const val GROWTH_TIME_DURATION = /*3600000L*/ 10000L
+const val MAX_TIMES_TO_CLAIM_OXYGEN = 3
 
 /**
  * View model for the Grove screen.

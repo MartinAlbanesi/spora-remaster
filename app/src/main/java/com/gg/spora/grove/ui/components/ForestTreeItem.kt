@@ -53,12 +53,6 @@ fun ForestTreeItem(
         showAnimation = false // Hide animation after delay
     }
 
-//    val imageResource = when (currentStage) {
-//        GrowthStage.SPROUT -> R.drawable.sprout_tree
-//        GrowthStage.MEDIUM -> R.drawable.medium_tree
-//        GrowthStage.ADULT -> tree.type.imageResource
-//    }
-
     if (!isLoading) {
         Box {
             AnimatedVisibility(

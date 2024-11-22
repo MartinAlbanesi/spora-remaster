@@ -3,7 +3,6 @@ package com.gg.spora.core.graph
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -70,17 +69,12 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val uiState by groveViewModel.uiState.collectAsState()
             val isLoading by groveViewModel.isLoading.collectAsState()
             val errorState by groveViewModel.errorState.collectAsState()
-/*
-            DisposableEffect(Unit) {
-                onDispose {
-                    groveViewModel.saveTreeCooldowns()
-                }
-            }
-*/
+
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
                 forestTreesColumnCount = 10,
+                errorState = errorState,
                 plantForestTree = { forestTree, seedTreeId ->
                     groveViewModel.plantForestTree(forestTree, seedTreeId)
                 },
@@ -89,7 +83,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     //groveViewModel.saveTreeCooldowns()
                     navController.popBackStack()
                 },
-                errorState = errorState
             )
         }
         composable<NavigationRoutes.Ranking> {

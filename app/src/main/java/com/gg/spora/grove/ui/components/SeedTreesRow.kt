@@ -31,7 +31,7 @@ fun SeedTreesRow(
         uiState.seedTrees.forEach { seedTree ->
             SeedTreeItem(
                 modifier = Modifier
-                    .padding(horizontal = 4.dp)
+                    .padding(horizontal = 6.dp)
                     .align(Alignment.Bottom),
                 seedTree = seedTree,
                 uiState = uiState,
