@@ -104,4 +104,7 @@ object NavigationRoutes {
 
     @Serializable
     object SupportScreen
+
+    @Serializable
+    object NotificationScreen
 }

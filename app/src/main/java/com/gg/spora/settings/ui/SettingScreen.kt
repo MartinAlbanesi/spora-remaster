@@ -43,7 +43,8 @@ fun SettingsScreen(
     onBackClick: () -> Unit,
     onLogOut: () -> Unit,
     onNavigateToEditProfile: () -> Unit,
-    onNavigateToSupport: () -> Unit
+    onNavigateToSupport: () -> Unit,
+    onNavigateToNotifications: () -> Unit
 ) {
     var showAboutUs by remember { mutableStateOf(false) }
 
@@ -119,7 +120,10 @@ fun SettingsScreen(
                         }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                                .clickable { onNavigateToNotifications() },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Notificaciones", modifier = Modifier.weight(1f))
@@ -226,7 +230,8 @@ private fun SettingsScreenPreview() {
                 onBackClick = {},
                 onLogOut = {},
                 onNavigateToEditProfile = {},
-                onNavigateToSupport = {}
+                onNavigateToSupport = {},
+                onNavigateToNotifications = {}
             )
         }
     }

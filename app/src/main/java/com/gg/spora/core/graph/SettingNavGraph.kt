@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.gg.spora.settings.ui.EditProfileScreen
+import com.gg.spora.settings.ui.Notifications
 import com.gg.spora.settings.ui.SettingViewModel
 import com.gg.spora.settings.ui.SettingsScreen
 import com.gg.spora.settings.ui.SupportScreen
@@ -24,7 +25,8 @@ fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
                     }
                 },
                 onNavigateToEditProfile = { navController.navigate(NavigationRoutes.EditProfileScreen) },
-                onNavigateToSupport = { navController.navigate(NavigationRoutes.SupportScreen) }
+                onNavigateToSupport = { navController.navigate(NavigationRoutes.SupportScreen) },
+                onNavigateToNotifications = { navController.navigate(NavigationRoutes.NotificationScreen) }
             )
         }
         composable<NavigationRoutes.EditProfileScreen> {
@@ -37,6 +39,13 @@ fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
             SupportScreen(
                 onBackClick = { navController.popBackStack() },
                 onSendClick = { subject, description -> /* handle send */ })
+        }
+
+        composable<NavigationRoutes.NotificationScreen> {
+            Notifications (
+                onBackClick = { navController.popBackStack() }
+            )
+
         }
 
 }
