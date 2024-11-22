@@ -3,6 +3,7 @@ package com.gg.spora.challenge.data.local
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
@@ -16,7 +17,7 @@ interface ChallengeDao {
     @Query("SELECT * FROM object_detail")
     suspend fun getAllObjectsDetail() : List<ObjectDetailEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertObjetDetail(objectDetailEntity: ObjectDetailEntity)
 
     @Query("DELETE FROM object_detail")
@@ -36,7 +37,7 @@ interface ChallengeDao {
     @Query("SELECT * FROM object_detail_step")
     suspend fun getAllStepsObjectDetail() : List<StepObjectDetailEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStepObjetDetail(stepObjectDetail: StepObjectDetailEntity)
 
     @Query("SELECT ods.* FROM object_detail od JOIN object_detail_step ods " +

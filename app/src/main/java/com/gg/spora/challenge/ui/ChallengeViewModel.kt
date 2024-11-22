@@ -48,7 +48,7 @@ class ChallengeViewModel @Inject constructor(
 
             val areObjectsEqual = objectsOfUser == objectsDetailChallenge
 
-            if(areObjectsEqual){
+            if(objectsDetailChallenge.all { it.isValidate }){
                 _isFinally.value = true
             }
         }

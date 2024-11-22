@@ -48,7 +48,6 @@ fun ChampyDialog(
     onClickSecondaryButton: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    val localRewards = getStarWithOxygen(starsState, rewards)
 
     val colorFilter = if (backgroundImage == R.drawable.expo_background) {
         ColorFilter.lighting(
@@ -91,6 +90,8 @@ fun ChampyDialog(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     if(!isChallenge){
+
+                        val localRewards = getStarWithOxygen(starsState, rewards)
                         StarWithOxygenGroup(
                             rewards = localRewards,
                             rotateItems = SporaConstant.ROTATE_ITEMS_REWARDS,
