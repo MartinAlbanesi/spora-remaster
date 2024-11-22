@@ -6,7 +6,7 @@ import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
 import kotlin.collections.listOf
 
-@Suppress("LargeClass")
+@Suppress("LargeClass", "LongParameterList")
 object FakeQuizModels {
 
     /* val fakeLocalAnswers = listOf(
@@ -1344,964 +1344,964 @@ object FakeQuizModels {
 
     val newFakeAnswers = listOf(
         Answer(
-            "1", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "1", "Plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "2", "Restos de comida", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "2", "Restos de comida", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "3", "Pañales", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "3", "Pañales", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "4", "Ropa usada", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "4", "Ropa usada", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "5", "Usar más el auto", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "5", "Usar más el auto", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "6", "Comer solo comida rápida", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "6", "Comer solo comida rápida", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "7", "Caminar o usar bicicleta", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "7", "Caminar o usar bicicleta", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "8", "Comprar más cosas nuevas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "8", "Comprar más cosas nuevas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "9", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "9", "Plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "10", "Vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "10", "Vidrio", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "11", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "11", "Papel", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "12", "Aluminio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "12", "Aluminio", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "13", "Oxígeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "13", "Oxígeno", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "14", "Nitrógeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "14", "Nitrógeno", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "15", "Dióxido de carbono", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "15", "Dióxido de carbono", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "16", "Helio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "16", "Helio", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "17", "Lavar el auto todos los dias", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "17", "Lavar el auto todos los dias", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
             "18",
             "Cerrar la canilla al cepillarse los dientes",
-            true,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "19", "Usar más agua en la ducha", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "19", "Usar más agua en la ducha", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "20", "Lavar la ropa a mano", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "20", "Lavar la ropa a mano", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "21", "Frutas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "21", "Frutas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "22", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "22", "Hojas secas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "23", "Bolsas de plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "23", "Bolsas de plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "24", "Flores", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "24", "Flores", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "25", "Gatos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "25", "Gatos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "26", "Perros", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "26", "Perros", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "27", "Peces", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "27", "Peces", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "28", "Conejos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "28", "Conejos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "29", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "29", "Carbón", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "30", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "30", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "31", "Energía solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "31", "Energía solar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "32", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "32", "Gas natural", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "33", "Tirarla a la basura", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "33", "Tirarla a la basura", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "34", "Donarla o reciclarla", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "34", "Donarla o reciclarla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "35", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "35", "Quemarla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "36", "Guardarla sin usar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "36", "Guardarla sin usar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "37", "Usar bolsas de tela", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "37", "Usar bolsas de tela", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
             "38",
             "Comprar productos empaquetados",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
             "39",
             "Elegir envases de un solo uso",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "40", "Comer con platos desechables", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "40", "Comer con platos desechables", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "41", "Electricidad", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "41", "Electricidad", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "42", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "42", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "43", "Agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "43", "Agua", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "44", "Carbono", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "44", "Carbono", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "45", "Aumenta la humedad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "45", "Aumenta la humedad", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "46", "Genera más oxígeno", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "46", "Genera más oxígeno", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "47", "Elimina la contaminación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "47", "Elimina la contaminación", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "48", "Reduce el calor del invierno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "48", "Reduce el calor del invierno", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "49", "Aumento de lluvias", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "49", "Aumento de lluvias", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "50", "Sequias", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "50", "Sequias", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "51", "Aumento del alimento", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "51", "Aumento del alimento", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
             "52",
             "Disminución del nivel del mar",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "53", "Energía solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "53", "Energía solar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "54", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "54", "Gas natural", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "55", "Gasolina", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "55", "Gasolina", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "56", "Biocombustible", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "56", "Biocombustible", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "57", "Panda", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "57", "Panda", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "58", "Oso polar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "58", "Oso polar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "59", "Elefante", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "59", "Elefante", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "60", "Águila", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "60", "Águila", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "61", "Reutilizar/Manualidades", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "61", "Reutilizar/Manualidades", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "62", "Desecharla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "62", "Desecharla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "63", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "63", "Quemarla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "64", "Enterrarlo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "64", "Enterrarlo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "65", "Reciclarla", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "65", "Reciclarla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "66", "Romperla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "66", "Romperla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "67", "Enterrarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "67", "Enterrarla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "68", "Quemarla", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "68", "Quemarla", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "69", "Aumenta la erosión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "69", "Aumenta la erosión", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
             "70",
             "Disminuye la calidad del aire",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "71", "Más sombra/oxígeno", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "71", "Más sombra/oxígeno", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "72", "Reduce el espacio de juego", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "72", "Reduce el espacio de juego", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "73", "De vidrio reutilizable", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "73", "De vidrio reutilizable", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "74", "De plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "74", "De plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "75", "Bolsa de plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "75", "Bolsa de plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "76", "Bolsa de papel", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "76", "Bolsa de papel", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "77", "Cáscara de banana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "77", "Cáscara de banana", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "78", "Bolsa de plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "78", "Bolsa de plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "79", "Papel de oficina", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "79", "Papel de oficina", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "80", "Tela de algodón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "80", "Tela de algodón", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "81", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "81", "Gas natural", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "82", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "82", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "83", "Agua", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "83", "Agua", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "84", "Electricidad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "84", "Electricidad", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "85", "Emisiones de CO2", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "85", "Emisiones de CO2", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "86", "Descomposición de alimentos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "86", "Descomposición de alimentos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "87", "Cosecha de plantas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "87", "Cosecha de plantas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "88", "Construcción de casas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "88", "Construcción de casas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "89", "Evitar tirar basura", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "89", "Evitar tirar basura", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "90", "Usar detergentes fuertes", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "90", "Usar detergentes fuertes", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "91", "Lavar ropa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "91", "Lavar ropa", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "92", "Quemar desechos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "92", "Quemar desechos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "93", "Reciclarlos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "93", "Reciclarlos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "94", "Desecharlos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "94", "Desecharlos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "95", "Guardarlos y no usarlos", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "95", "Guardarlos y no usarlos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "96", "Tirarlos en la calle", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "96", "Tirarlos en la calle", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "97", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "97", "Plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "98", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "98", "Hojas secas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "99", "Papel usado", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "99", "Papel usado", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "100", "Cáscaras de frutas", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "100", "Cáscaras de frutas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "101", "Energía eólica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "101", "Energía eólica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "102", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "102", "Gas natural", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "103", "Carbón", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "103", "Carbón", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "104", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "104", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "105", "Plantar arboles", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "105", "Plantar arboles", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "106", "Usar cárbon al cocinar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "106", "Usar cárbon al cocinar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "107", "Encender más luces", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "107", "Encender más luces", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "108", "Usar más plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "108", "Usar más plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "109", "Usar bombillas LED", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "109", "Usar bombillas LED", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "110", "Usar más plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "110", "Usar más plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "111", "Comprar electrodomésticos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "111", "Comprar electrodomésticos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "112", "Cocinar con carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "112", "Cocinar con carbón", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "113", "Mejora la calidad del agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "113", "Mejora la calidad del agua", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "114", "Afectan a los seres vivos", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "114", "Afectan a los seres vivos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
             "115",
             "Aumentan la cantidad de plantas",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ
         ),
         Answer(
-            "116", "Crean más oxígeno", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "116", "Crean más oxígeno", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "117", "Disminuye la contaminación", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "117", "Disminuye la contaminación", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "118", "Aumenta la contaminación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "118", "Aumenta la contaminación", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "119", "Reduce el uso de agua", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "119", "Reduce el uso de agua", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "120", "Se pierde energía", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
+            "120", "Se pierde energía", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ
         ),
         Answer(
-            "121", "Huracán", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "121", "Huracán", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "122", "Tormenta de nieve", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "122", "Tormenta de nieve", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "123",
             "Deshielo de un glaciar",
-            true,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "124", "Volcán en erupción", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "124", "Volcán en erupción", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "125", "Panel solar", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "125", "Panel solar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "126", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "126", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "127", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "127", "Gas natural", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "128", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "128", "Carbón", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "129",
             "Usar transporte público",
-            true,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "130", "Viajar en avión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "130", "Viajar en avión", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "131", "Conducir un coche", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "131", "Conducir un coche", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "132", "Comprar ropa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "132", "Comprar ropa", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "133", "Papel reciclado", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "133", "Papel reciclado", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "134", "Basura orgánica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "134", "Basura orgánica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "135", "Latas de aluminio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "135", "Latas de aluminio", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "136", "Contenedor de vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "136", "Contenedor de vidrio", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "137", "Paneles solares", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "137", "Paneles solares", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "138", "Petróleo", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "138", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "139", "Gas natural", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "139", "Gas natural", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "140", "Carbón", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "140", "Carbón", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "141",
             "Usar aspersores de jardín",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "142", "Lavar el auto", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "142", "Lavar el auto", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "143",
             "Recolectar agua de lluvia",
-            true,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "144", "Regar el cesped", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "144", "Regar el cesped", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "145",
             "Contaminación en el aire",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "146",
             "Contaminación lumínica",
-            true,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "147",
             "Contaminación del agua",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "148",
             "Contaminación acústica",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "149", "Selva tropical", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "149", "Selva tropical", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "150", "Desierto árido", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "150", "Desierto árido", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "151", "Tundra", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "151", "Tundra", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "152", "Sabana africana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "152", "Sabana africana", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "153", "Oso polar", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "153", "Oso polar", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "154", "Tigre de bengala", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "154", "Tigre de bengala", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "155", "Elefante africano", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "155", "Elefante africano", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "156", "Lobo gris", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "156", "Lobo gris", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "157", "Deshechar plásticos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "157", "Deshechar plásticos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "158",
             "Recolección de basura plástica",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "159", "Pesca industrial", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "159", "Pesca industrial", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "160",
             "Instalación de rompeolas",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "161",
             "Agricultura de monocultivo",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "162", "Agricultura vertical", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "162", "Agricultura vertical", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "163", "Uso de pesticidas", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "163", "Uso de pesticidas", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "164",
             "Agricultura de tala y quema",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "165", "Incendios forestales", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "165", "Incendios forestales", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "166",
             "Huracanes más intensos",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "167", "Erosión del suelo", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "167", "Erosión del suelo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "168", "Desertificación", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "168", "Desertificación", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "169", "Selva amazónica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "169", "Selva amazónica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "170", "Desierto del Sahara", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "170", "Desierto del Sahara", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "171", "Tundra ártica", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "171", "Tundra ártica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "172", "Sabana africana", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "172", "Sabana africana", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "173", "Bosques", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "173", "Bosques", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "174", "Ríos", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "174", "Ríos", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "175", "Petróleo", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "175", "Petróleo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "176", "Minerales", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "176", "Minerales", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "177", "Riego por aspersión", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "177", "Riego por aspersión", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "178", "Riego por goteo", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "178", "Riego por goteo", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "179",
             "Uso de agua reciclada",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "180",
             "Limpieza de pozos de agua",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "181", "Oso gris", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "181", "Oso gris", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "182", "Ballena azul", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "182", "Ballena azul", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "183", "Rinoceronte negro", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "183", "Rinoceronte negro", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "184", "Tucan", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "184", "Tucan", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "185", "Parque en la ciudad", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "185", "Parque en la ciudad", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "186",
             "Rascacielos de oficinas",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "187", "Estación de metro", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "187", "Estación de metro", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "188",
             "Calle con tráfico pesado",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "189", "Energía eólica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "189", "Energía eólica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "190", "Energía de biomasa", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "190", "Energía de biomasa", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "191", "Energía nuclear", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "191", "Energía nuclear", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "192", "Energía hidráulica", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "192", "Energía hidráulica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "193",
             "Construcción de represas",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "194", "Pesca industrial", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "194", "Pesca industrial", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "195",
             "Extracción de petróleo",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "196",
             "Construcción de viviendas",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "197", "Inundación", true, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "197", "Inundación", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "198", "Erupción volcánica", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "198", "Erupción volcánica", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
             "199",
             "Deslizamiento de tierra",
-            false,
+            null,
             listOf(TypeQuestion.RECYCLE),
             TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "200", "Tormenta de nieve", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
+            "200", "Tormenta de nieve", null, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
         ),
         Answer(
-            "201", "Energía solar", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "201", "Energía solar", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "202", "Energía eólica", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "202", "Energía eólica", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "203", "Hidroeléctrica", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "203", "Hidroeléctrica", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "204", "Carbón", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "204", "Carbón", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "205", "Gas natural", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "205", "Gas natural", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "206", "Petróleo", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "206", "Petróleo", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "207", "Smog", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "207", "Smog", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "208", "Derrames de petróleo", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "208", "Derrames de petróleo", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "209", "Residuos plásticos", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "209", "Residuos plásticos", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "210", "Energía eólica", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "210", "Energía eólica", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "211", "Reforestación", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "211", "Reforestación", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "212", "Paneles solares", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "212", "Paneles solares", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "213", "Derretimiento de glaciares", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "213", "Derretimiento de glaciares", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "214", "Subida del nivel del mar", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "214", "Subida del nivel del mar", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "215", "Sequías extremas", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "215", "Sequías extremas", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "216", "Reciclaje", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "216", "Reciclaje", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "217", "Conservación de energía", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "217", "Conservación de energía", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "218", "Jardines verticales", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "218", "Jardines verticales", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "219", "Deforestación", true, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+            "219", "Deforestación", null, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "220", "Especies en peligro", true, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+            "220", "Especies en peligro", null, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "221", "Ecosistemas marinos", true, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+            "221", "Ecosistemas marinos", null, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "222", "Carreteras", false, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+            "222", "Carreteras", null, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "223", "Minas de carbón", false, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+            "223", "Minas de carbón", null, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "224", "Zonas urbanas", false, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+            "224", "Zonas urbanas", null, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "225", "Reutilización", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "225", "Reutilización", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "226", "Reciclaje", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "226", "Reciclaje", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "227", "Reducción de residuos", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "227", "Reducción de residuos", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "228", "Producción masiva", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "228", "Producción masiva", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "229", "Desechos industriales", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "229", "Desechos industriales", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "230", "Consumo desmedido", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "230", "Consumo desmedido", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "231", "Rotación de cultivos", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "231", "Rotación de cultivos", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "232", "Uso de pesticidas", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "232", "Uso de pesticidas", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "233", "Conservación del suelo", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "233", "Conservación del suelo", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "234", "Monocultivo", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "234", "Monocultivo", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "235", "Compostaje", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "235", "Compostaje", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "236", "Deforestación", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+            "236", "Deforestación", null, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
         ),
         Answer(
-            "237", "Uso de energía limpia", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "237", "Uso de energía limpia", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "238", "Reforestación", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "238", "Reforestación", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "239", "Reciclaje", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "239", "Reciclaje", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "240", "Uso de carbón", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "240", "Uso de carbón", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "241", "Desperdicio de alimentos", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "241", "Desperdicio de alimentos", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "242", "Tala masiva", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "242", "Tala masiva", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "243", "Sol", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "243", "Sol", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "244", "Viento", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "244", "Viento", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "245", "Agua", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "245", "Agua", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "246", "Gas natural", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "246", "Gas natural", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "247", "Petróleo", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "247", "Petróleo", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "248", "Carbón", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "248", "Carbón", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "249", "Emisiones de vehículos", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "249", "Emisiones de vehículos", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "250", "Fábricas", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "250", "Fábricas", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "251", "Quema de basura", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "251", "Quema de basura", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "252", "Paneles solares", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "252", "Paneles solares", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "253", "Turbinas eólicas", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "253", "Turbinas eólicas", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "254", "Cultivo orgánico", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "254", "Cultivo orgánico", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "255", "Carbón", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "255", "Carbón", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "256", "Petróleo", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "256", "Petróleo", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "257", "Gas natural", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "257", "Gas natural", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "258", "Viento", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "258", "Viento", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "259", "Sol", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "259", "Sol", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "260", "Agua", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+            "260", "Agua", null, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
         ),
         Answer(
-            "261", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "261", "Papel", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "262", "Vidrio", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "262", "Vidrio", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "263", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "263", "Plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "264", "Comida", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "264", "Comida", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "265", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "265", "Hojas secas", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "266", "Piedras", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "266", "Piedras", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "267", "Derrames de petróleo", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "267", "Derrames de petróleo", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "268", "Pesticidas", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "268", "Pesticidas", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "269", "Plásticos", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "269", "Plásticos", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "270", "Peces", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "270", "Peces", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "271", "Algas", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "271", "Algas", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "272", "Rocas", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+            "272", "Rocas", null, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
         ),
         Answer(
-            "273", "CO2", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "273", "CO2", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "274", "Metano", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "274", "Metano", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "275", "Óxido nitroso", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "275", "Óxido nitroso", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "276", "Oxígeno", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "276", "Oxígeno", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "277", "Hidrógeno", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "277", "Hidrógeno", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "278", "Nitrógeno", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+            "278", "Nitrógeno", null, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
         ),
         Answer(
-            "279", "Cáscaras de frutas", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "279", "Cáscaras de frutas", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "280", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "280", "Papel", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "281", "Madera", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "281", "Madera", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "282", "Plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "282", "Plástico", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "283", "Metal", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "283", "Metal", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
         Answer(
-            "284", "Vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+            "284", "Vidrio", null, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
         ),
     )
 

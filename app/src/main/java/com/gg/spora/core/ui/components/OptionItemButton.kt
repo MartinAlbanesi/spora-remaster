@@ -4,6 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -12,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +24,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
+import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun OptionItemButton(
@@ -90,28 +93,35 @@ fun OptionItemButton(
 @Preview
 @Composable
 private fun OptionItemButtonPreview() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    SporaTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
 
-        OptionItemButton(
-            modifier = Modifier.fillMaxWidth(),
-            textItem = "Option 1",
-            isCorrect = true,
-            enabled = true
-        ) {}
-        OptionItemButton(
-            modifier = Modifier.fillMaxWidth(),
-            textItem = "Option 2",
-            isCorrect = false,
-            enabled = true
-        ) {}
-        OptionItemButton(
-            modifier = Modifier.fillMaxWidth(),
-            textItem = "Option 3",
-            isCorrect = null,
-            enabled = true
-        ) {}
+                OptionItemButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    textItem = "Option 1",
+                    isCorrect = true,
+                    enabled = true
+                ) {}
+                OptionItemButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    textItem = "Option 2",
+                    isCorrect = false,
+                    enabled = true
+                ) {}
+                OptionItemButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    textItem = "Option 3",
+                    isCorrect = null,
+                    enabled = true
+                ) {}
+            }
+        }
     }
 }

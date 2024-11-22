@@ -60,7 +60,7 @@ class QuizViewModel @Inject constructor(
     val counterQuestion = _counterQuestion.asStateFlow()
 
     //private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
-    private val _currentImageResId = MutableStateFlow<String?>("android.resource://com.gg.spora/drawable/wind_turbine")
+    private val _currentImageResId = MutableStateFlow<String?>(null)
     val currentImageResId = _currentImageResId.asStateFlow()
 
     private val _relationsItems = MutableStateFlow<List<String>>(emptyList())
@@ -173,7 +173,7 @@ class QuizViewModel @Inject constructor(
             _isCorrect.value = true
         } else {
 
-            _champyHelpingText.value = "La respuesta era: Japon"
+            _champyHelpingText.value = "La respuestas eran: ${correctAnswer.joinToString(", ")}"
 
             _isCorrect.value = false
             _lives.value--
