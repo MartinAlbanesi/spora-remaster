@@ -29,5 +29,5 @@ interface IUserRepositoryLocal {
 
     suspend fun updateUserName(userName: String)
 
-    suspend fun updateUserImage(userImage: Int)
+    suspend fun updateUserImage(userImage: String)
 }

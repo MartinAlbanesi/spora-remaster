@@ -13,7 +13,7 @@ fun UserNetwork.toUser() = User(
     oxygen = oxygen ?: 0,
     levelsCompleted = levelsCompleted?.map { it.toLevelCompleted() } ?: emptyList(),
     treesCount = treesCount ?: 0,
-    userImage = userImage ?: R.drawable.spora_face_splash,
+    userImage = userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
     weeklyOxygen = weeklyOxygen ?: 0
 )
 

@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 
 class UpdateUserImageUseCase @Inject constructor(private val userRepositoryLocal: IUserRepositoryLocal) {
-    suspend operator fun invoke(image: Int) {
+    suspend operator fun invoke(image: String) {
         userRepositoryLocal.updateUserImage(image)
     }
 }

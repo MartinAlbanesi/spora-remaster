@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,6 +47,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
@@ -54,17 +57,19 @@ import com.gg.spora.user.domain.models.User
 
 @Composable
 fun EditProfileScreen(
+    currentUser: User?,
+    selectedImage: String,
+    username: String,
+    userImages: List<String>,
     onBackClick: () -> Unit,
+    showPopup: Boolean = false,
+    onUpdatePopup: (Boolean) -> Unit,
+    onUpdateUsername: (String) -> Unit,
+    onUpdateUserProfile : (String, String) -> Unit,
+    showSnackbar: Boolean = false,
+    onUpdateShowSnackbar: (Boolean) -> Unit
 ) {
 
-    val viewModel: EditProfileViewModel = hiltViewModel()
-    val currentUser by viewModel.currentUser.collectAsState()
-    val selectedImage = viewModel.selectedImage
-    var username by remember { mutableStateOf(viewModel.newUsername) }
-
-    LaunchedEffect(currentUser) {
-        username = currentUser?.userName ?: ""
-    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -97,20 +102,23 @@ fun EditProfileScreen(
                         .fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Image(
-                        painter = painterResource(id = currentUser?.userImage ?: selectedImage),
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(selectedImage)
+                            .placeholder(R.drawable.user_image)
+                            .build(),
                         contentDescription = "User Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(200.dp)
                             .clip(RoundedCornerShape(16.dp))
-                            .clickable { viewModel.showPopup = true }
+                            .clickable { onUpdatePopup(true) }
                     )
                 }
 
                 TextField(
                     value = username,
-                    onValueChange = { username = it },
+                    onValueChange = { onUpdateUsername(it) },
                     label = { Text("Usuario Nuevo") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -143,7 +151,7 @@ fun EditProfileScreen(
 
                 SporaPrimaryButton(
                     text = "Actualizar datos",
-                    onClick = { viewModel.updateUserProfile(selectedImage, username) },
+                    onClick = { onUpdateUserProfile(selectedImage, username) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
@@ -151,11 +159,11 @@ fun EditProfileScreen(
             }
         }
 
-        if (viewModel.showSnackbar) {
+        if (showSnackbar) {
             Snackbar(
                 action = {
-                    TextButton(onClick = { viewModel.showSnackbar = false }) {
-                        Text("OK")
+                    TextButton(onClick = { onUpdateShowSnackbar(false)}) {
+                        Text("Continuar")
                     }
                 },
                 modifier = Modifier.padding(8.dp)
@@ -164,17 +172,11 @@ fun EditProfileScreen(
             }
         }
 
-        if (viewModel.showPopup) {
+        if (showPopup) {
             ImagePopup(
-                availableImages = listOf(
-                    R.drawable.medalladeoro,
-                    R.drawable.plastic_bottle,
-                    R.drawable.air_pollution,
-                    R.drawable.bottle_cap,
-                    R.drawable.spora_logo_without_slogan
-                ),
-                onImageSelected = { viewModel.updateUserProfile(it, username) },
-                onDismiss = { viewModel.showPopup = false }
+                availableImages = userImages,
+                onImageSelected = { onUpdateUserProfile(it, username) },
+                onDismiss = { onUpdatePopup(false) }
             )
         }
     }
@@ -183,8 +185,8 @@ fun EditProfileScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImagePopup(
-    availableImages: List<Int>,
-    onImageSelected: (Int) -> Unit,
+    availableImages: List<String>,
+    onImageSelected: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
     AlertDialog(
@@ -221,8 +223,11 @@ fun ImagePopup(
                                             onDismiss()
                                         }
                                 ) {
-                                    Image(
-                                        painter = painterResource(id = imageRes),
+                                    AsyncImage(
+                                        model = ImageRequest.Builder(LocalContext.current)
+                                            .data(imageRes)
+                                            .placeholder(R.drawable.user_image)
+                                            .build(),
                                         contentDescription = null,
                                         contentScale = ContentScale.Fit,
                                         modifier = Modifier
@@ -253,7 +258,16 @@ private fun EditProfileScreenPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             EditProfileScreen(
-                onBackClick = {}
+                onBackClick = {},
+                currentUser = null,
+                selectedImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
+                username = "Champy",
+                userImages = listOf(),
+                onUpdatePopup = {},
+                onUpdateUsername = {},
+                onUpdateUserProfile = { _, _ -> },
+                showSnackbar = false,
+                onUpdateShowSnackbar = {}
             )
         }
     }

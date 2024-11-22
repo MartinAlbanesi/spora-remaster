@@ -75,7 +75,7 @@ class UserRepositoryLocal @Inject constructor(
         userDao.updateUserName(userName)
     }
 
-    override suspend fun updateUserImage(userImage: Int) {
+    override suspend fun updateUserImage(userImage: String) {
         userDao.updateUserImage(userImage)
     }
 

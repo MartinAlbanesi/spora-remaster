@@ -21,11 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
@@ -159,8 +162,11 @@ fun Ranking(
                                 .background(Color.Black)
                         )
 
-                        Image(
-                            painter = painterResource(id = item.userImage),
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(item.userImage)
+                                .placeholder(R.drawable.user_image)
+                                .build(),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.size(63.dp)
@@ -328,8 +334,11 @@ fun Ranking(
                             .padding(bottom = 5.dp)
                             .background(Color.Black)
                     )
-                    Image(
-                        painter = painterResource(id = currentUser?.userImage ?: R.drawable.spora_face_splash),
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(currentUser?.userImage)
+                            .placeholder(R.drawable.user_image)
+                            .build(),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.size(63.dp)

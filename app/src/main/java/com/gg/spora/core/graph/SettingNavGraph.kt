@@ -11,13 +11,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.gg.spora.settings.ui.EditProfileScreen
+import com.gg.spora.settings.ui.EditProfileViewModel
 import com.gg.spora.settings.ui.Notifications
 import com.gg.spora.settings.ui.SettingViewModel
 import com.gg.spora.settings.ui.SettingsScreen
 import com.gg.spora.settings.ui.SupportScreen
 import com.gg.spora.settings.ui.SupportViewModel
-import com.gg.spora.user.data.local.UserRepositoryLocal
-import com.gg.spora.user.domain.GetUserLocalUseCase
 
 fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
     navigation<NavigationRoutes.SettingGraph>(startDestination = NavigationRoutes.SettingScreen) {
@@ -38,8 +37,29 @@ fun NavGraphBuilder.settingNavGraph(navController: NavHostController) {
             )
         }
         composable<NavigationRoutes.EditProfileScreen> {
+
+            val viewModel: EditProfileViewModel = hiltViewModel()
+            val currentUser by viewModel.currentUser.collectAsState()
+            val selectedImage = viewModel.selectedImage
+            val username = viewModel.newUsername
+            val userImages by viewModel.userImages.collectAsState()
+            val showPopup = viewModel.showPopup
+            val showSnackbar = viewModel.showSnackbar
+
             EditProfileScreen(
-                onBackClick = { navController.popBackStack() }
+                showSnackbar = showSnackbar,
+                showPopup = showPopup,
+                currentUser = currentUser,
+                selectedImage = selectedImage,
+                username = username,
+                userImages = userImages,
+                onBackClick = { navController.popBackStack() },
+                onUpdatePopup = { viewModel.updateShowPopup(it) },
+                onUpdateUsername = { viewModel.updateUserName(it) },
+                onUpdateUserProfile = { image, username ->
+                    viewModel.updateUserProfile(image, username)
+                },
+                onUpdateShowSnackbar = { viewModel.updateSnackBar(it) }
             )
 
         }
