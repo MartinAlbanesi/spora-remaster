@@ -17,7 +17,7 @@ object FakeUserModels {
         "titi@gmail.com",
         100,
         0,
-        R.drawable.spora_face_splash,
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
         100
     )
 
@@ -58,7 +58,7 @@ object FakeUserModels {
             oxygen = 100,
             levelsCompleted = fakeLevelsCompleted,
             treesCount = 0,
-            userImage = R.drawable.spora_face_splash,
+            userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
             weeklyOxygen = 100
         ),
         User(
@@ -68,8 +68,8 @@ object FakeUserModels {
             oxygen = 0,
             levelsCompleted = emptyList(),
             treesCount = 0,
-            userImage = R.drawable.spora_face_splash,
-            weeklyOxygen = 50
+            userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
+            weeklyOxygen = 0
         ),
     )
 

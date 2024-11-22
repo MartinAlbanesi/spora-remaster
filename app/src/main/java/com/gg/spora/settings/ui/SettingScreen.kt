@@ -33,17 +33,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.core.ui.components.SporaPrimaryButton
+import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
 @Suppress("LongMethod")
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
     onLogOut: () -> Unit,
-   // onSettingsClick: () -> Unit
-    onNavigateToEditProfile: () -> Unit
+    onNavigateToEditProfile: () -> Unit,
+    onNavigateToSupport: () -> Unit,
+    onNavigateToNotifications: () -> Unit
 ) {
     var showAboutUs by remember { mutableStateOf(false) }
 
@@ -56,15 +57,12 @@ fun SettingsScreen(
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
         )
-        Column (
-            modifier = Modifier
-                .fillMaxSize()
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            TopBarWithTitleExitAndIcon(
+            TopAppBarOnlyBackArrow(
                 title = "Opciones",
-                onBackClick = onBackClick,
-                showIcon = false,
-                showSettingsIcon = false
+                onBackClick = onBackClick
             )
 
             Column(
@@ -79,7 +77,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(150.dp)
+                        .height(180.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -92,7 +90,7 @@ fun SettingsScreen(
                     Column(
                         modifier = Modifier
                             .align(Alignment.Center)
-                            .padding(16.dp)
+                            .padding(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.weight(1f),
@@ -119,10 +117,13 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }/*
+                        }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                                .clickable { onNavigateToNotifications() },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Notificaciones", modifier = Modifier.weight(1f))
@@ -131,7 +132,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }*/ // Notificaciones
+                        }
                     }
                 }
 
@@ -139,7 +140,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
-                        .height(150.dp)
+                        .height(180.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.rectangle_profile),
@@ -152,7 +153,7 @@ fun SettingsScreen(
                     Column(
                         modifier = Modifier
                             .align(Alignment.Center)
-                            .padding(16.dp)
+                            .padding(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.weight(1f),
@@ -164,10 +165,13 @@ fun SettingsScreen(
                                 fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold
                             )
-                        }/*
+                        }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp)
+                                .clickable { onNavigateToSupport() },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(text = "Soporte", modifier = Modifier.weight(1f))
@@ -176,7 +180,7 @@ fun SettingsScreen(
                                 contentDescription = "Next Icon",
                                 modifier = Modifier.size(24.dp)
                             )
-                        }*/
+                        }
                         Divider(color = Color.Black, thickness = 1.dp)
                         Row(
                             modifier = Modifier
@@ -225,7 +229,9 @@ private fun SettingsScreenPreview() {
             SettingsScreen(
                 onBackClick = {},
                 onLogOut = {},
-                onNavigateToEditProfile = {}
+                onNavigateToEditProfile = {},
+                onNavigateToSupport = {},
+                onNavigateToNotifications = {}
             )
         }
     }

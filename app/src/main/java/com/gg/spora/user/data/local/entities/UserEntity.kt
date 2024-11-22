@@ -11,7 +11,7 @@ data class UserEntity(
     val email: String,
     val oxygen: Int,
     val treesCount: Int,
-    val userImage: Int,
+    val userImage: String,
     val weeklyOxygen: Int
 //    val levelsCompleted : List<LevelCompleted>
 )

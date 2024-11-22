@@ -7,6 +7,8 @@ import com.gg.spora.user.data.network.UserRepositoryNetwork
 import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.gg.spora.user.domain.SetNewUserUseCase
+import com.gg.spora.user.domain.UpdateUserImageUseCase
+import com.gg.spora.user.domain.UpdateUserNameUseCase
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -50,5 +52,21 @@ class UserModule {
         userRepositoryLocal: UserRepositoryLocal
     ) : SetNewUserUseCase{
         return SetNewUserUseCase(userRepositoryNetwork, userRepositoryLocal)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUpdateUserImageUseCase(
+        userRepositoryLocal: UserRepositoryLocal
+    ) : UpdateUserImageUseCase {
+        return UpdateUserImageUseCase(userRepositoryLocal)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUpdateUserNameUseCase(
+        userRepositoryLocal: UserRepositoryLocal
+    ) : UpdateUserNameUseCase {
+        return UpdateUserNameUseCase(userRepositoryLocal)
     }
 }

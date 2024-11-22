@@ -2,11 +2,12 @@ package com.gg.spora.user.domain.models
 
 data class User(
     val id: String,
-    val userName: String,
+    var userName: String,
     val email: String,
     val oxygen: Int,
     val weeklyOxygen: Int,
     val treesCount: Int,
-    val userImage: Int,
-    val levelsCompleted : List<LevelCompleted>
+    var userImage: String,
+    val levelsCompleted : List<LevelCompleted>,
+    val weeklyOxygen: Int
 )
