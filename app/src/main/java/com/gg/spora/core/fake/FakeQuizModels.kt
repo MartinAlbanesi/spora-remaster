@@ -1063,7 +1063,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[1], newFakeAnswers[2], newFakeAnswers[3]),
             correctAnswer = newFakeAnswers[0].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "2",
@@ -1071,7 +1072,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[4], newFakeAnswers[6], newFakeAnswers[7]),
             correctAnswer = newFakeAnswers[5].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "No te olvides que, la huella de carbono es la cantidad de gases malos para el planeta, como el dióxido de carbono, que las personas, cosas o actividades producen."
         ),
         Question(
             id = "3",
@@ -1079,7 +1081,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[8], newFakeAnswers[9], newFakeAnswers[11]),
             correctAnswer = newFakeAnswers[10].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Acordate que, un material biodegradable es algo que, cuando lo tiramos, se descompone solo y vuelve a la naturaleza, como si se deshiciera poco a poco. "
         ),
         Question(
             id = "4",
@@ -1087,7 +1090,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[12], newFakeAnswers[13], newFakeAnswers[15]),
             correctAnswer = newFakeAnswers[14].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "5",
@@ -1095,7 +1099,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[16], newFakeAnswers[18], newFakeAnswers[19]),
             correctAnswer = newFakeAnswers[17].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1104,7 +1109,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[20], newFakeAnswers[21], newFakeAnswers[23]),
             correctAnswer = newFakeAnswers[22].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1113,7 +1119,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[24], newFakeAnswers[25], newFakeAnswers[27]),
             correctAnswer = newFakeAnswers[26].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "8",
@@ -1121,7 +1128,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[28], newFakeAnswers[29], newFakeAnswers[31]),
             correctAnswer = newFakeAnswers[30].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban"
         ),
 
         Question(
@@ -1130,7 +1138,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[32], newFakeAnswers[34], newFakeAnswers[35]),
             correctAnswer = newFakeAnswers[33].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1139,7 +1148,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[37], newFakeAnswers[38], newFakeAnswers[39]),
             correctAnswer = newFakeAnswers[36].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1148,7 +1158,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[41], newFakeAnswers[42], newFakeAnswers[43]),
             correctAnswer = newFakeAnswers[40].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1157,7 +1168,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[44], newFakeAnswers[46], newFakeAnswers[47]),
             correctAnswer = newFakeAnswers[45].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "13",
@@ -1165,7 +1177,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[48], newFakeAnswers[50], newFakeAnswers[51]),
             correctAnswer = newFakeAnswers[49].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "14",
@@ -1173,7 +1186,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[53], newFakeAnswers[54], newFakeAnswers[55]),
             correctAnswer = newFakeAnswers[52].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1182,7 +1196,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[57], newFakeAnswers[58], newFakeAnswers[59]),
             correctAnswer = newFakeAnswers[56].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "La deforestación es cuando cortamos muchos árboles y destruimos bosques, aunque es triste que sea así"
         ),
 
         Question(
@@ -1191,7 +1206,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[61], newFakeAnswers[62], newFakeAnswers[63]),
             correctAnswer = newFakeAnswers[60].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1200,7 +1216,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[65], newFakeAnswers[66], newFakeAnswers[67]),
             correctAnswer = newFakeAnswers[64].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1209,7 +1226,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[68], newFakeAnswers[69], newFakeAnswers[71]),
             correctAnswer = newFakeAnswers[70].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
 
         Question(
@@ -1218,7 +1236,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[73], newFakeAnswers[74], newFakeAnswers[75]),
             correctAnswer = newFakeAnswers[72].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "¿Sabías que el plástico tarda hasta 500 años en descomponerse? Pero si me los traes, yo puedo ayudarte a acelerar el proceso."
         ),
 
         Question(
@@ -1227,7 +1246,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[76], newFakeAnswers[78], newFakeAnswers[79]),
             correctAnswer = newFakeAnswers[77].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Te doy una pista, una de mis super habilidades me ayuda a descomponerlo mucho más rápido."
         ),
         Question(
             id = "21",
@@ -1235,7 +1255,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[80], newFakeAnswers[81], newFakeAnswers[83]),
             correctAnswer = newFakeAnswers[82].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "22",
@@ -1243,7 +1264,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[85], newFakeAnswers[86], newFakeAnswers[87]),
             correctAnswer = newFakeAnswers[84].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "23",
@@ -1251,7 +1273,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[89], newFakeAnswers[90], newFakeAnswers[91]),
             correctAnswer = newFakeAnswers[88].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "24",
@@ -1259,7 +1282,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[93], newFakeAnswers[94], newFakeAnswers[95]),
             correctAnswer = newFakeAnswers[92].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "25",
@@ -1267,7 +1291,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[97], newFakeAnswers[98], newFakeAnswers[99]),
             correctAnswer = newFakeAnswers[96].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "26",
@@ -1275,7 +1300,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[101], newFakeAnswers[102], newFakeAnswers[103]),
             correctAnswer = newFakeAnswers[100].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "27",
@@ -1283,7 +1309,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[105], newFakeAnswers[106], newFakeAnswers[107]),
             correctAnswer = newFakeAnswers[104].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "28",
@@ -1291,7 +1318,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[109], newFakeAnswers[110], newFakeAnswers[111]),
             correctAnswer = newFakeAnswers[108].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "No te olvides que, la huella de carbono es la cantidad de gases malos para el planeta, como el dióxido de carbono, que las personas, cosas o actividades producen."
         ),
         Question(
             id = "29",
@@ -1299,7 +1327,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[112], newFakeAnswers[114], newFakeAnswers[115]),
             correctAnswer = newFakeAnswers[113].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos."
         ),
         Question(
             id = "30",
@@ -1307,7 +1336,8 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[117], newFakeAnswers[118], newFakeAnswers[119]),
             correctAnswer = newFakeAnswers[116].id,
             typeGame = TypeGame.QUIZ,
-            typeQuestion = listOf(TypeQuestion.RECYCLE)
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null
         ),
         Question(
             id = "111",
@@ -1316,6 +1346,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[122].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F1_quiz_image.png?alt=media&token=2189b80d-2532-46ba-8720-f9a4fbf6d09d"
         ),
         Question(
@@ -1325,6 +1356,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[124].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F2_quiz_image.png?alt=media&token=453fbd0e-cb79-4399-9dfa-eb10063e5d75"
         ),
         Question(
@@ -1334,6 +1366,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[128].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "No te olvides que, la huella de carbono es la cantidad de gases malos para el planeta, como el dióxido de carbono, que las personas, cosas o actividades producen.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F3_quiz_image.png?alt=media&token=eddcba94-0c69-4972-aea9-fb932bb5ada9"
         ),
         Question(
@@ -1343,6 +1376,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[132].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F4_quiz_image.png?alt=media&token=8a0cd511-61b2-49be-8e60-0ed0e9fb07e5"
         ),
         Question(
