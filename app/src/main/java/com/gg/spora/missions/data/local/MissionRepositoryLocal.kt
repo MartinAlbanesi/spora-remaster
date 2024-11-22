@@ -36,4 +36,12 @@ class MissionRepositoryLocal @Inject constructor(
     override suspend fun claimMission(id: Byte) {
         missionDao.claimMission(id)
     }
+
+    override suspend fun deleteAllMissions() {
+        missionDao.deleteAllMissions()
+    }
+
+    override suspend fun clearMissions() {
+        missionDao.clearMissions()
+    }
 }

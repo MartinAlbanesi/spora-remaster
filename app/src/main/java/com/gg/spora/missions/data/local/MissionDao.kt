@@ -30,4 +30,10 @@ interface MissionDao {
 
     @Query("UPDATE missions SET is_claimed = 1 WHERE id = :id")
     suspend fun claimMission(id: Byte)
+
+    @Query("DELETE FROM missions")
+    suspend fun deleteAllMissions()
+
+    @Query("UPDATE missions SET is_claimed = 0, counter = 0")
+    suspend fun clearMissions()
 }
