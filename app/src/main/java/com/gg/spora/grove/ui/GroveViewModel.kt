@@ -13,6 +13,7 @@ import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.domain.UpdateTimesOxygenClaimedUseCase
+import com.gg.spora.grove.domain.mappers.toSeedTree
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
@@ -30,6 +31,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -72,7 +74,7 @@ class GroveViewModel @Inject constructor(
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
     private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase,
-    private val updateTimesOxygenClaimed: UpdateTimesOxygenClaimedUseCase,
+    private val updateTimesOxygenClaimed: UpdateTimesOxygenClaimedUseCase
 ) : ViewModel() {
 
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
@@ -130,22 +132,25 @@ class GroveViewModel @Inject constructor(
         GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap(), 0, 0, 0L) // Initial value
     )
 
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 // Associated seedTreeId with its cooldown
                 launch {
+
                     loadSeedTreesUseCase().collect { seedTrees ->
                         _seedTreeCooldowns.update { currentCooldowns ->
                             seedTrees.associate { seedTree ->
                                 var seedTreeCooldown = 0L
-                                if (getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate != null) {
+
+                                if (getCooldownDataByIdUseCase(seedTree.id).firstOrNull()!!.lastUpdateDate != null) {
                                     seedTreeCooldown = Duration.between(
                                         getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate,
                                         LocalDateTime.now()
                                     ).seconds * 1000L
-
                                 }
+
                                 if (currentCooldowns[seedTree.id] != null) {
                                     seedTreeCooldown = currentCooldowns[seedTree.id]!!
                                 } else if (seedTreeCooldown > 0L && !isNegative(
@@ -208,7 +213,7 @@ class GroveViewModel @Inject constructor(
                     _userOxygen.update { userOxygen }
 
                     // Initialize seed trees if they are empty
-                    initSeedTrees()
+                    //initSeedTrees()
 
                     // Calculate accumulated oxygen
                     calculateAccumulatedOxygen()
@@ -226,39 +231,8 @@ class GroveViewModel @Inject constructor(
         }
     }
 
-    fun isNegative(number: Long): Boolean {
+    private fun isNegative(number: Long): Boolean {
         return number < 0L
-    }
-
-    fun saveTreeCooldowns() {
-        viewModelScope.launch {
-            try {
-                seedTreeCooldowns.value.forEach { (treeId, _) ->
-                    Log.i("GroveViewModel", "saveThreeCooldowns: $treeId")
-                    val cooldownData =
-                        CooldownData(treeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
-                    Log.i("GroveViewModel", "saveThreeCooldowns: $cooldownData")
-                    insertCooldownDataUseCase(
-                        CooldownData(
-                            treeId,
-                            LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)
-                        )
-                    )
-                }
-                forestTreeGrowthTimes.value.forEach { (treeId, _) ->
-                    insertCooldownDataUseCase(
-                        CooldownData(
-                            treeId,
-                            LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)
-                        )
-                    )
-                }
-            } catch (e: UnknownHostException) {
-                handleException("No internet connection. Please check your connection and try again.")
-            } catch (e: Exception) {
-                handleException("An unexpected error occurred. Please try again later.")
-            }
-        }
     }
 
     private fun handleException(message: String) {
@@ -266,17 +240,11 @@ class GroveViewModel @Inject constructor(
     }
 
     /*
-    override fun onCleared() {
-        saveTreeCooldowns()
-        super.onCleared()
-    }
-*/
     // Initialize seed trees if they are empty
-    fun initSeedTrees() {
+    private fun initSeedTrees() {
         viewModelScope.launch(Dispatchers.IO) {
             if (_seedTrees.value.isEmpty()) {
                 val initialSeedTrees = listOf(
-                    SeedTree(type = TreeType.PINE),
                     SeedTree(type = TreeType.SECUOYA),
                     SeedTree(type = TreeType.MANGROVE),
                     SeedTree(type = TreeType.BAOBAB),
@@ -285,7 +253,7 @@ class GroveViewModel @Inject constructor(
             }
         }
     }
-
+*/
     // Plants a new forest tree in a random position when seed tree button is clicked
     fun plantForestTree(forestTree: ForestTree, seedTreeId: String) {
         viewModelScope.launch(Dispatchers.IO) {

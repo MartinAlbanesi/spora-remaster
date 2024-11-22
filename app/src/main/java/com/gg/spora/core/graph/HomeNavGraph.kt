@@ -69,9 +69,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage("1"))
                     },
-                    onNavigateToGrove = {
-                        navController.navigate(NavigationRoutes.Grove)
-                    },
                     onNavigateToLibrary = {
                         homeViewModel.getTutorial(
                             Tutorials.LIBRARY_ICON_TUTORIAL,
@@ -97,7 +94,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         homeViewModel.getTutorial(
                             Tutorials.GROVE_ICON_TUTORIAL,
                         ) {
-//                            navController.navigate(NavigationRoutes.Grove)
+                           navController.navigate(NavigationRoutes.Grove)
                         }
                     },
                     onClaimMission = homeViewModel::claimMission
@@ -130,6 +127,9 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 }
             }
 */
+            if(!isLoading){
+
+            }
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
@@ -139,7 +139,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 },
                 claimOxygen = { groveViewModel.claimOxygen() },
                 popBackStack = {
-                    //groveViewModel.saveTreeCooldowns()
                     navController.popBackStack()
                 },
                 errorState = errorState

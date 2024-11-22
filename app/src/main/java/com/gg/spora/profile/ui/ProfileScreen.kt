@@ -198,8 +198,7 @@ private fun ProfileScreenPreview() {
                     id = "id",
                     treesCount = 0,
                     userImage = R.drawable.spora_face_splash,
-                    tutorialsCompleted = TutorialModels.tutorialsCompleted
-                    userImage = R.drawable.spora_face_splash,
+                    tutorialsCompleted = TutorialModels.tutorialsCompleted,
                     forestTrees = emptyList(),
                     seedTrees = emptyList(),
                     objectsScanned = emptyList()

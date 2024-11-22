@@ -2,6 +2,8 @@ package com.gg.spora.user.domain.mappers
 
 import com.gg.spora.R
 import com.gg.spora.challenge.domain.mappers.toObjectDetail
+import com.gg.spora.grove.domain.mappers.toForestTree
+import com.gg.spora.grove.domain.mappers.toSeedTree
 import com.gg.spora.tutorials.domain.mapper.toTutorialCompleted
 import com.gg.spora.tutorials.domain.model.TutorialCompleted
 import com.gg.spora.user.data.local.entities.UserEntity
@@ -19,8 +21,8 @@ fun UserNetwork.toUser() = User(
     treesCount = treesCount ?: 0,
     userImage = userImage ?: R.drawable.spora_face_splash,
     tutorialsCompleted = tutorialsCompleted?.map { it.toTutorialCompleted() } ?: emptyList(),
-    seedTrees = emptyList(),
-    forestTrees = emptyList(),
+    seedTrees = seedTrees ?: emptyList(),
+    forestTrees = forestTrees ?: emptyList(),
 )
 
 fun User.toUserEntity() = UserEntity(

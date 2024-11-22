@@ -1,6 +1,7 @@
 package com.gg.spora.grove.domain
 
 import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.domain.mappers.toSeedTreeNetwork
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.user.domain.GetUserAuthUseCase
@@ -24,7 +25,7 @@ class InsertSeedTreeUseCase @Inject constructor(private val groveRepository: IGr
 
             val userLocal = userRepositoryLocal.getUser().first()!!
             val updateSeedTrees = loadSeedTreesUseCase().first()
-            val newSeedTrees = updateSeedTrees + seedTree
+            val newSeedTrees = updateSeedTrees.map { it.toSeedTreeNetwork() } + seedTree.toSeedTreeNetwork()
 
             val userUpdated = userLocal.copy(
                 seedTrees = newSeedTrees

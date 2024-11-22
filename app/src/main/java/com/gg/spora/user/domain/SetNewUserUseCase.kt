@@ -34,8 +34,7 @@ class SetNewUserUseCase @Inject constructor(
                 userImage = R.drawable.spora_face_splash,
                 seedTrees = emptyList(),
                 forestTrees = emptyList(),
-                objectsScanned = emptyList()
-                userImage = R.drawable.spora_face_splash,
+                objectsScanned = emptyList(),
                 tutorialsCompleted = TutorialModels.tutorialsCompleted
             )
             userRepositoryLocal.setUserLocal(user)
@@ -56,8 +55,7 @@ class SetNewUserUseCase @Inject constructor(
                 levelsCompleted = emptyList(),
                 treesCount = 0,
                 userImage = R.drawable.spora_face_splash,
-                tutorialsCompleted = TutorialModels.tutorialsCompleted
-                userImage = R.drawable.spora_face_splash,
+                tutorialsCompleted = TutorialModels.tutorialsCompleted,
                 seedTrees = emptyList(),
                 forestTrees = emptyList(),
                 objectsScanned = emptyList()
@@ -68,7 +66,5 @@ class SetNewUserUseCase @Inject constructor(
         }
 
     }
-
-
 
 }

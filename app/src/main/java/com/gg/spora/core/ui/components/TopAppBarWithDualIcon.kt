@@ -92,7 +92,7 @@ fun TopAppBarPreview() {
                 secondLabel = "0",
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
                 onBackClick = {}
             )
         }

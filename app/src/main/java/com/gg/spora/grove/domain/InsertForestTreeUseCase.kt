@@ -1,6 +1,5 @@
 package com.gg.spora.grove.domain
 
-import com.gg.spora.grove.data.network.models.ForestTreeNetwork
 import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.domain.mappers.toForestTreeNetwork
 import com.gg.spora.grove.domain.models.ForestTree
@@ -30,7 +29,7 @@ class InsertForestTreeUseCase @Inject constructor(
             val newForestTrees = updateForestTrees + forestTree
 
             val userUpdated = userLocal.copy(
-                forestTrees = newForestTrees
+                forestTrees = newForestTrees.map { it.toForestTreeNetwork() }
             )
             userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
         }

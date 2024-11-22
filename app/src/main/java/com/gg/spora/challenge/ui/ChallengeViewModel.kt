@@ -128,7 +128,7 @@ class ChallengeViewModel @Inject constructor(
 
     }
 
-    fun setLoading(isLoading: Boolean) {
+    private fun setLoading(isLoading: Boolean) {
         _isLoading.value = isLoading
     }
 }
