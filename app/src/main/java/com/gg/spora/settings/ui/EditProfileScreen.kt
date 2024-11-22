@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,16 +56,8 @@ fun EditProfileScreen(
     onBackClick: () -> Unit,
 ) {
 
-    val availableImages = listOf(
-        R.drawable.medalladeoro,
-        R.drawable.plastic_bottle,
-        R.drawable.air_pollution,
-        R.drawable.bottle_cap,
-        R.drawable.spora_logo_without_slogan
-    )
-
     val viewModel: EditProfileViewModel = hiltViewModel()
-    val currentUser = viewModel.currentUser
+    val currentUser by viewModel.currentUser.collectAsState()
     val selectedImage = viewModel.selectedImage
 
 
@@ -100,7 +93,7 @@ fun EditProfileScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
-                        painter = painterResource(id = selectedImage),
+                        painter = painterResource(id = currentUser?.userImage ?: selectedImage),
                         contentDescription = "User Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
