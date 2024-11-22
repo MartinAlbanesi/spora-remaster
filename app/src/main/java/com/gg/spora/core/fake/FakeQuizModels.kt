@@ -1319,7 +1319,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[108].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "La huella de carbono es la cantidad de gases malos para el planeta, que las personas, cosas o actividades producen."
+            champyHelping = "La huella de carbono es la cantidad de gases malos para el planeta, que las personas producen."
         ),
         Question(
             id = "29",
@@ -1328,7 +1328,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[113].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias."
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos."
         ),
         Question(
             id = "30",
@@ -1416,7 +1416,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[148].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias.",
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F8_quiz_image.png?alt=media&token=2b1e4980-dde7-4c7a-ab98-a1ec7b395ffc"
         ),
         Question(
@@ -1466,7 +1466,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[170].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias",
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F13_quiz_image.png?alt=media&token=cadd73f2-c3ce-42d4-ba6c-2812bc77a5e7"
         ),
         Question(
@@ -1526,7 +1526,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[193].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F19_quiz_image.png?alt=media&token=f4c523bd-4600-4f4f-926d-6453fff0950d"
         ),
         Question(

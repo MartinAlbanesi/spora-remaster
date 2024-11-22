@@ -70,7 +70,7 @@ fun ChampyBubbleText(
                         contentDescription = "bubble text for champy",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
-                            .fillMaxHeight(0.95f)
+                            .fillMaxHeight(0.9f)
                             .fillMaxWidth()
                     )
 
