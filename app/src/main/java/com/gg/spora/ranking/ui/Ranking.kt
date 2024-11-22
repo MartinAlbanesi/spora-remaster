@@ -142,7 +142,7 @@ fun Ranking(
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = 8.dp, end = 8.dp), // Adjusted padding to move content left
+                            .padding(start = 8.dp, end = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
@@ -246,7 +246,7 @@ fun Ranking(
                                     modifier = Modifier.size(30.dp)
                                 )
                                 Text(
-                                    text = item.oxygen.toString(),
+                                    text = item.weeklyOxygen.toString(),
                                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
                                     fontWeight = FontWeight.SemiBold,
                                     color = Color.Black,

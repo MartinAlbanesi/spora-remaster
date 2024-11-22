@@ -74,6 +74,14 @@ class RankingViewModel @Inject constructor(
         }
     }
 
+
+    private fun resetWeeklyOxygen() {
+        viewModelScope.launch {
+            _rankingItems.value = _rankingItems.value.map { it.copy(weeklyOxygen = 0) }
+            _currentUser.value = _currentUser.value?.copy(weeklyOxygen = 0)
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startCountdownTimer() {
         viewModelScope.launch {
@@ -81,7 +89,10 @@ class RankingViewModel @Inject constructor(
                 val now = LocalDateTime.now()
                 val nextReset = now.with(ChronoUnit.DAYS.addTo(now, 7 - now.dayOfWeek.value.toLong()))
                 _timeUntilReset.value = Duration.between(now, nextReset)
-                kotlinx.coroutines.delay(1000L)
+                if (_timeUntilReset.value.isZero) {
+                    resetWeeklyOxygen()
+                }
+                delay(1000L)
             }
         }
     }
