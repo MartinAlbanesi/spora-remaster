@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,14 +35,17 @@ import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.user.domain.models.User
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.delay
 import java.time.Duration
 
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Suppress("CyclomaticComplexMethod", "LongMethod")
-
-
 @Composable
 fun Ranking(
     modifier: Modifier = Modifier,
@@ -51,8 +55,17 @@ fun Ranking(
     viewModel: RankingViewModel = hiltViewModel()
 ) {
     val timeUntilReset by viewModel.timeUntilReset.collectAsState()
-
     var imageRanking = R.drawable.ranking_sign
+
+    var remainingTime by remember { mutableStateOf(timeUntilReset) }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            remainingTime = viewModel.calculateTimeUntilNextMonday()
+            delay(1000L)
+        }
+    }
+
     Image(
         painter = painterResource(id = R.drawable.ranking_background),
         contentDescription = null,
@@ -83,9 +96,9 @@ fun Ranking(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Text(
-                text = "Tiempo hasta el reinicio: ${timeUntilReset.toHours()}h ${timeUntilReset.toMinutesPart()}m ${timeUntilReset.toSecondsPart()}s",
+                text = "Tiempo hasta el reinicio: ${remainingTime.toHours()}h ${remainingTime.toMinutesPart()}m ${remainingTime.toSecondsPart()}s",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White,
                 modifier = Modifier
@@ -129,7 +142,7 @@ fun Ranking(
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(8.dp),
+                            .padding(start = 8.dp, end = 8.dp), // Adjusted padding to move content left
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
@@ -191,6 +204,7 @@ fun Ranking(
                         Column(
                             modifier = Modifier
                                 .padding(start = 10.dp)
+                                .width(130.dp)
                         ) {
                             Text(
                                 text = item.userName,
@@ -202,38 +216,43 @@ fun Ranking(
                                 fontWeight = FontWeight.SemiBold,
                                 color = Color.Black,
                                 modifier = Modifier
-                                    .padding(bottom = 15.dp)
+                                    .padding(bottom = 2.dp)
                             )
                             Text(
                                 text = item.email,
-                                style = MaterialTheme.typography.bodySmall,
+                                style = MaterialTheme.typography.bodySmall.copy(fontSize =12.sp),
                                 color = Color.Black,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier
-                                    .padding(bottom = 15.dp)
+                                    .padding(bottom = 20.dp)
                             )
                         }
 
                         Spacer(modifier = Modifier.weight(1f))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
+                        Box(
                             modifier = Modifier
                                 .align(Alignment.CenterVertically)
-                                .padding(end = 15.dp)
+                                .padding(end = 8.dp)
                                 .width(75.dp)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.oxygen_icon),
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.size(30.dp)
-                            )
-                            Text(
-                                text = item.oxygen.toString(),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color.Black,
-                                modifier = Modifier.padding(start = 4.dp)
-                            )
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.oxygen_icon),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.size(30.dp)
+                                )
+                                Text(
+                                    text = item.oxygen.toString(),
+                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = Color.Black,
+                                    modifier = Modifier.padding(top = 4.dp)
+                                )
+                            }
                         }
                     }
                 }
@@ -353,6 +372,7 @@ fun Ranking(
                     Column(
                         modifier = Modifier
                             .padding(start = 10.dp)
+                            .width(130.dp)
                     ) {
                         Text(
                             text = userName,
@@ -364,44 +384,49 @@ fun Ranking(
                             fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
                             modifier = Modifier
-                                .padding(bottom = 16.dp)
+                                .padding(bottom = 2.dp)
                         )
                         Text(
                             text = currentUser?.email ?: "",
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                             color = Color.Gray,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                             modifier = Modifier
-                                .padding(bottom = 16.dp)
+                                .padding(bottom = 20.dp)
                         )
                     }
 
                     Spacer(modifier = Modifier.weight(1f))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
+                    Box(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
+                            .padding(end = 8.dp)
                             .width(75.dp)
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.oxygen_icon),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.size(30.dp)
-                        )
-                        Text(
-                            text = currentUser?.oxygen.toString(),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
-                            modifier = Modifier.padding(start = 4.dp)
-                        )
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.oxygen_icon),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.size(30.dp)
+                            )
+                            Text(
+                                text = currentUser?.oxygen.toString(),
+                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.Black,
+                                modifier = Modifier.padding(top = 4.dp)
+                            )
+                        }
                     }
                 }
             }
         }
     }
 }
-
 
 @Preview
 @Composable

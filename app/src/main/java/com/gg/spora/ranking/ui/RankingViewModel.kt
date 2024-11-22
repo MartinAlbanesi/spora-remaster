@@ -7,13 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.gg.spora.user.domain.GetAllUserNetworkUseCase
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.models.User
+import com.google.type.DayOfWeek
+import com.google.type.DayOfWeek.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalAdjusters
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -36,6 +40,22 @@ class RankingViewModel @Inject constructor(
         loadRankingData()
         getUserLocal()
         startCountdownTimer()
+        updateTimeUntilReset()
+    }
+
+    private fun updateTimeUntilReset() {
+        viewModelScope.launch {
+            while (true) {
+                _timeUntilReset.value = calculateTimeUntilNextMonday()
+                delay(1000L)
+            }
+        }
+    }
+
+    fun calculateTimeUntilNextMonday(): Duration {
+        val now = LocalDateTime.now()
+        val nextMonday = now.with(TemporalAdjusters.next(java.time.DayOfWeek.MONDAY)).withHour(0).withMinute(0).withSecond(0).withNano(0)
+        return Duration.between(now, nextMonday)
     }
 
     private fun loadRankingData() {
