@@ -1,12 +1,22 @@
 package com.gg.spora.user.domain
 
 import com.gg.spora.R
+import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.user.domain.models.User
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
+
+/**
+ * Use case that creates a new user locally and remotely.
+ * If the email is null, it is created only locally.
+ * If the email is not null, it is created locally and remotely. And the id of the
+ * local user is changed to that of the remote one.
+ * @param email? email del usuario
+ * @param userName nombre del usuario
+ */
 class SetNewUserUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal
@@ -25,6 +35,8 @@ class SetNewUserUseCase @Inject constructor(
                 seedTrees = emptyList(),
                 forestTrees = emptyList(),
                 objectsScanned = emptyList()
+                userImage = R.drawable.spora_face_splash,
+                tutorialsCompleted = TutorialModels.tutorialsCompleted
             )
             userRepositoryLocal.setUserLocal(user)
             return
@@ -44,6 +56,8 @@ class SetNewUserUseCase @Inject constructor(
                 levelsCompleted = emptyList(),
                 treesCount = 0,
                 userImage = R.drawable.spora_face_splash,
+                tutorialsCompleted = TutorialModels.tutorialsCompleted
+                userImage = R.drawable.spora_face_splash,
                 seedTrees = emptyList(),
                 forestTrees = emptyList(),
                 objectsScanned = emptyList()
@@ -54,4 +68,7 @@ class SetNewUserUseCase @Inject constructor(
         }
 
     }
+
+
+
 }

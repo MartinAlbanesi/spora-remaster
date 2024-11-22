@@ -1,6 +1,7 @@
 package com.gg.spora.user.data.local
 
 import com.gg.spora.core.fake.FakeUserModels
+import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
 import com.gg.spora.user.domain.mappers.toLevelCompleted
 import com.gg.spora.user.domain.mappers.toLevelCompletedEntity
 import com.gg.spora.user.domain.models.User
@@ -22,11 +23,14 @@ class UserRepositoryLocalTest {
     @RelaxedMockK
     private lateinit var userDao: UserDao
 
+    @RelaxedMockK
+    private lateinit var tutorialCompletedDao: TutorialCompletedDao
+
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
 
-        userRepositoryLocal = UserRepositoryLocal(userDao)
+        userRepositoryLocal = UserRepositoryLocal(userDao, tutorialCompletedDao)
     }
 
     @Test

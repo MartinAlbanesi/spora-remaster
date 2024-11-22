@@ -6,6 +6,10 @@ import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
+/**
+ * Use case to update the user's local data from the network
+ * @param email: String
+ */
 class UpdateUserLocalDataFromNetworkUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal

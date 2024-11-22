@@ -6,17 +6,23 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.gg.spora.R
 import com.gg.spora.core.graph.NavigationRoutes
+import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
 import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.getStageTypeByName
-import com.gg.spora.core.utils.functions.getTotalOxygenFromStars
 import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
+import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
+import com.gg.spora.missions.domain.enums.MissionType
+import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.user.domain.UpdateUserLevelsAndOxygenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,6 +32,7 @@ class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
 //    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
     private val updateUserLevelsAndOxygenUseCase: UpdateUserLevelsAndOxygenUseCase,
+    private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -33,9 +40,6 @@ class QuizViewModel @Inject constructor(
 
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
     val questions = _questions.asStateFlow()
-
-//    private val _currentQuestionIndex = MutableStateFlow(0)
-//    val currentQuestionIndex = _currentQuestionIndex.asStateFlow()
 
     private val _currentQuestion = MutableStateFlow<Question?>(null)
     val currentQuestion = _currentQuestion.asStateFlow()
@@ -55,16 +59,34 @@ class QuizViewModel @Inject constructor(
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
-    private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
+    //private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
+    private val _currentImageResId = MutableStateFlow<String?>(null)
     val currentImageResId = _currentImageResId.asStateFlow()
 
     private val _relationsItems = MutableStateFlow<List<String>>(emptyList())
     val relationsItems = _relationsItems.asStateFlow()
 
+    private val _showChampyHelp = MutableStateFlow(false)
+    val showChampyHelp = _showChampyHelp.asStateFlow()
+
+    private val _champyHelpingText = MutableStateFlow("Ingresar texto de ayuda de la Question")
+    val champyHelpingText = _champyHelpingText.asStateFlow()
+
+    private val _currentTotalRewards = MutableStateFlow(0)
+    val currentTotalRewards = _currentTotalRewards.asStateFlow()
+
+    private val _currentRewards = MutableStateFlow(listOf(0,0,0))
+    val currentRewards = _currentRewards.asStateFlow()
+
+    private val _missionCompleted = MutableStateFlow<Mission?>(null)
+    val missionCompleted: StateFlow<Mission?> = _missionCompleted
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+
     }
 
     private fun getCurrentQuestion() {
@@ -74,19 +96,19 @@ class QuizViewModel @Inject constructor(
     private fun getRandomQuestions() {
 
         val quizGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.quizCount.toInt(),
-            typeQuestion = listOf(TypeQuestion.MARTIN),
+            count = quizRoute.quizCount,
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ
         )
 
         val imageGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.imageCount.toInt(),
+            count = quizRoute.imageCount,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ_IMAGE
         )
 
         val relationsGame = getRandomQuestionFromTypeUseCase(
-            count = quizRoute.relationsCount.toInt(),
+            count = quizRoute.relationsCount,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.RELATIONS
         )
@@ -95,55 +117,70 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-        _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
+//        _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
+
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
-                // si la respuesta es la correcta
+                // si la respuesta es la Correcta
                 if (it.id == answerId) {
+
+//                    _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+
                     it.copy(
-                        isCorrect = _isCorrect.value,
+//                        isCorrect = correctAnswer,
+                        isCorrect = true
                     )
                 }
-                // si la respuesta es incorrecta
+                // si la respuesta es Incorrecta
                 else {
                     it.copy(
-                        isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
+//                        isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
+                        isCorrect = null,
                     )
                 }
             }
         )
 
-        if (_isCorrect.value == false) {
-            _lives.value--
-            _livesLost.value++
-        }
+//        if (_isCorrect.value == false) {
+//            _champyHelpingText.value = "La respuesta era: Japon"
+//            _lives.value--
+//            _livesLost.value++
+//        }
     }
 
-    fun onSelectedItem(answerId: String) {
+    fun onConfirmAnswer(answerId: String) {
+        val correctAnswer = _currentQuestion.value!!.correctAnswer
+        _isCorrect.value = correctAnswer == answerId
 
-        if (_relationsItems.value.contains(answerId)) {
-            _relationsItems.value -= answerId
-            return
-        }
+        _showChampyHelp.value = true
 
-        if (_relationsItems.value.size < 3) {
-            _relationsItems.value += answerId
+        if (_isCorrect.value == false) {
+            _champyHelpingText.value = "La respuesta era: ${_currentQuestion.value!!.answers.first { it.id == correctAnswer }.answer}"
+            _lives.value--
+            _livesLost.value++
+        }else{
+            _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
         }
     }
 
     fun relationsAnswerSelected() {
-        val correctAnswer = _currentQuestion.value!!.answerId.split(",").map { it.toInt() }.toSet()
+        val correctAnswer = _currentQuestion.value!!.correctAnswer.split(",").map { it.toInt() }.toSet()
         val selectedAnswers = _relationsItems.value.map { it.toInt() }.toSet()
 
         if (correctAnswer == selectedAnswers) {
+            _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+
             _isCorrect.value = true
         } else {
+
+            _champyHelpingText.value = "La respuestas eran: ${correctAnswer.joinToString(", ")}"
+
             _isCorrect.value = false
             _lives.value--
             _livesLost.value++
         }
 
-        _relationsItems.value = emptyList()
+//        _relationsItems.value = emptyList()
 
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!
@@ -162,6 +199,18 @@ class QuizViewModel @Inject constructor(
         )
     }
 
+    fun onSelectedItem(answerId: String) {
+
+        if (_relationsItems.value.contains(answerId)) {
+            _relationsItems.value -= answerId
+            return
+        }
+
+        if (_relationsItems.value.size < 3) {
+            _relationsItems.value += answerId
+        }
+    }
+
     fun nextQuestion() {
         if (_counterQuestion.value == _questions.value.size - 1) {
 
@@ -173,13 +222,21 @@ class QuizViewModel @Inject constructor(
             _isFinished.value = true
             return
         }
+        _showChampyHelp.value = false
+        _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
         _isCorrect.value = null
+        _relationsItems.value = emptyList()
     }
 
     fun resetGame() {
+
+        _showChampyHelp.value = false
+        _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
+
         _counterQuestion.value = 0
         _lives.value = MAX_LIVES
         _livesLost.value = 0
@@ -187,7 +244,9 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value = null
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+
     }
 
     private fun finishGame() {
@@ -203,7 +262,25 @@ class QuizViewModel @Inject constructor(
                 starState = currentStarState,
                 stageType = getStageTypeByName(quizRoute.stageType),
                 oxygenRewards = currentLevelOxygenRewards
-            )
+            ).apply {
+                _currentTotalRewards.value = this.first
+                _currentRewards.value = this.second
+            }
+
+            updateMission()
+        }
+    }
+
+    fun onShowChampyHelp() {
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(4000)
+            _showChampyHelp.value = true
+        }
+    }
+
+    private fun updateMission(){
+        viewModelScope.launch {
+            _missionCompleted.value = updateMissionByIdUseCase(MissionType.MINI_GAME_MISSION.missionId)
         }
     }
 

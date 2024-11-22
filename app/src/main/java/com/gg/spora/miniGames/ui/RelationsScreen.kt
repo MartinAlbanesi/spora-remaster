@@ -47,15 +47,11 @@ fun RelationsScreen(
     selectedItems: List<String>,
     isCorrect: Boolean?,
     onSelectedItem: (answerId: String) -> Unit,
-    onConfirmSelecteds: () -> Unit
+    onConfirmSelects: () -> Unit
 ) {
-
-
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
-
-
         ConstraintLayout(
             modifier = modifier
         ) {
@@ -124,7 +120,7 @@ fun RelationsScreen(
                             .fillMaxHeight(0.1f),
 //                        .heightIn(max = 60.dp),
                         answer = answer.answer,
-                        isCorrect = answer.isCorrect,
+//                        isCorrect = answer.isCorrect,
                         isEnabled = isCorrect == null,
                         isSelected = selectedItems.contains(answer.id),
                         onSelected = { onSelectedItem(answer.id) }
@@ -136,7 +132,7 @@ fun RelationsScreen(
         }
         if (selectedItems.size == 3 && isCorrect == null) {
             Button(
-                onClick = onConfirmSelecteds,
+                onClick = onConfirmSelects,
                 modifier = Modifier
                     .padding(16.dp)
                     .heightIn(min = 48.dp, max = 60.dp)
@@ -157,10 +153,7 @@ fun RelationsScreen(
 }
 
 //@PreviewLightDark
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 //@PreviewFontScale
 //@PreviewScreenSizes
@@ -184,6 +177,7 @@ private fun RelationsScreenPreview() {
                 lives = 5,
                 showButtonContinue = true,
                 counterQuestion = 0,
+                totalOxygen = 0,
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = { },
@@ -194,12 +188,12 @@ private fun RelationsScreenPreview() {
                             .fillMaxSize()
                             .padding(vertical = 0.dp),
                         objectName = "Botella de plástico",
-                        answers = FakeQuizModels.fakeAnswers.filter { it.id.toInt() > 100 }.take(6)
+                        answers = FakeQuizModels.newFakeAnswers.filter { it.id.toInt() > 100 }.take(6)
                             .shuffled(),
                         selectedItems = listOf("55", "56", "57"),
                         isCorrect = isCorrect,
                         onSelectedItem = { },
-                        onConfirmSelecteds = {},
+                        onConfirmSelects = {},
                     )
                 }
             )

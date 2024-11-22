@@ -3,10 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
 
-    id("com.google.devtools.ksp")
-
     //Dagger Hilt
-    // alias(libs.plugins.ksp) // Add this line without apply false
+    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 
     // Kotlin Serialization
@@ -88,7 +86,8 @@ android {
                         "androidx.compose.runtime.Composable",
                         "dagger.internal.DaggerGenerated",
                         "dagger.hilt.android.AndroidEntryPoint",
-                        "javax.annotation.processing.Generated"
+                        "javax.annotation.processing.Generated",
+                        "androidx.lifecycle.ViewModel"
                     )
                     classes(
                         "dagger.hilt.internal.aggregatedroot.codegen.*",
@@ -147,6 +146,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.cloud.messaging)
 
     //CameraX
     implementation(libs.camerax.core)
@@ -189,13 +189,14 @@ dependencies {
     // Constraint Layout Compose
     implementation(libs.constraint.layout.compose)
 
-    // Retrofit
-//    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    // Gson
     implementation (libs.converter.gson)
 
     // Material extend icons
     implementation(libs.androidx.material.icons.extended)
 
-    //Kotlin Coroutines
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    //Google auth
+    //implementation(libs.google.auth)
+    implementation("com.google.android.gms:play-services-auth:20.6.0")
+
 }

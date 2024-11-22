@@ -1,5 +1,6 @@
 package com.gg.spora.gameResultUI.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -16,35 +17,49 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImagePainter.State.Empty.painter
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
 fun StarWithOxygen(
     modifier: Modifier = Modifier,
-    starImage: Int,
+    starImage: Int?,
     oxygenAmount: Int,
 ) {
+
+    val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.reward_fill_star))
+
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        Image(
-            painter = painterResource(id = starImage),
-            contentDescription = "Estrella",
-            modifier = Modifier.size(96.dp)
-        )
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        if (starImage == null) {
             Image(
-                painter = painterResource(id = R.drawable.oxygen),
-                contentDescription = "Oxígeno",
-                modifier = Modifier.size(24.dp)
+                painter = painterResource(id = R.drawable.gray_star),
+                contentDescription = "Estrella",
+                modifier = Modifier.size(96.dp)
             )
-            Text(
-                text = "+$oxygenAmount",
-                fontSize = 16.sp,
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.oxygen),
+                    contentDescription = "Oxígeno",
+                    modifier = Modifier.size(24.dp)
+                )
+                Text(
+                    text = "+$oxygenAmount",
+                    fontSize = 16.sp,
+                )
+            }
+        } else {
+            LottieAnimation(
+                composition = lottie.value,
+                modifier = Modifier.size(96.dp)
             )
         }
     }
@@ -62,8 +77,8 @@ private fun StarWithOxygenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             StarWithOxygen(
-                oxygenAmount = 10,
-                starImage = R.drawable.star,
+                oxygenAmount = 0,
+                starImage = null,
                 modifier = Modifier.offset(y = (-16).dp)
             )
         }

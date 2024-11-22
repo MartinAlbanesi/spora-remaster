@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Fullscreen
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import coil.compose.rememberAsyncImagePainter
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.MiniGameScreen
@@ -51,13 +53,21 @@ fun QuizImageScreen(
     questionTitle: String,
     isCorrect: Boolean? = null,
     answerOptions: List<Answer>,
-    currentImageResIdState: Int,
+    //currentImageResIdState: Int,
+    currentImageResIdState: String?,
     onAnswerSelected: (String) -> Unit,
+    onConfirmAnswer: (String) -> Unit
 ) {
 
     var isAnswerSelected by remember { mutableStateOf(false) }
 
     var showImageFullScreen by remember { mutableStateOf(false) }
+
+    var selectedAnswerId by remember { mutableStateOf("") }
+
+    val painter = currentImageResIdState?.let {
+        rememberAsyncImagePainter(model = it)
+    } ?: painterResource(id = R.drawable.wind_turbine)
 
     if (showImageFullScreen) {
         Dialog(
@@ -68,7 +78,8 @@ fun QuizImageScreen(
             ),
             content = {
                 Image(
-                    painter = painterResource(id = currentImageResIdState),
+                    //painter = painterResource(id = currentImageResIdState),
+                    painter = painter,
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
@@ -82,99 +93,103 @@ fun QuizImageScreen(
         )
     }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = modifier
+    Box(
+        modifier = Modifier.fillMaxSize(),
     ) {
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .clickable {
-                    showImageFullScreen = true
-                }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = modifier
         ) {
-            Image(
-                painter = painterResource(id = currentImageResIdState),
-                contentDescription = "Imagen",
-                contentScale = ContentScale.FillBounds,
+            Box(
                 modifier = Modifier
-                    .padding(4.dp)
-                    .size(130.dp)
-            )
-            Icon(
-                Icons.Default.Fullscreen,
-                contentDescription = "Fullscreen",
+                    .weight(1f)
+                    .clickable {
+                        showImageFullScreen = true
+                    }
+            ) {
+                Image(
+                    //painter = painterResource(id = currentImageResIdState),
+                    painter = painter,
+                    contentDescription = "Imagen",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .size(130.dp)
+                )
+                Icon(
+                    Icons.Default.Fullscreen,
+                    contentDescription = "Fullscreen",
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .offset(x = (8).dp, y = (8).dp)
+                        .size(24.dp)
+                )
+            }
+            Text(
+                text = questionTitle,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
                 modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .offset(x = (8).dp, y = (8).dp)
-                    .size(24.dp)
-            )
-        }
-        Text(
-            text = questionTitle,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 4.dp)
+                    .fillMaxWidth()
+                    .padding(top = 4.dp)
 //                .weight(1f)
 //                .heightIn(min = 50.dp)
-        )
+            )
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(3f)
-        ) {
-            items(answerOptions) { answer ->
-                OptionItemButton(
-                    textItem = answer.answer,
-                    isCorrect = answer.isCorrect,
-                    enabled = isCorrect == null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp)
-                        .clip(MaterialTheme.shapes.large)
-                        .fillMaxWidth(0.4f)
-//                        .heightIn(max = 60.dp),
-                        .fillMaxHeight(0.1f)
-                        .clickable {
-                            isAnswerSelected = true
-                        }
-                )
-                {
-                    onAnswerSelected(answer.id)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(3f)
+            ) {
+                items(answerOptions) { answer ->
+                    OptionItemButton(
+                        textItem = answer.answer,
+                        isCorrect = answer.isCorrect,
+                        enabled = isCorrect == null,
+                        hasIcon = false,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                            .clip(MaterialTheme.shapes.large)
+//                        .fillMaxWidth(0.4f)
+//                        .heightIn(min = 40.dp)
+                            .fillMaxHeight()
+//                        .heightIn(max =200.dp)
+//                        .requiredHeightIn(40.dp, 60.dp)
+//                        .weight(1f)
+                            .clickable {
+                                isAnswerSelected = true
+                            }
+                    )
+                    {
+                        onAnswerSelected(answer.id)
+                        selectedAnswerId = answer.id
+                    }
                 }
-            }
 
+            }
         }
-//        answerOptions.forEach { answer ->
-//            OptionItemButton(
-//                textItem = answer.answer,
-//                isCorrect = answer.isCorrect,
-//                enabled = isCorrect == null,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(vertical = 4.dp)
-//                    .clip(MaterialTheme.shapes.large)
-//                    .height(50.dp)
-//                    .clickable {
-//                        isAnswerSelected = true
-//                    }
-//            )
-//            {
-//                onAnswerSelected(answer.id)
-//            }
+
+        if (answerOptions.filter { it.isCorrect == null }.size != 4) {
+            Button(
+                onClick = { onConfirmAnswer(selectedAnswerId) },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .heightIn(min = 48.dp, max = 60.dp)
+//                    .fillMaxHeight(0.15f)
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+            ) {
+                Text(text = "Confirmar")
+            }
+        }
     }
 
 }
-
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
+/*
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 @Composable
 private fun QuizImageScreenPreview() {
@@ -193,6 +208,7 @@ private fun QuizImageScreenPreview() {
                 lives = 5,
                 showButtonContinue = true,
                 counterQuestion = 0,
+                totalOxygen = 0,
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = { },
@@ -200,13 +216,13 @@ private fun QuizImageScreenPreview() {
                 content = {
                     QuizImageScreen(
                         modifier = Modifier,
-                        questionTitle = "Titi",
-                        answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
-                        currentImageResIdState = FakeQuizModels.fakeQuizQuestions.random().image!!,
+                        answerOptions = FakeQuizModels.newFakeAnswers.take(4).shuffled(),
+                        currentImageResIdState = FakeQuizModels.newFakeQuizQuestions.first { it.image != null }.image!!,
                         onAnswerSelected = {},
+                        onConfirmAnswer = {}
                     )
                 }
             )
         }
     }
-}
+}*/

@@ -18,7 +18,7 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun StarWithOxygenGroup(
     modifier: Modifier = Modifier,
-    rewards: Map<Int, Int>, // oxygenAmount to starImage
+    rewards: List<Pair<Int, Int?>>, // oxygenAmount to starImage
     rotateItems: Map<Float, Int>,
 ) {
     Row(
@@ -26,10 +26,10 @@ fun StarWithOxygenGroup(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier
     ) {
-        rewards.entries.toList().forEachIndexed { index, entry ->
+        rewards.forEachIndexed { index, entry ->
             StarWithOxygen(
-                oxygenAmount = entry.key,
-                starImage = entry.value,
+                oxygenAmount = entry.first,
+                starImage = entry.second,
                 modifier = Modifier
                     .rotate(rotateItems.keys.elementAt(index))
                     .offset(y = rotateItems.values.elementAt(index).dp)
@@ -52,11 +52,7 @@ private fun StarWithOxygenGroupPreview() {
         ) {
             StarWithOxygenGroup(
                 modifier = Modifier,
-                rewards = mapOf(
-                    10 to R.drawable.star,
-                    20 to R.drawable.star,
-                    30 to R.drawable.star
-                ),
+                rewards = listOf(Pair(0, null),Pair(0, null),Pair(0, null),),
                 rotateItems = mapOf(
                     -25f to 0,
                     0f to (-16),

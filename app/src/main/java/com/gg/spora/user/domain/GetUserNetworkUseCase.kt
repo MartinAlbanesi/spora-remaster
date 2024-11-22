@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
- * Caso de uso para devolver un usuario de firebase
+ * Use case to return a firebase user from the network
+ * @return Flow<User>
  */
 class GetUserNetworkUseCase @Inject constructor(
     private val getUserAuthUseCase: GetUserAuthUseCase,

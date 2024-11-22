@@ -61,38 +61,6 @@ fun ChampyWithRewards(
     }
 }
 
-//@Composable
-//fun ChampyWithRewards(
-//    modifier: Modifier = Modifier,
-//    champyImage: Int,
-//    oxygenAmount: Int,
-//) {
-//    Row(
-//        verticalAlignment = Alignment.CenterVertically,
-//        modifier = modifier
-//    ) {
-//        Image(
-//            painter = painterResource(id = champyImage),
-//            contentDescription = "Champy",
-//            modifier = Modifier.size(120.dp)
-//        )
-//        Row(
-//            verticalAlignment = Alignment.CenterVertically,
-//        ) {
-//            Image(
-//                painter = painterResource(id = R.drawable.o2_icon),
-//                contentDescription = "Oxígeno",
-//                modifier = Modifier.size(48.dp)
-//            )
-//            Text(
-//                text = "+ $oxygenAmount",
-//                fontSize = 24.sp,
-//                color = Color.White
-//            )
-//        }
-//    }
-//}
-
 //@PreviewLightDark
 @Preview
 //@PreviewFontScale

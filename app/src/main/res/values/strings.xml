@@ -9,4 +9,6 @@
     <string name="next">Siguiente</string>
     <string name="back">Volver</string>
     <string name="plant_seed">Plantar semilla</string>
+
+    <string name="default_channel" translatable="false">General</string>
 </resources>

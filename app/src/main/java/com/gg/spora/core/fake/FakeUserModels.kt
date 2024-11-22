@@ -3,6 +3,7 @@ package com.gg.spora.core.fake
 import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.StarState
+import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
 import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
@@ -60,7 +61,8 @@ object FakeUserModels {
             userImage = R.drawable.spora_face_splash,
             forestTrees = emptyList(),
             seedTrees = emptyList(),
-            objectsScanned = emptyList()
+            objectsScanned = emptyList(),
+            tutorialsCompleted = TutorialModels.tutorialsCompleted
         ),
         User(
             id = "2",
@@ -70,6 +72,7 @@ object FakeUserModels {
             levelsCompleted = emptyList(),
             treesCount = 0,
             userImage = R.drawable.spora_face_splash,
+            tutorialsCompleted = TutorialModels.tutorialsCompleted,
             forestTrees = emptyList(),
             seedTrees = emptyList(),
             objectsScanned = emptyList()

@@ -8,8 +8,9 @@ data class Question(
     val id: String,
     val question: String,
     val answers: List<Answer>,
-    val answerId: String,
+    val correctAnswer: String,
     val typeGame: TypeGame,
     val typeQuestion: List<TypeQuestion>,
-    val image: Int? = null
+    val image: String? = null,
+    val champyHelping: String? = null,
 )

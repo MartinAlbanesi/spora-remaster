@@ -12,6 +12,7 @@ data class UserNetwork(
     val levelsCompleted : List<LevelCompletedNetwork>? = null,
     val objectsScanned : List<ObjectDetailNetwork>? = null,
     val treesCount: Int? = null,
+    val tutorialsCompleted: List<TutorialCompletedNetwork>? = null,
     val userImage: Int? = null,
     val forestTrees: List<ForestTreeNetwork> ?= null,
     val seedTrees: List<SeedTreeNetwork>? = null

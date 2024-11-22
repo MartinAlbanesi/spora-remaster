@@ -56,9 +56,6 @@ fun LibraryCardBook(
                 title = category.label
             )
 
-            /*ListInfoCard(
-                cardList = cardList
-            )*/
 
             LibraryCarouselInfoCard(
                 cardList = cardList.map { it.toInfoCard() }
@@ -67,122 +64,6 @@ fun LibraryCardBook(
 
     }
 }
-
-/*@Composable
-fun ListInfoCard(cardList: List<InfoCardEntity>) {
-
-    LazyVerticalStaggeredGrid(
-        columns = StaggeredGridCells.Adaptive(150.dp),
-        verticalItemSpacing = 12.dp,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
-    ) {
-        items(cardList.size) {
-            InfoCard(cardList[it], cardList[it].isUnlocked)
-        }
-    }
-
-}*/
-
-
-
-/*@Composable
-fun InfoCard(
-    card: InfoCardEntity,
-    isUnlocked: Boolean = false,
-) {
-
-    if (isUnlocked) {
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            ),
-            modifier = Modifier
-                .width(200.dp)
-                .height(300.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 5.dp
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(2.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = card.title,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 2,
-                    modifier = Modifier.padding(top = 5.dp)
-                )
-
-                Image(
-                    painter = painterResource(id = card.image),
-                    contentDescription = "library card image",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(120.dp)
-                        .padding(top = 2.dp, end = 5.dp, start = 5.dp)
-                        .clip(shape = RoundedCornerShape(5.dp))
-                )
-
-                Text(
-                    text = card.info,
-                    style = MaterialTheme.typography.bodyLarge,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(5.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    } else {
-
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            ),
-            modifier = Modifier
-                .width(200.dp)
-                .height(300.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 5.dp
-            )
-        ) {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(2.dp),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Sin aprender",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 2,
-                    modifier = Modifier.padding(top = 5.dp)
-                )
-
-                Image(
-                    painter = painterResource(id = R.drawable.locked_level),
-                    contentDescription = "library card image",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .padding(top = 80.dp)
-                        .size(100.dp)
-                )
-            }
-        }
-    }
-}*/
-
 
 @Preview(showBackground = true)
 @Composable

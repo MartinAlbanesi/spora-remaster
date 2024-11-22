@@ -7,14 +7,14 @@ import com.gg.spora.core.utils.enums.StarState
 fun getStarWithOxygen (
     starsState: StarState,
     oxygenRewards: List<Int>,
-): Map<Int, Int>{
-    val localRewards: MutableMap<Int, Int> = mutableMapOf()
+): List<Pair<Int, Int?>>{
+    val localRewards: MutableList<Pair<Int, Int?>> = mutableListOf()
 
     for (i in 1..MAX_STAR) {
         if (i <= starsState.starCount) {
-            localRewards[oxygenRewards[i - 1]] = R.drawable.star
+            localRewards.add(Pair(oxygenRewards[i - 1], R.drawable.gray_star))
         } else {
-            localRewards[oxygenRewards[i - 1]] = R.drawable.gray_star
+            localRewards.add(Pair(oxygenRewards[i - 1], null))
         }
     }
 

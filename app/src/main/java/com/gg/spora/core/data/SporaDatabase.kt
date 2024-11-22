@@ -11,9 +11,13 @@ import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.library.data.local.entity.InfoCardEntity
+import com.gg.spora.missions.data.local.MissionDao
+import com.gg.spora.missions.data.local.MissionEntity
 import com.gg.spora.stage.data.local.StageDao
 import com.gg.spora.stage.data.local.models.LevelEntity
 import com.gg.spora.stage.data.local.models.StageLevelEntity
+import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
+import com.gg.spora.tutorials.data.local.TutorialCompletedEntity
 import com.gg.spora.user.data.local.UserDao
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
@@ -30,8 +34,11 @@ import com.gg.spora.user.data.local.entities.UserEntity
         ForestTreeEntity::class,
         SeedTreeEntity::class,
         CooldownDataEntity::class,
+        StageLevelEntity::class,
+        TutorialCompletedEntity::class,
+        MissionEntity::class
     ],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 abstract class SporaDatabase : RoomDatabase() {
@@ -43,6 +50,10 @@ abstract class SporaDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     abstract fun stageDao(): StageDao
+
+    abstract fun tutorialCompletedDao(): TutorialCompletedDao
+
+    abstract fun missionDao(): MissionDao
 
     abstract fun groveDao(): GroveDao
 }

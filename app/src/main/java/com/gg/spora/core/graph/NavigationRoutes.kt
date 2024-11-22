@@ -35,6 +35,9 @@ object NavigationRoutes {
     @Serializable
     object ProfileScreen
 
+    @Serializable
+    object CreateProfileScreen
+
 
 
     // Game Graph ------------------------------------------------------
@@ -74,7 +77,7 @@ object NavigationRoutes {
     object LibraryDesertInfo
 
     @Serializable
-    object LibraryRiverInfo
+    object LibraryLakeInfo
 
     // Challenge Graph ------------------------------------------------------
 

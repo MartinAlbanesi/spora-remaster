@@ -1,6 +1,7 @@
 package com.gg.spora.core.ui.components
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,7 @@ import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
 import com.gg.spora.ui.theme.SporaTheme
+import kotlinx.serialization.json.JsonNull.content
 
 
 @Suppress("LongMethod")
@@ -50,16 +52,38 @@ fun MiniGameScreen(
     lives: Int,
     livesLost: Int = 0,
     counterQuestion: Int,
+    totalOxygen: Int,
     isFinished: Boolean = false,
     showIcon: Boolean = true,
     showButtonContinue: Boolean = true,
     showProgressBar: Boolean = true,
+    showChampyHelp: Boolean = false,
+    rewards: List<Int> = emptyList(),
+    champyHelpingText: String = "",
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
     onNavigateNextLevel: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
+    val textColor by animateColorAsState(
+        when (isCorrect) {
+            true -> Color.White
+            false -> Color.White
+            null -> colorResource(R.color.primary_10)
+        }, label = "textColor"
+    )
+
+    val backgroundColor by animateColorAsState(
+        when (isCorrect) {
+            true -> colorResource(R.color.secondary)
+            false -> colorResource(R.color.error)
+            null -> colorResource(R.color.cream)
+        },
+        label = "backgroundColor"
+    )
+
     val champyImage = getChampyImageMiniGame(isCorrect)
 
     val progressIndicator by animateFloatAsState(
@@ -74,7 +98,8 @@ fun MiniGameScreen(
             isVisible = true,
             backgroundImage = R.drawable.minigame_background_crop,
             starsState = getRewardsStarState(livesLost = livesLost),
-            rewards = listOf(10, 20, 30),
+            rewards = rewards,
+            totalOxygen = totalOxygen,
             onBackStage = {
                 onBackForestStage()
             },
@@ -142,9 +167,13 @@ fun MiniGameScreen(
                 )
             }
             ChampyWithCard(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 16.dp),
                 champyImage = champyImage,
                 isCorrect = isCorrect,
+                showChampyHelp = showChampyHelp,
+                champyHelpingText = champyHelpingText,
             ) {
                 content()
             }
@@ -156,8 +185,8 @@ fun MiniGameScreen(
                     onNextQuestion()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White,
-                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = textColor,
+                    containerColor = backgroundColor,
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -174,10 +203,7 @@ fun MiniGameScreen(
     }
 }
 
-@Preview(
-    heightDp = 640,
-    widthDp = 360,
-)
+@Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 //@PreviewLightDark
 //@PreviewFontScale
@@ -195,6 +221,11 @@ private fun MiniGameScreenPreview() {
                 questionSize = 5,
                 lives = 5,
                 counterQuestion = 0,
+                champyHelpingText = "This is a test",
+                isCorrect = true,
+                isFinished = true,
+                totalOxygen = 0,
+                rewards = listOf(12, 22, 33),
                 onNextQuestion = {},
                 onResetGame = {},
                 onBackForestStage = {},

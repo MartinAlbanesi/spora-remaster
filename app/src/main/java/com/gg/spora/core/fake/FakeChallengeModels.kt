@@ -3,6 +3,7 @@ package com.gg.spora.core.fake
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.domain.model.StepObjectDetail
 
+@Suppress("MaxLineLength")
 object FakeChallengeModels {
 
     val fakeObjectDetails = listOf(

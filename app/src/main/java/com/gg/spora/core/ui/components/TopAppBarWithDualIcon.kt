@@ -25,6 +25,8 @@ import com.gg.spora.ui.theme.SporaTheme
 
 /**
  * Top bar with progress bar
+ * @param firstLabel: Label for the first icon
+ * @param firstIcon: Image for the first icon
  * @param secondLabel: Label for the second icon
  * @param secondIcon: Image for the second icon
  * @param showBackArrow: Boolean to show or not the back arrow
@@ -35,8 +37,8 @@ import com.gg.spora.ui.theme.SporaTheme
 @Composable
 fun TopAppBarWithDualIcon(
     modifier: Modifier = Modifier,
-//    firstLabel: String,
-//    firstIcon: Int,
+    firstLabel: String,
+    firstIcon: Int,
     secondLabel: String,
     secondIcon: Int,
     showBackArrow: Boolean = false,
@@ -50,12 +52,12 @@ fun TopAppBarWithDualIcon(
             ),
             title = {
                 Row(
-                    horizontalArrangement = Arrangement.Center,
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier.fillMaxWidth()
-                        .padding(top = 8.dp)
+//                        .padding(top = 8.dp)
 //                        .align(Alignment.TopCenter)
                 ) {
-//                    ImageWithTextHorizontal(imageResource = firstIcon, text = firstLabel)
+                    ImageWithTextHorizontal(imageResource = firstIcon, text = firstLabel)
 //                    Spacer(Modifier.size(50.dp))
                     ImageWithTextHorizontal(imageResource = secondIcon, text = secondLabel)
                 }
@@ -85,11 +87,12 @@ fun TopAppBarPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             TopAppBarWithDualIcon(
-//                firstLabel = "0",
-//                firstIcon = R.drawable.trees_icon,
+                firstLabel = "0",
+                firstIcon = R.drawable.trees_icon,
                 secondLabel = "0",
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
+                modifier = Modifier.fillMaxWidth()
                 onBackClick = {}
             )
         }

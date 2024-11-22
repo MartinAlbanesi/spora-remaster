@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,28 +24,23 @@ import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
-/**
- * @param modifier Modifier
- * @param onClickFirst Lambda function to navigate to forest screen
- * @param onClickSecond Lambda function to navigate to river screen
- * @param onClickThird Lambda function to navigate to desert screen
- * @param onBackButtonClick Lambda function to navigate to previous screen
- */
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewLibrary() {
-    LibraryScreen()
+    LibraryScreen(
+        false
+    )
 }
 
 @Composable
 fun LibraryScreen(
+    showTutorial: Boolean,
     onBackButtonClick: () -> Unit = {},
     onClickFirst: () -> Unit = {},
     onClickSecond: () -> Unit = {},
@@ -58,7 +52,7 @@ fun LibraryScreen(
 
 
         Image(
-            painter = painterResource(R.drawable.library_background_xxl),
+            painter = painterResource(R.drawable.library_xxl_v2),
             contentDescription = "Library background",
             modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.FillBounds
@@ -79,7 +73,10 @@ fun LibraryScreen(
             onClickThird = onClickThird
         )
 
-        MushyAndTable(modifier = Modifier)
+        MushyAndTable(
+            modifier = Modifier,
+            showTutorial = showTutorial
+        )
     }
 }
 
@@ -119,7 +116,10 @@ fun TorchFire(modifier: Modifier) {
 }
 
 @Composable
-fun MushyAndTable(modifier: Modifier) {
+fun MushyAndTable(
+    modifier: Modifier,
+    showTutorial: Boolean
+) {
 
     Box(
         modifier = modifier
@@ -127,11 +127,13 @@ fun MushyAndTable(modifier: Modifier) {
             .padding(bottom = 40.dp, end = 140.dp),
         contentAlignment = Alignment.BottomCenter
     ) {
-        MushyBlinkAnimation(
-            modifier
-                .size(260.dp)
-                .offset(y = -(20).dp, x = 5.dp)
-        )
+        if(!showTutorial){
+            MushyBlinkAnimation(
+                modifier
+                    .size(260.dp)
+                    .offset(y = -(20).dp, x = 5.dp)
+            )
+        }
 
         Image(
             painter = painterResource(R.drawable.library_table),

@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 /**
- * Caso de uso para obtener el usuario local
- * Si el usuario no existe, se devolverá null
+ * Use case to get local user If the user does not exist, null will be returned
+ * @return Flow<User?>
  */
 class GetUserLocalUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal

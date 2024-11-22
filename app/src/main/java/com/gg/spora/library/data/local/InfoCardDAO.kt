@@ -15,7 +15,7 @@ interface InfoCardDAO {
     fun getAllInfoCards(): Flow<List<InfoCardEntity>>
 
     @Query("SELECT * FROM info_cards WHERE id = :id")
-    suspend fun getInfoCardById(id: Int): InfoCardEntity?
+    suspend fun getInfoCardById(id: String): InfoCardEntity?
 
     @Query("SELECT * FROM info_cards WHERE category = :category")
     fun getInfoCardsByCategory(category: String): Flow<List<InfoCardEntity>>

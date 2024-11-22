@@ -1,201 +1,254 @@
 package com.gg.spora.tutorials.data
 
 
+import androidx.compose.ui.geometry.Offset
+import com.gg.spora.R
 import com.gg.spora.core.utils.enums.ChampyStates
-import com.gg.spora.tutorials.model.Tutorial
+import com.gg.spora.core.utils.enums.MushyStates
+import com.gg.spora.core.utils.enums.Tutorials
+import com.gg.spora.tutorials.domain.model.TutorialCompleted
+import com.gg.spora.tutorials.domain.model.TutorialItem
 
 object TutorialModels {
 
-    private const val NAME = "Titi"
+    val tutorialsCompleted = listOf(
+        TutorialCompleted(Tutorials.HOME_TUTORIAL.id, false, Tutorials.HOME_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.GROVE_TUTORIAL.id, false, Tutorials.GROVE_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.LIBRARY_TUTORIAL.id, false, Tutorials.LIBRARY_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.LIBRARY_ICON_TUTORIAL.id, false, Tutorials.LIBRARY_ICON_TUTORIAL.tutorialName),
+        TutorialCompleted(Tutorials.GROVE_ICON_TUTORIAL.id, false, Tutorials.GROVE_ICON_TUTORIAL.tutorialName),
+    )
 
-    val initialTutorial = listOf<Tutorial>(
-        Tutorial(
-            "Este es mi hogar, el Árbol Madre. Acá vive mi familia “Pestalotiopsis microspora”",
-            ChampyStates.SMILING
+    val homeTutorials = listOf(
+        TutorialItem(
+            text = "Este es mi hogar, el Árbol Madre. Acá vive mi familia “Pestalotiopsis microspora”",
+            champyImageState = ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Nos encargamos de limpiar los residuos del bosque y cuidar a los árboles que nos rodean.",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image
         ),
-        Tutorial(
+        TutorialItem(
             "Pero últimamente, estamos agotados debido a la contaminación que causan los humanos que viven fuera del bosque.",
-            ChampyStates.ANGRY
+            ChampyStates.ANGRY.image
         ),
-        Tutorial(
+        TutorialItem(
             "¡Es por eso que necesitamos de tu ayuda! Para que el bosque sobreviva, debemos aprender a cuidar el medioambiente.",
-            ChampyStates.GREETING
-        )
-
-    )
-    val homeTutorials = listOf<Tutorial>(
-        Tutorial(
+            ChampyStates.GREETING.image
+        ),
+        TutorialItem(
+            "Vamos a empezar viendo lo básico, ¿te parece?",
+            ChampyStates.BLINK.image
+        ),
+        TutorialItem(
             "Acá vas a poder ver la cantidad de árboles que están bajo nuestro cuidado.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            focusItem = Offset(0.3f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "Estos árboles nos darán un poco de su oxígeno todos los días.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            focusItem = Offset(0.3f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "El oxígeno nos ayudará a entender cuánto hemos avanzado.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            focusItem = Offset(0.7f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "Al principio, tendremos poquito pero cuanto más ayudemos al bosque y juguemos...",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image,
+            focusItem = Offset(0.7f, 0.05f)
         ),
-        Tutorial(
+        TutorialItem(
             "¡Más vamos a tener!",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image
         ),
-        Tutorial(
-            "Oh, ¿tenés curiosidad por la Arboleda?",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "Es un poco triste, los árboles que vivían ahí, ya no están.",
-            ChampyStates.SAD
-        ),
-        Tutorial(
-            "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
-            ChampyStates.NORMAL
-        ),
-        Tutorial(
-            "¡Volverán!",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
-            "¿Me ayudás a cuidarlos?",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "¡Que bueno! Entonces, vamos que te muestro.",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
+    )
+
+    val libraryIconTutorials = listOf(
+        TutorialItem(
             "Ese es el diario ecológico, el Señor Mushy es quien lo escribe y revisa.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "¿Quién es el Señor Mushy?",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "Es el hongo más sabio y viejo de la comunidad.",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image
         ),
-        Tutorial(
+        TutorialItem(
             "Se encarga de muchas cosas, pero la más importante es escribir el diario ecológico.",
-            ChampyStates.NORMAL
+            ChampyStates.NORMAL.image
         ),
-        Tutorial(
+        TutorialItem(
             "Te lo voy a presentar, ¡vamos!",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         )
     )
 
-    val groveTutorials = listOf<Tutorial>(
-        Tutorial(
+    val groveIconTutorials = listOf(
+        TutorialItem(
+            "Oh, ¿tenés curiosidad por la Arboleda?",
+            ChampyStates.CURIOUS.image
+        ),
+        TutorialItem(
+            "Es un poco triste, los árboles que vivían ahí, ya no están.",
+            ChampyStates.SAD.image
+        ),
+        TutorialItem(
+            "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
+            ChampyStates.NORMAL.image
+        ),
+        TutorialItem(
+            "¡Volverán!",
+            ChampyStates.GREETING.image
+        ),
+        TutorialItem(
+            "¿Me ayudás a cuidarlos?",
+            ChampyStates.CURIOUS.image
+        ),
+        TutorialItem(
+            "¡Que bueno! Entonces, vamos que te muestro.",
+            ChampyStates.GREETING.image
+        ),
+    )
+
+    val groveTutorials = listOf(
+        TutorialItem(
             "¡Llegamos! Esta es la Arboleda.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "O lo era...",
-            ChampyStates.SAD
+            ChampyStates.SAD.image
         ),
-        Tutorial(
+        TutorialItem(
             "Bueno... voy a explicarte cómo funciona, es bastante simple.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "El Árbol Madre nos va a dar cada cierto tiempo una semilla, que vamos a poder plantar.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image,
+            secondaryImage = R.drawable.tutorial_seed,
+            isSecondaryTalking = true
         ),
-        Tutorial(
+        TutorialItem(
             "Esa semilla, si la cuidamos muy bien, crecerá lentamente hasta ser un saludable árbol.",
-            ChampyStates.GREETING
+            ChampyStates.GREETING.image,
+            secondaryImage = R.drawable.tutorial_tree,
+            isSecondaryTalking = true
         ),
-        Tutorial(
+        TutorialItem(
             "El árbol nos dará un poco de su oxígeno diariamente como agradecimiento.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         ),
-        Tutorial(
+        TutorialItem(
             "Pero esa no es la única manera de conseguir oxígeno, según el Señor Mushy.",
-            ChampyStates.CURIOUS
+            ChampyStates.CURIOUS.image
         ),
-        Tutorial(
+        TutorialItem(
             "Habrá que preguntarle más tarde.",
-            ChampyStates.SMILING
+            ChampyStates.SMILING.image
         )
     )
 
-    val ecodiarioTutorial = listOf<Tutorial>(
-        Tutorial(
-            "¿Dónde andará el Señor Mushy?",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "¡Ahí está!",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
-            "Oh... Champy y un amigo. ¿Qué los trae por aquí?",
-            ChampyStates.SMILING
-        ),
-        Tutorial(
-            "¡Señor Mushy, él es $NAME y nos va a ayudar con el bosque!",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
-            "Por eso, quería que nos contara sobre el diario y su información.",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "De acuerdo... veamos",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "El diario es un antiguo libro que contiene aprendizajes heredados de anteriores generaciones.",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "Desde reciclaje, hasta energías renovables, todo se encuentra aquí.",
-            ChampyStates.NORMAL
-        ),
-        Tutorial(
-            "Así que, Champy, tú y $NAME son libres de leer o consultarme lo que deseen.",
-            ChampyStates.SMILING
-        ),
-        Tutorial(
-            "¡Gracias, señor Mushy! La próxima vez, vamos a preguntarle muchas cosas.",
-            ChampyStates.SMILING
-        ),
-        Tutorial(
-            "Nos vemos, señor Mushy.",
-            ChampyStates.GREETING
-        ),
-        Tutorial(
-            "Oh... Es bueno ver a las nuevas generaciones interesadas en aprender.",
-            ChampyStates.SMILING
+    fun getLibraryTutorial(userName: String): List<TutorialItem>{
+        val libraryTutorial = listOf(
+            TutorialItem(
+                "¿Dónde andará el Señor Mushy?",
+                ChampyStates.CURIOUS.image
+            ),
+            TutorialItem(
+                "¡Ahí está!",
+                ChampyStates.GREETING.image,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = false,
+            ),
+            TutorialItem(
+                "Oh... Champy y un amigo. ¿Qué los trae por acá?",
+                ChampyStates.SMILING.image,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "¡Señor Mushy, él es $userName y nos va a ayudar con el bosque!",
+                ChampyStates.GREETING.image,
+                isChampyTalking = true,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = false,
+            ),
+            TutorialItem(
+                "Por eso, quería que nos contara sobre el diario y su información.",
+                ChampyStates.CURIOUS.image,
+                isChampyTalking = true,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = false,
+            ),
+            TutorialItem(
+                "De acuerdo... veamos",
+                ChampyStates.CURIOUS.image,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.SERIOUS.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "En la biblioteca encontrarás libros \n" +
+                    "que contienen cartas heredadas \n" +
+                    "de anteriores generaciones.",
+                ChampyStates.CURIOUS.image,
+                false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "Con mucha información \n" +
+                    "desde reciclaje, hasta energías\n" +
+                    " renovables, todo se encuentra aquí.",
+                ChampyStates.NORMAL.image,
+                false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "Así que, Champy, tú y $userName son libres de leer o consultarme lo que deseen.",
+                ChampyStates.SMILING.image,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            ),
+            TutorialItem(
+                "¡Gracias, señor Mushy!\n" +
+                    "¡Vamos $userName aprendamos de todo!",
+                ChampyStates.SMILING.image,
+                secondaryImage = MushyStates.IDLE.image,
+            ),
+            TutorialItem(
+                "Nos vemos",
+                ChampyStates.GREETING.image,
+                secondaryImage = MushyStates.IDLE.image,
+            ),
+            TutorialItem(
+                "Oh... Es bueno ver a las nuevas generaciones interesadas en aprender.",
+                null,
+                isChampyTalking = false,
+                secondaryImage = MushyStates.IDLE.image,
+                isSecondaryTalking = true,
+            )
         )
-    )
+        return libraryTutorial
+    }
 
-    val bottleChallengeTutorial = listOf<Tutorial>(
-        Tutorial(
-            "¡Wow! Encontraste una botella, voy a contarte un poco sobre ella.",
-            ChampyStates.SMILING
-        ),
-        Tutorial(
-            "Las botellas de plástico se pueden encontrar en muchos lugares y son fáciles de reciclar",
-            ChampyStates.SMILING
-        ),
-        Tutorial(
-            "Al ser de una importancia ecológica alta, es necesario aprender a reciclarlas.",
-            ChampyStates.CURIOUS
-        ),
-        Tutorial(
-            "Así que, aprendamos juntos sobre cómo reciclar este tipo de objetos.",
-            ChampyStates.GREETING
-        ),
-    )
+    fun getTutorial(tutorial: Tutorials, userName: String): List<TutorialItem> {
+        return when(tutorial){
+            Tutorials.HOME_TUTORIAL -> homeTutorials
+            Tutorials.GROVE_TUTORIAL -> groveTutorials
+            Tutorials.LIBRARY_TUTORIAL -> getLibraryTutorial(userName)
+            Tutorials.LIBRARY_ICON_TUTORIAL -> libraryIconTutorials
+            Tutorials.GROVE_ICON_TUTORIAL -> groveIconTutorials
+        }
+    }
 }

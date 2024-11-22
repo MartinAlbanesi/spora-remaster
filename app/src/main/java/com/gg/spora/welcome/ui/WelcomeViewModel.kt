@@ -3,8 +3,13 @@ package com.gg.spora.welcome.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.fake.FakeStageModels
+import com.gg.spora.missions.data.local.MissionModels
+import com.gg.spora.missions.domain.SetMissionsUseCase
+import com.gg.spora.core.utils.SporaConstant.BANNED_WORDS
 import com.gg.spora.stage.domain.SetNewLevelsUseCase
 import com.gg.spora.stage.domain.SetNewStagesLevelUseCase
+import com.gg.spora.tutorials.data.TutorialModels
+import com.gg.spora.tutorials.domain.SetTutorialsLocalUseCase
 import com.gg.spora.user.domain.SetNewUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +19,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
-//    private val dataStore: DataStore<Preferences>
     private val setNewUserUseCase: SetNewUserUseCase,
     private val setNewStagesLevelUseCase: SetNewStagesLevelUseCase,
-    private val setNewLevelsUseCase: SetNewLevelsUseCase
+    private val setNewLevelsUseCase: SetNewLevelsUseCase,
+    private val setTutorialsLocalUseCase: SetTutorialsLocalUseCase,
+    private val setMissionsUseCase: SetMissionsUseCase
 ) : ViewModel() {
 
     private val _guestName = MutableStateFlow("")
@@ -28,8 +34,20 @@ class WelcomeViewModel @Inject constructor(
 
     fun setGuestName(name: String) {
         viewModelScope.launch {
-            _guestName.value = name
+            _guestName.value =
+                name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
         }
+    }
+
+    fun filterBannedWords(text: String, bannedWords: List<String> = BANNED_WORDS): String {
+        var filteredText = text
+        for (word in bannedWords) {
+            filteredText = filteredText.replace(
+                word, "*".repeat(word.length),
+                ignoreCase = true
+            )
+        }
+        return filteredText
     }
 
     fun setNewUser() {
@@ -44,6 +62,8 @@ class WelcomeViewModel @Inject constructor(
             val stageLevel = FakeStageModels.fakeStage
             setNewStagesLevelUseCase(stageLevel)
             setNewLevelsUseCase(level)
+            setTutorialsLocalUseCase(TutorialModels.tutorialsCompleted)
+            setMissionsUseCase(MissionModels.missions)
         }
     }
 
