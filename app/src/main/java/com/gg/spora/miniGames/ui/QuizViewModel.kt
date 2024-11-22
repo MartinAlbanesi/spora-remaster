@@ -37,7 +37,6 @@ data class ChampyHelping(
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
-//    private val updateLevelStateUseCase: UpdateLevelStateUseCase,
     private val updateUserLevelsAndOxygenUseCase: UpdateUserLevelsAndOxygenUseCase,
     private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
     savedStateHandle: SavedStateHandle,
@@ -66,7 +65,7 @@ class QuizViewModel @Inject constructor(
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
-    //private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
+
     private val _currentImageResId = MutableStateFlow<String?>(null)
     val currentImageResId = _currentImageResId.asStateFlow()
 
@@ -91,7 +90,6 @@ class QuizViewModel @Inject constructor(
     init {
         getRandomQuestions()
         getCurrentQuestion()
-        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
         _currentImageResId.value =
             _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
 
@@ -125,24 +123,20 @@ class QuizViewModel @Inject constructor(
     }
 
     fun isAnswerCorrect(answerId: String) {
-//        _isCorrect.value = _questions.value[_counterQuestion.value].answerId == answerId
 
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!.answers.map {
                 // si la respuesta es la Correcta
                 if (it.id == answerId) {
 
-//                    _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
 
                     it.copy(
-//                        isCorrect = correctAnswer,
                         isCorrect = true
                     )
                 }
                 // si la respuesta es Incorrecta
                 else {
                     it.copy(
-//                        isCorrect = if (it.id == _currentQuestion.value!!.answerId) true else null,
                         isCorrect = null,
                     )
                 }
@@ -212,8 +206,6 @@ class QuizViewModel @Inject constructor(
             _livesLost.value++
         }
 
-//        _relationsItems.value = emptyList()
-
         _currentQuestion.value = _currentQuestion.value?.copy(
             answers = _currentQuestion.value!!
                 .answers
@@ -258,7 +250,6 @@ class QuizViewModel @Inject constructor(
         _champyHelpingText.value = null
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
-        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
         _currentImageResId.value =
             _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
         _isCorrect.value = null
@@ -277,7 +268,6 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value = null
         getRandomQuestions()
         getCurrentQuestion()
-        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
         _currentImageResId.value =
             _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
         _relationsItems.value = emptyList()

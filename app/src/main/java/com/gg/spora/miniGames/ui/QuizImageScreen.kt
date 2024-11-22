@@ -61,7 +61,7 @@ fun QuizImageScreen(
 
     var isAnswerSelected by remember { mutableStateOf(false) }
 
-    var showImageFullScreen by remember { mutableStateOf(true) }
+    var showImageFullScreen by remember { mutableStateOf(false) }
 
     var selectedAnswerId by remember { mutableStateOf("") }
 

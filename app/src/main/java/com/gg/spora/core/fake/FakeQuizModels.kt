@@ -1073,7 +1073,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[5].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "No te olvides que, la huella de carbono es la cantidad de gases malos para el planeta, como el dióxido de carbono, que las personas, cosas o actividades producen."
+            champyHelping = "La huella de carbono es la cantidad de gases malos para el planeta, que las personas, cosas o actividades producen."
         ),
         Question(
             id = "3",
@@ -1082,7 +1082,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[10].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Acordate que, un material biodegradable es algo que, cuando lo tiramos, se descompone solo y vuelve a la naturaleza, como si se deshiciera poco a poco. "
+            champyHelping = "Un material biodegradable es algo que, cuando lo tiramos, se descompone solo y vuelve a la naturaleza."
         ),
         Question(
             id = "4",
@@ -1129,7 +1129,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[30].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban"
+            champyHelping = "La energía renovable es la energía que conseguimos de cosas que no se acaban"
         ),
 
         Question(
@@ -1197,7 +1197,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[56].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "La deforestación es cuando cortamos muchos árboles y destruimos bosques, aunque es triste que sea así"
+            champyHelping = "La deforestación es cuando cortamos muchos árboles y destruimos bosques."
         ),
 
         Question(
@@ -1237,7 +1237,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[72].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "¿Sabías que el plástico tarda hasta 500 años en descomponerse? Pero si me los traes, yo puedo ayudarte a acelerar el proceso."
+            champyHelping = "¿Sabías que el plástico tarda hasta 500 años en descomponerse? Yo puedo ayudarte a acelerar el proceso."
         ),
 
         Question(
@@ -1319,7 +1319,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[108].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "No te olvides que, la huella de carbono es la cantidad de gases malos para el planeta, como el dióxido de carbono, que las personas, cosas o actividades producen."
+            champyHelping = "La huella de carbono es la cantidad de gases malos para el planeta, que las personas, cosas o actividades producen."
         ),
         Question(
             id = "29",
@@ -1328,7 +1328,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[113].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos."
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias."
         ),
         Question(
             id = "30",
@@ -1356,7 +1356,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[124].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban.",
+            champyHelping = "La energía renovable es la energía que conseguimos de cosas que no se acaban.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F2_quiz_image.png?alt=media&token=453fbd0e-cb79-4399-9dfa-eb10063e5d75"
         ),
         Question(
@@ -1366,7 +1366,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[128].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "No te olvides que, la huella de carbono es la cantidad de gases malos para el planeta, como el dióxido de carbono, que las personas, cosas o actividades producen.",
+            champyHelping = "La huella de carbono es la cantidad de gases malos para el planeta.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F3_quiz_image.png?alt=media&token=eddcba94-0c69-4972-aea9-fb932bb5ada9"
         ),
         Question(
@@ -1386,7 +1386,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[136].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban.",
+            champyHelping = "La energía renovable es la energía que conseguimos de cosas que no se acaban.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F5_quiz_image.png?alt=media&token=4488cb59-d06b-4498-915c-81c05c8baada"
         ),
         Question(
@@ -1416,7 +1416,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[148].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F8_quiz_image.png?alt=media&token=2b1e4980-dde7-4c7a-ab98-a1ec7b395ffc"
         ),
         Question(
@@ -1466,7 +1466,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[170].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F13_quiz_image.png?alt=media&token=cadd73f2-c3ce-42d4-ba6c-2812bc77a5e7"
         ),
         Question(
@@ -1516,7 +1516,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[191].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Sabias que, los combustibles fósiles son materiales como el petróleo, el carbón y el gas natural, que vienen de plantas y animales que vivieron hace millones de años.",
+            champyHelping = "Los combustibles fósiles son materiales que vienen de plantas y animales que vivieron hace millones de años.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F18_quiz_image.png?alt=media&token=e77a97b7-a26d-4390-960a-048f20503537"
         ),
         Question(
@@ -1526,7 +1526,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[193].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
+            champyHelping = "Un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F19_quiz_image.png?alt=media&token=f4c523bd-4600-4f4f-926d-6453fff0950d"
         ),
         Question(
@@ -1546,7 +1546,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[200], newFakeAnswers[201], newFakeAnswers[202], newFakeAnswers[203], newFakeAnswers[205], newFakeAnswers[205]).shuffled(),
             correctAnswer = "${newFakeAnswers[200].id},${newFakeAnswers[201].id},${newFakeAnswers[202].id}",
             typeQuestion = listOf(TypeQuestion.ENERGY),
-            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban.",
+            champyHelping = "La energía renovable es la energía que conseguimos de cosas que no se acaban.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1580,7 +1580,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[224], newFakeAnswers[225], newFakeAnswers[226], newFakeAnswers[227], newFakeAnswers[228], newFakeAnswers[229]).shuffled(),
             correctAnswer = "${newFakeAnswers[224].id},${newFakeAnswers[225].id},${newFakeAnswers[226].id}",
             typeQuestion = listOf(TypeQuestion.SUSTENTABILITY),
-            champyHelping = "Parece complicado pero la economía circular solo es una forma inteligente de usar las cosas para que no generemos tanta basura.",
+            champyHelping = "La economía circular solo es una forma inteligente de usar las cosas para que no generemos tanta basura.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1652,7 +1652,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[272], newFakeAnswers[273], newFakeAnswers[274], newFakeAnswers[275], newFakeAnswers[276], newFakeAnswers[277]).shuffled(),
             correctAnswer = "${newFakeAnswers[272].id},${newFakeAnswers[273].id},${newFakeAnswers[274].id}",
             typeQuestion = listOf(TypeQuestion.CLIMATE_CHANGE),
-            champyHelping = "Sabias que, el efecto invernadero es como una manta que cubre la Tierra y la mantiene calentita.",
+            champyHelping = "El efecto invernadero es como una manta que cubre la Tierra y la mantiene calentita.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1661,7 +1661,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[278], newFakeAnswers[279], newFakeAnswers[280], newFakeAnswers[281], newFakeAnswers[282], newFakeAnswers[283]).shuffled(),
             correctAnswer = "${newFakeAnswers[278].id},${newFakeAnswers[279].id},${newFakeAnswers[280].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
-            champyHelping = "Recordá que, un material biodegradable es algo que, cuando lo tiramos, se descompone solo y vuelve a la naturaleza, como si se deshiciera poco a poco.",
+            champyHelping = "Un material biodegradable es algo que, cuando lo tiramos, se descompone solo y vuelve a la naturaleza.",
             typeGame = TypeGame.RELATIONS,
         ),
     )

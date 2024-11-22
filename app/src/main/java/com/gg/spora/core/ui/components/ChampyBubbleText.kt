@@ -49,7 +49,6 @@ fun ChampyBubbleText(
             contentDescription = null,
             modifier = Modifier
                 .weight(1f)
-//                .wrapContentWidth(align = Alignment.Start)
                 .offset {
                     champyOffset
                 }
@@ -61,7 +60,6 @@ fun ChampyBubbleText(
                 exit = scaleOut() + shrinkHorizontally(shrinkTowards = Alignment.CenterHorizontally),
                 modifier = Modifier
                     .weight(2.5f)
-//                    .padding(end = 16.dp)
                     .offset(x = (-10).dp)
             ){
                 Box(
@@ -69,25 +67,12 @@ fun ChampyBubbleText(
                 ) {
                     Image(
                         painter = painterResource(R.drawable.text_bubble_v2),
-                        contentDescription = null,
+                        contentDescription = "bubble text for champy",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
-                            .fillMaxHeight(0.8f)
+                            .fillMaxHeight(0.95f)
                             .fillMaxWidth()
-//                        .offset(x = (-20).dp)
                     )
-
-//                    Text(
-//                        text = champyHelpingText,
-//                        fontSize = 14.sp,
-//                        modifier = Modifier
-//                            .padding(
-//                                start = 40.dp,
-//                                end = 8.dp,
-//                                top = 8.dp,
-////                                bottom = 16.dp
-//                            )
-//                    )
 
                     TypewriteText(
                         text = champyHelpingText.text,
@@ -95,14 +80,11 @@ fun ChampyBubbleText(
                         textDelay = 100,
                         fontSize = champyHelpingText.fontSize,
                         modifier = Modifier
-//                        .clip(MaterialTheme.shapes.medium)
-//                        .align(Alignment.CenterStart)
-//                        .background(colorResource(R.color.cream))
+                            .fillMaxSize()
                             .padding(
                                 start = 40.dp,
-                                end = 8.dp,
                                 top = 8.dp,
-//                                bottom = 16.dp
+                                bottom = 2.dp
                             )
                     )
                 }
@@ -111,11 +93,8 @@ fun ChampyBubbleText(
     }
 }
 
-//@PreviewLightDark
 @Preview
 @Preview(device = "spec:width=1080px,height=2340px,dpi=640")
-//@PreviewFontScale
-//@PreviewScreenSizes
 @Composable
 private fun ChampyBubbleTextPreview() {
     SporaTheme {
