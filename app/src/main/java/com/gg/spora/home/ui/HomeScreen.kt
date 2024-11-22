@@ -32,6 +32,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     oxygen: Int,
     onNavigateToForestStage: () -> Unit,
+    onNavigateToGrove: () -> Unit,
     onNavigateToRanking: () -> Unit,
     onNavigateToExpoStage: () -> Unit,
     onNavigateToLibrary: () -> Unit,
@@ -67,11 +68,11 @@ fun HomeScreen(
                 onNavigateToLibrary()
             }
         ),
-//        HomeIcon(
-//            image = R.drawable.grove_icon,
-//            text = "Arboleda",
-//            onClick = {}
-//        )
+        HomeIcon(
+            image = R.drawable.grove_icon,
+            text = "Arboleda",
+            onClick = onNavigateToGrove
+        )
     )
 
     Scaffold(
@@ -171,7 +172,7 @@ fun HomeScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun MiniGameScreenPreview() {
+private fun HomePreview() {
     SporaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -181,6 +182,7 @@ private fun MiniGameScreenPreview() {
                 modifier = Modifier.fillMaxSize(),
                 oxygen = 0,
                 onNavigateToForestStage = {},
+                onNavigateToGrove = {},
                 onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},

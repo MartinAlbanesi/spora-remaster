@@ -11,19 +11,19 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class QuizLocalRepositoryTest {
 
-    private lateinit var quizLocalRepository: QuizLocalRepository
-
-    private lateinit var context: Context
-
-    @RelaxedMockK
-    private lateinit var quizLocalService: QuizLocalService
-
-    @Before
-    fun setUp() {
-        MockKAnnotations.init(this)
-        context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
-        quizLocalRepository = QuizLocalRepository(context, quizLocalService)
-    }
+//    private lateinit var quizLocalRepository: QuizLocalRepository
+//
+//    private lateinit var context: Context
+//
+//    @RelaxedMockK
+//    private lateinit var quizLocalService: QuizLocalService
+//
+//    @Before
+//    fun setUp() {
+//        MockKAnnotations.init(this)
+//        context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
+//        quizLocalRepository = QuizLocalRepository(context, quizLocalService)
+//    }
 
 
 //    @Test

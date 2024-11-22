@@ -1,5 +1,7 @@
 package com.gg.spora.user.domain.models
 
+import com.gg.spora.grove.domain.models.ForestTree
+import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.challenge.domain.model.ObjectDetail
 
 data class User(
@@ -10,5 +12,7 @@ data class User(
     val treesCount: Int,
     val userImage: Int,
     val levelsCompleted : List<LevelCompleted>,
-    val objectsScanned : List<ObjectDetail>
+    val objectsScanned : List<ObjectDetail>,
+    var forestTrees: List<ForestTree>,
+    val seedTrees: List<SeedTree>
 )

@@ -15,7 +15,9 @@ fun UserNetwork.toUser() = User(
     levelsCompleted = levelsCompleted?.map { it.toLevelCompleted() } ?: emptyList(),
     objectsScanned = objectsScanned?.map { it.toObjectDetail() } ?: emptyList(),
     treesCount = treesCount ?: 0,
-    userImage = userImage ?: R.drawable.spora_face_splash
+    userImage = userImage ?: R.drawable.spora_face_splash,
+    seedTrees = emptyList(),
+    forestTrees = emptyList(),
 )
 
 fun User.toUserEntity() = UserEntity(
@@ -36,5 +38,7 @@ fun UserWithLevelsCompletedEntity.toUser() = User(
     levelsCompleted = levelsCompleted.map { it.toLevelCompleted() },
     objectsScanned = user.objectsScanned,
     treesCount = user.treesCount,
-    userImage = user.userImage
+    userImage = user.userImage,
+    seedTrees = emptyList(),
+    forestTrees = emptyList(),
 )

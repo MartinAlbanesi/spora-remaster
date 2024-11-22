@@ -37,7 +37,6 @@ import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 
-@Suppress("LongMethod")
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,

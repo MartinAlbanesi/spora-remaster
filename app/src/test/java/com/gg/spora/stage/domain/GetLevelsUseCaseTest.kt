@@ -15,7 +15,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.DisplayName
 
 class GetLevelsUseCaseTest {
 
@@ -34,11 +33,8 @@ class GetLevelsUseCaseTest {
         getLevelsUseCase = GetLevelsUseCase(stageRepositoryLocal, getUserLocalUseCase)
     }
 
-    @DisplayName("Cuando se invoca al caso de uso, " +
-        "se debe retornar un flujo de niveles combinado con los niveles completados por el usuario")
-
     @Test
-    operator fun invoke() = runTest {
+    fun invoke_WhenInvokeUseCase_ThenReturnLevelListWithUserLevelsCompleted() = runTest {
 
         // Given
         val levelsFlow = flowOf(FakeStageModels.fakeLevels)

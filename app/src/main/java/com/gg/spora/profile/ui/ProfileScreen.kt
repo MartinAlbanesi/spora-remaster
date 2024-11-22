@@ -196,7 +196,9 @@ private fun ProfileScreenPreview() {
                     levelsCompleted = emptyList(),
                     id = "id",
                     treesCount = 0,
-                    userImage = R.drawable.spora_face_splash
+                    userImage = R.drawable.spora_face_splash,
+                    forestTrees = emptyList(),
+                    seedTrees = emptyList()
                 ),
 //                onLeftArrowClick = {},
 //                onRightArrowClick = {}

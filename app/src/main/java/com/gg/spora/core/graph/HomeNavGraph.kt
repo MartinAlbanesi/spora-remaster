@@ -3,6 +3,7 @@ package com.gg.spora.core.graph
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -12,15 +13,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.gg.spora.R
-import com.gg.spora.core.utils.enums.StageType
+import com.gg.spora.grove.ui.GroveScreen
+import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
 import com.gg.spora.profile.ui.ProfileScreen
 import com.gg.spora.profile.ui.ProfileViewModel
 import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ranking.ui.RankingViewModel
-import com.gg.spora.user.domain.models.User
 
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
@@ -28,8 +28,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         composable<NavigationRoutes.Home> {
 
             val homeViewModel: HomeViewModel = hiltViewModel()
-
-//            val user by homeViewModel.user.collectAsState()
 
             val userOxygen by homeViewModel.oxygen.collectAsState()
 
@@ -46,10 +44,13 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 HomeScreen(
                     oxygen = userOxygen,
                     onNavigateToForestStage = {
-                        navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
+                        navController.navigate(NavigationRoutes.Stage("1"))
+                    },
+                    onNavigateToGrove = {
+                        navController.navigate(NavigationRoutes.Grove)
                     },
                     onNavigateToExpoStage = {
-                        navController.navigate(NavigationRoutes.Stage(StageType.EXPO.name))
+                        navController.navigate(NavigationRoutes.Stage("2"))
                     },
                     onNavigateToLibrary = {
                         navController.navigate(NavigationRoutes.LibraryGraph)
@@ -63,8 +64,33 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 )
             }
         }
-        composable<NavigationRoutes.Grove> {
 
+        composable<NavigationRoutes.Grove> {
+            val groveViewModel : GroveViewModel = hiltViewModel()
+            val uiState by groveViewModel.uiState.collectAsState()
+            val isLoading by groveViewModel.isLoading.collectAsState()
+            val errorState by groveViewModel.errorState.collectAsState()
+/*
+            DisposableEffect(Unit) {
+                onDispose {
+                    groveViewModel.saveTreeCooldowns()
+                }
+            }
+*/
+            GroveScreen(
+                uiState = uiState,
+                isLoading = isLoading,
+                forestTreesColumnCount = 10,
+                plantForestTree = { forestTree, seedTreeId ->
+                    groveViewModel.plantForestTree(forestTree, seedTreeId)
+                },
+                claimOxygen = { groveViewModel.claimOxygen() },
+                popBackStack = {
+                    //groveViewModel.saveTreeCooldowns()
+                    navController.popBackStack()
+                },
+                errorState = errorState
+            )
         }
         composable<NavigationRoutes.Ranking> {
 
@@ -80,7 +106,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         }
         composable<NavigationRoutes.ProfileScreen> {
             val viewModel: ProfileViewModel = hiltViewModel()
-            val currentIndex by viewModel.currentIndex.collectAsState()
+            //val currentIndex by viewModel.currentIndex.collectAsState()
 
             val user by viewModel.user.collectAsState()
 

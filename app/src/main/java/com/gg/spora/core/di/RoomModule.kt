@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.stage.data.local.StageDao
 import com.gg.spora.user.data.local.UserDao
@@ -25,8 +26,7 @@ class RoomModule {
             appContext,
             SporaDatabase::class.java,
             "spora_database"
-        ).fallbackToDestructiveMigration()
-            .build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Singleton
@@ -50,5 +50,11 @@ class RoomModule {
     @Provides
     fun provideInfoCardDao(database: SporaDatabase): InfoCardDAO {
         return database.infoCardDao()
+    }
+
+    @Singleton
+    @Provides
+    fun privideGroveDao(sporaDatabase: SporaDatabase): GroveDao {
+        return sporaDatabase.groveDao()
     }
 }

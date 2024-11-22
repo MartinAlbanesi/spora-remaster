@@ -95,7 +95,6 @@ fun InfoRow(
     }
 }
 
-@Suppress("LongMethod")
 @Composable
 fun AboutUs(
     onDismiss: () -> Unit,
