@@ -1386,6 +1386,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[136].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F5_quiz_image.png?alt=media&token=4488cb59-d06b-4498-915c-81c05c8baada"
         ),
         Question(
@@ -1395,6 +1396,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[142].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F6_quiz_image.png?alt=media&token=236709ad-e6e7-48ed-b659-8ca39c22b86f"
         ),
         Question(
@@ -1404,6 +1406,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[145].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F7_quiz_image.png?alt=media&token=8fdcb32e-866a-43fe-8e45-8a2948a509b7"
         ),
         Question(
@@ -1413,6 +1416,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[148].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F8_quiz_image.png?alt=media&token=2b1e4980-dde7-4c7a-ab98-a1ec7b395ffc"
         ),
         Question(
@@ -1422,6 +1426,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[152].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F9_quiz_image.png?alt=media&token=a4084616-01e7-488e-9391-fed7844cdd96"
         ),
         Question(
@@ -1431,6 +1436,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[157].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F10_quiz_image.png?alt=media&token=652021df-ae3c-4d4c-a551-7d8fc0aa7567"
         ),
         Question(
@@ -1440,6 +1446,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[161].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "El impacto ambiental es el cambio que hacemos en la naturaleza con nuestras acciones.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F11_quiz_image.png?alt=media&token=e23d9e0e-bdb3-4709-8718-29b5073c82c1"
         ),
         Question(
@@ -1449,6 +1456,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[165].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "El cambio climático es cuando el clima de la Tierra cambia demasiado rápido por culpa de cosas que hacemos",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F12_quiz_image.png?alt=media&token=a8ffbbf7-9a23-406a-96f0-fc6ff53bc861"
         ),
         Question(
@@ -1458,6 +1466,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[170].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F13_quiz_image.png?alt=media&token=cadd73f2-c3ce-42d4-ba6c-2812bc77a5e7"
         ),
         Question(
@@ -1467,6 +1476,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[172].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F14_quiz_image.png?alt=media&token=fe98c17f-1acf-4d91-a262-e589d4d849e8"
         ),
         Question(
@@ -1476,6 +1486,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[177].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F15_quiz_image.png?alt=media&token=18f6f299-f9c0-44bb-a27e-84af05468c1e"
         ),
         Question(
@@ -1485,6 +1496,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[182].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F16_quiz_image.png?alt=media&token=3101ed4f-91a4-495f-8b6d-8097a8c57cfb"
         ),
         Question(
@@ -1494,6 +1506,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[184].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "La infraestructura verde son cosas que hacemos en las ciudades para trabajar junto con la naturaleza",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F17_quiz_image.png?alt=media&token=e0e30775-6cde-40e8-9192-31cce05dd8ea"
         ),
         Question(
@@ -1503,6 +1516,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[191].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Sabias que, los combustibles fósiles son materiales como el petróleo, el carbón y el gas natural, que vienen de plantas y animales que vivieron hace millones de años.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F18_quiz_image.png?alt=media&token=e77a97b7-a26d-4390-960a-048f20503537"
         ),
         Question(
@@ -1512,6 +1526,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[193].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Recordá que, un ecosistema es un lugar donde viven muchos seres vivos, como plantas, animales, insectos y hasta bacterias, que se ayudan entre sí y viven juntos.",
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F19_quiz_image.png?alt=media&token=f4c523bd-4600-4f4f-926d-6453fff0950d"
         ),
         Question(
@@ -1521,6 +1536,7 @@ object FakeQuizModels {
             correctAnswer = newFakeAnswers[196].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F20_quiz_image.png?alt=media&token=52cddaaf-c18f-4d87-ae89-68c1bdc76999"
         ),
         //---------------------------RELATION QUESTION-------------------------------
@@ -1530,6 +1546,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[200], newFakeAnswers[201], newFakeAnswers[202], newFakeAnswers[203], newFakeAnswers[205], newFakeAnswers[205]).shuffled(),
             correctAnswer = "${newFakeAnswers[200].id},${newFakeAnswers[201].id},${newFakeAnswers[202].id}",
             typeQuestion = listOf(TypeQuestion.ENERGY),
+            champyHelping = "No te olvides que, la energía renovable es la energía que conseguimos de cosas que no se acaban.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1554,6 +1571,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[218], newFakeAnswers[219], newFakeAnswers[220], newFakeAnswers[221], newFakeAnswers[222], newFakeAnswers[223]).shuffled(),
             correctAnswer = "${newFakeAnswers[218].id},${newFakeAnswers[219].id},${newFakeAnswers[220].id}",
             typeQuestion = listOf(TypeQuestion.BIODIVERSITY),
+            champyHelping = "La biodiversidad es la variedad de seres vivos que hay en el planeta: animales, plantas, insectos, hongos y más.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1562,6 +1580,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[224], newFakeAnswers[225], newFakeAnswers[226], newFakeAnswers[227], newFakeAnswers[228], newFakeAnswers[229]).shuffled(),
             correctAnswer = "${newFakeAnswers[224].id},${newFakeAnswers[225].id},${newFakeAnswers[226].id}",
             typeQuestion = listOf(TypeQuestion.SUSTENTABILITY),
+            champyHelping = "Parece complicado pero la economía circular solo es una forma inteligente de usar las cosas para que no generemos tanta basura.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1570,6 +1589,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[230], newFakeAnswers[231], newFakeAnswers[232], newFakeAnswers[233], newFakeAnswers[234], newFakeAnswers[235]).shuffled(),
             correctAnswer = "${newFakeAnswers[230].id},${newFakeAnswers[232].id},${newFakeAnswers[234].id}",
             typeQuestion = listOf(TypeQuestion.SUSTENTABILITY),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1578,6 +1598,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[236], newFakeAnswers[237], newFakeAnswers[238], newFakeAnswers[239], newFakeAnswers[240], newFakeAnswers[241]).shuffled(),
             correctAnswer = "${newFakeAnswers[236].id},${newFakeAnswers[237].id},${newFakeAnswers[238].id}",
             typeQuestion = listOf(TypeQuestion.CLIMATE_CHANGE),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1586,6 +1607,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[242], newFakeAnswers[243], newFakeAnswers[244], newFakeAnswers[245], newFakeAnswers[246], newFakeAnswers[247]).shuffled(),
             correctAnswer = "${newFakeAnswers[242].id},${newFakeAnswers[243].id},${newFakeAnswers[244].id}",
             typeQuestion = listOf(TypeQuestion.ENERGY),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1594,6 +1616,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[248], newFakeAnswers[249], newFakeAnswers[250], newFakeAnswers[251], newFakeAnswers[252], newFakeAnswers[253]).shuffled(),
             correctAnswer = "${newFakeAnswers[248].id},${newFakeAnswers[249].id},${newFakeAnswers[250].id}",
             typeQuestion = listOf(TypeQuestion.CONTAMINATION),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1602,6 +1625,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[254], newFakeAnswers[255], newFakeAnswers[256], newFakeAnswers[257], newFakeAnswers[258], newFakeAnswers[259]).shuffled(),
             correctAnswer = "${newFakeAnswers[254].id},${newFakeAnswers[255].id},${newFakeAnswers[256].id}",
             typeQuestion = listOf(TypeQuestion.ENERGY),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1610,6 +1634,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[260], newFakeAnswers[261], newFakeAnswers[262], newFakeAnswers[263], newFakeAnswers[264], newFakeAnswers[265]).shuffled(),
             correctAnswer = "${newFakeAnswers[260].id},${newFakeAnswers[261].id},${newFakeAnswers[262].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1618,6 +1643,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[266], newFakeAnswers[267], newFakeAnswers[268], newFakeAnswers[269], newFakeAnswers[270], newFakeAnswers[271]).shuffled(),
             correctAnswer = "${newFakeAnswers[266].id},${newFakeAnswers[267].id},${newFakeAnswers[268].id}",
             typeQuestion = listOf(TypeQuestion.CONTAMINATION),
+            champyHelping = null,
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1626,6 +1652,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[272], newFakeAnswers[273], newFakeAnswers[274], newFakeAnswers[275], newFakeAnswers[276], newFakeAnswers[277]).shuffled(),
             correctAnswer = "${newFakeAnswers[272].id},${newFakeAnswers[273].id},${newFakeAnswers[274].id}",
             typeQuestion = listOf(TypeQuestion.CLIMATE_CHANGE),
+            champyHelping = "Sabias que, el efecto invernadero es como una manta que cubre la Tierra y la mantiene calentita.",
             typeGame = TypeGame.RELATIONS,
         ),
         Question(
@@ -1634,6 +1661,7 @@ object FakeQuizModels {
             answers = listOf(newFakeAnswers[278], newFakeAnswers[279], newFakeAnswers[280], newFakeAnswers[281], newFakeAnswers[282], newFakeAnswers[283]).shuffled(),
             correctAnswer = "${newFakeAnswers[278].id},${newFakeAnswers[279].id},${newFakeAnswers[280].id}",
             typeQuestion = listOf(TypeQuestion.RECYCLE),
+            champyHelping = "Recordá que, un material biodegradable es algo que, cuando lo tiramos, se descompone solo y vuelve a la naturaleza, como si se deshiciera poco a poco.",
             typeGame = TypeGame.RELATIONS,
         ),
     )
