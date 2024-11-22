@@ -30,13 +30,3 @@ data class ForestTree(
     var timesOxygenClaimed: Int = 0,
 ) : Tree(id, type)
 
-fun ForestTree.toForestTreeEntity(): ForestTreeEntity {
-    return ForestTreeEntity(
-        idForestTree = id,
-        treeType = type.name,
-        currentStage = currentStage.toString(),
-        plantingDate = plantingDate.toEpochSecond(ZoneOffset.UTC),
-        position = position,
-        timesOxygenClaimed = timesOxygenClaimed
-    )
-}
