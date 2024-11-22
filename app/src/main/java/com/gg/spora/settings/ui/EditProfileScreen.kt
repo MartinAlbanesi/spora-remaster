@@ -260,7 +260,7 @@ private fun EditProfileScreenPreview() {
             EditProfileScreen(
                 onBackClick = {},
                 currentUser = null,
-                selectedImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
+                selectedImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                 username = "Champy",
                 userImages = listOf(),
                 onUpdatePopup = {},

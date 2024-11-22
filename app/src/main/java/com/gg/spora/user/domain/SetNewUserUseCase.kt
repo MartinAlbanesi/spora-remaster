@@ -21,7 +21,7 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList(),
                 treesCount = 0,
-                userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
+                userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                 weeklyOxygen = 0
             )
             userRepositoryLocal.setUserLocal(user)
@@ -41,7 +41,7 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList(),
                 treesCount = 0,
-                userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
+                userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                 weeklyOxygen = 0
             )
             val userId = userRepositoryNetwork.setUser(user)

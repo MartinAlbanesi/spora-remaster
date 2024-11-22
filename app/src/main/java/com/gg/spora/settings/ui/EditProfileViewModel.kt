@@ -30,19 +30,17 @@ class EditProfileViewModel @Inject constructor(
 
     var showSnackbar by mutableStateOf(false)
     var showPopup by mutableStateOf(false)
-    var selectedImage by mutableStateOf("https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f")
+    var selectedImage by mutableStateOf("https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36")
     var newUsername by mutableStateOf("")
 
 
     private val _userImages = MutableStateFlow<List<String>>(listOf(
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_curioso_idle.png?alt=media&token=63e957f7-1ec0-4895-b695-733604948485",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_derrotado_idle.png?alt=media&token=ecd4eac4-6d52-49ac-b522-cb5fb2d941f9",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_durmiendo_sentado.png?alt=media&token=87792ce7-a90f-4f8f-b61c-ac3fc6f3338a",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_enojado_idle.png?alt=media&token=a485f6da-4f03-41c8-b5cd-a9c6542c3e13",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_triste_idle.png?alt=media&token=b63b2227-a4b8-4cc3-a96f-0b3a5e89147d",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_celebrando_brazoslevantados_sinsombra.png?alt=media&token=5edbed36-6fb9-4b0a-81c3-fe5dec1659e1",
-        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fmushy_sin_sombra.png?alt=media&token=ec9d88b1-57ee-4807-ad40-978d7acf83b6"
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_defeated.png?alt=media&token=f4677f5b-c6bc-4611-b180-b584b3035512",
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_doubt.png?alt=media&token=e521f647-451e-4b52-ad12-dcff289a9d1a",
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_happy.png?alt=media&token=e86e643f-0b3e-4abc-925d-f52341701d1c",
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_sad.png?alt=media&token=f6a5d2b6-970c-4160-8d81-257d6776e839",
+        "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_serious.png?alt=media&token=3f9ffb71-2f81-4db1-9ba7-4a25e043891d",
     ))
 
     val userImages: StateFlow<List<String>> = _userImages
@@ -67,7 +65,7 @@ class EditProfileViewModel @Inject constructor(
         viewModelScope.launch {
             getUserLocalUseCase().collect { user ->
                 _currentUser.value = user
-                selectedImage = user?.userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f"
+                selectedImage = user?.userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36"
                 newUsername = user?.userName ?: ""
             }
         }

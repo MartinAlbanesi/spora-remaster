@@ -1,5 +1,7 @@
 package com.gg.spora.core.graph
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -22,6 +24,7 @@ import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ranking.ui.RankingViewModel
 import com.gg.spora.user.domain.models.User
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
     navigation<NavigationRoutes.HomeGraph>(startDestination = NavigationRoutes.Home) {

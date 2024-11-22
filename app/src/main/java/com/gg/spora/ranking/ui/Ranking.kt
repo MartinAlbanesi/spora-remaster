@@ -226,7 +226,7 @@ fun Ranking(
                             )
                             Text(
                                 text = item.email,
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize =12.sp),
+                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                                 color = Color.Black,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
@@ -235,7 +235,7 @@ fun Ranking(
                             )
                         }
 
-                        Spacer(modifier = Modifier.weight(1f))
+                        Spacer(modifier = Modifier.padding(end = 8.dp))
                         Box(
                             modifier = Modifier
                                 .align(Alignment.CenterVertically)
@@ -406,7 +406,7 @@ fun Ranking(
                         )
                     }
 
-                    Spacer(modifier = Modifier.weight(1f))
+                    Spacer(modifier = Modifier.padding(end = 8.dp))
                     Box(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)

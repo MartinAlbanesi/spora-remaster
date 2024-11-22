@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -86,7 +87,7 @@ fun ProfileScreen(
                 ) {
                     AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
-                            .data(user?.userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f")
+                            .data(user?.userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36")
                             .placeholder(R.drawable.user_image)
                             .build(),
                         contentDescription = "User Image",
@@ -155,8 +156,8 @@ fun ProfileScreen(
 
                     Box(
                         modifier = Modifier
-                            .padding(top = 130.dp)
                             .fillMaxWidth()
+                            .padding(top = 130.dp)
                             .height(100.dp)
                     ) {
                         Image(
@@ -169,9 +170,8 @@ fun ProfileScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(8.dp)
-                                .padding(end = 16.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+                                ,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Box(
                                 modifier = Modifier
@@ -179,61 +179,88 @@ fun ProfileScreen(
                                     .padding(16.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Spacer(
-                                    modifier = Modifier
-                                        .width(2.dp)
-                                        .height(65.dp)
-                                        .padding(bottom = 5.dp)
-                                        .background(Color.Black)
-                                )
-                                AsyncImage(
-                                    model = ImageRequest.Builder(LocalContext.current)
-                                        .data(user?.userImage)
-                                        .placeholder(R.drawable.user_image)
-                                        .build(),
-                                    contentDescription = null,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier
-                                        .size(63.dp)
-                                        .padding(bottom = 5.dp, start = 8.dp)
+                                Text(
+                                    text = "arreglar",
+                                    color = Color.White,
+                                    fontSize = 24.sp,
+                                    fontWeight = FontWeight.Bold
                                 )
                             }
+                            Spacer(
+                                modifier = Modifier
+                                    .width(2.dp)
+                                    .height(65.dp)
+                                    .padding(bottom = 5.dp)
+                                    .background(Color.Black)
+                            )
+                            AsyncImage(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(user?.userImage)
+                                    .placeholder(R.drawable.user_image)
+                                    .build(),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(63.dp)
+                                    .padding(bottom = 5.dp, start = 8.dp)
+                            )
+
                             var userName = "Usuario"
                             if (user?.userName != null) {
                                 userName = user.userName
                             }
-                            Text(
-                                text = userName,
-                                style = if (userName.count() > 12) {
-                                    MaterialTheme.typography.titleSmall
-                                } else {
-                                    MaterialTheme.typography.titleMedium
-                                },
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color.Black,
+                            Column(
                                 modifier = Modifier
-                                    .padding(bottom = 5.dp)
                                     .padding(start = 10.dp)
-                            )
-                            Spacer(modifier = Modifier.padding(4.dp))
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .width(75.dp)
+                                    .width(130.dp)
                             ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.oxygen_icon),
-                                    contentDescription = null,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier.size(30.dp)
-                                )
                                 Text(
-                                    text = user?.oxygen.toString(),
-                                    style = MaterialTheme.typography.titleMedium,
+                                    text = userName,
+                                    style = if (userName.count() > 12) {
+                                        MaterialTheme.typography.titleSmall
+                                    } else {
+                                        MaterialTheme.typography.titleMedium
+                                    },
                                     fontWeight = FontWeight.SemiBold,
                                     color = Color.Black,
-                                    modifier = Modifier.padding(start = 4.dp)
+                                    modifier = Modifier
+                                        .padding(bottom = 2.dp)
                                 )
+                                Text(
+                                    text = user?.email ?: "",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                                    color = Color.Black,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(bottom = 20.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.padding(end = 8.dp))
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(end = 8.dp)
+                                    .width(75.dp)
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.oxygen_icon),
+                                        contentDescription = null,
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier.size(30.dp)
+                                    )
+                                    Text(
+                                        text = user?.oxygen.toString(),
+                                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = Color.Black,
+                                        modifier = Modifier.padding(top = 4.dp)
+                                    )
+                                }
                             }
                         }
                     }
@@ -260,7 +287,7 @@ private fun ProfileScreenPreview() {
                     levelsCompleted = emptyList(),
                     id = "id",
                     treesCount = 0,
-                    userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f",
+                    userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                     weeklyOxygen = 0
                 ),
 //                onLeftArrowClick = {},
