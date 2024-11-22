@@ -1,5 +1,7 @@
 package com.gg.spora.core.graph
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -29,6 +31,7 @@ import com.gg.spora.ranking.ui.RankingViewModel
 import com.gg.spora.tutorials.ui.component.ChampyTalkingTutorial
 import com.gg.spora.user.domain.models.User
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
     navigation<NavigationRoutes.HomeGraph>(startDestination = NavigationRoutes.Home) {
@@ -120,22 +123,32 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val rankingItems by viewModel.rankingItems.collectAsState()
             val currentUser by viewModel.currentUser.collectAsState()
 
+
             Ranking(
                 onBackClick = { navController.popBackStack() },
                 userList = rankingItems,
                 currentUser = currentUser
             )
         }
+
+
+
         composable<NavigationRoutes.ProfileScreen> {
             val viewModel: ProfileViewModel = hiltViewModel()
             val currentIndex by viewModel.currentIndex.collectAsState()
-
+            val userPosition by viewModel.userPosition.collectAsState()
             val user by viewModel.user.collectAsState()
+
+            LaunchedEffect(Unit) {
+                user?.let { viewModel.fetchUserData(it) }
+            }
 
             ProfileScreen(
                 onBackClick = { navController.popBackStack() },
                 onSettingsClick = { navController.navigate(NavigationRoutes.SettingGraph) },
                 user = user,
+                userPosition = userPosition,
+
 //                onLeftArrowClick = { viewModel.onLeftArrowClick() },
 //                onRightArrowClick = { viewModel.onRightArrowClick() },
 //                currentIndex = currentIndex

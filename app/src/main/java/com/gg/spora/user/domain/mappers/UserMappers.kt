@@ -15,8 +15,9 @@ fun UserNetwork.toUser() = User(
     oxygen = oxygen ?: 0,
     levelsCompleted = levelsCompleted?.map { it.toLevelCompleted() } ?: emptyList(),
     treesCount = treesCount ?: 0,
-    userImage = userImage ?: R.drawable.spora_face_splash,
-    tutorialsCompleted = tutorialsCompleted?.map { it.toTutorialCompleted() } ?: emptyList()
+    tutorialsCompleted = tutorialsCompleted?.map { it.toTutorialCompleted() } ?: emptyList(),
+    userImage = userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
+    weeklyOxygen = weeklyOxygen ?: 0
 )
 
 fun User.toUserEntity() = UserEntity(
@@ -25,7 +26,8 @@ fun User.toUserEntity() = UserEntity(
     email = email,
     oxygen = oxygen,
     treesCount = treesCount,
-    userImage = userImage
+    userImage = userImage,
+    weeklyOxygen = weeklyOxygen
 )
 
 fun UserWithLevelsCompletedEntity.toUser(tutorialsCompleted: List<TutorialCompleted>) = User(
@@ -36,5 +38,6 @@ fun UserWithLevelsCompletedEntity.toUser(tutorialsCompleted: List<TutorialComple
     levelsCompleted = levelsCompleted.map { it.toLevelCompleted() },
     treesCount = user.treesCount,
     userImage = user.userImage,
-    tutorialsCompleted = tutorialsCompleted
+    tutorialsCompleted = tutorialsCompleted,
+    weeklyOxygen = user.weeklyOxygen
 )

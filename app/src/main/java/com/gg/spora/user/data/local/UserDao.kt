@@ -43,6 +43,12 @@ interface UserDao {
     @Update
     suspend fun updateUser(user: UserEntity)
 
+    @Query("update user_entity set userName = :userName")
+    suspend fun updateUserName(userName: String)
+
+    @Query("update user_entity set userImage = :userImage")
+    suspend fun updateUserImage(userImage: String)
+
     @Query("update user_entity set id = :userId")
     suspend fun updateUserId(userId: String)
 

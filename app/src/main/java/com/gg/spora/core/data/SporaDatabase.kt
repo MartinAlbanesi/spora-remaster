@@ -30,7 +30,7 @@ import com.gg.spora.user.data.local.entities.UserEntity
         TutorialCompletedEntity::class,
         MissionEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 abstract class SporaDatabase : RoomDatabase() {

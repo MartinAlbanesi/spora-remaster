@@ -165,7 +165,7 @@ fun AboutUs(
                         imageRes = R.drawable.user_image,
                         name = "Elías Rueda Arévalo",
                         email = "eliasruedac@gmail.com",
-                        linkedinUrl = "https://www.linkedin.com/in/gaston-toledo",
+                        linkedinUrl = "https://www.linkedin.com/in/elías-rueda-arévalo-8353b2211/",
                         githubUrl = "https://github.com/eliaasgabriel"
                     )
                     Divider(color = Color.Black, thickness = 1.dp)

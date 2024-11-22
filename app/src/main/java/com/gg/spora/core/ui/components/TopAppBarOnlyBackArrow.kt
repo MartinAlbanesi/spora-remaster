@@ -23,10 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gg.spora.R
 
 @Preview
 @Composable
@@ -36,8 +38,13 @@ fun PreviewTopAppBarOnlyBackArrow() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier,title:String, onBackClick: () -> Unit = {}) {
-
+fun TopAppBarOnlyBackArrow(
+    modifier: Modifier = Modifier,
+    title: String,
+    onBackClick: () -> Unit = {},
+    showSettingsIcon: Boolean = false,
+    onSettingsClick: () -> Unit = {}
+) {
     Box(
         modifier = modifier
             .background(
@@ -55,9 +62,10 @@ fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier,title:String, onBackCli
             title = {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
+                    Spacer(modifier = Modifier.weight(1f))
                     Text(
                         text = title,
                         fontSize = 32.sp,
@@ -65,22 +73,36 @@ fun TopAppBarOnlyBackArrow(modifier: Modifier = Modifier,title:String, onBackCli
                         fontStyle = MaterialTheme.typography.titleLarge.fontStyle,
                         fontWeight = FontWeight.Bold
                     )
-
-                    Spacer(Modifier.width(40.dp))
+                    Spacer(modifier = Modifier.weight(1f))
                 }
             },
             navigationIcon = {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Go back",
-                        tint = MaterialTheme.colorScheme.background,
-                        modifier = Modifier.size(100.dp)
-                    )
+                Box(modifier = Modifier.size(48.dp)) {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Go back",
+                            tint = MaterialTheme.colorScheme.background,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+            },
+            actions = {
+                Box(modifier = Modifier.size(48.dp)) {
+                    if (showSettingsIcon) {
+                        IconButton(onClick = onSettingsClick) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.settings_icon),
+                                contentDescription = "Settings",
+                                tint = Color.White,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
                 }
             },
             modifier = modifier,
-
-            )
+        )
     }
 }

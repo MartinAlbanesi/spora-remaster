@@ -104,4 +104,10 @@ object NavigationRoutes {
 
     @Serializable
     object EditProfileScreen
+
+    @Serializable
+    object SupportScreen
+
+    @Serializable
+    object NotificationScreen
 }
