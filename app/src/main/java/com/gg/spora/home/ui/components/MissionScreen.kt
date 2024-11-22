@@ -64,7 +64,7 @@ fun MissionScreen(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "Missiones Diarias",
+                    text = "Misiones Diarias",
                     color = Color.White,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,

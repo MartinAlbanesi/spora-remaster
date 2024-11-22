@@ -34,7 +34,7 @@ class GetRandomQuestionFromTypeUseCaseTest {
         val typeGame = TypeGame.RELATIONS
 
         // When
-        every { quizLocalRepository.getRandomQuestions(count, typeQuestion, typeGame) } returns FakeQuizModels.fakeQuestionRelations.shuffled()
+        every { quizLocalRepository.getRandomQuestions(count, typeQuestion, typeGame) } returns FakeQuizModels.newFakeQuizQuestions.shuffled()
 
         // Then
         val actual = getRandomQuestionFromTypeUseCase(count, typeQuestion, typeGame)
@@ -52,8 +52,8 @@ class GetRandomQuestionFromTypeUseCaseTest {
         val typeGame = TypeGame.QUIZ
 
         // When
-        every { quizLocalRepository.getRandomAnswers(count, typeQuestion, typeGame) } returns  FakeQuizModels.fakeLocalAnswers.map { it.toAnswer() }
-        every { quizLocalRepository.getRandomQuestions(count, typeQuestion, typeGame) } returns FakeQuizModels.fakeQuestionQuizTypeMartin.shuffled()
+        every { quizLocalRepository.getRandomAnswers(count, typeQuestion, typeGame) } returns  FakeQuizModels.newFakeAnswers
+        every { quizLocalRepository.getRandomQuestions(count, typeQuestion, typeGame) } returns FakeQuizModels.newFakeQuizQuestions.shuffled()
 
         // Then
         val actual = getRandomQuestionFromTypeUseCase(count, typeQuestion, typeGame)
