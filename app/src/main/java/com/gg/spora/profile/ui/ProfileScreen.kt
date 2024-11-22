@@ -289,7 +289,9 @@ private fun ProfileScreenPreview() {
                     treesCount = 0,
                     userImage = "titi",
                     weeklyOxygen = 0,
-                    tutorialsCompleted = emptyList()
+                    tutorialsCompleted = emptyList(),
+                    forestTrees = emptyList(),
+                    seedTrees = emptyList()
                 ),
                 userPosition = 0
 //                onLeftArrowClick = {},

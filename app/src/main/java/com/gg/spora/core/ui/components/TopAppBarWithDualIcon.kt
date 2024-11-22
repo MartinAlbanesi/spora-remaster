@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -24,8 +25,6 @@ import com.gg.spora.ui.theme.SporaTheme
 
 /**
  * Top bar with progress bar
- * @param firstLabel: Label for the first icon
- * @param firstIcon: Image for the first icon
  * @param secondLabel: Label for the second icon
  * @param secondIcon: Image for the second icon
  * @param showBackArrow: Boolean to show or not the back arrow
@@ -66,7 +65,7 @@ fun TopAppBarWithDualIcon(
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Go back"
+                            contentDescription = "Go back",
                         )
                     }
                 }
@@ -89,7 +88,8 @@ fun TopAppBarPreview() {
                 secondLabel = "0",
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = false,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                onBackClick = {}
             )
         }
     }

@@ -31,6 +31,8 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList(),
                 treesCount = 0,
+                seedTrees = emptyList(),
+                forestTrees = emptyList(),
                 userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                 weeklyOxygen = 0,
                 tutorialsCompleted = TutorialModels.tutorialsCompleted
@@ -52,6 +54,8 @@ class SetNewUserUseCase @Inject constructor(
                 oxygen = 0,
                 levelsCompleted = emptyList(),
                 treesCount = 0,
+                seedTrees = emptyList(),
+                forestTrees = emptyList(),
                 userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
                 weeklyOxygen = 0,
                 tutorialsCompleted = TutorialModels.tutorialsCompleted

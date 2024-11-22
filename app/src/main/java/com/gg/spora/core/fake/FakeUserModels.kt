@@ -60,7 +60,9 @@ object FakeUserModels {
             levelsCompleted = fakeLevelsCompleted,
             treesCount = 0,
             userImage = "R.drawable.spora_face_splash",
-            tutorialsCompleted = TutorialModels.tutorialsCompleted
+            tutorialsCompleted = TutorialModels.tutorialsCompleted,
+            forestTrees = emptyList(),
+            seedTrees = emptyList()
         ),
         User(
             id = "2",
@@ -70,7 +72,9 @@ object FakeUserModels {
             levelsCompleted = emptyList(),
             treesCount = 0,
             userImage = "R.drawable.spora_face_splash",
-            tutorialsCompleted = TutorialModels.tutorialsCompleted
+            tutorialsCompleted = TutorialModels.tutorialsCompleted,
+            forestTrees = emptyList(),
+            seedTrees = emptyList()
         ),
     )
 

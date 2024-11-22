@@ -1,5 +1,8 @@
 package com.gg.spora.user.data.network.models
 
+import com.gg.spora.grove.data.network.models.ForestTreeNetwork
+import com.gg.spora.grove.data.network.models.SeedTreeNetwork
+
 data class UserNetwork(
     val id: String? = null,
     val userName: String? = null,
@@ -9,5 +12,7 @@ data class UserNetwork(
     val treesCount: Int? = null,
     val userImage: String? = null,
     val weeklyOxygen: Int? = null,
-    val tutorialsCompleted: List<TutorialCompletedNetwork>? = null
+    val tutorialsCompleted: List<TutorialCompletedNetwork>? = null,
+    val forestTrees: List<ForestTreeNetwork> ?= null,
+    val seedTrees: List<SeedTreeNetwork>? = null
 )

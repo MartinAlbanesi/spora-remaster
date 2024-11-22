@@ -96,7 +96,7 @@ fun TopAppBarWithO2Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Go back",
                             tint = MaterialTheme.colorScheme.background,
-                            modifier = Modifier.size(100.dp)
+                            modifier = Modifier.size(64.dp)
                         )
                     }
                 }

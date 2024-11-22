@@ -18,6 +18,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.gg.spora.grove.ui.GroveScreen
+import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.R
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.Tutorials
@@ -67,7 +69,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     champyQuote = champyQuote,
                     missions = missions,
                     onNavigateToForestStage = {
-                        navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
+                        navController.navigate(NavigationRoutes.Stage("1"))
+                    },
+                    onNavigateToGrove = {
+                        navController.navigate(NavigationRoutes.Grove)
                     },
                     onNavigateToLibrary = {
                         homeViewModel.getTutorial(
@@ -114,8 +119,27 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 )
             }
         }
-        composable<NavigationRoutes.Grove> {
 
+        composable<NavigationRoutes.Grove> {
+            val groveViewModel : GroveViewModel = hiltViewModel()
+            val uiState by groveViewModel.uiState.collectAsState()
+            val isLoading by groveViewModel.isLoading.collectAsState()
+            val errorState by groveViewModel.errorState.collectAsState()
+
+            GroveScreen(
+                uiState = uiState,
+                isLoading = isLoading,
+                forestTreesColumnCount = 10,
+                errorState = errorState,
+                plantForestTree = { forestTree, seedTreeId ->
+                    groveViewModel.plantForestTree(forestTree, seedTreeId)
+                },
+                claimOxygen = { groveViewModel.claimOxygen() },
+                popBackStack = {
+                    //groveViewModel.saveTreeCooldowns()
+                    navController.popBackStack()
+                },
+            )
         }
         composable<NavigationRoutes.Ranking> {
 

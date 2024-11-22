@@ -199,4 +199,6 @@ dependencies {
     //implementation(libs.google.auth)
     implementation("com.google.android.gms:play-services-auth:20.6.0")
 
+    //Kotlin Coroutines
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
 }

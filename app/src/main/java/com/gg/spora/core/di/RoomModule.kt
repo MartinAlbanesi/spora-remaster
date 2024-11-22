@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.core.data.SporaDatabase
+import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.library.data.local.InfoCardDAO
 import com.gg.spora.missions.data.local.MissionDao
 import com.gg.spora.stage.data.local.StageDao
@@ -63,5 +64,11 @@ class RoomModule {
     @Provides
     fun provideMissionDao(database: SporaDatabase): MissionDao {
         return database.missionDao()
+    }
+
+    @Singleton
+    @Provides
+    fun privideGroveDao(sporaDatabase: SporaDatabase): GroveDao {
+        return sporaDatabase.groveDao()
     }
 }
