@@ -1,19 +1,19 @@
 package com.gg.spora.grove.data.database
 
-import com.gg.spora.grove.data.local.GroveRepository
-import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.CooldownDataEntity
 import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
 import com.gg.spora.grove.data.database.entities.toCooldownData
+import com.gg.spora.grove.data.local.GroveRepository
+import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.domain.mappers.toForestTreeEntity
+import com.gg.spora.grove.domain.mappers.toSeedTreeEntity
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.domain.models.toCooldownDataEntity
-import com.gg.spora.grove.domain.models.toForestTreeEntity
-import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -24,6 +24,8 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 class GroveRepositoryTest{
 
@@ -167,6 +169,6 @@ class GroveRepositoryTest{
         val result = groveRepository.getCooldownData(treeId).first()
 
         // Then
-        Assert.assertEquals(CooldownData(treeId), result)
+        Assert.assertEquals(CooldownData(treeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)), result)
     }
 }
