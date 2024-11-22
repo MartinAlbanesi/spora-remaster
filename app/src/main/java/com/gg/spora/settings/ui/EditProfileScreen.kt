@@ -37,7 +37,7 @@ fun EditProfileScreen(
     onBackClick: () -> Unit
 ) {
     var username by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
+//    var email by remember { mutableStateOf("") }
     var showSnackbar by remember { mutableStateOf(false) }
 
     Box(

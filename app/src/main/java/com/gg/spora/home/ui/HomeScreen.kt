@@ -45,6 +45,7 @@ import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.ui.theme.SporaTheme
 
+@Suppress("LongMethod")
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -54,7 +55,6 @@ fun HomeScreen(
     missions: List<Mission>,
     onNavigateToForestStage: () -> Unit,
     onNavigateToRanking: () -> Unit,
-    onNavigateToExpoStage: () -> Unit,
     onNavigateToLibrary: () -> Unit,
     onNavigateToProfile: () -> Unit,
     onNavigateToGrove: () -> Unit,
@@ -257,7 +257,6 @@ private fun MiniGameScreenPreview() {
                 missions = MissionModels.fakeMissions,
                 champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
                 onNavigateToForestStage = {},
-                onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
                 onNavigateToProfile = {},

@@ -58,7 +58,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
         composable<NavigationRoutes.RegisteredLogin> {
 
             RegisteredLoginScreen(
-                onBackClick = { navController.popBackStack() },
+//                onBackClick = { navController.popBackStack() },
 //                onGoogleLoginClick = { },
 //                onLoginClick = { },
 //                onRegisterClick = { },

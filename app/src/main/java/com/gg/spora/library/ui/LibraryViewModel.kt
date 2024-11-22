@@ -39,8 +39,8 @@ class LibraryViewModel @Inject constructor(
     private val insertInfoCardUseCase: InsertNewInfoCardUseCase,
     private val updateInfoCardUseCase: UpdateInfoCardUseCase,
     private val getInfoCardListByCategoryUseCase: GetInfoCardListByCategoryUseCase,
-    private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
-    private val infoCardFakeRepository: FakeRepositoryInfoCard,
+//    private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
+//    private val infoCardFakeRepository: FakeRepositoryInfoCard,
     private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
     val tutorialSelected: TutorialSelected
 ) : ViewModel() {

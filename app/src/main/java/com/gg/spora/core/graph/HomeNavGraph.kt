@@ -66,9 +66,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },
-                    onNavigateToExpoStage = {
-                        navController.navigate(NavigationRoutes.Stage(StageType.EXPO.name))
-                    },
                     onNavigateToLibrary = {
                         homeViewModel.getTutorial(
                             Tutorials.LIBRARY_ICON_TUTORIAL,

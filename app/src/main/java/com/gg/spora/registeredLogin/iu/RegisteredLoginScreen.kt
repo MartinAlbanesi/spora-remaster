@@ -51,7 +51,7 @@ import com.gg.spora.registeredLogin.component.SignUpText
 
 @Composable
 fun RegisteredLoginScreen(
-    onBackClick: () -> Unit,
+//    onBackClick: () -> Unit,
 //    onLoginClick: () -> Unit,
 //    onGoogleLoginClick: () -> Unit,
 //    onRegisterClick: () -> Unit,

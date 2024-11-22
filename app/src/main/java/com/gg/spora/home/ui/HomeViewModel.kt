@@ -26,7 +26,7 @@ import kotlin.random.Random
 @HiltViewModel
 class HomeViewModel @Inject constructor(
 //    private val getUserNetworkUseCase: GetUserNetworkUseCase
-    private val getUserOxygenUseCase: GetUserOxygenUseCase,
+//    private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase,
     private val getUserAuthUseCase: GetUserAuthUseCase,
     val tutorialSelected: TutorialSelected,

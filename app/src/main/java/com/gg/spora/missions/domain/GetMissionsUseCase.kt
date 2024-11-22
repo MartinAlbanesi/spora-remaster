@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetMissionsUseCase @Inject constructor(
-    private val IMissionRepositoryLocal: IMissionRepositoryLocal
+    private val missionRepositoryLocal: IMissionRepositoryLocal
 ) {
     operator fun invoke(): Flow<List<Mission>> {
-        return IMissionRepositoryLocal.getMissions()
+        return missionRepositoryLocal.getMissions()
     }
 }

@@ -5,6 +5,7 @@ import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.library.data.local.entity.InfoCardEntity
 import javax.inject.Inject
 
+@Suppress("MaxLineLength")
 class FakeRepositoryInfoCard @Inject constructor() {
 
     private val fakeInfoCardEntityModels = listOf<InfoCardEntity>(
