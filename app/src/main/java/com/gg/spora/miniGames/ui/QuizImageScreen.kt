@@ -61,7 +61,7 @@ fun QuizImageScreen(
 
     var isAnswerSelected by remember { mutableStateOf(false) }
 
-    var showImageFullScreen by remember { mutableStateOf(false) }
+    var showImageFullScreen by remember { mutableStateOf(true) }
 
     var selectedAnswerId by remember { mutableStateOf("") }
 
@@ -74,7 +74,8 @@ fun QuizImageScreen(
             onDismissRequest = { showImageFullScreen = false },
             properties = DialogProperties(
                 dismissOnBackPress = true,
-                dismissOnClickOutside = true
+                dismissOnClickOutside = true,
+                usePlatformDefaultWidth = false
             ),
             content = {
                 Image(
@@ -83,7 +84,9 @@ fun QuizImageScreen(
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
-                        .heightIn(0.dp, 250.dp)
+//                        .heightIn(0.dp, 250.dp)
+                        .fillMaxWidth(0.9f)
+                        .fillMaxHeight(0.6f)
                         .clip(MaterialTheme.shapes.large)
                         .clickable {
                             showImageFullScreen = false
@@ -188,7 +191,7 @@ fun QuizImageScreen(
     }
 
 }
-/*
+
 @Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 @Composable
@@ -216,8 +219,9 @@ private fun QuizImageScreenPreview() {
                 content = {
                     QuizImageScreen(
                         modifier = Modifier,
+                        questionTitle = "Titi",
                         answerOptions = FakeQuizModels.newFakeAnswers.take(4).shuffled(),
-                        currentImageResIdState = FakeQuizModels.newFakeQuizQuestions.first { it.image != null }.image!!,
+                        currentImageResIdState = null,
                         onAnswerSelected = {},
                         onConfirmAnswer = {}
                     )
@@ -225,4 +229,4 @@ private fun QuizImageScreenPreview() {
             )
         }
     }
-}*/
+}
