@@ -4,15 +4,15 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.toCooldownData
-import com.gg.spora.grove.data.database.entities.toForestTree
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.domain.mappers.toForestTree
+import com.gg.spora.grove.domain.mappers.toForestTreeEntity
+import com.gg.spora.grove.domain.mappers.toSeedTreeEntity
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.toCooldownDataEntity
-import com.gg.spora.grove.domain.models.toForestTreeEntity
-import com.gg.spora.grove.domain.models.toSeedTreeEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -34,6 +34,12 @@ class GroveRepository @Inject constructor(
     override suspend fun insertSeedTreesList(seedTrees: List<SeedTree>) {
         val seedTreeEntities = seedTrees.map { it.toSeedTreeEntity() }
         groveDao.insertSeedTreesList(seedTreeEntities)
+    }
+
+    // Inserts a seed tree into the database
+    override suspend fun insertSeedTree(seedTree: SeedTree) {
+        val seedTreeEntity = seedTree.toSeedTreeEntity()
+        groveDao.insertSeedTree(seedTreeEntity)
     }
 
     // Gets all seed trees from the database

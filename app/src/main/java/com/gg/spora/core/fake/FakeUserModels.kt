@@ -57,7 +57,9 @@ object FakeUserModels {
             oxygen = 100,
             levelsCompleted = fakeLevelsCompleted,
             treesCount = 0,
-            userImage = R.drawable.spora_face_splash
+            userImage = R.drawable.spora_face_splash,
+            forestTrees = emptyList(),
+            seedTrees = emptyList()
         ),
         User(
             id = "2",
@@ -66,7 +68,9 @@ object FakeUserModels {
             oxygen = 0,
             levelsCompleted = emptyList(),
             treesCount = 0,
-            userImage = R.drawable.spora_face_splash
+            userImage = R.drawable.spora_face_splash,
+            forestTrees = emptyList(),
+            seedTrees = emptyList()
         ),
     )
 

@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 
 data class ForestTreeNetwork (
     val id: String,
-    val type: TreeType,
+    val treeType: String,
     var currentStage: GrowthStage,
     val plantingDate: LocalDateTime,
     var position: Int = 0,

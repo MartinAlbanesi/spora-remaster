@@ -145,7 +145,6 @@ class GroveViewModel @Inject constructor(
                                         LocalDateTime.now()
                                     ).seconds * 1000L
 
-                                    Log.i("viewModelScope", "seedTreeColdown 1 : $seedTreeCooldown")
                                 }
                                 if (currentCooldowns[seedTree.id] != null) {
                                     seedTreeCooldown = currentCooldowns[seedTree.id]!!
@@ -159,7 +158,6 @@ class GroveViewModel @Inject constructor(
                                     seedTreeCooldown = 0L
                                 }
 
-                                Log.i("viewModelScope", "seedTreeColdown 2: $seedTreeCooldown")
                                 seedTree.id to (seedTreeCooldown)
                             }
                         }

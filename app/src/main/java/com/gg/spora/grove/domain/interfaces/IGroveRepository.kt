@@ -13,6 +13,7 @@ interface IGroveRepository {
     suspend fun getSeedTreesListFromDatabase(): Flow<List<SeedTree>>
     suspend fun getForestTreesListFromDatabase(): Flow<List<ForestTree?>>
     suspend fun insertSeedTreesList(seedTrees: List<SeedTree>)
+    suspend fun insertSeedTree(seedTree: SeedTree)
     suspend fun insertForestTree(forestTree: ForestTree)
     suspend fun updateForestTreeGrowthStage(forestTree: ForestTree)
     suspend fun insertCooldownData(cooldownData: CooldownData)

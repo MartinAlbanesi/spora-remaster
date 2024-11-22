@@ -19,17 +19,7 @@ import java.util.UUID
 data class SeedTree(
     override val id: String = UUID.randomUUID().toString(),
     override val type: TreeType,
-    val timeToGenerateForestTree: Long = 5000L,
+    val timeToGenerateForestTree: Long = 10000L,
     val expectedTimeToGenerateForestTree: Long = ( LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + timeToGenerateForestTree),
     var amountOfForestTreesGenerated: Int = 0,
 ) : Tree(id, type)
-
-// Extension function mapper to convert SeedTree to SeedTreeEntity
-fun SeedTree.toSeedTreeEntity(): SeedTreeEntity {
-    return SeedTreeEntity(
-        idSeedTree = id,
-        treeType = type.name,
-        timeToGenerateForestTree = timeToGenerateForestTree,
-        amountOfForestTreesGenerated = amountOfForestTreesGenerated,
-    )
-}

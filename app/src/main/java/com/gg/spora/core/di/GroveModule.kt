@@ -8,6 +8,7 @@ import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
 import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
+import com.gg.spora.grove.domain.InsertSeedTreeUseCase
 import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
@@ -48,13 +49,13 @@ class GroveModule {
     fun provideLoadForestTreesUseCase(groveRepository: IGroveRepository): LoadForestTreesUseCase {
         return LoadForestTreesUseCase(groveRepository)
     }
-
+    /*
     @Provides
     @Singleton
     fun provideInsertForestTreeUseCase(groveRepository: IGroveRepository): InsertForestTreeUseCase {
-        return InsertForestTreeUseCase(groveRepository)
+        return InsertForestTreeUseCase(groveRepository, getUserAuthUseCase, )
     }
-
+*/
     @Provides
     @Singleton
     fun provideUpdateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
