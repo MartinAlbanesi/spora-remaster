@@ -39,12 +39,8 @@ fun SupportScreen(
     onBackClick: () -> Unit,
     onSendClick: (String, String) -> Unit
 ) {
-
     var description by remember { mutableStateOf("") }
     var selectedSubject by remember { mutableStateOf("") }
-
-
-
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -109,15 +105,15 @@ fun SupportScreen(
                             .verticalScroll(rememberScrollState())
                             .padding(16.dp)
                     ) {
-                        ClickableRow("Cuenta y perfil") { selectedSubject = "Cuenta y perfil" }
+                        ClickableRow("Cuenta y perfil", selectedSubject) { selectedSubject = "Cuenta y perfil" }
                         HorizontalDivider(thickness = 1.dp, color = Color.Black)
-                        ClickableRow("Errores y problemas técnicos") { selectedSubject = "Errores y problemas técnicos" }
+                        ClickableRow("Errores y problemas técnicos", selectedSubject) { selectedSubject = "Errores y problemas técnicos" }
                         HorizontalDivider(thickness = 1.dp, color = Color.Black)
-                        ClickableRow("Accesibilidad") { selectedSubject = "Accesibilidad" }
+                        ClickableRow("Accesibilidad", selectedSubject) { selectedSubject = "Accesibilidad" }
                         HorizontalDivider(thickness = 1.dp, color = Color.Black)
-                        ClickableRow("Sugerencias") { selectedSubject = "Sugerencias" }
+                        ClickableRow("Sugerencias", selectedSubject) { selectedSubject = "Sugerencias" }
                         HorizontalDivider(thickness = 1.dp, color = Color.Black)
-                        ClickableRow("Otro") { selectedSubject = "Otro" }
+                        ClickableRow("Otro", selectedSubject) { selectedSubject = "Otro" }
                     }
                 }
             }
@@ -165,11 +161,13 @@ fun SupportScreen(
 }
 
 @Composable
-fun ClickableRow(text: String, onClick: () -> Unit) {
+fun ClickableRow(text: String, selectedSubject: String, onClick: () -> Unit) {
+    val backgroundColor = if (text == selectedSubject) Color(0xFFFFA500) else Color.Transparent
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
+            .background(backgroundColor)
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {

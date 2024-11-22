@@ -252,7 +252,7 @@ fun Ranking(
                                     modifier = Modifier.size(30.dp)
                                 )
                                 Text(
-                                    text = item.weeklyOxygen.toString(),
+                                    text = item.oxygen.toString(),
                                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
                                     fontWeight = FontWeight.SemiBold,
                                     color = Color.Black,
