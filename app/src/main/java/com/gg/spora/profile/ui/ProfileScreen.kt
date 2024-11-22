@@ -288,8 +288,9 @@ private fun ProfileScreenPreview() {
                     levelsCompleted = emptyList(),
                     id = "id",
                     treesCount = 0,
-                    userImage = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
-                    weeklyOxygen = 0
+                    userImage = "titi",
+                    weeklyOxygen = 0,
+                    tutorialsCompleted = emptyList()
                 ),
                 userPosition = 0
 //                onLeftArrowClick = {},

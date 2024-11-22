@@ -34,7 +34,7 @@ class EditProfileViewModel @Inject constructor(
     var newUsername by mutableStateOf("")
 
 
-    private val _userImages = MutableStateFlow<List<String>>(listOf(
+    private val _userImages = MutableStateFlow(listOf(
         "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
         "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_defeated.png?alt=media&token=f4677f5b-c6bc-4611-b180-b584b3035512",
         "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_doubt.png?alt=media&token=e521f647-451e-4b52-ad12-dcff289a9d1a",
@@ -73,14 +73,31 @@ class EditProfileViewModel @Inject constructor(
 
     fun updateUserProfile(imageRes: String, username: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _currentUser.value?.let { user ->
-                user.userImage = imageRes
-                user.userName = username
-                selectedImage = imageRes
-                updateUserImageInFirebase(user.id, imageRes, username)
-                updateUserNameUseCase(username)
-                updateUserImageUseCase(imageRes)
-            }
+
+            val user = User(
+                id = _currentUser.value?.id ?: "",
+                userName = username,
+                email = _currentUser.value?.email ?: "",
+                oxygen = _currentUser.value?.oxygen ?: 0,
+                treesCount = _currentUser.value?.treesCount ?: 0,
+                userImage = imageRes,
+                levelsCompleted = _currentUser.value?.levelsCompleted ?: emptyList(),
+                tutorialsCompleted = _currentUser.value?.tutorialsCompleted ?: emptyList(),
+                weeklyOxygen = _currentUser.value?.weeklyOxygen ?: 0
+            )
+
+            updateUserImageInFirebase(user.id, imageRes, username)
+            updateUserNameUseCase(username)
+            updateUserImageUseCase(imageRes)
+
+//            _currentUser.value?.let { user ->
+//                user.userImage = imageRes
+//                user.userName = username
+//                selectedImage = imageRes
+//                updateUserImageInFirebase(user.id, imageRes, username)
+//                updateUserNameUseCase(username)
+//                updateUserImageUseCase(imageRes)
+//            }
 
         }
 

@@ -8,8 +8,8 @@ data class User(
     val email: String,
     val oxygen: Int,
     val treesCount: Int,
-    val userImage: Int,
+    val userImage: String,
     val levelsCompleted : List<LevelCompleted>,
     val tutorialsCompleted : List<TutorialCompleted>,
-    val weeklyOxygen: Int
+    val weeklyOxygen: Int = 0
 )

@@ -57,17 +57,17 @@ fun Ranking(
     onBackClick: () -> Unit,
     viewModel: RankingViewModel = hiltViewModel()
 ) {
-    val timeUntilReset by viewModel.timeUntilReset.collectAsState()
+//    val timeUntilReset by viewModel.timeUntilReset.collectAsState()
     var imageRanking = R.drawable.ranking_sign
 
-    var remainingTime by remember { mutableStateOf(timeUntilReset) }
+//    var remainingTime by remember { mutableStateOf(timeUntilReset) }
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            remainingTime = viewModel.calculateTimeUntilNextMonday()
-            delay(1000L)
-        }
-    }
+//    LaunchedEffect(Unit) {
+//        while (true) {
+//            remainingTime = viewModel.calculateTimeUntilNextMonday()
+//            delay(1000L)
+//        }
+//    }
 
     Image(
         painter = painterResource(id = R.drawable.ranking_background),
@@ -101,7 +101,7 @@ fun Ranking(
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Text(
-                text = "Tiempo hasta el reinicio: ${remainingTime.toHours()}h ${remainingTime.toMinutesPart()}m ${remainingTime.toSecondsPart()}s",
+                text = "Titi",//"Tiempo hasta el reinicio: ${remainingTime.toHours()}h ${remainingTime.toMinutesPart()}m ${remainingTime.toSecondsPart()}s",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White,
                 modifier = Modifier
