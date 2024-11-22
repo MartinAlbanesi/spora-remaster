@@ -54,3 +54,7 @@ fun ForestTreeEntity.toForestTree(): ForestTree {
         timesOxygenClaimed = timesOxygenClaimed
     )
 }
+
+fun List<ForestTreeEntity>.toForestList() : List<ForestTree>{
+    return map { it.toForestTree() }
+}

@@ -6,6 +6,7 @@ import com.gg.spora.grove.data.database.dao.GroveDao
 import com.gg.spora.grove.data.database.entities.toCooldownData
 import com.gg.spora.grove.data.database.entities.toSeedTree
 import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.domain.mappers.toForestList
 import com.gg.spora.grove.domain.mappers.toForestTree
 import com.gg.spora.grove.domain.mappers.toForestTreeEntity
 import com.gg.spora.grove.domain.mappers.toSeedTreeEntity
@@ -62,7 +63,7 @@ class GroveRepository @Inject constructor(
         groveDao.insertForestTree(forestTreeEntity)
     }
 
-    // Gets all forest trees from the database
+    // Gets all forest trees from the database and list empty
     override suspend fun getForestTreesListFromDatabase(): Flow<List<ForestTree?>> {
         return groveDao.getForestTreesList().map { forestTreeEntities ->
             val forestTrees = MutableList<ForestTree?>(50) { null } // Creates a list of 50 null elements
@@ -71,6 +72,11 @@ class GroveRepository @Inject constructor(
             }
             forestTrees // Returns the list of forest trees with forest trees and null elements
         }
+    }
+
+    // Gets all forest trees from the database
+    override suspend fun getForestTreesExistsFromDatabase(): Flow<List<ForestTree>> {
+        return groveDao.getForestTreesList().map { it.toForestList() }
     }
 
     // Deletes a forest tree by id

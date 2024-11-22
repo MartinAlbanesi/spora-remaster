@@ -13,28 +13,24 @@ import javax.inject.Inject
 /**
  * Use case for inserting a forest tree.
  */
-class InsertForestTreeUseCase @Inject constructor(private val groveRepository: IGroveRepository,
-                                                  private val userRepositoryLocal: IUserRepositoryLocal,
-                                                  private val userRepositoryNetwork: IUserRepositoryNetwork,
-                                                  private val getUserAuthUseCase: GetUserAuthUseCase,
-                                                  private val loadForestTreesUseCase : LoadForestTreesUseCase
+class InsertForestTreeUseCase @Inject constructor(
+    private val groveRepository: IGroveRepository,
+    private val userRepositoryLocal: IUserRepositoryLocal,
+    private val userRepositoryNetwork: IUserRepositoryNetwork,
+    private val getUserAuthUseCase: GetUserAuthUseCase,
+    private val loadForestTreesExistsUseCase: LoadForestTreesExistsUseCase
 ) {
     suspend operator fun invoke(forestTree: ForestTree) {
 
-        if(getUserAuthUseCase() != null) {
+        if (getUserAuthUseCase() != null) {
 
             val userLocal = userRepositoryLocal.getUser().first()!!
-            var updateForestTrees = mutableListOf<ForestTree>()
+            val updateForestTrees = loadForestTreesExistsUseCase().first()
 
-            loadForestTreesUseCase().collect{ forestTrees ->
-
-                updateForestTrees = forestTrees as MutableList<ForestTree>
-            }
-
-            updateForestTrees.add(forestTree)
+            val newForestTrees = updateForestTrees + forestTree
 
             val userUpdated = userLocal.copy(
-                forestTrees = updateForestTrees
+                forestTrees = newForestTrees
             )
             userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
         }
