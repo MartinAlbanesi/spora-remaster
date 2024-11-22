@@ -410,7 +410,6 @@ fun Ranking(
                     Box(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
-                            .padding(end = 8.dp)
                             .width(75.dp)
                     ) {
                         Column(
