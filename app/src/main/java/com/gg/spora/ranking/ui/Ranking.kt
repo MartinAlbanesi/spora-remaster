@@ -398,7 +398,7 @@ fun Ranking(
                         Text(
                             text = currentUser?.email ?: "",
                             style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                            color = Color.Gray,
+                            color = Color.Black,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier
@@ -410,7 +410,6 @@ fun Ranking(
                     Box(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
-                            .padding(end = 8.dp)
                             .width(75.dp)
                     ) {
                         Column(
