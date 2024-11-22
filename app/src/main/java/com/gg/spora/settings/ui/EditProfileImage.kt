@@ -34,7 +34,7 @@ fun ImagePopup(onDismiss: () -> Unit,) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(450.dp)
+                    .height(400.dp)
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState())
             ) {
