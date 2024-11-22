@@ -188,7 +188,7 @@ private fun RelationsScreenPreview() {
                             .fillMaxSize()
                             .padding(vertical = 0.dp),
                         objectName = "Botella de plástico",
-                        answers = FakeQuizModels.fakeAnswers.filter { it.id.toInt() > 100 }.take(6)
+                        answers = FakeQuizModels.newFakeAnswers.filter { it.id.toInt() > 100 }.take(6)
                             .shuffled(),
                         selectedItems = listOf("55", "56", "57"),
                         isCorrect = isCorrect,

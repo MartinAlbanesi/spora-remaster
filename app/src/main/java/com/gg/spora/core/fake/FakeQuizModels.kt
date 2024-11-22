@@ -2050,7 +2050,259 @@ object FakeQuizModels {
         ),
         Answer(
             "200", "Tormenta de nieve", false, listOf(TypeQuestion.RECYCLE), TypeGame.QUIZ_IMAGE,
-        )
+        ),
+        Answer(
+            "201", "Energía solar", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "202", "Energía eólica", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "203", "Hidroeléctrica", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "204", "Carbón", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "205", "Gas natural", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "206", "Petróleo", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "207", "Smog", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "208", "Derrames de petróleo", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "209", "Residuos plásticos", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "210", "Energía eólica", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "211", "Reforestación", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "212", "Paneles solares", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "213", "Derretimiento de glaciares", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "214", "Subida del nivel del mar", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "215", "Sequías extremas", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "216", "Reciclaje", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "217", "Conservación de energía", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "218", "Jardines verticales", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "219", "Deforestación", true, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "220", "Especies en peligro", true, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "221", "Ecosistemas marinos", true, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "222", "Carreteras", false, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "223", "Minas de carbón", false, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "224", "Zonas urbanas", false, listOf(TypeQuestion.BIODIVERSITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "225", "Reutilización", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "226", "Reciclaje", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "227", "Reducción de residuos", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "228", "Producción masiva", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "229", "Desechos industriales", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "230", "Consumo desmedido", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "231", "Rotación de cultivos", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "232", "Uso de pesticidas", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "233", "Conservación del suelo", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "234", "Monocultivo", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "235", "Compostaje", true, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "236", "Deforestación", false, listOf(TypeQuestion.SUSTENTABILITY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "237", "Uso de energía limpia", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "238", "Reforestación", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "239", "Reciclaje", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "240", "Uso de carbón", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "241", "Desperdicio de alimentos", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "242", "Tala masiva", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "243", "Sol", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "244", "Viento", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "245", "Agua", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "246", "Gas natural", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "247", "Petróleo", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "248", "Carbón", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "249", "Emisiones de vehículos", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "250", "Fábricas", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "251", "Quema de basura", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "252", "Paneles solares", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "253", "Turbinas eólicas", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "254", "Cultivo orgánico", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "255", "Carbón", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "256", "Petróleo", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "257", "Gas natural", true, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "258", "Viento", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "259", "Sol", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "260", "Agua", false, listOf(TypeQuestion.ENERGY), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "261", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "262", "Vidrio", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "263", "Plástico", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "264", "Comida", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "265", "Hojas secas", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "266", "Piedras", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "267", "Derrames de petróleo", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "268", "Pesticidas", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "269", "Plásticos", true, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "270", "Peces", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "271", "Algas", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "272", "Rocas", false, listOf(TypeQuestion.CONTAMINATION), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "273", "CO2", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "274", "Metano", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "275", "Óxido nitroso", true, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "276", "Oxígeno", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "277", "Hidrógeno", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "278", "Nitrógeno", false, listOf(TypeQuestion.CLIMATE_CHANGE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "279", "Cáscaras de frutas", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "280", "Papel", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "281", "Madera", true, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "282", "Plástico", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "283", "Metal", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
+        Answer(
+            "284", "Vidrio", false, listOf(TypeQuestion.RECYCLE), TypeGame.RELATIONS,
+        ),
     )
 
 
@@ -2059,7 +2311,7 @@ object FakeQuizModels {
             id = "1",
             question = "¿Cuál de estos materiales es reciclable?",
             answers = newFakeAnswers.filter { fake -> fake.id != "1" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[0],
+            correctAnswer = newFakeAnswers[0].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2067,7 +2319,7 @@ object FakeQuizModels {
             id = "2",
             question = "¿Qué debemos hacer para reducir nuestra huella de carbono?",
             answers = newFakeAnswers.filter { fake -> fake.id != "7" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[6],
+            correctAnswer = newFakeAnswers[6].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2075,7 +2327,7 @@ object FakeQuizModels {
             id = "3",
             question = "¿Cuál de estos materiales es biodegradable?",
             answers = newFakeAnswers.filter { fake -> fake.id != "10" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[9],
+            correctAnswer = newFakeAnswers[9].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2083,7 +2335,7 @@ object FakeQuizModels {
             id = "4",
             question = "¿Qué gas atrapa el calor en la atmósfera y contribuye al cambio climático?",
             answers = newFakeAnswers.filter { fake -> fake.id != "14" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[13],
+            correctAnswer = newFakeAnswers[13].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2091,7 +2343,7 @@ object FakeQuizModels {
             id = "5",
             question = "¿Cuál es una buena práctica para ahorrar agua?",
             answers = newFakeAnswers.filter { fake -> fake.id != "16" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[15],
+            correctAnswer = newFakeAnswers[15].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2100,7 +2352,7 @@ object FakeQuizModels {
             id = "6",
             question = "¿Cuál de estos objetos no debería tirarse en el suelo?",
             answers = newFakeAnswers.filter { fake -> fake.id != "24" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[23],
+            correctAnswer = newFakeAnswers[23].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2109,7 +2361,7 @@ object FakeQuizModels {
             id = "7",
             question = "¿Qué animal se ve afectado por la contaminación del océano?",
             answers = newFakeAnswers.filter { fake -> fake.id != "27" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[26],
+            correctAnswer = newFakeAnswers[26].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2117,7 +2369,7 @@ object FakeQuizModels {
             id = "8",
             question = "¿Cuál es una fuente de energía renovable",
             answers = newFakeAnswers.filter { fake -> fake.id != "31" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[30],
+            correctAnswer = newFakeAnswers[30].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2126,7 +2378,7 @@ object FakeQuizModels {
             id = "9",
             question = "¿Qué podemos hacer con la ropa que ya no usamos?",
             answers = newFakeAnswers.filter { fake -> fake.id != "34" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[33],
+            correctAnswer = newFakeAnswers[33].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2135,7 +2387,7 @@ object FakeQuizModels {
             id = "10",
             question = "¿Qué podemos hacer para reducir el uso de plástico?",
             answers = newFakeAnswers.filter { fake -> fake.id != "37" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[36],
+            correctAnswer = newFakeAnswers[36].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2144,7 +2396,7 @@ object FakeQuizModels {
             id = "11",
             question = "¿Qué recurso natural ahorramos al apagar las luces cuando no son necesarias?",
             answers = newFakeAnswers.filter { fake -> fake.id != "41" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[40],
+            correctAnswer = newFakeAnswers[40].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2153,7 +2405,7 @@ object FakeQuizModels {
             id = "12",
             question = "¿Cuál es un beneficio de plantar árboles en las ciudades?",
             answers = newFakeAnswers.filter { fake -> fake.id != "46" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[45],
+            correctAnswer = newFakeAnswers[45].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2161,7 +2413,7 @@ object FakeQuizModels {
             id = "13",
             question = "¿Cuál de estos es un problema causado por el cambio climático?",
             answers = newFakeAnswers.filter { fake -> fake.id != "50" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[49],
+            correctAnswer = newFakeAnswers[49].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2169,7 +2421,7 @@ object FakeQuizModels {
             id = "14",
             question = "¿Qué tipo de energía no contamina el aire cuando se usa?",
             answers = newFakeAnswers.filter { fake -> fake.id != "53" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[52],
+            correctAnswer = newFakeAnswers[52].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2178,7 +2430,7 @@ object FakeQuizModels {
             id = "15",
             question = "¿Cuál de estos animales está en peligro debido a la deforestación de los bosques tropicales?",
             answers = newFakeAnswers.filter { fake -> fake.id != "57" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[56],
+            correctAnswer = newFakeAnswers[56].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2187,7 +2439,7 @@ object FakeQuizModels {
             id = "16",
             question = "¿Qué podemos hacer con una botella de plástico vacía en casa para ayudar al medio ambiente?",
             answers = newFakeAnswers.filter { fake -> fake.id != "61" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[60],
+            correctAnswer = newFakeAnswers[60].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2196,7 +2448,7 @@ object FakeQuizModels {
             id = "17",
             question = "¿Qué debemos hacer con una botella de vidrio usada en lugar de tirarla a la basura?",
             answers = newFakeAnswers.filter { fake -> fake.id != "65" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[64],
+            correctAnswer = newFakeAnswers[64].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2205,7 +2457,7 @@ object FakeQuizModels {
             id = "18",
             question = "¿Qué efecto tiene plantar más árboles en las ciudades?",
             answers = newFakeAnswers.filter { fake -> fake.id != "71" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[70],
+            correctAnswer = newFakeAnswers[70].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2214,7 +2466,7 @@ object FakeQuizModels {
             id = "19",
             question = "¿Qué tipo de envases es mejor para el medio ambiente al hacer compras?",
             answers = newFakeAnswers.filter { fake -> fake.id != "73" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[72],
+            correctAnswer = newFakeAnswers[72].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2223,7 +2475,7 @@ object FakeQuizModels {
             id = "20",
             question = "¿Cuál de estos productos tarda más en descomponerse si se deja en la naturaleza?",
             answers = newFakeAnswers.filter { fake -> fake.id != "75" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[74],
+            correctAnswer = newFakeAnswers[74].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2231,7 +2483,7 @@ object FakeQuizModels {
             id = "21",
             question = "¿Qué recurso natural podemos ayudar a conservar al reparar fugas de agua en casa rápidamente?",
             answers = newFakeAnswers.filter { fake -> fake.id != "83" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[82],
+            correctAnswer = newFakeAnswers[82].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2239,7 +2491,7 @@ object FakeQuizModels {
             id = "22",
             question = "¿Cuál es una de las principales fuentes de contaminación del aire?",
             answers = newFakeAnswers.filter { fake -> fake.id != "85" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[84],
+            correctAnswer = newFakeAnswers[84].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2247,7 +2499,7 @@ object FakeQuizModels {
             id = "23",
             question = "¿Qué acción ayuda a reducir la contaminación del agua?",
             answers = newFakeAnswers.filter { fake -> fake.id != "89" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[88],
+            correctAnswer = newFakeAnswers[88].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2255,7 +2507,7 @@ object FakeQuizModels {
             id = "24",
             question = "¿Qué debemos hacer con los residuos electrónicos, como celulares viejos?",
             answers = newFakeAnswers.filter { fake -> fake.id != "93" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[92],
+            correctAnswer = newFakeAnswers[92].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2263,7 +2515,7 @@ object FakeQuizModels {
             id = "25",
             question = "¿Cuál de estos productos causa mayor contaminación si se quema al aire libre?",
             answers = newFakeAnswers.filter { fake -> fake.id != "97" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[96],
+            correctAnswer = newFakeAnswers[96].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2271,7 +2523,7 @@ object FakeQuizModels {
             id = "26",
             question = "¿Cuál es una forma de energía que no emite gases contaminantes?",
             answers = newFakeAnswers.filter { fake -> fake.id != "101" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[100],
+            correctAnswer = newFakeAnswers[100].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2279,7 +2531,7 @@ object FakeQuizModels {
             id = "27",
             question = "¿Qué acción contribuye a reducir la contaminación del aire en las ciudades?",
             answers = newFakeAnswers.filter { fake -> fake.id != "105" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[104],
+            correctAnswer = newFakeAnswers[104].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2287,7 +2539,7 @@ object FakeQuizModels {
             id = "28",
             question = "¿Cuál es una forma de reducir la huella de carbono en los hogares?",
             answers = newFakeAnswers.filter { fake -> fake.id != "109" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[108],
+            correctAnswer = newFakeAnswers[108].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2295,7 +2547,7 @@ object FakeQuizModels {
             id = "29",
             question = "¿Qué efecto tienen los productos químicos en el ecosistema de un lago?",
             answers = newFakeAnswers.filter { fake -> fake.id != "114" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[113],
+            correctAnswer = newFakeAnswers[113].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2303,7 +2555,7 @@ object FakeQuizModels {
             id = "30",
             question = "¿Qué se logra al reducir el consumo de electricidad en los hogares?",
             answers = newFakeAnswers.filter { fake -> fake.id != "117" && fake.typeGame == TypeGame.QUIZ }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[116],
+            correctAnswer = newFakeAnswers[116].id,
             typeGame = TypeGame.QUIZ,
             typeQuestion = listOf(TypeQuestion.RECYCLE)
         ),
@@ -2311,7 +2563,7 @@ object FakeQuizModels {
             id = "111",
             question = "¿Qué está representado en esta imagen como ejemplo de cambio climático?",
             answers = newFakeAnswers.filter { fake -> fake.id != "123" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[122],
+            correctAnswer = newFakeAnswers[122].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F1_quiz_image.png?alt=media&token=2189b80d-2532-46ba-8720-f9a4fbf6d09d"
@@ -2320,7 +2572,7 @@ object FakeQuizModels {
             id = "112",
             question = "¿Cuál de estos es un ejemplo de energía renovable en la imagen?",
             answers = newFakeAnswers.filter { fake -> fake.id != "125" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[124],
+            correctAnswer = newFakeAnswers[124].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F2_quiz_image.png?alt=media&token=453fbd0e-cb79-4399-9dfa-eb10063e5d75"
@@ -2329,7 +2581,7 @@ object FakeQuizModels {
             id = "113",
             question = "¿Qué acción está representada en la imagen para reducir la huella de carbono?",
             answers = newFakeAnswers.filter { fake -> fake.id != "129" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[128],
+            correctAnswer = newFakeAnswers[128].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F3_quiz_image.png?alt=media&token=eddcba94-0c69-4972-aea9-fb932bb5ada9"
@@ -2338,7 +2590,7 @@ object FakeQuizModels {
             id = "114",
             question = "¿Qué está representado en esta imagen como ejemplo de reciclaje?",
             answers = newFakeAnswers.filter { fake -> fake.id != "133" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[132],
+            correctAnswer = newFakeAnswers[132].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F4_quiz_image.png?alt=media&token=8a0cd511-61b2-49be-8e60-0ed0e9fb07e5"
@@ -2347,7 +2599,7 @@ object FakeQuizModels {
             id = "115",
             question = "¿Qué está representado en esta imagen como ejemplo de energía renovable?",
             answers = newFakeAnswers.filter { fake -> fake.id != "137" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[136],
+            correctAnswer = newFakeAnswers[136].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F5_quiz_image.png?alt=media&token=4488cb59-d06b-4498-915c-81c05c8baada"
@@ -2356,7 +2608,7 @@ object FakeQuizModels {
             id = "116",
             question = "¿Qué práctica se ilustra en la imagen como una forma de ahorro de agua?",
             answers = newFakeAnswers.filter { fake -> fake.id != "143" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[142],
+            correctAnswer = newFakeAnswers[142].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F6_quiz_image.png?alt=media&token=236709ad-e6e7-48ed-b659-8ca39c22b86f"
@@ -2365,7 +2617,7 @@ object FakeQuizModels {
             id = "117",
             question = "¿Qué tipo de contaminación está ilustrado en esta imagen?",
             answers = newFakeAnswers.filter { fake -> fake.id != "148" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[147],
+            correctAnswer = newFakeAnswers[147].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F7_quiz_image.png?alt=media&token=8fdcb32e-866a-43fe-8e45-8a2948a509b7"
@@ -2374,7 +2626,7 @@ object FakeQuizModels {
             id = "118",
             question = "¿Qué ecosistema está representado en esta imagen y que es crucial para la biodiversidad?",
             answers = newFakeAnswers.filter { fake -> fake.id != "149" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[148],
+            correctAnswer = newFakeAnswers[148].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F8_quiz_image.png?alt=media&token=2b1e4980-dde7-4c7a-ab98-a1ec7b395ffc"
@@ -2383,7 +2635,7 @@ object FakeQuizModels {
             id = "119",
             question = "¿Qué animal en extinción vive en este ambiente?",
             answers = newFakeAnswers.filter { fake -> fake.id != "153" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[152],
+            correctAnswer = newFakeAnswers[152].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F9_quiz_image.png?alt=media&token=a4084616-01e7-488e-9391-fed7844cdd96"
@@ -2392,7 +2644,7 @@ object FakeQuizModels {
             id = "1110",
             question = "¿Qué acción representa esta imagen en la lucha contra la contaminación de los océanos?",
             answers = newFakeAnswers.filter { fake -> fake.id != "158" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[157],
+            correctAnswer = newFakeAnswers[157].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F10_quiz_image.png?alt=media&token=652021df-ae3c-4d4c-a551-7d8fc0aa7567"
@@ -2401,7 +2653,7 @@ object FakeQuizModels {
             id = "1111",
             question = "¿Qué método agrícola está representado en la imagen para reducir el impacto ambiental?",
             answers = newFakeAnswers.filter { fake -> fake.id != "162" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[161],
+            correctAnswer = newFakeAnswers[161].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F11_quiz_image.png?alt=media&token=e23d9e0e-bdb3-4709-8718-29b5073c82c1"
@@ -2410,7 +2662,7 @@ object FakeQuizModels {
             id = "1112",
             question = "¿Qué fenómeno ambiental está ilustrado en esta imagen como un impacto del cambio climático?",
             answers = newFakeAnswers.filter { fake -> fake.id != "166" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[165],
+            correctAnswer = newFakeAnswers[165].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F12_quiz_image.png?alt=media&token=a8ffbbf7-9a23-406a-96f0-fc6ff53bc861"
@@ -2419,7 +2671,7 @@ object FakeQuizModels {
             id = "1113",
             question = "¿Qué ecosistema se muestra en la imagen y es crucial para el equilibrio climático global?",
             answers = newFakeAnswers.filter { fake -> fake.id != "171" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[170],
+            correctAnswer = newFakeAnswers[170].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F13_quiz_image.png?alt=media&token=cadd73f2-c3ce-42d4-ba6c-2812bc77a5e7"
@@ -2428,7 +2680,7 @@ object FakeQuizModels {
             id = "1114",
             question = "¿Qué recurso natural está en riesgo, según lo ilustrado en esta imagen?",
             answers = newFakeAnswers.filter { fake -> fake.id != "172" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[171],
+            correctAnswer = newFakeAnswers[171].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F14_quiz_image.png?alt=media&token=fe98c17f-1acf-4d91-a262-e589d4d849e8"
@@ -2437,7 +2689,7 @@ object FakeQuizModels {
             id = "1115",
             question = "¿Qué medida de conservación de agua está representada en esta imagen?",
             answers = newFakeAnswers.filter { fake -> fake.id != "178" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[177],
+            correctAnswer = newFakeAnswers[177].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F15_quiz_image.png?alt=media&token=18f6f299-f9c0-44bb-a27e-84af05468c1e"
@@ -2446,7 +2698,7 @@ object FakeQuizModels {
             id = "1116",
             question = "¿Qué animal vive en esta zona del África y está en peligro de extinción?",
             answers = newFakeAnswers.filter { fake -> fake.id != "183" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[182],
+            correctAnswer = newFakeAnswers[182].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F16_quiz_image.png?alt=media&token=3101ed4f-91a4-495f-8b6d-8097a8c57cfb"
@@ -2455,7 +2707,7 @@ object FakeQuizModels {
             id = "1117",
             question = "¿Qué tipo de paisaje urbano está representado en la imagen como ejemplo de infraestructura verde?",
             answers = newFakeAnswers.filter { fake -> fake.id != "185" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[184],
+            correctAnswer = newFakeAnswers[184].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F17_quiz_image.png?alt=media&token=e0e30775-6cde-40e8-9192-31cce05dd8ea"
@@ -2464,7 +2716,7 @@ object FakeQuizModels {
             id = "1118",
             question = "¿Qué tipo de energía renovable se muestra en esta imagen como alternativa a los combustibles fósiles?",
             answers = newFakeAnswers.filter { fake -> fake.id != "192" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[191],
+            correctAnswer = newFakeAnswers[191].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F18_quiz_image.png?alt=media&token=e77a97b7-a26d-4390-960a-048f20503537"
@@ -2473,7 +2725,7 @@ object FakeQuizModels {
             id = "1119",
             question = "¿Qué actividad humana que afecta los ecosistemas costeros está representada en la imagen?",
             answers = newFakeAnswers.filter { fake -> fake.id != "194" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[193],
+            correctAnswer = newFakeAnswers[193].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F19_quiz_image.png?alt=media&token=f4c523bd-4600-4f4f-926d-6453fff0950d"
@@ -2482,10 +2734,123 @@ object FakeQuizModels {
             id = "1120",
             question = "¿Qué evento extremo relacionado con el cambio climático se muestra en la imagen, afectando cada vez más regiones?",
             answers = newFakeAnswers.filter { fake -> fake.id != "197" && fake.typeGame == TypeGame.QUIZ_IMAGE }.shuffled().take(3),
-            correctAnswer = newFakeAnswers[196],
+            correctAnswer = newFakeAnswers[196].id,
             typeGame = TypeGame.QUIZ_IMAGE,
             typeQuestion = listOf(TypeQuestion.RECYCLE),
             image = "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/minigames%2F20_quiz_image.png?alt=media&token=52cddaaf-c18f-4d87-ae89-68c1bdc76999"
+        ),
+        //---------------------------RELATION QUESTION-------------------------------
+        Question(
+            id = "1121",
+            question = "Energías Renovables",
+            answers = listOf(newFakeAnswers[200], newFakeAnswers[201], newFakeAnswers[202], newFakeAnswers[203], newFakeAnswers[205], newFakeAnswers[205]).shuffled(),
+            correctAnswer = "${newFakeAnswers[200].id},${newFakeAnswers[201].id},${newFakeAnswers[202].id}",
+            typeQuestion = listOf(TypeQuestion.ENERGY),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1122",
+            question = "Contaminación",
+            answers = listOf(newFakeAnswers[206], newFakeAnswers[207], newFakeAnswers[208], newFakeAnswers[209], newFakeAnswers[210], newFakeAnswers[211]).shuffled(),
+            correctAnswer = "${newFakeAnswers[206].id},${newFakeAnswers[207].id},${newFakeAnswers[208].id}",
+            typeQuestion = listOf(TypeQuestion.CONTAMINATION),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1123",
+            question = "Cambio climático",
+            answers = listOf(newFakeAnswers[212], newFakeAnswers[213], newFakeAnswers[214], newFakeAnswers[215], newFakeAnswers[216], newFakeAnswers[217]).shuffled(),
+            correctAnswer = "${newFakeAnswers[212].id},${newFakeAnswers[213].id},${newFakeAnswers[214].id}",
+            typeQuestion = listOf(TypeQuestion.CLIMATE_CHANGE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1124",
+            question = "Biodiversidad",
+            answers = listOf(newFakeAnswers[218], newFakeAnswers[219], newFakeAnswers[220], newFakeAnswers[221], newFakeAnswers[222], newFakeAnswers[223]).shuffled(),
+            correctAnswer = "${newFakeAnswers[218].id},${newFakeAnswers[219].id},${newFakeAnswers[220].id}",
+            typeQuestion = listOf(TypeQuestion.BIODIVERSITY),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1125",
+            question = "Economía circular",
+            answers = listOf(newFakeAnswers[224], newFakeAnswers[225], newFakeAnswers[226], newFakeAnswers[227], newFakeAnswers[228], newFakeAnswers[229]).shuffled(),
+            correctAnswer = "${newFakeAnswers[224].id},${newFakeAnswers[225].id},${newFakeAnswers[226].id}",
+            typeQuestion = listOf(TypeQuestion.SUSTENTABILITY),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1126",
+            question = "Agricultura sustentable",
+            answers = listOf(newFakeAnswers[230], newFakeAnswers[231], newFakeAnswers[232], newFakeAnswers[233], newFakeAnswers[234], newFakeAnswers[235]).shuffled(),
+            correctAnswer = "${newFakeAnswers[230].id},${newFakeAnswers[232].id},${newFakeAnswers[234].id}",
+            typeQuestion = listOf(TypeQuestion.SUSTENTABILITY),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1127",
+            question = "Reduccion Calentamiento global",
+            answers = listOf(newFakeAnswers[236], newFakeAnswers[237], newFakeAnswers[238], newFakeAnswers[239], newFakeAnswers[240], newFakeAnswers[241]).shuffled(),
+            correctAnswer = "${newFakeAnswers[236].id},${newFakeAnswers[237].id},${newFakeAnswers[238].id}",
+            typeQuestion = listOf(TypeQuestion.CLIMATE_CHANGE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1128",
+            question = "Recursos renovables",
+            answers = listOf(newFakeAnswers[242], newFakeAnswers[243], newFakeAnswers[244], newFakeAnswers[245], newFakeAnswers[246], newFakeAnswers[247]).shuffled(),
+            correctAnswer = "${newFakeAnswers[242].id},${newFakeAnswers[243].id},${newFakeAnswers[244].id}",
+            typeQuestion = listOf(TypeQuestion.ENERGY),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1129",
+            question = "Contaminación del aire",
+            answers = listOf(newFakeAnswers[248], newFakeAnswers[249], newFakeAnswers[250], newFakeAnswers[251], newFakeAnswers[252], newFakeAnswers[253]).shuffled(),
+            correctAnswer = "${newFakeAnswers[248].id},${newFakeAnswers[249].id},${newFakeAnswers[250].id}",
+            typeQuestion = listOf(TypeQuestion.CONTAMINATION),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1130",
+            question = "Energía no renovable",
+            answers = listOf(newFakeAnswers[254], newFakeAnswers[255], newFakeAnswers[256], newFakeAnswers[257], newFakeAnswers[258], newFakeAnswers[259]).shuffled(),
+            correctAnswer = "${newFakeAnswers[254].id},${newFakeAnswers[255].id},${newFakeAnswers[256].id}",
+            typeQuestion = listOf(TypeQuestion.ENERGY),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1131",
+            question = "Residuos reciclables",
+            answers = listOf(newFakeAnswers[260], newFakeAnswers[261], newFakeAnswers[262], newFakeAnswers[263], newFakeAnswers[264], newFakeAnswers[265]).shuffled(),
+            correctAnswer = "${newFakeAnswers[260].id},${newFakeAnswers[261].id},${newFakeAnswers[262].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1132",
+            question = "Contaminación del agua",
+            answers = listOf(newFakeAnswers[266], newFakeAnswers[267], newFakeAnswers[268], newFakeAnswers[269], newFakeAnswers[270], newFakeAnswers[271]).shuffled(),
+            correctAnswer = "${newFakeAnswers[266].id},${newFakeAnswers[267].id},${newFakeAnswers[268].id}",
+            typeQuestion = listOf(TypeQuestion.CONTAMINATION),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1133",
+            question = "Gases de efecto invernadero",
+            answers = listOf(newFakeAnswers[272], newFakeAnswers[273], newFakeAnswers[274], newFakeAnswers[275], newFakeAnswers[276], newFakeAnswers[277]).shuffled(),
+            correctAnswer = "${newFakeAnswers[272].id},${newFakeAnswers[273].id},${newFakeAnswers[274].id}",
+            typeQuestion = listOf(TypeQuestion.CLIMATE_CHANGE),
+            typeGame = TypeGame.RELATIONS,
+        ),
+        Question(
+            id = "1134",
+            question = "Materiales biodegradables",
+            answers = listOf(newFakeAnswers[278], newFakeAnswers[279], newFakeAnswers[280], newFakeAnswers[281], newFakeAnswers[282], newFakeAnswers[283]).shuffled(),
+            correctAnswer = "${newFakeAnswers[278].id},${newFakeAnswers[279].id},${newFakeAnswers[280].id}",
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
+            typeGame = TypeGame.RELATIONS,
         ),
     )
 

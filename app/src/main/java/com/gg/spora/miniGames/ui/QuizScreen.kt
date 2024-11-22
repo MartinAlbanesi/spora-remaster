@@ -142,7 +142,7 @@ private fun MinigameQuizScreenPreview() {
                             .fillMaxSize()
                             .padding(16.dp),
                         questionTitle = "¿Cuál es la capital de España?",
-                        answerOptions = FakeQuizModels.fakeAnswers.shuffled().take(4),
+                        answerOptions = FakeQuizModels.newFakeAnswers.shuffled().take(4),
                         onAnswerSelected = {},
                         onConfirmAnswer = { }
                     )

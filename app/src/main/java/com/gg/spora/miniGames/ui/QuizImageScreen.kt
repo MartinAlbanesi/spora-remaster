@@ -180,7 +180,7 @@ fun QuizImageScreen(
     }
 
 }
-
+/*
 @Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 @Composable
@@ -208,9 +208,8 @@ private fun QuizImageScreenPreview() {
                 content = {
                     QuizImageScreen(
                         modifier = Modifier,
-                        questionTitle = FakeQuizModels.fakeQuizQuestions.first { it.image != null }.question,
-                        answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
-                        currentImageResIdState = FakeQuizModels.fakeQuizQuestions.first { it.image != null }.image!!,
+                        answerOptions = FakeQuizModels.newFakeAnswers.take(4).shuffled(),
+                        currentImageResIdState = FakeQuizModels.newFakeQuizQuestions.first { it.image != null }.image!!,
                         onAnswerSelected = {},
                         onConfirmAnswer = {}
                     )
@@ -218,4 +217,4 @@ private fun QuizImageScreenPreview() {
             )
         }
     }
-}
+}*/
