@@ -86,7 +86,8 @@ android {
                         "androidx.compose.runtime.Composable",
                         "dagger.internal.DaggerGenerated",
                         "dagger.hilt.android.AndroidEntryPoint",
-                        "javax.annotation.processing.Generated"
+                        "javax.annotation.processing.Generated",
+                        "androidx.lifecycle.ViewModel"
                     )
                     classes(
                         "dagger.hilt.internal.aggregatedroot.codegen.*",

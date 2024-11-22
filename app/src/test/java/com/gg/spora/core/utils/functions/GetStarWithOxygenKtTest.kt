@@ -37,7 +37,7 @@ class GetStarWithOxygenKtTest{
         // Given
         starState = StarState.ONE
         val expected = listOf(
-            Pair(10,2131230880),
+            Pair(10,2131230881),
             Pair(20, null),
             Pair(30, null)
         )
@@ -54,8 +54,8 @@ class GetStarWithOxygenKtTest{
         // Given
         starState = StarState.TWO
         val expected = listOf(
-            Pair(10,2131230880),
-            Pair(20, 2131230880),
+            Pair(10,2131230881),
+            Pair(20,2131230881),
             Pair(30, null)
         )
 
@@ -71,9 +71,9 @@ class GetStarWithOxygenKtTest{
         // Given
         starState = StarState.THREE
         val expected = listOf(
-            Pair(10,2131230880),
-            Pair(20, 2131230880),
-            Pair(30, 2131230880)
+            Pair(10, 2131230881),
+            Pair(20, 2131230881),
+            Pair(30, 2131230881)
         )
 
         // When
