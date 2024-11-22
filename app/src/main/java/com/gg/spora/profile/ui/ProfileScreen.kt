@@ -2,16 +2,20 @@
 package com.gg.spora.profile.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,11 +23,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
@@ -76,8 +84,11 @@ fun ProfileScreen(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.user_image),
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(user?.userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2FChampy_sonriente_idle.png?alt=media&token=40474e6d-7365-491c-b8ea-424bd73fdc6f")
+                            .placeholder(R.drawable.user_image)
+                            .build(),
                         contentDescription = "User Image",
                         modifier = Modifier.size(200.dp)
                     )
@@ -133,7 +144,7 @@ fun ProfileScreen(
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = "PRÓXIMAMENTE",
+                        text = "Posición actual",
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp,
@@ -141,43 +152,96 @@ fun ProfileScreen(
                             .align(Alignment.TopCenter)
                             .padding(top = 45.dp)
                     )
-                    // descomentar para habilitar la funcionalidad de los botones de cambio de logro
-                    /*
-                    Row(
+
+                    Box(
                         modifier = Modifier
-                            .align(Alignment.Center)
-                            .padding(top = 80.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                            .padding(top = 130.dp)
+                            .fillMaxWidth()
+                            .height(100.dp)
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.left_arrow),
-                            contentDescription = "Left Arrow",
-                            modifier = Modifier
-                                .size(88.dp)
-                                .clickable {
-                                    onLeftArrowClick()
-                                }
+                            painter = painterResource(id = R.drawable.ranking_user),
+                            contentDescription = null,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier.matchParentSize()
                         )
-                        Image(
-                            painter = painterResource(id = images[currentIndex]),
-                            contentDescription = "Achievement Image",
-                            modifier = Modifier.size(180.dp)
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.right_arrow),
-                            contentDescription = "Right Arrow",
+                        Row(
                             modifier = Modifier
-                                .size(88.dp)
-                                .clickable {
-                                   onRightArrowClick()
-                                }
-                        )*/
+                                .fillMaxSize()
+                                .padding(8.dp)
+                                .padding(end = 16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Spacer(
+                                    modifier = Modifier
+                                        .width(2.dp)
+                                        .height(65.dp)
+                                        .padding(bottom = 5.dp)
+                                        .background(Color.Black)
+                                )
+                                AsyncImage(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(user?.userImage)
+                                        .placeholder(R.drawable.user_image)
+                                        .build(),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .size(63.dp)
+                                        .padding(bottom = 5.dp, start = 8.dp)
+                                )
+                            }
+                            var userName = "Usuario"
+                            if (user?.userName != null) {
+                                userName = user.userName
+                            }
+                            Text(
+                                text = userName,
+                                style = if (userName.count() > 12) {
+                                    MaterialTheme.typography.titleSmall
+                                } else {
+                                    MaterialTheme.typography.titleMedium
+                                },
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .padding(bottom = 5.dp)
+                                    .padding(start = 10.dp)
+                            )
+                            Spacer(modifier = Modifier.padding(4.dp))
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .width(75.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.oxygen_icon),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.size(30.dp)
+                                )
+                                Text(
+                                    text = user?.oxygen.toString(),
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = Color.Black,
+                                    modifier = Modifier.padding(start = 4.dp)
+                                )
+                            }
+                        }
                     }
                 }
             }
         }
     }
+}
 
 @Preview(showBackground = true)
 @Composable
