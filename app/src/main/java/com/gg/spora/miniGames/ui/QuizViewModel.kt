@@ -59,7 +59,8 @@ class QuizViewModel @Inject constructor(
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
 
-    private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
+    //private val _currentImageResId = MutableStateFlow(R.drawable.wind_turbine)
+    private val _currentImageResId = MutableStateFlow<String?>("android.resource://com.gg.spora/drawable/wind_turbine")
     val currentImageResId = _currentImageResId.asStateFlow()
 
     private val _relationsItems = MutableStateFlow<List<String>>(emptyList())
@@ -83,7 +84,9 @@ class QuizViewModel @Inject constructor(
     init {
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+
     }
 
     private fun getCurrentQuestion() {
@@ -94,7 +97,7 @@ class QuizViewModel @Inject constructor(
 
         val quizGame = getRandomQuestionFromTypeUseCase(
             count = quizRoute.quizCount,
-            typeQuestion = listOf(TypeQuestion.MARTIN),
+            typeQuestion = listOf(TypeQuestion.RECYCLE),
             typeGame = TypeGame.QUIZ
         )
 
@@ -146,7 +149,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun onConfirmAnswer(answerId: String) {
-        val correctAnswer = _currentQuestion.value!!.answerId
+        val correctAnswer = _currentQuestion.value!!.correctAnswer
         _isCorrect.value = correctAnswer == answerId
 
         _showChampyHelp.value = true
@@ -161,7 +164,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun relationsAnswerSelected() {
-        val correctAnswer = _currentQuestion.value!!.answerId.split(",").map { it.toInt() }.toSet()
+        val correctAnswer = _currentQuestion.value!!.correctAnswer.split(",").map { it.toInt() }.toSet()
         val selectedAnswers = _relationsItems.value.map { it.toInt() }.toSet()
 
         if (correctAnswer == selectedAnswers) {
@@ -223,7 +226,8 @@ class QuizViewModel @Inject constructor(
         _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
         _isCorrect.value = null
         _relationsItems.value = emptyList()
     }
@@ -240,7 +244,9 @@ class QuizViewModel @Inject constructor(
         _isCorrect.value = null
         getRandomQuestions()
         getCurrentQuestion()
-        _currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
+        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+
     }
 
     private fun finishGame() {

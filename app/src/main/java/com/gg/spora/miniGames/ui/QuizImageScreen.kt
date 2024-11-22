@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import coil.compose.rememberAsyncImagePainter
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.MiniGameScreen
@@ -52,7 +53,8 @@ fun QuizImageScreen(
     questionTitle: String,
     isCorrect: Boolean? = null,
     answerOptions: List<Answer>,
-    currentImageResIdState: Int,
+    //currentImageResIdState: Int,
+    currentImageResIdState: String?,
     onAnswerSelected: (String) -> Unit,
     onConfirmAnswer: (String) -> Unit
 ) {
@@ -63,6 +65,10 @@ fun QuizImageScreen(
 
     var selectedAnswerId by remember { mutableStateOf("") }
 
+    val painter = currentImageResIdState?.let {
+        rememberAsyncImagePainter(model = it)
+    } ?: painterResource(id = R.drawable.wind_turbine)
+
     if (showImageFullScreen) {
         Dialog(
             onDismissRequest = { showImageFullScreen = false },
@@ -72,7 +78,8 @@ fun QuizImageScreen(
             ),
             content = {
                 Image(
-                    painter = painterResource(id = currentImageResIdState),
+                    //painter = painterResource(id = currentImageResIdState),
+                    painter = painter,
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
@@ -102,7 +109,8 @@ fun QuizImageScreen(
                     }
             ) {
                 Image(
-                    painter = painterResource(id = currentImageResIdState),
+                    //painter = painterResource(id = currentImageResIdState),
+                    painter = painter,
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
@@ -180,7 +188,7 @@ fun QuizImageScreen(
     }
 
 }
-
+/*
 @Preview(device = "spec:width=1080px,height=2340px,dpi=640")
 @Preview
 @Composable
@@ -208,9 +216,8 @@ private fun QuizImageScreenPreview() {
                 content = {
                     QuizImageScreen(
                         modifier = Modifier,
-                        questionTitle = FakeQuizModels.fakeQuizQuestions.first { it.image != null }.question,
-                        answerOptions = FakeQuizModels.fakeAnswers.take(4).shuffled(),
-                        currentImageResIdState = FakeQuizModels.fakeQuizQuestions.first { it.image != null }.image!!,
+                        answerOptions = FakeQuizModels.newFakeAnswers.take(4).shuffled(),
+                        currentImageResIdState = FakeQuizModels.newFakeQuizQuestions.first { it.image != null }.image!!,
                         onAnswerSelected = {},
                         onConfirmAnswer = {}
                     )
@@ -218,4 +225,4 @@ private fun QuizImageScreenPreview() {
             )
         }
     }
-}
+}*/
