@@ -59,7 +59,8 @@ object FakeUserModels {
             treesCount = 0,
             userImage = R.drawable.spora_face_splash,
             forestTrees = emptyList(),
-            seedTrees = emptyList()
+            seedTrees = emptyList(),
+            objectsScanned = emptyList()
         ),
         User(
             id = "2",
@@ -70,7 +71,8 @@ object FakeUserModels {
             treesCount = 0,
             userImage = R.drawable.spora_face_splash,
             forestTrees = emptyList(),
-            seedTrees = emptyList()
+            seedTrees = emptyList(),
+            objectsScanned = emptyList()
         ),
     )
 

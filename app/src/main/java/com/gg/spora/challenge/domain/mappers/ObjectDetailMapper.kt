@@ -6,8 +6,8 @@ import com.gg.spora.challenge.domain.model.ObjectDetail
 
 fun ObjectDetailNetwork.toObjectDetail() : ObjectDetail{
     return ObjectDetail(
-        nameObjectDetail = nameObjectDetail,
-        description = description,
+        nameObjectDetail = nameObjectDetail ?: "",
+        description = description ?: "",
         isValidate = isValidate)
 }
 
@@ -21,7 +21,7 @@ fun ObjectDetailEntity.toObjectDetail() : ObjectDetail{
 
 fun ObjectDetail.toObjectDetailEntity() : ObjectDetailEntity{
     return ObjectDetailEntity(
-        nameObjectDetail = nameObjectDetail!!,
+        nameObjectDetail = nameObjectDetail,
         description = description,
         isValidate = isValidate)
 }

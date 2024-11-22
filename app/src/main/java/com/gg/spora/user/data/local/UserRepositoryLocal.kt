@@ -1,6 +1,7 @@
 package com.gg.spora.user.data.local
 
 import com.gg.spora.challenge.data.local.ChallengeDao
+import com.gg.spora.challenge.domain.mappers.toObjectDetail
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
@@ -59,7 +60,7 @@ class UserRepositoryLocal @Inject constructor(
     }
 
     override suspend fun getAllObjectsDetailsValidate(): List<ObjectDetail> {
-        return userDao.getAllObjectsDetailsValidate()
+        return userDao.getAllObjectsDetailsValidate().map { it.toObjectDetail() }
     }
 
     override suspend fun getUserOxygen(): Flow<Int> {

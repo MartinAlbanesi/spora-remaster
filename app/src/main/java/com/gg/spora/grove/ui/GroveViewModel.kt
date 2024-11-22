@@ -138,7 +138,7 @@ class GroveViewModel @Inject constructor(
                     loadSeedTreesUseCase().collect { seedTrees ->
                         _seedTreeCooldowns.update { currentCooldowns ->
                             seedTrees.associate { seedTree ->
-                                var seedTreeCooldown: Long = 0L
+                                var seedTreeCooldown = 0L
                                 if (getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate != null) {
                                     seedTreeCooldown = Duration.between(
                                         getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate,

@@ -198,7 +198,8 @@ private fun ProfileScreenPreview() {
                     treesCount = 0,
                     userImage = R.drawable.spora_face_splash,
                     forestTrees = emptyList(),
-                    seedTrees = emptyList()
+                    seedTrees = emptyList(),
+                    objectsScanned = emptyList()
                 ),
 //                onLeftArrowClick = {},
 //                onRightArrowClick = {}

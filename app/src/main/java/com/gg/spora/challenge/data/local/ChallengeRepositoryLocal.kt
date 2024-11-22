@@ -30,10 +30,6 @@ constructor(private val challengeDao: ChallengeDao) : IChallengeRepositoryLocal{
         challengeDao.deleteAllObjectsDetail()
     }
 
-    override suspend fun setValidObjectDetailInDatabase(nameObjectDetail: String) {
-        challengeDao.setValidObjectDetailInDatabase(nameObjectDetail)
-    }
-
     //endregion
 
     //region StepObjectDetail

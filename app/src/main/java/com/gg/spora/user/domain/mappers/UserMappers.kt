@@ -26,8 +26,7 @@ fun User.toUserEntity() = UserEntity(
     email = email,
     oxygen = oxygen,
     treesCount = treesCount,
-    userImage = userImage,
-    objectsScanned = objectsScanned
+    userImage = userImage
 )
 
 fun UserWithLevelsCompletedEntity.toUser() = User(
@@ -36,7 +35,7 @@ fun UserWithLevelsCompletedEntity.toUser() = User(
     email = user.email,
     oxygen = user.oxygen,
     levelsCompleted = levelsCompleted.map { it.toLevelCompleted() },
-    objectsScanned = user.objectsScanned,
+    objectsScanned = emptyList(),
     treesCount = user.treesCount,
     userImage = user.userImage,
     seedTrees = emptyList(),

@@ -14,7 +14,6 @@ interface IChallengeRepositoryLocal {
 
     suspend fun deleteAllObjectsDetail()
 
-    suspend fun setValidObjectDetailInDatabase(nameObjectDetail: String)
 
     suspend fun getAllStepsObjectDetail(): List<StepObjectDetail>
 
