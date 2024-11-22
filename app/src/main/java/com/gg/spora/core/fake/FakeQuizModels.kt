@@ -6,7 +6,7 @@ import com.gg.spora.miniGames.domain.model.Answer
 import com.gg.spora.miniGames.domain.model.Question
 import kotlin.collections.listOf
 
-@Suppress("LargeClass", "LongParameterList")
+@Suppress("LargeClass", "LongParameterList", "MaxLineLength")
 object FakeQuizModels {
     // ----------------------- NEW QUIZ -----------------------
 

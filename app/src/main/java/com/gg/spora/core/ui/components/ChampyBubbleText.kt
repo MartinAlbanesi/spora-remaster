@@ -26,8 +26,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.TypewriteText
+import com.gg.spora.miniGames.ui.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
@@ -36,7 +38,7 @@ fun ChampyBubbleText(
     champyOffset: IntOffset,
     champyImage: Int,
     showChampyHelp: Boolean = false,
-    champyHelpingText: String
+    champyHelpingText: ChampyHelping?
 ) {
     Row(
         modifier = modifier,
@@ -52,41 +54,58 @@ fun ChampyBubbleText(
                     champyOffset
                 }
         )
-        AnimatedVisibility(
-            visible = showChampyHelp,
-            enter = scaleIn() + expandHorizontally(expandFrom = Alignment.CenterHorizontally),
-            exit = scaleOut() + shrinkHorizontally(shrinkTowards = Alignment.CenterHorizontally),
-            modifier = Modifier
-                .weight(1.5f)
-                .padding(end = 16.dp)
-        ){
-            Box(
+        champyHelpingText?.let {
+            AnimatedVisibility(
+                visible = showChampyHelp,
+                enter = scaleIn() + expandHorizontally(expandFrom = Alignment.CenterHorizontally),
+                exit = scaleOut() + shrinkHorizontally(shrinkTowards = Alignment.CenterHorizontally),
                 modifier = Modifier
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.text_bubble_v2),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillBounds,
+                    .weight(2.5f)
+//                    .padding(end = 16.dp)
+                    .offset(x = (-10).dp)
+            ){
+                Box(
                     modifier = Modifier
-                        .fillMaxHeight(0.8f)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.text_bubble_v2),
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier
+                            .fillMaxHeight(0.8f)
+                            .fillMaxWidth()
 //                        .offset(x = (-20).dp)
-                )
+                    )
 
-                TypewriteText(
-                    text = champyHelpingText,
-                    textAlign = TextAlign.Start,
-                    textDelay = 100,
-                    modifier = Modifier
+//                    Text(
+//                        text = champyHelpingText,
+//                        fontSize = 14.sp,
+//                        modifier = Modifier
+//                            .padding(
+//                                start = 40.dp,
+//                                end = 8.dp,
+//                                top = 8.dp,
+////                                bottom = 16.dp
+//                            )
+//                    )
+
+                    TypewriteText(
+                        text = champyHelpingText.text,
+                        textAlign = champyHelpingText.textAlign,
+                        textDelay = 100,
+                        fontSize = champyHelpingText.fontSize,
+                        modifier = Modifier
 //                        .clip(MaterialTheme.shapes.medium)
 //                        .align(Alignment.CenterStart)
 //                        .background(colorResource(R.color.cream))
-                        .padding(
-                            start = 32.dp,
-                            end = 16.dp,
-                            top = 16.dp,
-                            bottom = 16.dp
-                        )
-                )
+                            .padding(
+                                start = 40.dp,
+                                end = 8.dp,
+                                top = 8.dp,
+//                                bottom = 16.dp
+                            )
+                    )
+                }
             }
         }
     }
@@ -109,7 +128,11 @@ private fun ChampyBubbleTextPreview() {
                 champyImage = R.drawable.champy_serious_idle,
                 champyOffset = IntOffset(0, 0),
                 showChampyHelp = true,
-                champyHelpingText = "La respuesta a la pregunta de la vida, el universo y todo lo demás es 42"
+                champyHelpingText = ChampyHelping(
+                    text = "Hola, soy Champy",
+                    fontSize = 20,
+                    textAlign = TextAlign.Center
+                )
             )
         }
     }

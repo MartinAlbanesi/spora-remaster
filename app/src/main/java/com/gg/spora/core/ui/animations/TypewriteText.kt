@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.sp
 import com.gg.spora.ui.theme.SporaTheme
 import kotlinx.coroutines.delay
 
@@ -37,6 +38,7 @@ fun TypewriteText(
     spec: AnimationSpec<Int> = tween(text.length * 25, easing = LinearEasing),
     style: TextStyle = LocalTextStyle.current,
     preoccupySpace: Boolean = true,
+    fontSize: Int = 16,
     textDelay: Long = 0
 ){
     // State that keeps the text that is currently animated
@@ -82,6 +84,7 @@ fun TypewriteText(
                 text = text,
                 style = style,
                 textAlign = textAlign,
+                fontSize = fontSize.sp,
                 modifier = Modifier.alpha(0f)
             )
         }
@@ -91,6 +94,7 @@ fun TypewriteText(
             text = textToAnimate.substring(0, index.value),
             style = style,
             textAlign = textAlign,
+            fontSize = fontSize.sp
         )
     }
 }

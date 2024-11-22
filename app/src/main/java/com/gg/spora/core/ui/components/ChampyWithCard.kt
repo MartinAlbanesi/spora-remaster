@@ -16,10 +16,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
+import com.gg.spora.core.utils.SporaConstant
+import com.gg.spora.miniGames.ui.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
 
 /**
@@ -34,7 +37,7 @@ fun ChampyWithCard(
     champyImage: Int,
     isCorrect: Boolean? = null,
     showChampyHelp: Boolean,
-    champyHelpingText: String,
+    champyHelpingText: ChampyHelping?,
     content: @Composable () -> Unit
 ) {
 
@@ -102,7 +105,9 @@ private fun SporaWithCardPreview() {
                 modifier = Modifier.fillMaxSize(),
                 champyImage = R.drawable.champy_celebrating_raised_arms,
                 showChampyHelp = true,
-                champyHelpingText = "This is a test",
+                champyHelpingText = ChampyHelping(
+                    text = "Los combustibles fósiles son materiales como el petróleo, el carbón y el gas natural, que vienen de plantas y animales que vivieron hace millones de años.",
+                ),
             ) {}
         }
     }

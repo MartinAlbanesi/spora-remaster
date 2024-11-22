@@ -1,10 +1,11 @@
 package com.gg.spora.miniGames.ui
 
+import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.gg.spora.R
+import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.graph.NavigationRoutes
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.SporaConstant.MAX_LIVES
@@ -26,6 +27,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+data class ChampyHelping(
+    val text: String,
+    val fontSize: Int = 14,
+    val textAlign: TextAlign = TextAlign.Start
+)
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
@@ -69,13 +76,13 @@ class QuizViewModel @Inject constructor(
     private val _showChampyHelp = MutableStateFlow(false)
     val showChampyHelp = _showChampyHelp.asStateFlow()
 
-    private val _champyHelpingText = MutableStateFlow("Ingresar texto de ayuda de la Question")
+    private val _champyHelpingText = MutableStateFlow<ChampyHelping?>(null)
     val champyHelpingText = _champyHelpingText.asStateFlow()
 
     private val _currentTotalRewards = MutableStateFlow(0)
     val currentTotalRewards = _currentTotalRewards.asStateFlow()
 
-    private val _currentRewards = MutableStateFlow(listOf(0,0,0))
+    private val _currentRewards = MutableStateFlow(listOf(0, 0, 0))
     val currentRewards = _currentRewards.asStateFlow()
 
     private val _missionCompleted = MutableStateFlow<Mission?>(null)
@@ -85,7 +92,8 @@ class QuizViewModel @Inject constructor(
         getRandomQuestions()
         getCurrentQuestion()
         //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
-        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+        _currentImageResId.value =
+            _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
 
     }
 
@@ -140,12 +148,6 @@ class QuizViewModel @Inject constructor(
                 }
             }
         )
-
-//        if (_isCorrect.value == false) {
-//            _champyHelpingText.value = "La respuesta era: Japon"
-//            _lives.value--
-//            _livesLost.value++
-//        }
     }
 
     fun onConfirmAnswer(answerId: String) {
@@ -155,25 +157,55 @@ class QuizViewModel @Inject constructor(
         _showChampyHelp.value = true
 
         if (_isCorrect.value == false) {
-            _champyHelpingText.value = "La respuesta era: ${_currentQuestion.value!!.answers.first { it.id == correctAnswer }.answer}"
+
+            _champyHelpingText.value = ChampyHelping(
+                text = "La respuesta era: ${_currentQuestion.value!!.answers.first { it.id == correctAnswer }.answer}",
+                fontSize = 20,
+                textAlign = TextAlign.Center
+            )
+
+
+
             _lives.value--
             _livesLost.value++
-        }else{
-            _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+        } else {
+            _champyHelpingText.value = ChampyHelping(
+                text = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random(),
+                fontSize = 20,
+                textAlign = TextAlign.Center
+            )
         }
     }
 
     fun relationsAnswerSelected() {
-        val correctAnswer = _currentQuestion.value!!.correctAnswer.split(",").map { it.toInt() }.toSet()
+        val correctAnswer =
+            _currentQuestion.value!!.correctAnswer.split(",").map { it.toInt() }.toSet()
         val selectedAnswers = _relationsItems.value.map { it.toInt() }.toSet()
 
+        _showChampyHelp.value = true
+
+        val correctsAnswers = FakeQuizModels.newFakeAnswers
+            .filter {
+                it.id.toInt() in correctAnswer
+            }.joinToString(", ") {
+                it.answer
+            }
+
         if (correctAnswer == selectedAnswers) {
-            _champyHelpingText.value = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random()
+            _champyHelpingText.value = ChampyHelping(
+                text = SporaConstant.CHAMPY_CONGRATULATING_YOU_LIST.random(),
+                fontSize = 20,
+                textAlign = TextAlign.Center
+            )
 
             _isCorrect.value = true
         } else {
 
-            _champyHelpingText.value = "La respuestas eran: ${correctAnswer.joinToString(", ")}"
+            _champyHelpingText.value = ChampyHelping(
+                text = "La respuestas eran: $correctsAnswers",
+                fontSize = 20,
+                textAlign = TextAlign.Center
+            )
 
             _isCorrect.value = false
             _lives.value--
@@ -223,11 +255,12 @@ class QuizViewModel @Inject constructor(
             return
         }
         _showChampyHelp.value = false
-        _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
+        _champyHelpingText.value = null
         _counterQuestion.value++
         _currentQuestion.value = _questions.value[_counterQuestion.value]
         //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
-        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+        _currentImageResId.value =
+            _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
         _isCorrect.value = null
         _relationsItems.value = emptyList()
     }
@@ -235,7 +268,7 @@ class QuizViewModel @Inject constructor(
     fun resetGame() {
 
         _showChampyHelp.value = false
-        _champyHelpingText.value = "Ingresar texto de ayuda de la Question"
+        _champyHelpingText.value = null
 
         _counterQuestion.value = 0
         _lives.value = MAX_LIVES
@@ -245,7 +278,9 @@ class QuizViewModel @Inject constructor(
         getRandomQuestions()
         getCurrentQuestion()
         //_currentImageResId.value = _currentQuestion.value?.image ?: R.drawable.wind_turbine
-        _currentImageResId.value = _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+        _currentImageResId.value =
+            _currentQuestion.value?.image ?: "android.resource://com.gg.spora/drawable/wind_turbine"
+        _relationsItems.value = emptyList()
 
     }
 
@@ -273,14 +308,23 @@ class QuizViewModel @Inject constructor(
 
     fun onShowChampyHelp() {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(4000)
-            _showChampyHelp.value = true
+            delay(1000)
+                currentQuestion.value?.champyHelping?.let{
+                    _champyHelpingText.value = ChampyHelping(
+                        text = it
+                    )
+                }
+
+            _champyHelpingText.value?.let{
+                _showChampyHelp.value = true
+            }
         }
     }
 
-    private fun updateMission(){
+    private fun updateMission() {
         viewModelScope.launch {
-            _missionCompleted.value = updateMissionByIdUseCase(MissionType.MINI_GAME_MISSION.missionId)
+            _missionCompleted.value =
+                updateMissionByIdUseCase(MissionType.MINI_GAME_MISSION.missionId)
         }
     }
 

@@ -37,6 +37,7 @@ import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.scalarNumber
 import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
+import com.gg.spora.miniGames.ui.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
 import kotlinx.serialization.json.JsonNull.content
 
@@ -59,7 +60,7 @@ fun MiniGameScreen(
     showProgressBar: Boolean = true,
     showChampyHelp: Boolean = false,
     rewards: List<Int> = emptyList(),
-    champyHelpingText: String = "",
+    champyHelpingText: ChampyHelping? = null,
     onNextQuestion: () -> Unit,
     onResetGame: () -> Unit,
     onBackForestStage: () -> Unit,
@@ -221,7 +222,7 @@ private fun MiniGameScreenPreview() {
                 questionSize = 5,
                 lives = 5,
                 counterQuestion = 0,
-                champyHelpingText = "This is a test",
+                champyHelpingText = null,
                 isCorrect = true,
                 isFinished = true,
                 totalOxygen = 0,
