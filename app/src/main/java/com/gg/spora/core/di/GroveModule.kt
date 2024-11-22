@@ -41,8 +41,8 @@ class GroveModule {
     @Provides
     @Singleton
     fun provideLoadSeedTreesUseCase(
-                                    userRepositoryLocal: UserRepositoryLocal): LoadSeedTreesUseCase {
-        return LoadSeedTreesUseCase(userRepositoryLocal)
+                                    userRepositoryLocal: UserRepositoryLocal,  groveRepository: IGroveRepository): LoadSeedTreesUseCase {
+        return LoadSeedTreesUseCase(userRepositoryLocal,groveRepository)
     }
 
     @Provides

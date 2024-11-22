@@ -127,9 +127,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 }
             }
 */
-            if(!isLoading){
-
-            }
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
@@ -142,6 +139,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     navController.popBackStack()
                 },
                 errorState = errorState
+                /*loadTrees ={
+                    groveViewModel.loadSeedTrees()
+                    groveViewModel.loadForestTrees()
+                }*/
             )
         }
         composable<NavigationRoutes.Ranking> {

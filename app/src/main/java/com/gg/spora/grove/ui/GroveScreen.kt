@@ -65,7 +65,8 @@ fun GroveScreen(
     plantForestTree: (ForestTree, String) -> Unit,
     claimOxygen: () -> Unit,
     popBackStack: () -> Unit,
-    errorState: String?
+    errorState: String?,
+    //loadTrees: () -> Unit
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -80,6 +81,7 @@ fun GroveScreen(
             }
         }
     }
+
 
     BackHandler{
         popBackStack()
@@ -208,7 +210,8 @@ fun GrovePreview() {
                 plantForestTree = { _, _ -> },
                 claimOxygen = {},
                 popBackStack = {},
-                errorState = ""
+                errorState = "",
+                //loadTrees = {}
             )
         }
     }

@@ -132,7 +132,6 @@ class GroveViewModel @Inject constructor(
         GroveUiState(emptyList(), emptyList(), emptyMap(), emptyMap(), 0, 0, 0L) // Initial value
     )
 
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -144,7 +143,7 @@ class GroveViewModel @Inject constructor(
                             seedTrees.associate { seedTree ->
                                 var seedTreeCooldown = 0L
 
-                                if (getCooldownDataByIdUseCase(seedTree.id).firstOrNull()!!.lastUpdateDate != null) {
+                                if (getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate != null) {
                                     seedTreeCooldown = Duration.between(
                                         getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate,
                                         LocalDateTime.now()
@@ -153,7 +152,8 @@ class GroveViewModel @Inject constructor(
 
                                 if (currentCooldowns[seedTree.id] != null) {
                                     seedTreeCooldown = currentCooldowns[seedTree.id]!!
-                                } else if (seedTreeCooldown > 0L && !isNegative(
+                                }
+                                else if (seedTreeCooldown > 0L && !isNegative(
                                         INITIAL_COOLDOWN_DURATION - seedTreeCooldown
                                     )
                                 ) {
@@ -213,7 +213,7 @@ class GroveViewModel @Inject constructor(
                     _userOxygen.update { userOxygen }
 
                     // Initialize seed trees if they are empty
-                    //initSeedTrees()
+                    initSeedTrees()
 
                     // Calculate accumulated oxygen
                     calculateAccumulatedOxygen()
@@ -231,6 +231,18 @@ class GroveViewModel @Inject constructor(
         }
     }
 
+    private fun initSeedTrees() {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (_seedTrees.value.isEmpty()) {
+                val initialSeedTrees = listOf(
+                    SeedTree(type = TreeType.SECUOYA),
+                    SeedTree(type = TreeType.MANGROVE),
+                    SeedTree(type = TreeType.BAOBAB),
+                )
+                saveSeedTreesUseCase(initialSeedTrees)
+            }
+        }
+    }
     private fun isNegative(number: Long): Boolean {
         return number < 0L
     }

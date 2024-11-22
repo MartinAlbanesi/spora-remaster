@@ -18,24 +18,21 @@ import javax.inject.Inject
  */
 class LoadSeedTreesUseCase @Inject constructor(
     private val userRepositoryLocal: IUserRepositoryLocal,
+    private val groveRepository: IGroveRepository
 ) {
     suspend operator fun invoke(): Flow<List<SeedTree>> {
-            val initialSeedTrees = listOf(
-                SeedTree(type = TreeType.SECUOYA),
-                SeedTree(type = TreeType.MANGROVE),
-                SeedTree(type = TreeType.BAOBAB),
-            )
-
         val userFlow = flow {
             val userLocal = userRepositoryLocal.getUser().firstOrNull()
-            var seedTreesFinally : List<SeedTree> = emptyList()
-
-            if (userLocal != null) {
-                seedTreesFinally = userLocal.seedTrees.map { it.toSeedTree() } + initialSeedTrees
-            }
+            val seedTreesFinally = userLocal?.seedTrees?.map { it.toSeedTree() } ?: emptyList()
             emit(seedTreesFinally)
         }
 
-        return userFlow
+        val seedTreesLocalFlow = groveRepository.getSeedTreesListFromDatabase()
+
+        // Combinamos ambos Flow
+        return combine(userFlow, seedTreesLocalFlow) { seedTreesUser, seedTreesLocal ->
+            // Unimos ambas listas y eliminamos duplicados según alguna propiedad
+            (seedTreesUser + seedTreesLocal).distinctBy { it.type }
+        }
     }
 }

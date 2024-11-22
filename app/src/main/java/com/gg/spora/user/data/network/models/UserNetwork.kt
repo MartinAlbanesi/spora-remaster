@@ -14,6 +14,6 @@ data class UserNetwork(
     val treesCount: Int? = null,
     val tutorialsCompleted: List<TutorialCompletedNetwork>? = null,
     val userImage: Int? = null,
-    val forestTrees: List<ForestTreeNetwork> ?= null,
+    var forestTrees: List<ForestTreeNetwork> ?= null,
     val seedTrees: List<SeedTreeNetwork>? = null
 )
