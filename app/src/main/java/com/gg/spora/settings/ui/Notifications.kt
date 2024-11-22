@@ -115,8 +115,7 @@ fun NotificationRow(text: String, switchState: Boolean, onSwitchChange: (Boolean
             colors = SwitchDefaults.colors(
                 checkedThumbColor = Color.Gray,
                 uncheckedThumbColor = Color.Gray,
-                checkedTrackColor = colorResource(id = R.color.primary),
-              //  uncheckedTrackColor = colorResource(id = R.color.primary)
+                checkedTrackColor = colorResource(id = R.color.primary)
             )
         )
     }
