@@ -20,8 +20,11 @@ class GetStarWithOxygenKtTest{
     @Test
     fun `this - When StarState is Zero - Then Return Map with images null`() {
         // Given
-        val expected = mapOf(10 to null, 20 to null, 30 to null)
-
+        val expected = listOf(
+            Pair(10, null),
+            Pair(20, null),
+            Pair(30, null)
+        )
         // When
         val result = getStarWithOxygen(starState, oxygenRewards)
 
@@ -33,7 +36,11 @@ class GetStarWithOxygenKtTest{
     fun `this - When StarState is One - Then Return Map with images`() {
         // Given
         starState = StarState.ONE
-        val expected = mapOf(10 to 2131230880, 20 to null, 30 to null)
+        val expected = listOf(
+            Pair(10,2131230880),
+            Pair(20, null),
+            Pair(30, null)
+        )
 
         // When
         val result = getStarWithOxygen(starState, oxygenRewards)
@@ -46,7 +53,11 @@ class GetStarWithOxygenKtTest{
     fun `this - When StarState is Two - Then Return Map with images`() {
         // Given
         starState = StarState.TWO
-        val expected = mapOf(10 to 2131230880, 20 to 2131230880, 30 to null)
+        val expected = listOf(
+            Pair(10,2131230880),
+            Pair(20, 2131230880),
+            Pair(30, null)
+        )
 
         // When
         val result = getStarWithOxygen(starState, oxygenRewards)
@@ -59,7 +70,11 @@ class GetStarWithOxygenKtTest{
     fun `this - When StarState is Three - Then Return Map with images`() {
         // Given
         starState = StarState.THREE
-        val expected = mapOf(10 to 2131230880, 20 to 2131230880, 30 to 2131230880)
+        val expected = listOf(
+            Pair(10,2131230880),
+            Pair(20, 2131230880),
+            Pair(30, 2131230880)
+        )
 
         // When
         val result = getStarWithOxygen(starState, oxygenRewards)
