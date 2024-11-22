@@ -57,17 +57,17 @@ fun Ranking(
     onBackClick: () -> Unit,
     viewModel: RankingViewModel = hiltViewModel()
 ) {
-//    val timeUntilReset by viewModel.timeUntilReset.collectAsState()
+    val timeUntilReset by viewModel.timeUntilReset.collectAsState()
     var imageRanking = R.drawable.ranking_sign
 
-//    var remainingTime by remember { mutableStateOf(timeUntilReset) }
+    var remainingTime by remember { mutableStateOf(timeUntilReset) }
 
-//    LaunchedEffect(Unit) {
-//        while (true) {
-//            remainingTime = viewModel.calculateTimeUntilNextMonday()
-//            delay(1000L)
-//        }
-//    }
+    LaunchedEffect(Unit) {
+        while (true) {
+            remainingTime = viewModel.calculateTimeUntilNextMonday()
+            delay(1000L)
+        }
+    }
 
     Image(
         painter = painterResource(id = R.drawable.ranking_background),
@@ -101,7 +101,7 @@ fun Ranking(
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Text(
-                text = "Titi",//"Tiempo hasta el reinicio: ${remainingTime.toHours()}h ${remainingTime.toMinutesPart()}m ${remainingTime.toSecondsPart()}s",
+                text = "Tiempo hasta el reinicio: ${remainingTime.toHours()}h ${remainingTime.toMinutesPart()}m ${remainingTime.toSecondsPart()}s",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White,
                 modifier = Modifier
@@ -118,146 +118,148 @@ fun Ranking(
                 .padding(horizontal = 16.dp)
                 .height(450.dp)
         ) {
-            itemsIndexed(userList) { index, item ->
-                var numImage = 0
-                if (item.id != currentUser!!.id) {
-                    numImage = index + 1
-                }
+            currentUser?.let{
+                itemsIndexed(userList) { index, item ->
+                    var numImage = 0
+                    if (item.id != currentUser.id) {
+                        numImage = index + 1
+                    }
 
-                imageRanking = when (numImage) {
-                    0 -> R.drawable.ranking_user
-                    1 -> R.drawable.ranking_ore
-                    2 -> R.drawable.ranking_plate
-                    3 -> R.drawable.ranking_bronze
-                    else -> R.drawable.ranking_sign
-                }
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(100.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = imageRanking),
-                        contentDescription = null,
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier.matchParentSize()
-                    )
-                    Row(
+                    imageRanking = when (numImage) {
+                        0 -> R.drawable.ranking_user
+                        1 -> R.drawable.ranking_ore
+                        2 -> R.drawable.ranking_plate
+                        3 -> R.drawable.ranking_bronze
+                        else -> R.drawable.ranking_sign
+                    }
+                    Box(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(start = 8.dp, end = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                            .fillMaxWidth()
+                            .height(100.dp)
                     ) {
-                        Box(
+                        Image(
+                            painter = painterResource(id = imageRanking),
+                            contentDescription = null,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier.matchParentSize()
+                        )
+                        Row(
                             modifier = Modifier
-                                .width(88.dp)
-                                .padding(16.dp),
-                            contentAlignment = Alignment.Center
+                                .fillMaxSize()
+                                .padding(start = 8.dp, end = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (item.oxygen == 0) {
-                                Text(
-                                    text = "",
-                                    style = MaterialTheme.typography.headlineLarge,
-                                    color = Color.Black,
-                                    textAlign = TextAlign.Center
-                                )
-                            } else {
-                                when (index) {
-                                    0 -> Image(
-                                        painter = painterResource(id = R.drawable.medalladeoro),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(66.dp)
-                                    )
-                                    1 -> Image(
-                                        painter = painterResource(id = R.drawable.medalladeplata),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(66.dp)
-                                    )
-                                    2 -> Image(
-                                        painter = painterResource(id = R.drawable.medalladebronce),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(66.dp)
-                                    )
-                                    else -> Text(
-                                        text = (index + 1).toString(),
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (item.oxygen == 0) {
+                                    Text(
+                                        text = "",
                                         style = MaterialTheme.typography.headlineLarge,
                                         color = Color.Black,
                                         textAlign = TextAlign.Center
                                     )
+                                } else {
+                                    when (index) {
+                                        0 -> Image(
+                                            painter = painterResource(id = R.drawable.medalladeoro),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(66.dp)
+                                        )
+                                        1 -> Image(
+                                            painter = painterResource(id = R.drawable.medalladeplata),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(66.dp)
+                                        )
+                                        2 -> Image(
+                                            painter = painterResource(id = R.drawable.medalladebronce),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(66.dp)
+                                        )
+                                        else -> Text(
+                                            text = (index + 1).toString(),
+                                            style = MaterialTheme.typography.headlineLarge,
+                                            color = Color.Black,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
                                 }
                             }
-                        }
-                        Spacer(
-                            modifier = Modifier
-                                .width(2.dp)
-                                .height(65.dp)
-                                .padding(bottom = 5.dp)
-                                .background(Color.Black)
-                        )
-
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(item.userImage)
-                                .placeholder(R.drawable.user_image)
-                                .build(),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(63.dp)
-                                .padding(bottom = 5.dp, start = 8.dp)
-                        )
-
-                        Column(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                                .width(130.dp)
-                        ) {
-                            Text(
-                                text = item.userName,
-                                style = if (item.userName.count() > 12) {
-                                    MaterialTheme.typography.titleSmall
-                                } else {
-                                    MaterialTheme.typography.titleMedium
-                                },
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color.Black,
+                            Spacer(
                                 modifier = Modifier
-                                    .padding(bottom = 2.dp)
+                                    .width(2.dp)
+                                    .height(65.dp)
+                                    .padding(bottom = 5.dp)
+                                    .background(Color.Black)
                             )
-                            Text(
-                                text = item.email,
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                                color = Color.Black,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(bottom = 20.dp)
-                            )
-                        }
 
-                        Spacer(modifier = Modifier.padding(end = 8.dp))
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.CenterVertically)
-                                .padding(end = 8.dp)
-                                .width(75.dp)
-                        ) {
+                            AsyncImage(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(item.userImage)
+                                    .placeholder(R.drawable.user_image)
+                                    .build(),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(63.dp)
+                                    .padding(bottom = 5.dp, start = 8.dp)
+                            )
+
                             Column(
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                                    .width(130.dp)
                             ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.oxygen_icon),
-                                    contentDescription = null,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier.size(30.dp)
-                                )
                                 Text(
-                                    text = item.oxygen.toString(),
-                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                                    text = item.userName,
+                                    style = if (item.userName.count() > 12) {
+                                        MaterialTheme.typography.titleSmall
+                                    } else {
+                                        MaterialTheme.typography.titleMedium
+                                    },
                                     fontWeight = FontWeight.SemiBold,
                                     color = Color.Black,
-                                    modifier = Modifier.padding(top = 4.dp)
+                                    modifier = Modifier
+                                        .padding(bottom = 2.dp)
                                 )
+                                Text(
+                                    text = item.email,
+                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                                    color = Color.Black,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(bottom = 20.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.padding(end = 8.dp))
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(end = 8.dp)
+                                    .width(75.dp)
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.oxygen_icon),
+                                        contentDescription = null,
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier.size(30.dp)
+                                    )
+                                    Text(
+                                        text = item.oxygen.toString(),
+                                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = Color.Black,
+                                        modifier = Modifier.padding(top = 4.dp)
+                                    )
+                                }
                             }
                         }
                     }

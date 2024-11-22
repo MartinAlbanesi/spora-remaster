@@ -86,13 +86,13 @@ class RankingViewModel @Inject constructor(
     private fun startCountdownTimer() {
         viewModelScope.launch {
             while (true) {
-//                val now = LocalDateTime.now()
-//                val nextReset = now.with(ChronoUnit.DAYS.addTo(now, 7 - now.dayOfWeek.value.toLong()))
-//                _timeUntilReset.value = Duration.between(now, nextReset)
-//                if (_timeUntilReset.value.isZero) {
-//                    resetWeeklyOxygen()
-//                }
-//                delay(1000L)
+                val now = LocalDateTime.now()
+                val nextReset = now.with(ChronoUnit.DAYS.addTo(now, 7 - now.dayOfWeek.value.toLong()))
+                _timeUntilReset.value = Duration.between(now, nextReset)
+                if (_timeUntilReset.value.isZero) {
+                    resetWeeklyOxygen()
+                }
+                delay(1000L)
             }
         }
     }
