@@ -22,7 +22,7 @@ class InfoCardRepositoryLocal @Inject constructor(
         return infoCardDao.getAllInfoCards().map { it.map { it.toInfoCard() } }
     }
 
-    override suspend fun getInfoCardById(id: Int): InfoCard? {
+    override suspend fun getInfoCardById(id: String): InfoCard? {
         return infoCardDao.getInfoCardById(id)?.toInfoCard()
     }
 

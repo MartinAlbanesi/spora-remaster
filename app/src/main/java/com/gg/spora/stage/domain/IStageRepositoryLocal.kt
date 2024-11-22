@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface IStageRepositoryLocal {
 
-
     suspend fun setNewLevels(levels: List<Level>)
 
     suspend fun getLevelsCount(): Int

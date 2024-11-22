@@ -1,6 +1,9 @@
 package com.gg.spora.core.di
 
+import com.gg.spora.core.data.INetworkConnectivityChecker
+import com.gg.spora.core.data.NetworkConnectivityChecker
 import com.gg.spora.core.firebase.FirestoreService
+import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -8,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -31,6 +35,12 @@ class FirebaseModule {
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNetworkConnectivityChecker(@ApplicationContext appContext: Context): INetworkConnectivityChecker {
+        return NetworkConnectivityChecker(appContext)
     }
 
 //    @Singleton

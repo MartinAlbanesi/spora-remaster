@@ -94,16 +94,16 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
         }
 
-        composable<NavigationRoutes.LibraryRiverInfo> {
+        composable<NavigationRoutes.LibraryLakeInfo> {
             val libraryViewModel = hiltViewModel<LibraryViewModel>()
 
-            libraryViewModel.getInfoCardListByCategory(StageType.RIVER)
+            libraryViewModel.getInfoCardListByCategory(StageType.LAKE)
 
             val cardList by libraryViewModel.infoCardEntityList.collectAsState()
 
             LibraryCardBook(
                 cardList = cardList.map { it.toInfoCardEntity() },
-                category = StageType.RIVER,
+                category = StageType.LAKE,
                 onBackClick = { navController.popBackStack() }
             )
         }

@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,19 +24,11 @@ import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
 
-/**
- * @param modifier Modifier
- * @param onClickFirst Lambda function to navigate to forest screen
- * @param onClickSecond Lambda function to navigate to river screen
- * @param onClickThird Lambda function to navigate to desert screen
- * @param onBackButtonClick Lambda function to navigate to previous screen
- */
 
 @Preview(showBackground = true)
 @Composable
@@ -61,7 +52,7 @@ fun LibraryScreen(
 
 
         Image(
-            painter = painterResource(R.drawable.library_background_xxl),
+            painter = painterResource(R.drawable.library_xxl_v2),
             contentDescription = "Library background",
             modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.FillBounds

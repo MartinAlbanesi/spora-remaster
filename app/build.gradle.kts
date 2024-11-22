@@ -194,4 +194,8 @@ dependencies {
     // Material extend icons
     implementation(libs.androidx.material.icons.extended)
 
+    //Google auth
+    //implementation(libs.google.auth)
+    implementation("com.google.android.gms:play-services-auth:20.6.0")
+
 }

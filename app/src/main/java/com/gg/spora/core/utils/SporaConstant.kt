@@ -67,4 +67,42 @@ object SporaConstant {
         "Las hormigas limpian el bosque",
         "Jugar afuera ahorra electricidad y es divertido",
     )
+    const val ANSWERS_FILE_PATH = "src/main/res/raw/answers.json"
+
+    val BANNED_WORDS = listOf(
+        "puta",
+        "culo",
+        "ass",
+        "puto",
+        "caca",
+        "pis",
+        "nigga",
+        "mierda",
+        "tonto",
+        "tonta",
+        "idiota",
+        "pendejo",
+        "pendeja",
+        "bitch",
+        "negro",
+        "judio",
+        "judia",
+        "negra",
+        "gay",
+        "maricon",
+        "maricona",
+        "lesbiana",
+        "burro",
+        "nazi",
+        "slut",
+        "sexo",
+        "porno",
+        "pito",
+        "pene",
+        "vagina",
+        "concha",
+        "asshole",
+        "tarado",
+        "tarada"
+    )
 }

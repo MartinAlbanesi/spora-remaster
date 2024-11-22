@@ -120,7 +120,7 @@ fun HomeScreen(
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.home_background),
+                painter = painterResource(id = R.drawable.home_background_rework),
                 contentDescription = "Home Background",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
@@ -184,16 +184,18 @@ fun HomeScreen(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .size(140.dp)
-                    .offset(y = (-40).dp, x = (-80).dp)
+                    .offset(y = (-120).dp, x = (-130).dp)
                     .clickable(onClick = onNavigateToForestStage)
             )
 
-            SignButton(
+            /*SignButton(
                 image = R.drawable.expo_sign,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .size(140.dp)
-//                    .offset(y = (-40).dp, x = (-80).dp)
+                    .offset(
+                        y = (-30).dp
+                    )
                     .clickable(onClick = onNavigateToExpoStage)
             )
 

@@ -7,7 +7,7 @@ interface IInfoCardRepositoryLocal {
 
     suspend fun getAllInfoCards(): Flow<List<InfoCard>>
 
-    suspend fun getInfoCardById(id: Int): InfoCard?
+    suspend fun getInfoCardById(id: String): InfoCard?
 
     suspend fun getInfoCardListByCategory(category: String): Flow<List<InfoCard>>
 
