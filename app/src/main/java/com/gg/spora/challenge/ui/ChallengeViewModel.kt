@@ -4,10 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.challenge.domain.GetAllObjectsDetailOfForestChallengeUseCase
 import com.gg.spora.challenge.domain.PutObjectDetailLocalUseCase
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.core.fake.FakeChallengeModels
-import com.gg.spora.user.domain.GetAllObjectsDetailForUserLocalUseCase
+import com.gg.spora.grove.domain.InsertSeedTreeUseCase
+import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.user.domain.GetAllObjectsDetailForUserUseCase
 import com.gg.spora.user.domain.UpdateObjectDetailChallengeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +21,9 @@ import javax.inject.Inject
 class ChallengeViewModel @Inject constructor(
     private val putObjectDetailLocalUseCase: PutObjectDetailLocalUseCase,
     private val updateObjectDetailChallengeUseCase : UpdateObjectDetailChallengeUseCase,
-    private val getAllObjectsDetailForUserLocalUseCase : GetAllObjectsDetailForUserLocalUseCase
+    private val getAllObjectsDetailForUserUseCase : GetAllObjectsDetailForUserUseCase,
+    private val insertSeedTreeUseCase: InsertSeedTreeUseCase,
+    private val getAllObjectsDetailOfForestChallengeUseCase: GetAllObjectsDetailOfForestChallengeUseCase
 ) : ViewModel () {
 
     private val _objectsChallenge = MutableLiveData<List<ObjectDetail>>(mutableListOf())
@@ -26,8 +32,26 @@ class ChallengeViewModel @Inject constructor(
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
+    private val _isFinally = MutableLiveData(false)
+    val isFinally: LiveData<Boolean> get() = _isFinally
+
     init {
         insertObjectsDetailInDatabase()
+        validateIfChallengeIsFinally()
+    }
+
+    private fun validateIfChallengeIsFinally(){
+        viewModelScope.launch {
+
+            val objectsOfUser = getAllObjectsDetailForUserUseCase()
+            val objectsDetailChallenge = getAllObjectsDetailOfForestChallengeUseCase()
+
+            val areObjectsEqual = objectsOfUser == objectsDetailChallenge
+
+            if(areObjectsEqual){
+                _isFinally.value = true
+            }
+        }
     }
 
     fun setObjectsChallengeEmpty(){
@@ -52,9 +76,16 @@ class ChallengeViewModel @Inject constructor(
         return objectDetail
     }
 
+    fun insertSeedTreeOfChallengeOne(){
+        viewModelScope.launch {
+            val seedTree = SeedTree(type = TreeType.PINE)
+            insertSeedTreeUseCase(seedTree)
+        }
+    }
+
     private fun setObjectsFromUser() {
         viewModelScope.launch {
-            val currentList = getAllObjectsDetailForUserLocalUseCase()
+            val currentList = getAllObjectsDetailForUserUseCase()
 
             _objectsChallenge.value?.forEach { localItem ->
                 val matchingObject = currentList.find { it.nameObjectDetail ==  localItem.nameObjectDetail}

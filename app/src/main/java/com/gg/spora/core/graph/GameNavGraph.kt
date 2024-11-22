@@ -189,6 +189,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             val challengeViewModel = hiltViewModel<ChallengeViewModel>()
             val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
             var isCorrect by remember { mutableStateOf(false) }
+            val isChallengeFinallyUser by challengeViewModel.isFinally.observeAsState(false)
             val isLoading by challengeViewModel.isLoading.observeAsState(true)
             val challengeRoute = backStackEntry.toRoute<NavigationRoutes.Challenge>()
             isCorrect = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
@@ -225,11 +226,11 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                 navController.navigate(NavigationRoutes.Camera(stageId = challengeRoute.stageId,
                                     nameObject = nameObject.toString()))
                             },
-                            onNavigateToForestStage = {
-                                navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
-                                    popUpTo<NavigationRoutes.Stage> { inclusive = true }
-                                }
+                            onNavigateToGrove = {
+                                challengeViewModel.insertSeedTreeOfChallengeOne()
+                                navController.navigate(NavigationRoutes.Grove)
                             },
+                            isChallengeFinallyUser = isChallengeFinallyUser,
                             challengeObjects = objectsChallenge,
                             continueDialogObjectDetail = { challengeRoute.nameObject = "" },
                             selectedObject = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)

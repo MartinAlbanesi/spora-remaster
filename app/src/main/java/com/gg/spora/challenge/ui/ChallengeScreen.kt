@@ -53,16 +53,20 @@ import com.gg.spora.core.utils.enums.StarState
 fun ChallengeScreen(
     modifier: Modifier = Modifier,
     onNavigateToCameraScreen: (Any?) -> Unit,
-    onNavigateToForestStage: () -> Unit,
+    onNavigateToGrove: () -> Unit,
     challengeObjects: List<ObjectDetail>,
     continueDialogObjectDetail: () -> Unit,
-    selectedObject : ObjectDetail
+    selectedObject: ObjectDetail,
+    isChallengeFinallyUser: Boolean
 ) {
-    val buttonContinueEnabled = challengeObjects.isNotEmpty() && challengeObjects.all { it.isValidate }
+    val buttonContinueEnabled = challengeObjects.isNotEmpty()
+            && challengeObjects.all { it.isValidate }
+            && !isChallengeFinallyUser
+
     var showDialog by remember { mutableStateOf(false) }
     var showDialogChallengeFinish by remember { mutableStateOf(false) }
 
-    if (!selectedObject.nameObjectDetail.isNullOrEmpty()) {
+    if (selectedObject.nameObjectDetail.isNotEmpty()) {
         showDialog = true
     }
 
@@ -80,7 +84,7 @@ fun ChallengeScreen(
     if(showDialogChallengeFinish){
         DialogFinishChallenge(
             modifier = modifier,
-            onNavigateToForestStage = onNavigateToForestStage,
+            onNavigateToGrove = onNavigateToGrove,
             onBackDialogFinishChallenge = { showDialogChallengeFinish = false }
         )
     }
@@ -116,10 +120,9 @@ fun ChallengeScreen(
 @Composable
 fun DialogFinishChallenge(
     modifier: Modifier,
-    onNavigateToForestStage: () -> Unit,
+    onNavigateToGrove: () -> Unit,
     onBackDialogFinishChallenge: () -> Unit
 ){
-    val totalOxygen = 100
     ChampyDialog(
         modifier = modifier,
         backgroundImage = R.drawable.minigame_background_crop,
@@ -128,15 +131,16 @@ fun DialogFinishChallenge(
         isVisible = true,
         starsState = StarState.THREE,
         isChallenge = true,
-        textPrimaryButton = stringResource(R.string.next),
+        textPrimaryButton = stringResource(R.string.plant_seed),
         textSecondaryButton = stringResource(R.string.back),
-        onClickPrimaryButton = onNavigateToForestStage,
+        onClickPrimaryButton = onNavigateToGrove,
         onClickSecondaryButton = onBackDialogFinishChallenge,
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column {
+                /*
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = modifier.padding(bottom = 5.dp)
@@ -157,7 +161,7 @@ fun DialogFinishChallenge(
                         ),
                     )
                 }
-
+*/
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
