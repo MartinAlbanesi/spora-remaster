@@ -71,6 +71,14 @@ class UserRepositoryLocal @Inject constructor(
         userDao.deleteLevelsCompleted()
     }
 
+    override suspend fun updateUserName(userName: String) {
+        userDao.updateUserName(userName)
+    }
+
+    override suspend fun updateUserImage(userImage: Int) {
+        userDao.updateUserImage(userImage)
+    }
+
 //    override suspend fun getCurrentUserFlow(): List<User> {
 //        return userDao.getUsersWithLevelsCompleted().first().map { it.toUser() }
 //    }

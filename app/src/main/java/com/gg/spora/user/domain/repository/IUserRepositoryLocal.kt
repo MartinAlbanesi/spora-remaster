@@ -26,4 +26,8 @@ interface IUserRepositoryLocal {
     suspend fun deleteUser()
 
     suspend fun deleteLevelsCompleted()
+
+    suspend fun updateUserName(userName: String)
+
+    suspend fun updateUserImage(userImage: Int)
 }

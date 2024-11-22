@@ -1,5 +1,7 @@
 package com.gg.spora.settings.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,6 +30,8 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.user.domain.models.User
+import kotlinx.coroutines.flow.Flow
 
 
 @Composable
@@ -35,8 +39,12 @@ fun SupportScreen(
     onBackClick: () -> Unit,
     onSendClick: (String, String) -> Unit
 ) {
+
     var description by remember { mutableStateOf("") }
     var selectedSubject by remember { mutableStateOf("") }
+
+
+
 
     Box(
         modifier = Modifier.fillMaxSize()

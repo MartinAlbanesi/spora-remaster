@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,7 +60,11 @@ fun EditProfileScreen(
     val viewModel: EditProfileViewModel = hiltViewModel()
     val currentUser by viewModel.currentUser.collectAsState()
     val selectedImage = viewModel.selectedImage
+    var username by remember { mutableStateOf(viewModel.newUsername) }
 
+    LaunchedEffect(currentUser) {
+        username = currentUser?.userName ?: ""
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -103,7 +108,7 @@ fun EditProfileScreen(
                     )
                 }
 
-              /*  TextField(
+                TextField(
                     value = username,
                     onValueChange = { username = it },
                     label = { Text("Usuario Nuevo") },
@@ -112,6 +117,8 @@ fun EditProfileScreen(
                         .padding(vertical = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
                 )
+
+                /*
                 TextField(
                     value = username,
                     onValueChange = { username = it },
@@ -136,7 +143,7 @@ fun EditProfileScreen(
 
                 SporaPrimaryButton(
                     text = "Actualizar datos",
-                    onClick = { viewModel.showSnackbar = true },
+                    onClick = { viewModel.updateUserProfile(selectedImage, username) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
@@ -166,7 +173,7 @@ fun EditProfileScreen(
                     R.drawable.bottle_cap,
                     R.drawable.spora_logo_without_slogan
                 ),
-                onImageSelected = { viewModel.updateUserImage(it) },
+                onImageSelected = { viewModel.updateUserProfile(it, username) },
                 onDismiss = { viewModel.showPopup = false }
             )
         }

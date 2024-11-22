@@ -2,7 +2,7 @@ package com.gg.spora.user.domain.models
 
 data class User(
     val id: String,
-    val userName: String,
+    var userName: String,
     val email: String,
     val oxygen: Int,
     val treesCount: Int,
