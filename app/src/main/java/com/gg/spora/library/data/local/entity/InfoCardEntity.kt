@@ -19,7 +19,7 @@ import com.gg.spora.core.utils.enums.StageType
 
 @Entity(tableName = "info_cards")
 data class InfoCardEntity(
-    @PrimaryKey() var id: String,
+    @PrimaryKey var id: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "info") val info: String,
     @ColumnInfo(name = "image") val image: String,

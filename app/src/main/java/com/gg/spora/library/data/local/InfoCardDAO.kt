@@ -3,6 +3,7 @@ package com.gg.spora.library.data.local
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.gg.spora.library.data.local.entity.InfoCardEntity
@@ -20,10 +21,10 @@ interface InfoCardDAO {
     @Query("SELECT * FROM info_cards WHERE category = :category")
     fun getInfoCardsByCategory(category: String): Flow<List<InfoCardEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertInfoCard(infoCardEntity: InfoCardEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertInfoCardList(infoCardEntities: List<InfoCardEntity>)
 
     @Update

@@ -123,6 +123,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val isLoading by groveViewModel.isLoading.collectAsState()
             val errorState by groveViewModel.errorState.collectAsState()
 
+            val showTutorial by groveViewModel.tutorialSelected.showTutorial.collectAsState()
+
+            val currentTutorialItem by groveViewModel.tutorialSelected.currentTutorialItem.collectAsState()
+
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
@@ -137,6 +141,20 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     navController.popBackStack()
                 },
             )
+
+            if (showTutorial) {
+                ChampyTalkingTutorial(
+                    modifier = Modifier.fillMaxSize(),
+                    champyImage = currentTutorialItem!!.champyImageState,
+                    isChampyTalking = currentTutorialItem!!.isChampyTalking,
+                    secondaryImage = currentTutorialItem!!.secondaryImage,
+                    isSecondaryTalking = currentTutorialItem!!.isSecondaryTalking,
+                    text = currentTutorialItem!!.text,
+                    focusPosition = currentTutorialItem!!.focusItem,
+                    onClickSkip = groveViewModel.tutorialSelected::skipTutorial,
+                    onNextItem = groveViewModel.tutorialSelected::nextTutorialItem
+                )
+            }
         }
         composable<NavigationRoutes.Ranking> {
 
