@@ -1,12 +1,15 @@
 package com.gg.spora.challenge.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -16,13 +19,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.DefaultShadowColor
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,10 +39,12 @@ import com.gg.spora.R
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.challenge.ui.components.ButtonObjectScannerChallenge
 import com.gg.spora.challenge.ui.components.ObjectDetailDialog
+import com.gg.spora.core.ui.components.ChampyDialog
+import com.gg.spora.core.utils.enums.StarState
 
 
 /**
- * Screen for mini games with Spora and progress bar
+ * Screen for challenge
  * @param modifier: Modifier
  * @param onNavigateToCameraScreen: Click listener for back button
  * @param onNavigateToCameraScreen: Action for navigate to Camera Screen
@@ -43,15 +53,20 @@ import com.gg.spora.challenge.ui.components.ObjectDetailDialog
 fun ChallengeScreen(
     modifier: Modifier = Modifier,
     onNavigateToCameraScreen: (Any?) -> Unit,
-    onNavigateToForestStage: () -> Unit,
+    onNavigateToGrove: () -> Unit,
     challengeObjects: List<ObjectDetail>,
     continueDialogObjectDetail: () -> Unit,
-    selectedObject : ObjectDetail
+    selectedObject: ObjectDetail,
+    isChallengeFinallyUser: Boolean
 ) {
-    val buttonContinueEnabled = challengeObjects.isNotEmpty() && challengeObjects.all { it.isValidate }
-    var showDialog by remember { mutableStateOf(false) }
+    val buttonContinueEnabled = challengeObjects.isNotEmpty()
+            && challengeObjects.all { it.isValidate }
+            && !isChallengeFinallyUser
 
-    if (!selectedObject.nameObjectDetail.isNullOrEmpty()) {
+    var showDialog by remember { mutableStateOf(false) }
+    var showDialogChallengeFinish by remember { mutableStateOf(false) }
+
+    if (selectedObject.nameObjectDetail.isNotEmpty()) {
         showDialog = true
     }
 
@@ -66,32 +81,109 @@ fun ChallengeScreen(
         )
     }
 
+    if(showDialogChallengeFinish){
+        DialogFinishChallenge(
+            modifier = modifier,
+            onNavigateToGrove = onNavigateToGrove,
+            onBackDialogFinishChallenge = { showDialogChallengeFinish = false }
+        )
+    }
+
     Column(
         modifier = modifier.padding(15.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-
         Text(
             text = stringResource(R.string.label_challenge),
-            style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
-            fontWeight = FontWeight.SemiBold,
-            color = Color.Black,
-            modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp)
+            fontSize = 25.sp,
+            modifier = Modifier.padding(10.dp)
         )
 
-        ObjectsChallengeList(challengeObjects, onNavigateToCameraScreen)
+        ObjectsChallengeList(challengeObjects, onNavigateToCameraScreen )
 
         Spacer(modifier = Modifier.height(48.dp))
 
         ContinueButton(
             enabled = buttonContinueEnabled,
-            onClick = onNavigateToForestStage
+            onClick = {
+                showDialogChallengeFinish = true
+
+            }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
     }
 
+}
+
+@Composable
+fun DialogFinishChallenge(
+    modifier: Modifier,
+    onNavigateToGrove: () -> Unit,
+    onBackDialogFinishChallenge: () -> Unit
+){
+    ChampyDialog(
+        modifier = modifier,
+        backgroundImage = R.drawable.minigame_background_crop,
+        champyImage = R.drawable.champy_celebrating_raised_arms,
+        title = stringResource(R.string.rewards),
+        isVisible = true,
+        starsState = StarState.THREE,
+        isChallenge = true,
+        textPrimaryButton = stringResource(R.string.plant_seed),
+        textSecondaryButton = stringResource(R.string.back),
+        onClickPrimaryButton = onNavigateToGrove,
+        onClickSecondaryButton = onBackDialogFinishChallenge,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column {
+                /*
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = modifier.padding(bottom = 5.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.oxygen_icon),
+                        contentDescription = "Oxigen",
+                        modifier = Modifier.size(50.dp)
+                    )
+                    Text(
+                        text = "+ $totalOxygen",
+                        fontSize = 24.sp,
+                        color = Color.White,
+                        style = TextStyle(
+                            shadow = Shadow(
+                                color = Color.Black, offset = Offset(5f, 5f), blurRadius = 5f
+                            )
+                        ),
+                    )
+                }
+*/
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.seed),
+                        contentDescription = "Seed",
+                        modifier = Modifier.size(50.dp)
+                    )
+                    Text(
+                        text = "+ 1",
+                        fontSize = 24.sp,
+                        color = Color.White,
+                        style = TextStyle(
+                            shadow = Shadow(
+                                color = Color.Black, offset = Offset(5f, 5f), blurRadius = 5f
+                            )
+                        ),
+                    )
+                }
+            }
+        }
+    }
 }
 
 /**

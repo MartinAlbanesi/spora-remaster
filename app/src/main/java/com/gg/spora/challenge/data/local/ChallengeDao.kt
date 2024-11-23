@@ -3,9 +3,12 @@ package com.gg.spora.challenge.data.local
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
 import com.gg.spora.challenge.domain.entities.StepObjectDetailEntity
+import com.gg.spora.challenge.domain.model.ObjectDetail
 
 @Dao
 interface ChallengeDao {
@@ -14,16 +17,11 @@ interface ChallengeDao {
     @Query("SELECT * FROM object_detail")
     suspend fun getAllObjectsDetail() : List<ObjectDetailEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertObjetDetail(objectDetailEntity: ObjectDetailEntity)
 
     @Query("DELETE FROM object_detail")
     suspend fun deleteAllObjectsDetail()
-
-    @Query(
-        "UPDATE object_detail SET is_validate = 1 " +
-            "WHERE name_object_detail = :nameObjectDetail")
-    suspend fun setValidObjectDetailInDatabase(nameObjectDetail : String)
 
     @Query("SELECT COUNT(*) FROM object_detail " +
             "WHERE name_object_detail = :nameObjectDetail")
@@ -39,7 +37,7 @@ interface ChallengeDao {
     @Query("SELECT * FROM object_detail_step")
     suspend fun getAllStepsObjectDetail() : List<StepObjectDetailEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStepObjetDetail(stepObjectDetail: StepObjectDetailEntity)
 
     @Query("SELECT ods.* FROM object_detail od JOIN object_detail_step ods " +

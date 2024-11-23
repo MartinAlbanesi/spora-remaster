@@ -1,6 +1,9 @@
 package com.gg.spora.user.domain.mappers
 
 import com.gg.spora.R
+import com.gg.spora.challenge.domain.mappers.toObjectDetail
+import com.gg.spora.grove.domain.mappers.toForestTree
+import com.gg.spora.grove.domain.mappers.toSeedTree
 import com.gg.spora.tutorials.domain.mapper.toTutorialCompleted
 import com.gg.spora.tutorials.domain.model.TutorialCompleted
 import com.gg.spora.user.data.local.entities.UserEntity
@@ -14,12 +17,13 @@ fun UserNetwork.toUser() = User(
     email = email ?: "",
     oxygen = oxygen ?: 0,
     levelsCompleted = levelsCompleted?.map { it.toLevelCompleted() } ?: emptyList(),
+    objectsScanned = objectsScanned?.map { it.toObjectDetail() } ?: emptyList(),
     treesCount = treesCount ?: 0,
     tutorialsCompleted = tutorialsCompleted?.map { it.toTutorialCompleted() } ?: emptyList(),
     userImage = userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36",
     weeklyOxygen = weeklyOxygen ?: 0,
-    seedTrees = emptyList(),
-    forestTrees = emptyList(),
+    seedTrees = seedTrees ?: emptyList(),
+    forestTrees = forestTrees ?: emptyList(),
 )
 
 fun User.toUserEntity() = UserEntity(
@@ -38,10 +42,11 @@ fun UserWithLevelsCompletedEntity.toUser(tutorialsCompleted: List<TutorialComple
     email = user.email,
     oxygen = user.oxygen,
     levelsCompleted = levelsCompleted.map { it.toLevelCompleted() },
+    objectsScanned = emptyList(),
     treesCount = user.treesCount,
     userImage = user.userImage,
     tutorialsCompleted = tutorialsCompleted,
-    weeklyOxygen = user.weeklyOxygen,
     seedTrees = emptyList(),
     forestTrees = emptyList(),
+    weeklyOxygen = user.weeklyOxygen,
 )

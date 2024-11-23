@@ -40,14 +40,14 @@ fun ChampyDialog(
     title: String,
     isVisible: Boolean,
     starsState: StarState,
-    rewards: List<Int>,
+    rewards: List<Int> = mutableListOf(),
+    isChallenge: Boolean = false,
     textPrimaryButton: String,
     textSecondaryButton: String,
     onClickPrimaryButton: () -> Unit,
     onClickSecondaryButton: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    val localRewards = getStarWithOxygen(starsState, rewards)
 
     val colorFilter = if (backgroundImage == R.drawable.expo_background) {
         ColorFilter.lighting(
@@ -89,14 +89,18 @@ fun ChampyDialog(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    StarWithOxygenGroup(
-                        rewards = localRewards,
-                        rotateItems = SporaConstant.ROTATE_ITEMS_REWARDS,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.CenterHorizontally)
-                            .offset(y = (-16).dp)
-                    )
+                    if(!isChallenge){
+
+                        val localRewards = getStarWithOxygen(starsState, rewards)
+                        StarWithOxygenGroup(
+                            rewards = localRewards,
+                            rotateItems = SporaConstant.ROTATE_ITEMS_REWARDS,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.CenterHorizontally)
+                                .offset(y = (-16).dp)
+                        )
+                    }
                     ChampyWithRewards(
                         champyImage = champyImage,
                         title = title,
@@ -120,7 +124,7 @@ fun ChampyDialog(
                         )
 
                         SporaPrimaryButton(
-                            text = textPrimaryButton, //if (starsState.starCount != 0) "Siguiente" else "Volver",
+                            text = textPrimaryButton,
                             onClick = onClickPrimaryButton,
                             modifier = Modifier
                                 .padding(8.dp)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -69,7 +70,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     champyQuote = champyQuote,
                     missions = missions,
                     onNavigateToForestStage = {
-                        navController.navigate(NavigationRoutes.Stage("1"))
+                        navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },
                     onNavigateToLibrary = {
                         homeViewModel.getTutorial(
@@ -96,7 +97,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         homeViewModel.getTutorial(
                             Tutorials.GROVE_ICON_TUTORIAL,
                         ) {
-                            navController.navigate(NavigationRoutes.Grove)
+                           navController.navigate(NavigationRoutes.Grove)
                         }
                     },
                     onClaimMission = homeViewModel::claimMission,
@@ -122,24 +123,33 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val uiState by groveViewModel.uiState.collectAsState()
             val isLoading by groveViewModel.isLoading.collectAsState()
             val errorState by groveViewModel.errorState.collectAsState()
-
             val showTutorial by groveViewModel.tutorialSelected.showTutorial.collectAsState()
 
             val currentTutorialItem by groveViewModel.tutorialSelected.currentTutorialItem.collectAsState()
 
+            /*
+                        DisposableEffect(Unit) {
+                            onDispose {
+                                groveViewModel.saveTreeCooldowns()
+                            }
+                        }
+            */
             GroveScreen(
                 uiState = uiState,
                 isLoading = isLoading,
                 forestTreesColumnCount = 10,
-                errorState = errorState,
                 plantForestTree = { forestTree, seedTreeId ->
                     groveViewModel.plantForestTree(forestTree, seedTreeId)
                 },
                 claimOxygen = { groveViewModel.claimOxygen() },
                 popBackStack = {
-                    //groveViewModel.saveTreeCooldowns()
                     navController.popBackStack()
                 },
+                errorState = errorState
+                /*loadTrees ={
+                    groveViewModel.loadSeedTrees()
+                    groveViewModel.loadForestTrees()
+                }*/
             )
 
             if (showTutorial) {
@@ -170,10 +180,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             )
         }
 
-
-
         composable<NavigationRoutes.ProfileScreen> {
             val viewModel: ProfileViewModel = hiltViewModel()
+            //val currentIndex by viewModel.currentIndex.collectAsState()
+
             val currentIndex by viewModel.currentIndex.collectAsState()
             val userPosition by viewModel.userPosition.collectAsState()
             val user by viewModel.user.collectAsState()

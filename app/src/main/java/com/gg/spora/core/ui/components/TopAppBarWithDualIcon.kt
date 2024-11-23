@@ -25,6 +25,8 @@ import com.gg.spora.ui.theme.SporaTheme
 
 /**
  * Top bar with progress bar
+ * @param firstLabel: Label for the first icon
+ * @param firstIcon: Image for the first icon
  * @param secondLabel: Label for the second icon
  * @param secondIcon: Image for the second icon
  * @param showBackArrow: Boolean to show or not the back arrow

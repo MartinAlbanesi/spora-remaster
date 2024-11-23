@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 /**
  * Entity for seed trees.
@@ -26,7 +28,8 @@ fun SeedTreeEntity.toSeedTree(): SeedTree {
     return SeedTree(
         id = idSeedTree,
         type = TreeType.valueOf(treeType),
-        timeToGenerateForestTree = timeToGenerateForestTree
+        timeToGenerateForestTree = timeToGenerateForestTree,
+        expectedTimeToGenerateForestTree = ( LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + timeToGenerateForestTree)
     ).apply {
         amountOfForestTreesGenerated = 0
     }

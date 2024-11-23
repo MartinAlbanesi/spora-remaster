@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
+import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.user.domain.models.LevelCompleted
 
 @Entity(tableName = "user_entity")

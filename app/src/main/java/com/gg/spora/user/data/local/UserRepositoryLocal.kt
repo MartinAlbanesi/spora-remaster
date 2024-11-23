@@ -1,5 +1,8 @@
 package com.gg.spora.user.data.local
 
+import com.gg.spora.challenge.data.local.ChallengeDao
+import com.gg.spora.challenge.domain.mappers.toObjectDetail
+import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
 import com.gg.spora.tutorials.domain.mapper.toTutorialCompleted
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
@@ -42,6 +45,11 @@ class UserRepositoryLocal @Inject constructor(
         }
     }
 
+    override suspend fun updateUserWithChallengeObjectCompleted(user: User, objectDetail: ObjectDetail) {
+        userDao.updateUser(user.toUserEntity())
+        userDao.setValidObjectDetailInDatabase(objectDetail.nameObjectDetail)
+    }
+
     override suspend fun updateUserId(userId: String) {
         userDao.updateUserId(userId)
     }
@@ -56,6 +64,10 @@ class UserRepositoryLocal @Inject constructor(
                 tutorialCompleted.toTutorialCompleted()
             })
         }
+    }
+
+    override suspend fun getAllObjectsDetailsValidate(): List<ObjectDetail> {
+        return userDao.getAllObjectsDetailsValidate().map { it.toObjectDetail() }
     }
 
     override suspend fun getUserOxygen(): Flow<Int> {

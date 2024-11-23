@@ -12,8 +12,8 @@ fun ForestTreeNetwork.toForestTree() : ForestTree{
     return ForestTree(
         id = id,
         type = TreeType.valueOf(treeType),
-        currentStage = currentStage,
-        plantingDate = plantingDate,
+        currentStage = GrowthStage.valueOf(currentStage),
+        plantingDate =  LocalDateTime.ofEpochSecond(plantingDate, 0, ZoneOffset.UTC),
         position = position,
         timesOxygenClaimed = timesOxygenClaimed,
         hasReachedAdultStage = hasReachedAdultStage
@@ -24,13 +24,14 @@ fun ForestTree.toForestTreeNetwork() : ForestTreeNetwork{
     return ForestTreeNetwork(
         id = id,
         treeType = type.name,
-        currentStage = currentStage,
-        plantingDate = plantingDate,
+        currentStage = currentStage.toString(),
+        plantingDate = plantingDate.toEpochSecond(ZoneOffset.UTC),
         position = position,
         timesOxygenClaimed = timesOxygenClaimed,
         hasReachedAdultStage = hasReachedAdultStage
     )
 }
+
 
 fun ForestTree.toForestTreeEntity(): ForestTreeEntity {
     return ForestTreeEntity(
@@ -53,4 +54,8 @@ fun ForestTreeEntity.toForestTree(): ForestTree {
         position = position,
         timesOxygenClaimed = timesOxygenClaimed
     )
+}
+
+fun List<ForestTreeEntity>.toForestList() : List<ForestTree>{
+    return map { it.toForestTree() }
 }

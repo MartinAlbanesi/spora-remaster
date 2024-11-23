@@ -1,9 +1,9 @@
 package com.gg.spora.user.domain.models
 
+import com.gg.spora.challenge.domain.model.ObjectDetail
+import com.gg.spora.grove.data.network.models.ForestTreeNetwork
+import com.gg.spora.grove.data.network.models.SeedTreeNetwork
 import com.gg.spora.tutorials.domain.model.TutorialCompleted
-
-import com.gg.spora.grove.domain.models.ForestTree
-import com.gg.spora.grove.domain.models.SeedTree
 
 data class User(
     val id: String,
@@ -12,9 +12,10 @@ data class User(
     val oxygen: Int,
     val treesCount: Int,
     val levelsCompleted: List<LevelCompleted>,
-    var forestTrees: List<ForestTree>,
-    val seedTrees: List<SeedTree>,
+    var forestTrees: List<ForestTreeNetwork>,
+    val seedTrees: List<SeedTreeNetwork>,
     val userImage: String,
     val tutorialsCompleted : List<TutorialCompleted>,
-    val weeklyOxygen: Int = 0
+    val weeklyOxygen: Int = 0,
+    val objectsScanned : List<ObjectDetail>,
 )

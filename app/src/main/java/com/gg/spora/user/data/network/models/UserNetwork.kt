@@ -2,6 +2,7 @@ package com.gg.spora.user.data.network.models
 
 import com.gg.spora.grove.data.network.models.ForestTreeNetwork
 import com.gg.spora.grove.data.network.models.SeedTreeNetwork
+import com.gg.spora.challenge.data.network.models.ObjectDetailNetwork
 
 data class UserNetwork(
     val id: String? = null,
@@ -9,6 +10,7 @@ data class UserNetwork(
     val email: String? = null,
     val oxygen: Int? = null,
     val levelsCompleted : List<LevelCompletedNetwork>? = null,
+    val objectsScanned : List<ObjectDetailNetwork>? = null,
     val treesCount: Int? = null,
     val userImage: String? = null,
     val weeklyOxygen: Int? = null,

@@ -19,7 +19,7 @@ import java.util.UUID
 data class SeedTree(
     override val id: String = UUID.randomUUID().toString(),
     override val type: TreeType,
-    val timeToGenerateForestTree: Long = 10000L,
+    val timeToGenerateForestTree: Long = 5000L,
     val expectedTimeToGenerateForestTree: Long = ( LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + timeToGenerateForestTree),
     var amountOfForestTreesGenerated: Int = 0,
 ) : Tree(id, type)

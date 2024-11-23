@@ -61,11 +61,12 @@ fun GroveScreen(
     uiState: GroveUiState,
     isLoading: Boolean,
     forestTreesColumnCount: Int,
-    errorState: String?,
     scrollState: ScrollState = rememberScrollState(),
     plantForestTree: (ForestTree, String) -> Unit,
     claimOxygen: () -> Unit,
     popBackStack: () -> Unit,
+    errorState: String?,
+    //loadTrees: () -> Unit
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -81,6 +82,7 @@ fun GroveScreen(
         }
     }
 
+
     BackHandler{
         popBackStack()
     }
@@ -92,8 +94,8 @@ fun GroveScreen(
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = true,
                 onBackClick = popBackStack,
+                firstLabel = "0",
                 firstIcon = R.drawable.trees_icon,
-                firstLabel = ""
             )
         },
         modifier = modifier
@@ -208,7 +210,8 @@ fun GrovePreview() {
                 plantForestTree = { _, _ -> },
                 claimOxygen = {},
                 popBackStack = {},
-                errorState = ""
+                errorState = "",
+                //loadTrees = {}
             )
         }
     }
