@@ -47,8 +47,8 @@ object FakeStageModels {
             "ZERO",
             "RECYCLE",
             3,
-            3,
-            4
+            2,
+            2
         ),
         LevelEntity(
             "2",
@@ -77,8 +77,8 @@ object FakeStageModels {
             starState = StarState.ZERO,
             isComplete = true,
             typeQuestion = TypeQuestion.RECYCLE,
-            quizCount = 5,
-            imageCount = 3,
+            quizCount = 3,
+            imageCount = 2,
             relationsCount = 2
 
         ),
