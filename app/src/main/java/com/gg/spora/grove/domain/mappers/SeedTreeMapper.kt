@@ -1,23 +1,17 @@
 package com.gg.spora.grove.domain.mappers
 
-import com.gg.spora.grove.data.database.entities.ForestTreeEntity
 import com.gg.spora.grove.data.database.entities.SeedTreeEntity
-import com.gg.spora.grove.data.network.models.ForestTreeNetwork
 import com.gg.spora.grove.data.network.models.SeedTreeNetwork
-import com.gg.spora.grove.domain.models.ForestTree
-import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 fun SeedTreeNetwork.toSeedTree() : SeedTree {
     return SeedTree(
-        id = id,
-        type = TreeType.valueOf(treeType),
-        timeToGenerateForestTree = timeToGenerateForestTree,
-        expectedTimeToGenerateForestTree = expectedTimeToGenerateForestTree,
-        amountOfForestTreesGenerated = amountOfForestTreesGenerated
+        id = id ?: "",
+        type = TreeType.valueOf(treeType.toString()),
+        timeToGenerateForestTree = timeToGenerateForestTree ?: 0L,
+        expectedTimeToGenerateForestTree = expectedTimeToGenerateForestTree ?: 0L,
+        amountOfForestTreesGenerated = amountOfForestTreesGenerated ?: 0
     )
 }
 

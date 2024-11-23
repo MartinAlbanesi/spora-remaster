@@ -85,7 +85,8 @@ class EditProfileViewModel @Inject constructor(
                 tutorialsCompleted = _currentUser.value?.tutorialsCompleted ?: emptyList(),
                 weeklyOxygen = _currentUser.value?.weeklyOxygen ?: 0,
                 forestTrees = _currentUser.value?.forestTrees ?: emptyList(),
-                seedTrees = _currentUser.value?.seedTrees ?: emptyList()
+                seedTrees = _currentUser.value?.seedTrees ?: emptyList(),
+                objectsScanned = _currentUser.value?.objectsScanned ?: emptyList()
             )
 
             updateUserImageInFirebase(user.id, imageRes, username)

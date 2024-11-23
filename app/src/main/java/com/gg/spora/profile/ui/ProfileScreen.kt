@@ -3,8 +3,6 @@ package com.gg.spora.profile.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,7 +24,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +32,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.models.User
 
@@ -291,7 +287,8 @@ private fun ProfileScreenPreview() {
                     weeklyOxygen = 0,
                     tutorialsCompleted = emptyList(),
                     forestTrees = emptyList(),
-                    seedTrees = emptyList()
+                    seedTrees = emptyList(),
+                    objectsScanned = emptyList()
                 ),
                 userPosition = 0
 //                onLeftArrowClick = {},

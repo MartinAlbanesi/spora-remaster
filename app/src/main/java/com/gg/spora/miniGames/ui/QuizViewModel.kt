@@ -298,7 +298,7 @@ class QuizViewModel @Inject constructor(
 
     fun onShowChampyHelp() {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(1000)
+            delay(4000)
                 currentQuestion.value?.champyHelping?.let{
                     _champyHelpingText.value = ChampyHelping(
                         text = it

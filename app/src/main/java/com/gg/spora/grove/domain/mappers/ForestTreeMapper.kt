@@ -10,13 +10,13 @@ import java.time.ZoneOffset
 
 fun ForestTreeNetwork.toForestTree() : ForestTree{
     return ForestTree(
-        id = id,
-        type = TreeType.valueOf(treeType),
-        currentStage = GrowthStage.valueOf(currentStage),
-        plantingDate =  LocalDateTime.ofEpochSecond(plantingDate, 0, ZoneOffset.UTC),
-        position = position,
-        timesOxygenClaimed = timesOxygenClaimed,
-        hasReachedAdultStage = hasReachedAdultStage
+        id = id ?: "",
+        type = TreeType.valueOf(treeType.toString()),
+        currentStage = GrowthStage.valueOf(currentStage.toString()),
+        plantingDate =  LocalDateTime.ofEpochSecond(plantingDate ?: 0L, 0, ZoneOffset.UTC),
+        position = position ?: 0,
+        timesOxygenClaimed = timesOxygenClaimed ?: 0,
+        hasReachedAdultStage = hasReachedAdultStage ?: false,
     )
 }
 
