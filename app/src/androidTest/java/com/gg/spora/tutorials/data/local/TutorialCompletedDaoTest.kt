@@ -89,7 +89,7 @@ class TutorialCompletedDaoTest{
         val tutorialCompletedEntityActual = tutorialCompletedDao.getTutorialById(1)
 
         // Then
-        assertEquals(tutorialCompletedEntityActual.isCompleted, false)
+        assertEquals(tutorialCompletedEntityActual.completed, false)
     }
 
     @Test

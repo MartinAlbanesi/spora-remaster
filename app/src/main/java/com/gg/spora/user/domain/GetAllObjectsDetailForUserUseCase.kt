@@ -15,7 +15,12 @@ class GetAllObjectsDetailForUserUseCase @Inject constructor(
         val userLocal = userRepositoryLocal.getUser().first()!!
         val objectDetailLocal = challengeRepositoryLocal.getAllObjectsDetail()
 
-        return (userLocal.objectsScanned + objectDetailLocal)
+        val updatedObjectDetails = objectDetailLocal.map { objectDetail ->
+            val stepsObjectDetail = challengeRepositoryLocal.getAllStepsObjectDetailWithName(objectDetail.nameObjectDetail)
+            objectDetail.copy(stepsObjectDetail = stepsObjectDetail) // Crear una copia con el nuevo valor
+        }
+
+        return (userLocal.objectsScanned + updatedObjectDetails)
             .distinctBy { it.nameObjectDetail }
     }
 }

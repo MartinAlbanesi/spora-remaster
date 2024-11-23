@@ -8,7 +8,7 @@ import com.gg.spora.user.data.network.models.TutorialCompletedNetwork
 fun TutorialCompleted.toTutorialCompletedEntity() : TutorialCompletedEntity{
     return TutorialCompletedEntity(
         tutorialId = tutorialId,
-        isCompleted = isCompleted,
+        completed = completed,
         tutorialName = tutorialName
     )
 }
@@ -16,7 +16,7 @@ fun TutorialCompleted.toTutorialCompletedEntity() : TutorialCompletedEntity{
 fun TutorialCompletedEntity.toTutorialCompleted() : TutorialCompleted{
     return TutorialCompleted(
         tutorialId = tutorialId,
-        isCompleted = isCompleted,
+        completed = completed,
         tutorialName = tutorialName
     )
 }
@@ -24,7 +24,7 @@ fun TutorialCompletedEntity.toTutorialCompleted() : TutorialCompleted{
 fun TutorialCompletedNetwork.toTutorialCompleted() : TutorialCompleted{
     return TutorialCompleted(
         tutorialId = tutorialId ?: Tutorials.HOME_TUTORIAL.id,
-        isCompleted = isCompleted ?: false,
+        completed = completed ?: false,
         tutorialName = tutorialName ?: Tutorials.HOME_TUTORIAL.tutorialName
     )
 }

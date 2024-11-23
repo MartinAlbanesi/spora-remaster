@@ -44,7 +44,7 @@ class TutorialSelected @Inject constructor(
             val isTutorialCompleted =
                 tutorialRepositoryLocal.getTutorialById(tutorial.id)
 
-            if (isTutorialCompleted.isCompleted) {
+            if (isTutorialCompleted.completed) {
                 _showTutorial.value = false
                 _secondaryAction()
                 return@launch
