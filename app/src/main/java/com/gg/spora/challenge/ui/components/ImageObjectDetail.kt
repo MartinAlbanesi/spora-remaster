@@ -24,7 +24,7 @@ fun classifyImageObjectDetail(objectDetailName : String) : Int{
         "Botella de plástico" -> {
             R.drawable.plastic_bottle
         }
-        "Caja de carton" -> {
+        "Caja de cartón" -> {
             R.drawable.cardboard_box
         }
         "Tapita de plástico" -> {

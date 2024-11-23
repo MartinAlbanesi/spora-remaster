@@ -37,21 +37,6 @@ class ChallengeViewModel @Inject constructor(
 
     init {
         insertObjectsDetailInDatabase()
-        validateIfChallengeIsFinally()
-    }
-
-    private fun validateIfChallengeIsFinally(){
-        viewModelScope.launch {
-
-            val objectsOfUser = getAllObjectsDetailForUserUseCase()
-            val objectsDetailChallenge = getAllObjectsDetailOfForestChallengeUseCase()
-
-            val areObjectsEqual = objectsOfUser == objectsDetailChallenge
-
-            if(objectsDetailChallenge.all { it.isValidate }){
-                _isFinally.value = true
-            }
-        }
     }
 
     fun setObjectsChallengeEmpty(){
@@ -83,21 +68,6 @@ class ChallengeViewModel @Inject constructor(
         }
     }
 
-    private fun setObjectsFromUser() {
-        viewModelScope.launch {
-            val currentList = getAllObjectsDetailForUserUseCase()
-
-            _objectsChallenge.value?.forEach { localItem ->
-                val matchingObject = currentList.find { it.nameObjectDetail ==  localItem.nameObjectDetail}
-                if(matchingObject != null){
-                    localItem.isValidate = true
-                }
-            }
-
-            setLoading(false)
-        }
-    }
-
     fun setObjectInObjectsChallengeWithName(nameObjectDetail: String) {
         viewModelScope.launch {
             updateObjectDetailChallengeUseCase(nameObjectDetail)
@@ -116,14 +86,18 @@ class ChallengeViewModel @Inject constructor(
     private fun insertObjectsDetailInDatabase(){
         viewModelScope.launch{
             val listObjects = FakeChallengeModels.fakeObjectDetails
+            val listObjectsDatabase = getAllObjectsDetailForUserUseCase()
 
-            for(objectDetail in listObjects){
-                putObjectDetailLocalUseCase(objectDetail)
+            if(listObjectsDatabase.isEmpty()){
+                for(objectDetail in listObjects){
+                    putObjectDetailLocalUseCase(objectDetail)
+                }
+                _objectsChallenge.postValue(listObjects)
             }
-
-            _objectsChallenge.postValue(listObjects)
-            setObjectsFromUser()
-
+            else{
+                _objectsChallenge.postValue(listObjectsDatabase)
+            }
+            setLoading(false)
         }
 
     }

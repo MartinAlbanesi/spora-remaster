@@ -61,7 +61,6 @@ fun ChallengeScreen(
 ) {
     val buttonContinueEnabled = challengeObjects.isNotEmpty()
             && challengeObjects.all { it.isValidate }
-            && !isChallengeFinallyUser
 
     var showDialog by remember { mutableStateOf(false) }
     var showDialogChallengeFinish by remember { mutableStateOf(false) }
