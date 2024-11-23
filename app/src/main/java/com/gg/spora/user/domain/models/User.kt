@@ -11,12 +11,10 @@ data class User(
     val email: String,
     val oxygen: Int,
     val treesCount: Int,
-    val userImage: Int,
     val levelsCompleted: List<LevelCompleted>,
     var forestTrees: List<ForestTree>,
     val seedTrees: List<SeedTree>,
     val userImage: String,
-    val levelsCompleted : List<LevelCompleted>,
     val tutorialsCompleted : List<TutorialCompleted>,
     val weeklyOxygen: Int = 0
 )

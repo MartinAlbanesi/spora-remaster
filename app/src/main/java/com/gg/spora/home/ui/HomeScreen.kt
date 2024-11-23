@@ -58,7 +58,6 @@ fun HomeScreen(
     onNavigateToRanking: () -> Unit,
     onNavigateToLibrary: () -> Unit,
     onNavigateToProfile: () -> Unit,
-    onNavigateToGrove: () -> Unit,
     onClaimMission: (Byte, Byte) -> Unit
 ) {
 
@@ -259,11 +258,9 @@ private fun MiniGameScreenPreview() {
                 champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
                 onNavigateToForestStage = {},
                 onNavigateToGrove = {},
-                onNavigateToExpoStage = {},
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
                 onNavigateToProfile = {},
-                onNavigateToGrove = {},
                 onClaimMission = { _, _ -> }
             )
         }

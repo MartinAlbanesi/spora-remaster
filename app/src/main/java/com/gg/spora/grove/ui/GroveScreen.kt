@@ -91,7 +91,9 @@ fun GroveScreen(
                 secondLabel = uiState.userOxygen.toString(),
                 secondIcon = R.drawable.oxygen_icon,
                 showBackArrow = true,
-                onBackClick = popBackStack
+                onBackClick = popBackStack,
+                firstIcon = R.drawable.trees_icon,
+                firstLabel = ""
             )
         },
         modifier = modifier

@@ -62,7 +62,7 @@ object FakeUserModels {
             userImage = "R.drawable.spora_face_splash",
             tutorialsCompleted = TutorialModels.tutorialsCompleted,
             forestTrees = emptyList(),
-            seedTrees = emptyList()
+            seedTrees = emptyList(),
         ),
         User(
             id = "2",

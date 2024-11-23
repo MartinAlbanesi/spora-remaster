@@ -71,9 +71,6 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage("1"))
                     },
-                    onNavigateToGrove = {
-                        navController.navigate(NavigationRoutes.Grove)
-                    },
                     onNavigateToLibrary = {
                         homeViewModel.getTutorial(
                             Tutorials.LIBRARY_ICON_TUTORIAL,
@@ -99,10 +96,10 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         homeViewModel.getTutorial(
                             Tutorials.GROVE_ICON_TUTORIAL,
                         ) {
-//                            navController.navigate(NavigationRoutes.Grove)
+                            navController.navigate(NavigationRoutes.Grove)
                         }
                     },
-                    onClaimMission = homeViewModel::claimMission
+                    onClaimMission = homeViewModel::claimMission,
                 )
             }
             if (showTutorial) {

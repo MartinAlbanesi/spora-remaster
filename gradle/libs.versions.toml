@@ -101,7 +101,6 @@ hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testi
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 # Kotlin Serialization
-kotlinx-coroutines-test-v152 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 # Firebase

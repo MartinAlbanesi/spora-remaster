@@ -32,8 +32,7 @@ import com.gg.spora.user.data.local.entities.UserEntity
         LevelEntity::class,
         StageLevelEntity::class,
         TutorialCompletedEntity::class,
-        MissionEntity::class
-        StageLevelEntity::class,
+        MissionEntity::class,
         ForestTreeEntity::class,
         SeedTreeEntity::class,
         CooldownDataEntity::class,
