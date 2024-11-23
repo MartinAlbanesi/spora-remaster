@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
@@ -188,15 +190,22 @@ fun InfoCardCarousel(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model =
                     ImageRequest.Builder(LocalContext.current)
                         .data(card.image)
-                        .placeholder(R.drawable.spora_face_splash)
+//                        .placeholder(R.drawable.spora_face_splash)
                         .error(R.drawable.champy_defeated_arms_body)
                         .build(),
                     contentDescription = "library card image",
                     contentScale = ContentScale.FillBounds,
+                    loading = {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .size(44.dp)
+                                .align(Alignment.TopCenter)
+                        )
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(140.dp)

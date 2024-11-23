@@ -3,6 +3,9 @@ package com.gg.spora.user.domain
 import com.gg.spora.grove.domain.interfaces.IGroveRepository
 import com.gg.spora.grove.domain.mappers.toForestTree
 import com.gg.spora.grove.domain.mappers.toSeedTree
+import com.gg.spora.tutorials.data.local.TutorialRepositoryLocal
+import com.gg.spora.tutorials.domain.SetTutorialsLocalUseCase
+import com.gg.spora.tutorials.domain.repository.ITutorialRepositoryLocal
 import com.gg.spora.user.domain.mappers.toLevelCompletedEntity
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
@@ -16,7 +19,8 @@ import javax.inject.Inject
 class UpdateUserLocalDataFromNetworkUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal,
-    private val groveRepositoryLocal: IGroveRepository
+    private val groveRepositoryLocal: IGroveRepository,
+    private val setTutorialsLocalUseCase: SetTutorialsLocalUseCase
 ) {
     suspend operator fun invoke(
         email: String
@@ -30,5 +34,7 @@ class UpdateUserLocalDataFromNetworkUseCase @Inject constructor(
         val listSeedTrees = user.seedTrees.map { it.toSeedTree() }
         groveRepositoryLocal.insertSeedTreesList(listSeedTrees)
         userRepositoryLocal.setLevelsCompleted(user.levelsCompleted.map { it.toLevelCompletedEntity(user.id) })
+
+        setTutorialsLocalUseCase(user.tutorialsCompleted)
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,6 +45,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.SubcomposeAsyncImage
 import kotlinx.coroutines.delay
 import java.time.Duration
 
@@ -196,13 +198,20 @@ fun Ranking(
                                     .background(Color.Black)
                             )
 
-                            AsyncImage(
+                            SubcomposeAsyncImage(
                                 model = ImageRequest.Builder(LocalContext.current)
                                     .data(item.userImage)
                                     .placeholder(R.drawable.user_image)
                                     .build(),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
+                                loading = {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier
+                                            .size(44.dp)
+                                            .align(Alignment.TopCenter)
+                                    )
+                                },
                                 modifier = Modifier
                                     .size(63.dp)
                                     .padding(bottom = 5.dp, start = 8.dp)

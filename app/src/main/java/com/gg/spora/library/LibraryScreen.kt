@@ -59,9 +59,10 @@ fun LibraryScreen(
         )
 
         TopAppBarOnlyBackArrow(
-            title = ""
+            title = "",
+            onBackClick = onBackButtonClick
         ) {
-            onBackButtonClick()
+
         }
 
         TorchFire(modifier = Modifier)

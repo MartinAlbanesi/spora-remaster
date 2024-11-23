@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
@@ -82,13 +84,20 @@ fun ProfileScreen(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    AsyncImage(
+                    SubcomposeAsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(user?.userImage ?: "https://firebasestorage.googleapis.com/v0/b/spora-3f595.firebasestorage.app/o/avatars%2Fchampy_smile.png?alt=media&token=332929a3-a86a-4a8c-834e-28bccc40fe36")
                             .placeholder(R.drawable.user_image)
                             .build(),
                         contentDescription = "User Image",
-                        modifier = Modifier.size(200.dp)
+                        modifier = Modifier.size(200.dp),
+                        loading = {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .size(44.dp)
+                                    .align(Alignment.TopCenter)
+                            )
+                        },
                     )
                     Box(
                         modifier = Modifier
