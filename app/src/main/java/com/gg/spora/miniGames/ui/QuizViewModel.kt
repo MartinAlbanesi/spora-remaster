@@ -87,6 +87,9 @@ class QuizViewModel @Inject constructor(
     private val _missionCompleted = MutableStateFlow<Mission?>(null)
     val missionCompleted: StateFlow<Mission?> = _missionCompleted
 
+    private val _isRewardsLoading = MutableStateFlow(false)
+    val isRewardsLoading: StateFlow<Boolean> = _isRewardsLoading
+
     init {
         getRandomQuestions()
         getCurrentQuestion()
@@ -276,6 +279,7 @@ class QuizViewModel @Inject constructor(
 
     private fun finishGame() {
         _isFinished.value = true
+        _isRewardsLoading.value = true
 
         viewModelScope.launch {
 
@@ -293,6 +297,7 @@ class QuizViewModel @Inject constructor(
             }
 
             updateMission()
+            _isRewardsLoading.value = false
         }
     }
 

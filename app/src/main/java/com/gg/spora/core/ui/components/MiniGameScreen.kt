@@ -47,6 +47,7 @@ import kotlinx.serialization.json.JsonNull.content
 fun MiniGameScreen(
     modifier: Modifier = Modifier,
     title: String = "Mini Juego",
+    isRewardsLoading: Boolean = false,
     imageBackground: Int,
     isCorrect: Boolean? = null,
     questionSize: Int,
@@ -95,22 +96,26 @@ fun MiniGameScreen(
     var showDialogConfirm by rememberSaveable { mutableStateOf(false) }
 
     if (isFinished) {
-        GameResultPopUp(
-            isVisible = true,
-            backgroundImage = R.drawable.minigame_background_crop,
-            starsState = getRewardsStarState(livesLost = livesLost),
-            rewards = rewards,
-            totalOxygen = totalOxygen,
-            onBackStage = {
-                onBackForestStage()
-            },
-            onResetGame = {
-                onResetGame()
-            },
-            onNavigateNextLevel = {
-                onNavigateNextLevel()
-            }
-        )
+        if(isRewardsLoading){
+            ShowCircularProgressIndicator(true)
+        }else{
+            GameResultPopUp(
+                isVisible = true,
+                backgroundImage = R.drawable.minigame_background_crop,
+                starsState = getRewardsStarState(livesLost = livesLost),
+                rewards = rewards,
+                totalOxygen = totalOxygen,
+                onBackStage = {
+                    onBackForestStage()
+                },
+                onResetGame = {
+                    onResetGame()
+                },
+                onNavigateNextLevel = {
+                    onNavigateNextLevel()
+                }
+            )
+        }
     }
 
     BackHandler {

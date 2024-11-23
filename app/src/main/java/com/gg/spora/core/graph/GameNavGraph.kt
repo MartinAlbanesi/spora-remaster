@@ -173,6 +173,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val currentRewards by quizViewModel.currentRewards.collectAsState()
 
+            val isRewardsLoading by quizViewModel.isRewardsLoading.collectAsState()
+
             LaunchedEffect(counterQuestion){
                 quizViewModel.onShowChampyHelp()
             }
@@ -196,6 +198,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             ){
                 MiniGameScreen(
                     modifier = Modifier.fillMaxSize(),
+                    isRewardsLoading = isRewardsLoading,
                     title = quizGameRoute.title,
                     imageBackground = quizGameRoute.imageBackground,
                     isCorrect = isCorrect,
