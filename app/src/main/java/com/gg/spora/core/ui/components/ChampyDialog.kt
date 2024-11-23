@@ -40,7 +40,7 @@ fun ChampyDialog(
     title: String,
     isVisible: Boolean,
     starsState: StarState,
-    rewards: List<Int> = mutableListOf(),
+    rewards: List<Int> = emptyList(),
     isChallenge: Boolean = false,
     textPrimaryButton: String,
     textSecondaryButton: String,

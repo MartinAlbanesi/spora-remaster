@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -38,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import coil.compose.AsyncImagePainter.State.Empty.painter
+import coil.compose.SubcomposeAsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
@@ -65,9 +68,9 @@ fun QuizImageScreen(
 
     var selectedAnswerId by remember { mutableStateOf("") }
 
-    val painter = currentImageResIdState?.let {
-        rememberAsyncImagePainter(model = it)
-    } ?: painterResource(id = R.drawable.wind_turbine)
+//    val painter = currentImageResIdState?.let {
+//        rememberAsyncImagePainter(model = it)
+//    } ?: painterResource(id = R.drawable.wind_turbine)
 
     if (showImageFullScreen) {
         Dialog(
@@ -78,11 +81,17 @@ fun QuizImageScreen(
                 usePlatformDefaultWidth = false
             ),
             content = {
-                Image(
+                SubcomposeAsyncImage(
                     //painter = painterResource(id = currentImageResIdState),
-                    painter = painter,
+                    model = currentImageResIdState,
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
+                    loading = {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .size(44.dp)
+                        )
+                    },
                     modifier = Modifier
 //                        .heightIn(0.dp, 250.dp)
                         .fillMaxWidth(0.9f)
@@ -111,11 +120,17 @@ fun QuizImageScreen(
                         showImageFullScreen = true
                     }
             ) {
-                Image(
+                SubcomposeAsyncImage(
                     //painter = painterResource(id = currentImageResIdState),
-                    painter = painter,
+                    model = currentImageResIdState,
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
+                    loading = {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .size(24.dp)
+                        )
+                    },
                     modifier = Modifier
                         .padding(4.dp)
                         .size(130.dp)

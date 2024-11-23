@@ -308,7 +308,11 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                             },
                             onNavigateToGrove = {
                                 challengeViewModel.insertSeedTreeOfChallengeOne()
-                                navController.navigate(NavigationRoutes.Grove)
+                                navController.navigate(NavigationRoutes.Grove){
+                                    popUpTo(NavigationRoutes.Stage(challengeRoute.stageId)){
+                                        inclusive = true
+                                    }
+                                }
                             },
                             isChallengeFinallyUser = isChallengeFinallyUser,
                             challengeObjects = objectsChallenge,
