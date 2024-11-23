@@ -29,7 +29,7 @@ object SporaConstant {
     )
 
     val PATH_LADDER = listOf(
-        Pair(-40,0), Pair(-40,0), Pair(-10,0), Pair(50,0), Pair(50,0)
+        Pair(-40,0), Pair(-30,0), Pair(45,0), Pair(50,0), Pair(50,0)
     )
 
     val CHAMPY_CONGRATULATING_YOU_LIST = listOf(
