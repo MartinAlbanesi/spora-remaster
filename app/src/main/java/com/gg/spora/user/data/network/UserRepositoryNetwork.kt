@@ -2,6 +2,7 @@ package com.gg.spora.user.data.network
 
 import com.gg.spora.core.firebase.FirestoreService
 import com.gg.spora.core.utils.enums.CollectionsDataBase
+import com.gg.spora.tutorials.data.TutorialModels.tutorialsCompleted
 import com.gg.spora.user.data.network.models.UserNetwork
 import com.gg.spora.user.domain.repository.IUserRepositoryNetwork
 import com.gg.spora.user.domain.mappers.toUser
@@ -52,5 +53,17 @@ class UserRepositoryNetwork @Inject constructor(
                 querySnapshot.toObjects(UserNetwork::class.java)
                     .map { userNetwork -> userNetwork.toUser() }
             }
+    }
+
+    override suspend fun updateUserOxygen(
+        oxygen: Int,
+        userId: String
+    ) {
+        firestoreService.updateFieldInDocument(
+            collection = CollectionsDataBase.USERS,
+            id = userId,
+            field = "oxygen",
+            value = oxygen
+        )
     }
 }

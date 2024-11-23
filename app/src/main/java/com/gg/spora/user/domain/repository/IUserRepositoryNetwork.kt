@@ -14,4 +14,6 @@ interface IUserRepositoryNetwork {
     fun getUserByEmailFlow(email: String): Flow<User>
 
     fun getAllUser(): Flow<List<User>>
+
+    suspend fun updateUserOxygen(oxygen: Int, userId: String)
 }
