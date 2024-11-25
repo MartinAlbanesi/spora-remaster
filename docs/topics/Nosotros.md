@@ -18,8 +18,11 @@ Para llevar a cabo este proyecto, nos organizamos en equipos de trabajo, cada un
 
 ## ¿Dónde estamos?
 
-Actualmente nos encontramos en la etapa inicial del proyecto, realizando la planificación y el diseño de la aplicación. En las próximas semanas comenzaremos con el desarrollo de la misma, y esperamos poder lanzarla al mercado en los próximos meses. Estamos ansiosos por ver los resultados de nuestro trabajo, y confiamos en que la aplicación será un éxito y cumplirá con las expectativas de nuestros usuarios.
+Actualmente, tenemos una versión estable de la aplicación con las funciones principales implementadas. Estamos realizando pruebas de usabilidad y correcciones de errores para garantizar que la aplicación funcione correctamente en todos los dispositivos. Una vez que hayamos completado esta etapa, estaremos listos para lanzar la aplicación en la tienda de aplicaciones de Android, y comenzar a promocionarla entre nuestro público objetivo.
 
 ## ¿Qué nos depara el futuro?
 
 Una vez que la aplicación esté lista, planeamos continuar trabajando en ella para mejorarla y agregar nuevas funcionalidades. Estamos emocionados por lo que nos depara el futuro, y confiamos en que este proyecto nos abrirá nuevas puertas y oportunidades en el mundo laboral. Estamos seguros de que este proyecto será el comienzo de una carrera exitosa en el desarrollo de aplicaciones móviles, y estamos ansiosos por ver a dónde nos llevará.
+
+\
+<a href="../../README.md">Volver a la página de inicio</a>

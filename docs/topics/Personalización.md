@@ -1,3 +1,0 @@
-# Personalización
-
-Start typing here...
