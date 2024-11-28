@@ -3,10 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
 
-    id("com.google.devtools.ksp")
-
     //Dagger Hilt
-    // alias(libs.plugins.ksp) // Add this line without apply false
+    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 
     // Kotlin Serialization
@@ -18,7 +16,7 @@ plugins {
     // Google Services
     alias(libs.plugins.googleServices)
 
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.firebaseCrashlytics)
 
     // Kover
     alias(libs.plugins.kover)
@@ -123,7 +121,6 @@ dependencies {
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
-    testImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -190,9 +187,6 @@ dependencies {
 
     // Constraint Layout Compose
     implementation(libs.constraint.layout.compose)
-
-    // Gson
-    implementation (libs.converter.gson)
 
     // Material extend icons
     implementation(libs.androidx.material.icons.extended)
