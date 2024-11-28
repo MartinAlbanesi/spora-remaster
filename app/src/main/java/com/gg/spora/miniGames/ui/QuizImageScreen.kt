@@ -1,6 +1,5 @@
 package com.gg.spora.miniGames.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,9 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import coil.compose.AsyncImagePainter.State.Empty.painter
 import coil.compose.SubcomposeAsyncImage
-import coil.compose.rememberAsyncImagePainter
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.ui.components.MiniGameScreen
@@ -56,21 +52,15 @@ fun QuizImageScreen(
     questionTitle: String,
     isCorrect: Boolean? = null,
     answerOptions: List<Answer>,
-    //currentImageResIdState: Int,
     currentImageResIdState: String?,
     onAnswerSelected: (String) -> Unit,
     onConfirmAnswer: (String) -> Unit
 ) {
-
     var isAnswerSelected by remember { mutableStateOf(false) }
 
     var showImageFullScreen by remember { mutableStateOf(false) }
 
     var selectedAnswerId by remember { mutableStateOf("") }
-
-//    val painter = currentImageResIdState?.let {
-//        rememberAsyncImagePainter(model = it)
-//    } ?: painterResource(id = R.drawable.wind_turbine)
 
     if (showImageFullScreen) {
         Dialog(
@@ -82,7 +72,6 @@ fun QuizImageScreen(
             ),
             content = {
                 SubcomposeAsyncImage(
-                    //painter = painterResource(id = currentImageResIdState),
                     model = currentImageResIdState,
                     contentDescription = "Imagen",
                     contentScale = ContentScale.FillBounds,
@@ -93,7 +82,6 @@ fun QuizImageScreen(
                         )
                     },
                     modifier = Modifier
-//                        .heightIn(0.dp, 250.dp)
                         .fillMaxWidth(0.9f)
                         .fillMaxHeight(0.6f)
                         .clip(MaterialTheme.shapes.large)
@@ -152,8 +140,6 @@ fun QuizImageScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 4.dp)
-//                .weight(1f)
-//                .heightIn(min = 50.dp)
             )
 
             LazyColumn(
@@ -171,12 +157,7 @@ fun QuizImageScreen(
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)
                             .clip(MaterialTheme.shapes.large)
-//                        .fillMaxWidth(0.4f)
-//                        .heightIn(min = 40.dp)
                             .fillMaxHeight()
-//                        .heightIn(max =200.dp)
-//                        .requiredHeightIn(40.dp, 60.dp)
-//                        .weight(1f)
                             .clickable {
                                 isAnswerSelected = true
                             }
@@ -196,7 +177,6 @@ fun QuizImageScreen(
                 modifier = Modifier
                     .padding(16.dp)
                     .heightIn(min = 48.dp, max = 60.dp)
-//                    .fillMaxHeight(0.15f)
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
             ) {

@@ -1,9 +1,6 @@
 package com.gg.spora.user.domain.mappers
 
-import com.gg.spora.R
 import com.gg.spora.challenge.domain.mappers.toObjectDetail
-import com.gg.spora.grove.domain.mappers.toForestTree
-import com.gg.spora.grove.domain.mappers.toSeedTree
 import com.gg.spora.tutorials.domain.mapper.toTutorialCompleted
 import com.gg.spora.tutorials.domain.model.TutorialCompleted
 import com.gg.spora.user.data.local.entities.UserEntity
@@ -11,6 +8,7 @@ import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
 import com.gg.spora.user.data.network.models.UserNetwork
 import com.gg.spora.user.domain.models.User
 
+@Suppress("MaxLineLength")
 fun UserNetwork.toUser() = User(
     id = id ?: "",
     userName = userName ?: "",

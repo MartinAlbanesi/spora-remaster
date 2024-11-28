@@ -35,6 +35,7 @@ import com.gg.spora.tutorials.ui.component.ChampyTalkingTutorial
 import com.gg.spora.user.domain.models.User
 
 @RequiresApi(Build.VERSION_CODES.O)
+@Suppress("LongMethod")
 fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
     navigation<NavigationRoutes.HomeGraph>(startDestination = NavigationRoutes.Home) {

@@ -20,6 +20,7 @@ class SetNewUserUseCase @Inject constructor(
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val userRepositoryLocal: IUserRepositoryLocal
 ) {
+    @Suppress("MaxLineLength")
     suspend operator fun invoke(email: String?, userName: String) {
 
         if (email == null) {

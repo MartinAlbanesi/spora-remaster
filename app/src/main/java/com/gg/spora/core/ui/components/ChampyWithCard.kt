@@ -106,7 +106,9 @@ private fun SporaWithCardPreview() {
                 champyImage = R.drawable.champy_celebrating_raised_arms,
                 showChampyHelp = true,
                 champyHelpingText = ChampyHelping(
-                    text = "Los combustibles fósiles son materiales como el petróleo, el carbón y el gas natural, que vienen de plantas y animales que vivieron hace millones de años.",
+                    text = "Los combustibles fósiles son materiales como el petróleo, el " +
+                        "carbón y el gas natural, que vienen de plantas y animales que vivieron " +
+                        "hace millones de años.",
                 ),
             ) {}
         }

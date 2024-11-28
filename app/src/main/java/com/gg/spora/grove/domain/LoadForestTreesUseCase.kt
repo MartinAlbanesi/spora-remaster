@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 class LoadForestTreesUseCase @Inject constructor(
     private val groveRepository: IGroveRepository,
-    private val userRepositoryLocal: UserRepositoryLocal
+//    private val userRepositoryLocal: UserRepositoryLocal
 ) {
     suspend operator fun invoke(): Flow<List<ForestTree?>> {
         return groveRepository.getForestTreesListFromDatabase()

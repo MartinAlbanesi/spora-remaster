@@ -6,7 +6,7 @@ import com.gg.spora.core.firebase.FirestoreService
 import javax.inject.Inject
 
 class ChallengeRepositoryNetwork @Inject constructor(firestoreService: FirestoreService) : IChallengeRepositoryNetwork{
-    private val firestore = firestoreService.getFirestore()
+//    private val firestore = firestoreService.getFirestore()
 
     override fun getObjectsDetailByUser(userId: String) {
         TODO("Not yet implemented")

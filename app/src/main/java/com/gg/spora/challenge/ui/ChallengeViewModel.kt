@@ -23,7 +23,7 @@ class ChallengeViewModel @Inject constructor(
     private val updateObjectDetailChallengeUseCase : UpdateObjectDetailChallengeUseCase,
     private val getAllObjectsDetailForUserUseCase : GetAllObjectsDetailForUserUseCase,
     private val insertSeedTreeUseCase: InsertSeedTreeUseCase,
-    private val getAllObjectsDetailOfForestChallengeUseCase: GetAllObjectsDetailOfForestChallengeUseCase
+//    private val getAllObjectsDetailOfForestChallengeUseCase: GetAllObjectsDetailOfForestChallengeUseCase
 ) : ViewModel () {
 
     private val _objectsChallenge = MutableLiveData<List<ObjectDetail>>(mutableListOf())

@@ -63,6 +63,9 @@ constraintLayoutCompose = "1.0.1"
 # Kover
 kover = "0.8.3"
 
+# coreLibraryDesugaring
+coreLibraryDesugaring = "2.0.4"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -141,6 +144,9 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 # Constraint Layout Compose
 constraint-layout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintLayoutCompose" }
+
+# coreLibraryDesugaring
+coreLibraryDesugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "coreLibraryDesugaring" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -53,6 +53,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -121,6 +123,7 @@ dependencies {
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.core.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -177,7 +180,7 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
 
-    // kotlin corrutines
+    // kotlin Coroutines
     testImplementation (libs.kotlinx.coroutines.test)
 
     // Mockk
@@ -193,8 +196,8 @@ dependencies {
 
     //Google auth
     //implementation(libs.google.auth)
-    implementation("com.google.android.gms:play-services-auth:20.6.0")
+//    implementation("com.google.android.gms:play-services-auth:20.6.0")
 
-    //Kotlin Coroutines
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    // CoreLibraryDesugaring
+    coreLibraryDesugaring(libs.coreLibraryDesugaring)
 }

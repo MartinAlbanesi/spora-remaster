@@ -76,7 +76,7 @@ class GroveViewModel @Inject constructor(
     private val insertCooldownDataUseCase: InsertCooldownDataUseCase,
     private val updateUserOxygenUseCase: UpdateUserOxygenUseCase,
     private val getUserOxygenUseCase: GetUserOxygenUseCase,
-    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
+//    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
     private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase,
     private val updateTimesOxygenClaimed: UpdateTimesOxygenClaimedUseCase,
     val tutorialSelected: TutorialSelected,

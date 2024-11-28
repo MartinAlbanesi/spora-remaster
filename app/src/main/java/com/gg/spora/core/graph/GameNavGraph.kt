@@ -317,7 +317,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                                     }
                                 }
                             },
-                            isChallengeFinallyUser = isChallengeFinallyUser,
+//                            isChallengeFinallyUser = isChallengeFinallyUser,
                             challengeObjects = objectsChallenge,
                             continueDialogObjectDetail = { challengeRoute.nameObject = "" },
                             selectedObject = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)

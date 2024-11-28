@@ -57,7 +57,7 @@ fun ChallengeScreen(
     challengeObjects: List<ObjectDetail>,
     continueDialogObjectDetail: () -> Unit,
     selectedObject: ObjectDetail,
-    isChallengeFinallyUser: Boolean
+//    isChallengeFinallyUser: Boolean
 ) {
     val buttonContinueEnabled = challengeObjects.isNotEmpty()
             && challengeObjects.all { it.isValidate }
