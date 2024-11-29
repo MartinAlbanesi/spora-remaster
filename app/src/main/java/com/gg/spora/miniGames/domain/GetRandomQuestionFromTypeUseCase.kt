@@ -14,58 +14,6 @@ class GetRandomQuestionFromTypeUseCase @Inject constructor(
         typeQuestion: List<TypeQuestion>,
         typeGame: TypeGame,
     ): List<Question> {
-
-
-//        val questions : MutableSet<Question> = mutableSetOf()
-//
-//        do {
-//            if(typeGame == TypeGame.RELATIONS) {
-//                val randomQuestions = quizLocalRepository
-//                    .getRandomQuestions(count, typeQuestion, typeGame)
-////                return randomQuestions
-//                questions.addAll(randomQuestions)
-//            }else{
-//                val randomAnswer = quizLocalRepository.getRandomAnswers(1, typeQuestion, typeGame).first()
-//                val randomAnswers = quizLocalRepository
-//                    .getRandomAnswers(count, typeQuestion, typeGame)
-//                    .filter { it.id != randomAnswer.id }
-//
-//                val questionWithAnswerId = quizLocalRepository
-//                    .getQuestionById(randomAnswer.id)
-//
-//                if(questionWithAnswerId == null) {
-//                    throw QuestionNotFoundException()
-//                }
-//
-//                val newQuestion = questionWithAnswerId.copy(
-//                    answers = (questionWithAnswerId.answers + randomAnswers).shuffled()
-//                )
-//                questions.add(newQuestion)
-//            }
-//        } while (questions.size < count)
-//
-//        return questions.toList()
-
-//        val randomAnswer = quizLocalRepository.getRandomAnswers(1, typeQuestion, typeGame).first()
-//        val randomAnswers = quizLocalRepository
-//            .getRandomAnswers(count, typeQuestion, typeGame)
-//            .filter { it.id != randomAnswer.id }
-//
-//        val questionWithAnswerId = quizLocalRepository
-//            .getQuestionById(randomAnswer.id)
-//
-//        if(questionWithAnswerId == null) {
-//            throw QuestionNotFoundException()
-//        }
-//
-//
-//        val newQuestion = questionWithAnswerId.copy(
-//            answers = (questionWithAnswerId.answers + randomAnswers).shuffled()
-//        )
-//        return listOf(newQuestion)
-
-
-
         val randomQuestions = quizLocalRepository
             .getRandomQuestions(count, typeQuestion,typeGame)
             .map { question ->

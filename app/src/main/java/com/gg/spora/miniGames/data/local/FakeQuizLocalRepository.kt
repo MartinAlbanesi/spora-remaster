@@ -20,7 +20,10 @@ class FakeQuizLocalRepository @Inject constructor(
         typeGame: TypeGame,
     ): List<Question> {
         val randomQuestions = fakeModelsQuiz
-            .filter { it.typeGame == typeGame && it.typeQuestion.intersect(typeQuestion.toSet()).isNotEmpty() }
+            .filter {
+                it.typeGame == typeGame
+                    //&& it.typeQuestion.intersect(typeQuestion.toSet()).isNotEmpty()
+            }
             .shuffled()
             .take(count)
         return randomQuestions
