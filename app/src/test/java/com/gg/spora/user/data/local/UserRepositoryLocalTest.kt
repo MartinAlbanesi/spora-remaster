@@ -13,8 +13,19 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.sql.Timestamp
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toKotlinDuration
 
 class UserRepositoryLocalTest {
 
@@ -34,64 +45,75 @@ class UserRepositoryLocalTest {
     }
 
     @Test
-    fun `getUser - Cuando se llama al método getUserByIdFlow, entonces se debe retornar un Flow de User`() = runTest{
+    fun `getUser - When the getUserByIdFlow method is called, then a User Flow must be returned`() =
+        runTest {
 
-        // Given
-        val expected = "test"
-        coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(FakeUserModels.fakeUserWithLevelsCompletedEntity)
+            // Given
+            val expected = "test"
+            coEvery { userDao.getUsersWithLevelsCompleted() } returns flowOf(FakeUserModels.fakeUserWithLevelsCompletedEntity)
 
-        // When
-        var result : User? = null
-        userRepositoryLocal.getUser().collect {
-            result = it
+            // When
+            var result: User? = null
+            userRepositoryLocal.getUser().collect {
+                result = it
+            }
+
+            // Then
+            Assert.assertEquals(result, FakeUserModels.fakeUsers.first())
+            Assert.assertEquals(expected, result?.userName)
         }
 
-        // Then
-        Assert.assertEquals(result, FakeUserModels.fakeUsers.first())
-        Assert.assertEquals(expected, result?.userName)
-    }
+    @Test
+    fun `updateUserWithLevelCompleted - When new levelCompleted is added, Then insert user in local`() =
+        runTest {
+
+            // Given
+            val user = FakeUserModels.fakeUsers.first()
+            val levelCompleted =
+                FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id).copy(
+                    levelId = "22"
+                )
+
+            coEvery { userDao.updateUser(any()) } returns Unit
+            coEvery { userDao.getLevelsCompleted() } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
+            coEvery { userDao.updateLevelCompleted(any()) } returns Unit
+            coEvery { userDao.insertLevelCompleted(any()) } returns Unit
+
+            // When
+            userRepositoryLocal.updateUserWithLevelCompleted(
+                user,
+                levelCompleted.toLevelCompleted()
+            )
+
+            coVerify(exactly = 1) { userDao.updateUser(any()) }
+            coVerify(exactly = 1) { userDao.getLevelsCompleted() }
+            coVerify(exactly = 0) { userDao.updateLevelCompleted(any()) }
+            coVerify(exactly = 1) { userDao.insertLevelCompleted(any()) }
+        }
 
     @Test
-    fun `updateUserWithLevelCompleted - When new levelCompleted is added, Then insert user in local`() = runTest {
+    fun `updateUserWithLevelCompleted - When levelCompleted added Exist, Then update user in local`() =
+        runTest {
 
-        // Given
-        val user = FakeUserModels.fakeUsers.first()
-        val levelCompleted = FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id).copy(
-            levelId = "22"
-        )
+            // Given
+            val user = FakeUserModels.fakeUsers.first()
+            val levelCompleted =
+                FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id)
 
-        coEvery { userDao.updateUser(any()) } returns Unit
-        coEvery { userDao.getLevelsCompleted() } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
-        coEvery { userDao.updateLevelCompleted(any()) } returns Unit
-        coEvery { userDao.insertLevelCompleted(any()) } returns Unit
+            coEvery { userDao.updateUser(any()) } returns Unit
+            coEvery { userDao.getLevelsCompleted() } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
+            coEvery { userDao.updateLevelCompleted(any()) } returns Unit
+            coEvery { userDao.insertLevelCompleted(any()) } returns Unit
 
-        // When
-        userRepositoryLocal.updateUserWithLevelCompleted(user, levelCompleted.toLevelCompleted())
+            // When
+            userRepositoryLocal.updateUserWithLevelCompleted(
+                user,
+                levelCompleted.toLevelCompleted()
+            )
 
-        coVerify(exactly = 1) { userDao.updateUser(any()) }
-        coVerify(exactly = 1) { userDao.getLevelsCompleted() }
-        coVerify(exactly = 0) { userDao.updateLevelCompleted(any()) }
-        coVerify(exactly = 1) { userDao.insertLevelCompleted(any()) }
-    }
-
-    @Test
-    fun `updateUserWithLevelCompleted - When levelCompleted added Exist, Then update user in local`() = runTest {
-
-        // Given
-        val user = FakeUserModels.fakeUsers.first()
-        val levelCompleted = FakeUserModels.fakeLevelsCompleted.first().toLevelCompletedEntity(user.id)
-
-        coEvery { userDao.updateUser(any()) } returns Unit
-        coEvery { userDao.getLevelsCompleted() } returns flowOf(FakeUserModels.fakeLevelsCompletedEntity)
-        coEvery { userDao.updateLevelCompleted(any()) } returns Unit
-        coEvery { userDao.insertLevelCompleted(any()) } returns Unit
-
-        // When
-        userRepositoryLocal.updateUserWithLevelCompleted(user, levelCompleted.toLevelCompleted())
-
-        coVerify(exactly = 1) { userDao.updateUser(any()) }
-        coVerify(exactly = 1) { userDao.getLevelsCompleted() }
-        coVerify(exactly = 1) { userDao.updateLevelCompleted(any()) }
-        coVerify(exactly = 0) { userDao.insertLevelCompleted(any()) }
-    }
+            coVerify(exactly = 1) { userDao.updateUser(any()) }
+            coVerify(exactly = 1) { userDao.getLevelsCompleted() }
+            coVerify(exactly = 1) { userDao.updateLevelCompleted(any()) }
+            coVerify(exactly = 0) { userDao.insertLevelCompleted(any()) }
+        }
 }

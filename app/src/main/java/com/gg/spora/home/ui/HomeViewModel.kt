@@ -86,14 +86,14 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getTutorial(tutorials: Tutorials, secondaryAction: () -> Unit) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             tutorialSelected.getTutorial(tutorials, secondaryAction)
         }
     }
 
 
     private fun getOxygen() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             getUserLocalUseCase().collect {
                 _oxygen.value = it?.oxygen ?: 0
             }

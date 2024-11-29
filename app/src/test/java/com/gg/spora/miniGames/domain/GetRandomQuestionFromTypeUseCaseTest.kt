@@ -3,7 +3,6 @@ package com.gg.spora.miniGames.domain
 import com.gg.spora.core.fake.FakeQuizModels
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.core.utils.enums.TypeQuestion
-import com.gg.spora.miniGames.domain.mappers.toAnswer
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
