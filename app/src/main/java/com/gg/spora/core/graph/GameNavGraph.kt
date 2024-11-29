@@ -83,6 +83,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                     isVisible = showLevelPreview,
                     backgroundImage = stage!!.levelPreviewImage,
                     level = currentLevel!!,
+                    oxygen = oxygen,
                     onClickPrimaryButton = {
                         showLevelPreview = false
                         navController

@@ -1,6 +1,7 @@
 package com.gg.spora.stage.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +32,7 @@ fun LevelPreview(
     isVisible: Boolean,
     backgroundImage: Int,
     level: Level,
+    oxygen: Int,
     onClickPrimaryButton: () -> Unit,
     onClickSecondaryButton: () -> Unit,
 ) {
@@ -44,29 +47,45 @@ fun LevelPreview(
         isVisible = isVisible,
         starsState = level.starState,
         rewards = level.rewardsOxygen.map { it.toInt() },
+        canAccess = oxygen >= level.requiredOxygen,
         textPrimaryButton = "Jugar",
         textSecondaryButton = "Cancelar",
         onClickPrimaryButton = onClickPrimaryButton,
         onClickSecondaryButton = onClickSecondaryButton,
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = "Requisito: ${level.requiredOxygen}",
-                fontSize = 24.sp,
-                color = Color.White,
-                style = TextStyle(
-                    shadow = Shadow(
-                        color = Color.Black, offset = Offset(5f, 5f), blurRadius = 5f
-                    )
-                ),
-            )
-            Image(
-                painter = painterResource(id = R.drawable.oxygen_icon),
-                contentDescription = "Oxígeno",
-                modifier = Modifier.size(48.dp)
-            )
+        Column {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = "Requisito: ${level.requiredOxygen}",
+                    fontSize = 24.sp,
+                    color = Color.White,
+                    style = TextStyle(
+                        shadow = Shadow(
+                            color = Color.Black, offset = Offset(5f, 5f), blurRadius = 5f
+                        )
+                    ),
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.oxygen_icon),
+                    contentDescription = "Oxígeno",
+                    modifier = Modifier.size(48.dp)
+                )
+            }
+
+            if(oxygen <= level.requiredOxygen){
+                Text(
+                    text = "Tu oxígeno es $oxygen",
+                    fontSize = 24.sp,
+                    color = colorResource(id = R.color.error),
+                    style = TextStyle(
+                        shadow = Shadow(
+                            color = Color.Black, offset = Offset(5f, 5f), blurRadius = 5f
+                        )
+                    ),
+                )
+            }
         }
     }
 }
@@ -81,6 +100,7 @@ fun GameResultPopupPreview() {
         ) {
             LevelPreview(
                 isVisible = true,
+                oxygen = 5000,
                 backgroundImage = R.drawable.minigame_background_crop,
                 level = FakeStageModels.fakeLevels.first(),
                 onClickPrimaryButton = {},

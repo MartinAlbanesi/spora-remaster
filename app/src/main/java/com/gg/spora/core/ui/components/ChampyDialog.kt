@@ -44,6 +44,7 @@ fun ChampyDialog(
     isChallenge: Boolean = false,
     textPrimaryButton: String,
     textSecondaryButton: String,
+    canAccess: Boolean = true,
     onClickPrimaryButton: () -> Unit,
     onClickSecondaryButton: () -> Unit,
     content: @Composable () -> Unit
@@ -126,6 +127,7 @@ fun ChampyDialog(
                         SporaPrimaryButton(
                             text = textPrimaryButton,
                             onClick = onClickPrimaryButton,
+                            isEnable = canAccess,
                             modifier = Modifier
                                 .padding(8.dp)
                         )
@@ -153,6 +155,7 @@ private fun ChampyDialogConfirmPreview() {
                 isVisible = true,
                 starsState = StarState.ZERO,
                 rewards = listOf(0,0,0),
+                canAccess = false,
                 textPrimaryButton = "Jugar",
                 textSecondaryButton = "Cancelar",
                 onClickPrimaryButton = {},
