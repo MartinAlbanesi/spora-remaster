@@ -39,7 +39,7 @@ camerax = "1.3.4"
 # Tensor Flow Lite
 tensorflowgpu = "2.14.0"
 tensorflowmetadata = "0.1.0"
-tensorflow = "+"
+tensorflow = "2.16.1"
 
 # Coil
 coil = "2.7.0"
@@ -116,8 +116,8 @@ camerax-extensions = { group = "androidx.camera", name = "camera-extensions",  v
 # Tensor Flow Lite
 tensorflow-gpu = { group = "org.tensorflow", name = "tensorflow-lite-gpu",  version.ref = "tensorflowgpu"}
 tensorflow-select = { group = "org.tensorflow", name = "tensorflow-lite-select-tf-ops",  version.ref = "tensorflowgpu"}
-tensorflow-android = { group = "org.tensorflow", name = "tensorflow-lite",  version.ref = "tensorflow"}
-tensorflow-support = { group = "org.tensorflow", name = "tensorflow-lite-support",  version.ref = "tensorflow"}
+tensorflow-android = { group = "org.tensorflow", name = "tensorflow-lite",  version.ref = "tensorflow" }
+tensorflow-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version = "0.4.4" }
 tensorflow-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata",  version.ref = "tensorflowmetadata"}
 
 # Coil
