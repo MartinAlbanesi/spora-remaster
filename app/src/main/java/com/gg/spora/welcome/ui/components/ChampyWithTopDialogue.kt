@@ -89,10 +89,10 @@ fun TopDialogue(x: Dp = 0.dp, y: Dp = 0.dp, padding: Dp = 70.dp, dialogue: Strin
                 .align(Alignment.Center)
                 .offset(x =(x + 33.dp), y = (-20).dp)
                 .padding(horizontal = padding),
-            style = TextStyle.Default.copy(lineBreak = LineBreak.Paragraph),
+//            style = TextStyle.Default.copy(lineBreak = LineBreak.Paragraph),
             textAlign = TextAlign.Center,
-            maxLines = 3,
-            overflow = TextOverflow.Ellipsis,
+//            maxLines = 3,
+//            overflow = TextOverflow.Ellipsis,
             fontSize = 20.sp,
             color = MaterialTheme.colorScheme.onSurface
         )
