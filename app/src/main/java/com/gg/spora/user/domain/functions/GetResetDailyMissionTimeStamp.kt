@@ -1,13 +1,14 @@
 package com.gg.spora.user.domain.functions
 
+import com.gg.spora.BuildConfig
 import java.time.LocalDateTime
 import java.time.ZoneId
 
 fun getResetDailyMissionTimeStamp(): Long {
     return LocalDateTime.now()
-        .plusHours(23)
-        .plusSeconds(59)
-        .plusMinutes(59)
+        .plusHours(BuildConfig.HOURS)
+        .plusMinutes(BuildConfig.MINUTES)
+        .plusSeconds(BuildConfig.SECONDS)
         .atZone(ZoneId.systemDefault())
         .toEpochSecond()
 }

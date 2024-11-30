@@ -1,11 +1,10 @@
 package com.gg.spora.missions.domain.models
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
 import com.gg.spora.missions.domain.enums.MissionType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,12 +22,9 @@ class MissionManager @Inject constructor(
         scope.launch {
             _missionCompleted.value =
                 updateMissionByIdUseCase(missionType.missionId)
+
+            delay(7000)
+            _missionCompleted.value = null
         }
     }
-
-    @Composable
-    fun MissionPopUp(modifier: Modifier = Modifier) {
-
-    }
-
 }

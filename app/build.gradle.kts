@@ -39,7 +39,17 @@ android {
         }
     }
     buildTypes {
+
+        debug {
+            buildConfigField("Long", "HOURS", "0L")
+            buildConfigField("Long", "MINUTES", "4L")
+            buildConfigField("Long", "SECONDS", "0L")
+        }
         release {
+            buildConfigField("Long", "HOURS", "23L")
+            buildConfigField("Long", "MINUTES", "59L")
+            buildConfigField("Long", "SECONDS", "59L")
+
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false
@@ -62,6 +72,7 @@ android {
     buildFeatures {
         compose = true
         mlModelBinding = true
+        buildConfig = true
     }
     packaging {
         resources {
