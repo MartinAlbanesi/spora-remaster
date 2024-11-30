@@ -39,10 +39,10 @@ import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
-import com.gg.spora.home.ui.components.MissionScreen
 import com.gg.spora.home.ui.components.SignButton
 import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.models.Mission
+import com.gg.spora.missions.ui.MissionScreen
 import com.gg.spora.ui.theme.SporaTheme
 
 @Suppress("LongMethod")

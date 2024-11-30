@@ -1,6 +1,5 @@
 package com.gg.spora.home.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
@@ -8,7 +7,7 @@ import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.formatDuration
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.home.domain.functions.timeStampToLocalDateTime
-import com.gg.spora.missions.SetNewDailyMissionsUseCase
+import com.gg.spora.missions.domain.SetNewDailyMissionsUseCase
 import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.ClaimMissionUseCase
 import com.gg.spora.missions.domain.GetMissionsUseCase
@@ -16,17 +15,12 @@ import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.GetUserLocalUseCase
-import com.gg.spora.user.domain.GetUserOxygenUseCase
 import com.gg.spora.user.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime

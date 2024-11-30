@@ -15,6 +15,7 @@ import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.getStageTypeByName
 import com.gg.spora.miniGames.domain.GetRandomQuestionFromTypeUseCase
 import com.gg.spora.miniGames.domain.model.Question
+import com.gg.spora.miniGames.ui.models.ChampyHelping
 import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
 import com.gg.spora.missions.domain.enums.MissionType
 import com.gg.spora.missions.domain.models.Mission
@@ -27,12 +28,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-data class ChampyHelping(
-    val text: String,
-    val fontSize: Int = 14,
-    val textAlign: TextAlign = TextAlign.Start
-)
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
@@ -64,7 +59,6 @@ class QuizViewModel @Inject constructor(
 
     private val _counterQuestion = MutableStateFlow(0)
     val counterQuestion = _counterQuestion.asStateFlow()
-
 
     private val _currentImageResId = MutableStateFlow<String?>(null)
     val currentImageResId = _currentImageResId.asStateFlow()

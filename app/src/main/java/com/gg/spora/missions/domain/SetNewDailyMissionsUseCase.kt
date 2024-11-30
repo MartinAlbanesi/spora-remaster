@@ -1,4 +1,4 @@
-package com.gg.spora.missions
+package com.gg.spora.missions.domain
 
 import com.gg.spora.core.utils.SporaConstant.MAX_DAILY_MISSIONS
 import com.gg.spora.missions.domain.models.Mission

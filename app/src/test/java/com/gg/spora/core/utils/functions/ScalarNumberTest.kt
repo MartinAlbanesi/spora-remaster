@@ -15,7 +15,7 @@ class ScalarNumberTest {
         val maxOriginal = 10
 
         // When
-        val result = scalarNumber(valor, minOriginal, maxOriginal)
+        val result = calculateProgress(valor, minOriginal, maxOriginal)
 
         // Then
         assertEquals(0.5f, result)

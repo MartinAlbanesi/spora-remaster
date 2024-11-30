@@ -16,13 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.utils.SporaConstant
-import com.gg.spora.miniGames.ui.ChampyHelping
+import com.gg.spora.miniGames.ui.models.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
 
 /**

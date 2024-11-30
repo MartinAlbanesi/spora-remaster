@@ -34,12 +34,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.utils.functions.getRewardsStarState
-import com.gg.spora.core.utils.functions.scalarNumber
+import com.gg.spora.core.utils.functions.calculateProgress
 import com.gg.spora.gameResultUI.GameResultPopUp
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
-import com.gg.spora.miniGames.ui.ChampyHelping
+import com.gg.spora.miniGames.ui.models.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
-import kotlinx.serialization.json.JsonNull.content
 
 
 @Suppress("LongMethod")
@@ -89,7 +88,7 @@ fun MiniGameScreen(
     val champyImage = getChampyImageMiniGame(isCorrect)
 
     val progressIndicator by animateFloatAsState(
-        targetValue = scalarNumber(valor = counterQuestion, maxOriginal = questionSize),
+        targetValue = calculateProgress(valor = counterQuestion, maxOriginal = questionSize),
         label = "progressIndicator",
     )
 
