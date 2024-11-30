@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
-import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
 import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
 import com.gg.spora.grove.domain.InsertCooldownDataUseCase
 import com.gg.spora.grove.domain.InsertForestTreeUseCase
@@ -14,7 +13,6 @@ import com.gg.spora.grove.domain.LoadSeedTreesUseCase
 import com.gg.spora.grove.domain.SaveSeedTreesUseCase
 import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
 import com.gg.spora.grove.domain.UpdateTimesOxygenClaimedUseCase
-import com.gg.spora.grove.domain.mappers.toSeedTree
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
@@ -22,9 +20,7 @@ import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.utils.functions.combine
-import com.gg.spora.missions.domain.GetMissionsUseCase
 import com.gg.spora.missions.domain.enums.MissionType
-import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.missions.domain.models.MissionManager
 import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.user.domain.GetUserOxygenUseCase
@@ -37,7 +33,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -46,7 +41,6 @@ import java.time.Duration
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
-import kotlin.collections.associate
 
 const val INITIAL_COOLDOWN_DURATION = /*43200000L*/ 10000L
 const val OXYGEN_COOLDOWN_DURATION = /*86400000L*/ 10000L

@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -19,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -39,6 +41,8 @@ import com.gg.spora.miniGames.ui.QuizImageScreen
 import com.gg.spora.miniGames.ui.QuizScreen
 import com.gg.spora.miniGames.ui.QuizViewModel
 import com.gg.spora.miniGames.ui.RelationsScreen
+import com.gg.spora.missions.domain.functions.getMissionIcon
+import com.gg.spora.missions.ui.component.MissionCompletedPopUp
 import com.gg.spora.stage.domain.model.getLevelWithStage
 import com.gg.spora.stage.ui.LevelPreview
 import com.gg.spora.stage.ui.StageScreen
@@ -78,7 +82,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 mutableStateOf(false)
             }
 
-            currentLevel?.let{
+            currentLevel?.let {
                 LevelPreview(
                     isVisible = showLevelPreview,
                     backgroundImage = stage!!.levelPreviewImage,
@@ -114,7 +118,12 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                     backgroundImage = stage!!.stageBackgroundImage,
                     pathLadder = stage!!.pathLadder,
                     onNavigateToChallenge = {
-                        navController.navigate(NavigationRoutes.Challenge(stageId = stage!!.id, nameObject = ""))
+                        navController.navigate(
+                            NavigationRoutes.Challenge(
+                                stageId = stage!!.id,
+                                nameObject = ""
+                            )
+                        )
                     },
                     popBackStack = {
                         navController.popBackStack()
@@ -176,96 +185,86 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val isRewardsLoading by quizViewModel.isRewardsLoading.collectAsState()
 
-            LaunchedEffect(counterQuestion){
+            val missionCompleted by quizViewModel.missionManager.missionCompleted.collectAsState()
+
+            LaunchedEffect(counterQuestion) {
                 quizViewModel.onShowChampyHelp()
             }
 
-            val missionCompleted by quizViewModel.missionManager.missionCompleted.collectAsState()
-
-            val snackBarHostState = remember { SnackbarHostState() }
-
-            LaunchedEffect(missionCompleted != null) {
-                missionCompleted?.let {
-                    snackBarHostState.showSnackbar(
-                        message = "La Misión: '${missionCompleted!!.text}' ha sido completada",
-                    )
-                }
-            }
-
-            Scaffold(
-                snackbarHost = {
-                    SnackbarHost(hostState = snackBarHostState)
+            MiniGameScreen(
+                modifier = Modifier.fillMaxSize(),
+                isRewardsLoading = isRewardsLoading,
+                title = quizGameRoute.title,
+                imageBackground = quizGameRoute.imageBackground,
+                isCorrect = isCorrect,
+                questionSize = questions.size - 1,
+                isFinished = isFinished,
+                lives = lives,
+                livesLost = livesLost,
+                counterQuestion = counterQuestion,
+                showButtonContinue = isCorrect != null,
+                showChampyHelp = showChampyHelp,
+                champyHelpingText = champyHelpingText,
+                totalOxygen = currentTotalRewards,
+                rewards = currentRewards,
+                onNextQuestion = quizViewModel::nextQuestion,
+                onResetGame = quizViewModel::resetGame,
+                onBackForestStage = { navController.popBackStack() },
+                onNavigateNextLevel = {
+                    navController.popBackStack()
                 },
-            ){
-                MiniGameScreen(
-                    modifier = Modifier.fillMaxSize(),
-                    isRewardsLoading = isRewardsLoading,
-                    title = quizGameRoute.title,
-                    imageBackground = quizGameRoute.imageBackground,
-                    isCorrect = isCorrect,
-                    questionSize = questions.size - 1,
-                    isFinished = isFinished,
-                    lives = lives,
-                    livesLost = livesLost,
-                    counterQuestion = counterQuestion,
-                    showButtonContinue = isCorrect != null,
-                    showChampyHelp = showChampyHelp,
-                    champyHelpingText = champyHelpingText,
-                    totalOxygen = currentTotalRewards,
-                    rewards = currentRewards,
-                    onNextQuestion = quizViewModel::nextQuestion,
-                    onResetGame = quizViewModel::resetGame,
-                    onBackForestStage = { navController.popBackStack() },
-                    onNavigateNextLevel = {
-                        navController.popBackStack()
-                    },
-                    content = {
-                        when (currentQuestion!!.typeGame) {
-                            TypeGame.QUIZ -> {
-                                QuizScreen(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
-                                    isCorrect = isCorrect,
-                                    questionTitle = currentQuestion!!.question,
-                                    answerOptions = currentQuestion!!.answers,
-                                    onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                    onConfirmAnswer = quizViewModel::onConfirmAnswer,
-                                )
-                            }
+                content = {
+                    when (currentQuestion!!.typeGame) {
+                        TypeGame.QUIZ -> {
+                            QuizScreen(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp),
+                                isCorrect = isCorrect,
+                                questionTitle = currentQuestion!!.question,
+                                answerOptions = currentQuestion!!.answers,
+                                onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                onConfirmAnswer = quizViewModel::onConfirmAnswer,
+                            )
+                        }
 
-                            TypeGame.QUIZ_IMAGE -> {
-                                QuizImageScreen(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(horizontal = 8.dp),
-                                    questionTitle = currentQuestion!!.question,
-                                    answerOptions = currentQuestion!!.answers,
-                                    currentImageResIdState = currentImage,
-                                    isCorrect = isCorrect,
-                                    onAnswerSelected = quizViewModel::isAnswerCorrect,
-                                    onConfirmAnswer = quizViewModel::onConfirmAnswer,
-                                )
-                            }
+                        TypeGame.QUIZ_IMAGE -> {
+                            QuizImageScreen(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(horizontal = 8.dp),
+                                questionTitle = currentQuestion!!.question,
+                                answerOptions = currentQuestion!!.answers,
+                                currentImageResIdState = currentImage,
+                                isCorrect = isCorrect,
+                                onAnswerSelected = quizViewModel::isAnswerCorrect,
+                                onConfirmAnswer = quizViewModel::onConfirmAnswer,
+                            )
+                        }
 
-                            TypeGame.RELATIONS -> {
-                                RelationsScreen(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(vertical = 0.dp),
-                                    objectName = currentQuestion!!.question,
-                                    answers = currentQuestion!!.answers,
-                                    selectedItems = selectedItems,
-                                    isCorrect = isCorrect,
-                                    onSelectedItem = quizViewModel::onSelectedItem,
-                                    onConfirmSelects = quizViewModel::relationsAnswerSelected,
-                                )
-                            }
+                        TypeGame.RELATIONS -> {
+                            RelationsScreen(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(vertical = 0.dp),
+                                objectName = currentQuestion!!.question,
+                                answers = currentQuestion!!.answers,
+                                selectedItems = selectedItems,
+                                isCorrect = isCorrect,
+                                onSelectedItem = quizViewModel::onSelectedItem,
+                                onConfirmSelects = quizViewModel::relationsAnswerSelected,
+                            )
                         }
                     }
-                )
-            }
+                }
+            )
 
+            MissionCompletedPopUp(
+                modifier = Modifier,
+                missionText = missionCompleted?.text ?: "",
+                missionIcon = getMissionIcon(missionCompleted?.id ?: 0),
+                showMissionCompleted = missionCompleted != null
+            )
         }
 
         composable<NavigationRoutes.Challenge> { backStackEntry ->
@@ -277,7 +276,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             val challengeRoute = backStackEntry.toRoute<NavigationRoutes.Challenge>()
             isCorrect = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
 
-            if(challengeRoute.nameObject != ""){
+            if (challengeRoute.nameObject != "") {
                 challengeViewModel.setObjectInObjectsChallengeWithName(challengeRoute.nameObject)
             }
             if (!isLoading) {
@@ -307,13 +306,17 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                         ChallengeScreen(
                             modifier = Modifier,
                             onNavigateToCameraScreen = { nameObject ->
-                                navController.navigate(NavigationRoutes.Camera(stageId = challengeRoute.stageId,
-                                    nameObject = nameObject.toString()))
+                                navController.navigate(
+                                    NavigationRoutes.Camera(
+                                        stageId = challengeRoute.stageId,
+                                        nameObject = nameObject.toString()
+                                    )
+                                )
                             },
                             onNavigateToGrove = {
                                 challengeViewModel.insertSeedTreeOfChallengeOne()
-                                navController.navigate(NavigationRoutes.Grove){
-                                    popUpTo(NavigationRoutes.Stage(challengeRoute.stageId)){
+                                navController.navigate(NavigationRoutes.Grove) {
+                                    popUpTo(NavigationRoutes.Stage(challengeRoute.stageId)) {
                                         inclusive = true
                                     }
                                 }
@@ -321,10 +324,12 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 //                            isChallengeFinallyUser = isChallengeFinallyUser,
                             challengeObjects = objectsChallenge,
                             continueDialogObjectDetail = { challengeRoute.nameObject = "" },
-                            selectedObject = challengeViewModel.getObjectDetailWithName(challengeRoute.nameObject)
+                            selectedObject = challengeViewModel.getObjectDetailWithName(
+                                challengeRoute.nameObject
+                            )
                         )
                     }
-            )
+                )
             }
         }
 
@@ -335,10 +340,20 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             CameraScreen(
                 nameObject = nameObject,
                 onNavigateToChallengeScreen = {
-                    navController.navigate(NavigationRoutes.Challenge(stageId = cameraRoute.stageId, nameObject = nameObject))
+                    navController.navigate(
+                        NavigationRoutes.Challenge(
+                            stageId = cameraRoute.stageId,
+                            nameObject = nameObject
+                        )
+                    )
                 },
                 onNavigateToBack = {
-                    navController.navigate(NavigationRoutes.Challenge(stageId = cameraRoute.stageId, nameObject = ""))
+                    navController.navigate(
+                        NavigationRoutes.Challenge(
+                            stageId = cameraRoute.stageId,
+                            nameObject = ""
+                        )
+                    )
                 }
             )
         }

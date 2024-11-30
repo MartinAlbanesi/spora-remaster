@@ -41,24 +41,21 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
             val missionCompleted by libraryViewModel.missionManager.missionCompleted.collectAsState()
 
-            Box(
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                LibraryScreen(
-                    showTutorial = showTutorial,
-                    onBackButtonClick = { navController.popBackStack() },
-                    onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
-                    onClickSecond = { navController.navigate(NavigationRoutes.LibraryLakeInfo) },
-                    onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
-                )
+            LibraryScreen(
+                showTutorial = showTutorial,
+                onBackButtonClick = { navController.popBackStack() },
+                onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
+                onClickSecond = { navController.navigate(NavigationRoutes.LibraryLakeInfo) },
+                onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
+            )
 
-                MissionCompletedPopUp(
-                    modifier = Modifier.align(Alignment.BottomCenter),
-                    missionText = missionCompleted?.text ?: "",
-                    missionIcon = getMissionIcon(missionCompleted?.id ?: 0),
-                    showMissionCompleted = missionCompleted != null
-                )
-            }
+            MissionCompletedPopUp(
+                modifier = Modifier,
+                missionText = missionCompleted?.text ?: "",
+                missionIcon = getMissionIcon(missionCompleted?.id ?: 0),
+                showMissionCompleted = missionCompleted != null
+            )
+
 
             if (showTutorial) {
                 currentTutorialItem?.let { item ->

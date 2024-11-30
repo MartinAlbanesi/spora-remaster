@@ -47,10 +47,7 @@ fun LibraryScreen(
     onClickThird: () -> Unit = {}
 ) {
 
-
     Box(modifier = Modifier.fillMaxSize()) {
-
-
         Image(
             painter = painterResource(R.drawable.library_xxl_v2),
             contentDescription = "Library background",

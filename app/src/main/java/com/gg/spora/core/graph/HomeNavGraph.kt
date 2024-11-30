@@ -28,6 +28,8 @@ import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.ui.CreateProfileScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
+import com.gg.spora.missions.domain.functions.getMissionIcon
+import com.gg.spora.missions.ui.component.MissionCompletedPopUp
 import com.gg.spora.profile.ui.ProfileScreen
 import com.gg.spora.profile.ui.ProfileViewModel
 import com.gg.spora.ranking.ui.Ranking
@@ -132,6 +134,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val currentTutorialItem by groveViewModel.tutorialSelected.currentTutorialItem.collectAsState()
 
+            val missionCompleted by groveViewModel.missionManager.missionCompleted.collectAsState()
+
             /*
                         DisposableEffect(Unit) {
                             onDispose {
@@ -170,6 +174,13 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     onNextItem = groveViewModel.tutorialSelected::nextTutorialItem
                 )
             }
+
+            MissionCompletedPopUp(
+                modifier = Modifier,
+                missionText = missionCompleted?.text ?: "",
+                missionIcon = getMissionIcon(missionCompleted?.id ?: 0),
+                showMissionCompleted = missionCompleted != null
+            )
         }
         composable<NavigationRoutes.Ranking> {
 
