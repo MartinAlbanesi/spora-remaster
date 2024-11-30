@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -57,6 +58,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val missions by homeViewModel.missions.collectAsState()
 
+            val missionResetTime by homeViewModel.missionResetTime.collectAsStateWithLifecycle()
+
             if (!isLoading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -70,6 +73,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     showTutorial = showTutorial,
                     champyQuote = champyQuote,
                     missions = missions,
+                    missionResetTime = missionResetTime,
                     onNavigateToForestStage = {
                         navController.navigate(NavigationRoutes.Stage(StageType.FOREST.name))
                     },

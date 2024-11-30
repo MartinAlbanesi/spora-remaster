@@ -18,7 +18,8 @@ object FakeUserModels {
         100,
         0,
        "R.drawable.spora_face_splash",
-        weeklyOxygen = 0
+        weeklyOxygen = 0,
+        resetDailyMission = 0
     )
 
     val fakeLevelsCompletedEntity = listOf(

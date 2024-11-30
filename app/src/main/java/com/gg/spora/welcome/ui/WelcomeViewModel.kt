@@ -63,7 +63,7 @@ class WelcomeViewModel @Inject constructor(
             setNewStagesLevelUseCase(stageLevel)
             setNewLevelsUseCase(level)
             setTutorialsLocalUseCase(TutorialModels.tutorialsCompleted)
-            setMissionsUseCase(MissionModels.missions)
+            setMissionsUseCase(MissionModels.missions.shuffled().take(3))
         }
     }
 

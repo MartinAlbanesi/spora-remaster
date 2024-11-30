@@ -5,7 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
+import com.gg.spora.home.domain.functions.formatDuration
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
+import com.gg.spora.home.domain.functions.timeStampToLocalDateTime
+import com.gg.spora.missions.SetNewDailyMissionsUseCase
+import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.ClaimMissionUseCase
 import com.gg.spora.missions.domain.GetMissionsUseCase
 import com.gg.spora.missions.domain.models.Mission
@@ -19,9 +23,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import java.time.Duration
+import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toKotlinDuration
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -31,7 +45,8 @@ class HomeViewModel @Inject constructor(
     private val getUserAuthUseCase: GetUserAuthUseCase,
     val tutorialSelected: TutorialSelected,
     private val getMissionsUseCase: GetMissionsUseCase,
-    private val claimMissionUseCase: ClaimMissionUseCase
+    private val claimMissionUseCase: ClaimMissionUseCase,
+    private val setNewDailyMissionsUseCase: SetNewDailyMissionsUseCase
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -57,6 +72,9 @@ class HomeViewModel @Inject constructor(
     private val _showMission = MutableStateFlow(false)
     val showMission = _showMission.asStateFlow()
 
+    private val _missionResetTime = MutableStateFlow("")
+    val missionResetTime = _missionResetTime.asStateFlow()
+
     init {
 //        getUser()
         getUserName()
@@ -65,6 +83,7 @@ class HomeViewModel @Inject constructor(
         getOxygen()
         getChampyQuote()
         getMissions()
+        getResetTime()
     }
 
     private fun getMissions() {
@@ -81,7 +100,30 @@ class HomeViewModel @Inject constructor(
             getUserLocalUseCase().collect {
                 _user.value = it
             }
+        }
+    }
 
+    private fun getResetTime() {
+        viewModelScope.launch {
+            getUserLocalUseCase().collect {
+                it?.let { userFlow ->
+                    var duration = 23.hours + 59.minutes + 59.seconds
+                    while (duration.inWholeSeconds > 0) {
+                        duration = Duration.between(
+                            LocalDateTime.now(),
+                            timeStampToLocalDateTime(userFlow.resetDailyMission)
+                        ).toKotlinDuration()
+
+                        _missionResetTime.value = formatDuration(duration)
+
+                        delay(1000)
+                    }
+
+                    if (duration.inWholeSeconds <= 0) {
+                        setNewDailyMissionsUseCase(MissionModels.missions)
+                    }
+                }
+            }
         }
     }
 

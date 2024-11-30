@@ -98,7 +98,7 @@ class UserRepositoryLocal @Inject constructor(
         userDao.updateUserImage(userImage)
     }
 
-//    override suspend fun getCurrentUserFlow(): List<User> {
-//        return userDao.getUsersWithLevelsCompleted().first().map { it.toUser() }
-//    }
+    override suspend fun updateResetDailyMission(resetDailyMission: Long) {
+        userDao.updateResetDailyMission(resetDailyMission)
+    }
 }

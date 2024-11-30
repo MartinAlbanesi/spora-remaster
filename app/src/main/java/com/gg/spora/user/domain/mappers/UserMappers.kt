@@ -31,7 +31,8 @@ fun User.toUserEntity() = UserEntity(
     oxygen = oxygen,
     treesCount = treesCount,
     userImage = userImage,
-    weeklyOxygen = weeklyOxygen
+    weeklyOxygen = weeklyOxygen,
+    resetDailyMission = resetDailyMission
 )
 
 fun UserWithLevelsCompletedEntity.toUser(tutorialsCompleted: List<TutorialCompleted>) = User(
@@ -47,4 +48,5 @@ fun UserWithLevelsCompletedEntity.toUser(tutorialsCompleted: List<TutorialComple
     seedTrees = emptyList(),
     forestTrees = emptyList(),
     weeklyOxygen = user.weeklyOxygen,
+    resetDailyMission = user.resetDailyMission
 )

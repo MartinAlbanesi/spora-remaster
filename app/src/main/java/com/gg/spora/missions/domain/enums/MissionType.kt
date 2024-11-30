@@ -6,4 +6,6 @@ enum class MissionType(
 ) {
     LIBRARY_MISSION(0, "Visita a Mushy"),
     MINI_GAME_MISSION(1,  "Juega un mini juego"),
+    GROVE_MISSION(2, "Planta un árbol"),
+    SCAN_MISSION(3, "Escanea un código un objeto y reciclalo"),
 }

@@ -3,11 +3,13 @@ package com.gg.spora.home.ui.components
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,6 +51,7 @@ import com.gg.spora.ui.theme.SporaTheme
 fun MissionScreen(
     modifier: Modifier = Modifier,
     missions: List<Mission>,
+    missionResetTime: String,
     onBack: () -> Unit,
     onClaimMission: (Byte, Byte) -> Unit
 ) {
@@ -57,11 +60,13 @@ fun MissionScreen(
 //            modifier = modifier
         ) {
             Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .clip(RoundedCornerShape(14.dp, 14.dp, 0.dp, 0.dp))
-                    .height(48.dp)
+//                    .height(48.dp)
                     .background(color = colorResource(id = R.color.primary))
                     .fillMaxWidth()
+                    .padding(8.dp)
             ) {
                 Text(
                     text = "Misiones Diarias",
@@ -70,10 +75,11 @@ fun MissionScreen(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .fillMaxSize()
+//                        .fillMaxSize()
+//                        .fillMaxWidth()
                         .wrapContentHeight(align = Alignment.CenterVertically)
                 )
-//            Text(text = "12:00:00")
+                Text(text = missionResetTime)
             }
             missions.forEach { mission ->
                 MissionCard(
@@ -242,6 +248,7 @@ private fun MissionScreenPreview() {
             MissionScreen(
                 modifier = Modifier.fillMaxWidth(0.6f),
                 missions = MissionModels.fakeMissions,
+                missionResetTime = "12h 00m 00s",
                 onBack = {},
                 onClaimMission = { _, _ -> }
             )

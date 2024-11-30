@@ -35,4 +35,6 @@ interface IUserRepositoryLocal {
     suspend fun updateUserName(userName: String)
 
     suspend fun updateUserImage(userImage: String)
+
+    suspend fun updateResetDailyMission(resetDailyMission: Long)
 }

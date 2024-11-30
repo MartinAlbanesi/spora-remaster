@@ -9,6 +9,8 @@ object SporaConstant {
     const val MAX_LEVELS = 4
     const val MAX_STAGES_LEVEL = 2
 
+    const val MAX_DAILY_MISSIONS = 3
+
     /**
      key = rotate, value = offset
      */

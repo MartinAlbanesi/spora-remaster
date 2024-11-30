@@ -11,15 +11,25 @@ object MissionModels {
             text = MissionType.LIBRARY_MISSION.text,
             oxygenReward = 10,
             objective = 1,
-            counter = 0,
         ),
         Mission(
             id = MissionType.MINI_GAME_MISSION.missionId,
             text = MissionType.MINI_GAME_MISSION.text,
-            oxygenReward = 10,
+            oxygenReward = 20,
             objective = 1,
-            counter = 0,
         ),
+        Mission(
+            id = MissionType.GROVE_MISSION.missionId,
+            text = MissionType.GROVE_MISSION.text,
+            oxygenReward = 30,
+            objective = 1,
+        ),
+        Mission(
+            id = MissionType.SCAN_MISSION.missionId,
+            text = MissionType.SCAN_MISSION.text,
+            oxygenReward = 40,
+            objective = 1,
+        )
     )
 
     val fakeMissions = listOf(

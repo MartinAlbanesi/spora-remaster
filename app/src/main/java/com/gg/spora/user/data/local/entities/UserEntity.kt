@@ -15,6 +15,7 @@ data class UserEntity(
     val oxygen: Int,
     val treesCount: Int,
     val userImage: String,
-    val weeklyOxygen: Int
+    val weeklyOxygen: Int,
+    val resetDailyMission: Long,
 //    val levelsCompleted : List<LevelCompleted>
 )

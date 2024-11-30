@@ -18,4 +18,5 @@ data class User(
     val tutorialsCompleted : List<TutorialCompleted>,
     val weeklyOxygen: Int = 0,
     val objectsScanned : List<ObjectDetail>,
+    val resetDailyMission: Long = 0
 )

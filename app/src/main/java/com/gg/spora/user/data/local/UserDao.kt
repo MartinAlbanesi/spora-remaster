@@ -66,4 +66,7 @@ interface UserDao {
 
     @Update
     suspend fun updateLevelCompleted(levelsCompleted: LevelCompletedEntity)
+
+    @Query("update user_entity set resetDailyMission = :resetDailyMission")
+    suspend fun updateResetDailyMission(resetDailyMission: Long)
 }

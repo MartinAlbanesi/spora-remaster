@@ -53,6 +53,7 @@ fun HomeScreen(
     showTutorial: Boolean = true,
     champyQuote: String?,
     missions: List<Mission>,
+    missionResetTime: String,
     onNavigateToForestStage: () -> Unit,
     onNavigateToGrove: () -> Unit,
     onNavigateToRanking: () -> Unit,
@@ -233,6 +234,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.8f),
                 missions = missions,
+                missionResetTime = missionResetTime,
                 onBack = {
                     showMission = false
                 },
@@ -256,6 +258,7 @@ private fun MiniGameScreenPreview() {
                 showTutorial = false,
                 missions = MissionModels.fakeMissions,
                 champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
+                missionResetTime= "5123",
                 onNavigateToForestStage = {},
                 onNavigateToGrove = {},
                 onNavigateToLibrary = {},
