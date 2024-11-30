@@ -22,6 +22,7 @@ import com.gg.spora.library.domain.usecases.GetAllInfoCardsUseCase
 import com.gg.spora.library.domain.usecases.GetInfoCardListByCategoryUseCase
 import com.gg.spora.library.domain.usecases.InsertNewInfoCardUseCase
 import com.gg.spora.library.domain.usecases.UpdateInfoCardUseCase
+import com.gg.spora.missions.domain.models.MissionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,20 +42,17 @@ class LibraryViewModel @Inject constructor(
     private val getInfoCardListByCategoryUseCase: GetInfoCardListByCategoryUseCase,
 //    private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
 //    private val infoCardFakeRepository: FakeRepositoryInfoCard,
-    private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
-    val tutorialSelected: TutorialSelected
+    val tutorialSelected: TutorialSelected,
+    val missionManager: MissionManager
 ) : ViewModel() {
 
     private val _infoCardEntityList = MutableStateFlow<List<InfoCard>>(emptyList())
     val infoCardEntityList: StateFlow<List<InfoCard>> = _infoCardEntityList
 
-    private val _missionCompleted = MutableStateFlow<Mission?>(null)
-    val missionCompleted: StateFlow<Mission?> = _missionCompleted
-
     init {
         getLibraryTutorial()
         loadInfoCardList()
-        updateMission()
+        missionManager.updateMission(MissionType.LIBRARY_MISSION)
     }
 
     private fun getLibraryTutorial() {
@@ -88,13 +86,6 @@ class LibraryViewModel @Inject constructor(
         viewModelScope.launch {
             updateInfoCardUseCase.invoke(infoCard)
             loadInfoCardList()
-        }
-    }
-
-    private fun updateMission() {
-        viewModelScope.launch {
-            _missionCompleted.value =
-                updateMissionByIdUseCase(MissionType.LIBRARY_MISSION.missionId)
         }
     }
 

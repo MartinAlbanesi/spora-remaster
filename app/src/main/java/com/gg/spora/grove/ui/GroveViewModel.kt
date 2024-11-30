@@ -23,7 +23,9 @@ import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.utils.functions.combine
 import com.gg.spora.missions.domain.GetMissionsUseCase
+import com.gg.spora.missions.domain.enums.MissionType
 import com.gg.spora.missions.domain.models.Mission
+import com.gg.spora.missions.domain.models.MissionManager
 import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.user.domain.GetUserOxygenUseCase
 import com.gg.spora.user.domain.UpdateUserOxygenUseCase
@@ -80,6 +82,7 @@ class GroveViewModel @Inject constructor(
     private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase,
     private val updateTimesOxygenClaimed: UpdateTimesOxygenClaimedUseCase,
     val tutorialSelected: TutorialSelected,
+    val missionManager: MissionManager
 ) : ViewModel() {
 
     private val _seedTrees = MutableStateFlow<List<SeedTree>>(emptyList())
@@ -112,8 +115,8 @@ class GroveViewModel @Inject constructor(
     // Flag to track if initial forest trees have been loaded
     private var _initialForestTreesLoaded = false
 
-    private val _missions = MutableStateFlow(emptyList<Mission>())
-    val missions = _missions.asStateFlow()
+//    private val _missions = MutableStateFlow(emptyList<Mission>())
+//    val missions = _missions.asStateFlow()
 
     // Data flow for the UI state, combining all data sources
     val uiState: StateFlow<GroveUiState> = combine(
@@ -300,6 +303,8 @@ class GroveViewModel @Inject constructor(
                 updateForestTreeGrowthTime(forestTree)
                 // Calculate accumulated oxygen for when the tree is adult
                 calculateAccumulatedOxygen()
+
+                missionManager.updateMission(MissionType.GROVE_MISSION)
             } catch (e: UnknownHostException) {
                 handleException("No internet connection. Please check your connection and try again.")
             } catch (e: Exception) {

@@ -18,7 +18,7 @@ import com.gg.spora.miniGames.domain.model.Question
 import com.gg.spora.miniGames.ui.models.ChampyHelping
 import com.gg.spora.missions.domain.UpdateMissionByIdUseCase
 import com.gg.spora.missions.domain.enums.MissionType
-import com.gg.spora.missions.domain.models.Mission
+import com.gg.spora.missions.domain.models.MissionManager
 import com.gg.spora.user.domain.UpdateUserLevelsAndOxygenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -33,8 +33,8 @@ import javax.inject.Inject
 class QuizViewModel @Inject constructor(
     private val getRandomQuestionFromTypeUseCase: GetRandomQuestionFromTypeUseCase,
     private val updateUserLevelsAndOxygenUseCase: UpdateUserLevelsAndOxygenUseCase,
-    private val updateMissionByIdUseCase: UpdateMissionByIdUseCase,
     savedStateHandle: SavedStateHandle,
+    val missionManager: MissionManager
 ) : ViewModel() {
 
     private val quizRoute = savedStateHandle.toRoute<NavigationRoutes.QuizGame>()
@@ -78,8 +78,8 @@ class QuizViewModel @Inject constructor(
     private val _currentRewards = MutableStateFlow(listOf(0, 0, 0))
     val currentRewards = _currentRewards.asStateFlow()
 
-    private val _missionCompleted = MutableStateFlow<Mission?>(null)
-    val missionCompleted: StateFlow<Mission?> = _missionCompleted
+//    private val _missionCompleted = MutableStateFlow<Mission?>(null)
+//    val missionCompleted: StateFlow<Mission?> = _missionCompleted
 
     private val _isRewardsLoading = MutableStateFlow(false)
     val isRewardsLoading: StateFlow<Boolean> = _isRewardsLoading
@@ -290,7 +290,7 @@ class QuizViewModel @Inject constructor(
                 _currentRewards.value = this.second
             }
 
-            updateMission()
+            missionManager.updateMission(MissionType.MINI_GAME_MISSION)
             _isRewardsLoading.value = false
         }
     }
@@ -310,11 +310,11 @@ class QuizViewModel @Inject constructor(
         }
     }
 
-    private fun updateMission() {
-        viewModelScope.launch {
-            _missionCompleted.value =
-                updateMissionByIdUseCase(MissionType.MINI_GAME_MISSION.missionId)
-        }
-    }
+//    private fun updateMission() {
+//        viewModelScope.launch {
+//            _missionCompleted.value =
+//                updateMissionByIdUseCase(MissionType.MINI_GAME_MISSION.missionId)
+//        }
+//    }
 
 }

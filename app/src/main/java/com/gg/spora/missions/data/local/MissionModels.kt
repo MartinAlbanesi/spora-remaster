@@ -27,7 +27,7 @@ object MissionModels {
         Mission(
             id = MissionType.SCAN_MISSION.missionId,
             text = MissionType.SCAN_MISSION.text,
-            oxygenReward = 40,
+            oxygenReward = 30,
             objective = 1,
         )
     )

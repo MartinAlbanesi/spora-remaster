@@ -180,7 +180,7 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 quizViewModel.onShowChampyHelp()
             }
 
-            val missionCompleted by quizViewModel.missionCompleted.collectAsState()
+            val missionCompleted by quizViewModel.missionManager.missionCompleted.collectAsState()
 
             val snackBarHostState = remember { SnackbarHostState() }
 

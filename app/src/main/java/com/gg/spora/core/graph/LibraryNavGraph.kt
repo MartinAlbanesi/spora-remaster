@@ -33,7 +33,7 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
             val currentTutorialItem by libraryViewModel.tutorialSelected.currentTutorialItem.collectAsState()
 
-            val missionCompleted by libraryViewModel.missionCompleted.collectAsState()
+            val missionCompleted by libraryViewModel.missionManager.missionCompleted.collectAsState()
 
             val snackBarHostState = remember { SnackbarHostState() }
 
