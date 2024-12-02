@@ -71,35 +71,6 @@ fun MissionCompleted(
     )
 }
 
-@Composable
-fun MissionCompletedPopUp(
-    modifier: Modifier = Modifier,
-    showMissionCompleted: Boolean,
-    missionText: String,
-    @DrawableRes missionIcon: Int,
-) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        AnimatedVisibility(
-            visible = showMissionCompleted,
-            enter = slideInVertically {
-                it
-            },
-            exit = slideOutVertically {
-                it
-            },
-            modifier = Modifier.align(Alignment.BottomCenter)
-        ) {
-            MissionCompleted(
-                modifier = modifier,
-                missionText = missionText,
-                missionIcon = missionIcon
-            )
-        }
-    }
-}
-
 //@PreviewLightDark
 @Preview
 //@PreviewFontScale

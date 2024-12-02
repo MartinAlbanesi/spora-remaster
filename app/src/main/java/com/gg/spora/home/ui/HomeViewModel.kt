@@ -1,5 +1,6 @@
 package com.gg.spora.home.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
@@ -18,9 +19,13 @@ import com.gg.spora.user.domain.GetUserLocalUseCase
 import com.gg.spora.user.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
@@ -63,21 +68,18 @@ class HomeViewModel @Inject constructor(
     private val _missions = MutableStateFlow(emptyList<Mission>())
     val missions = _missions.asStateFlow()
 
-    private val _showMission = MutableStateFlow(false)
-    val showMission = _showMission.asStateFlow()
-
     private val _missionResetTime = MutableStateFlow("")
     val missionResetTime = _missionResetTime.asStateFlow()
 
     init {
 //        getUser()
+        getResetTime()
         getUserName()
 //        getTutorial(Tutorials.HOME_TUTORIAL)
         tutorialSelected.getTutorial(Tutorials.HOME_TUTORIAL)
         getOxygen()
         getChampyQuote()
         getMissions()
-        getResetTime()
     }
 
     private fun getMissions() {
@@ -98,25 +100,45 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getResetTime() {
-        viewModelScope.launch {
-            getUserLocalUseCase().collect {
-                it?.let { userFlow ->
-                    var duration = 23.hours + 59.minutes + 59.seconds
-                    while (duration.inWholeSeconds > 0) {
-                        duration = Duration.between(
-                            LocalDateTime.now(),
-                            timeStampToLocalDateTime(userFlow.resetDailyMission)
-                        ).toKotlinDuration()
+        viewModelScope.launch(Dispatchers.Main) {
 
-                        _missionResetTime.value = formatDuration(duration)
+            var duration: kotlin.time.Duration
 
-                        delay(1000)
-                    }
+            while (true) {
 
-                    if (duration.inWholeSeconds <= 0) {
-                        setNewDailyMissionsUseCase(MissionModels.missions)
-                    }
+                val userFlow = async { getUserLocalUseCase().first() }.await()
+
+                duration = Duration.between(
+                    LocalDateTime.now(),
+                    timeStampToLocalDateTime(userFlow!!.resetDailyMission)
+                ).toKotlinDuration()
+
+                if (duration.inWholeSeconds <= 0) {
+
+                    async { setNewDailyMissionsUseCase(MissionModels.missions) }.await()
+
+                    _missionResetTime.value = formatDuration(duration)
+
+                    Log.i("titi", "reset: ${duration.inWholeSeconds}")
                 }
+
+                while (duration.inWholeSeconds > 0) {
+
+                    duration = Duration.between(
+                        LocalDateTime.now(),
+                        timeStampToLocalDateTime(userFlow.resetDailyMission)
+                    ).toKotlinDuration()
+
+                    _missionResetTime.value = formatDuration(duration)
+
+                    Log.i("titi", "duration1: ${duration.inWholeSeconds}")
+
+                    delay(1000)
+
+                    Log.i("titi", "duration2: ${duration.inWholeSeconds}")
+
+                }
+//                }
             }
         }
     }
