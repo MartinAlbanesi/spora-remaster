@@ -1,9 +1,13 @@
 package com.gg.spora.core.ui.components
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -21,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -28,15 +33,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.core.utils.functions.calculateProgress
-import com.gg.spora.gameResultUI.GameResultPopUp
+import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
+import com.gg.spora.miniGames.ui.components.GameRewardsPopUp
 import com.gg.spora.miniGames.ui.models.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -94,29 +100,6 @@ fun MiniGameScreen(
 
     var showDialogConfirm by rememberSaveable { mutableStateOf(false) }
 
-    if (isFinished) {
-        if(isRewardsLoading){
-            ShowCircularProgressIndicator(true)
-        }else{
-            GameResultPopUp(
-                isVisible = true,
-                backgroundImage = R.drawable.minigame_background_crop,
-                starsState = getRewardsStarState(livesLost = livesLost),
-                rewards = rewards,
-                totalOxygen = totalOxygen,
-                onBackStage = {
-                    onBackForestStage()
-                },
-                onResetGame = {
-                    onResetGame()
-                },
-                onNavigateNextLevel = {
-                    onNavigateNextLevel()
-                }
-            )
-        }
-    }
-
     BackHandler {
         showDialogConfirm = true
     }
@@ -133,7 +116,6 @@ fun MiniGameScreen(
         }
     )
 
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -141,7 +123,7 @@ fun MiniGameScreen(
         Image(
             painter = painterResource(imageBackground),
             contentDescription = null,
-            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.6f)
@@ -158,7 +140,7 @@ fun MiniGameScreen(
                 lives = lives,
                 showIcon = showIcon
             )
-            if(showProgressBar){
+            if (showProgressBar) {
                 LinearProgressIndicator(
                     progress = { progressIndicator },
                     gapSize = 0.dp,
@@ -183,7 +165,7 @@ fun MiniGameScreen(
                 content()
             }
         }
-        if(showButtonContinue){
+        if (showButtonContinue) {
             Button(
                 enabled = isCorrect != null,
                 onClick = {
@@ -205,6 +187,31 @@ fun MiniGameScreen(
                 )
             }
         }
+    }
+
+    if (isFinished) {
+
+        AnimatedVisibility(isRewardsLoading) {
+            ShowCircularProgressIndicator(true)
+        }
+
+        GameRewardsPopUp(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0x66000000))
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) { },
+            backgroundImage = R.drawable.minigame_background_crop,
+            starsState = getRewardsStarState(livesLost = livesLost),
+            totalOxygen = totalOxygen,
+            rewards = rewards,
+            isFinished = !isRewardsLoading,
+            onBackStage = onBackForestStage,
+            onResetGame = onResetGame,
+            onNavigateNextLevel = onNavigateNextLevel
+        )
     }
 }
 
