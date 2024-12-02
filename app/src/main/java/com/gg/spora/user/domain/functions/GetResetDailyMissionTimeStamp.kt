@@ -7,8 +7,8 @@ import java.time.ZoneId
 fun getResetDailyMissionTimeStamp(): Long {
     return LocalDateTime.now()
         .plusHours(BuildConfig.HOURS)
-        .plusMinutes(0)
-        .plusSeconds(20)
+        .plusMinutes(BuildConfig.MINUTES)
+        .plusSeconds(BuildConfig.SECONDS)
         .atZone(ZoneId.systemDefault())
         .toEpochSecond()
 }
