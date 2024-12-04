@@ -66,4 +66,12 @@ class UserRepositoryNetwork @Inject constructor(
             value = oxygen
         )
     }
+
+    override suspend fun updateUserData(user: User) {
+        firestoreService.updateDocument(
+            collection = CollectionsDataBase.USERS,
+            document = user,
+            id = user.id
+        )
+    }
 }

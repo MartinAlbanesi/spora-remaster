@@ -2,6 +2,7 @@ package com.gg.spora.core.graph
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -14,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
@@ -23,6 +26,7 @@ import androidx.navigation.navigation
 import com.gg.spora.grove.ui.GroveScreen
 import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.R
+import com.gg.spora.core.ui.components.ShowCircularProgressIndicator
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.ui.CreateProfileScreen
@@ -67,7 +71,14 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator()
+                    Image(
+                        painter = painterResource(id = R.drawable.home_background_rework),
+                        contentDescription = "Home Background",
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier
+                            .matchParentSize()
+                    )
+                    ShowCircularProgressIndicator(true)
                 }
             } else {
                 HomeScreen(

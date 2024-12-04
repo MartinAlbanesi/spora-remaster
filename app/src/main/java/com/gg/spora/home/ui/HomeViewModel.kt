@@ -1,6 +1,5 @@
 package com.gg.spora.home.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
@@ -16,6 +15,7 @@ import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.GetUserLocalUseCase
+import com.gg.spora.user.domain.SyncUserNetworkDataUseCase
 import com.gg.spora.user.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,28 +24,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlin.random.Random
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toKotlinDuration
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-//    private val getUserNetworkUseCase: GetUserNetworkUseCase
-//    private val getUserOxygenUseCase: GetUserOxygenUseCase,
     private val getUserLocalUseCase: GetUserLocalUseCase,
     private val getUserAuthUseCase: GetUserAuthUseCase,
     val tutorialSelected: TutorialSelected,
     private val getMissionsUseCase: GetMissionsUseCase,
     private val claimMissionUseCase: ClaimMissionUseCase,
-    private val setNewDailyMissionsUseCase: SetNewDailyMissionsUseCase
+    private val setNewDailyMissionsUseCase: SetNewDailyMissionsUseCase,
+    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -72,14 +66,20 @@ class HomeViewModel @Inject constructor(
     val missionResetTime = _missionResetTime.asStateFlow()
 
     init {
-//        getUser()
+
         getResetTime()
         getUserName()
-//        getTutorial(Tutorials.HOME_TUTORIAL)
         tutorialSelected.getTutorial(Tutorials.HOME_TUTORIAL)
         getOxygen()
         getChampyQuote()
         getMissions()
+        syncUserNetworkData()
+    }
+
+    private fun syncUserNetworkData() {
+        viewModelScope.launch {
+            syncUserNetworkDataUseCase()
+        }
     }
 
     private fun getMissions() {
@@ -118,8 +118,6 @@ class HomeViewModel @Inject constructor(
                     async { setNewDailyMissionsUseCase(MissionModels.missions) }.await()
 
                     _missionResetTime.value = formatDuration(duration)
-
-                    Log.i("titi", "reset: ${duration.inWholeSeconds}")
                 }
 
                 while (duration.inWholeSeconds > 0) {
@@ -131,14 +129,8 @@ class HomeViewModel @Inject constructor(
 
                     _missionResetTime.value = formatDuration(duration)
 
-                    Log.i("titi", "duration1: ${duration.inWholeSeconds}")
-
                     delay(1000)
-
-                    Log.i("titi", "duration2: ${duration.inWholeSeconds}")
-
                 }
-//                }
             }
         }
     }

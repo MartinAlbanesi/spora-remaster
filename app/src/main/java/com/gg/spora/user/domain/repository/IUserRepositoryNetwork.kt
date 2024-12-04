@@ -16,4 +16,6 @@ interface IUserRepositoryNetwork {
     fun getAllUser(): Flow<List<User>>
 
     suspend fun updateUserOxygen(oxygen: Int, userId: String)
+
+    suspend fun updateUserData(user: User)
 }
