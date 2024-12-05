@@ -1,6 +1,5 @@
 package com.gg.spora.user.data.local
 
-import com.gg.spora.challenge.data.local.ChallengeDao
 import com.gg.spora.challenge.domain.mappers.toObjectDetail
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.tutorials.data.local.entity.TutorialCompletedDao
@@ -50,8 +49,8 @@ class UserRepositoryLocal @Inject constructor(
         userDao.setValidObjectDetailInDatabase(objectDetail.nameObjectDetail)
     }
 
-    override suspend fun updateUserId(userId: String) {
-        userDao.updateUserId(userId)
+    override suspend fun updateUserIdAndEmail(userId: String, email: String) {
+        userDao.updateUserIdAndEmail(userId, email)
     }
 
 //    override suspend fun deleteUserById(id: String) {

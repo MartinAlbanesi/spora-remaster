@@ -1,14 +1,12 @@
 package com.gg.spora.user.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.gg.spora.challenge.domain.entities.ObjectDetailEntity
-import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
 import com.gg.spora.user.data.local.entities.UserEntity
 import com.gg.spora.user.data.local.entities.UserWithLevelsCompletedEntity
@@ -58,8 +56,8 @@ interface UserDao {
     @Query("update user_entity set userImage = :userImage")
     suspend fun updateUserImage(userImage: String)
 
-    @Query("update user_entity set id = :userId")
-    suspend fun updateUserId(userId: String)
+    @Query("update user_entity set id = :userId, email = :email")
+    suspend fun updateUserIdAndEmail(userId: String, email: String)
 
     @Query("update user_entity set oxygen = :oxygen")
     suspend fun updateUserOxygen(oxygen: Int)

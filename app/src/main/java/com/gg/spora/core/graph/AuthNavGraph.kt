@@ -1,14 +1,20 @@
 package com.gg.spora.core.graph
 
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import com.gg.spora.login.ui.LoginScreen
 import com.gg.spora.login.ui.LoginViewModel
-import com.gg.spora.registeredLogin.iu.RegisteredLoginScreen
+import com.gg.spora.login.ui.RegisteredLoginScreen
 import com.gg.spora.welcome.ui.WelcomeScreen
 import com.gg.spora.welcome.ui.WelcomeViewModel
 
@@ -29,7 +35,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
                     }
                 },
                 onNavigateToSignUp = {
-                    navController.navigate(NavigationRoutes.SignUp)
+                    navController.navigate(NavigationRoutes.SignUp(""))
                 },
                 filterNames = welcomeViewModel::filterBannedWords
             )
@@ -37,21 +43,42 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
         composable<NavigationRoutes.SignUp> {
 
+            val routeArguments = it.toRoute<NavigationRoutes.SignUp>()
+
             val loginViewModel = hiltViewModel<LoginViewModel>()
 
+            val showError by loginViewModel.showError.collectAsState()
+
+            if (showError.first) {
+                AlertDialog(
+                    text = {
+                        Text(showError.second)
+                    },
+                    onDismissRequest = { loginViewModel.isShowError() },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                loginViewModel.isShowError()
+                            }
+                        ) {
+                            Text("Aceptar")
+                        }
+                    })
+            }
+
             LoginScreen(
+                userName = routeArguments.userName,
                 viewModel = loginViewModel,
-                /*onNavigationToHome = {
+                onNavigationToHome = {
                     navController.navigate(NavigationRoutes.HomeGraph) {
-                        popUpTo(NavigationRoutes.SignUp) {
+                        popUpTo(NavigationRoutes.SignUp("")) {
                             inclusive = true
                         }
                     }
-                },*/
+                },
                 onNavigateToRegisteredLogin = {
                     navController.navigate(NavigationRoutes.RegisteredLogin)
                 }
-//                navController = navController
             )
         }
 

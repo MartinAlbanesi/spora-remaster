@@ -5,14 +5,9 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -23,12 +18,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.gg.spora.grove.ui.GroveScreen
-import com.gg.spora.grove.ui.GroveViewModel
+import androidx.navigation.toRoute
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.ShowCircularProgressIndicator
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.Tutorials
+import com.gg.spora.grove.ui.GroveScreen
+import com.gg.spora.grove.ui.GroveViewModel
 import com.gg.spora.home.ui.CreateProfileScreen
 import com.gg.spora.home.ui.HomeScreen
 import com.gg.spora.home.ui.HomeViewModel
@@ -39,7 +35,6 @@ import com.gg.spora.profile.ui.ProfileViewModel
 import com.gg.spora.ranking.ui.Ranking
 import com.gg.spora.ranking.ui.RankingViewModel
 import com.gg.spora.tutorials.ui.component.ChampyTalkingTutorial
-import com.gg.spora.user.domain.models.User
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Suppress("LongMethod")
@@ -65,6 +60,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val missions by homeViewModel.missions.collectAsState()
 
             val missionResetTime by homeViewModel.missionResetTime.collectAsStateWithLifecycle()
+
+            val user by homeViewModel.user.collectAsState()
 
             if (!isLoading) {
                 Box(
@@ -101,14 +98,14 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         if (isUserLoggedIn) {
                             navController.navigate(NavigationRoutes.Ranking)
                         } else {
-                            navController.navigate(NavigationRoutes.CreateProfileScreen)
+                            navController.navigate(NavigationRoutes.CreateProfileScreen(user!!.userName))
                         }
                     },
                     onNavigateToProfile = {
                         if (isUserLoggedIn) {
                             navController.navigate(NavigationRoutes.ProfileScreen)
                         } else {
-                            navController.navigate(NavigationRoutes.CreateProfileScreen)
+                            navController.navigate(NavigationRoutes.CreateProfileScreen(user!!.userName))
                         }
                     },
                     onNavigateToGrove = {
@@ -232,13 +229,16 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
         }
 
         composable<NavigationRoutes.CreateProfileScreen> {
+
+            val routeArguments = it.toRoute<NavigationRoutes.CreateProfileScreen>()
+
             CreateProfileScreen(
                 modifier = Modifier.fillMaxSize(),
                 onSkip = {
                     navController.popBackStack()
                 },
                 onConfirm = {
-                    navController.navigate(NavigationRoutes.SignUp)
+                    navController.navigate(NavigationRoutes.SignUp(routeArguments.userName))
                 }
             )
         }

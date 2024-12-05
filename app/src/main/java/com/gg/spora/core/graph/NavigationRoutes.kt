@@ -13,7 +13,9 @@ object NavigationRoutes {
     object Welcome
 
     @Serializable
-    object SignUp
+    data class SignUp(
+        val userName: String
+    )
 
     @Serializable
     object RegisteredLogin
@@ -36,7 +38,9 @@ object NavigationRoutes {
     object ProfileScreen
 
     @Serializable
-    object CreateProfileScreen
+    data class CreateProfileScreen(
+        val userName: String
+    )
 
 
 

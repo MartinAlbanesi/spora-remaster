@@ -60,8 +60,6 @@ class TutorialSelected @Inject constructor(
             _currentTutorialItem.value = _tutorialsItems.first()
 
             _showTutorial.value = true
-
-            Log.i("titi", _currentTutorialItem.value.toString())
         }
     }
 

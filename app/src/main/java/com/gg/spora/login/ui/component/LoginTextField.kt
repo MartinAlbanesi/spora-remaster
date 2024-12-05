@@ -1,4 +1,4 @@
-package com.gg.spora.login.component
+package com.gg.spora.login.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

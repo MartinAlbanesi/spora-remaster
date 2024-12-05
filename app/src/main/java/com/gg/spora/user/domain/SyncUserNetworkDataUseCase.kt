@@ -16,13 +16,16 @@ class SyncUserNetworkDataUseCase @Inject constructor(
 
         val isNetworkAvailable = isNetworkAvailable(context)
 
-        if(!isNetworkAvailable) return
+        if (!isNetworkAvailable) return
 
-        val userLocal = userRepositoryLocal.getUser().first()!!
-        val userNetwork = userRepositoryNetwork.getUserByEmailFlow(userLocal.email).first()
+        val userLocal = userRepositoryLocal.getUser().first()
 
-        if(userLocal.oxygen > userNetwork.oxygen){
-            userRepositoryNetwork.updateUserData(userLocal)
+        userLocal?.let {
+            val userNetwork = userRepositoryNetwork.getUserByEmailFlow(userLocal.email).first()
+
+            if (userLocal.oxygen > userNetwork.oxygen) {
+                userRepositoryNetwork.updateUserData(userLocal)
+            }
         }
     }
 }

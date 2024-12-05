@@ -20,66 +20,67 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.login.component.EmailField
-import com.gg.spora.login.component.GoogleLoginButton
-import com.gg.spora.login.component.IconButtonArrowLogin
-import com.gg.spora.login.component.LoginButton
-import com.gg.spora.login.component.LoginQuestionLink
-import com.gg.spora.login.component.NameField
-import com.gg.spora.login.component.PasswordField
-import com.gg.spora.login.component.loginText
-import com.gg.spora.login.component.separatorLogin
+import com.gg.spora.core.ui.components.ShowCircularProgressIndicator
+import com.gg.spora.login.ui.component.EmailField
+import com.gg.spora.login.ui.component.IconButtonArrowLogin
+import com.gg.spora.login.ui.component.LoginButton
+import com.gg.spora.login.ui.component.LoginQuestionLink
+import com.gg.spora.login.ui.component.NameField
+import com.gg.spora.login.ui.component.PasswordField
+import com.gg.spora.login.ui.component.loginText
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel,
+    userName: String = "",
     //navController: NavHostController,
-    //onNavigationToHome: () -> Unit,
+    onNavigationToHome: () -> Unit,
     onNavigateToRegisteredLogin: () -> Unit,
 ) {
     val isLoading by viewModel.isLoading.observeAsState(initial = false)
 
-    if (isLoading) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-    } else {
+    ShowCircularProgressIndicator(isLoading)
+
+    Box(
+        Modifier
+            .fillMaxSize()
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.welcome_background),
+            contentDescription = "Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
         Box(
-            Modifier
+            modifier = Modifier
                 .fillMaxSize()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.welcome_background),
-                contentDescription = "Background",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.5f))
-            )
-            IconButtonArrowLogin()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+        IconButtonArrowLogin()
 
-            Login(
-                Modifier.align(Alignment.Center),
-                viewModel
-            )
+        Login(
+            Modifier.align(Alignment.Center),
+            viewModel,
+            userName,
+            onNavigationToHome = onNavigationToHome
+        )
 
-            LoginQuestionLink(
+        LoginQuestionLink(
 //            navController = navController
-                onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
-            )
-        }
+            onNavigateToRegisteredLogin = onNavigateToRegisteredLogin
+        )
     }
+
 }
 
 @Composable
 fun Login(
     modifier: Modifier,
-    viewModel: LoginViewModel
+    viewModel: LoginViewModel,
+    userName: String,
+    onNavigationToHome: () -> Unit,
 ) {
-    val name: String by viewModel.name.observeAsState(initial = "")
+    val name: String by viewModel.name.observeAsState(initial = userName)
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
     val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
@@ -89,37 +90,33 @@ fun Login(
 
     val context = LocalContext.current
 
-    if (isLoading) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+
+    Column(modifier = modifier.padding(16.dp)) {
+        loginText(Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.padding(16.dp))
+        NameField(name = name) { viewModel.onLoginChanged(it, email, password) }
+        Spacer(modifier = Modifier.padding(16.dp))
+        EmailField(email) { viewModel.onLoginChanged(name, it, password) }
+        Spacer(modifier = Modifier.padding(16.dp))
+        PasswordField(password) { viewModel.onLoginChanged(name, email, it) }
+        Spacer(modifier = Modifier.padding(16.dp))
+        LoginButton(loginEnable) {
+            viewModel.onCreateAccount {
+                onNavigationToHome()
+            }
         }
-    } else {
-        Column(modifier = modifier.padding(16.dp)) {
-            loginText(Modifier.align(Alignment.CenterHorizontally))
-            Spacer(modifier = Modifier.padding(16.dp))
-            NameField(name = name) { viewModel.onLoginChanged(it, email, password) }
-            Spacer(modifier = Modifier.padding(16.dp))
-            EmailField(email) { viewModel.onLoginChanged(name, it, password) }
-            Spacer(modifier = Modifier.padding(16.dp))
-            PasswordField(password) { viewModel.onLoginChanged(name, email, it) }
-            Spacer(modifier = Modifier.padding(16.dp))
-            LoginButton(loginEnable) {
-                viewModel.onLoginSelected {
-                    viewModel.setLoading(true)
-                }
-            }
-            //Spacer(modifier = Modifier.padding(8.dp))
-            //separatorLogin()
-            //Spacer(modifier = Modifier.padding(8.dp))
-            //GoogleLoginButton()
+        //Spacer(modifier = Modifier.padding(8.dp))
+        //separatorLogin()
+        //Spacer(modifier = Modifier.padding(8.dp))
+        //GoogleLoginButton()
 
-            if (loginSuccess) {
-                Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
-            }
+        if (loginSuccess) {
+            Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
+        }
 
-            errorMessage?.let {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            }
+        errorMessage?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }
     }
+
 }

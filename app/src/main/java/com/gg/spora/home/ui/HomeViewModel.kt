@@ -7,10 +7,10 @@ import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.home.domain.functions.formatDuration
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.home.domain.functions.timeStampToLocalDateTime
-import com.gg.spora.missions.domain.SetNewDailyMissionsUseCase
 import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.ClaimMissionUseCase
 import com.gg.spora.missions.domain.GetMissionsUseCase
+import com.gg.spora.missions.domain.SetNewDailyMissionsUseCase
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.tutorials.domain.TutorialSelected
 import com.gg.spora.user.domain.GetUserAuthUseCase
@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
     private val getMissionsUseCase: GetMissionsUseCase,
     private val claimMissionUseCase: ClaimMissionUseCase,
     private val setNewDailyMissionsUseCase: SetNewDailyMissionsUseCase,
-    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase
+//    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -73,14 +73,14 @@ class HomeViewModel @Inject constructor(
         getOxygen()
         getChampyQuote()
         getMissions()
-        syncUserNetworkData()
+//        syncUserNetworkData()
     }
 
-    private fun syncUserNetworkData() {
-        viewModelScope.launch {
-            syncUserNetworkDataUseCase()
-        }
-    }
+//    private fun syncUserNetworkData() {
+//        viewModelScope.launch {
+//            syncUserNetworkDataUseCase()
+//        }
+//    }
 
     private fun getMissions() {
         viewModelScope.launch {

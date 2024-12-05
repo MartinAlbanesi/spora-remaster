@@ -7,7 +7,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gg.spora.core.data.SporaDatabase
 import com.gg.spora.core.fake.FakeUserModels
 import com.gg.spora.user.data.local.entities.LevelCompletedEntity
-import com.gg.spora.user.data.local.entities.UserEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -199,14 +198,14 @@ class UserDaoTest {
         }
 
     @Test
-    fun updateUserId_SetAValidUserIdToUpdate_UpdatedUserIdFromDB() = runTest {
+    fun updateUserId_SetAValidUserIdToUpdate_UpdatedUserIdAndEmialFromDB() = runTest {
 
         // Given
         val expectedUser = FakeUserModels.fakeUserEntity
         userDao.insertUser(expectedUser)
 
         // When
-        userDao.updateUserId("123")
+        userDao.updateUserIdAndEmail("123")
 
         // Then
         val actualUser = userDao.getUsersWithLevelsCompleted().first()?.user
