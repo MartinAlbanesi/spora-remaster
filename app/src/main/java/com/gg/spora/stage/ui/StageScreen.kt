@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeStageModels
@@ -30,7 +29,6 @@ import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.functions.getIsCompleteFromPreviousLevel
 import com.gg.spora.stage.domain.model.Level
 import com.gg.spora.ui.theme.SporaTheme
-import com.google.common.collect.Multimaps.index
 
 @Composable
 fun StageScreen(

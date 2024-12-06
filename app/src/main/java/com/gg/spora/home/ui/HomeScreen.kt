@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
+import com.gg.spora.core.ui.components.BannerAdd
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
@@ -165,6 +166,7 @@ fun HomeScreen(
                     }
                 }
             }
+
             Column(
                 modifier = Modifier
                     .align(Alignment.TopEnd),
@@ -216,6 +218,10 @@ fun HomeScreen(
                     }
                 }
             }
+
+            BannerAdd(
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
         }
     }
 

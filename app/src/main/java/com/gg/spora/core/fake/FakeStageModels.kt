@@ -133,12 +133,6 @@ object FakeStageModels {
             R.drawable.minigame_background_crop,
             R.drawable.forest_area_rework,
         ),
-        StageLevelEntity(
-            "2",
-            "EXPO",
-            R.drawable.expo_background,
-            R.drawable.expo_proyecto_stage_background,
-        ),
     )
 
     var fakeStage = listOf(
@@ -150,15 +144,6 @@ object FakeStageModels {
             levelPreviewImage = R.drawable.minigame_background_crop,
             stageBackgroundImage = R.drawable.forest_area_rework,
             pathLadder = SporaConstant.PATH_LADDER
-        ),
-        StageLevel(
-            id = "2",
-            stageType = StageType.EXPO,
-//            levels = fakeExpoLevels,
-//            challenge = fakeChallenge,
-            levelPreviewImage = R.drawable.expo_background,
-            stageBackgroundImage = R.drawable.expo_proyecto_stage_background,
-            pathLadder = SporaConstant.PATH_LADDER_EXPO
         ),
     )
 }

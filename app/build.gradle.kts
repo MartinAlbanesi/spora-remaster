@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -40,12 +43,24 @@ android {
     }
     buildTypes {
 
+        val properties = Properties()
+        properties.load(FileInputStream(rootProject.file("local.properties")))
+
         debug {
+            buildConfigField("String", "AD_MOD_API", "\"ca-app-pub-3940256099942544~3347511713\"")
+            buildConfigField("String", "BANNER_ADD", "\"ca-app-pub-3940256099942544/9214589741\"")
+            buildConfigField("String", "INTERSTITIAL_ADD ", "\"ca-app-pub-3940256099942544/1033173712\"")
+
             buildConfigField("Long", "HOURS", "0L")
             buildConfigField("Long", "MINUTES", "4L")
             buildConfigField("Long", "SECONDS", "0L")
         }
         release {
+
+            buildConfigField("String", "AD_MOD_API", properties.getProperty("AD_MOD_API"))
+            buildConfigField("String", "BANNER_ADD", properties.getProperty("BANNER_ADD"))
+            buildConfigField("String", "INTERSTITIAL_ADD", properties.getProperty("INTERSTITIAL_ADD"))
+
             buildConfigField("Long", "HOURS", "23L")
             buildConfigField("Long", "MINUTES", "59L")
             buildConfigField("Long", "SECONDS", "59L")
