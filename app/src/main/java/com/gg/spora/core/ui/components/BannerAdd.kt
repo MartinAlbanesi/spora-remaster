@@ -18,39 +18,19 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 
 @Composable
-fun BannerAdd(modifier: Modifier = Modifier) {
+fun BannerAdd(
+    modifier: Modifier = Modifier,
+    bannerId: String
+) {
     AndroidView(
         modifier = modifier,
         factory = { context ->
             val adView = AdView(context)
             adView.setAdSize(AdSize.BANNER)
             adView.apply {
-                adUnitId = "ca-app-pub-3940256099942544/9214589741"
+                adUnitId = bannerId
                 loadAd(AdRequest.Builder().build())
             }
         },
     )
-}
-
-//@PreviewLightDark
-@Preview
-//@PreviewFontScale
-//@PreviewScreenSizes
-@Composable
-private fun BannerAddPreview() {
-    SporaTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ){
-                BannerAdd(
-                    modifier = Modifier.align(Alignment.TopCenter)
-                )
-            }
-        }
-    }
 }

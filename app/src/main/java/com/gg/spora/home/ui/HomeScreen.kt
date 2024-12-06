@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gg.spora.BuildConfig
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
@@ -220,7 +221,10 @@ fun HomeScreen(
             }
 
             BannerAdd(
-                modifier = Modifier.align(Alignment.BottomCenter)
+                modifier = Modifier.align(
+                    Alignment.BottomCenter
+                ),
+                bannerId = BuildConfig.BANNER_ADD
             )
         }
     }
