@@ -211,4 +211,7 @@ dependencies {
 
     // CoreLibraryDesugaring
     coreLibraryDesugaring(libs.coreLibraryDesugaring)
+
+    // AdMod
+    implementation(libs.ad.mod)
 }

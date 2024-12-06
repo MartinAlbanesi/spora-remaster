@@ -198,14 +198,14 @@ class UserDaoTest {
         }
 
     @Test
-    fun updateUserId_SetAValidUserIdToUpdate_UpdatedUserIdAndEmialFromDB() = runTest {
+    fun updateUserId_SetAValidUserIdToUpdate_UpdatedUserIdAndEmailFromDB() = runTest {
 
         // Given
         val expectedUser = FakeUserModels.fakeUserEntity
         userDao.insertUser(expectedUser)
 
         // When
-        userDao.updateUserIdAndEmail("123")
+        userDao.updateUserIdAndEmail("123", "")
 
         // Then
         val actualUser = userDao.getUsersWithLevelsCompleted().first()?.user

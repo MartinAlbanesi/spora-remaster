@@ -66,6 +66,9 @@ kover = "0.8.3"
 # coreLibraryDesugaring
 coreLibraryDesugaring = "2.0.4"
 
+# admod
+admod = "23.6.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -147,6 +150,9 @@ constraint-layout-compose = { group = "androidx.constraintlayout", name = "const
 
 # coreLibraryDesugaring
 coreLibraryDesugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "coreLibraryDesugaring" }
+
+# Admod
+ad-mod = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "admod" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

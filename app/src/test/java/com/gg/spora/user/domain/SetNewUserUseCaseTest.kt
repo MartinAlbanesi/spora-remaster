@@ -43,7 +43,7 @@ class SetNewUserUseCaseTest{
         // Then
         coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
         coVerify(exactly = 1) { userRepositoryLocal.setUserLocal(any()) }
-        coVerify(exactly = 1) { userRepositoryLocal.updateUserIdAndEmail(any()) }
+        coVerify(exactly = 1) { userRepositoryLocal.updateUserIdAndEmail(any(), any()) }
     }
 
     @Test
@@ -60,7 +60,7 @@ class SetNewUserUseCaseTest{
         // Then
         coVerify(exactly = 0) { userRepositoryNetwork.setUser(any()) }
         coVerify(exactly = 1) { userRepositoryLocal.setUserLocal(any()) }
-        coVerify(exactly = 0) { userRepositoryLocal.updateUserIdAndEmail(any()) }
+        coVerify(exactly = 0) { userRepositoryLocal.updateUserIdAndEmail(any(), any()) }
     }
 
     @Test
@@ -78,6 +78,6 @@ class SetNewUserUseCaseTest{
         // Then
         coVerify(exactly = 0) { userRepositoryLocal.setUserLocal(any()) }
         coVerify(exactly = 1) { userRepositoryNetwork.setUser(any()) }
-        coVerify(exactly = 0) { userRepositoryLocal.updateUserIdAndEmail(any()) }
+        coVerify(exactly = 0) { userRepositoryLocal.updateUserIdAndEmail(any(), any()) }
     }
 }
