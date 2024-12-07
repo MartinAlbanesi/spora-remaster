@@ -52,8 +52,8 @@ android {
         properties.load(FileInputStream(rootProject.file("local.properties")))
 
         debug {
-            buildConfigField("String", "BANNER_ADD", "\"ca-app-pub-3940256099942544/9214589741\"")
-            buildConfigField("String", "INTERSTITIAL_ADD ", "\"ca-app-pub-3940256099942544/1033173712\"")
+            buildConfigField("String", "BANNER_AD", "\"ca-app-pub-3940256099942544/9214589741\"")
+            buildConfigField("String", "INTERSTITIAL_AD", "\"ca-app-pub-3940256099942544/1033173712\"")
 
             addManifestPlaceholders(
                 mapOf(
@@ -66,8 +66,8 @@ android {
             buildConfigField("Long", "SECONDS", "0L")
         }
         release {
-            buildConfigField("String", "BANNER_ADD", properties.getProperty("BANNER_ADD"))
-            buildConfigField("String", "INTERSTITIAL_ADD", properties.getProperty("INTERSTITIAL_ADD"))
+            buildConfigField("String", "BANNER_AD", properties.getProperty("BANNER_AD"))
+            buildConfigField("String", "INTERSTITIAL_AD", properties.getProperty("INTERSTITIAL_AD"))
 
             addManifestPlaceholders(
                 mapOf(

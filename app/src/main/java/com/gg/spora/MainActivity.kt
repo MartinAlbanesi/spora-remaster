@@ -13,6 +13,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.gg.spora.core.graph.RootNavigationGraph
+import com.gg.spora.core.ui.components.ads.loadInterstitial
+import com.gg.spora.core.ui.components.ads.removeInterstitial
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.GetUserLocalUseCase
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +28,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        loadInterstitial(this)
+
         setContent {
             var isUserLoggedIn : Boolean? by rememberSaveable {
                 mutableStateOf(null)
@@ -52,5 +57,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        removeInterstitial()
+        super.onDestroy()
     }
 }

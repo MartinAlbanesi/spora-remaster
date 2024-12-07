@@ -6,12 +6,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,8 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,6 +31,7 @@ import com.gg.spora.camera.ui.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.ui.components.MiniGameScreen
+import com.gg.spora.core.ui.components.ads.showInterstitialAdd
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.miniGames.ui.QuizImageScreen
@@ -187,6 +184,8 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
 
             val missionCompleted by quizViewModel.missionManager.missionCompleted.collectAsState()
 
+            val context = LocalContext.current
+
             LaunchedEffect(counterQuestion) {
                 quizViewModel.onShowChampyHelp()
             }
@@ -209,9 +208,15 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 rewards = currentRewards,
                 onNextQuestion = quizViewModel::nextQuestion,
                 onResetGame = quizViewModel::resetGame,
-                onBackForestStage = { navController.popBackStack() },
+                onBackForestStage = {
+                    showInterstitialAdd(context){
+                        navController.popBackStack()
+                    }
+                },
                 onNavigateNextLevel = {
-                    navController.popBackStack()
+                    showInterstitialAdd(context) {
+                        navController.popBackStack()
+                    }
                 },
                 content = {
                     when (currentQuestion!!.typeGame) {

@@ -36,8 +36,8 @@ import com.gg.spora.BuildConfig
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
-import com.gg.spora.core.ui.components.BannerAdd
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
+import com.gg.spora.core.ui.components.ads.BannerAd
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
@@ -220,11 +220,11 @@ fun HomeScreen(
                 }
             }
 
-            BannerAdd(
+            BannerAd(
                 modifier = Modifier.align(
                     Alignment.BottomCenter
                 ),
-                bannerId = BuildConfig.BANNER_ADD
+                bannerId = BuildConfig.BANNER_AD
             )
         }
     }
