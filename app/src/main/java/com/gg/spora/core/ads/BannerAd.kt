@@ -1,4 +1,4 @@
-package com.gg.spora.core.ui.components.ads
+package com.gg.spora.core.ads
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

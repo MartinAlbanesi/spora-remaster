@@ -24,10 +24,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,16 +45,15 @@ fun MissionCard(
     mission: Mission,
     onClaimMission: (Byte, Byte) -> Unit
 ) {
-
     val icon = getMissionIcon(mission.id)
 
     val textColor = when {
-        mission.isCompleted || mission.isClaimed -> colorResource(id = R.color.white)
+        mission.isClaimed -> colorResource(id = R.color.white)
         else -> colorResource(id = R.color.primary_10)
     }
 
     val backgroundColor = when {
-        mission.isCompleted || mission.isClaimed -> colorResource(id = R.color.secondary_30)
+        mission.isClaimed -> colorResource(id = R.color.secondary_30)
         else -> colorResource(id = R.color.cream)
     }
 
@@ -82,7 +83,10 @@ fun MissionCard(
         headlineContent = {
             when {
                 mission.isClaimed -> ClaimedMissionText(mission.text, textColor)
-                mission.isCompleted -> ClaimMissionButton(mission.id, mission.oxygenReward, textColor, onClaimMission)
+                mission.isCompleted -> ClaimMissionButton(
+                    textColor = textColor,
+                    onClaimMission = { onClaimMission(mission.id, mission.oxygenReward) }
+                )
                 else -> MissionProgressIndicator(progressIndicator)
             }
         },
@@ -141,13 +145,11 @@ private fun ClaimedMissionText(missionText: String, textColor: Color) {
 
 @Composable
 private fun ClaimMissionButton(
-    missionId: Byte,
-    missionOxygenReward: Byte,
     textColor: Color,
-    onClaimMission: (Byte, Byte) -> Unit
+    onClaimMission: () -> Unit
 ) {
     Button(
-        onClick = { onClaimMission(missionId, missionOxygenReward) },
+        onClick = { onClaimMission() },
         colors = ButtonDefaults.buttonColors(
             contentColor = textColor,
             containerColor = colorResource(R.color.secondary)
@@ -176,8 +178,8 @@ private fun MissionProgressIndicator(progressIndicator: Float) {
     )
 }
 
-@PreviewLightDark
-//@Preview
+//@PreviewLightDark
+@Preview
 //@PreviewFontScale
 //@PreviewScreenSizes
 @Composable
@@ -195,8 +197,8 @@ private fun MissionCardPreview() {
                     objective = 10,
                     counter = 5,
                     oxygenReward = 5,
-                    isCompleted = false,
-                    isClaimed = true
+                    isCompleted = true,
+                    isClaimed = false,
                 ),
                 onClaimMission = { _, _ -> }
             )

@@ -1,6 +1,7 @@
 package com.gg.spora.missions.domain
 
 import com.gg.spora.core.utils.SporaConstant.MAX_DAILY_MISSIONS
+import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.missions.domain.repository.IMissionRepositoryLocal
 import com.gg.spora.user.domain.functions.getResetDailyMissionTimeStamp
@@ -15,6 +16,8 @@ class SetNewDailyMissionsUseCase @Inject constructor(
     suspend operator fun invoke(missions: List<Mission>) {
         missionRepositoryLocal.deleteAllMissions()
         userRepositoryLocal.updateResetDailyMission(getResetDailyMissionTimeStamp())
-        missionRepositoryLocal.insertMissions(missions.shuffled().take(MAX_DAILY_MISSIONS))
+        missionRepositoryLocal.insertMissions(
+            missions.shuffled().take(MAX_DAILY_MISSIONS) + MissionModels.missionAd
+        )
     }
 }

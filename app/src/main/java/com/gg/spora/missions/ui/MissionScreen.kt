@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +31,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
+import com.gg.spora.core.ads.showRewardedAd
 import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.models.Mission
 import com.gg.spora.missions.ui.component.MissionCard
@@ -43,6 +45,9 @@ fun MissionScreen(
     onBack: () -> Unit,
     onClaimMission: (Byte, Byte) -> Unit
 ) {
+
+    val context = LocalContext.current
+
     Box(modifier = modifier){
         Column(
 //            modifier = modifier
@@ -85,7 +90,19 @@ fun MissionScreen(
                     missions.forEach { mission ->
                         MissionCard(
                             mission = mission,
-                            onClaimMission = onClaimMission,
+                            onClaimMission = { missionId, oxygenReward ->
+                                if(missionId.toInt() == 0){
+                                    showRewardedAd(
+                                        context = context,
+                                        onAdDismissed = {},
+                                        onUserEarnedReward = { oxygen ->
+                                            onClaimMission(missionId, oxygen)
+                                        }
+                                    )
+                                }else{
+                                    onClaimMission(missionId, oxygenReward)
+                                }
+                            },
                         )
                     }
                 }

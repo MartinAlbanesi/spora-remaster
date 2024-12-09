@@ -37,7 +37,7 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
 import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
-import com.gg.spora.core.ui.components.ads.BannerAd
+import com.gg.spora.core.ads.BannerAd
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
@@ -66,7 +66,7 @@ fun HomeScreen(
 
     var showMission by rememberSaveable { mutableStateOf(false) }
 
-    var missionNotClaimed = missions.filter { !it.isClaimed }.size
+    val missionNotClaimed = missions.filter { !it.isClaimed }.size
 
     // Icons in the left
     val leftIcons = listOf<HomeIcon>(

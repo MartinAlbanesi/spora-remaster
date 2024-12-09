@@ -1,4 +1,4 @@
-package com.gg.spora.core.ui.components.ads
+package com.gg.spora.core.ads
 
 import android.app.Activity
 import android.content.Context
@@ -31,7 +31,7 @@ fun loadInterstitial(context: Context) {
     )
 }
 
-fun showInterstitialAdd(context: Context, onAdDismissed: () -> Unit) {
+fun showInterstitialAd(context: Context, onAdDismissed: () -> Unit) {
     val activity = context.findActivity()
 
     if (mInterstitialAd != null && activity != null) {

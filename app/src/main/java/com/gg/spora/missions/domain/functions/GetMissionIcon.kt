@@ -9,6 +9,7 @@ fun getMissionIcon(missionId: Byte): Int {
         MissionType.MINI_GAME_MISSION.missionId -> R.drawable.challenge_level
         MissionType.GROVE_MISSION.missionId -> R.drawable.trees_icon
         MissionType.SCAN_MISSION.missionId -> R.drawable.camera_icon
+        MissionType.AD_MISSION.missionId -> R.drawable.ad_icon
         else -> R.drawable.tutorial_seed
     }
 }

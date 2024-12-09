@@ -31,7 +31,7 @@ import com.gg.spora.camera.ui.CameraScreen
 import com.gg.spora.challenge.ui.ChallengeScreen
 import com.gg.spora.challenge.ui.ChallengeViewModel
 import com.gg.spora.core.ui.components.MiniGameScreen
-import com.gg.spora.core.ui.components.ads.showInterstitialAdd
+import com.gg.spora.core.ads.showInterstitialAd
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.TypeGame
 import com.gg.spora.miniGames.ui.QuizImageScreen
@@ -209,12 +209,12 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
                 onNextQuestion = quizViewModel::nextQuestion,
                 onResetGame = quizViewModel::resetGame,
                 onBackForestStage = {
-                    showInterstitialAdd(context){
+                    showInterstitialAd(context){
                         navController.popBackStack()
                     }
                 },
                 onNavigateNextLevel = {
-                    showInterstitialAdd(context) {
+                    showInterstitialAd(context) {
                         navController.popBackStack()
                     }
                 },

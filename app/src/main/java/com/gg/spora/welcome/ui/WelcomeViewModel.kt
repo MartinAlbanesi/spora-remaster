@@ -6,6 +6,7 @@ import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.SetMissionsUseCase
 import com.gg.spora.core.utils.SporaConstant.BANNED_WORDS
+import com.gg.spora.core.utils.SporaConstant.MAX_DAILY_MISSIONS
 import com.gg.spora.stage.domain.SetNewLevelsUseCase
 import com.gg.spora.stage.domain.SetNewStagesLevelUseCase
 import com.gg.spora.tutorials.data.TutorialModels
@@ -63,7 +64,10 @@ class WelcomeViewModel @Inject constructor(
             setNewStagesLevelUseCase(stageLevel)
             setNewLevelsUseCase(level)
             setTutorialsLocalUseCase(TutorialModels.tutorialsCompleted)
-            setMissionsUseCase(MissionModels.missions.shuffled().take(3))
+            setMissionsUseCase(
+                MissionModels.missions.shuffled().take(MAX_DAILY_MISSIONS)
+                + MissionModels.missionAd
+            )
         }
     }
 
