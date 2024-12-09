@@ -191,6 +191,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.cloud.messaging)
+    implementation(libs.firebase.google.auth)
 
     //CameraX
     implementation(libs.camerax.core)
