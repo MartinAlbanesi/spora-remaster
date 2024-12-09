@@ -35,7 +35,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeUserModels
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
 import com.gg.spora.user.domain.models.User
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -46,6 +45,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.SubcomposeAsyncImage
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import kotlinx.coroutines.delay
 import java.time.Duration
 
@@ -81,10 +81,10 @@ fun Ranking(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        TopBarWithTitleExitAndIcon(
+
+        TopBarWithLeadingAndTrailingIcon(
             title = "Ranking",
-            onBackClick = onBackClick,
-            showIcon = false
+            onClickLeadingIcon = onBackClick,
         )
 
         Text(

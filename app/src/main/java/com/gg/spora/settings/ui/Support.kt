@@ -1,7 +1,5 @@
 package com.gg.spora.settings.ui
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,7 +9,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -29,9 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
-import com.gg.spora.user.domain.models.User
-import kotlinx.coroutines.flow.Flow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 
 
 @Composable
@@ -54,9 +49,10 @@ fun SupportScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            TopAppBarOnlyBackArrow(
+
+            TopBarWithLeadingAndTrailingIcon(
                 title = "Soporte",
-                onBackClick = onBackClick
+                onClickLeadingIcon = onBackClick
             )
 
             Spacer(modifier = Modifier.height(16.dp))

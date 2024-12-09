@@ -15,7 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.library.data.local.entity.InfoCardEntity
 import com.gg.spora.library.data.repository.FakeRepositoryInfoCard
@@ -49,11 +49,9 @@ fun LibraryCardBook(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-
-            TopAppBarOnlyBackArrow(
-                modifier = Modifier,
-                onBackClick = onBackClick,
-                title = category.label
+            TopBarWithLeadingAndTrailingIcon(
+                title = category.label,
+                onClickLeadingIcon = onBackClick
             )
 
 

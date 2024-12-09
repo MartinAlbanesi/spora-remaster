@@ -1,4 +1,3 @@
-// ProfileScreen.kt
 package com.gg.spora.profile.ui
 
 import androidx.compose.foundation.Image
@@ -13,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,7 +34,7 @@ import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.models.User
 
@@ -67,11 +68,12 @@ fun ProfileScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            TopAppBarOnlyBackArrow(
+
+            TopBarWithLeadingAndTrailingIcon(
                 title = "Perfil",
-                onBackClick = onBackClick,
-                showSettingsIcon = true,
-                onSettingsClick = onSettingsClick
+                onClickLeadingIcon = onBackClick,
+                trailingIcon = Icons.Default.Settings,
+                onClickTrailingIcon = onSettingsClick
             )
 
             Box(

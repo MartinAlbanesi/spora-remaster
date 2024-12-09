@@ -43,6 +43,7 @@ import com.gg.spora.core.utils.functions.calculateProgress
 import com.gg.spora.core.utils.functions.getRewardsStarState
 import com.gg.spora.miniGames.domain.functions.getChampyImageMiniGame
 import com.gg.spora.miniGames.ui.components.GameRewardsPopUp
+import com.gg.spora.miniGames.ui.components.LivesCounter
 import com.gg.spora.miniGames.ui.models.ChampyHelping
 import com.gg.spora.ui.theme.SporaTheme
 
@@ -132,13 +133,16 @@ fun MiniGameScreen(
         Column(
             modifier = modifier
         ) {
-            TopBarWithTitleExitAndIcon(
+            TopBarWithLeadingAndTrailingIcon(
                 title = title,
-                onBackClick = {
+                onClickLeadingIcon = {
                     showDialogConfirm = true
                 },
-                lives = lives,
-                showIcon = showIcon
+                trailingContent = {
+                    LivesCounter(
+                        lives = lives.toString(),
+                    )
+                },
             )
             if (showProgressBar) {
                 LinearProgressIndicator(

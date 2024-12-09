@@ -36,11 +36,12 @@ import com.gg.spora.BuildConfig
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
-import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
 import com.gg.spora.core.ads.BannerAd
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
+import com.gg.spora.home.ui.components.OxygenAndTreeIcons
 import com.gg.spora.home.ui.components.SignButton
 import com.gg.spora.missions.data.local.MissionModels
 import com.gg.spora.missions.domain.models.Mission
@@ -105,13 +106,16 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBarWithDualIcon(
-                firstLabel = "0",
-                firstIcon = R.drawable.trees_icon,
-                secondLabel = oxygen.toString(),
-                secondIcon = R.drawable.oxygen_icon,
-                showBackArrow = false,
-                modifier = ModifierStyle.brush
+            TopBarWithLeadingAndTrailingIcon(
+                modifier = Modifier,
+                leadingIcon = null,
+                title = "",
+                titleContent = {
+                    OxygenAndTreeIcons(
+                        oxygen = oxygen,
+                        trees = 0
+                    )
+                }
             )
         },
         modifier = modifier

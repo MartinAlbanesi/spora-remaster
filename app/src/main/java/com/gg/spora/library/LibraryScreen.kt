@@ -27,7 +27,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 
 
 @Preview(showBackground = true)
@@ -55,12 +55,10 @@ fun LibraryScreen(
             contentScale = ContentScale.FillBounds
         )
 
-        TopAppBarOnlyBackArrow(
+        TopBarWithLeadingAndTrailingIcon(
             title = "",
-            onBackClick = onBackButtonClick
-        ) {
-
-        }
+            onClickLeadingIcon = onBackButtonClick,
+        )
 
         TorchFire(modifier = Modifier)
 

@@ -33,7 +33,7 @@ fun ImageWithTextHorizontal(
     text: String
 ) {
     val textStyle = TextStyle(
-        fontSize = 30.sp,
+        fontSize = 24.sp,
         color = Color.White,
     )
 
@@ -44,9 +44,8 @@ fun ImageWithTextHorizontal(
         Image(
             painter = painterResource(imageResource),
             contentDescription = "Icons of the user's currency",
-            modifier = Modifier.size(46.dp)
+            modifier = Modifier.size(44.dp)
         )
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(
             text,
             style = textStyle
@@ -65,7 +64,6 @@ fun IconWithTextPreview() {
             ImageWithTextHorizontal(
                 imageResource = R.drawable.trees_icon,
                 text = "12",
-                modifier = Modifier.padding(16.dp)
             )
         }
     }

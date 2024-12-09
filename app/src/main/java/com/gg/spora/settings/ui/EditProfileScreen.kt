@@ -51,7 +51,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.SporaPrimaryButton
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.user.domain.models.User
 
@@ -84,9 +84,10 @@ fun EditProfileScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            TopAppBarOnlyBackArrow(
+
+            TopBarWithLeadingAndTrailingIcon(
                 title = "Editar Perfil",
-                onBackClick = onBackClick
+                onClickLeadingIcon = onBackClick
             )
 
             Column(

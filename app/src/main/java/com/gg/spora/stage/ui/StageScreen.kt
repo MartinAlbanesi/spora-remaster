@@ -22,8 +22,9 @@ import androidx.compose.ui.unit.dp
 import com.gg.spora.R
 import com.gg.spora.core.fake.FakeStageModels
 import com.gg.spora.core.ui.components.ChallengeStageItem
+import com.gg.spora.core.ui.components.ImageWithTextHorizontal
 import com.gg.spora.core.ui.components.LevelStageItem
-import com.gg.spora.core.ui.components.TopAppBarWithO2Icon
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.functions.getIsCompleteFromPreviousLevel
@@ -45,15 +46,16 @@ fun StageScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBarWithO2Icon(
+
+            TopBarWithLeadingAndTrailingIcon(
                 title = title,
-                firstLabel = oxygen.toString(),
-                firstIcon = R.drawable.oxygen,
-                showBackArrow = true,
-                showIcon = true,
-                onBackClick = {
-                    popBackStack()
-                },
+                onClickLeadingIcon = popBackStack,
+                trailingContent = {
+                    ImageWithTextHorizontal(
+                        imageResource = R.drawable.oxygen,
+                        text = oxygen.toString(),
+                    )
+                }
             )
         }
     ) { paddingValue ->

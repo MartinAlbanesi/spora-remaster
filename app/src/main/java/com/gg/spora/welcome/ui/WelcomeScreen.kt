@@ -34,9 +34,8 @@ import com.gg.spora.R
 import com.gg.spora.core.ui.components.ChampyTalkingAnimation
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.core.ui.components.SporaPrimaryInverseButton
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.ui.theme.SporaTheme
-import com.gg.spora.welcome.ui.components.ChampyWithTopDialogue
 import com.gg.spora.welcome.ui.components.LogoScreen
 import com.gg.spora.welcome.ui.components.SporaTextField
 import kotlinx.coroutines.launch
@@ -78,16 +77,16 @@ fun WelcomeScreen(
             if (pagerState.currentPage > 0) {
 
                 if (pagerState.currentPage == 3) {
-                    TopAppBarOnlyBackArrow(
-                        onBackClick = {
+                    TopBarWithLeadingAndTrailingIcon(
+                        modifier = modifier
+                            .weight(1f),
+                        title = "",
+                        onClickLeadingIcon = {
                             coroutineScope.launch {
                                 pagerState.animateScrollToPage(pagerState.currentPage - 1)
                                 name = ""
                             }
-                        },
-                        modifier = modifier
-                            .weight(1f),
-                        title = ""
+                        }
                     )
                 } else Spacer(modifier = modifier.weight(1f))
 

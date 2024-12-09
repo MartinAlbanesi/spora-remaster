@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.TopBarWithTitleExitAndIcon
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
@@ -60,11 +60,9 @@ fun Notifications(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                TopBarWithTitleExitAndIcon(
+                TopBarWithLeadingAndTrailingIcon(
                     title = "Notificaciones",
-                    onBackClick = onBackClick,
-                    showSettingsIcon = false,
-                    showIcon = false
+                    onClickLeadingIcon = onBackClick
                 )
 
                 Column(

@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.gg.spora.R
 import com.gg.spora.ui.theme.SporaTheme
 import com.gg.spora.core.ui.components.SporaPrimaryButton
-import com.gg.spora.core.ui.components.TopAppBarOnlyBackArrow
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 
 @Composable
 fun SettingsScreen(
@@ -59,9 +59,9 @@ fun SettingsScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            TopAppBarOnlyBackArrow(
+            TopBarWithLeadingAndTrailingIcon(
                 title = "Opciones",
-                onBackClick = onBackClick
+                onClickLeadingIcon = onBackClick
             )
 
             Column(

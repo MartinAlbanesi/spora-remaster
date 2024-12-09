@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
@@ -30,7 +33,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.ui.components.TopAppBarWithDualIcon
+import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
@@ -39,6 +42,7 @@ import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.grove.ui.components.ButtonWithIcon
 import com.gg.spora.grove.ui.components.ForestTreesFlowRow
 import com.gg.spora.grove.ui.components.SeedTreesRow
+import com.gg.spora.home.ui.components.OxygenAndTreeIcons
 import com.gg.spora.ui.theme.SporaTheme
 import kotlinx.coroutines.launch
 
@@ -88,14 +92,17 @@ fun GroveScreen(
     }
     Scaffold(
         topBar = {
-            TopAppBarWithDualIcon(
-                modifier = ModifierStyle.brush,
-                secondLabel = uiState.userOxygen.toString(),
-                secondIcon = R.drawable.oxygen_icon,
-                showBackArrow = true,
-                onBackClick = popBackStack,
-                firstLabel = "0",
-                firstIcon = R.drawable.trees_icon,
+            TopBarWithLeadingAndTrailingIcon(
+                modifier = Modifier,
+                title = "",
+                leadingIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                onClickLeadingIcon = popBackStack,
+                titleContent = {
+                    OxygenAndTreeIcons(
+                        oxygen = uiState.userOxygen,
+                        trees = uiState.accumulatedOxygen
+                    )
+                }
             )
         },
         modifier = modifier
@@ -202,7 +209,7 @@ fun GrovePreview() {
                     seedTreeCooldowns = emptyMap(),
                     forestTreeGrowthTimes = emptyMap(),
                     accumulatedOxygen = 0,
-                    userOxygen = 0,
+                    userOxygen = 5050,
                     oxygenCooldown = 0L,
                 ),
                 isLoading = false,
