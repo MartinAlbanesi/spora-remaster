@@ -26,6 +26,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
+import com.gg.spora.core.ads.BannerAd
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
 import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 
@@ -72,6 +73,11 @@ fun LibraryScreen(
         MushyAndTable(
             modifier = Modifier,
             showTutorial = showTutorial
+        )
+
+        BannerAd(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
         )
     }
 }
