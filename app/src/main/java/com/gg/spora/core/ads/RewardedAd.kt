@@ -1,7 +1,6 @@
 package com.gg.spora.core.ads
 
 import android.content.Context
-import android.util.Log
 import com.gg.spora.BuildConfig
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -30,7 +29,6 @@ fun loadRewarded(context: Context) {
 
 fun showRewardedAd(
     context: Context,
-    onAdDismissed: () -> Unit,
     onUserEarnedReward: (Byte) -> Unit
 ) {
     val activity = context.findActivity()
@@ -45,11 +43,9 @@ fun showRewardedAd(
                 mRewardedAd = null
 
                 loadRewarded(context)
-                onAdDismissed()
             }
         }
         mRewardedAd?.show(activity) {
-            Log.i("titi", it.amount.toByte().toString())
             onUserEarnedReward(it.amount.toByte())
         }
     }

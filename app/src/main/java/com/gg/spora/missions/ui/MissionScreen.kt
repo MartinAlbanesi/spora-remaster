@@ -94,7 +94,6 @@ fun MissionScreen(
                                 if(missionId.toInt() == 0){
                                     showRewardedAd(
                                         context = context,
-                                        onAdDismissed = {},
                                         onUserEarnedReward = { oxygen ->
                                             onClaimMission(missionId, oxygen)
                                         }
