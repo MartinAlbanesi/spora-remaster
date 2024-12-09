@@ -1,5 +1,6 @@
 package com.gg.spora.user.domain
 
+import android.util.Log
 import com.gg.spora.tutorials.data.TutorialModels
 import com.gg.spora.user.domain.functions.getResetDailyMissionTimeStamp
 import com.gg.spora.user.domain.models.User
@@ -27,8 +28,8 @@ class SetNewUserUseCase @Inject constructor(
         val userLocal = userRepositoryLocal.getUser().first()
 
         if (userLocal != null) {
-            userRepositoryNetwork.setUser(userLocal.copy(email = email!!))
-            userRepositoryLocal.updateUserIdAndEmail(userLocal.id, email)
+            val userId = userRepositoryNetwork.setUser(userLocal.copy(email = email!!))
+            userRepositoryLocal.updateUserIdAndEmail(userId, email)
             return
         }
 

@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
     private val getMissionsUseCase: GetMissionsUseCase,
     private val claimMissionUseCase: ClaimMissionUseCase,
     private val setNewDailyMissionsUseCase: SetNewDailyMissionsUseCase,
-//    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase
+    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -73,14 +73,14 @@ class HomeViewModel @Inject constructor(
         getOxygen()
         getChampyQuote()
         getMissions()
-//        syncUserNetworkData()
+        syncUserNetworkData()
     }
 
-//    private fun syncUserNetworkData() {
-//        viewModelScope.launch {
-//            syncUserNetworkDataUseCase()
-//        }
-//    }
+    private fun syncUserNetworkData() {
+        viewModelScope.launch {
+            syncUserNetworkDataUseCase()
+        }
+    }
 
     private fun getMissions() {
         viewModelScope.launch {

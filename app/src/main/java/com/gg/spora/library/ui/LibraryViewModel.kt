@@ -61,10 +61,10 @@ class LibraryViewModel @Inject constructor(
 
     private fun loadInfoCardList() {
 
-        viewModelScope.launch {
-            val currentInfoCards = getAllInfoCardsUseCase.invoke().first()
-            _infoCardEntityList.value = currentInfoCards
-        }
+//        viewModelScope.launch {
+//            val currentInfoCards = getAllInfoCardsUseCase.invoke().first()
+//            _infoCardEntityList.value = currentInfoCards
+//        }
 
     }
 

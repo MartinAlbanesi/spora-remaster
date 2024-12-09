@@ -74,7 +74,7 @@ fun LevelPreview(
                 )
             }
 
-            if(oxygen <= level.requiredOxygen){
+            if(oxygen < level.requiredOxygen){
                 Text(
                     text = "Tu oxígeno es $oxygen",
                     fontSize = 24.sp,
