@@ -18,4 +18,6 @@ interface IUserRepositoryNetwork {
     suspend fun updateUserOxygen(oxygen: Int, userId: String)
 
     suspend fun updateUserData(user: User)
+
+    suspend fun getUserByEmail(email: String): User?
 }

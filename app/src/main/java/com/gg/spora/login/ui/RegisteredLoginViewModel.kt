@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.login.domain.LoginWithGoogleUseCase
 import com.gg.spora.login.domain.SignInWithEmailAndPasswordUseCase
 import com.gg.spora.user.domain.UpdateUserLocalDataFromNetworkUseCase
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -21,7 +23,9 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisteredLoginViewModel @Inject constructor(
     private val updateUserLocalDataFromNetworkUseCase: UpdateUserLocalDataFromNetworkUseCase,
-    private val signInWithEmailAndPasswordUseCase: SignInWithEmailAndPasswordUseCase
+    private val signInWithEmailAndPasswordUseCase: SignInWithEmailAndPasswordUseCase,
+    private val loginWithGoogleUseCase: LoginWithGoogleUseCase,
+    private val googleSignInClient: GoogleSignInClient
 ) : ViewModel() {
 
     private val _email = MutableLiveData<String>()
@@ -89,36 +93,23 @@ class RegisteredLoginViewModel @Inject constructor(
         _showError.value = Pair(false, "")
     }
 
-//    fun onLoginClick(navController: NavHostController) {
-//        val email = email.value.toString().trim()
-//        val password = password.value.toString().trim()
-//
-//        viewModelScope.launch(Dispatchers.Main) {
-//            _isLoading.value = true
-//
-//            try {
-//                val wea = auth.signInWithEmailAndPassword(email, password).await()
-//
-//                if (wea.user != null) {
-//                    updateUserLocalDataFromNetworkUseCase(email)
-//                    navController.navigate(NavigationRoutes.Home)
-//                } else {
-//                    _showError.value = true
-//                }
-//            } catch (e: FirebaseAuthInvalidUserException) {
-//                _showError.value = true
-//                Log.e("RegisteredLogin", "Usuario no encontrado: ${e.message}", e)
-//            } catch (e: FirebaseAuthInvalidCredentialsException) {
-//                _showError.value = true
-//                Log.e("RegisteredLogin", "Credenciales inválidas: ${e.message}", e)
-//            } finally {
-//                _isLoading.value = false
-//            }
-//
-//        }
-//    }
-//    fun showErrorConsumed() {
-//        _showError.value = false
-//    }
+    fun onGoogleLoginSelected(googleLauncherLogin: (GoogleSignInClient) -> Unit) {
+        googleLauncherLogin(googleSignInClient)
+    }
+
+    fun signInWithGoogle(idToken: String, onNavigateToHome: () -> Unit) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            val result = loginWithGoogleUseCase(idToken)
+
+            if (result != null) {
+//                _singInState.value = result
+                onNavigateToHome()
+            } else {
+                _showError.value = Pair(true, "Error al iniciar sesión")
+            }
+            _isLoading.value = false
+        }
+    }
 
 }

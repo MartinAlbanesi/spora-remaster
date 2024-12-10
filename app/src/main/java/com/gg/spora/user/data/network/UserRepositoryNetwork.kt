@@ -11,6 +11,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.snapshots
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UserRepositoryNetwork @Inject constructor(
@@ -73,5 +74,13 @@ class UserRepositoryNetwork @Inject constructor(
             document = user,
             id = user.id
         )
+    }
+
+    override suspend fun getUserByEmail(email: String): User? {
+        val ref = firestore
+            .collection(CollectionsDataBase.USERS)
+            .whereEqualTo("email", email)
+        val result = ref.get().await().documents.firstOrNull()
+        return result?.toObject(UserNetwork::class.java)?.toUser()
     }
 }

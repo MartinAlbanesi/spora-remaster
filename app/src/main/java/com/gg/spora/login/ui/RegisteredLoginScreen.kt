@@ -1,13 +1,20 @@
 package com.gg.spora.login.ui
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -34,7 +41,10 @@ import com.gg.spora.core.ui.components.ShowCircularProgressIndicator
 import com.gg.spora.core.ui.components.SporaPrimaryButton
 import com.gg.spora.login.ui.component.IconButtonArrowLogin
 import com.gg.spora.login.ui.component.InputField
+import com.gg.spora.login.ui.component.LoginWithProvider
 import com.gg.spora.login.ui.component.SignUpText
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 
 
 @Composable
@@ -54,6 +64,21 @@ fun RegisteredLoginScreen(
     val isLoading by registeredLoginViewModel.isLoading.observeAsState(initial = false)
 
     val showError by registeredLoginViewModel.showError.collectAsState()
+
+    val googleLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { retult ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(retult.data)
+
+        try {
+            val account = task.getResult(ApiException::class.java)
+            registeredLoginViewModel.signInWithGoogle(account.idToken!!) {
+                navController.navigate(NavigationRoutes.HomeGraph)
+            }
+        } catch (e: ApiException) {
+            registeredLoginViewModel.isShowError()
+        }
+    }
 
     if (showError.first) {
         AlertDialog(
@@ -138,46 +163,27 @@ fun RegisteredLoginScreen(
             )
 
             // Separator
-            /* Row(verticalAlignment = Alignment.CenterVertically) {
-                 Divider(modifier = Modifier.weight(1f))
-                 Text(
-                     text = "o",
-                     modifier = Modifier.padding(horizontal = 8.dp),
-                     color = Color.White
-                 )
-                 Divider(modifier = Modifier.weight(1f))
-             }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Divider(modifier = Modifier.weight(1f))
+                Text(
+                    text = "o",
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    color = Color.White
+                )
+                Divider(modifier = Modifier.weight(1f))
+            }
 
-             // GoogleButton
-             Button(
-                 onClick = { },
-                 modifier = Modifier.fillMaxWidth(),
-                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                 contentPadding = PaddingValues(8.dp)
-             ) {
-                 Box(
-                     modifier = Modifier.fillMaxWidth(),
-                     contentAlignment = Alignment.Center
-                 ) {
-                     Row(
-                         modifier = Modifier.fillMaxWidth(),
-                         verticalAlignment = Alignment.CenterVertically
-                     ) {
-                         Icon(
-                             painter = painterResource(id = R.drawable.google),
-                             contentDescription = "Google Login",
-                             tint = Color.Unspecified,
-                             modifier = Modifier.size(ButtonDefaults.IconSize)
-                         )
-                     }
-                     Text(
-                         text = "Continue with Google",
-                         color = Color.Black,
-                         fontSize = 18.sp,
-                         modifier = Modifier.align(Alignment.Center)
-                     )
-                 }
-             }*/
+            // GoogleButton
+            LoginWithProvider(
+                provider = "Google",
+                logo = R.drawable.google_icon,
+                onClickProvider = {
+                    registeredLoginViewModel.onGoogleLoginSelected {
+                        googleLauncher.launch(it.signInIntent)
+                    }
+                }
+            )
+
         }
 
         // Arrow at top left
