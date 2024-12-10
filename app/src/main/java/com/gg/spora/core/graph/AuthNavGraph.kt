@@ -68,7 +68,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
             LoginScreen(
                 userName = routeArguments.userName,
-                viewModel = loginViewModel,
+                loginViewModel = loginViewModel,
                 onNavigationToHome = {
                     navController.navigate(NavigationRoutes.HomeGraph) {
                         popUpTo(NavigationRoutes.SignUp("")) {

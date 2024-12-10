@@ -70,7 +70,7 @@ coreLibraryDesugaring = "2.0.4"
 admod = "23.6.0"
 
 # Google Auth
-googleAuth = "21.2.0"
+googleAuth = "21.3.0"
 
 
 [libraries]

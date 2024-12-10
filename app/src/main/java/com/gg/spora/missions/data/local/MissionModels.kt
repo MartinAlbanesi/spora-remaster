@@ -1,5 +1,6 @@
 package com.gg.spora.missions.data.local
 
+import com.gg.spora.core.utils.SporaConstant.REWARDED_AD_REWARD
 import com.gg.spora.missions.domain.enums.MissionType
 import com.gg.spora.missions.domain.models.Mission
 
@@ -35,7 +36,7 @@ object MissionModels {
     val missionAd = Mission(
         id = MissionType.AD_MISSION.missionId,
         text = MissionType.AD_MISSION.text,
-        oxygenReward = 45,
+        oxygenReward = REWARDED_AD_REWARD,
         objective = 1,
         isCompleted = true,
         counter = 1

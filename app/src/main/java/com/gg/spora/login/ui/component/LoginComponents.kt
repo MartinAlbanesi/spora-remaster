@@ -211,7 +211,7 @@ fun GoogleLoginButton() {
             modifier = Modifier.fillMaxWidth()
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.google),
+                painter = painterResource(id = R.drawable.google_icon),
                 contentDescription = "Google Logo",
                 modifier = Modifier
                     .size(24.dp)
