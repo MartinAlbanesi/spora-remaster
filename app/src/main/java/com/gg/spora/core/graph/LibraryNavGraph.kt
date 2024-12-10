@@ -20,10 +20,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.gg.spora.core.ui.components.ShowCircularProgressIndicator
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.library.LibraryScreen
 import com.gg.spora.library.domain.mappers.toInfoCardEntity
 import com.gg.spora.library.ui.LibraryCardBook
+import com.gg.spora.library.ui.LibraryCardBookDialog
 import com.gg.spora.library.ui.LibraryViewModel
 import com.gg.spora.missions.domain.functions.getMissionIcon
 import com.gg.spora.missions.ui.component.MissionCompletedPopUp
@@ -41,12 +43,27 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
             val missionCompleted by libraryViewModel.missionManager.missionCompleted.collectAsState()
 
-            LibraryScreen(
-                showTutorial = showTutorial,
-                onBackButtonClick = { navController.popBackStack() },
-                onClickFirst = { navController.navigate(NavigationRoutes.LibraryForestInfo) },
-                onClickSecond = { navController.navigate(NavigationRoutes.LibraryLakeInfo) },
-                onClickThird = { navController.navigate(NavigationRoutes.LibraryDesertInfo) },
+            val showDialog by libraryViewModel.showDialog.collectAsState()
+
+            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
+
+            val isLoading by libraryViewModel.isLoading.collectAsState()
+
+            if(isLoading){
+                ShowCircularProgressIndicator(true)
+            }else{
+                LibraryScreen(
+                    showTutorial = showTutorial,
+                    onBackButtonClick = { navController.popBackStack() },
+                    onClickBooks = libraryViewModel::getInfoCardListByCategory
+                )
+            }
+
+
+            LibraryCardBookDialog(
+                showDialog = showDialog,
+                cardList = cardList.map { it.toInfoCardEntity() },
+                onDismissRequest = libraryViewModel::showDialog
             )
 
             MissionCompletedPopUp(
@@ -74,48 +91,48 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
             }
         }
 
-        composable<NavigationRoutes.LibraryForestInfo> {
-
-            val libraryViewModel = hiltViewModel<LibraryViewModel>()
-
-            libraryViewModel.getInfoCardListByCategory(StageType.FOREST)
-
-            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
-
-            LibraryCardBook(
-                cardList = cardList.map { it.toInfoCardEntity() },
-                category = StageType.FOREST,
-                onBackClick = { navController.popBackStack() }
-            )
-
-        }
-
-        composable<NavigationRoutes.LibraryLakeInfo> {
-            val libraryViewModel = hiltViewModel<LibraryViewModel>()
-
-            libraryViewModel.getInfoCardListByCategory(StageType.LAKE)
-
-            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
-
-            LibraryCardBook(
-                cardList = cardList.map { it.toInfoCardEntity() },
-                category = StageType.LAKE,
-                onBackClick = { navController.popBackStack() }
-            )
-        }
-
-        composable<NavigationRoutes.LibraryDesertInfo> {
-            val libraryViewModel = hiltViewModel<LibraryViewModel>()
-
-            libraryViewModel.getInfoCardListByCategory(StageType.DESERT)
-
-            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
-
-            LibraryCardBook(
-                cardList = cardList.map { it.toInfoCardEntity() },
-                category = StageType.DESERT,
-                onBackClick = { navController.popBackStack() }
-            )
-        }
+//        composable<NavigationRoutes.LibraryForestInfo> {
+//
+//            val libraryViewModel = hiltViewModel<LibraryViewModel>()
+//
+//            libraryViewModel.getInfoCardListByCategory(StageType.FOREST)
+//
+//            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
+//
+//            LibraryCardBook(
+//                cardList = cardList.map { it.toInfoCardEntity() },
+//                category = StageType.FOREST,
+//                onBackClick = { navController.popBackStack() }
+//            )
+//
+//        }
+//
+//        composable<NavigationRoutes.LibraryLakeInfo> {
+//            val libraryViewModel = hiltViewModel<LibraryViewModel>()
+//
+//            libraryViewModel.getInfoCardListByCategory(StageType.LAKE)
+//
+//            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
+//
+//            LibraryCardBook(
+//                cardList = cardList.map { it.toInfoCardEntity() },
+//                category = StageType.LAKE,
+//                onBackClick = { navController.popBackStack() }
+//            )
+//        }
+//
+//        composable<NavigationRoutes.LibraryDesertInfo> {
+//            val libraryViewModel = hiltViewModel<LibraryViewModel>()
+//
+//            libraryViewModel.getInfoCardListByCategory(StageType.DESERT)
+//
+//            val cardList by libraryViewModel.infoCardEntityList.collectAsState()
+//
+//            LibraryCardBook(
+//                cardList = cardList.map { it.toInfoCardEntity() },
+//                category = StageType.DESERT,
+//                onBackClick = { navController.popBackStack() }
+//            )
+//        }
     }
 }

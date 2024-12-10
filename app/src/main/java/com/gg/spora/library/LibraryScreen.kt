@@ -29,6 +29,7 @@ import com.gg.spora.R
 import com.gg.spora.core.ads.BannerAd
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
 import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
+import com.gg.spora.core.utils.enums.StageType
 
 
 @Preview(showBackground = true)
@@ -43,9 +44,7 @@ fun PreviewLibrary() {
 fun LibraryScreen(
     showTutorial: Boolean,
     onBackButtonClick: () -> Unit = {},
-    onClickFirst: () -> Unit = {},
-    onClickSecond: () -> Unit = {},
-    onClickThird: () -> Unit = {}
+    onClickBooks: (StageType) -> Unit = {},
 ) {
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -65,9 +64,9 @@ fun LibraryScreen(
 
         BookcaseScreenClicker(
             modifier = Modifier,
-            onClickFirst = onClickFirst,
-            onClickSecond = onClickSecond,
-            onClickThird = onClickThird
+            onClickFirst = { onClickBooks(StageType.FOREST) },
+            onClickSecond = { onClickBooks(StageType.LAKE) },
+            onClickThird = { onClickBooks(StageType.DESERT) }
         )
 
         MushyAndTable(

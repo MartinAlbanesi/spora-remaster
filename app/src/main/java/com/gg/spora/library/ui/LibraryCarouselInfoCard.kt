@@ -62,7 +62,10 @@ fun calculateCurrentOffsetForPage(page: Int, currentPage: Int, currentPageOffset
 }
 
 @Composable
-fun LibraryCarouselInfoCard(cardList: List<InfoCard>) {
+fun LibraryCarouselInfoCard(
+    modifier : Modifier = Modifier,
+    cardList: List<InfoCard>
+) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         pageCount = { cardList.size }
@@ -71,9 +74,7 @@ fun LibraryCarouselInfoCard(cardList: List<InfoCard>) {
     val scope = rememberCoroutineScope()
 
     Column(
-        Modifier
-            .fillMaxSize()
-            .padding(bottom = 60.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

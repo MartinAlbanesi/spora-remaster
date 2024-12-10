@@ -37,8 +37,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
     private val getAllInfoCardsUseCase: GetAllInfoCardsUseCase,
-    private val insertInfoCardUseCase: InsertNewInfoCardUseCase,
-    private val updateInfoCardUseCase: UpdateInfoCardUseCase,
+//    private val insertInfoCardUseCase: InsertNewInfoCardUseCase,
+//    private val updateInfoCardUseCase: UpdateInfoCardUseCase,
     private val getInfoCardListByCategoryUseCase: GetInfoCardListByCategoryUseCase,
 //    private val infoCardRepositoryLocal: InfoCardRepositoryLocal,
 //    private val infoCardFakeRepository: FakeRepositoryInfoCard,
@@ -48,6 +48,12 @@ class LibraryViewModel @Inject constructor(
 
     private val _infoCardEntityList = MutableStateFlow<List<InfoCard>>(emptyList())
     val infoCardEntityList: StateFlow<List<InfoCard>> = _infoCardEntityList
+
+    private val _showDialog = MutableStateFlow(false)
+    val showDialog: StateFlow<Boolean> = _showDialog
+
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading
 
     init {
         getLibraryTutorial()
@@ -60,33 +66,44 @@ class LibraryViewModel @Inject constructor(
     }
 
     private fun loadInfoCardList() {
+        try {
+            viewModelScope.launch {
+                val currentInfoCards = getAllInfoCardsUseCase.invoke().first()
+                _infoCardEntityList.value = currentInfoCards
 
-//        viewModelScope.launch {
-//            val currentInfoCards = getAllInfoCardsUseCase.invoke().first()
-//            _infoCardEntityList.value = currentInfoCards
-//        }
+                _isLoading.value = false
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+            _isLoading.value = false
+        }
 
     }
 
     fun getInfoCardListByCategory(category: StageType) {
         viewModelScope.launch {
+            _showDialog.value = true
             _infoCardEntityList.value =
                 getInfoCardListByCategoryUseCase.invoke(category.name).first()
         }
     }
 
-    fun insertNewInfoCard(infoCard: InfoCard) {
-        viewModelScope.launch {
-            insertInfoCardUseCase.invoke(infoCard)
-            loadInfoCardList()
-        }
+    fun showDialog() {
+        _showDialog.value = !_showDialog.value
     }
-
-    fun updateInfoCard(infoCard: InfoCard) {
-        viewModelScope.launch {
-            updateInfoCardUseCase.invoke(infoCard)
-            loadInfoCardList()
-        }
-    }
+//
+//    fun insertNewInfoCard(infoCard: InfoCard) {
+//        viewModelScope.launch {
+//            insertInfoCardUseCase.invoke(infoCard)
+//            loadInfoCardList()
+//        }
+//    }
+//
+//    fun updateInfoCard(infoCard: InfoCard) {
+//        viewModelScope.launch {
+//            updateInfoCardUseCase.invoke(infoCard)
+//            loadInfoCardList()
+//        }
+//    }
 
 }
