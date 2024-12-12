@@ -25,30 +25,34 @@ class GetAllInfoCardsUseCase @Inject constructor(
 
     suspend operator fun invoke(): Flow<List<InfoCard>> {
 
-        var infoCardList: Flow<List<InfoCard>>
+//        var infoCardList: Flow<List<InfoCard>>
 
-        try {
-            networkInfo.performNetworkConnectivityCheck()
-            Log.d("GetAllInfoCardsUseCase", "Internet connection available")
+        val infoCardList = networkRepository.getAllInfoCards()
 
-            updateLocalData(networkRepository.getAllInfoCards().first())
-            Log.d("GetAllInfoCardsUseCase", "Local data updated")
+        updateLocalData(infoCardList.first())
 
-            infoCardList = localRepository.getAllInfoCards()
-            Log.d("GetAllInfoCardsUseCase", "Local data adquired")
-
-        } catch (e: NoInternetConnectionException) {
-
-            Log.d("GetAllInfoCardsUseCase", e.message.toString())
-
-            if (localRepository.getAllInfoCards().first().isNotEmpty()) {
-                infoCardList = localRepository.getAllInfoCards()
-                Log.d("GetAllInfoCardsUseCase", "Local data adquired")
-            } else {
-                infoCardList = emptyFlow()
-                Log.d("GetAllInfoCardsUseCase", "No data available")
-            }
-        }
+//        try {
+//            networkInfo.performNetworkConnectivityCheck()
+//            Log.d("GetAllInfoCardsUseCase", "Internet connection available")
+//
+//            updateLocalData(networkRepository.getAllInfoCards().first())
+//            Log.d("GetAllInfoCardsUseCase", "Local data updated")
+//
+//            infoCardList = localRepository.getAllInfoCards()
+//            Log.d("GetAllInfoCardsUseCase", "Local data adquired")
+//
+//        } catch (e: NoInternetConnectionException) {
+//
+//            Log.d("GetAllInfoCardsUseCase", e.message.toString())
+//
+//            if (localRepository.getAllInfoCards().first().isNotEmpty()) {
+//                infoCardList = localRepository.getAllInfoCards()
+//                Log.d("GetAllInfoCardsUseCase", "Local data adquired")
+//            } else {
+//                infoCardList = emptyFlow()
+//                Log.d("GetAllInfoCardsUseCase", "No data available")
+//            }
+//        }
         return infoCardList
     }
 

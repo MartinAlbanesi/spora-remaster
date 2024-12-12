@@ -1,4 +1,4 @@
-package com.gg.spora.library.data
+package com.gg.spora.core.di
 
 import com.gg.spora.core.data.INetworkConnectivityChecker
 import com.gg.spora.core.firebase.FirestoreService

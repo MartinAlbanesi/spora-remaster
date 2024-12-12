@@ -8,16 +8,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +32,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gg.spora.R
 import com.gg.spora.core.ads.BannerAd
 import com.gg.spora.core.ui.animations.MushyBlinkAnimation
+import com.gg.spora.core.ui.animations.TypewriteText
 import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
 import com.gg.spora.core.utils.enums.StageType
 
@@ -43,6 +48,7 @@ fun PreviewLibrary() {
 @Composable
 fun LibraryScreen(
     showTutorial: Boolean,
+    mushyMessage: String? = null,
     onBackButtonClick: () -> Unit = {},
     onClickBooks: (StageType) -> Unit = {},
 ) {
@@ -71,6 +77,7 @@ fun LibraryScreen(
 
         MushyAndTable(
             modifier = Modifier,
+            mushyMessage = mushyMessage,
             showTutorial = showTutorial
         )
 
@@ -119,6 +126,7 @@ fun TorchFire(modifier: Modifier) {
 @Composable
 fun MushyAndTable(
     modifier: Modifier,
+    mushyMessage: String? = null,
     showTutorial: Boolean
 ) {
 
@@ -129,11 +137,25 @@ fun MushyAndTable(
         contentAlignment = Alignment.BottomCenter
     ) {
         if(!showTutorial){
-            MushyBlinkAnimation(
-                modifier
-                    .size(260.dp)
-                    .offset(y = -(20).dp, x = 5.dp)
-            )
+                MushyBlinkAnimation(
+                    modifier
+                        .size(260.dp)
+                        .offset(y = -(20).dp, x = 5.dp)
+                )
+
+                mushyMessage?.let {
+                    TypewriteText(
+                        text = it,
+                        preoccupySpace = false,
+                        modifier = Modifier
+                            .offset(x = (-20).dp, y = (100).dp)
+                            .clip(MaterialTheme.shapes.medium)
+                            .align(Alignment.Center)
+                            .background(colorResource(R.color.cream))
+                            .fillMaxWidth(0.6f)
+                            .padding(16.dp)
+                    )
+                }
         }
 
         Image(

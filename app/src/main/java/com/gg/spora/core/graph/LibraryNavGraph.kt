@@ -49,11 +49,14 @@ fun NavGraphBuilder.libraryNavGraph(navController: NavHostController) {
 
             val isLoading by libraryViewModel.isLoading.collectAsState()
 
+            val mushyMessage by libraryViewModel.mushyMessage.collectAsState()
+
             if(isLoading){
                 ShowCircularProgressIndicator(true)
             }else{
                 LibraryScreen(
                     showTutorial = showTutorial,
+                    mushyMessage = mushyMessage,
                     onBackButtonClick = { navController.popBackStack() },
                     onClickBooks = libraryViewModel::getInfoCardListByCategory
                 )
