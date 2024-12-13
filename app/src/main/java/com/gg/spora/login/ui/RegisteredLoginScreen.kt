@@ -73,7 +73,7 @@ fun RegisteredLoginScreen(
         try {
             val account = task.getResult(ApiException::class.java)
             registeredLoginViewModel.signInWithGoogle(account.idToken!!) {
-                navController.navigate(NavigationRoutes.HomeGraph)
+                navController.navigate(NavigationRoutes.Home)
             }
         } catch (e: ApiException) {
             registeredLoginViewModel.isShowError()
@@ -191,7 +191,7 @@ fun RegisteredLoginScreen(
 
         // Text of "Don't have an account?"
         SignUpText(
-            onClick = { navController.navigate(NavigationRoutes.SignUp) },
+            onClick = { navController.navigate(NavigationRoutes.SignUp("")) },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)

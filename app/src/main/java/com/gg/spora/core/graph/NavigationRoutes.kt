@@ -1,7 +1,9 @@
 package com.gg.spora.core.graph
 
+import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
 
+@Keep
 object NavigationRoutes {
 
     // Auth Graph ------------------------------------------------------
@@ -51,7 +53,7 @@ object NavigationRoutes {
 
     @Serializable
     data class Stage(
-        val stageType: String = "FOREST",
+        val stageType: String,
     )
 
     @Serializable

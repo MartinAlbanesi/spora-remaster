@@ -1,6 +1,7 @@
 package com.gg.spora.core.graph
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -272,95 +273,6 @@ fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {
             )
         }
 
-        composable<NavigationRoutes.Challenge> { backStackEntry ->
-            val challengeViewModel = hiltViewModel<ChallengeViewModel>()
-            val objectsChallenge by challengeViewModel.objectsChallenge.observeAsState(listOf())
-            var isCorrect by remember { mutableStateOf(false) }
-            val isChallengeFinallyUser by challengeViewModel.isFinally.observeAsState(false)
-            val isLoading by challengeViewModel.isLoading.observeAsState(true)
-            val challengeRoute = backStackEntry.toRoute<NavigationRoutes.Challenge>()
-            isCorrect = objectsChallenge.isNotEmpty() && objectsChallenge.all { it.isValidate }
-
-            if (challengeRoute.nameObject != "") {
-                challengeViewModel.setObjectInObjectsChallengeWithName(challengeRoute.nameObject)
-            }
-            if (!isLoading) {
-                MiniGameScreen(
-                    modifier = Modifier.fillMaxSize(),
-                    imageBackground = R.drawable.minigame_background_crop,
-                    title = stringResource(R.string.title_challenge),
-                    isCorrect = null,
-                    questionSize = SporaConstant.MAX_QUESTIONS,
-                    isFinished = false,
-                    lives = 0,
-                    counterQuestion = 0,
-                    showIcon = false,
-                    showButtonContinue = false,
-                    showProgressBar = false,
-                    totalOxygen = 0,
-                    onNextQuestion = {},
-                    onResetGame = {},
-                    onBackForestStage = {
-                        navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
-                            popUpTo<NavigationRoutes.Stage> { inclusive = true }
-                        }
-                        challengeViewModel.setObjectsChallengeEmpty()
-                    },
-                    onNavigateNextLevel = {},
-                    content = {
-                        ChallengeScreen(
-                            modifier = Modifier,
-                            onNavigateToCameraScreen = { nameObject ->
-                                navController.navigate(
-                                    NavigationRoutes.Camera(
-                                        stageId = challengeRoute.stageId,
-                                        nameObject = nameObject.toString()
-                                    )
-                                )
-                            },
-                            onNavigateToGrove = {
-                                challengeViewModel.insertSeedTreeOfChallengeOne()
-                                navController.navigate(NavigationRoutes.Grove) {
-                                    popUpTo(NavigationRoutes.Stage(challengeRoute.stageId)) {
-                                        inclusive = true
-                                    }
-                                }
-                            },
-//                            isChallengeFinallyUser = isChallengeFinallyUser,
-                            challengeObjects = objectsChallenge,
-                            continueDialogObjectDetail = { challengeRoute.nameObject = "" },
-                            selectedObject = challengeViewModel.getObjectDetailWithName(
-                                challengeRoute.nameObject
-                            )
-                        )
-                    }
-                )
-            }
-        }
-
-        composable<NavigationRoutes.Camera> { backStackEntry ->
-            val cameraRoute = backStackEntry.toRoute<NavigationRoutes.Camera>()
-            val nameObject = cameraRoute.nameObject
-
-            CameraScreen(
-                nameObject = nameObject,
-                onNavigateToChallengeScreen = {
-                    navController.navigate(
-                        NavigationRoutes.Challenge(
-                            stageId = cameraRoute.stageId,
-                            nameObject = nameObject
-                        )
-                    )
-                },
-                onNavigateToBack = {
-                    navController.navigate(
-                        NavigationRoutes.Challenge(
-                            stageId = cameraRoute.stageId,
-                            nameObject = ""
-                        )
-                    )
-                }
-            )
-        }
+        challengeNavGraph(navController = navController)
     }
 }
