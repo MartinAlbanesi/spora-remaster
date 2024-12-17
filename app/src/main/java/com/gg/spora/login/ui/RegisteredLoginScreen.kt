@@ -53,7 +53,9 @@ fun RegisteredLoginScreen(
 //    onLoginClick: () -> Unit,
 //    onGoogleLoginClick: () -> Unit,
 //    onRegisterClick: () -> Unit,
-    navController: NavHostController
+//    navController: NavHostController
+    onSignUpClick: () -> Unit,
+    onNavigateToHome: () -> Unit
 ) {
 
     val registeredLoginViewModel = hiltViewModel<RegisteredLoginViewModel>()
@@ -73,7 +75,7 @@ fun RegisteredLoginScreen(
         try {
             val account = task.getResult(ApiException::class.java)
             registeredLoginViewModel.signInWithGoogle(account.idToken!!) {
-                navController.navigate(NavigationRoutes.Home)
+                onNavigateToHome()
             }
         } catch (e: ApiException) {
             registeredLoginViewModel.isShowError()
@@ -155,7 +157,7 @@ fun RegisteredLoginScreen(
                 textSize = 24,
                 onClick = {
                     registeredLoginViewModel.onSignInWithEmail {
-                        navController.navigate(NavigationRoutes.Home)
+                        onNavigateToHome()
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -191,7 +193,7 @@ fun RegisteredLoginScreen(
 
         // Text of "Don't have an account?"
         SignUpText(
-            onClick = { navController.navigate(NavigationRoutes.SignUp("")) },
+            onClick = onSignUpClick,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)

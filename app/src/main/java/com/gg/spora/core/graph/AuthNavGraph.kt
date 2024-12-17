@@ -20,7 +20,7 @@ import com.gg.spora.welcome.ui.WelcomeViewModel
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
-    navigation< NavigationRoutes.AuthGraph>(startDestination = NavigationRoutes.Welcome){
+    navigation<NavigationRoutes.AuthGraph>(startDestination = NavigationRoutes.Welcome) {
         composable<NavigationRoutes.Welcome> {
             val welcomeViewModel = hiltViewModel<WelcomeViewModel>()
             WelcomeScreen(
@@ -89,7 +89,9 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 //                onGoogleLoginClick = { },
 //                onLoginClick = { },
 //                onRegisterClick = { },
-                navController = navController
+//                navController = navController
+                onSignUpClick = { navController.navigate(NavigationRoutes.SignUp("")) },
+                onNavigateToHome = { navController.navigate(NavigationRoutes.Home) }
             )
         }
     }

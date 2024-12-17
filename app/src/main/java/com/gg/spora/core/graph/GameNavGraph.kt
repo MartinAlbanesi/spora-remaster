@@ -2,6 +2,7 @@ package com.gg.spora.core.graph
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.annotation.Keep
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -46,6 +47,7 @@ import com.gg.spora.stage.ui.LevelPreview
 import com.gg.spora.stage.ui.StageScreen
 import com.gg.spora.stage.ui.StageViewModel
 
+@Keep
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Suppress("LongMethod")
 fun NavGraphBuilder.gameNavGraph(navController: NavHostController) {

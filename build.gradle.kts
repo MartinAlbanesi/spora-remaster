@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.hilt) apply false
 
     // Kotlin Serialization
-    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.kotlinSerialization) apply false
 
     // Detekt
     alias(libs.plugins.detekt)
