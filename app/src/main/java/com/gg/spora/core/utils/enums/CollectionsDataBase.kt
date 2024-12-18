@@ -1,5 +1,8 @@
 package com.gg.spora.core.utils.enums
 
+import androidx.annotation.Keep
+
+@Keep
 object CollectionsDataBase {
     const val LEVELS = "levels"
     const val OBJECTSCHALLENGE = "objectsChallenge"

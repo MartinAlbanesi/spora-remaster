@@ -55,7 +55,7 @@ fun NavGraphBuilder.challengeNavGraph(navController: NavHostController) {
                 onResetGame = {},
                 onBackForestStage = {
                     navController.navigate(NavigationRoutes.Stage(challengeRoute.stageId)) {
-                        popUpTo(NavigationRoutes.Stage(challengeRoute.stageId)) { inclusive = true }
+                        popUpTo<NavigationRoutes.Stage> { inclusive = true }
                     }
                     challengeViewModel.setObjectsChallengeEmpty()
                 },
