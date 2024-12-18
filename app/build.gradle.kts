@@ -33,7 +33,7 @@ android {
         applicationId = "com.gg.spora"
         minSdk = 24
         targetSdk = 34
-        versionCode = 5
+        versionCode = 6
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -68,23 +68,13 @@ android {
             buildConfigField("Long", "SECONDS", "0L")
         }
         release {
-//            buildConfigField("String", "BANNER_AD", properties.getProperty("BANNER_AD"))
-//            buildConfigField("String", "INTERSTITIAL_AD", properties.getProperty("INTERSTITIAL_AD"))
-//            buildConfigField("String", "REWARDED_AD", properties.getProperty("REWARDED_AD"))
-
-            buildConfigField("String", "BANNER_AD", "\"ca-app-pub-3940256099942544/9214589741\"")
-            buildConfigField("String", "INTERSTITIAL_AD", "\"ca-app-pub-3940256099942544/1033173712\"")
-            buildConfigField("String", "REWARDED_AD", "\"ca-app-pub-3940256099942544/5224354917\"")
-
-//            addManifestPlaceholders(
-//                mapOf(
-//                    "AD_MOD_API" to properties.getProperty("AD_MOD_API"),
-//                )
-//            )
+            buildConfigField("String", "BANNER_AD", properties.getProperty("BANNER_AD"))
+            buildConfigField("String", "INTERSTITIAL_AD", properties.getProperty("INTERSTITIAL_AD"))
+            buildConfigField("String", "REWARDED_AD", properties.getProperty("REWARDED_AD"))
 
             addManifestPlaceholders(
                 mapOf(
-                    "AD_MOD_API" to "ca-app-pub-3940256099942544~3347511713",
+                    "AD_MOD_API" to properties.getProperty("AD_MOD_API"),
                 )
             )
 
