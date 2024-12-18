@@ -194,6 +194,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.cloud.messaging)
     implementation(libs.firebase.google.auth)
+    implementation(libs.firebase.remote.config)
 
     //CameraX
     implementation(libs.camerax.core)

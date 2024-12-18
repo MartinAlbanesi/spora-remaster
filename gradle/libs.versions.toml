@@ -111,6 +111,7 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-google-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "googleAuth" }
+firebase-remote-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 
 # Camera X
 camerax-core = { group = "androidx.camera", name = "camera-core", version.ref = "camerax"}
