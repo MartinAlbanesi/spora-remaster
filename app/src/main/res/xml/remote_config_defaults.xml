@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>BANNER_AD</key>
+        <value>ca-app-pub-3940256099942544/9214589741</value>
+    </entry>
+    <entry>
+        <key>INTERSTITIAL_AD</key>
+        <value>ca-app-pub-3940256099942544/1033173712</value>
+    </entry>
+    <entry>
+        <key>REWARDED_VIDEO_AD</key>
+        <value>ca-app-pub-3940256099942544/5224354917</value>
+    </entry>
+</defaultsMap>
