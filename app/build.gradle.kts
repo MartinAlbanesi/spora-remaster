@@ -53,6 +53,8 @@ android {
 
         debug {
 
+            applicationIdSuffix = ".debug"
+
             buildConfigField("String", "BANNER_AD", "\"ca-app-pub-3940256099942544/9214589741\"")
             buildConfigField("String", "INTERSTITIAL_AD", "\"ca-app-pub-3940256099942544/1033173712\"")
             buildConfigField("String", "REWARDED_AD", "\"ca-app-pub-3940256099942544/5224354917\"")

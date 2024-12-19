@@ -14,10 +14,48 @@
       },
       "oauth_client": [
         {
-          "client_id": "582788422443-861ie47191eul4gn2lqinr6gqin4g0r3.apps.googleusercontent.com",
+          "client_id": "582788422443-p93grst46a1j7af0115ehvodvvuu3pgu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gg.spora",
+            "certificate_hash": "de039c83dd54dcf2d043bdb148bf303e7e680723"
+          }
+        },
+        {
+          "client_id": "582788422443-ldbvfihbbd0jrisnp1pcvmr5rbi799n9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8r5h2sGz4aZTGWsr6WlwFRk7ehZk1IpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582788422443-ldbvfihbbd0jrisnp1pcvmr5rbi799n9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-6297441380914740~1171303446"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582788422443:android:74fd32f94c4d442a07c36e",
+        "android_client_info": {
+          "package_name": "com.gg.spora.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582788422443-9v5iig8p10nj9cdfb2odj4rfgenfqg7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gg.spora.debug",
             "certificate_hash": "bfeca07266209208d26faa44ebbd844f5cf52a3d"
           }
         },
