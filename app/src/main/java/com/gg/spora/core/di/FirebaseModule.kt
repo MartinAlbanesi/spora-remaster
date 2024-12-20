@@ -56,7 +56,7 @@ class FirebaseModule {
                     minimumFetchIntervalInSeconds = 3600
                 }
             )
-            setDefaultsAsync(R.xml.remote_config_defaults)
+//            setDefaultsAsync(R.xml.remote_config_defaults)
             fetchAndActivate()
         }
         return wea
