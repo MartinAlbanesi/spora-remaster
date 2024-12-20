@@ -48,3 +48,5 @@
 
 # Titi
 -keep class **Network { *; }
+-keep class **.model.** { *; }
+-keep class **.models.** { *; }
