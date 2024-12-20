@@ -36,6 +36,11 @@ fun ChampyDialogConfirm(
     modifier: Modifier = Modifier,
     backgroundImage: Int,
     isVisible: Boolean,
+    title: String = "¿Estás seguro?",
+    body: String = "Al salir perderás tu progreso",
+    champyImage: Int = R.drawable.champy_serious_idle,
+    primaryButtonText: String = "Salir",
+    showSecondaryButton: Boolean = true,
     onConfirmRequest: () -> Unit,
     onDismissRequest: () -> Unit
 ) {
@@ -62,20 +67,20 @@ fun ChampyDialogConfirm(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(300.dp)
+                        .height(360.dp)
                         .clip(MaterialTheme.shapes.extraLarge)
                 )
 
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "¿Estás seguro?",
+                        text = title,
                         color = Color.White,
                         style = TextStyle(
-                            fontSize = 45.sp,
+                            fontSize = 32.sp,
                             shadow = Shadow(
                                 color = Color.Black, offset = Offset(5f, 5f), blurRadius = 5f
                             )
@@ -83,8 +88,8 @@ fun ChampyDialogConfirm(
                     )
 
                     ChampyWithRewards(
-                        champyImage = R.drawable.champy_serious_idle,
-                        title = "Al salir perderás tu progreso",
+                        champyImage = champyImage,
+                        title = body,
                         body = {},
                         modifier = Modifier
                             .fillMaxWidth()
@@ -96,15 +101,18 @@ fun ChampyDialogConfirm(
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        SporaPrimaryInverseButton(
-                            text = "Cancelar",
-                            onClick = onDismissRequest,
-                            modifier = Modifier
-                                .padding(8.dp)
-                        )
+
+                        if (showSecondaryButton){
+                            SporaPrimaryInverseButton(
+                                text = "Cancelar",
+                                onClick = onDismissRequest,
+                                modifier = Modifier
+                                    .padding(8.dp)
+                            )
+                        }
 
                         SporaPrimaryButton(
-                            text = "Salir", //if (starsState.starCount != 0) "Siguiente" else "Volver",
+                            text = primaryButtonText,
                             onClick = onConfirmRequest,
                             modifier = Modifier
                                 .padding(8.dp)
@@ -129,6 +137,11 @@ private fun ChampyDialogConfirmPreview() {
             ChampyDialogConfirm(
                 backgroundImage = R.drawable.minigame_background_crop,
                 isVisible = true,
+                showSecondaryButton = false,
+                title = "!Nueva Actualizacion!",
+                body = "Para continuar usando la app, actualiza a la última versión con mejoras y nuevas funciones.",
+                champyImage = R.drawable.champy_smiling_idle,
+                primaryButtonText = "Actualizar",
                 onConfirmRequest = {},
                 onDismissRequest = {}
             )
