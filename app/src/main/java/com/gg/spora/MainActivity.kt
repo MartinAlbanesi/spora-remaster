@@ -101,16 +101,16 @@ fun navigateToPlayStore(context: Context) {
         context.startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-//                Uri.parse("market://details?id=$appPackage")
-                Uri.parse("https://play.google.com/store/apps/details?id=com.gg.spora")
+                Uri.parse("market://details?id=$appPackage")
+//                Uri.parse("https://play.google.com/store/apps/details?id=com.gg.spora")
             )
         )
     } catch (e: Exception) {
         context.startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-//                Uri.parse("https://play.google.com/store/apps/details?id=$appPackage")
-                Uri.parse("https://play.google.com/store/apps/details?id=com.gg.spora")
+                Uri.parse("https://play.google.com/store/apps/details?id=$appPackage")
+//                Uri.parse("https://play.google.com/store/apps/details?id=com.gg.spora")
             )
         )
 
