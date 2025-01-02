@@ -1,5 +1,10 @@
 package com.gg.spora.home.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.shrinkHorizontally
@@ -19,19 +24,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.gg.spora.BuildConfig
 import com.gg.spora.R
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
@@ -64,6 +73,32 @@ fun HomeScreen(
     onNavigateToProfile: () -> Unit,
     onClaimMission: (Byte, Byte) -> Unit
 ) {
+
+    val context = LocalContext.current
+
+    var hasNotificationPermission by remember {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            mutableStateOf(
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            )
+        } else mutableStateOf(true)
+    }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+            hasNotificationPermission = isGranted
+        }
+    )
+
+    LaunchedEffect(!hasNotificationPermission) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     var showMission by rememberSaveable { mutableStateOf(false) }
 
