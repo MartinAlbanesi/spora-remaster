@@ -8,7 +8,7 @@ import com.gg.spora.challenge.domain.GetAllObjectsDetailOfForestChallengeUseCase
 import com.gg.spora.challenge.domain.PutObjectDetailLocalUseCase
 import com.gg.spora.challenge.domain.model.ObjectDetail
 import com.gg.spora.core.fake.FakeChallengeModels
-import com.gg.spora.grove.domain.InsertSeedTreeUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.InsertSeedTreeUseCase
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
 import com.gg.spora.user.domain.GetAllObjectsDetailForUserUseCase

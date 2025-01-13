@@ -2,20 +2,21 @@ package com.gg.spora.core.di
 
 import android.annotation.SuppressLint
 import com.gg.spora.grove.data.database.dao.GroveDao
-import com.gg.spora.grove.data.local.GroveRepository
-import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
-import com.gg.spora.grove.domain.DeleteSeedTreeByIdUseCase
-import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
-import com.gg.spora.grove.domain.InsertCooldownDataUseCase
-import com.gg.spora.grove.domain.InsertForestTreeUseCase
-import com.gg.spora.grove.domain.InsertSeedTreeUseCase
-import com.gg.spora.grove.domain.LoadForestTreesExistsUseCase
-import com.gg.spora.grove.domain.LoadForestTreesUseCase
-import com.gg.spora.grove.domain.LoadSeedTreesUseCase
-import com.gg.spora.grove.domain.SaveSeedTreesUseCase
-import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
-import com.gg.spora.grove.domain.UpdateTimesOxygenClaimedUseCase
-import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.data.local.ForestTreeRepositoryLocalImpl
+import com.gg.spora.grove.data.local.SeedTreeRepositoryLocalImpl
+import com.gg.spora.grove.domain.interfaces.IForestTreeRepositoryLocal
+import com.gg.spora.grove.domain.interfaces.ISeedTreeRepositoryLocal
+import com.gg.spora.grove.domain.useCases.forestTrees.DeleteForestTreeByIdUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.InsertForestTreeUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.LoadForestTreesExistsUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.LoadForestTreesUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.UpdateTimesOxygenClaimedUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.DeleteSeedTreeByIdUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.GetCooldownDataByIdUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.InsertCooldownDataUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.LoadSeedTreesUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.SaveSeedTreesUseCase
 import com.gg.spora.user.data.local.UserRepositoryLocal
 import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
@@ -33,43 +34,48 @@ class GroveModule {
     @SuppressLint("NewApi")
     @Provides
     @Singleton
-    fun provideGroveRepository(groveDao: GroveDao): IGroveRepository {
-        return GroveRepository(groveDao)
+    fun provideSeedTreeRepositoryLocal(groveDao: GroveDao): ISeedTreeRepositoryLocal {
+        return SeedTreeRepositoryLocalImpl(groveDao)
     }
 
+    @Provides
+    @Singleton
+    fun provideForestTreeRepositoryLocal(groveDao: GroveDao): IForestTreeRepositoryLocal {
+        return ForestTreeRepositoryLocalImpl(groveDao)
+    }
 
     @Provides
     @Singleton
     fun provideLoadSeedTreesUseCase(
-                                    userRepositoryLocal: UserRepositoryLocal,  groveRepository: IGroveRepository): LoadSeedTreesUseCase {
-        return LoadSeedTreesUseCase(userRepositoryLocal,groveRepository)
+                                    userRepositoryLocal: UserRepositoryLocal,  seedTreeRepositoryLocal: ISeedTreeRepositoryLocal): LoadSeedTreesUseCase {
+        return LoadSeedTreesUseCase(userRepositoryLocal,seedTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideSaveSeedTreesUseCase(groveRepository: IGroveRepository): SaveSeedTreesUseCase {
-        return SaveSeedTreesUseCase(groveRepository)
+    fun provideSaveSeedTreesUseCase(seedTreeRepositoryLocal: ISeedTreeRepositoryLocal): SaveSeedTreesUseCase {
+        return SaveSeedTreesUseCase(seedTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideLoadForestTreesUseCase(groveRepository: IGroveRepository,
+    fun provideLoadForestTreesUseCase(forestTreeRepositoryLocal: IForestTreeRepositoryLocal,
                                       userRepositoryLocal: UserRepositoryLocal): LoadForestTreesUseCase {
         return LoadForestTreesUseCase(
-            groveRepository,
+            forestTreeRepositoryLocal,
             //userRepositoryLocal
         )
     }
 
     @Provides
     @Singleton
-    fun provideInsertForestTreeUseCase(groveRepository: IGroveRepository,
+    fun provideInsertForestTreeUseCase(forestTreeRepositoryLocal: IForestTreeRepositoryLocal,
                                        userRepositoryLocal: IUserRepositoryLocal,
                                        userRepositoryNetwork: IUserRepositoryNetwork,
                                        getUserAuthUseCase: GetUserAuthUseCase,
                                        loadForestTreesExistsUseCase: LoadForestTreesExistsUseCase
     ): InsertForestTreeUseCase {
-        return InsertForestTreeUseCase(groveRepository,
+        return InsertForestTreeUseCase(forestTreeRepositoryLocal,
             userRepositoryLocal,
             userRepositoryNetwork,
             getUserAuthUseCase,
@@ -78,37 +84,37 @@ class GroveModule {
 
     @Provides
     @Singleton
-    fun provideUpdateForestTreeGrowthStageByIdUseCase(groveRepository: IGroveRepository): UpdateForestTreeGrowthStageByIdUseCase {
-        return UpdateForestTreeGrowthStageByIdUseCase(groveRepository)
+    fun provideUpdateForestTreeGrowthStageByIdUseCase(forestTreeRepositoryLocal: IForestTreeRepositoryLocal): UpdateForestTreeGrowthStageByIdUseCase {
+        return UpdateForestTreeGrowthStageByIdUseCase(forestTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideGetCooldownDataByIdUseCase(groveRepository: IGroveRepository): GetCooldownDataByIdUseCase {
-        return GetCooldownDataByIdUseCase(groveRepository)
+    fun provideGetCooldownDataByIdUseCase(seedTreeRepositoryLocal: ISeedTreeRepositoryLocal): GetCooldownDataByIdUseCase {
+        return GetCooldownDataByIdUseCase(seedTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideInsertCooldownDataUseCase(groveRepository: IGroveRepository): InsertCooldownDataUseCase {
-        return InsertCooldownDataUseCase(groveRepository)
+    fun provideInsertCooldownDataUseCase(seedTreeRepositoryLocal: ISeedTreeRepositoryLocal): InsertCooldownDataUseCase {
+        return InsertCooldownDataUseCase(seedTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideDeleteSeedTreeByIdUseCase(groveRepository: IGroveRepository): DeleteSeedTreeByIdUseCase {
-        return DeleteSeedTreeByIdUseCase(groveRepository)
+    fun provideDeleteSeedTreeByIdUseCase(seedTreeRepositoryLocal: ISeedTreeRepositoryLocal): DeleteSeedTreeByIdUseCase {
+        return DeleteSeedTreeByIdUseCase(seedTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideDeleteForestTreeByIdUseCase(groveRepository: IGroveRepository): DeleteForestTreeByIdUseCase {
-        return DeleteForestTreeByIdUseCase(groveRepository)
+    fun provideDeleteForestTreeByIdUseCase(forestTreeRepositoryLocal: IForestTreeRepositoryLocal): DeleteForestTreeByIdUseCase {
+        return DeleteForestTreeByIdUseCase(forestTreeRepositoryLocal)
     }
 
     @Provides
     @Singleton
-    fun provideUpdateTimesOxygenClaimedUseCase(groveRepository: IGroveRepository): UpdateTimesOxygenClaimedUseCase {
-        return UpdateTimesOxygenClaimedUseCase(groveRepository)
+    fun provideUpdateTimesOxygenClaimedUseCase(forestTreeRepositoryLocal: IForestTreeRepositoryLocal): UpdateTimesOxygenClaimedUseCase {
+        return UpdateTimesOxygenClaimedUseCase(forestTreeRepositoryLocal)
     }
 }

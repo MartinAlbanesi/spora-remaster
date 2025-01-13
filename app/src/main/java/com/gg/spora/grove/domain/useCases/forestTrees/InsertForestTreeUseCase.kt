@@ -1,6 +1,6 @@
-package com.gg.spora.grove.domain
+package com.gg.spora.grove.domain.useCases.forestTrees
 
-import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.domain.interfaces.IForestTreeRepositoryLocal
 import com.gg.spora.grove.domain.mappers.toForestTreeNetwork
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.user.domain.GetUserAuthUseCase
@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Use case for inserting a forest tree.
  */
 class InsertForestTreeUseCase @Inject constructor(
-    private val groveRepository: IGroveRepository,
+    private val forestTreeRepositoryLocal: IForestTreeRepositoryLocal,
     private val userRepositoryLocal: IUserRepositoryLocal,
     private val userRepositoryNetwork: IUserRepositoryNetwork,
     private val getUserAuthUseCase: GetUserAuthUseCase,
@@ -34,6 +34,6 @@ class InsertForestTreeUseCase @Inject constructor(
             userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
         }
 
-        groveRepository.insertForestTree(forestTree)
+        forestTreeRepositoryLocal.insertForestTree(forestTree)
     }
 }

@@ -4,21 +4,22 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.enums.Tutorials
-import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
-import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
-import com.gg.spora.grove.domain.InsertCooldownDataUseCase
-import com.gg.spora.grove.domain.InsertForestTreeUseCase
-import com.gg.spora.grove.domain.LoadForestTreesUseCase
-import com.gg.spora.grove.domain.LoadSeedTreesUseCase
-import com.gg.spora.grove.domain.SaveSeedTreesUseCase
-import com.gg.spora.grove.domain.UpdateForestTreeGrowthStageByIdUseCase
-import com.gg.spora.grove.domain.UpdateTimesOxygenClaimedUseCase
 import com.gg.spora.grove.domain.models.CooldownData
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.GrowthStage
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.grove.domain.models.TreeType
+import com.gg.spora.grove.domain.useCases.forestTrees.DeleteForestTreeByIdUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.InsertForestTreeUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.LoadForestTreesUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.UpdateForestTreeGrowthStageByIdUseCase
+import com.gg.spora.grove.domain.useCases.forestTrees.UpdateTimesOxygenClaimedUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.GetCooldownDataByIdUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.GetSeedTreeCooldownUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.InsertCooldownDataUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.LoadSeedTreesUseCase
+import com.gg.spora.grove.domain.useCases.seedTrees.SaveSeedTreesUseCase
 import com.gg.spora.grove.utils.functions.combine
 import com.gg.spora.missions.domain.enums.MissionType
 import com.gg.spora.missions.domain.models.MissionManager
@@ -75,6 +76,7 @@ class GroveViewModel @Inject constructor(
 //    private val deleteSeedTreeByIdUseCase: DeleteSeedTreeByIdUseCase,
     private val deleteForestTreeByIdUseCase: DeleteForestTreeByIdUseCase,
     private val updateTimesOxygenClaimed: UpdateTimesOxygenClaimedUseCase,
+    private val getSeedTreeCooldownUseCase: GetSeedTreeCooldownUseCase,
     val tutorialSelected: TutorialSelected,
     val missionManager: MissionManager
 ) : ViewModel() {
@@ -149,29 +151,9 @@ class GroveViewModel @Inject constructor(
                     loadSeedTreesUseCase().collect { seedTrees ->
                         _seedTreeCooldowns.update { currentCooldowns ->
                             seedTrees.associate { seedTree ->
-                                var seedTreeCooldown = 0L
-
-                                if (getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate != null) {
-                                    seedTreeCooldown = Duration.between(
-                                        getCooldownDataByIdUseCase(seedTree.id).first().lastUpdateDate,
-                                        LocalDateTime.now()
-                                    ).seconds * 1000L
-                                }
-
-                                if (currentCooldowns[seedTree.id] != null) {
-                                    seedTreeCooldown = currentCooldowns[seedTree.id]!!
-                                }
-                                else if (seedTreeCooldown > 0L && !isNegative(
-                                        INITIAL_COOLDOWN_DURATION - seedTreeCooldown
-                                    )
-                                ) {
-                                    seedTreeCooldown = INITIAL_COOLDOWN_DURATION - seedTreeCooldown
-                                    triggerSeedTreeCooldown(seedTree.id, seedTreeCooldown)
-                                } else {
-                                    seedTreeCooldown = 0L
-                                }
-
-                                seedTree.id to (seedTreeCooldown)
+                                // Use the new use case to get the cooldown
+                                val seedTreeCooldown = getSeedTreeCooldownUseCase(seedTree.id).first()
+                                seedTree.id to seedTreeCooldown
                             }
                         }
                     }
@@ -308,39 +290,25 @@ class GroveViewModel @Inject constructor(
     }
 
     // Trigger seed tree cooldown when seed tree button is clicked
-    fun triggerSeedTreeCooldown(seedTreeId: String, coolDown: Long = 0L) {
+    fun triggerSeedTreeCooldown(seedTreeId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            var remainingTime: Long
-            // Reset cooldown to initial value
-            if (coolDown != 0L) {
-                // Decrement cooldown until it reaches 0
-                remainingTime = coolDown
-            } else {
-                insertCooldownDataUseCase(
-                    CooldownData(
-                        seedTreeId, LocalDateTime.now().truncatedTo(
-                            ChronoUnit.SECONDS
-                        )
-                    )
+            insertCooldownDataUseCase(
+                CooldownData(
+                    seedTreeId, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)
                 )
-                _seedTreeCooldowns.update { currentCooldowns ->
-                    currentCooldowns + (seedTreeId to INITIAL_COOLDOWN_DURATION)
-                }
-                // Decrement cooldown until it reaches 0
-                remainingTime = INITIAL_COOLDOWN_DURATION
+            )
+            _seedTreeCooldowns.update { currentCooldowns ->
+                currentCooldowns + (seedTreeId to INITIAL_COOLDOWN_DURATION)
             }
+
+            // Decrement cooldown until it reaches 0
+            var remainingTime = INITIAL_COOLDOWN_DURATION
             while (remainingTime > 0) {
                 delay(1000)
                 remainingTime -= 1000
                 _seedTreeCooldowns.update { currentCooldowns ->
                     currentCooldowns + (seedTreeId to remainingTime)
                 }
-
-                Log.i(
-                    "GroveViewModel",
-                    "Cooldown remaining for seedTreeId: $remainingTime ${_seedTreeCooldowns.value}"
-                )
-
             }
 
             // Reset cooldown to 0 when finished

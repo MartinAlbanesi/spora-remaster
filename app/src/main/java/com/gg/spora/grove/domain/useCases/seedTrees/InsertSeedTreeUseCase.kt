@@ -1,8 +1,7 @@
-package com.gg.spora.grove.domain
+package com.gg.spora.grove.domain.useCases.seedTrees
 
-import com.gg.spora.grove.domain.interfaces.IGroveRepository
+import com.gg.spora.grove.domain.interfaces.ISeedTreeRepositoryLocal
 import com.gg.spora.grove.domain.mappers.toSeedTreeNetwork
-import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.SeedTree
 import com.gg.spora.user.domain.GetUserAuthUseCase
 import com.gg.spora.user.domain.repository.IUserRepositoryLocal
@@ -13,11 +12,12 @@ import javax.inject.Inject
 /**
  * Use case for inserting a seed tree.
  */
-class InsertSeedTreeUseCase @Inject constructor(private val groveRepository: IGroveRepository,
-                                                  private val userRepositoryLocal: IUserRepositoryLocal,
-                                                  private val userRepositoryNetwork: IUserRepositoryNetwork,
-                                                  private val getUserAuthUseCase: GetUserAuthUseCase,
-                                                  private val loadSeedTreesUseCase: LoadSeedTreesUseCase)
+class InsertSeedTreeUseCase @Inject constructor(
+    private val seedTreeRepositoryLocal: ISeedTreeRepositoryLocal,
+    private val userRepositoryLocal: IUserRepositoryLocal,
+    private val userRepositoryNetwork: IUserRepositoryNetwork,
+    private val getUserAuthUseCase: GetUserAuthUseCase,
+    private val loadSeedTreesUseCase: LoadSeedTreesUseCase)
 {
     suspend operator fun invoke(seedTree: SeedTree) {
 
@@ -33,6 +33,6 @@ class InsertSeedTreeUseCase @Inject constructor(private val groveRepository: IGr
             userRepositoryNetwork.updateUserById(userUpdated, userLocal.id)
         }
 
-        groveRepository.insertSeedTree(seedTree)
+        seedTreeRepositoryLocal.insertSeedTree(seedTree)
     }
 }
