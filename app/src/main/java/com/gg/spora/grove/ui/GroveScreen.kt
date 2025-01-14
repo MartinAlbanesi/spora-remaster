@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
@@ -32,9 +31,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.gg.spora.BuildConfig.OXYGEN_COOLDOWN_DURATION
 import com.gg.spora.R
 import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
-import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.SeedTree
@@ -100,7 +99,7 @@ fun GroveScreen(
                 titleContent = {
                     OxygenAndTreeIcons(
                         oxygen = uiState.userOxygen,
-                        trees = uiState.accumulatedOxygen
+                        trees = uiState.forestTrees.filterNotNull().size
                     )
                 }
             )

@@ -13,11 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.gg.spora.BuildConfig.INITIAL_COOLDOWN_DURATION
 import com.gg.spora.R
 import com.gg.spora.grove.domain.models.ForestTree
 import com.gg.spora.grove.domain.models.GroveUiState
 import com.gg.spora.grove.domain.models.SeedTree
-import com.gg.spora.grove.ui.INITIAL_COOLDOWN_DURATION
 
 /**
  * Composable function for displaying a seed tree item.

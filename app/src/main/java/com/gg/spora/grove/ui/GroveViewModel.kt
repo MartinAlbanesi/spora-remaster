@@ -3,6 +3,10 @@ package com.gg.spora.grove.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gg.spora.BuildConfig.GROWTH_TIME_DURATION
+import com.gg.spora.BuildConfig.INITIAL_COOLDOWN_DURATION
+import com.gg.spora.BuildConfig.MAX_TIMES_TO_CLAIM_OXYGEN
+import com.gg.spora.BuildConfig.OXYGEN_COOLDOWN_DURATION
 import com.gg.spora.core.utils.enums.Tutorials
 import com.gg.spora.grove.domain.DeleteForestTreeByIdUseCase
 import com.gg.spora.grove.domain.GetCooldownDataByIdUseCase
@@ -42,10 +46,10 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
-const val INITIAL_COOLDOWN_DURATION = /*43200000L*/ 10000L
-const val OXYGEN_COOLDOWN_DURATION = /*86400000L*/ 10000L
-const val GROWTH_TIME_DURATION = /*3600000L*/ 10000L
-const val MAX_TIMES_TO_CLAIM_OXYGEN = 3
+//const val INITIAL_COOLDOWN_DURATION = /*43200000L*/ 10000L
+//const val OXYGEN_COOLDOWN_DURATION = /*86400000L*/ 10000L
+//const val GROWTH_TIME_DURATION = /*3600000L*/ 10000L
+//const val MAX_TIMES_TO_CLAIM_OXYGEN = 3
 
 /**
  * View model for the Grove screen.
@@ -237,8 +241,6 @@ class GroveViewModel @Inject constructor(
                 _errorState.update { "An unexpected error occurred. Please try again later." }
             }
         }
-
-
     }
 
     private fun initSeedTrees() {
@@ -427,7 +429,7 @@ class GroveViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 // Updates the user's oxygen by the accumulated oxygen
-                updateUserOxygenUseCase(userOxygen.value + accumulatedOxygen.value)
+                updateUserOxygenUseCase(accumulatedOxygen.value)
 
                 // Checks the amount of times a tree has given oxygen, if it exceeds the limit, it gets deleted
                 checkTreesLifetime()
