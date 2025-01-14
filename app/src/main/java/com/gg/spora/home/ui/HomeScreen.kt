@@ -43,11 +43,10 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.gg.spora.BuildConfig
 import com.gg.spora.R
+import com.gg.spora.core.ads.BannerAd
 import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
-import com.gg.spora.core.ads.BannerAd
 import com.gg.spora.core.ui.components.TopBarWithLeadingAndTrailingIcon
-import com.gg.spora.core.ui.modifiers.ModifierStyle
 import com.gg.spora.home.domain.models.HomeIcon
 import com.gg.spora.home.ui.components.ImageWithTextVertical
 import com.gg.spora.home.ui.components.OxygenAndTreeIcons
@@ -66,6 +65,7 @@ fun HomeScreen(
     champyQuote: String?,
     missions: List<Mission>,
     missionResetTime: String,
+    trees: Int,
     onNavigateToForestStage: () -> Unit,
     onNavigateToGrove: () -> Unit,
     onNavigateToRanking: () -> Unit,
@@ -148,7 +148,7 @@ fun HomeScreen(
                 titleContent = {
                     OxygenAndTreeIcons(
                         oxygen = oxygen,
-                        trees = 0
+                        trees = trees,
                     )
                 }
             )
@@ -306,6 +306,7 @@ private fun MiniGameScreenPreview() {
                 oxygen = 0,
                 showTutorial = false,
                 missions = MissionModels.fakeMissions,
+                trees = 20,
                 champyQuote = "¡Hola! Soy Champy, tu compañero de aventuras. ¿Estás listo para explorar el bosque?",
                 missionResetTime= "5123",
                 onNavigateToForestStage = {},
