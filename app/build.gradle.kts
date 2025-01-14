@@ -68,6 +68,11 @@ android {
             buildConfigField("Long", "HOURS", "0L")
             buildConfigField("Long", "MINUTES", "4L")
             buildConfigField("Long", "SECONDS", "0L")
+
+            buildConfigField("Long", "INITIAL_COOLDOWN_DURATION", "10000L")
+            buildConfigField("Long", "OXYGEN_COOLDOWN_DURATION", "10000L")
+            buildConfigField("Long", "GROWTH_TIME_DURATION", "10000L")
+            buildConfigField("Integer", "MAX_TIMES_TO_CLAIM_OXYGEN", "3")
         }
         release {
             buildConfigField("String", "BANNER_AD", properties.getProperty("BANNER_AD"))
@@ -83,6 +88,11 @@ android {
             buildConfigField("Long", "HOURS", "23L")
             buildConfigField("Long", "MINUTES", "59L")
             buildConfigField("Long", "SECONDS", "59L")
+
+            buildConfigField("Long", "INITIAL_COOLDOWN_DURATION", "43200000L")
+            buildConfigField("Long", "OXYGEN_COOLDOWN_DURATION", "86400000L")
+            buildConfigField("Long", "GROWTH_TIME_DURATION", "3600000L")
+            buildConfigField("Integer", "MAX_TIMES_TO_CLAIM_OXYGEN", "3")
 
             isMinifyEnabled = true
             isShrinkResources = true

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.spora.core.utils.SporaConstant
 import com.gg.spora.core.utils.enums.Tutorials
+import com.gg.spora.grove.domain.LoadForestTreesUseCase
 import com.gg.spora.home.domain.functions.formatDuration
 import com.gg.spora.home.domain.functions.getChampyHomeQuote
 import com.gg.spora.home.domain.functions.timeStampToLocalDateTime
@@ -39,7 +40,8 @@ class HomeViewModel @Inject constructor(
     private val getMissionsUseCase: GetMissionsUseCase,
     private val claimMissionUseCase: ClaimMissionUseCase,
     private val setNewDailyMissionsUseCase: SetNewDailyMissionsUseCase,
-    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase
+    private val syncUserNetworkDataUseCase: SyncUserNetworkDataUseCase,
+    private val loadForestTreesUseCase: LoadForestTreesUseCase,
 ) : ViewModel() {
 
     private val _oxygen = MutableStateFlow(0)
@@ -65,6 +67,9 @@ class HomeViewModel @Inject constructor(
     private val _missionResetTime = MutableStateFlow("")
     val missionResetTime = _missionResetTime.asStateFlow()
 
+    private val _forestTrees = MutableStateFlow<Int>(0)
+    val forestTrees = _forestTrees.asStateFlow()
+
     init {
 
         getResetTime()
@@ -74,6 +79,15 @@ class HomeViewModel @Inject constructor(
         getChampyQuote()
         getMissions()
         syncUserNetworkData()
+        loadForestTreesSize()
+    }
+
+    private fun loadForestTreesSize() {
+        viewModelScope.launch {
+            loadForestTreesUseCase().collect {
+                _forestTrees.value = it.filterNotNull().size
+            }
+        }
     }
 
     private fun syncUserNetworkData() {
