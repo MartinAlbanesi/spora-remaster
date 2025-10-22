@@ -27,12 +27,12 @@ plugins {
 
 android {
     namespace = "com.gg.spora"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.gg.spora"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 11
         versionName = "1.0.3"
 
@@ -217,11 +217,16 @@ dependencies {
     implementation(libs.camera.view)
 
     //TensorFlow
-    implementation(libs.tensorflow.gpu)
-    implementation(libs.tensorflow.select)
-    implementation(libs.tensorflow.support)
-    implementation(libs.tensorflow.android)
-    implementation(libs.tensorflow.metadata)
+//    implementation(libs.tensorflow.gpu)
+//    implementation(libs.tensorflow.select)
+//    implementation(libs.tensorflow.support)
+//    implementation(libs.tensorflow.android)
+//    implementation(libs.tensorflow.metadata)
+
+    implementation(libs.litert)
+    implementation(libs.litert.api)
+    implementation(libs.litert.support)
+    implementation(libs.litert.metadata)
 
     // Room
     implementation(libs.room.runtime)

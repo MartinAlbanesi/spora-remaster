@@ -9,9 +9,12 @@ class GetCurrentVersionUseCase @Inject constructor(
 ) {
     operator fun invoke() : List<Byte> {
         try {
-            val currentVersion = context.packageManager.getPackageInfo(context.packageName, 0)
-            return currentVersion.versionName.split(".").map { it.toByte() }
-        } catch (e: CurrentUserNotFoundException) {
+            val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            // If pInfo.versionName is null, use "0.0.0" as a default value.
+            val versionName = pInfo.versionName ?: "0.0.0"
+            return versionName.split(".").map { it.toByte() }
+        } catch (e: CurrentUserNotFoundException) { // Catch a more general Exception
+            // It's better to return a default version here as well.
             return listOf(0,0,0)
         }
     }
