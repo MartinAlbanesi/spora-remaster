@@ -6,27 +6,28 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
-import androidx.compose.runtime.Composable
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.PreviewFontScale
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.gg.spora.ui.theme.SporaTheme
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.gg.spora.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -48,6 +49,8 @@ fun TypewriteText(
     val index = remember {
         Animatable(initialValue = 0, typeConverter = Int.VectorConverter)
     }
+
+    val lottie = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.next))
 
     // Effect to handle animation when visibility changes
     LaunchedEffect(isVisible) {
@@ -87,6 +90,15 @@ fun TypewriteText(
                 fontSize = fontSize.sp,
                 modifier = Modifier.alpha(0f)
             )
+        }else{
+//            LottieAnimation(
+//                composition = lottie.value,
+//                speed = 2.0f,
+//                modifier = Modifier
+//                    .size(24.dp)
+//                    .align(Alignment.BottomEnd)
+//                    .offset(x = (16).dp, y = (16).dp)
+//            )
         }
 
         // Display animated text based on the current index value
@@ -95,6 +107,15 @@ fun TypewriteText(
             style = style,
             textAlign = textAlign,
             fontSize = fontSize.sp
+        )
+        LottieAnimation(
+            composition = lottie.value,
+            speed = 2.0f,
+            iterations = LottieConstants.IterateForever,
+            modifier = Modifier
+                .size(24.dp)
+                .align(Alignment.BottomEnd)
+                .offset(x = (16).dp, y = (16).dp)
         )
     }
 }
