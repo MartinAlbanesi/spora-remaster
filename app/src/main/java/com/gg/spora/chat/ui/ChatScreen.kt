@@ -14,7 +14,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -27,17 +26,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gg.spora.R
-import com.gg.spora.core.ui.animations.ChampyBlinkAnimation
 import com.gg.spora.core.ui.animations.TypewriteText
 import com.gg.spora.core.utils.enums.ChampyStates
 import com.gg.spora.ui.theme.SporaTheme
 
 @Composable
-fun ChampyChatScreen(
+fun ChatScreen(
     modifier: Modifier = Modifier,
-    champyResponses: Pair<ChampyStates, String>? = null,
+    champyResponses: ChatUiState,
     onClickNextText: () -> Unit
 ) {
+
+//    var showNextIcon by remember { mutableStateOf(true) }
+//    var champyImage by remember { mutableIntStateOf(ChampyStates.SMILING.image) }
+//    var champyMessage by remember { mutableStateOf("") }
+//
+//    champyImage = champyResponses.response.first.image
+//    champyMessage = champyResponses.response.second
+//    showNextIcon = champyResponses.showNextIcon
 
     Box(
         modifier = modifier
@@ -53,25 +59,28 @@ fun ChampyChatScreen(
                 .matchParentSize()
         )
 
-        if (champyResponses == null) {
-            ChampyBlinkAnimation(
-                modifier = Modifier
-                    .size(140.dp)
-                    .align(Alignment.Center)
-//                    .offset(x = (-20).dp)
-            )
-        } else {
+        Box(
+            modifier = Modifier
+//                .scale(2.0f)
+                .fillMaxSize()
+                .align(Alignment.Center)
+                .clickable {
+                    if(champyResponses.showNextIcon){
+                        onClickNextText()
+                    }
+                }
+        ){
             Image(
-                painter = painterResource(id = champyResponses.first.image),
-                contentDescription = "Champy Blink",
+                painter = painterResource(id = champyResponses.response.first.image),
+                contentDescription = champyResponses.response.first.name,
                 modifier = modifier
                     .size(140.dp)
                     .align(Alignment.Center)
             )
-
             TypewriteText(
-                text = champyResponses.second,
+                text = champyResponses.response.second,
                 preoccupySpace = false,
+                showNextIcon = champyResponses.showNextIcon,
                 modifier = Modifier
                     .scale(0.6f)
                     .offset(x = (-0).dp, y = (150).dp)
@@ -80,40 +89,41 @@ fun ChampyChatScreen(
                     .background(colorResource(R.color.cream))
                     .fillMaxWidth(0.8f)
                     .padding(16.dp)
-                    .clickable { onClickNextText() }
             )
         }
+
+
     }
+//    }
 }
 
 @Composable
 @Preview
+//@PreviewScreenSizes
 private fun ChampyChatScreenPreview() {
 
-    val wea = mapOf(
-        ChampyStates.SMILING to "Hello! I'm Champy, your virtual fitness companion!",
-        ChampyStates.CURIOUS to "Did you know that regular exercise can boost your mood and energy levels? yuuuuuuuuuuu asd xcvcxvxcv",
-        ChampyStates.GREETING to "Let's get moving and achieve your fitness goals together!"
-    )
+//    val wea = mapOf(
+//        ChampyStates.SMILING to "Hello! I'm Champy, your virtual fitness companion!",
+//        ChampyStates.CURIOUS to "Did you know that regular exercise can boost your mood and energy levels? yuuuuuuuuuuu asd xcvcxvxcv",
+//        ChampyStates.GREETING to "Let's get moving and achieve your fitness goals together!"
+//    )
 
     var counter by remember { mutableIntStateOf(0) }
 
-    val wea2 by remember {
-        mutableStateOf<Pair<ChampyStates, String>?>(
-            Pair(
-                wea.keys.elementAt(counter),
-                wea.values.elementAt(counter)
-            )
+    val champyChat = ChatUiState.Success(
+        Pair(
+            ChampyStates.SMILING,
+            "Hello! I'm Champy, your virtual fitness companion!"
         )
-    }
+    )
 
     SporaTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ChampyChatScreen(
-                champyResponses = wea2,
+            ChatScreen(
+                champyResponses = champyChat,
                 onClickNextText = {
                     counter++
                 }

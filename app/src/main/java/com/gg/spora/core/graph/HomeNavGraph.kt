@@ -20,6 +20,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.gg.spora.R
+import com.gg.spora.chat.ui.ChatScreen
+import com.gg.spora.chat.ui.ChatScreenViewModel
 import com.gg.spora.core.ui.components.ShowCircularProgressIndicator
 import com.gg.spora.core.utils.enums.StageType
 import com.gg.spora.core.utils.enums.Tutorials
@@ -119,6 +121,9 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                         }
                     },
                     onClaimMission = homeViewModel::claimMission,
+                    onNavigateToChampyChat = {
+                        navController.navigate(NavigationRoutes.ChampyChat)
+                    }
                 )
             }
             if (showTutorial) {
@@ -193,6 +198,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 showMissionCompleted = missionCompleted != null
             )
         }
+
         composable<NavigationRoutes.Ranking> {
 
             val viewModel: RankingViewModel = hiltViewModel()
@@ -211,7 +217,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
             val viewModel: ProfileViewModel = hiltViewModel()
             //val currentIndex by viewModel.currentIndex.collectAsState()
 
-            val currentIndex by viewModel.currentIndex.collectAsState()
+//            val currentIndex by viewModel.currentIndex.collectAsState()
             val userPosition by viewModel.userPosition.collectAsState()
             val user by viewModel.user.collectAsState()
 
@@ -243,6 +249,18 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 onConfirm = {
                     navController.navigate(NavigationRoutes.SignUp(routeArguments.userName))
                 }
+            )
+        }
+
+        composable<NavigationRoutes.ChampyChat>{
+
+            val chatScreenViewModel = hiltViewModel<ChatScreenViewModel>()
+            val champyResponseUiState by chatScreenViewModel.chatUiState.collectAsStateWithLifecycle()
+
+            ChatScreen(
+                modifier = Modifier,
+                champyResponses = champyResponseUiState,
+                onClickNextText = chatScreenViewModel::nextResponse
             )
         }
     }

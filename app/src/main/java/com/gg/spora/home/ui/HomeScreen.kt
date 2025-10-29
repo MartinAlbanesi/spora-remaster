@@ -71,7 +71,8 @@ fun HomeScreen(
     onNavigateToRanking: () -> Unit,
     onNavigateToLibrary: () -> Unit,
     onNavigateToProfile: () -> Unit,
-    onClaimMission: (Byte, Byte) -> Unit
+    onClaimMission: (Byte, Byte) -> Unit,
+    onNavigateToChampyChat: () -> Unit,
 ) {
 
     val context = LocalContext.current
@@ -231,32 +232,34 @@ fun HomeScreen(
                     .clickable(onClick = onNavigateToForestStage)
             )
 
+            if (!showTutorial) {
             Box(
                 modifier = Modifier
                     .align(Alignment.Center)
+                    .clickable{ onNavigateToChampyChat() }
 //                    .fillMaxSize()
-            ) {
-                if (!showTutorial) {
-                    ChampyBlinkAnimation(
-                        modifier = Modifier
-                            .size(140.dp)
-                            .align(Alignment.Center)
-                            .offset(x = (-20).dp)
-                    )
-                    champyQuote?.let {
-                        TypewriteText(
-                            text = it,
-                            preoccupySpace = false,
+                    ) {
+
+                        ChampyBlinkAnimation(
                             modifier = Modifier
-                                .offset(x = (-20).dp, y = (100).dp)
-                                .clip(MaterialTheme.shapes.medium)
+                                .size(140.dp)
                                 .align(Alignment.Center)
-                                .background(colorResource(R.color.cream))
-                                .fillMaxWidth(0.6f)
-                                .padding(16.dp)
+                                .offset(x = (-20).dp)
                         )
+                        champyQuote?.let {
+                            TypewriteText(
+                                text = it,
+                                preoccupySpace = false,
+                                modifier = Modifier
+                                    .offset(x = (-20).dp, y = (100).dp)
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .align(Alignment.Center)
+                                    .background(colorResource(R.color.cream))
+                                    .fillMaxWidth(0.6f)
+                                    .padding(16.dp)
+                            )
+                        }
                     }
-                }
             }
 
             BannerAd(
@@ -314,7 +317,8 @@ private fun MiniGameScreenPreview() {
                 onNavigateToLibrary = {},
                 onNavigateToRanking = {},
                 onNavigateToProfile = {},
-                onClaimMission = { _, _ -> }
+                onClaimMission = { _, _ -> },
+                onNavigateToChampyChat = {}
             )
         }
     }

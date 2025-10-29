@@ -40,7 +40,8 @@ fun TypewriteText(
     style: TextStyle = LocalTextStyle.current,
     preoccupySpace: Boolean = true,
     fontSize: Int = 16,
-    textDelay: Long = 0
+    textDelay: Long = 0,
+    showNextIcon: Boolean = true
 ){
     // State that keeps the text that is currently animated
     var textToAnimate by remember { mutableStateOf("") }
@@ -90,15 +91,6 @@ fun TypewriteText(
                 fontSize = fontSize.sp,
                 modifier = Modifier.alpha(0f)
             )
-        }else{
-//            LottieAnimation(
-//                composition = lottie.value,
-//                speed = 2.0f,
-//                modifier = Modifier
-//                    .size(24.dp)
-//                    .align(Alignment.BottomEnd)
-//                    .offset(x = (16).dp, y = (16).dp)
-//            )
         }
 
         // Display animated text based on the current index value
@@ -108,14 +100,16 @@ fun TypewriteText(
             textAlign = textAlign,
             fontSize = fontSize.sp
         )
-        LottieAnimation(
-            composition = lottie.value,
-            speed = 2.0f,
-            iterations = LottieConstants.IterateForever,
-            modifier = Modifier
-                .size(24.dp)
-                .align(Alignment.BottomEnd)
-                .offset(x = (16).dp, y = (16).dp)
-        )
+        if (showNextIcon && !index.isRunning){
+            LottieAnimation(
+                composition = lottie.value,
+                speed = 2.0f,
+                iterations = LottieConstants.IterateForever,
+                modifier = Modifier
+                    .size(24.dp)
+                    .align(Alignment.BottomEnd)
+                    .offset(x = (16).dp, y = (16).dp)
+            )
+        }
     }
 }

@@ -44,7 +44,8 @@ object NavigationRoutes {
         val userName: String
     )
 
-
+    @Serializable
+    object ChampyChat
 
     // Game Graph ------------------------------------------------------
 
