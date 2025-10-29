@@ -256,10 +256,12 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 
             val chatScreenViewModel = hiltViewModel<ChatScreenViewModel>()
             val champyResponseUiState by chatScreenViewModel.chatUiState.collectAsStateWithLifecycle()
+            val showTextField by chatScreenViewModel.showTextField.collectAsStateWithLifecycle()
 
             ChatScreen(
                 modifier = Modifier,
                 champyResponses = champyResponseUiState,
+                showTextField = showTextField,
                 onClickNextText = chatScreenViewModel::nextResponse
             )
         }

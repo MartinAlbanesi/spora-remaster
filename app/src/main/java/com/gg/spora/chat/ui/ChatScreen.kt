@@ -1,8 +1,12 @@
 package com.gg.spora.chat.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +18,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -34,16 +39,11 @@ import com.gg.spora.ui.theme.SporaTheme
 fun ChatScreen(
     modifier: Modifier = Modifier,
     champyResponses: ChatUiState,
+    showTextField: Boolean = true,
     onClickNextText: () -> Unit
 ) {
 
-//    var showNextIcon by remember { mutableStateOf(true) }
-//    var champyImage by remember { mutableIntStateOf(ChampyStates.SMILING.image) }
-//    var champyMessage by remember { mutableStateOf("") }
-//
-//    champyImage = champyResponses.response.first.image
-//    champyMessage = champyResponses.response.second
-//    showNextIcon = champyResponses.showNextIcon
+    var textMessage by remember  { mutableStateOf("") }
 
     Box(
         modifier = modifier
@@ -64,8 +64,11 @@ fun ChatScreen(
 //                .scale(2.0f)
                 .fillMaxSize()
                 .align(Alignment.Center)
-                .clickable {
-                    if(champyResponses.showNextIcon){
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) {
+                    if (champyResponses.showNextIcon) {
                         onClickNextText()
                     }
                 }
@@ -91,9 +94,25 @@ fun ChatScreen(
                     .padding(16.dp)
             )
         }
-
-
     }
+
+    AnimatedVisibility(
+        visible = showTextField,
+        enter = slideInVertically(initialOffsetY = { it }),
+        exit = slideOutVertically(targetOffsetY = { it })
+    ) {
+        Box(modifier = Modifier.fillMaxSize()){
+            ChatTextField(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp),
+                value = textMessage,
+                onValueChange = { textMessage = it},
+                onSend = {},
+            )
+        }
+    }
+
 //    }
 }
 

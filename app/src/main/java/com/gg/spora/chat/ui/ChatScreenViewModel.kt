@@ -43,8 +43,13 @@ class ChatScreenViewModel @Inject constructor(
 
     private var _currentResponseIndex = 1
 
+    private val _showTextField = MutableStateFlow(true)
+    val showTextField = _showTextField.asStateFlow()
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
+
+            _showTextField.value = false
 
             val wea = mapOf(
                 ChampyStates.NORMAL to "Soy Pestalotiopsis microspora, un hongo que vive en bosques tropicales.",
@@ -83,6 +88,7 @@ class ChatScreenViewModel @Inject constructor(
                     "¿Quieres preguntarme algo más sobre el cuidado del medio ambiente?"
                 )
             )
+            _showTextField.value = true
             return
         }
 
@@ -94,7 +100,6 @@ class ChatScreenViewModel @Inject constructor(
             Pair(state, message)
         )
         _currentResponseIndex++
-
     }
 
 }
