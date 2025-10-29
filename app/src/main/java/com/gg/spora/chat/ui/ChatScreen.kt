@@ -1,6 +1,8 @@
 package com.gg.spora.chat.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
@@ -40,7 +42,8 @@ fun ChatScreen(
     modifier: Modifier = Modifier,
     champyResponses: ChatUiState,
     showTextField: Boolean = true,
-    onClickNextText: () -> Unit
+    onClickNextText: () -> Unit,
+    getResponseFromIA: (String) -> Unit
 ) {
 
     var textMessage by remember  { mutableStateOf("") }
@@ -74,14 +77,14 @@ fun ChatScreen(
                 }
         ){
             Image(
-                painter = painterResource(id = champyResponses.response.first.image),
-                contentDescription = champyResponses.response.first.name,
+                painter = painterResource(id = champyResponses.response.state.image),
+                contentDescription = champyResponses.response.state.name,
                 modifier = modifier
                     .size(140.dp)
                     .align(Alignment.Center)
             )
             TypewriteText(
-                text = champyResponses.response.second,
+                text = champyResponses.response.message,
                 preoccupySpace = false,
                 showNextIcon = champyResponses.showNextIcon,
                 modifier = Modifier
@@ -99,7 +102,13 @@ fun ChatScreen(
     AnimatedVisibility(
         visible = showTextField,
         enter = slideInVertically(initialOffsetY = { it }),
-        exit = slideOutVertically(targetOffsetY = { it })
+        exit = slideOutVertically(
+            targetOffsetY = { it },
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioNoBouncy,
+                stiffness = Spring.StiffnessLow
+            )
+        )
     ) {
         Box(modifier = Modifier.fillMaxSize()){
             ChatTextField(
@@ -108,7 +117,7 @@ fun ChatScreen(
                     .padding(16.dp),
                 value = textMessage,
                 onValueChange = { textMessage = it},
-                onSend = {},
+                onSend = { getResponseFromIA(textMessage)},
             )
         }
     }
@@ -130,7 +139,7 @@ private fun ChampyChatScreenPreview() {
     var counter by remember { mutableIntStateOf(0) }
 
     val champyChat = ChatUiState.Success(
-        Pair(
+        ChampyResponseChat(
             ChampyStates.SMILING,
             "Hello! I'm Champy, your virtual fitness companion!"
         )
@@ -145,7 +154,8 @@ private fun ChampyChatScreenPreview() {
                 champyResponses = champyChat,
                 onClickNextText = {
                     counter++
-                }
+                },
+                getResponseFromIA = {}
             )
         }
     }

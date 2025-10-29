@@ -13,14 +13,20 @@ import javax.inject.Inject
 
 
 sealed class ChatUiState(
-    val response: Pair<ChampyStates, String>,
-    val showNextIcon: Boolean
+    val response: ChampyResponseChat,
+    val showNextIcon: Boolean,
+//    val textSpeed
 ) {
-    class Error(response: Pair<ChampyStates, String>) : ChatUiState(response, showNextIcon = false)
-    class Loading(response: Pair<ChampyStates, String>) : ChatUiState(response, showNextIcon = false)
-    class Standby(response: Pair<ChampyStates, String>) : ChatUiState(response, showNextIcon = false)
-    class Success(response: Pair<ChampyStates, String>) : ChatUiState(response, showNextIcon = true)
+    class Error(response: ChampyResponseChat) : ChatUiState(response, showNextIcon = false)
+    class Loading(response: ChampyResponseChat) : ChatUiState(response, showNextIcon = false)
+    class Standby(response: ChampyResponseChat) : ChatUiState(response, showNextIcon = false)
+    class Success(response: ChampyResponseChat) : ChatUiState(response, showNextIcon = true)
 }
+
+data class ChampyResponseChat(
+    val state: ChampyStates,
+    val message: String
+)
 
 
 @HiltViewModel
@@ -30,52 +36,52 @@ class ChatScreenViewModel @Inject constructor(
 
     private val _chatUiState = MutableStateFlow<ChatUiState>(
         ChatUiState.Standby(
-            Pair(
+            ChampyResponseChat(
                 ChampyStates.SMILING,
-                "Puedes preguntarme lo que quieras el cuidado del medio ambiente!"
+                "Puedes preguntarme lo que quieras sobre el cuidado del medio ambiente!"
             )
         )
     )
 
     val chatUiState = _chatUiState.asStateFlow()
 
-    private val _responseIA = MutableStateFlow<Map<ChampyStates, String>>(emptyMap())
+    private val _responseIA = MutableStateFlow<List<ChampyResponseChat>>(emptyList())
 
-    private var _currentResponseIndex = 1
+    private var _currentResponseIndex = 0
 
     private val _showTextField = MutableStateFlow(true)
     val showTextField = _showTextField.asStateFlow()
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-            _showTextField.value = false
-
-            val wea = mapOf(
-                ChampyStates.NORMAL to "Soy Pestalotiopsis microspora, un hongo que vive en bosques tropicales.",
-                ChampyStates.SMILING to "Habito en hojas y ramas caídas, donde descompongo materia orgánica.",
-                ChampyStates.BLINK to "Tengo una habilidad especial: puedo degradar plásticos como el poliuretano.",
-                ChampyStates.GREETING to "Incluso puedo hacerlo sin oxígeno, algo poco común entre los hongos.",
-                ChampyStates.CURIOUS to "Por eso los científicos me estudian como posible ayuda contra la contaminación.",
-            )
-
-            _chatUiState.value = ChatUiState.Loading(
-                Pair(
-                    ChampyStates.CURIOUS,
-                    "Estoy pensando en una respuesta para ti..."
-                )
-            )
-            delay(2000)
-
-            _responseIA.value = wea
-
-            _chatUiState.value = ChatUiState.Success(
-                Pair(
-                    wea.keys.first(),
-                    wea.values.first()
-                )
-            )
-        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//
+//            _showTextField.value = false
+//
+//            val wea = mapOf(
+//                ChampyStates.NORMAL to "Soy Pestalotiopsis microspora, un hongo que vive en bosques tropicales.",
+//                ChampyStates.SMILING to "Habito en hojas y ramas caídas, donde descompongo materia orgánica.",
+//                ChampyStates.BLINK to "Tengo una habilidad especial: puedo degradar plásticos como el poliuretano.",
+//                ChampyStates.GREETING to "Incluso puedo hacerlo sin oxígeno, algo poco común entre los hongos.",
+//                ChampyStates.CURIOUS to "Por eso los científicos me estudian como posible ayuda contra la contaminación.",
+//            )
+//
+//            _chatUiState.value = ChatUiState.Loading(
+//                Pair(
+//                    ChampyStates.CURIOUS,
+//                    "Estoy pensando en una respuesta para ti..."
+//                )
+//            )
+//            delay(2000)
+//
+//            _responseIA.value = wea
+//
+//            _chatUiState.value = ChatUiState.Success(
+//                Pair(
+//                    wea.keys.first(),
+//                    wea.values.first()
+//                )
+//            )
+//        }
     }
 
 
@@ -83,7 +89,7 @@ class ChatScreenViewModel @Inject constructor(
         if (_currentResponseIndex >= _responseIA.value.size ) {
             _currentResponseIndex = 0
             _chatUiState.value = ChatUiState.Standby(
-                Pair(
+                ChampyResponseChat(
                     ChampyStates.SMILING,
                     "¿Quieres preguntarme algo más sobre el cuidado del medio ambiente?"
                 )
@@ -93,13 +99,47 @@ class ChatScreenViewModel @Inject constructor(
         }
 
 
-        val state = _responseIA.value.keys.toList()[_currentResponseIndex]
-        val message = _responseIA.value.values.toList()[_currentResponseIndex]
+        val state = _responseIA.value[_currentResponseIndex].state
+        val message = _responseIA.value[_currentResponseIndex].message
 
         _chatUiState.value = ChatUiState.Success(
-            Pair(state, message)
+            ChampyResponseChat(state, message)
         )
         _currentResponseIndex++
+    }
+
+    fun getResponseFromIA(message: String){
+        viewModelScope.launch(Dispatchers.IO) {
+
+            _showTextField.value = false
+
+            val wea = listOf(
+                ChampyResponseChat(ChampyStates.NORMAL, "¡Yo soy Champy!"),
+                ChampyResponseChat(ChampyStates.NORMAL, "Soy de la familia Pestalotiopsis microspora, un hongo que vive en bosques tropicales."),
+                ChampyResponseChat(ChampyStates.SMILING, "Habito en hojas y ramas caídas, donde descompongo materia orgánica."),
+                ChampyResponseChat(ChampyStates.BLINK, "Tengo una habilidad especial: puedo degradar plásticos como el poliuretano."),
+                ChampyResponseChat(ChampyStates.GREETING, "Incluso puedo hacerlo sin oxígeno, algo poco común entre los hongos."),
+                ChampyResponseChat(ChampyStates.CURIOUS, "Por eso los científicos me estudian como posible ayuda contra la contaminación."),
+            )
+
+
+            _chatUiState.value = ChatUiState.Loading(
+                ChampyResponseChat(
+                    ChampyStates.CURIOUS,
+                    "Estoy pensando en una respuesta para ti..."
+                )
+            )
+            delay(2000)
+
+            _responseIA.value = wea
+
+            _chatUiState.value = ChatUiState.Success(
+                ChampyResponseChat(
+                    wea.first().state,
+                    wea.first().message
+                )
+            )
+        }
     }
 
 }

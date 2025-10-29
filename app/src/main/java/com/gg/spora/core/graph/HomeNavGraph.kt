@@ -262,7 +262,8 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
                 modifier = Modifier,
                 champyResponses = champyResponseUiState,
                 showTextField = showTextField,
-                onClickNextText = chatScreenViewModel::nextResponse
+                onClickNextText = chatScreenViewModel::nextResponse,
+                getResponseFromIA = chatScreenViewModel::getResponseFromIA
             )
         }
     }

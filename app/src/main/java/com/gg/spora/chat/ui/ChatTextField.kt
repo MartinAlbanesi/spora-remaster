@@ -57,16 +57,12 @@ fun ChatTextField(
                     innerTextField()
                 }
             )
-            IconButton(onClick = onSend) {
-//                Canvas(modifier = Modifier.size(24.dp)) {
-//                    val path = Path().apply {
-//                        moveTo(0f, 0f)
-//                        lineTo(size.width, size.height / 2)
-//                        lineTo(0f, size.height)
-//                        close()
-//                    }
-//                    drawPath(path, color = Color(0xFFF57C00)) // Orange color for the send icon
-//                }
+            IconButton(
+                onClick = {
+                    onValueChange("")
+                    onSend()
+                }
+            ) {
                 Icon(
                     painter = painterResource(R.drawable.send),
                     contentDescription = "Send",
