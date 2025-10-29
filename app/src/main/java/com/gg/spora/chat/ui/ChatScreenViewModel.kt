@@ -91,7 +91,7 @@ class ChatScreenViewModel @Inject constructor(
             _chatUiState.value = ChatUiState.Standby(
                 ChampyResponseChat(
                     ChampyStates.SMILING,
-                    "¿Quieres preguntarme algo más sobre el cuidado del medio ambiente?"
+                    "¿Quieres preguntarme algo más?"
                 )
             )
             _showTextField.value = true
@@ -126,7 +126,7 @@ class ChatScreenViewModel @Inject constructor(
             _chatUiState.value = ChatUiState.Loading(
                 ChampyResponseChat(
                     ChampyStates.CURIOUS,
-                    "Estoy pensando en una respuesta para ti..."
+                    "Estoy pensando en una respuesta para vos..."
                 )
             )
             delay(2000)
@@ -139,6 +139,8 @@ class ChatScreenViewModel @Inject constructor(
                     wea.first().message
                 )
             )
+
+            _currentResponseIndex++
         }
     }
 

@@ -1,8 +1,8 @@
 package com.gg.spora.chat.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
@@ -104,10 +104,7 @@ fun ChatScreen(
         enter = slideInVertically(initialOffsetY = { it }),
         exit = slideOutVertically(
             targetOffsetY = { it },
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessLow
-            )
+            animationSpec = tween(durationMillis = 1000, easing = FastOutLinearInEasing)
         )
     ) {
         Box(modifier = Modifier.fillMaxSize()){
