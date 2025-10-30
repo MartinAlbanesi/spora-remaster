@@ -17,7 +17,7 @@ import kotlin.random.Random
 fun ChampyBlinkAnimation(modifier: Modifier, ) {
 
     val initialFrame: Int = ChampyStates.SMILING.image
-    val finalFrame: Int = ChampyStates.BLINK.image
+    val finalFrame: Int = ChampyStates.HAPPY.image
     var isTimePassed by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {

@@ -20,7 +20,7 @@ fun ChampyGreetingAnimation(modifier: Modifier) {
 
     Image(
         painter =
-        if (isClicked) painterResource(id = ChampyStates.GREETING.image)
+        if (isClicked) painterResource(id = ChampyStates.EXCITED.image)
         else painterResource(id = ChampyStates.SMILING.image),
         contentDescription = "Champy Smiling",
         modifier = modifier.clickable(

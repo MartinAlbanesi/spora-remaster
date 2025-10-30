@@ -26,7 +26,7 @@ object TutorialModels {
         ),
         TutorialItem(
             "Nos encargamos de limpiar los residuos del bosque y cuidar a los árboles que nos rodean.",
-            ChampyStates.NORMAL.image
+            ChampyStates.SERIOUS.image
         ),
         TutorialItem(
             "Pero últimamente, estamos agotados debido a la contaminación que causan los humanos que viven fuera del bosque.",
@@ -34,11 +34,11 @@ object TutorialModels {
         ),
         TutorialItem(
             "¡Es por eso que necesitamos de tu ayuda! Para que el bosque sobreviva, debemos aprender a cuidar el medioambiente.",
-            ChampyStates.GREETING.image
+            ChampyStates.EXCITED.image
         ),
         TutorialItem(
             "Vamos a empezar viendo lo básico, ¿te parece?",
-            ChampyStates.BLINK.image
+            ChampyStates.HAPPY.image
         ),
         TutorialItem(
             "Acá vas a poder ver la cantidad de árboles que están bajo nuestro cuidado.",
@@ -57,12 +57,12 @@ object TutorialModels {
         ),
         TutorialItem(
             "Al principio, tendremos poquito pero cuanto más ayudemos al bosque y juguemos...",
-            ChampyStates.NORMAL.image,
+            ChampyStates.SERIOUS.image,
             focusItem = Offset(0.7f, 0.05f)
         ),
         TutorialItem(
             "¡Más vamos a tener!",
-            ChampyStates.GREETING.image
+            ChampyStates.EXCITED.image
         ),
     )
 
@@ -77,11 +77,11 @@ object TutorialModels {
         ),
         TutorialItem(
             "Es el hongo más sabio y viejo de la comunidad.",
-            ChampyStates.NORMAL.image
+            ChampyStates.SERIOUS.image
         ),
         TutorialItem(
             "Se encarga de muchas cosas, pero la más importante es escribir el diario ecológico.",
-            ChampyStates.NORMAL.image
+            ChampyStates.SERIOUS.image
         ),
         TutorialItem(
             "Te lo voy a presentar, ¡vamos!",
@@ -100,11 +100,11 @@ object TutorialModels {
         ),
         TutorialItem(
             "Pero el Señor Mushy dice, que si la visitamos y cuidamos todos los días...",
-            ChampyStates.NORMAL.image
+            ChampyStates.SERIOUS.image
         ),
         TutorialItem(
             "¡Volverán!",
-            ChampyStates.GREETING.image
+            ChampyStates.EXCITED.image
         ),
         TutorialItem(
             "¿Me ayudás a cuidarlos?",
@@ -112,7 +112,7 @@ object TutorialModels {
         ),
         TutorialItem(
             "¡Que bueno! Entonces, vamos que te muestro.",
-            ChampyStates.GREETING.image
+            ChampyStates.EXCITED.image
         ),
     )
 
@@ -137,7 +137,7 @@ object TutorialModels {
         ),
         TutorialItem(
             "Esa semilla, si la cuidamos muy bien, crecerá lentamente hasta ser un saludable árbol.",
-            ChampyStates.GREETING.image,
+            ChampyStates.EXCITED.image,
             secondaryImage = R.drawable.tutorial_tree,
             isSecondaryTalking = true
         ),
@@ -163,7 +163,7 @@ object TutorialModels {
             ),
             TutorialItem(
                 "¡Ahí está!",
-                ChampyStates.GREETING.image,
+                ChampyStates.EXCITED.image,
                 secondaryImage = MushyStates.IDLE.image,
                 isSecondaryTalking = false,
             ),
@@ -176,7 +176,7 @@ object TutorialModels {
             ),
             TutorialItem(
                 "¡Señor Mushy, él es $userName y nos va a ayudar con el bosque!",
-                ChampyStates.GREETING.image,
+                ChampyStates.EXCITED.image,
                 isChampyTalking = true,
                 secondaryImage = MushyStates.IDLE.image,
                 isSecondaryTalking = false,
@@ -208,7 +208,7 @@ object TutorialModels {
                 "Con mucha información \n" +
                     "desde reciclaje, hasta energías\n" +
                     " renovables, todo se encuentra aquí.",
-                ChampyStates.NORMAL.image,
+                ChampyStates.SERIOUS.image,
                 false,
                 secondaryImage = MushyStates.IDLE.image,
                 isSecondaryTalking = true,
@@ -228,7 +228,7 @@ object TutorialModels {
             ),
             TutorialItem(
                 "Nos vemos",
-                ChampyStates.GREETING.image,
+                ChampyStates.EXCITED.image,
                 secondaryImage = MushyStates.IDLE.image,
             ),
             TutorialItem(

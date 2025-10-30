@@ -114,11 +114,11 @@ class ChatScreenViewModel @Inject constructor(
             _showTextField.value = false
 
             val wea = listOf(
-                ChampyResponseChat(ChampyStates.NORMAL, "¡Yo soy Champy!"),
-                ChampyResponseChat(ChampyStates.NORMAL, "Soy de la familia Pestalotiopsis microspora, un hongo que vive en bosques tropicales."),
+                ChampyResponseChat(ChampyStates.SERIOUS, "¡Yo soy Champy!"),
+                ChampyResponseChat(ChampyStates.SERIOUS, "Soy de la familia Pestalotiopsis microspora, un hongo que vive en bosques tropicales."),
                 ChampyResponseChat(ChampyStates.SMILING, "Habito en hojas y ramas caídas, donde descompongo materia orgánica."),
-                ChampyResponseChat(ChampyStates.BLINK, "Tengo una habilidad especial: puedo degradar plásticos como el poliuretano."),
-                ChampyResponseChat(ChampyStates.GREETING, "Incluso puedo hacerlo sin oxígeno, algo poco común entre los hongos."),
+                ChampyResponseChat(ChampyStates.HAPPY, "Tengo una habilidad especial: puedo degradar plásticos como el poliuretano."),
+                ChampyResponseChat(ChampyStates.EXCITED, "Incluso puedo hacerlo sin oxígeno, algo poco común entre los hongos."),
                 ChampyResponseChat(ChampyStates.CURIOUS, "Por eso los científicos me estudian como posible ayuda contra la contaminación."),
             )
 
